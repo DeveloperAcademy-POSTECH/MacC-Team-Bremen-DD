@@ -9,40 +9,40 @@ import SwiftUI
 
 
 extension Color {
-    static var primary: Color {
+    static let primary: Color {
         Color("AccentColor")
     }
     
-    static var pointPink: Color {
+    static let pointPink: Color {
         Color("PointPink")
     }
-    static var pointPurple: Color {
+    static let pointPurple: Color {
         Color("PointPurple")
     }
-    static var pointYellow: Color {
+    static let pointYellow: Color {
         Color("PointYellow")
     }
-    static var pointRed: Color {
+    static let pointRed: Color {
         Color("PointRed")
     }
-    static var pointBlue: Color {
+    static let pointBlue: Color {
         Color("PointBlue")
     }
     
-    static var fontBlack: Color {
+    static let fontBlack: Color {
         Color("Font_Black")
     }
-    static var fontDarkGray: Color {
+    static let fontDarkGray: Color {
         Color("Font_DarkGray")
     }
-    static var fontLightGray: Color {
+    static let fontLightGray: Color {
         Color("Font_LightGray")
     }
     
-    static var background: Color {
+    static let background: Color {
         Color("Background")
     }
-    static var cardBackground: Color {
+    static let cardBackground: Color {
         Color("CardBackground")
     }
 }
