@@ -8,11 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2D66DCA228FD4DF000C90400 /* RlogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCA128FD4DF000C90400 /* RlogApp.swift */; };
-		2D66DCA428FD4DF000C90400 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCA328FD4DF000C90400 /* ContentView.swift */; };
 		2D66DCA628FD4DF200C90400 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D66DCA528FD4DF200C90400 /* Assets.xcassets */; };
 		2D66DCA928FD4DF200C90400 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D66DCA828FD4DF200C90400 /* Preview Assets.xcassets */; };
-		2D66DCAB28FD4DF200C90400 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCAA28FD4DF200C90400 /* Persistence.swift */; };
-		2D66DCAE28FD4DF200C90400 /* Rlog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCAC28FD4DF200C90400 /* Rlog.xcdatamodeld */; };
+		2D66DCAB28FD4DF200C90400 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCAA28FD4DF200C90400 /* CoreDataManager.swift */; };
+		2D66DCAE28FD4DF200C90400 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCAC28FD4DF200C90400 /* DataModel.xcdatamodeld */; };
 		2D66DCBB28FD8D0E00C90400 /* ScheduleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCBA28FD8D0E00C90400 /* ScheduleListView.swift */; };
 		2D66DCBD28FD8D2500C90400 /* ScheduleCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCBC28FD8D2500C90400 /* ScheduleCreateView.swift */; };
 		2D66DCBF28FD8D3700C90400 /* ScheduleUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCBE28FD8D3700C90400 /* ScheduleUpdateView.swift */; };
@@ -31,16 +30,23 @@
 		2D66DCDC28FD8E9D00C90400 /* WorkSpaceCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCDB28FD8E9D00C90400 /* WorkSpaceCreateViewModel.swift */; };
 		2D66DCDE28FD8EB300C90400 /* ScheduleUpdateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCDD28FD8EB300C90400 /* ScheduleUpdateViewModel.swift */; };
 		2D66DCE028FD8ECA00C90400 /* MainTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCDF28FD8ECA00C90400 /* MainTabViewModel.swift */; };
-		2D66DCE428FD8F1D00C90400 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCE328FD8F1D00C90400 /* ColorExtension.swift */; };
+		2D66DCE428FD8F1D00C90400 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCE328FD8F1D00C90400 /* Color+.swift */; };
+		C64D97BA28FE918F004F80E7 /* Text+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97B928FE918F004F80E7 /* Text+.swift */; };
+		C64D97BC28FE9197004F80E7 /* TextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97BB28FE9197004F80E7 /* TextField+.swift */; };
+		C64D97BE28FE919F004F80E7 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97BD28FE919F004F80E7 /* Date+.swift */; };
+		C64D97C028FE91AB004F80E7 /* DateFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97BF28FE91AB004F80E7 /* DateFormatter+.swift */; };
+		C64D97C328FE92B0004F80E7 /* WorkspaceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97C228FE92B0004F80E7 /* WorkspaceEntity.swift */; };
+		C64D97C528FE92C1004F80E7 /* ScheduleEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97C428FE92C1004F80E7 /* ScheduleEntity.swift */; };
+		C64D97C728FE92C7004F80E7 /* DayEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97C628FE92C7004F80E7 /* DayEntity.swift */; };
+		C64D97C928FE92D8004F80E7 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97C828FE92D8004F80E7 /* Tab.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2D66DC9E28FD4DF000C90400 /* Rlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D66DCA128FD4DF000C90400 /* RlogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RlogApp.swift; sourceTree = "<group>"; };
-		2D66DCA328FD4DF000C90400 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2D66DCA528FD4DF200C90400 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D66DCA828FD4DF200C90400 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		2D66DCAA28FD4DF200C90400 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		2D66DCAA28FD4DF200C90400 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		2D66DCAD28FD4DF200C90400 /* Rlog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Rlog.xcdatamodel; sourceTree = "<group>"; };
 		2D66DCBA28FD8D0E00C90400 /* ScheduleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleListView.swift; sourceTree = "<group>"; };
 		2D66DCBC28FD8D2500C90400 /* ScheduleCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCreateView.swift; sourceTree = "<group>"; };
@@ -60,7 +66,15 @@
 		2D66DCDB28FD8E9D00C90400 /* WorkSpaceCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCreateViewModel.swift; sourceTree = "<group>"; };
 		2D66DCDD28FD8EB300C90400 /* ScheduleUpdateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleUpdateViewModel.swift; sourceTree = "<group>"; };
 		2D66DCDF28FD8ECA00C90400 /* MainTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewModel.swift; sourceTree = "<group>"; };
-		2D66DCE328FD8F1D00C90400 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		2D66DCE328FD8F1D00C90400 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		C64D97B928FE918F004F80E7 /* Text+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+.swift"; sourceTree = "<group>"; };
+		C64D97BB28FE9197004F80E7 /* TextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+.swift"; sourceTree = "<group>"; };
+		C64D97BD28FE919F004F80E7 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		C64D97BF28FE91AB004F80E7 /* DateFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+.swift"; sourceTree = "<group>"; };
+		C64D97C228FE92B0004F80E7 /* WorkspaceEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceEntity.swift; sourceTree = "<group>"; };
+		C64D97C428FE92C1004F80E7 /* ScheduleEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEntity.swift; sourceTree = "<group>"; };
+		C64D97C628FE92C7004F80E7 /* DayEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayEntity.swift; sourceTree = "<group>"; };
+		C64D97C828FE92D8004F80E7 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +108,8 @@
 			isa = PBXGroup;
 			children = (
 				2D66DCA128FD4DF000C90400 /* RlogApp.swift */,
-				2D66DCA328FD4DF000C90400 /* ContentView.swift */,
 				2D66DCA528FD4DF200C90400 /* Assets.xcassets */,
+				C64D97C128FE92A2004F80E7 /* Model */,
 				2D66DCB428FD51E400C90400 /* View */,
 				2D66DCB828FD8C8E00C90400 /* ViewModel */,
 				2D66DCE228FD8F0500C90400 /* CoreData */,
@@ -120,6 +134,7 @@
 				2D66DCB528FD51EC00C90400 /* Schedule */,
 				2D66DCB628FD51F900C90400 /* WorkSpace */,
 				2D66DCB728FD520600C90400 /* MonthlyCalculate */,
+				C64D97B828FE9146004F80E7 /* Components */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -196,7 +211,11 @@
 		2D66DCE128FD8EF900C90400 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				2D66DCE328FD8F1D00C90400 /* ColorExtension.swift */,
+				2D66DCE328FD8F1D00C90400 /* Color+.swift */,
+				C64D97B928FE918F004F80E7 /* Text+.swift */,
+				C64D97BB28FE9197004F80E7 /* TextField+.swift */,
+				C64D97BD28FE919F004F80E7 /* Date+.swift */,
+				C64D97BF28FE91AB004F80E7 /* DateFormatter+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -204,10 +223,28 @@
 		2D66DCE228FD8F0500C90400 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				2D66DCAA28FD4DF200C90400 /* Persistence.swift */,
-				2D66DCAC28FD4DF200C90400 /* Rlog.xcdatamodeld */,
+				2D66DCAA28FD4DF200C90400 /* CoreDataManager.swift */,
+				2D66DCAC28FD4DF200C90400 /* DataModel.xcdatamodeld */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		C64D97B828FE9146004F80E7 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		C64D97C128FE92A2004F80E7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C64D97C228FE92B0004F80E7 /* WorkspaceEntity.swift */,
+				C64D97C428FE92C1004F80E7 /* ScheduleEntity.swift */,
+				C64D97C628FE92C7004F80E7 /* DayEntity.swift */,
+				C64D97C828FE92D8004F80E7 /* Tab.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,26 +318,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D66DCC528FD8D6D00C90400 /* WorkSpaceCreateView.swift in Sources */,
+				C64D97C528FE92C1004F80E7 /* ScheduleEntity.swift in Sources */,
 				2D66DCCE28FD8DE600C90400 /* ScheduleListViewModel.swift in Sources */,
-				2D66DCE428FD8F1D00C90400 /* ColorExtension.swift in Sources */,
+				2D66DCE428FD8F1D00C90400 /* Color+.swift in Sources */,
 				2D66DCC128FD8D5100C90400 /* WorkSpaceListView.swift in Sources */,
+				C64D97C728FE92C7004F80E7 /* DayEntity.swift in Sources */,
 				2D66DCD028FD8E1000C90400 /* ScheduleCreateViewModel.swift in Sources */,
 				2D66DCBB28FD8D0E00C90400 /* ScheduleListView.swift in Sources */,
 				2D66DCBF28FD8D3700C90400 /* ScheduleUpdateView.swift in Sources */,
-				2D66DCAB28FD4DF200C90400 /* Persistence.swift in Sources */,
+				C64D97C928FE92D8004F80E7 /* Tab.swift in Sources */,
+				2D66DCAB28FD4DF200C90400 /* CoreDataManager.swift in Sources */,
 				2D66DCD428FD8E4700C90400 /* MonthlyCalculateListViewModel.swift in Sources */,
 				2D66DCDA28FD8E8F00C90400 /* WorkSpaceDetailViewModel.swift in Sources */,
 				2D66DCC328FD8D6100C90400 /* WorkSpaceDetailView.swift in Sources */,
-				2D66DCAE28FD4DF200C90400 /* Rlog.xcdatamodeld in Sources */,
+				2D66DCAE28FD4DF200C90400 /* DataModel.xcdatamodeld in Sources */,
 				2D66DCDE28FD8EB300C90400 /* ScheduleUpdateViewModel.swift in Sources */,
+				C64D97BE28FE919F004F80E7 /* Date+.swift in Sources */,
 				2D66DCCC28FD8DC500C90400 /* MainTabView.swift in Sources */,
+				C64D97BA28FE918F004F80E7 /* Text+.swift in Sources */,
+				C64D97C328FE92B0004F80E7 /* WorkspaceEntity.swift in Sources */,
 				2D66DCD628FD8E5500C90400 /* MonthlyCalculateDetailViewModel.swift in Sources */,
 				2D66DCD828FD8E7100C90400 /* WorkSpaceListViewModel.swift in Sources */,
 				2D66DCC728FD8D8900C90400 /* MonthlyCalculateListView.swift in Sources */,
 				2D66DCCA28FD8DA200C90400 /* MonthlyCalculateDetailView.swift in Sources */,
 				2D66DCDC28FD8E9D00C90400 /* WorkSpaceCreateViewModel.swift in Sources */,
-				2D66DCA428FD4DF000C90400 /* ContentView.swift in Sources */,
+				C64D97C028FE91AB004F80E7 /* DateFormatter+.swift in Sources */,
 				2D66DCA228FD4DF000C90400 /* RlogApp.swift in Sources */,
+				C64D97BC28FE9197004F80E7 /* TextField+.swift in Sources */,
 				2D66DCBD28FD8D2500C90400 /* ScheduleCreateView.swift in Sources */,
 				2D66DCE028FD8ECA00C90400 /* MainTabViewModel.swift in Sources */,
 			);
@@ -515,13 +559,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		2D66DCAC28FD4DF200C90400 /* Rlog.xcdatamodeld */ = {
+		2D66DCAC28FD4DF200C90400 /* DataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				2D66DCAD28FD4DF200C90400 /* Rlog.xcdatamodel */,
 			);
 			currentVersion = 2D66DCAD28FD4DF200C90400 /* Rlog.xcdatamodel */;
-			path = Rlog.xcdatamodeld;
+			path = DataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
