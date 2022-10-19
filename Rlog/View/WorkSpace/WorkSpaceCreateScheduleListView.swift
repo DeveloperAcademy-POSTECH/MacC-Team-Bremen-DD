@@ -1,0 +1,24 @@
+//
+//  WorkSpaceCreateScheduleListView.swift
+//  Rlog
+//
+//  Created by 송시원 on 2022/10/19.
+//
+
+import SwiftUI
+
+struct WorkSpaceCreateScheduleListView: View {
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            //타이틀 섭뷰 넣기 "근무 일정을 입력해주세요." Or "근무 유형을 추가해주세요!"
+            Text("sample")
+        }
+    }
+}
+
+struct WorkSpaceCreateScheduleListView_Previews: PreviewProvider {
+    static var previews: some View {
+        WorkSpaceCreateScheduleListView()
+    }
+}
