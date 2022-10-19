@@ -13,7 +13,16 @@ struct WorkSpaceCreateScheduleListView: View {
         VStack(alignment: .leading, spacing: 20) {
             //타이틀 섭뷰 넣기 "근무 일정을 입력해주세요." Or "근무 유형을 추가해주세요!"
             Text("sample")
+            labelText
         }
+    }
+}
+
+private extension WorkSpaceCreateScheduleListView {
+    var labelText: some View {
+        Text("근무 유형")
+            .font(.caption)
+            .foregroundColor(.fontLightGray)
     }
 }
 
