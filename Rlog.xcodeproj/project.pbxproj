@@ -31,6 +31,7 @@
 		2D66DCDE28FD8EB300C90400 /* ScheduleUpdateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCDD28FD8EB300C90400 /* ScheduleUpdateViewModel.swift */; };
 		2D66DCE028FD8ECA00C90400 /* MainTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCDF28FD8ECA00C90400 /* MainTabViewModel.swift */; };
 		2D66DCE428FD8F1D00C90400 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCE328FD8F1D00C90400 /* Color+.swift */; };
+		C62C338C28FFCEBD00469273 /* CustomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C338B28FFCEBD00469273 /* CustomButtonView.swift */; };
 		C64D97BA28FE918F004F80E7 /* Text+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97B928FE918F004F80E7 /* Text+.swift */; };
 		C64D97BC28FE9197004F80E7 /* TextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97BB28FE9197004F80E7 /* TextField+.swift */; };
 		C64D97BE28FE919F004F80E7 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97BD28FE919F004F80E7 /* Date+.swift */; };
@@ -67,6 +68,7 @@
 		2D66DCDD28FD8EB300C90400 /* ScheduleUpdateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleUpdateViewModel.swift; sourceTree = "<group>"; };
 		2D66DCDF28FD8ECA00C90400 /* MainTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewModel.swift; sourceTree = "<group>"; };
 		2D66DCE328FD8F1D00C90400 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		C62C338B28FFCEBD00469273 /* CustomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonView.swift; sourceTree = SOURCE_ROOT; };
 		C64D97B928FE918F004F80E7 /* Text+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+.swift"; sourceTree = "<group>"; };
 		C64D97BB28FE9197004F80E7 /* TextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+.swift"; sourceTree = "<group>"; };
 		C64D97BD28FE919F004F80E7 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 		C64D97B828FE9146004F80E7 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				C62C338B28FFCEBD00469273 /* CustomButtonView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				2D66DCC128FD8D5100C90400 /* WorkSpaceListView.swift in Sources */,
 				C64D97C728FE92C7004F80E7 /* DayEntity.swift in Sources */,
 				2D66DCD028FD8E1000C90400 /* ScheduleCreateViewModel.swift in Sources */,
+				C62C338C28FFCEBD00469273 /* CustomButtonView.swift in Sources */,
 				2D66DCBB28FD8D0E00C90400 /* ScheduleListView.swift in Sources */,
 				2D66DCBF28FD8D3700C90400 /* ScheduleUpdateView.swift in Sources */,
 				C64D97C928FE92D8004F80E7 /* Tab.swift in Sources */,
