@@ -8,12 +8,10 @@
 import SwiftUI
 
 struct CompleteButtonView: View {
-    let label: String
     var isAvailable: Bool
     let action: () -> Void
     
-    init(label: String, isAvailable: Bool, action: @escaping () -> Void) {
-        self.label = label
+    init(isAvailable: Bool, action: @escaping () -> Void) {
         self.isAvailable = isAvailable
         self.action = action
     }
