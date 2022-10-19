@@ -7,8 +7,14 @@
 
 import SwiftUI
 
+enum ScheduleCase: String, CaseIterable {
+    case upcoming = "예정된 알바"
+    case past = "지나간 알바"
+}
+
 struct ScheduleListView: View {
-    @State private var isShowUpcoming = true
+    @State private var scheduleListTitle = ScheduleCase.upcoming.rawValue
+    var scheduleCases = ScheduleCase.allCases.map { $0.rawValue }
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -22,13 +28,14 @@ struct ScheduleListView: View {
             }
             .padding(.horizontal, 16)
             
-            // TODO: - 커스텀 토글 버튼
-            Button(action: {
-                isShowUpcoming.toggle()
-            }, label: {
-                Text("Test")
-            })
-            .padding(.bottom, 16)
+            // TODO: - #888888 컬러 추가
+            Rectangle()
+                .fill(LinearGradient(colors: [Color.clear, Color.fontLightGray], startPoint: .top, endPoint: .bottom))
+                .frame(height: 83)
+            
+            CustomPicker(selectedCase: $scheduleListTitle, options: scheduleCases)
+                .frame(width: 176, height: 40)
+                .padding(.bottom, 16)
         }
     }
 }
@@ -56,7 +63,7 @@ private extension ScheduleListView {
                 ForEach(0..<3) { index in
                     RoundedRectangle(cornerRadius: 10)
                         .frame(height: 97)
-                        .foregroundColor(isShowUpcoming ? Color.green : Color.red)
+                        .foregroundColor(scheduleListTitle == ScheduleCase.upcoming.rawValue ? Color.green : Color.red)
                 }
                 .padding(.top, 16)
             }
@@ -68,11 +75,44 @@ private extension ScheduleListView {
             // TODO: - 체크 아이콘 수정
             Image(systemName: "checkmark")
                 .foregroundColor(Color.green)
-            Text(isShowUpcoming ? "예정된 알바" : "지나간 알바")
+            Text(scheduleListTitle)
                 .font(.title3)
                 .fontWeight(.semibold)
                 .foregroundColor(Color.fontBlack)
         }
+    }
+}
+
+private struct CustomPicker: View {
+    @Binding var selectedCase: String
+    var options: [String]
+    
+    var body: some View {
+        HStack(spacing: 0) {
+            ForEach(options, id: \.self) { option in
+                ZStack {
+                    Rectangle()
+                        .fill(.white)
+                    Rectangle()
+                        .fill(Color.green)
+                        .cornerRadius(20)
+                        .opacity(selectedCase == option ? 1 : 0.01)
+                        .frame(width: selectedCase == option ? 97 : 79)
+                        .onTapGesture {
+                            withAnimation(.interactiveSpring()) {
+                                selectedCase = option
+                            }
+                        }
+                }
+                .overlay(
+                    Text(option)
+                        .font(.caption2)
+                        .fontWeight(selectedCase == option ? .bold : .regular)
+                        .foregroundColor(selectedCase == option ? .white : Color.fontBlack)
+                )
+            }
+        }
+        .cornerRadius(20)
     }
 }
 
