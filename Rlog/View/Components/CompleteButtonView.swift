@@ -20,7 +20,7 @@ struct CompleteButtonView: View {
         Button {
             action()
         } label: {
-            compleButtonContainerView
+            completeButtonContainerView
         }
         .disabled(!isAvailable)
     }
@@ -28,7 +28,7 @@ struct CompleteButtonView: View {
 }
 
 extension CompleteButtonView {
-    var compleButtonContainerView: some View {
+    var completeButtonContainerView: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
                 .frame(maxWidth: .infinity, minHeight: 56, maxHeight: 56)
