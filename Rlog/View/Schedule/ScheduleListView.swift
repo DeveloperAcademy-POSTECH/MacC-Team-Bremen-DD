@@ -9,7 +9,31 @@ import SwiftUI
 
 struct ScheduleListView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            VStack(spacing: 0) {
+                header
+                    .padding(.top, 32)
+                    .padding(.leading, 7)
+                Spacer()
+            }
+            .padding(.horizontal, 16)
+        }
+    }
+}
+
+private extension ScheduleListView {
+    var header: some View {
+        HStack(spacing: 0) {
+            Image(systemName: "chevron.backward")
+            // TODO: - 연도와 월 받아오기
+            Text("2022.10")
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundColor(Color.fontBlack)
+                .padding(.horizontal, 10)
+            Image(systemName: "chevron.right")
+            Spacer()
+        }
     }
 }
 
