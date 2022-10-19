@@ -14,6 +14,8 @@ struct ScheduleListView: View {
                 header
                     .padding(.top, 32)
                     .padding(.leading, 7)
+                upcomingList
+                    .padding(.top, 36)
                 Spacer()
             }
             .padding(.horizontal, 16)
@@ -33,6 +35,32 @@ private extension ScheduleListView {
                 .padding(.horizontal, 10)
             Image(systemName: "chevron.right")
             Spacer()
+        }
+    }
+    
+    var upcomingList: some View {
+        ScrollView {
+            LazyVStack(alignment: .leading, spacing: 0) {
+                upcomingListHeader
+                // TODO: - 리스트 cell 구현
+                ForEach(0..<3) { index in
+                    RoundedRectangle(cornerRadius: 10)
+                        .frame(height: 97)
+                }
+                .padding(.top, 16)
+            }
+        }
+    }
+    
+    var upcomingListHeader: some View {
+        HStack(spacing: 0) {
+            // TODO: - 체크 아이콘 수정
+            Image(systemName: "checkmark")
+                .foregroundColor(Color.green)
+            Text("예정된 일정")
+                .font(.title3)
+                .fontWeight(.semibold)
+                .foregroundColor(Color.fontBlack)
         }
     }
 }
