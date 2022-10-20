@@ -9,8 +9,8 @@ import SwiftUI
 
 extension ScheduleListView {
     struct CustomPicker: View {
-        @Binding var selectedCase: String
-        var options: [String]
+        @EnvironmentObject var viewModel: ScheduleListViewModel
+        @Binding var selectedScheduleCase: ScheduleCase
         
         var body: some View {
             GeometryReader { geometry in
@@ -21,20 +21,20 @@ extension ScheduleListView {
                         .fill(Color.primary)
                         .frame(width: 97)
                         .cornerRadius(20)
-                        .offset(x: selectedCase == options[0] ? -40 : 40)
+                        .offset(x: viewModel.setCustomPickerOffset(currentCase: selectedScheduleCase))
                     HStack(spacing: 0) {
-                        ForEach(options, id: \.self) { option in
+                        ForEach(viewModel.scheduleCases, id: \.self) { schedule in
                             ZStack {
                                 Rectangle()
                                     .fill(.clear)
-                                    .frame(width: selectedCase == option ? 97 : 176 - 97)
-                                Text(option)
+                                    .frame(width: viewModel.setCustomPickerRectangleWidth(currentCase: selectedScheduleCase, compareCase: schedule))
+                                Text(schedule.rawValue)
                                     .font(.caption2)
-                                    .fontWeight(selectedCase == option ? .bold : .regular)
-                                    .foregroundColor(selectedCase == option ? .white : Color.fontBlack)
+                                    .fontWeight(viewModel.setCustomPickerTextWeight(currentCase: selectedScheduleCase, compareCase: schedule))
+                                    .foregroundColor(viewModel.setCustomPickerForegroundColor(currentCase: selectedScheduleCase, compareCase: schedule))
                                     .onTapGesture {
                                         withAnimation {
-                                            selectedCase = option
+                                            selectedScheduleCase = schedule
                                         }
                                     }
                             }

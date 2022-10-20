@@ -7,14 +7,9 @@
 
 import SwiftUI
 
-enum ScheduleCase: String, CaseIterable {
-    case upcoming = "예정된 일정"
-    case past = "지나간 일정"
-}
-
 struct ScheduleListView: View {
-    @State private var scheduleListTitle = ScheduleCase.upcoming.rawValue
-    private var scheduleCases = ScheduleCase.allCases.map { $0.rawValue }
+    @ObservedObject var viewModel = ScheduleListViewModel()
+    @State var selectedScheduleCase: ScheduleCase = .upcoming
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -32,9 +27,10 @@ struct ScheduleListView: View {
                 .fill(LinearGradient(colors: [Color.clear, Color.fontLightGray], startPoint: .top, endPoint: .bottom))
                 .frame(height: 83)
             
-            CustomPicker(selectedCase: $scheduleListTitle, options: scheduleCases)
+            CustomPicker(selectedScheduleCase: $selectedScheduleCase)
                 .frame(width: 176, height: 40)
                 .padding(.bottom)
+                .environmentObject(viewModel)
         }
     }
 }
@@ -62,7 +58,7 @@ private extension ScheduleListView {
                 ForEach(0..<3) { index in
                     RoundedRectangle(cornerRadius: 10)
                         .frame(height: 97)
-                        .foregroundColor(scheduleListTitle == ScheduleCase.upcoming.rawValue ? Color.green : Color.red)
+                        .foregroundColor(selectedScheduleCase == .upcoming ? Color.green : Color.red)
                 }
                 .padding(.top)
             }
@@ -74,7 +70,7 @@ private extension ScheduleListView {
             Image(systemName: "checkmark")
                 .foregroundColor(Color.primary)
                 .fontWeight(.bold)
-            Text(scheduleListTitle)
+            Text(selectedScheduleCase.rawValue)
                 .font(.title3)
                 .fontWeight(.semibold)
                 .foregroundColor(Color.fontBlack)
