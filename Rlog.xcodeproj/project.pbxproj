@@ -154,6 +154,7 @@
 		2D66DCB628FD51F900C90400 /* WorkSpace */ = {
 			isa = PBXGroup;
 			children = (
+				75DE015F29011A5800A77369 /* SubViews */,
 				2D66DCC028FD8D5100C90400 /* WorkSpaceListView.swift */,
 				2D66DCC228FD8D6100C90400 /* WorkSpaceDetailView.swift */,
 				2D66DCC428FD8D6D00C90400 /* WorkSpaceCreateView.swift */,
@@ -229,6 +230,13 @@
 				2D66DCAC28FD4DF200C90400 /* DataModel.xcdatamodeld */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		75DE015F29011A5800A77369 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 		C64D97B828FE9146004F80E7 /* Components */ = {
