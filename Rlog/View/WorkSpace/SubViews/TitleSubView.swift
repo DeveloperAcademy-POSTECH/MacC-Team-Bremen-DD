@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct TitleSubView: View {
-    let contents: String
+    let title: String
     var body: some View {
-        Text(contents)
+        Text(title)
             .font(.title3)
             .padding(.bottom,20)
     }
@@ -18,6 +18,6 @@ struct TitleSubView: View {
 
 struct TitleSubView_Previews: PreviewProvider {
     static var previews: some View {
-        TitleSubView(contents: "test")
+        TitleSubView(title: "test")
     }
 }

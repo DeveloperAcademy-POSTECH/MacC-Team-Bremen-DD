@@ -13,7 +13,7 @@ struct WorkSpaceCreateConfirmationView: View {
     var body: some View {
         // 고민: 폭이 한계까지 닿지 않아서 가운데정렬이 되는데, 컨포넌트를 가져오면 해결된다. 이럴 경우 다른 방식으로 미뤄두는게 필요할까?
         VStack(alignment: .leading, spacing: 20) {
-            TitleSubView(contents: "새로운 아르바이트를 추가합니다.")
+            TitleSubView(title: "새로운 아르바이트를 추가합니다.")
             WorkSpaceInfoSubView(labelName:"근무지", content:"팍이네 팍팍 감자탕")
             WorkSpaceInfoSubView(labelName:"시급", content:"9,250원")
             WorkSpaceInfoSubView(labelName:"급여일", content:"매월 10일")
