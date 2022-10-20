@@ -8,6 +8,13 @@
 import SwiftUI
 
 struct MainTabView: View {
+
+    @ObservedObject var viewModel: MainTabViewModel
+
+    init() {
+        viewModel = MainTabViewModel()
+    }
+
     var body: some View {
         TabView {
             ForEach(Tab.allCases, id: \.self) { tab in
