@@ -10,5 +10,5 @@ import Foundation
 enum AlbaStatus: Int16 {
     case coming
     case needConfirm
-    case doned
+    case done
 }

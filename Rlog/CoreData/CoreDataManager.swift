@@ -9,45 +9,45 @@ import CoreData
 
 struct CoreDataManager {
     static let shared = CoreDataManager()
-    let container = NSPersistentContainer(name: "DataModel")
-    let cloudContainer = NSPersistentCloudKitContainer(name: "DataModel")
-    let databaseName = "DataModel.sqlite"
+    private let container = NSPersistentContainer(name: "DataModel")
+    private let cloudContainer = NSPersistentCloudKitContainer(name: "DataModel")
+    private let databaseName = "DataModel.sqlite"
 
-    var context: NSManagedObjectContext {
+    private var context: NSManagedObjectContext {
         container.viewContext
     }
 
-    var oldStoreURL: URL {
+    private var oldStoreURL: URL {
         let directory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         return directory.appendingPathComponent(databaseName)
     }
 
-    var sharedStoreURL: URL {
+    private var sharedStoreURL: URL {
         let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.Bremen-DD.Rlog")!
         return container.appendingPathComponent(databaseName)
     }
 
-    init() {
-        print("core data init")
-
-        if !FileManager.default.fileExists(atPath: oldStoreURL.path) {
-            print("old store doesn't exist. Using new shared URL")
-            container.persistentStoreDescriptions.first!.url = sharedStoreURL
-        }
-
-        print("Container URL = \(container.persistentStoreDescriptions.first!.url!)")
-
-        container.loadPersistentStores { desc, error in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-        }
-
-        migrateStore(for: container)
-        container.viewContext.automaticallyMergesChangesFromParent = true
+    private init() {
+        saveStoreURL(!FileManager.default.fileExists(atPath: oldStoreURL.path))
+        loadStores()
+        migrateStore()
+        context.automaticallyMergesChangesFromParent = true
     }
 
-    func migrateStore(for container: NSPersistentContainer) {
+    private func saveStoreURL(_ isNeededToSaveNewURL: Bool) {
+        guard isNeededToSaveNewURL else { return }
+        container.persistentStoreDescriptions.first!.url = sharedStoreURL
+    }
+
+    private func loadStores() {
+        container.loadPersistentStores { desc, error in
+              if let error = error {
+                  print(error.localizedDescription)
+              }
+        }
+    }
+
+    private func migrateStore() {
         print("Went into MigrateStore")
         let coordinator = container.persistentStoreCoordinator
 
@@ -72,7 +72,7 @@ struct CoreDataManager {
 
 // MARK: - CRUD LOGIC
 extension CoreDataManager {
-    func save() {
+    private func save() {
         do {
             try context.save()
         } catch {
@@ -81,25 +81,25 @@ extension CoreDataManager {
     }
 
     // MARK: - WORKSPACE CRUD
-    func createWorkspace(name: String, paymentDay: Int16, hourlyWage: Int16, color: String, hasTax: Bool, hasJuhyu: Bool) {
+    private func createWorkspace(name: String, paymentDay: Int16, hourlyWage: Int16, colorString: String, hasTax: Bool, hasJuhyu: Bool) {
         let workspace = WorkspaceEntity(context: context)
         workspace.name = name
         workspace.paymentDay = paymentDay
         workspace.hourlyWage = hourlyWage
-        workspace.color = color
+        workspace.colorString = colorString
         workspace.hasTax = hasTax
         workspace.hasJuhyu = hasJuhyu
         save()
     }
 
-    func getAllWorkspaces() -> [WorkspaceEntity] {
+    private func getAllWorkspaces() -> [WorkspaceEntity] {
         let fetchRequest: NSFetchRequest<WorkspaceEntity> = WorkspaceEntity.fetchRequest()
         let result = try? context.fetch(fetchRequest)
         return result ?? []
     }
 
     // MARK: - SCHEDULE CRUD
-    func createSchedule(of workspace: WorkspaceEntity, repeatedSchedule: [String], startTime: String, endTime: String, spentHour: Int16) {
+    private func createSchedule(of workspace: WorkspaceEntity, repeatedSchedule: [String], startTime: String, endTime: String, spentHour: Int16) {
         let schedule = ScheduleEntity(context: context)
         schedule.workspace = workspace
         schedule.repeatedSchedule = repeatedSchedule
@@ -109,14 +109,14 @@ extension CoreDataManager {
         save()
     }
 
-    func getAllSchedules(of workspace: WorkspaceEntity) -> [ScheduleEntity] {
+    private func getAllSchedules(of workspace: WorkspaceEntity) -> [ScheduleEntity] {
         let fetchRequest: NSFetchRequest<ScheduleEntity> = ScheduleEntity.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "workspace.name = %@", workspace.name )
         let result = try? context.fetch(fetchRequest)
         return result ?? []
     }
 
-    func editSchedule(pf schedule: ScheduleEntity, repeatedSchedule: [String], startTime: String, endTime: String, spentHour: Int16) {
+    private func editSchedule(of schedule: ScheduleEntity, repeatedSchedule: [String], startTime: String, endTime: String, spentHour: Int16) {
         schedule.repeatedSchedule = repeatedSchedule
         schedule.startTime = startTime
         schedule.endTime = endTime

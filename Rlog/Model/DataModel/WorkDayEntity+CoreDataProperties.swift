@@ -25,6 +25,15 @@ extension WorkDayEntity {
     @NSManaged public var spentHour: Int16
     @NSManaged public var workspace: WorkspaceEntity
 
+    var weekDayType: WeekDay {
+        get {
+            WeekDay(rawValue: self.weekDay) ?? .mon
+        }
+        set {
+            self.weekDay = newValue.rawValue
+        }
+    }
+
 }
 
 extension WorkDayEntity : Identifiable {

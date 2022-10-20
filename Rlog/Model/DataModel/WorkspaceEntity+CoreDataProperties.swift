@@ -7,6 +7,7 @@
 //
 
 import CoreData
+import SwiftUI
 import Foundation
 
 extension WorkspaceEntity {
@@ -18,11 +19,15 @@ extension WorkspaceEntity {
     @NSManaged public var name: String
     @NSManaged public var paymentDay: Int16
     @NSManaged public var hourlyWage: Int16
-    @NSManaged public var color: String
+    @NSManaged public var colorString: String
     @NSManaged public var hasTax: Bool
     @NSManaged public var hasJuhyu: Bool
     @NSManaged public var schedules: ScheduleEntity
     @NSManaged public var workDays: WorkDayEntity
+
+    var colorProperty: Color {
+        Color(self.colorString)
+    }
 
 }
 
