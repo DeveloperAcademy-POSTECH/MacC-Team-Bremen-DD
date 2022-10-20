@@ -34,11 +34,11 @@ extension CompleteButtonView {
                 .frame(maxWidth: .infinity, minHeight: 56, maxHeight: 56)
                 .foregroundColor(isAvailable ? .primary : .fontLightGray)
 
-            completeButtonLabelView
+            completeButtonLabel
         }
     }
     
-    var completeButtonLabelView: some View {
+    var completeButtonLabel: some View {
         Text("확인")
             .font(.body)
             .foregroundColor(.white)
