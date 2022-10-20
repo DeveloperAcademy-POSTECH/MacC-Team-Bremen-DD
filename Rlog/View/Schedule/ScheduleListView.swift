@@ -24,9 +24,8 @@ struct ScheduleListView: View {
                     .padding(.leading, 7)
                 scheduleList
                     .padding(.top, 36)
-                Spacer()
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal)
             
             // TODO: - #888888 컬러 추가
             Rectangle()
@@ -35,7 +34,7 @@ struct ScheduleListView: View {
             
             CustomPicker(selectedCase: $scheduleListTitle, options: scheduleCases)
                 .frame(width: 176, height: 40)
-                .padding(.bottom, 16)
+                .padding(.bottom)
         }
     }
 }
@@ -65,7 +64,7 @@ private extension ScheduleListView {
                         .frame(height: 97)
                         .foregroundColor(scheduleListTitle == ScheduleCase.upcoming.rawValue ? Color.green : Color.red)
                 }
-                .padding(.top, 16)
+                .padding(.top)
             }
         }
     }
@@ -89,31 +88,36 @@ private struct CustomPicker: View {
     var options: [String]
     
     var body: some View {
-        HStack(spacing: 0) {
-            ForEach(options, id: \.self) { option in
-                ZStack {
-                    Rectangle()
-                        .fill(.white)
-                    Rectangle()
-                        .fill(Color.green)
-                        .cornerRadius(20)
-                        .opacity(selectedCase == option ? 1 : 0.01)
-                        .frame(width: selectedCase == option ? 97 : 79)
-                        .onTapGesture {
-                            withAnimation(.interactiveSpring()) {
-                                selectedCase = option
-                            }
+        GeometryReader { geometry in
+            ZStack {
+                Rectangle()
+                    .fill(.white)
+                Rectangle()
+                    .fill(Color.primary)
+                    .frame(width: 97)
+                    .cornerRadius(20)
+                    .offset(x: selectedCase == options[0] ? -40 : 40)
+                HStack(spacing: 0) {
+                    ForEach(options, id: \.self) { option in
+                        ZStack {
+                            Rectangle()
+                                .fill(.clear)
+                                .frame(width: selectedCase == option ? 97 : 176 - 97)
+                            Text(option)
+                                .font(.caption2)
+                                .fontWeight(selectedCase == option ? .bold : .regular)
+                                .foregroundColor(selectedCase == option ? .white : Color.fontBlack)
+                                .onTapGesture {
+                                    withAnimation {
+                                        selectedCase = option
+                                    }
+                                }
                         }
+                    }
                 }
-                .overlay(
-                    Text(option)
-                        .font(.caption2)
-                        .fontWeight(selectedCase == option ? .bold : .regular)
-                        .foregroundColor(selectedCase == option ? .white : Color.fontBlack)
-                )
             }
+            .cornerRadius(20)
         }
-        .cornerRadius(20)
     }
 }
 
