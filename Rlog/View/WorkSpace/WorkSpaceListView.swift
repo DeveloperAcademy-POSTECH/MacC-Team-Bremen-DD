@@ -74,10 +74,6 @@ private extension WorkSpaceListView {
     
     func WorkSpaceCardContents(model: CustomModel) -> some View {
         ZStack{
-//            RoundedRectangle(cornerRadius: 20)
-//                .fill(Color.green)
-//                .frame(width: .infinity, height: 213)
-//                .padding()
             
             VStack(alignment: .leading, spacing: 0) {
                 WorkSpaceCardHeader(workTitle: model.title)
@@ -98,7 +94,7 @@ private extension WorkSpaceListView {
             }
             .padding()
             .background(RoundedRectangle(cornerRadius: 10)
-                .fill(Color.))
+            .fill(Color.background))
             .padding([.horizontal, .bottom])
         }
     }
