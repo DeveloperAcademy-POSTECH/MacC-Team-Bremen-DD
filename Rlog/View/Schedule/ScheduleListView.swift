@@ -14,7 +14,7 @@ enum ScheduleCase: String, CaseIterable {
 
 struct ScheduleListView: View {
     @State private var scheduleListTitle = ScheduleCase.upcoming.rawValue
-    var scheduleCases = ScheduleCase.allCases.map { $0.rawValue }
+    private var scheduleCases = ScheduleCase.allCases.map { $0.rawValue }
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -75,10 +75,12 @@ private extension ScheduleListView {
             // TODO: - 체크 아이콘 수정
             Image(systemName: "checkmark")
                 .foregroundColor(Color.green)
+                .fontWeight(.bold)
             Text(scheduleListTitle)
                 .font(.title3)
                 .fontWeight(.semibold)
                 .foregroundColor(Color.fontBlack)
+                .padding(.leading, 5)
         }
     }
 }
