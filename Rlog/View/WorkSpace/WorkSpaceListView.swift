@@ -45,7 +45,7 @@ struct WorkSpaceListView: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Text("근무지")
-                            .font(.title)
+                            .font(.title2)
                             .fontWeight(.bold)
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
