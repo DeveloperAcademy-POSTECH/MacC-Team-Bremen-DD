@@ -5,8 +5,8 @@
 //  Created by 송시원 on 2022/10/17.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 final class MainTabViewModel: ObservableObject {
 

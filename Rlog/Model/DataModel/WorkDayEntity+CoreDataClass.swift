@@ -6,8 +6,8 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 @objc(WorkDayEntity)
 public class WorkDayEntity: NSManagedObject {

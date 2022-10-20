@@ -6,8 +6,8 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 @objc(ScheduleEntity)
 public class ScheduleEntity: NSManagedObject {
