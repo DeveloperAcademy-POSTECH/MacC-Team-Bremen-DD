@@ -8,24 +8,24 @@
 import SwiftUI
 
 enum WorkspaceColor: String {
-    case pointBlue
-    case pointPink
-    case pointPurple
-    case pointRed
-    case pointYellow
+    case blue
+    case pink
+    case purple
+    case red
+    case yellow
 
     var name: String {
         get {
             switch self {
-            case .pointBlue:
+            case .blue:
                 return "PointBlue"
-            case .pointPink:
+            case .pink:
                 return "PointPink"
-            case .pointPurple:
+            case .purple:
                 return "PointPurple"
-            case .pointRed:
+            case .red:
                 return "PointRed"
-            case .pointYellow:
+            case .yellow:
                 return "PointYellow"
             }
         }
@@ -34,15 +34,15 @@ enum WorkspaceColor: String {
     var color: Color {
         get {
             switch self {
-            case .pointBlue:
+            case .blue:
                 return Color("PointBlue")
-            case .pointPink:
-                return Color("")
-            case .pointPurple:
+            case .pink:
+                return Color("PointPink")
+            case .purple:
                 return Color("PointPurple")
-            case .pointRed:
+            case .red:
                 return Color("PointRed")
-            case .pointYellow:
+            case .yellow:
                 return Color("PointYellow")
             }
         }
