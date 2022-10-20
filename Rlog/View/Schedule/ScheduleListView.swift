@@ -8,8 +8,8 @@
 import SwiftUI
 
 enum ScheduleCase: String, CaseIterable {
-    case upcoming = "예정된 알바"
-    case past = "지나간 알바"
+    case upcoming = "예정된 일정"
+    case past = "지나간 일정"
 }
 
 struct ScheduleListView: View {
@@ -72,7 +72,6 @@ private extension ScheduleListView {
     
     var scheduleListHeader: some View {
         HStack(spacing: 0) {
-            // TODO: - 체크 아이콘 수정
             Image(systemName: "checkmark")
                 .foregroundColor(Color.green)
                 .fontWeight(.bold)
