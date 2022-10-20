@@ -11,5 +11,6 @@ import Combine
 final class MainTabViewModel: ObservableObject {
 
     func onAppear() {
+        
     }
 }
