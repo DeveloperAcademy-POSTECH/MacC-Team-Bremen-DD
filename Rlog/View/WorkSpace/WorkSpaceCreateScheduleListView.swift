@@ -17,6 +17,7 @@ struct WorkSpaceCreateScheduleListView: View {
             Text("sample")
             labelText
         }
+        .padding()
     }
 }
 
