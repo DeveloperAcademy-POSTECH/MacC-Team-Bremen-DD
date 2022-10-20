@@ -27,7 +27,7 @@ extension ScheduleListView {
                             ZStack {
                                 Rectangle()
                                     .fill(.clear)
-                                    .frame(width: viewModel.setCustomPickerRectangleWidth(currentCase: selectedScheduleCase, compareCase: schedule))
+                                    .frame(width: 176 / 2)
                                 Text(schedule.rawValue)
                                     .font(.caption2)
                                     .fontWeight(viewModel.setCustomPickerTextWeight(currentCase: selectedScheduleCase, compareCase: schedule))

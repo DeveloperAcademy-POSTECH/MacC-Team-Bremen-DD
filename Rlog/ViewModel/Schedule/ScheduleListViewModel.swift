@@ -19,10 +19,6 @@ class ScheduleListViewModel: ObservableObject {
         return currentCase == .upcoming ? -40 : 40
     }
     
-    func setCustomPickerRectangleWidth(currentCase: ScheduleCase, compareCase: ScheduleCase) -> CGFloat {
-        return currentCase == compareCase ? 97 : 176 - 97
-    }
-    
     func setCustomPickerTextWeight(currentCase: ScheduleCase, compareCase: ScheduleCase) -> Font.Weight {
         return currentCase == compareCase ? Font.Weight.bold : Font.Weight.regular
     }
