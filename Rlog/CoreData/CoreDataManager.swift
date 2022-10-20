@@ -81,7 +81,7 @@ extension CoreDataManager {
     }
 
     // MARK: - WORKSPACE CRUD
-    private func createWorkspace(name: String, paymentDay: Int16, hourlyWage: Int16, colorString: String, hasTax: Bool, hasJuhyu: Bool) {
+    func createWorkspace(name: String, paymentDay: Int16, hourlyWage: Int16, colorString: String, hasTax: Bool, hasJuhyu: Bool) {
         let workspace = WorkspaceEntity(context: context)
         workspace.name = name
         workspace.paymentDay = paymentDay
@@ -92,14 +92,14 @@ extension CoreDataManager {
         save()
     }
 
-    private func getAllWorkspaces() -> [WorkspaceEntity] {
+    func getAllWorkspaces() -> [WorkspaceEntity] {
         let fetchRequest: NSFetchRequest<WorkspaceEntity> = WorkspaceEntity.fetchRequest()
         let result = try? context.fetch(fetchRequest)
         return result ?? []
     }
 
     // MARK: - SCHEDULE CRUD
-    private func createSchedule(of workspace: WorkspaceEntity, repeatedSchedule: [String], startTime: String, endTime: String, spentHour: Int16) {
+    func createSchedule(of workspace: WorkspaceEntity, repeatedSchedule: [String], startTime: String, endTime: String, spentHour: Int16) {
         let schedule = ScheduleEntity(context: context)
         schedule.workspace = workspace
         schedule.repeatedSchedule = repeatedSchedule
@@ -109,14 +109,14 @@ extension CoreDataManager {
         save()
     }
 
-    private func getAllSchedules(of workspace: WorkspaceEntity) -> [ScheduleEntity] {
+    func getAllSchedules(of workspace: WorkspaceEntity) -> [ScheduleEntity] {
         let fetchRequest: NSFetchRequest<ScheduleEntity> = ScheduleEntity.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "workspace.name = %@", workspace.name )
         let result = try? context.fetch(fetchRequest)
         return result ?? []
     }
 
-    private func editSchedule(of schedule: ScheduleEntity, repeatedSchedule: [String], startTime: String, endTime: String, spentHour: Int16) {
+    func editSchedule(of schedule: ScheduleEntity, repeatedSchedule: [String], startTime: String, endTime: String, spentHour: Int16) {
         schedule.repeatedSchedule = repeatedSchedule
         schedule.startTime = startTime
         schedule.endTime = endTime
