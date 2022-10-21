@@ -128,6 +128,7 @@ extension ScheduleUpdateView {
                         .frame(width: 76, height: 32)
                     Text("11 : 30")
                         .font(.title3)
+                        .foregroundColor(.fontBlack)
                 }
                 .padding(.trailing, 22)
                 HStack(spacing: 8) {
