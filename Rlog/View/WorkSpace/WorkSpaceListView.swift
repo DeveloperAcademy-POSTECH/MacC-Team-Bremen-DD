@@ -8,19 +8,19 @@
 import SwiftUI
 
 enum WorkSpaceInfo: CaseIterable {
-    case money
-    case date
-    case pay
-    case tax
-    case workType
+    case hourlyWage
+    case paymentDay
+    case hasJuhyu
+    case hasTax
+    case workDays
     
     var text: String {
         switch self {
-        case .money: return "시급"
-        case .date: return "급여일"
-        case .pay: return "주휴수당"
-        case .tax: return "소득세"
-        case .workType: return "근무 유형"
+        case .hourlyWage: return "시급"
+        case .paymentDay: return "급여일"
+        case .hasJuhyu: return "주휴수당"
+        case .hasTax: return "소득세"
+        case .workDays: return "근무 유형"
         }
     }
 }
@@ -60,10 +60,10 @@ struct WorkSpaceListView: View {
 }
 
 private extension WorkSpaceListView {
-    func WorkSpaceCardHeader(workTitle: String) -> some View {
+    func WorkSpaceCardHeader(workTitle: String, workTagColor: String) -> some View {
         HStack(alignment: .center){
             Rectangle()
-                .fill(.primary)
+                .foregroundColor(Color(workTagColor))
                 .frame(width: 3, height: 17)
             Text(workTitle)
                 .font(.callout)
@@ -76,7 +76,7 @@ private extension WorkSpaceListView {
         ZStack{
             
             VStack(alignment: .leading, spacing: 0) {
-                WorkSpaceCardHeader(workTitle: model.title)
+                WorkSpaceCardHeader(workTitle: model.name, workTagColor: model.Color)
                 
                 VStack(spacing: 8){
                     ForEach(WorkSpaceInfo.allCases, id: \.self) { tab in
@@ -103,47 +103,57 @@ private extension WorkSpaceListView {
 
 
 struct CustomModel: Hashable {
-    let title: String
-    let money: Int
+    let name: String
+    let hourlyWage: Int
     let date: String
-    let pay: String
-    let tax: String
-    let workType: String
+    let hasJuhyu: Bool
+    let hasTax: Bool
+    let Color: String
+    let workDays: String
+    let schedules: String
     
     func text(info: WorkSpaceInfo) -> String {
         switch info {
-        case .money: return "\(money)"
-        case .date: return date
-        case .pay: return "\(pay)"
-        case .tax: return "\(tax)"
-        case .workType: return "\(workType)"
+        case .hourlyWage: return "\(hourlyWage)"
+        case .paymentDay: return date
+        case .hasJuhyu:
+            return hasJuhyu ? "적용" : "미적용"
+        case .hasTax:
+            return hasTax ? "적용" : "미적용"
+        case .workDays: return "\(workDays + " " + schedules)"
         }
     }
 }
 
 let models = [
     CustomModel(
-        title: "팍이네 팍팍 감자탕",
-        money: 2000,
+        name: "팍이네 팍팍 감자탕",
+        hourlyWage: 2000,
         date: "2022.07.11",
-        pay: "미적용",
-        tax: "미적용",
-        workType : "월, 화, 수, 목요일 10:00 - 12:00"
+        hasJuhyu: true,
+        hasTax: false,
+        Color: "PointRed",
+        workDays : "월, 화, 수, 목요일",
+        schedules : "10:00 - 12:00"
     ),
     CustomModel(
-        title: "팍이네 팍팍팍 감자탕",
-        money: 2000,
+        name: "팍이네 팍팍팍 감자탕",
+        hourlyWage: 2000,
         date: "2022.07.11",
-        pay: "미적용",
-        tax: "미적용",
-        workType : "월, 화, 수, 목요일 10:00 - 12:00"
+        hasJuhyu: false,
+        hasTax: true,
+        Color: "PointPink",
+        workDays : "월, 화, 수, 목요일",
+        schedules : "10:00 - 12:00"
     ),
     CustomModel(
-        title: "팍이네 팍팍팍팍 감자탕",
-        money: 2000,
+        name: "팍이네 팍팍팍팍 감자탕",
+        hourlyWage: 2000,
         date: "2022.07.11",
-        pay: "미적용",
-        tax: "미적용",
-        workType : "월, 화, 수, 목요일 10:00 - 12:00"
+        hasJuhyu: true,
+        hasTax: false,
+        Color: "PointYellow",
+        workDays : "월, 화, 수, 목요일",
+        schedules : "10:00 - 12:00"
     ),
 ]
