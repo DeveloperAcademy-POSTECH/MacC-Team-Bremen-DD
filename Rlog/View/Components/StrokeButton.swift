@@ -43,7 +43,7 @@ private extension StrokeButton {
                 .frame(maxWidth: .infinity, minHeight: 56, maxHeight: 56)
             
             Text(label)
-                .foregroundColor(buttonStyle == .add ? .gray : .red)
+                .foregroundColor(buttonStyle == .add ? .fontLightGray : .red)
         }
     }
 }
