@@ -44,8 +44,7 @@ struct CustomTextField: View {
             } else if textFieldType == .wage {
                 if text.hasPrefix("0") { text = "" }
             } else if textFieldType == .payday {
-                if text.hasPrefix("0") { text = "" }
-                if Int(text) ?? 10 > 31 || Int(text) ?? 10 < 1 { text = "" }
+                if text.hasPrefix("0") || Int(text) ?? 10 > 31 || Int(text) ?? 10 < 1 { text = "" }
             }
         }
     }
