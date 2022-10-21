@@ -28,6 +28,7 @@ struct CoreDataManager {
         guard let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.Bremen-DD.Rlog") else {
             return URL(fileURLWithPath: "")
         }
+
         return container.appendingPathComponent(databaseName)
     }
 
@@ -76,9 +77,10 @@ struct CoreDataManager {
 
 // MARK: - CRUD LOGIC
 extension CoreDataManager {
-    private func save() {
+    private func save(completion: @escaping (() -> Void) ) {
         do {
             try context.save()
+            completion()
         } catch {
             print("FAILED TO SAVE CONTEXT")
         }
@@ -93,7 +95,9 @@ extension CoreDataManager {
         workspace.colorString = colorString
         workspace.hasTax = hasTax
         workspace.hasJuhyu = hasJuhyu
-        save()
+        save {
+            print("Scuccessfully Create Workspace")
+        }
     }
 
     func getAllWorkspaces() -> [WorkspaceEntity] {
@@ -104,7 +108,9 @@ extension CoreDataManager {
 
     func deleteWorkspace(workspace: WorkspaceEntity) {
         context.delete(workspace)
-        save()
+        save {
+            print("Scuccessfully Delete Workspace")
+        }
     }
 
     // MARK: - SCHEDULE CRUD
@@ -115,7 +121,9 @@ extension CoreDataManager {
         schedule.startTime = startTime
         schedule.endTime = endTime
         schedule.spentHour = spentHour
-        save()
+        save {
+            print("Scuccessfully Create Schedule")
+        }
     }
 
     func getAllSchedules(of workspace: WorkspaceEntity) -> [ScheduleEntity] {
@@ -130,12 +138,16 @@ extension CoreDataManager {
         schedule.startTime = startTime
         schedule.endTime = endTime
         schedule.spentHour = spentHour
-        save()
+        save {
+            print("Scuccessfully Edit Schedule")
+        }
     }
 
     func deleteSchedule(of schedule: ScheduleEntity) {
         context.delete(schedule)
-        save()
+        save {
+            print("Scuccessfully Deleted Schedule")
+        }
     }
 
     // MARK: - WORKDAY CRUD
@@ -150,7 +162,9 @@ extension CoreDataManager {
         workday.startTime = startTime
         workday.endTime = endTime
         workday.spentHour = spentHour
-        save()
+        save {
+            print("Scuccessfully Create WorkDay")
+        }
     }
 
     func getAllWorkdays(of workspace: WorkspaceEntity) -> [WorkDayEntity] {
@@ -163,8 +177,8 @@ extension CoreDataManager {
     func getWorkdays(of workspace: WorkspaceEntity, yearInt: Int, monthInt: Int, limit: Int) -> [WorkDayEntity] {
         let fetchRequest: NSFetchRequest<WorkDayEntity> = WorkDayEntity.fetchRequest()
         let workspacePredicate = NSPredicate(format: "workspace.name = %@", workspace.name )
-        let yearPredicate = NSPredicate(format: "yearInt", yearInt)
-        let monthPredicate = NSPredicate(format: "monthInt", monthInt)
+        let yearPredicate = NSPredicate(format: "yearInt == %i", yearInt)
+        let monthPredicate = NSPredicate(format: "monthInt == %i", monthInt)
         fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: [workspacePredicate, yearPredicate, monthPredicate])
         fetchRequest.fetchLimit = limit
         let result = try? context.fetch(fetchRequest)
@@ -179,11 +193,15 @@ extension CoreDataManager {
         workday.startTime = startTime
         workday.endTime = endTime
         workday.spentHour = spentHour
-        save()
+        save {
+            print("Scuccessfully Edit WorkDay")
+        }
     }
 
     func deleteWorkDay(of workday: WorkDayEntity) {
         context.delete(workday)
-        save()
+        save {
+            print("Scuccessfully Delete WorkDay")
+        }
     }
 }
