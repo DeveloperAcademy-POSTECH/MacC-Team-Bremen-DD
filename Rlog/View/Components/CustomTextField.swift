@@ -28,7 +28,7 @@ enum CustomTextFieldType: String {
 struct CustomTextField: View {
     let textFieldType: CustomTextFieldType
     let keyboardType: UIKeyboardType
-    @State var isFocused: Bool = false
+    @State var isFocused = false
     @Binding var text: String {
         didSet {
             if textFieldType == .workplace {
@@ -86,7 +86,7 @@ private extension CustomTextField {
 private struct UITextFieldRepresentable: UIViewRepresentable {
     @Binding var text: String
     var placeholder: String
-    var isFirstResponder: Bool = false
+    var isFirstResponder = false
     @Binding var isFocused: Bool
     
     func makeUIView(context: UIViewRepresentableContext<UITextFieldRepresentable>) -> UITextField {
