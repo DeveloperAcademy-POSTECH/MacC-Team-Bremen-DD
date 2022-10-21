@@ -59,3 +59,32 @@ struct WorkSpaceCreateView_Previews: PreviewProvider {
         WorkSpaceCreateView()
     }
 }
+
+extension View {
+    /// hidden 방식을 고민하다가 좋은 코드를 발견해서 가져왔습니다. 직접 구현하는것도 가능하지만 더 깔끔하게 사용 가능할것 같아서 활용하고자합니다!
+    /// https://github.com/GeorgeElsham/HidingViews
+    /// Hide or show the view based on a boolean value.
+    ///
+    /// Example for visibility:
+    ///
+    ///     Text("Label")
+    ///         .isHidden(true)
+    ///
+    /// Example for complete removal:
+    ///
+    ///     Text("Label")
+    ///         .isHidden(true, remove: true)
+    ///
+    /// - Parameters:
+    ///   - hidden: Set to `false` to show the view. Set to `true` to hide the view.
+    ///   - remove: Boolean value indicating whether or not to remove the view.
+    @ViewBuilder func isHidden(_ hidden: Bool, remove: Bool = false) -> some View {
+        if hidden {
+            if !remove {
+                self.hidden()
+            }
+        } else {
+            self
+        }
+    }
+}
