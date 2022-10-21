@@ -7,23 +7,6 @@
 
 import SwiftUI
 
-enum WorkSpaceInfo: CaseIterable {
-    case hourlyWage
-    case paymentDay
-    case hasJuhyu
-    case hasTax
-    case workDays
-    
-    var text: String {
-        switch self {
-        case .hourlyWage: return "시급"
-        case .paymentDay: return "급여일"
-        case .hasJuhyu: return "주휴수당"
-        case .hasTax: return "소득세"
-        case .workDays: return "근무 유형"
-        }
-    }
-}
 
 struct WorkSpaceListView: View {
     
@@ -31,13 +14,11 @@ struct WorkSpaceListView: View {
         NavigationView {
             ZStack {
                 Color.cardBackground
+                    .ignoresSafeArea()
                 
                 ScrollView {
                     ForEach(models, id: \.self) { model in
-                        NavigationLink(
-                            destination: { WorkSpaceDetailView() },
-                            label: { WorkSpaceCardContents(model: model) }
-                        )
+                        WorkSpaceCell(model: model)
                     }
                 }
                 .padding(.top, 32)
@@ -51,6 +32,7 @@ struct WorkSpaceListView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: { print("button pressed") }){
                             Image(systemName: "plus")
+                                .fontWeight(.bold)
                         }
                     }
                 }
@@ -58,49 +40,6 @@ struct WorkSpaceListView: View {
         }
     }
 }
-
-private extension WorkSpaceListView {
-    func WorkSpaceCardHeader(workTitle: String, workTagColor: String) -> some View {
-        HStack(alignment: .center){
-            Rectangle()
-                .foregroundColor(Color(workTagColor))
-                .frame(width: 3, height: 17)
-            Text(workTitle)
-                .font(.callout)
-                .fontWeight(.bold)
-                .foregroundColor(.fontBlack)
-        }.padding(.bottom, 20)
-    }
-    
-    func WorkSpaceCardContents(model: CustomModel) -> some View {
-        ZStack{
-            
-            VStack(alignment: .leading, spacing: 0) {
-                WorkSpaceCardHeader(workTitle: model.name, workTagColor: model.Color)
-                
-                VStack(spacing: 8){
-                    ForEach(WorkSpaceInfo.allCases, id: \.self) { tab in
-                        HStack() {
-                            Text(tab.text)
-                                .font(.subheadline)
-                                .foregroundColor(.fontLightGray)
-                            Spacer()
-                            Text(model.text(info: tab))
-                                .font(.subheadline)
-                                .foregroundColor(.fontBlack)
-                        }
-                    }
-                }
-            }
-            .padding()
-            .background(RoundedRectangle(cornerRadius: 10)
-            .fill(Color.background))
-            .padding([.horizontal, .bottom])
-        }
-    }
-}
-
-
 
 struct CustomModel: Hashable {
     let name: String
