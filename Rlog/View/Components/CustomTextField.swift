@@ -76,7 +76,7 @@ private extension CustomTextField {
             
             Rectangle()
                 .frame(maxWidth: .infinity, minHeight: 2, maxHeight: 2)
-                .foregroundColor(isFocused == false ? .fontLightGray : .green)
+                .foregroundColor(isFocused == false ? .fontLightGray : .primary)
         }
         .frame(maxWidth: .infinity, minHeight: 30, maxHeight: 30)
     }
