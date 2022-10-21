@@ -102,6 +102,11 @@ extension CoreDataManager {
         return result ?? []
     }
 
+    func deleteWorkspace(workspace: WorkspaceEntity) {
+        context.delete(workspace)
+        save()
+    }
+
     // MARK: - SCHEDULE CRUD
     func createSchedule(of workspace: WorkspaceEntity, repeatedSchedule: [String], startTime: String, endTime: String, spentHour: Int16) {
         let schedule = ScheduleEntity(context: context)
