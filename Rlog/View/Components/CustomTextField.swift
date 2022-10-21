@@ -23,11 +23,17 @@ enum CustomTextFieldType: String {
         case .none: return "내용을 입력해주세요."
         }
     }
+    
+    var keyboardType: UIKeyboardType {
+        switch self {
+        case .wage, .payday: return .numberPad
+        case .workplace, .reason, .none: return .default
+        }
+    }
 }
 
 struct CustomTextField: View {
     let textFieldType: CustomTextFieldType
-    let keyboardType: UIKeyboardType
     @State var isFocused = false
     @Binding var text: String {
         didSet {
@@ -59,7 +65,7 @@ private extension CustomTextField {
                     isFocused: $isFocused
                 )
                 .padding(.horizontal)
-                .keyboardType(keyboardType)
+                .keyboardType(textFieldType.keyboardType)
 
                 Spacer()
                 

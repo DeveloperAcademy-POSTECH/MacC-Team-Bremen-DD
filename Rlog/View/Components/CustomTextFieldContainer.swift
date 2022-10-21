@@ -9,12 +9,10 @@ import SwiftUI
 
 struct CustomTextFieldContainer: View {
     let containerType: CustomTextFieldType
-    let keyboardType: UIKeyboardType
     var text: Binding<String>
     
-    init(containerType: CustomTextFieldType, keyboardType: UIKeyboardType, text: Binding<String>) {
+    init(containerType: CustomTextFieldType, text: Binding<String>) {
         self.containerType = containerType
-        self.keyboardType = keyboardType
         self.text = text
     }
     
@@ -51,7 +49,6 @@ private extension CustomTextFieldContainer {
         VStack {
             CustomTextField(
                 textFieldType: .workplace,
-                keyboardType: keyboardType,
                 text: text
             )
             
@@ -70,7 +67,6 @@ private extension CustomTextFieldContainer {
         HStack {
             CustomTextField(
                 textFieldType: .wage,
-                keyboardType: keyboardType,
                 text: text
             )
             
@@ -87,7 +83,6 @@ private extension CustomTextFieldContainer {
             VStack(spacing: 0) {
                 CustomTextField(
                     textFieldType: .payday,
-                    keyboardType: keyboardType,
                     text: text
                 )
                 
@@ -110,7 +105,6 @@ private extension CustomTextFieldContainer {
     var reasonView: some View {
         CustomTextField(
             textFieldType: .reason,
-            keyboardType: keyboardType,
             text: text
         )
         
