@@ -18,12 +18,16 @@ struct CoreDataManager {
     }
 
     private var oldStoreURL: URL {
-        let directory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+        guard let directory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
+            return URL(fileURLWithPath: "")
+        }
         return directory.appendingPathComponent(databaseName)
     }
 
     private var sharedStoreURL: URL {
-        let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.Bremen-DD.Rlog")!
+        guard let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.Bremen-DD.Rlog") else {
+            return URL(fileURLWithPath: "")
+        }
         return container.appendingPathComponent(databaseName)
     }
 
