@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ScheduleListView: View {
     @ObservedObject var viewModel = ScheduleListViewModel()
-    @State var selectedScheduleCase: ScheduleCase = .upcoming
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -27,7 +26,7 @@ struct ScheduleListView: View {
                 .fill(LinearGradient(colors: [Color.clear, Color.fontLightGray], startPoint: .top, endPoint: .bottom))
                 .frame(height: 83)
             
-            CustomPicker(selectedScheduleCase: $selectedScheduleCase)
+            StatusPicker()
                 .frame(width: 176, height: 40)
                 .padding(.bottom)
                 .environmentObject(viewModel)
@@ -58,7 +57,7 @@ private extension ScheduleListView {
                 ForEach(0..<3) { index in
                     RoundedRectangle(cornerRadius: 10)
                         .frame(height: 97)
-                        .foregroundColor(selectedScheduleCase == .upcoming ? Color.green : Color.red)
+                        .foregroundColor(viewModel.selectedScheduleCase == .upcoming ? Color.green : Color.red)
                 }
                 .padding(.top)
             }
@@ -70,7 +69,7 @@ private extension ScheduleListView {
             Image(systemName: "checkmark")
                 .foregroundColor(Color.primary)
                 .fontWeight(.bold)
-            Text(selectedScheduleCase.rawValue)
+            Text(viewModel.selectedScheduleCase.rawValue)
                 .font(.title3)
                 .fontWeight(.semibold)
                 .foregroundColor(Color.fontBlack)
@@ -79,8 +78,8 @@ private extension ScheduleListView {
     }
 }
 
-struct ScheduleListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ScheduleListView()
-    }
-}
+//struct ScheduleListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ScheduleListView()
+//    }
+//}
