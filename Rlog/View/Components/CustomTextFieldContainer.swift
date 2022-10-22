@@ -86,9 +86,9 @@ private extension CustomTextFieldContainer {
                     text: text
                 )
                 
-                if Int(text.wrappedValue) ?? 10 > 31 {
+                if Int(text.wrappedValue) ?? 10 > 28 {
                     HStack {
-                        Text("1~31 사이의 숫자를 입력해주세요")
+                        Text("1~28 사이의 숫자를 입력해주세요")
                             .font(.footnote)
                             .foregroundColor(.red)
                         Spacer()
