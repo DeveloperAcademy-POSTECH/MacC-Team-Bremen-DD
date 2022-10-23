@@ -9,7 +9,7 @@ import SwiftUI
 
 extension ScheduleListView {
     struct StatusPicker: View {
-        @EnvironmentObject var viewModel: ScheduleListViewModel
+        @ObservedObject var viewModel: ScheduleListViewModel
         
         var body: some View {
             GeometryReader { geometry in
@@ -20,7 +20,7 @@ extension ScheduleListView {
                         .fill(Color.primary)
                         .frame(width: 97)
                         .cornerRadius(20)
-                        .offset(x: viewModel.setStatusPickerOffset())
+                        .offset(x: viewModel.statusPickerOffset)
                     HStack(spacing: 0) {
                         ForEach(viewModel.scheduleCases, id: \.self) { schedule in
                             ZStack {
@@ -29,8 +29,8 @@ extension ScheduleListView {
                                     .frame(width: 176 / 2)
                                 Text(schedule.rawValue)
                                     .font(.caption2)
-                                    .fontWeight(viewModel.setStatusPickerTextWeight(compareCase: schedule))
-                                    .foregroundColor(viewModel.setStatusPickerForegroundColor(compareCase: schedule))
+                                    .fontWeight(viewModel.getStatusPickerTextWeight(compareCase: schedule))
+                                    .foregroundColor(viewModel.getStatusPickerForegroundColor(compareCase: schedule))
                                     .onTapGesture {
                                         withAnimation {
                                             viewModel.selectedScheduleCase = schedule

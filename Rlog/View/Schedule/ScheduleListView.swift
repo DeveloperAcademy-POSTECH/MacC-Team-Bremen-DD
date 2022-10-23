@@ -26,10 +26,9 @@ struct ScheduleListView: View {
                 .fill(LinearGradient(colors: [Color.clear, Color.fontLightGray], startPoint: .top, endPoint: .bottom))
                 .frame(height: 83)
             
-            StatusPicker()
+            StatusPicker(viewModel: viewModel)
                 .frame(width: 176, height: 40)
                 .padding(.bottom)
-                .environmentObject(viewModel)
         }
     }
 }
@@ -77,9 +76,3 @@ private extension ScheduleListView {
         }
     }
 }
-
-//struct ScheduleListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ScheduleListView()
-//    }
-//}
