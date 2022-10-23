@@ -7,11 +7,21 @@
 
 import SwiftUI
 
-struct WorkSpaceCreateScheduleListViewModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+final class WorkSpaceCreateScheduleListViewModel: ObservableObject {
+    @Published var isNavigationActivated = false
+    @Published var scheduleList: [Schedule] = []
+    
+    func didTapAddScheduleButton() {
+        showModal()
     }
 }
+
+extension WorkSpaceCreateScheduleListViewModel {
+    func showModal() {
+        isShowingModal = true
+    }
+}
+
 struct Schedule: Hashable{
     var workDays: [String] = []
     var startHour: String = ""

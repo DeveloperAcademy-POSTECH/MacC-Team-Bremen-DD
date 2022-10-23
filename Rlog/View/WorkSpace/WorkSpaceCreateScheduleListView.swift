@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct WorkSpaceCreateScheduleListView: View {
-    
-    @State var isNavigationActivated: Bool = false
+    @ObservedObject var viewModel = WorkSpaceCreateScheduleListViewModel()
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -17,7 +16,8 @@ struct WorkSpaceCreateScheduleListView: View {
             labelText
             VStack(spacing: 16) {
                 //리스트 불러와서 반복문으로 돌리기
-                ForEach(1 ..< 3, id: \.self) { s in
+                ForEach(viewModel.scheduleList, id: \.self) { s in
+                    scheduleItem(s)
                     //컨포넌트로 대체하기
                     RoundedRectangle(cornerRadius: 10)
                         .frame(maxHeight: 56)
@@ -44,6 +44,7 @@ private extension WorkSpaceCreateScheduleListView {
     var addScheduleButton: some View {
         //컨포넌트로 대체하기
         Button {
+            viewModel.didTapAddScheduleButton()
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
