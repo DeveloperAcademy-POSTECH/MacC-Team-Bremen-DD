@@ -11,7 +11,7 @@ import SwiftUI
 struct WorkSpaceListView: View {
     
     var body: some View {
-//  Navgation Header 리팩토링 고려 코드 https://stackoverflow.com/questions/57517803/how-to-remove-the-default-navigation-bar-space-in-swiftui-navigationview
+        //  Navgation Header 리팩토링 고려 코드 https://stackoverflow.com/questions/57517803/how-to-remove-the-default-navigation-bar-space-in-swiftui-navigationview
         NavigationView {
             ScrollView {
                 ForEach(models, id: \.self) { model in
@@ -43,8 +43,8 @@ struct CustomModel: Hashable {
     let name: String
     let hourlyWage: Int
     let date: String
-    let hasJuhyu: Bool
-    let hasTax: Bool
+    var hasJuhyu: Bool
+    var hasTax: Bool
     let Color: String
     let workDays: String
     let schedules: String
@@ -59,6 +59,16 @@ struct CustomModel: Hashable {
         case .hasTax:
             return hasTax ? "적용" : "미적용"
         case .workDays: return "\(workDays + " " + schedules)"
+        }
+    }
+    
+    // TODO: TODO: CoreData model에도 추가해야함. 공용 컴포넌트 연결시 case 추가해야함.
+    func getDetailValue(info: WorkSpaceDetailInfo) -> Bool {
+        switch info {
+        case .hasTax:
+            return hasTax
+        case .hasJuhyu:
+            return hasJuhyu
         }
     }
 }
