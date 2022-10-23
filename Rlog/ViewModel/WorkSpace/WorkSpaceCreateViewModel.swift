@@ -38,4 +38,10 @@ enum WritingState: Int {
             return "소득세, 주휴수당 정보를 입력해주세요."
         }
     }
+struct WorkSpaceInfo {
+    var workSpaceName: String
+    var hourlyWage: Int?
+    var payday: Int
+    var incomeTax: Bool
+    var holidayAllowance: Bool
 }
