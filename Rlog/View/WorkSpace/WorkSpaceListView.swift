@@ -12,32 +12,27 @@ struct WorkSpaceListView: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
-                Color.cardBackground
-                    .ignoresSafeArea()
-                
-                ScrollView {
-                    ForEach(models, id: \.self) { model in
-                        WorkSpaceCell(model: model)
-                    }
+            ScrollView {
+                ForEach(models, id: \.self) { model in
+                    WorkSpaceCell(model: model)
                 }
-                .padding(.top, 32)
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Text("근무지")
-                            .font(.title2)
+            }
+            .padding(.top, 32)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Text("근무지")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: { print("button pressed") }){
+                        Image(systemName: "plus")
                             .fontWeight(.bold)
                     }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: { print("button pressed") }){
-                            Image(systemName: "plus")
-                                .fontWeight(.bold)
-                        }
-                    }
                 }
-
             }
+            .background(Color.cardBackground)
         }
     }
 }
