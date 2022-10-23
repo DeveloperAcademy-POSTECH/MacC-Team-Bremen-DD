@@ -64,6 +64,7 @@ final class WorkSpaceCreateViewModel: ObservableObject {
 
 extension WorkSpaceCreateViewModel {
     func switchToNextStatus() {
+        withAnimation(.easeIn) {
             switch currentState {
             case .workSpace:
                 isHiddenGuidingTitle = false
@@ -80,6 +81,7 @@ extension WorkSpaceCreateViewModel {
                 return
             }
             isActivatedConfirmButton = false
+        }
     }
     func inActivateButton(inputState: WritingState) {
         if currentState.rawValue == inputState.rawValue {
