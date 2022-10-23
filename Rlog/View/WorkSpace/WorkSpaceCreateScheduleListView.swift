@@ -65,7 +65,7 @@ private extension WorkSpaceCreateScheduleListView {
                     .foregroundColor(.white)
             }
             .sheet(isPresented: $viewModel.isShowingModal) {
-                Rectangle()
+                WorkSpaceCreateCreatingScheduleView(isShowingModal: $viewModel.isShowingModal)
             }
         }
     }

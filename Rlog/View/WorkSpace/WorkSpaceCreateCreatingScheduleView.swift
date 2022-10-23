@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WorkSpaceCreateCreatingScheduleView: View {
     @ObservedObject var viewModel = WorkSpaceCreateCreatingScheduleViewModel()
+    @Binding var isShowingModal: Bool
     
     var body: some View {
         NavigationView {
