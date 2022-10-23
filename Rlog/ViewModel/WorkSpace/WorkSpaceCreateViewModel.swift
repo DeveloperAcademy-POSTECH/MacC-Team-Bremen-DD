@@ -10,15 +10,32 @@ import SwiftUI
 
 
 final class WorkSpaceCreateViewModel: ObservableObject {
+    // 뷰 상태, 버튼 활성화 여부
     @Published var currentState: WritingState = .workSpace
-    @Published var isTappedConfirmButton: Bool = false
+    @Published var isActivatedConfirmButton: Bool = false
     
-    init() {
-        $isTappedConfirmButton.filter {
-            $0 == true
-        }.sink { [weak self] _ in
-            guard let self = self else { return }
-            self.currentState = WritingState(rawValue: self.currentState.rawValue + 1) ?? .workSpace
+    // 버튼 숨김 여부
+    @Published var isHiddenConfirmButton = true
+    @Published var isHiddenGuidingTitle = true
+    @Published var isHiddenHourlyWage = false
+    @Published var isHiddenPayday = false
+    @Published var isHiddenToggleInputs = false
+
+    // 인풋값과 입력여부
+    @Published var isOnIncomeTax = false
+    @Published var isOnHolidayAllowance = false
+    @Published var workSpaceName = "" {
+        didSet {
+        }
+    }
+    @Published var hourlyWage = "" {
+        didSet {
+        }
+    }
+    @Published var payday = "" {
+        didSet {
+        }
+    }
         }
     }
 }
