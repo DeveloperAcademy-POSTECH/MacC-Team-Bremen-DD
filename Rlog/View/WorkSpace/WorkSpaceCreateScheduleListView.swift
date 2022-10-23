@@ -16,8 +16,8 @@ struct WorkSpaceCreateScheduleListView: View {
             labelText
             VStack(spacing: 16) {
                 //리스트 불러와서 반복문으로 돌리기
-                ForEach(viewModel.scheduleList, id: \.self) { s in
-                    scheduleItem(s)
+                ForEach(viewModel.scheduleList, id: \.self) { item in
+                    createScheduleListCell(for: item)
                     //컨포넌트로 대체하기
                     RoundedRectangle(cornerRadius: 10)
                         .frame(maxHeight: 56)
@@ -32,8 +32,19 @@ struct WorkSpaceCreateScheduleListView: View {
 }
 
 private extension WorkSpaceCreateScheduleListView {
+    @ViewBuilder
+    func createScheduleListCell(for item: Schedule) -> some View {
+        HStack {
+            ForEach(item.workDays,id: \.self) { day in
+                Text("\(day) ")
+            }
+            Spacer()
+            Text("\(item.startHour):\(item.startMinute) - \(item.endHour):\(item.endMinute)")
+        }
+            
+    }
     var guidingText: some View {
-        Text("근무 요일과 시간을 입력해주세요.")
+        Text("근무 일정을 입력해주세요.")
             .padding(.vertical, 20)
     }
     var labelText: some View {
