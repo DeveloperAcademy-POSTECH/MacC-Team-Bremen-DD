@@ -12,3 +12,10 @@ struct WorkSpaceCreateScheduleListViewModel: View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
+struct Schedule: Hashable{
+    var workDays: [String] = []
+    var startHour: String = ""
+    var startMinute: String = ""
+    var endHour: String = ""
+    var endMinute: String = ""
+}
