@@ -26,16 +26,43 @@ final class WorkSpaceCreateViewModel: ObservableObject {
     @Published var isOnHolidayAllowance = false
     @Published var workSpaceName = "" {
         didSet {
+            if !workSpaceName.isEmpty {
+                activateButton(inputState: .workSpace)
+            } else {
+                inActivateButton(inputState: .workSpace)
+            }
+            print(isActivatedConfirmButton)
         }
     }
     @Published var hourlyWage = "" {
         didSet {
+            if !hourlyWage.isEmpty {
+                activateButton(inputState: .hourlyWage)
+            } else {
+                inActivateButton(inputState: .hourlyWage)
+            }
+            print(isActivatedConfirmButton)
         }
     }
     @Published var payday = "" {
         didSet {
+            if !payday.isEmpty {
+                activateButton(inputState: .payday)
+            } else {
+                inActivateButton(inputState: .payday)
+            }
         }
     }
+}
+extension WorkSpaceCreateViewModel {
+    func inActivateButton(inputState: WritingState) {
+        if currentState.rawValue == inputState.rawValue {
+            isActivatedConfirmButton = false
+        }
+    }
+    func activateButton(inputState: WritingState)  {
+        if currentState.rawValue == inputState.rawValue {
+            isActivatedConfirmButton = true
         }
     }
 }
@@ -55,6 +82,7 @@ enum WritingState: Int {
             return "소득세, 주휴수당 정보를 입력해주세요."
         }
     }
+}
 struct WorkSpaceInfo {
     var workSpaceName: String
     var hourlyWage: Int?
