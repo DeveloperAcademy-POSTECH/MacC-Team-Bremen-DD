@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CompleteButtonView: View {
+struct FilledButton: View {
     let action: () -> Void
     
     init(action: @escaping () -> Void) {
