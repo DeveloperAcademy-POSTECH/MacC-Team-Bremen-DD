@@ -13,8 +13,7 @@ struct WorkSpaceCreateScheduleListView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            //타이틀 섭뷰 넣기 "근무 일정을 입력해주세요." Or "근무 유형을 추가해주세요!"
-            Text("sample")
+            guidingText
             labelText
             VStack(spacing: 16) {
                 //리스트 불러와서 반복문으로 돌리기
@@ -23,10 +22,7 @@ struct WorkSpaceCreateScheduleListView: View {
                     RoundedRectangle(cornerRadius: 10)
                         .frame(maxHeight: 56)
                 }
-                //컨포넌트로 대체하기
-                Button {} label: {
-                    Text("+ 근무 일정 추가하기")
-                }
+                addScheduleButton
             }
             Spacer()
             
@@ -36,10 +32,28 @@ struct WorkSpaceCreateScheduleListView: View {
 }
 
 private extension WorkSpaceCreateScheduleListView {
+    var guidingText: some View {
+        Text("근무 요일과 시간을 입력해주세요.")
+            .padding(.vertical, 20)
+    }
     var labelText: some View {
         Text("근무 유형")
             .font(.caption)
             .foregroundColor(.fontLightGray)
+    }
+    var addScheduleButton: some View {
+        //컨포넌트로 대체하기
+        Button {
+        } label: {
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .frame(height: 58)
+                    .foregroundColor(.fontLightGray)
+                Text("+ 근무 일정 추가하기")
+                    .foregroundColor(.white)
+            }
+            }
+        }
     }
 }
 
