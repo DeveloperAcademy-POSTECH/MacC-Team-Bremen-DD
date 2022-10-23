@@ -71,7 +71,7 @@ let models = [
         date: "2022.07.11",
         hasJuhyu: true,
         hasTax: false,
-        Color: "PointRed",
+        color: "PointRed",
         workDays : "월, 화, 수, 목요일",
         schedules : "10:00 - 12:00"
     ),
@@ -81,7 +81,7 @@ let models = [
         date: "2022.07.11",
         hasJuhyu: false,
         hasTax: true,
-        Color: "PointPink",
+        color: "PointPink",
         workDays : "월, 화, 수, 목요일",
         schedules : "10:00 - 12:00"
     ),
@@ -91,7 +91,7 @@ let models = [
         date: "2022.07.11",
         hasJuhyu: true,
         hasTax: false,
-        Color: "PointYellow",
+        color: "PointYellow",
         workDays : "월, 화, 수, 목요일",
         schedules : "10:00 - 12:00"
     ),
@@ -101,7 +101,7 @@ let models = [
         date: "2022.07.11",
         hasJuhyu: true,
         hasTax: false,
-        Color: "PointYellow",
+        color: "PointYellow",
         workDays : "월, 화, 수, 목요일",
         schedules : "10:00 - 12:00"
     )
