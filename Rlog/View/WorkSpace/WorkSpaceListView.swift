@@ -41,6 +41,7 @@ struct WorkSpaceListView: View {
     }
 }
 
+// TODO: CoreData의 Model로 변경
 struct CustomModel: Hashable {
     let name: String
     let hourlyWage: Int
@@ -51,7 +52,8 @@ struct CustomModel: Hashable {
     let workDays: String
     let schedules: String
     
-    func text(info: WorkSpaceInfo) -> String {
+    // TODO: CoreData model에도 추가해야함.
+    func getValue(info: WorkSpaceInfo) -> String {
         switch info {
         case .hourlyWage: return "\(hourlyWage)"
         case .paymentDay: return date
@@ -64,6 +66,7 @@ struct CustomModel: Hashable {
     }
 }
 
+// TODO: Data 주입 후, 삭제 해야함
 let models = [
     CustomModel(
         name: "팍이네 팍팍 감자탕",

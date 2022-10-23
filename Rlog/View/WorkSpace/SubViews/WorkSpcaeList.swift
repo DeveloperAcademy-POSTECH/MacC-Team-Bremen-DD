@@ -37,7 +37,7 @@ struct WorkSpaceCell: View {
 }
 
 private extension WorkSpaceCell {
-    func WorkSpaceCardHeader(workTitle: String, workTagColor: String) -> some View {
+    func makeWorkSpaceCardHeader(workTitle: String, workTagColor: String) -> some View {
         HStack(alignment: .center){
             Rectangle()
                 .foregroundColor(Color(workTagColor))
@@ -52,7 +52,7 @@ private extension WorkSpaceCell {
     func WorkSpaceCardContent(model: CustomModel) -> some View {
         ZStack{
             VStack(alignment: .leading, spacing: 0) {
-                WorkSpaceCardHeader(workTitle: model.name, workTagColor: model.Color)
+                makeWorkSpaceCardHeader(workTitle: model.name, workTagColor: model.Color)
                 
                 VStack(spacing: 8){
                     ForEach(WorkSpaceInfo.allCases, id: \.self) { tab in
@@ -61,7 +61,7 @@ private extension WorkSpaceCell {
                                 .font(.subheadline)
                                 .foregroundColor(.fontLightGray)
                             Spacer()
-                            Text(model.text(info: tab))
+                            Text(model.getValue(info: tab))
                                 .font(.subheadline)
                                 .foregroundColor(.fontBlack)
                         }
