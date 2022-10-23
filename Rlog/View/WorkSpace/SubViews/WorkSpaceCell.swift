@@ -51,7 +51,7 @@ private extension WorkSpaceCell {
     
     func makeWorkSpaceCardContent(model: CustomModel) -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            makeWorkSpaceCardHeader(workTitle: model.name, workTagColor: model.Color)
+            makeWorkSpaceCardHeader(workTitle: model.name, workTagColor: model.color)
             
             VStack(spacing: 8){
                 ForEach(WorkSpaceInfo.allCases, id: \.self) { tab in

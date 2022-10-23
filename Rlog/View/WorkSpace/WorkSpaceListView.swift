@@ -45,7 +45,7 @@ struct CustomModel: Hashable {
     let date: String
     let hasJuhyu: Bool
     let hasTax: Bool
-    let Color: String
+    let color: String
     let workDays: String
     let schedules: String
     
