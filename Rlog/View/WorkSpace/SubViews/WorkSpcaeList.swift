@@ -50,29 +50,27 @@ private extension WorkSpaceCell {
     }
     
     func makeWorkSpaceCardContent(model: CustomModel) -> some View {
-        ZStack{
-            VStack(alignment: .leading, spacing: 0) {
-                makeWorkSpaceCardHeader(workTitle: model.name, workTagColor: model.Color)
-                
-                VStack(spacing: 8){
-                    ForEach(WorkSpaceInfo.allCases, id: \.self) { tab in
-                        HStack() {
-                            Text(tab.text)
-                                .font(.subheadline)
-                                .foregroundColor(.fontLightGray)
-                            Spacer()
-                            Text(model.getValue(info: tab))
-                                .font(.subheadline)
-                                .foregroundColor(.fontBlack)
-                        }
+        VStack(alignment: .leading, spacing: 0) {
+            makeWorkSpaceCardHeader(workTitle: model.name, workTagColor: model.Color)
+            
+            VStack(spacing: 8){
+                ForEach(WorkSpaceInfo.allCases, id: \.self) { tab in
+                    HStack() {
+                        Text(tab.text)
+                            .font(.subheadline)
+                            .foregroundColor(.fontLightGray)
+                        Spacer()
+                        Text(model.getValue(info: tab))
+                            .font(.subheadline)
+                            .foregroundColor(.fontBlack)
                     }
                 }
             }
-            .padding()
-            .background(RoundedRectangle(cornerRadius: 10)
-                .fill(Color.background))
-            .padding([.horizontal, .bottom])
         }
+        .padding()
+        .background(RoundedRectangle(cornerRadius: 10)
+            .fill(Color.background))
+        .padding([.horizontal, .bottom])
     }
 }
 
