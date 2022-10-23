@@ -17,9 +17,7 @@ struct ScheduleCreateView: View {
                 .padding(.top, 40)
             workDate
                 .padding(.top)
-            startTime
-                .padding(.top)
-            endTime
+            schedule
                 .padding(.top)
             reasonInput
                 .padding(.top)
@@ -72,27 +70,33 @@ extension ScheduleCreateView {
         }
     }
     
-    var startTime: some View {
+    var schedule: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("출근 시간")
+            Text("근무 시간")
                 .font(.subheadline)
                 .foregroundColor(Color.fontLightGray)
-            
-            TimeEditer()
-                .environmentObject(viewModel)
-                .padding(.top, 8)
-        }
-    }
-    
-    var endTime: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text("퇴근 시간")
-                .font(.subheadline)
-                .foregroundColor(Color.fontLightGray)
-            
-            TimeEditer()
-                .environmentObject(viewModel)
-                .padding(.top, 8)
+            // TODO: - TextField 컴포넌트로 변경
+            HStack(spacing: 0) {
+                TextField("00", text: $viewModel.startHourText)
+                    .frame(height: 40)
+                    .multilineTextAlignment(.center)
+                    .keyboardType(.namePhonePad)
+                Text(":")
+                TextField("00", text: $viewModel.startMinuteText)
+                    .frame(height: 40)
+                    .multilineTextAlignment(.center)
+                    .keyboardType(.namePhonePad)
+                Text("-")
+                    .padding(.horizontal, 10)
+                TextField("00", text: $viewModel.endHourText)
+                    .frame(height: 40)
+                    .multilineTextAlignment(.center)
+                    .keyboardType(.namePhonePad)
+                TextField("00", text: $viewModel.endMinuteText)
+                    .frame(height: 40)
+                    .multilineTextAlignment(.center)
+                    .keyboardType(.namePhonePad)
+            }
         }
     }
     
@@ -120,34 +124,6 @@ extension ScheduleCreateView {
                     .foregroundColor(Color.red)
             }
         })
-    }
-    
-    private struct TimeEditer: View {
-        // TODO: - 로직 구현
-        @EnvironmentObject var viewModel: ScheduleCreateViewModel
-        
-        var body: some View {
-            HStack(spacing: 0) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                        // TODO: - 컬러 변경
-                        .fill(Color.gray)
-                        .frame(width: 76, height: 32)
-                    Text("11 : 30")
-                        .font(.title3)
-                        .foregroundColor(.fontBlack)
-                }
-                .padding(.trailing, 22)
-                HStack(spacing: 8) {
-                    // TODO: - 버튼 스타일 적용
-                    ForEach(viewModel.timeUnits, id: \.self) { unit in
-                        Button(unit) {
-                            // TODO: - ViewModel Action 구현
-                        }
-                    }
-                }
-            }
-        }
     }
 }
 
