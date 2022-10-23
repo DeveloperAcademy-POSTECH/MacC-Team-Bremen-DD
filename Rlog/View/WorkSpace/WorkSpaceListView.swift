@@ -36,6 +36,7 @@ struct WorkSpaceListView: View {
                         }
                     }
                 }
+
             }
         }
     }
@@ -98,4 +99,14 @@ let models = [
         workDays : "월, 화, 수, 목요일",
         schedules : "10:00 - 12:00"
     ),
+    CustomModel(
+        name: "팍이네 팍팍팍팍 감자탕",
+        hourlyWage: 2000,
+        date: "2022.07.11",
+        hasJuhyu: true,
+        hasTax: false,
+        Color: "PointYellow",
+        workDays : "월, 화, 수, 목요일",
+        schedules : "10:00 - 12:00"
+    )
 ]
