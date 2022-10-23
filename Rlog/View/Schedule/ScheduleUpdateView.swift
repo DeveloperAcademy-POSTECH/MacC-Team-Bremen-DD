@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ScheduleUpdateView: View {
+    @ObservedObject var viewModel = ScheduleUpdateViewModel()
     @State var reason = ""
     
     var body: some View {
@@ -74,6 +75,7 @@ extension ScheduleUpdateView {
                 .foregroundColor(Color.fontLightGray)
             
             TimeEditer()
+                .environmentObject(viewModel)
                 .padding(.top, 8)
         }
     }
@@ -85,6 +87,7 @@ extension ScheduleUpdateView {
                 .foregroundColor(Color.fontLightGray)
             
             TimeEditer()
+                .environmentObject(viewModel)
                 .padding(.top, 8)
         }
     }
@@ -117,7 +120,7 @@ extension ScheduleUpdateView {
     
     private struct TimeEditer: View {
         // TODO: - 로직 구현
-        let timeUnit = ["-1시간", "-30분", "+30분", "+1시간"]
+        @EnvironmentObject var viewModel: ScheduleUpdateViewModel
         
         var body: some View {
             HStack(spacing: 0) {
@@ -132,7 +135,7 @@ extension ScheduleUpdateView {
                 }
                 .padding(.trailing, 22)
                 HStack(spacing: 8) {
-                    ForEach(timeUnit, id: \.self) { unit in
+                    ForEach(viewModel.timeUnit, id: \.self) { unit in
                         Button(unit) {
                             // TODO: - ViewModel Action 구현
                         }

@@ -5,10 +5,9 @@
 //  Created by 송시원 on 2022/10/17.
 //
 
-import SwiftUI
+import Foundation
 
-struct ScheduleUpdateViewModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+class ScheduleUpdateViewModel: ObservableObject {
+    let timeUnit = ["-1시간", "-30분", "+30분", "+1시간"]
 }
+
