@@ -43,6 +43,7 @@
 		C64D97BE28FE919F004F80E7 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97BD28FE919F004F80E7 /* Date+.swift */; };
 		C64D97C028FE91AB004F80E7 /* DateFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97BF28FE91AB004F80E7 /* DateFormatter+.swift */; };
 		C64D97C928FE92D8004F80E7 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97C828FE92D8004F80E7 /* Tab.swift */; };
+		C6AABAC5290547E900779203 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AABAC4290547E900779203 /* CoreData.swift */; };
 		C6CC13C429012A70005600E1 /* WorkspaceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CC13C329012A70005600E1 /* WorkspaceColor.swift */; };
 		C6CC13C629012CB0005600E1 /* AlbaStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CC13C529012CB0005600E1 /* AlbaStatus.swift */; };
 		C6CC13C829012D04005600E1 /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CC13C729012D04005600E1 /* WeekDay.swift */; };
@@ -87,6 +88,7 @@
 		C64D97BD28FE919F004F80E7 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		C64D97BF28FE91AB004F80E7 /* DateFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+.swift"; sourceTree = "<group>"; };
 		C64D97C828FE92D8004F80E7 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		C6AABAC4290547E900779203 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		C6CC13C329012A70005600E1 /* WorkspaceColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceColor.swift; sourceTree = "<group>"; };
 		C6CC13C529012CB0005600E1 /* AlbaStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbaStatus.swift; sourceTree = "<group>"; };
 		C6CC13C729012D04005600E1 /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				C6CC13C329012A70005600E1 /* WorkspaceColor.swift */,
 				C6CC13C529012CB0005600E1 /* AlbaStatus.swift */,
 				C6CC13C729012D04005600E1 /* WeekDay.swift */,
+				C6AABAC4290547E900779203 /* CoreData.swift */,
 				C62C33A72901193E00469273 /* DataModel */,
 			);
 			path = Model;
@@ -356,6 +359,7 @@
 				2D66DCD028FD8E1000C90400 /* ScheduleCreateViewModel.swift in Sources */,
 				C62C338C28FFCEBD00469273 /* CustomButtonView.swift in Sources */,
 				2D66DCBB28FD8D0E00C90400 /* ScheduleListView.swift in Sources */,
+				C6AABAC5290547E900779203 /* CoreData.swift in Sources */,
 				2D66DCBF28FD8D3700C90400 /* ScheduleUpdateView.swift in Sources */,
 				C64D97C928FE92D8004F80E7 /* Tab.swift in Sources */,
 				2D66DCAB28FD4DF200C90400 /* CoreDataManager.swift in Sources */,

@@ -9,9 +9,8 @@ import CoreData
 
 struct CoreDataManager {
     static let shared = CoreDataManager()
-    private let container = NSPersistentContainer(name: "DataModel")
-    private let cloudContainer = NSPersistentCloudKitContainer(name: "DataModel")
-    private let databaseName = "DataModel.sqlite"
+    private let container = NSPersistentContainer(name: CoreData.containerName)
+    private let databaseName = CoreData.databaseName
 
     private var context: NSManagedObjectContext {
         container.viewContext
@@ -25,7 +24,7 @@ struct CoreDataManager {
     }
 
     private var sharedStoreURL: URL {
-        guard let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.Bremen-DD.Rlog") else {
+        guard let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: CoreData.groupIdentifier) else {
             return URL(fileURLWithPath: "")
         }
 
@@ -41,7 +40,8 @@ struct CoreDataManager {
 
     private func saveStoreURL(_ isNeededToSaveNewURL: Bool) {
         guard isNeededToSaveNewURL else { return }
-        container.persistentStoreDescriptions.first!.url = sharedStoreURL
+        guard let description = container.persistentStoreDescriptions.first else { return }
+        description.url = sharedStoreURL
     }
 
     private func loadStores() {
@@ -77,10 +77,9 @@ struct CoreDataManager {
 
 // MARK: - CRUD LOGIC
 extension CoreDataManager {
-    private func save(completion: @escaping (() -> Void) ) {
+    private func save() {
         do {
             try context.save()
-            completion()
         } catch {
             print("FAILED TO SAVE CONTEXT")
         }
@@ -95,9 +94,7 @@ extension CoreDataManager {
         workspace.colorString = colorString
         workspace.hasTax = hasTax
         workspace.hasJuhyu = hasJuhyu
-        save {
-            print("Scuccessfully Create Workspace")
-        }
+        save()
     }
 
     func getAllWorkspaces() -> [WorkspaceEntity] {
@@ -108,9 +105,7 @@ extension CoreDataManager {
 
     func deleteWorkspace(workspace: WorkspaceEntity) {
         context.delete(workspace)
-        save {
-            print("Scuccessfully Delete Workspace")
-        }
+        save()
     }
 
     // MARK: - SCHEDULE CRUD
@@ -121,9 +116,7 @@ extension CoreDataManager {
         schedule.startTime = startTime
         schedule.endTime = endTime
         schedule.spentHour = spentHour
-        save {
-            print("Scuccessfully Create Schedule")
-        }
+        save()
     }
 
     func getAllSchedules(of workspace: WorkspaceEntity) -> [ScheduleEntity] {
@@ -138,16 +131,12 @@ extension CoreDataManager {
         schedule.startTime = startTime
         schedule.endTime = endTime
         schedule.spentHour = spentHour
-        save {
-            print("Scuccessfully Edit Schedule")
-        }
+        save()
     }
 
     func deleteSchedule(of schedule: ScheduleEntity) {
         context.delete(schedule)
-        save {
-            print("Scuccessfully Deleted Schedule")
-        }
+        save()
     }
 
     // MARK: - WORKDAY CRUD
@@ -162,9 +151,7 @@ extension CoreDataManager {
         workday.startTime = startTime
         workday.endTime = endTime
         workday.spentHour = spentHour
-        save {
-            print("Scuccessfully Create WorkDay")
-        }
+        save()
     }
 
     func getAllWorkdays(of workspace: WorkspaceEntity) -> [WorkDayEntity] {
@@ -193,15 +180,11 @@ extension CoreDataManager {
         workday.startTime = startTime
         workday.endTime = endTime
         workday.spentHour = spentHour
-        save {
-            print("Scuccessfully Edit WorkDay")
-        }
+        save()
     }
 
     func deleteWorkDay(of workday: WorkDayEntity) {
         context.delete(workday)
-        save {
-            print("Scuccessfully Delete WorkDay")
-        }
+        save()
     }
 }
