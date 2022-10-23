@@ -53,8 +53,34 @@ final class WorkSpaceCreateViewModel: ObservableObject {
             }
         }
     }
+
+    func didTapConfirmButton() {
+        // 컨포넌트 작동 방식에 따라 수정이 필요할지도!
+        if isActivatedConfirmButton {
+            switchToNextStatus()
+        }
+    }
 }
+
 extension WorkSpaceCreateViewModel {
+    func switchToNextStatus() {
+            switch currentState {
+            case .workSpace:
+                isHiddenGuidingTitle = false
+                isHiddenHourlyWage = true
+                currentState = .hourlyWage
+            case .hourlyWage:
+                isHiddenPayday = true
+                currentState = .payday
+            case .payday:
+                isHiddenToggleInputs = true
+                isHiddenConfirmButton = false
+                currentState = .toggleOptions
+            case .toggleOptions:
+                return
+            }
+            isActivatedConfirmButton = false
+    }
     func inActivateButton(inputState: WritingState) {
         if currentState.rawValue == inputState.rawValue {
             isActivatedConfirmButton = false
@@ -83,6 +109,7 @@ enum WritingState: Int {
         }
     }
 }
+
 struct WorkSpaceInfo {
     var workSpaceName: String
     var hourlyWage: Int?
