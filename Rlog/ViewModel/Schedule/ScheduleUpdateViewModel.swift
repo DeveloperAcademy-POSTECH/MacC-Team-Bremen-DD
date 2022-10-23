@@ -7,7 +7,12 @@
 
 import Foundation
 
-class ScheduleUpdateViewModel: ObservableObject {
-    let timeUnit = ["-1시간", "-30분", "+30분", "+1시간"]
+enum TimeUnit: String, CaseIterable {
+    case minusOneHour = "-1시간"
+    case minusHalfHour = "-30분"
+    case plusHalfHour = "+30분"
+    case plusOneHour = "+1시간"
 }
+
+class ScheduleUpdateViewModel: ObservableObject {}
 

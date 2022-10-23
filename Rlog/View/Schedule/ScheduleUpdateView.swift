@@ -119,9 +119,6 @@ extension ScheduleUpdateView {
     }
     
     private struct TimeEditer: View {
-        // TODO: - 로직 구현
-        @EnvironmentObject var viewModel: ScheduleUpdateViewModel
-        
         var body: some View {
             HStack(spacing: 0) {
                 ZStack {
@@ -135,8 +132,8 @@ extension ScheduleUpdateView {
                 }
                 .padding(.trailing, 22)
                 HStack(spacing: 8) {
-                    ForEach(viewModel.timeUnit, id: \.self) { unit in
-                        Button(unit) {
+                    ForEach(TimeUnit.allCases, id: \.self) { unit in
+                        Button(unit.rawValue) {
                             // TODO: - ViewModel Action 구현
                         }
                         .buttonStyle(TimeEditButtonStyle())
@@ -161,9 +158,3 @@ extension ScheduleUpdateView {
         }
     }
 }
-
-//struct ScheduleUpdateView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ScheduleUpdateView()
-//    }
-//}
