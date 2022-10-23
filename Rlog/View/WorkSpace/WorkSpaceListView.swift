@@ -43,8 +43,8 @@ struct CustomModel: Hashable {
     let name: String
     let hourlyWage: Int
     let date: String
-    let hasJuhyu: Bool
-    let hasTax: Bool
+    var hasJuhyu: Bool
+    var hasTax: Bool
     let color: String
     let workDays: String
     let schedules: String
