@@ -14,10 +14,12 @@ struct WorkSpaceCreateView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            if viewModel.isHiddenGuidingTitle {
-                guidingTitle
+            VStack(alignment: .leading, spacing: 0) {
+                if viewModel.isHiddenGuidingTitle {
+                    guidingTitle
+                }
+                guidingText
             }
-            guidingText
             if viewModel.isHiddenToggleInputs {
                 toggleInputs
             }
@@ -66,7 +68,7 @@ private extension WorkSpaceCreateView {
                 .font(.title2)
                 .fontWeight(.bold)
                 .foregroundColor(.fontBlack)
-                .padding(.vertical, 20)
+                .padding(.top, 20)
     }
     var toggleInputs: some View {
         VStack(spacing: 10) {
@@ -92,6 +94,7 @@ private extension WorkSpaceCreateView {
     var guidingText: some View {
         Text(viewModel.currentState.title)
             .font(.title3)
+            .padding(.vertical, 20)
     }
     
     // 확인 버튼
