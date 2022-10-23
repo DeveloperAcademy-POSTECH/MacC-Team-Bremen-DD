@@ -31,7 +31,7 @@ struct WorkSpaceCell: View {
     var body: some View {
         NavigationLink(
             destination: { WorkSpaceDetailView() },
-            label: { WorkSpaceCardContent(model: model) }
+            label: { makeWorkSpaceCardContent(model: model) }
         )
     }
 }
@@ -49,7 +49,7 @@ private extension WorkSpaceCell {
         }.padding(.bottom, 20)
     }
     
-    func WorkSpaceCardContent(model: CustomModel) -> some View {
+    func makeWorkSpaceCardContent(model: CustomModel) -> some View {
         ZStack{
             VStack(alignment: .leading, spacing: 0) {
                 makeWorkSpaceCardHeader(workTitle: model.name, workTagColor: model.Color)
