@@ -10,6 +10,7 @@ import SwiftUI
 final class WorkSpaceCreateScheduleListViewModel: ObservableObject {
     @Published var isNavigationActivated = false
     @Published var scheduleList: [Schedule] = []
+    @Published var isShowingModal = false
     
     func didTapAddScheduleButton() {
         showModal()

@@ -53,6 +53,8 @@ private extension WorkSpaceCreateScheduleListView {
                 Text("+ 근무 일정 추가하기")
                     .foregroundColor(.white)
             }
+            .sheet(isPresented: $viewModel.isShowingModal) {
+                Rectangle()
             }
         }
     }
