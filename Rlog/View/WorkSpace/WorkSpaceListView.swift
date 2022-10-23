@@ -11,6 +11,7 @@ import SwiftUI
 struct WorkSpaceListView: View {
     
     var body: some View {
+//  Navgation Header 리팩토링 고려 코드 https://stackoverflow.com/questions/57517803/how-to-remove-the-default-navigation-bar-space-in-swiftui-navigationview
         NavigationView {
             ScrollView {
                 ForEach(models, id: \.self) { model in
