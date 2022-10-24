@@ -41,7 +41,6 @@ private extension WorkSpaceCreateScheduleListView {
             Spacer()
             Text("\(item.startHour):\(item.startMinute) - \(item.endHour):\(item.endMinute)")
         }
-            
     }
     var guidingText: some View {
         Text("근무 일정을 입력해주세요.")
@@ -53,7 +52,7 @@ private extension WorkSpaceCreateScheduleListView {
             .foregroundColor(.fontLightGray)
     }
     var addScheduleButton: some View {
-        //컨포넌트로 대체하기
+        // TODO: 컨포넌트로 대체하기
         Button {
             viewModel.didTapAddScheduleButton()
         } label: {
@@ -65,7 +64,7 @@ private extension WorkSpaceCreateScheduleListView {
                     .foregroundColor(.white)
             }
             .sheet(isPresented: $viewModel.isShowingModal) {
-                WorkSpaceCreateCreatingScheduleView(isShowingModal: $viewModel.isShowingModal)
+                WorkSpaceCreateCreatingScheduleView(isShowingModal: $viewModel.isShowingModal, scheduleList: $viewModel.scheduleList)
             }
         }
     }

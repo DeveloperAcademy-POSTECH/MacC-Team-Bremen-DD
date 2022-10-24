@@ -10,6 +10,7 @@ import SwiftUI
 struct WorkSpaceCreateCreatingScheduleView: View {
     @ObservedObject var viewModel = WorkSpaceCreateCreatingScheduleViewModel()
     @Binding var isShowingModal: Bool
+    @Binding var scheduleList: [Schedule]
     
     var body: some View {
         NavigationView {
@@ -20,12 +21,26 @@ struct WorkSpaceCreateCreatingScheduleView: View {
                 Spacer()
             }
             .navigationBarTitle(Text("근무 일정 추가하기"), displayMode: .inline)
-            .navigationBarItems(leading:
-                                    Button{
-                self.isShowingModal = false
-            } label: {
-                Text("취소").foregroundColor(.fontLightGray)}
-            )
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button{
+                        self.isShowingModal = false
+                    } label: {
+                        Text("취소")
+                        .foregroundColor(.fontLightGray)
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    if viewModel.isShowingConfirmButton {
+                        Button{
+                            scheduleList.append(Schedule(workDays: viewModel.getDayList() ,startHour: viewModel.startHour, startMinute: viewModel.endMinute, endHour: viewModel.endHour, endMinute: viewModel.endMinute))
+                            self.isShowingModal = false
+                        } label: {
+                            Text("완료")
+                        }
+                    }
+                }
+            }
             .padding(.horizontal)
         }
     }

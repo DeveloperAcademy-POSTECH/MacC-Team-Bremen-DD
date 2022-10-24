@@ -8,6 +8,8 @@
 import SwiftUI
 
 final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
+    @Published var isShowingConfirmButton = false
+    
     // 어떻게 더 깔끔하게 짤 수 있을까요? enum을 사용하면 깔끔해질까요?
     @Published var sevenDays: [selectedDayModel] = [selectedDayModel(dayName: "월", isSelected: false), selectedDayModel(dayName: "화", isSelected: false), selectedDayModel(dayName: "수", isSelected: false), selectedDayModel(dayName: "목", isSelected: false), selectedDayModel(dayName: "금", isSelected: false), selectedDayModel(dayName: "토", isSelected: false), selectedDayModel(dayName: "일", isSelected: false)]
 //    @Published var pickedDays: [String] = []
