@@ -48,6 +48,9 @@
 		C67FC835290692BD00DE3898 /* WorkDayEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FC833290692BD00DE3898 /* WorkDayEntity+CoreDataClass.swift */; };
 		C67FC836290692BD00DE3898 /* WorkDayEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FC834290692BD00DE3898 /* WorkDayEntity+CoreDataProperties.swift */; };
 		C67FC8382906931300DE3898 /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FC8372906931300DE3898 /* WeekDay.swift */; };
+		C67FC83B290693BD00DE3898 /* ScheduleEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FC839290693BD00DE3898 /* ScheduleEntity+CoreDataClass.swift */; };
+		C67FC83C290693BD00DE3898 /* ScheduleEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FC83A290693BD00DE3898 /* ScheduleEntity+CoreDataProperties.swift */; };
+		C67FC83E290693F900DE3898 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FC83D290693F900DE3898 /* CoreData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +96,9 @@
 		C67FC833290692BD00DE3898 /* WorkDayEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkDayEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C67FC834290692BD00DE3898 /* WorkDayEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkDayEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C67FC8372906931300DE3898 /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
+		C67FC839290693BD00DE3898 /* ScheduleEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C67FC83A290693BD00DE3898 /* ScheduleEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C67FC83D290693F900DE3898 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,10 +288,13 @@
 		C67FC82E2906914600DE3898 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				C67FC839290693BD00DE3898 /* ScheduleEntity+CoreDataClass.swift */,
+				C67FC83A290693BD00DE3898 /* ScheduleEntity+CoreDataProperties.swift */,
 				C67FC833290692BD00DE3898 /* WorkDayEntity+CoreDataClass.swift */,
 				C67FC834290692BD00DE3898 /* WorkDayEntity+CoreDataProperties.swift */,
 				C67FC82F2906916700DE3898 /* WorkspaceEntity+CoreDataClass.swift */,
 				C67FC8302906916700DE3898 /* WorkspaceEntity+CoreDataProperties.swift */,
+				C67FC83D290693F900DE3898 /* CoreData.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -364,9 +373,12 @@
 				C64D97C528FE92C1004F80E7 /* ScheduleEntity.swift in Sources */,
 				2D66DCCE28FD8DE600C90400 /* ScheduleListViewModel.swift in Sources */,
 				7A937596290035BD00D6D5BE /* FilledButton.swift in Sources */,
+				C67FC83E290693F900DE3898 /* CoreData.swift in Sources */,
 				2D66DCE428FD8F1D00C90400 /* Color+.swift in Sources */,
+				C67FC83C290693BD00DE3898 /* ScheduleEntity+CoreDataProperties.swift in Sources */,
 				2D66DCC128FD8D5100C90400 /* WorkSpaceListView.swift in Sources */,
 				C64D97C728FE92C7004F80E7 /* DayEntity.swift in Sources */,
+				C67FC83B290693BD00DE3898 /* ScheduleEntity+CoreDataClass.swift in Sources */,
 				2D66DCD028FD8E1000C90400 /* ScheduleCreateViewModel.swift in Sources */,
 				C62C338C28FFCEBD00469273 /* CustomButtonView.swift in Sources */,
 				2D66DCBB28FD8D0E00C90400 /* ScheduleListView.swift in Sources */,
