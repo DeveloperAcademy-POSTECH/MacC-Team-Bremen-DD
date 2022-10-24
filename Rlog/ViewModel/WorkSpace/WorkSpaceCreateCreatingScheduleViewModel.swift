@@ -10,18 +10,48 @@ import SwiftUI
 final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
     // 어떻게 더 깔끔하게 짤 수 있을까요? enum을 사용하면 깔끔해질까요?
     @Published var sevenDays: [selectedDayModel] = [selectedDayModel(dayName: "월", isSelected: false), selectedDayModel(dayName: "화", isSelected: false), selectedDayModel(dayName: "수", isSelected: false), selectedDayModel(dayName: "목", isSelected: false), selectedDayModel(dayName: "금", isSelected: false), selectedDayModel(dayName: "토", isSelected: false), selectedDayModel(dayName: "일", isSelected: false)]
-    @Published var startHour = ""
+//    @Published var pickedDays: [String] = []
+    @Published var startHour = "" {
+        didSet {
+            // TODO: 입력값이 24시간을 넘어가면 경고처리 하기
+            checkAllInputFilled()
+        }
+    }
     @Published var startMinute = ""
-    @Published var endHour = ""
+    @Published var endHour = "" {
+        didSet {
+            // TODO: 입력값이 24시간을 넘어가면 경고처리 하기
+            checkAllInputFilled()
+        }
+    }
     @Published var endMinute = ""
     
-
-    // let dayList = ["월","화","수","목","금","토","일"]
     func didTapDayPicker(index: Int) {
         sevenDays[index].isSelected.toggle()
-    } 
+        checkAllInputFilled()
+    }
 
 }
+
+extension WorkSpaceCreateCreatingScheduleViewModel {
+    func getDayList() -> [String] {
+        var dayList: [String] = []
+        for day in sevenDays {
+            if day.isSelected {
+                dayList.append(day.dayName)
+            }
+        }
+        return dayList
+    }
+    func checkAllInputFilled() {
+        if !startHour.isEmpty && !endHour.isEmpty && startHour != endHour && !getDayList().isEmpty {
+            isShowingConfirmButton = true
+            return
+        }
+        isShowingConfirmButton = false
+    }
+}
+
 struct selectedDayModel: Hashable {
     let dayName: String
     var isSelected: Bool
