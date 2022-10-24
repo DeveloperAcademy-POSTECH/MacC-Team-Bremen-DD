@@ -7,12 +7,22 @@
 
 import SwiftUI
 
-enum UnderlinedTextFieldType: String {
-    case workplace = "근무지"
-    case wage = "시급"
-    case payday = "급여일"
-    case reason = "사유"
-    case none = ""
+enum UnderlinedTextFieldType: Equatable {
+    case workplace
+    case wage
+    case payday
+    case reason
+    case none(title: String)
+
+    var title: String {
+        switch self {
+        case .workplace: return "근무지"
+        case .wage: return "시급"
+        case .payday: return "급여일"
+        case .reason: return "사유"
+        case .none(let title): return title
+        }
+    }
     
     var placeholder: String {
         switch self {

@@ -27,7 +27,7 @@ struct InputFormElement: View {
 private extension InputFormElement {
     var titleHeader: some View {
         HStack {
-            Text(containerType.rawValue)
+            Text(containerType.title)
                 .font(.caption)
                 .foregroundColor(.gray)
             
@@ -41,7 +41,7 @@ private extension InputFormElement {
         case .wage: wageView
         case .payday: paydayView
         case .reason: reasonView
-        case .none: EmptyView()
+        case .none: noneView
         }
     }
     
@@ -108,5 +108,12 @@ private extension InputFormElement {
             text: text
         )
         
+    }
+    
+    var noneView: some View {
+        UnderlinedTextField(
+            textFieldType: .none(title: containerType.title),
+            text: text
+        )
     }
 }
