@@ -60,4 +60,36 @@ extension CoreDataManager {
         context.delete(workspace)
         save()
     }
+
+    // MARK: - SCHEDULE CRUD
+    func createSchedule(of workspace: WorkspaceEntity, repeatedSchedule: [String], startTime: String, endTime: String, spentHour: Int16) {
+        let schedule = ScheduleEntity(context: context)
+        schedule.workspace = workspace
+        schedule.repeatedSchedule = repeatedSchedule
+        schedule.startTime = startTime
+        schedule.endTime = endTime
+        schedule.spentHour = spentHour
+        save()
+    }
+
+    func getAllSchedules(of workspace: WorkspaceEntity) -> [ScheduleEntity] {
+        let fetchRequest: NSFetchRequest<ScheduleEntity> = ScheduleEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "workspace.name = %@", workspace.name )
+        let result = try? context.fetch(fetchRequest)
+        return result ?? []
+    }
+
+    func editSchedule(of schedule: ScheduleEntity, repeatedSchedule: [String], startTime: String, endTime: String, spentHour: Int16) {
+        schedule.repeatedSchedule = repeatedSchedule
+        schedule.startTime = startTime
+        schedule.endTime = endTime
+        schedule.spentHour = spentHour
+        save()
+    }
+
+    func deleteSchedule(of schedule: ScheduleEntity) {
+        context.delete(schedule)
+        save()
+    }
+
 }
