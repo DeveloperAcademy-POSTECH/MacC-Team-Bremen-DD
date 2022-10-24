@@ -31,7 +31,7 @@ struct WorkSpaceCreateScheduleListView: View {
 private extension WorkSpaceCreateScheduleListView {
     @ViewBuilder
     func createScheduleListCell(for item: Schedule) -> some View {
-        HStack {
+        HStack(spacing: 0) {
             ForEach(item.workDays,id: \.self) { day in
                 Text("\(day) ")
             }

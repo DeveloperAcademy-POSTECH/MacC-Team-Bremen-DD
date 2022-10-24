@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct WorkSpaceCreateCreatingScheduleView: View {
-    @ObservedObject var viewModel = WorkSpaceCreateCreatingScheduleViewModel()
+    @ObservedObject var viewModel:  WorkSpaceCreateCreatingScheduleViewModel
     @Binding var isShowingModal: Bool
     @Binding var scheduleList: [Schedule]
+    
+    
     
     var body: some View {
         NavigationView {
@@ -48,6 +50,7 @@ private extension WorkSpaceCreateCreatingScheduleView {
     }
     var toolbarConfirmButton: some View {
         Button{
+            // TODO: 넣기 전 데이터를 가공하는게 필요함
             scheduleList.append(Schedule(workDays: viewModel.getDayList() ,startHour: viewModel.startHour, startMinute: viewModel.endMinute, endHour: viewModel.endHour, endMinute: viewModel.endMinute))
             self.isShowingModal = false
         } label: {
@@ -93,6 +96,7 @@ private extension WorkSpaceCreateCreatingScheduleView {
                 Text(":")
                 TextField("00", text: $viewModel.endMinute)
             }
+            .foregroundColor(.fontBlack)
         }
     }
 }
