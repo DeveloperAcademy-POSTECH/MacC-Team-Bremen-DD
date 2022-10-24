@@ -148,6 +148,7 @@ extension ScheduleCreateView {
                 Spacer()
                     .frame(width: 10, height: 23)
                 Text(label)
+                    .font(.footnote)
                     .foregroundColor(configuration.isOn ? .white : Color.fontLightGray)
                 Spacer()
                     .frame(width: 10, height: 23)
