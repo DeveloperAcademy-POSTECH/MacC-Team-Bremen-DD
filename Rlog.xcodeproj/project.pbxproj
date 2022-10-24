@@ -31,18 +31,22 @@
 		2D66DCDE28FD8EB300C90400 /* ScheduleUpdateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCDD28FD8EB300C90400 /* ScheduleUpdateViewModel.swift */; };
 		2D66DCE028FD8ECA00C90400 /* MainTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCDF28FD8ECA00C90400 /* MainTabViewModel.swift */; };
 		2D66DCE428FD8F1D00C90400 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCE328FD8F1D00C90400 /* Color+.swift */; };
-		75DE0162290271E600A77369 /* WorkSpaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DE0161290271E600A77369 /* WorkSpaceCell.swift */; };
-		7A937596290035BD00D6D5BE /* FilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A937595290035BD00D6D5BE /* FilledButton.swift */; };
-		89CAA070290265F300504BDE /* StrokeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA06F290265F300504BDE /* StrokeButton.swift */; };
 		C62C338C28FFCEBD00469273 /* CustomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C338B28FFCEBD00469273 /* CustomButtonView.swift */; };
+		C62C339F2901190600469273 /* ScheduleEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C33992901190600469273 /* ScheduleEntity+CoreDataClass.swift */; };
+		C62C33A02901190600469273 /* ScheduleEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C339A2901190600469273 /* ScheduleEntity+CoreDataProperties.swift */; };
+		C62C33A12901190600469273 /* WorkspaceEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C339B2901190600469273 /* WorkspaceEntity+CoreDataClass.swift */; };
+		C62C33A22901190600469273 /* WorkspaceEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C339C2901190600469273 /* WorkspaceEntity+CoreDataProperties.swift */; };
+		C62C33A32901190600469273 /* WorkDayEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C339D2901190600469273 /* WorkDayEntity+CoreDataClass.swift */; };
+		C62C33A42901190600469273 /* WorkDayEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C339E2901190600469273 /* WorkDayEntity+CoreDataProperties.swift */; };
 		C64D97BA28FE918F004F80E7 /* Text+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97B928FE918F004F80E7 /* Text+.swift */; };
 		C64D97BC28FE9197004F80E7 /* TextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97BB28FE9197004F80E7 /* TextField+.swift */; };
 		C64D97BE28FE919F004F80E7 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97BD28FE919F004F80E7 /* Date+.swift */; };
 		C64D97C028FE91AB004F80E7 /* DateFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97BF28FE91AB004F80E7 /* DateFormatter+.swift */; };
-		C64D97C328FE92B0004F80E7 /* WorkspaceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97C228FE92B0004F80E7 /* WorkspaceEntity.swift */; };
-		C64D97C528FE92C1004F80E7 /* ScheduleEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97C428FE92C1004F80E7 /* ScheduleEntity.swift */; };
-		C64D97C728FE92C7004F80E7 /* DayEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97C628FE92C7004F80E7 /* DayEntity.swift */; };
 		C64D97C928FE92D8004F80E7 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97C828FE92D8004F80E7 /* Tab.swift */; };
+		C6AABAC5290547E900779203 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AABAC4290547E900779203 /* CoreData.swift */; };
+		C6CC13C429012A70005600E1 /* WorkspaceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CC13C329012A70005600E1 /* WorkspaceColor.swift */; };
+		C6CC13C629012CB0005600E1 /* AlbaStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CC13C529012CB0005600E1 /* AlbaStatus.swift */; };
+		C6CC13C829012D04005600E1 /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CC13C729012D04005600E1 /* WeekDay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,18 +75,23 @@
 		2D66DCDD28FD8EB300C90400 /* ScheduleUpdateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleUpdateViewModel.swift; sourceTree = "<group>"; };
 		2D66DCDF28FD8ECA00C90400 /* MainTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewModel.swift; sourceTree = "<group>"; };
 		2D66DCE328FD8F1D00C90400 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
-		75DE0161290271E600A77369 /* WorkSpaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCell.swift; sourceTree = "<group>"; };
-		7A937595290035BD00D6D5BE /* FilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
-		89CAA06F290265F300504BDE /* StrokeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeButton.swift; sourceTree = "<group>"; };
 		C62C338B28FFCEBD00469273 /* CustomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomButtonView.swift; path = Rlog/View/Components/CustomButtonView.swift; sourceTree = SOURCE_ROOT; };
+		C62C33982901164F00469273 /* Rlog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rlog.entitlements; sourceTree = "<group>"; };
+		C62C33992901190600469273 /* ScheduleEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C62C339A2901190600469273 /* ScheduleEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C62C339B2901190600469273 /* WorkspaceEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkspaceEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C62C339C2901190600469273 /* WorkspaceEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkspaceEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C62C339D2901190600469273 /* WorkDayEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkDayEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C62C339E2901190600469273 /* WorkDayEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkDayEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C64D97B928FE918F004F80E7 /* Text+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+.swift"; sourceTree = "<group>"; };
 		C64D97BB28FE9197004F80E7 /* TextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+.swift"; sourceTree = "<group>"; };
 		C64D97BD28FE919F004F80E7 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		C64D97BF28FE91AB004F80E7 /* DateFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+.swift"; sourceTree = "<group>"; };
-		C64D97C228FE92B0004F80E7 /* WorkspaceEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceEntity.swift; sourceTree = "<group>"; };
-		C64D97C428FE92C1004F80E7 /* ScheduleEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEntity.swift; sourceTree = "<group>"; };
-		C64D97C628FE92C7004F80E7 /* DayEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayEntity.swift; sourceTree = "<group>"; };
 		C64D97C828FE92D8004F80E7 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		C6AABAC4290547E900779203 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
+		C6CC13C329012A70005600E1 /* WorkspaceColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceColor.swift; sourceTree = "<group>"; };
+		C6CC13C529012CB0005600E1 /* AlbaStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbaStatus.swift; sourceTree = "<group>"; };
+		C6CC13C729012D04005600E1 /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +124,7 @@
 		2D66DCA028FD4DF000C90400 /* Rlog */ = {
 			isa = PBXGroup;
 			children = (
+				C62C33982901164F00469273 /* Rlog.entitlements */,
 				2D66DCA128FD4DF000C90400 /* RlogApp.swift */,
 				2D66DCA528FD4DF200C90400 /* Assets.xcassets */,
 				C64D97C128FE92A2004F80E7 /* Model */,
@@ -160,7 +170,6 @@
 		2D66DCB628FD51F900C90400 /* WorkSpace */ = {
 			isa = PBXGroup;
 			children = (
-				75DE0160290271BC00A77369 /* SubViews */,
 				2D66DCC028FD8D5100C90400 /* WorkSpaceListView.swift */,
 				2D66DCC228FD8D6100C90400 /* WorkSpaceDetailView.swift */,
 				2D66DCC428FD8D6D00C90400 /* WorkSpaceCreateView.swift */,
@@ -238,20 +247,23 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
-		75DE0160290271BC00A77369 /* SubViews */ = {
+		C62C33A72901193E00469273 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				75DE0161290271E600A77369 /* WorkSpaceCell.swift */,
+				C62C33992901190600469273 /* ScheduleEntity+CoreDataClass.swift */,
+				C62C339A2901190600469273 /* ScheduleEntity+CoreDataProperties.swift */,
+				C62C339B2901190600469273 /* WorkspaceEntity+CoreDataClass.swift */,
+				C62C339C2901190600469273 /* WorkspaceEntity+CoreDataProperties.swift */,
+				C62C339D2901190600469273 /* WorkDayEntity+CoreDataClass.swift */,
+				C62C339E2901190600469273 /* WorkDayEntity+CoreDataProperties.swift */,
 			);
-			path = SubViews;
+			path = DataModel;
 			sourceTree = "<group>";
 		};
 		C64D97B828FE9146004F80E7 /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				C62C338B28FFCEBD00469273 /* CustomButtonView.swift */,
-				7A937595290035BD00D6D5BE /* FilledButton.swift */,
-				89CAA06F290265F300504BDE /* StrokeButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -259,10 +271,12 @@
 		C64D97C128FE92A2004F80E7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C64D97C228FE92B0004F80E7 /* WorkspaceEntity.swift */,
-				C64D97C428FE92C1004F80E7 /* ScheduleEntity.swift */,
-				C64D97C628FE92C7004F80E7 /* DayEntity.swift */,
 				C64D97C828FE92D8004F80E7 /* Tab.swift */,
+				C6CC13C329012A70005600E1 /* WorkspaceColor.swift */,
+				C6CC13C529012CB0005600E1 /* AlbaStatus.swift */,
+				C6CC13C729012D04005600E1 /* WeekDay.swift */,
+				C6AABAC4290547E900779203 /* CoreData.swift */,
+				C62C33A72901193E00469273 /* DataModel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -338,34 +352,38 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D66DCC528FD8D6D00C90400 /* WorkSpaceCreateView.swift in Sources */,
-				C64D97C528FE92C1004F80E7 /* ScheduleEntity.swift in Sources */,
 				2D66DCCE28FD8DE600C90400 /* ScheduleListViewModel.swift in Sources */,
-				7A937596290035BD00D6D5BE /* FilledButton.swift in Sources */,
 				2D66DCE428FD8F1D00C90400 /* Color+.swift in Sources */,
 				2D66DCC128FD8D5100C90400 /* WorkSpaceListView.swift in Sources */,
-				C64D97C728FE92C7004F80E7 /* DayEntity.swift in Sources */,
+				C6CC13C429012A70005600E1 /* WorkspaceColor.swift in Sources */,
 				2D66DCD028FD8E1000C90400 /* ScheduleCreateViewModel.swift in Sources */,
 				C62C338C28FFCEBD00469273 /* CustomButtonView.swift in Sources */,
 				2D66DCBB28FD8D0E00C90400 /* ScheduleListView.swift in Sources */,
+				C6AABAC5290547E900779203 /* CoreData.swift in Sources */,
 				2D66DCBF28FD8D3700C90400 /* ScheduleUpdateView.swift in Sources */,
 				C64D97C928FE92D8004F80E7 /* Tab.swift in Sources */,
 				2D66DCAB28FD4DF200C90400 /* CoreDataManager.swift in Sources */,
+				C62C33A12901190600469273 /* WorkspaceEntity+CoreDataClass.swift in Sources */,
 				2D66DCD428FD8E4700C90400 /* MonthlyCalculateListViewModel.swift in Sources */,
 				2D66DCDA28FD8E8F00C90400 /* WorkSpaceDetailViewModel.swift in Sources */,
+				C6CC13C829012D04005600E1 /* WeekDay.swift in Sources */,
 				2D66DCC328FD8D6100C90400 /* WorkSpaceDetailView.swift in Sources */,
 				2D66DCAE28FD4DF200C90400 /* DataModel.xcdatamodeld in Sources */,
 				2D66DCDE28FD8EB300C90400 /* ScheduleUpdateViewModel.swift in Sources */,
 				C64D97BE28FE919F004F80E7 /* Date+.swift in Sources */,
 				2D66DCCC28FD8DC500C90400 /* MainTabView.swift in Sources */,
+				C62C33A22901190600469273 /* WorkspaceEntity+CoreDataProperties.swift in Sources */,
 				C64D97BA28FE918F004F80E7 /* Text+.swift in Sources */,
-				C64D97C328FE92B0004F80E7 /* WorkspaceEntity.swift in Sources */,
+				C62C33A32901190600469273 /* WorkDayEntity+CoreDataClass.swift in Sources */,
+				C62C33A02901190600469273 /* ScheduleEntity+CoreDataProperties.swift in Sources */,
+				C62C33A42901190600469273 /* WorkDayEntity+CoreDataProperties.swift in Sources */,
 				2D66DCD628FD8E5500C90400 /* MonthlyCalculateDetailViewModel.swift in Sources */,
 				2D66DCD828FD8E7100C90400 /* WorkSpaceListViewModel.swift in Sources */,
+				C62C339F2901190600469273 /* ScheduleEntity+CoreDataClass.swift in Sources */,
+				C6CC13C629012CB0005600E1 /* AlbaStatus.swift in Sources */,
 				2D66DCC728FD8D8900C90400 /* MonthlyCalculateListView.swift in Sources */,
 				2D66DCCA28FD8DA200C90400 /* MonthlyCalculateDetailView.swift in Sources */,
-				75DE0162290271E600A77369 /* WorkSpaceCell.swift in Sources */,
 				2D66DCDC28FD8E9D00C90400 /* WorkSpaceCreateViewModel.swift in Sources */,
-				89CAA070290265F300504BDE /* StrokeButton.swift in Sources */,
 				C64D97C028FE91AB004F80E7 /* DateFormatter+.swift in Sources */,
 				2D66DCA228FD4DF000C90400 /* RlogApp.swift in Sources */,
 				C64D97BC28FE9197004F80E7 /* TextField+.swift in Sources */,
@@ -427,7 +445,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -481,7 +499,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -496,6 +514,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Rlog/Rlog.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -515,10 +534,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "group.com.Bremen-DD.Rlog";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Bremen-DD.Rlog";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = RlogApp;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = RlogGroup;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -530,6 +549,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Rlog/Rlog.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -549,10 +569,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "group.com.Bremen-DD.Rlog";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Bremen-DD.Rlog";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = RlogApp;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = RlogGroup;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
