@@ -15,11 +15,11 @@ final class WorkSpaceCreateViewModel: ObservableObject {
     @Published var isActivatedConfirmButton: Bool = false
     
     // 버튼 숨김 여부
-    @Published var isHiddenConfirmButton = true
-    @Published var isHiddenGuidingTitle = true
-    @Published var isHiddenHourlyWage = false
-    @Published var isHiddenPayday = false
-    @Published var isHiddenToggleInputs = false
+    @Published var isHiddenConfirmButton = false
+    @Published var isHiddenGuidingTitle = false
+    @Published var isHiddenHourlyWage = true
+    @Published var isHiddenPayday = true
+    @Published var isHiddenToggleInputs = true
 
     // 인풋값과 입력여부
     @Published var isOnIncomeTax = false
@@ -67,15 +67,15 @@ extension WorkSpaceCreateViewModel {
         withAnimation(.easeIn) {
             switch currentState {
             case .workSpace:
-                isHiddenGuidingTitle = false
-                isHiddenHourlyWage = true
+                isHiddenGuidingTitle = true
+                isHiddenHourlyWage = false
                 currentState = .hourlyWage
             case .hourlyWage:
-                isHiddenPayday = true
+                isHiddenPayday = false
                 currentState = .payday
             case .payday:
-                isHiddenToggleInputs = true
-                isHiddenConfirmButton = false
+                isHiddenToggleInputs = false
+                isHiddenConfirmButton = true
                 currentState = .toggleOptions
             case .toggleOptions:
                 return

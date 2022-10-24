@@ -15,23 +15,23 @@ struct WorkSpaceCreateView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             VStack(alignment: .leading, spacing: 0) {
-                if viewModel.isHiddenGuidingTitle {
+                if !viewModel.isHiddenGuidingTitle {
                     guidingTitle
                 }
                 guidingText
             }
-            if viewModel.isHiddenToggleInputs {
+            if !viewModel.isHiddenToggleInputs {
                 toggleInputs
             }
             
             // TODO: 컨포넌트로 대체
-            if viewModel.isHiddenPayday {
+            if !viewModel.isHiddenPayday {
                 VStack(alignment: .leading, spacing: 20)  {
                     Text("정산일")
                     TextField("10", text: $viewModel.payday)
                 }
             }
-            if viewModel.isHiddenHourlyWage {
+            if !viewModel.isHiddenHourlyWage {
                 VStack(alignment: .leading, spacing: 20)  {
                     Text("시급")
                     TextField("최저시급 9,160원", text: $viewModel.hourlyWage)
@@ -42,7 +42,7 @@ struct WorkSpaceCreateView: View {
                 TextField("예시) 편의점", text: $viewModel.workSpaceName)
             }
             Spacer()
-            if viewModel.isHiddenConfirmButton {
+            if !viewModel.isHiddenConfirmButton {
                 ConfirmButton
             }
         }
