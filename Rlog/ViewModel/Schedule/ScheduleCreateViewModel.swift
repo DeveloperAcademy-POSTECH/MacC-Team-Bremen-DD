@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 final class ScheduleCreateViewModel: ObservableObject {
     // TODO: - 현재 가지고 있는 workspace 받아오기
@@ -17,6 +18,14 @@ final class ScheduleCreateViewModel: ObservableObject {
     @Published var endMinuteText: String = ""
     @Published var workspaceFlags: [Bool]
     @Published var reason = ""
+    
+    var confirmButtonForegroundColor: Color {
+        if startHourText != "" && startMinuteText != "" && endHourText != "" && endMinuteText != "" {
+            return Color.primary
+        } else {
+            return Color.fontLightGray
+        }
+    }
     
     init() {
         workspaceFlags = Array(repeating: false, count: workspaces.count)

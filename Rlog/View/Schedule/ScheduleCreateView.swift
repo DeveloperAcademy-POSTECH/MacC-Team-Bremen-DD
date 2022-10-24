@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ScheduleCreateView: View {
     @ObservedObject var viewModel = ScheduleCreateViewModel()
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -20,11 +21,25 @@ struct ScheduleCreateView: View {
                 .padding(.top)
             reasonInput
                 .padding(.top)
-            deleteButton
-                .padding(.top, 32)
             Spacer()
         }
         .padding(.horizontal)
+        .navigationTitle("일정 추가하기")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: { dismiss() }, label: {
+                    Text("취소")
+                        .foregroundColor(Color.fontLightGray)
+                })
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {}, label: {
+                    Text("완료")
+                        .foregroundColor(viewModel.confirmButtonForegroundColor)
+                })
+            }
+        }
     }
 }
 
@@ -112,19 +127,6 @@ extension ScheduleCreateView {
                 .frame(height: 40)
                 .padding(.top)
         }
-    }
-    
-    // TODO: - 컴포넌트 버튼으로 변경
-    var deleteButton: some View {
-        Button(action: {}, label: {
-            ZStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.red)
-                    .frame(height: 54)
-                Text("일정 삭제하기")
-                    .foregroundColor(Color.red)
-            }
-        })
     }
     
     private struct WorkSpaceToggleItem: View {
