@@ -37,18 +37,24 @@ struct UnderlinedTextField: View {
     @State var isFocused = false
     @Binding var text: String {
         didSet {
-            if textFieldType == .workplace {
+            switch textFieldType {
+            case .workplace:
                 if text.count > 20 && oldValue.count <= 20 {
                     text = oldValue
                 }
-            } else if textFieldType == .wage {
+            case .wage:
                 if text.hasPrefix("0") { text = "" }
-            } else if textFieldType == .payday {
-                if text.hasPrefix("0") || Int(text) ?? 10 > 28 || Int(text) ?? 10 < 1 { text = "" }
+            case .payday:
+                guard let textToInt = Int(text) else { return }
+                if text.hasPrefix("0") || textToInt > 31 || textToInt < 1 { text = "" }
+            case .reason:
+                return
+            case .none:
+                return
             }
         }
     }
-    
+
     var body: some View {
         underlinedTextFieldView
     }
