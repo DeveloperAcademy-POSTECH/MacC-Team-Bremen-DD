@@ -33,6 +33,7 @@
 		2D66DCE428FD8F1D00C90400 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCE328FD8F1D00C90400 /* Color+.swift */; };
 		89CAA072290276E800504BDE /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA071290276E800504BDE /* CustomTextField.swift */; };
 		89CAA0742902771D00504BDE /* CustomTextFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA0732902771D00504BDE /* CustomTextFieldContainer.swift */; };
+		75DE0162290271E600A77369 /* WorkSpaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DE0161290271E600A77369 /* WorkSpaceCell.swift */; };
 		7A937596290035BD00D6D5BE /* FilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A937595290035BD00D6D5BE /* FilledButton.swift */; };
 		89CAA070290265F300504BDE /* StrokeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA06F290265F300504BDE /* StrokeButton.swift */; };
 		C62C338C28FFCEBD00469273 /* CustomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C338B28FFCEBD00469273 /* CustomButtonView.swift */; };
@@ -74,6 +75,7 @@
 		2D66DCE328FD8F1D00C90400 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		89CAA071290276E800504BDE /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		89CAA0732902771D00504BDE /* CustomTextFieldContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldContainer.swift; sourceTree = "<group>"; };
+		75DE0161290271E600A77369 /* WorkSpaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCell.swift; sourceTree = "<group>"; };
 		7A937595290035BD00D6D5BE /* FilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
 		89CAA06F290265F300504BDE /* StrokeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeButton.swift; sourceTree = "<group>"; };
 		C62C338B28FFCEBD00469273 /* CustomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomButtonView.swift; path = Rlog/View/Components/CustomButtonView.swift; sourceTree = SOURCE_ROOT; };
@@ -162,6 +164,7 @@
 		2D66DCB628FD51F900C90400 /* WorkSpace */ = {
 			isa = PBXGroup;
 			children = (
+				75DE0160290271BC00A77369 /* SubViews */,
 				2D66DCC028FD8D5100C90400 /* WorkSpaceListView.swift */,
 				2D66DCC228FD8D6100C90400 /* WorkSpaceDetailView.swift */,
 				2D66DCC428FD8D6D00C90400 /* WorkSpaceCreateView.swift */,
@@ -237,6 +240,14 @@
 				2D66DCAC28FD4DF200C90400 /* DataModel.xcdatamodeld */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		75DE0160290271BC00A77369 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				75DE0161290271E600A77369 /* WorkSpaceCell.swift */,
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 		C64D97B828FE9146004F80E7 /* Components */ = {
@@ -360,6 +371,7 @@
 				89CAA0742902771D00504BDE /* CustomTextFieldContainer.swift in Sources */,
 				2D66DCC728FD8D8900C90400 /* MonthlyCalculateListView.swift in Sources */,
 				2D66DCCA28FD8DA200C90400 /* MonthlyCalculateDetailView.swift in Sources */,
+				75DE0162290271E600A77369 /* WorkSpaceCell.swift in Sources */,
 				2D66DCDC28FD8E9D00C90400 /* WorkSpaceCreateViewModel.swift in Sources */,
 				C64D97C028FE91AB004F80E7 /* DateFormatter+.swift in Sources */,
 				2D66DCA228FD4DF000C90400 /* RlogApp.swift in Sources */,
