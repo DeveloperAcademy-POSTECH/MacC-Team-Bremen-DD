@@ -15,12 +15,9 @@ struct WorkSpaceCreateScheduleListView: View {
             guidingText
             labelText
             VStack(spacing: 16) {
-                //리스트 불러와서 반복문으로 돌리기
                 ForEach(viewModel.scheduleList, id: \.self) { item in
                     createScheduleListCell(for: item)
-                    //컨포넌트로 대체하기
-                    RoundedRectangle(cornerRadius: 10)
-                        .frame(maxHeight: 56)
+                    // TODO: 컨포넌트로 대체하기
                 }
                 addScheduleButton
             }
@@ -41,6 +38,9 @@ private extension WorkSpaceCreateScheduleListView {
             Spacer()
             Text("\(item.startHour):\(item.startMinute) - \(item.endHour):\(item.endMinute)")
         }
+        .padding()
+        .background(Color(red: 0.962, green: 0.962, blue: 0.962))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
     }
     var guidingText: some View {
         Text("근무 일정을 입력해주세요.")
