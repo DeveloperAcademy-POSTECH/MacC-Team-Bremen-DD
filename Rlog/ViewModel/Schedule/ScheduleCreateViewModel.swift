@@ -16,6 +16,7 @@ final class ScheduleCreateViewModel: ObservableObject {
     @Published var endHourText: String = ""
     @Published var endMinuteText: String = ""
     @Published var workspaceFlags: [Bool]
+    @Published var reason = ""
     
     init() {
         workspaceFlags = Array(repeating: false, count: workspaces.count)

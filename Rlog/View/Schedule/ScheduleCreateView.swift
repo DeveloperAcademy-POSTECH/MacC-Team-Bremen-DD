@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ScheduleCreateView: View {
     @ObservedObject var viewModel = ScheduleCreateViewModel()
-    @State var reason = ""
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -40,8 +39,8 @@ extension ScheduleCreateView {
                 // TODO: - 리스트 뷰에서 근무지명 받아오기
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: 8) {
-                        ForEach(viewModel.workspaces.indices) { index in
-                            WorkSpaceToggleItem(bindings: $viewModel.workspaceFlags, tag: index, label: viewModel.workspaces[index])
+                        ForEach(viewModel.workspaces.indices, id: \.self) { index in
+                            WorkSpaceToggleItem(flagOptions: $viewModel.workspaceFlags, tag: index, label: viewModel.workspaces[index])
                         }
                     }
                 }
@@ -93,6 +92,7 @@ extension ScheduleCreateView {
                     .frame(height: 40)
                     .multilineTextAlignment(.center)
                     .keyboardType(.numberPad)
+                Text(":")
                 TextField("00", text: $viewModel.endMinuteText)
                     .frame(height: 40)
                     .multilineTextAlignment(.center)
@@ -108,7 +108,7 @@ extension ScheduleCreateView {
                 .foregroundColor(Color.fontLightGray)
             
             // TODO: - 컴포넌트 텍스트필드로 변경
-            TextField("사유를 입력해주세요.", text: $reason)
+            TextField("사유를 입력해주세요.", text: $viewModel.reason)
                 .frame(height: 40)
                 .padding(.top)
         }
@@ -128,13 +128,13 @@ extension ScheduleCreateView {
     }
     
     private struct WorkSpaceToggleItem: View {
-        @Binding var bindings: [Bool]
+        @Binding var flagOptions: [Bool]
         var tag: Int
         var label: String
         
         var body: some View {
-            let isOn = Binding ( get: { bindings[tag] }, set: { value in
-                bindings = bindings.enumerated().map { $0.0 == self.tag }
+            let isOn = Binding ( get: { flagOptions[tag] }, set: { value in
+                flagOptions = flagOptions.enumerated().map { $0.0 == self.tag }
             })
             return Toggle(label, isOn: isOn).toggleStyle(WorkSpaceToggleStyle(label: label))
         }
