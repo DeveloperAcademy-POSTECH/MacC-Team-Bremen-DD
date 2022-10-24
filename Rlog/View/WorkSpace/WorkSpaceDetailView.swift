@@ -11,10 +11,10 @@ enum WorkSpaceDetailInfo: CaseIterable {
     case hasTax
     case hasJuhyu
     
-    var text: [String] {
+    var text: (title: String, description: String) {
         switch self {
-        case .hasTax: return ["소득세", "3.3% 적용"]
-        case .hasJuhyu: return ["주휴수당", "60시간 근무 시 적용"]
+        case .hasTax: return (title: "소득세", description: "3.3% 적용")
+        case .hasJuhyu: return (title: "주휴수당", description: "60시간 근무 시 적용")
         }
     }
 }
@@ -83,10 +83,10 @@ private extension WorkSpaceDetailView {
         ForEach(WorkSpaceDetailInfo.allCases, id: \.self) { tab in
             Toggle(isOn: tab == .hasTax ? $model.hasJuhyu : $model.hasTax, label: {
                 HStack(spacing: 13) {
-                    Text(tab.text[0])
+                    Text(tab.text.title)
                         .font(.subheadline)
                         .foregroundColor(.fontLightGray)
-                    Text(tab.text[1])
+                    Text(tab.text.description)
                         .font(.caption)
                         .foregroundColor(.fontLightGray)
                 }
