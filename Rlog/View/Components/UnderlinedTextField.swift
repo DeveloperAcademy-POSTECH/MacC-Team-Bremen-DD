@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum CustomTextFieldType: String {
+enum UnderlinedTextFieldType: String {
     case workplace = "근무지"
     case wage = "시급"
     case payday = "급여일"
@@ -32,8 +32,8 @@ enum CustomTextFieldType: String {
     }
 }
 
-struct CustomTextField: View {
-    let textFieldType: CustomTextFieldType
+struct UnderlinedTextField: View {
+    let textFieldType: UnderlinedTextFieldType
     @State var isFocused = false
     @Binding var text: String {
         didSet {
@@ -50,12 +50,12 @@ struct CustomTextField: View {
     }
     
     var body: some View {
-        customTextFieldView
+        underlinedTextFieldView
     }
 }
 
-private extension CustomTextField {
-    var customTextFieldView: some View {
+private extension UnderlinedTextField {
+    var underlinedTextFieldView: some View {
         VStack {
             HStack {
                 UITextFieldRepresentable(

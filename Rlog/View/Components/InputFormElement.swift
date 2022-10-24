@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct CustomTextFieldContainer: View {
-    let containerType: CustomTextFieldType
+struct InputFormElement: View {
+    let containerType: UnderlinedTextFieldType
     var text: Binding<String>
     
-    init(containerType: CustomTextFieldType, text: Binding<String>) {
+    init(containerType: UnderlinedTextFieldType, text: Binding<String>) {
         self.containerType = containerType
         self.text = text
     }
@@ -24,7 +24,7 @@ struct CustomTextFieldContainer: View {
     }
 }
 
-private extension CustomTextFieldContainer {
+private extension InputFormElement {
     var titleHeader: some View {
         HStack {
             Text(containerType.rawValue)
@@ -47,7 +47,7 @@ private extension CustomTextFieldContainer {
     
     var workplaceView: some View {
         VStack {
-            CustomTextField(
+            UnderlinedTextField(
                 textFieldType: .workplace,
                 text: text
             )
@@ -65,7 +65,7 @@ private extension CustomTextFieldContainer {
     
     var wageView: some View {
         HStack {
-            CustomTextField(
+            UnderlinedTextField(
                 textFieldType: .wage,
                 text: text
             )
@@ -81,7 +81,7 @@ private extension CustomTextFieldContainer {
             Text("매월")
             Spacer()
             VStack(spacing: 0) {
-                CustomTextField(
+                UnderlinedTextField(
                     textFieldType: .payday,
                     text: text
                 )
@@ -103,7 +103,7 @@ private extension CustomTextFieldContainer {
     }
     
     var reasonView: some View {
-        CustomTextField(
+        UnderlinedTextField(
             textFieldType: .reason,
             text: text
         )
