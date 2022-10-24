@@ -75,7 +75,6 @@ extension ScheduleUpdateView {
                 .foregroundColor(Color.fontLightGray)
             
             TimeEditer()
-                .environmentObject(viewModel)
                 .padding(.top, 8)
         }
     }
@@ -87,7 +86,6 @@ extension ScheduleUpdateView {
                 .foregroundColor(Color.fontLightGray)
             
             TimeEditer()
-                .environmentObject(viewModel)
                 .padding(.top, 8)
         }
     }
