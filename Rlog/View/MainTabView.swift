@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct MainTabView: View {
-
     var body: some View {
         TabView {
             ForEach(Tab.allCases, id: \.self) { tab in

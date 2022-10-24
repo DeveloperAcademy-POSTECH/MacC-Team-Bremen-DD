@@ -5,12 +5,10 @@
 //  Created by 송시원 on 2022/10/17.
 //
 
-import Combine
-import Foundation
+import SwiftUI
 
-final class MainTabViewModel: ObservableObject {
-
-    func onAppear() {
-        
+struct MainTabViewModel: View {
+    var body: some View {
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
