@@ -62,8 +62,10 @@ struct WorkSpaceDetailView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: { dismiss() }){
                     Image(systemName: "chevron.left")
-                        .fontWeight(.bold)
-                    .foregroundColor(.black)                }
+                        .foregroundColor(.fontBlack)
+                    Text("이전")
+                        .foregroundColor(.fontBlack)
+                }
             }
 
             ToolbarItem(placement: .navigationBarTrailing) {
