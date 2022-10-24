@@ -24,7 +24,7 @@
         <attribute name="hasTax" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="hourlyWage" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
-        <attribute name="paymenyDay" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="paymentDay" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="schedules" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ScheduleEntity" inverseName="workspace" inverseEntity="ScheduleEntity"/>
         <relationship name="workDays" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkDayEntity" inverseName="workspace" inverseEntity="WorkDayEntity"/>
     </entity>

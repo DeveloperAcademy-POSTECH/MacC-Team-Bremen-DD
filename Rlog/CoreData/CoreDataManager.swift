@@ -39,7 +39,7 @@ extension CoreDataManager {
     }
 
     // MARK: - WORKSPACE CRUD
-    func createWorkspace(name: String, paymentDay: Int16, hourlyWage: Int16, colorString: String, hasTax: Bool, hasJuhyu: Bool) {
+    func createWorkspace(name: String, hourlyWage: Int16, paymentDay: Int16, colorString: String, hasTax: Bool, hasJuhyu: Bool) {
         let workspace = WorkspaceEntity(context: context)
         workspace.name = name
         workspace.paymentDay = paymentDay
