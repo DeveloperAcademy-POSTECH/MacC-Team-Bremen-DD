@@ -14,9 +14,17 @@ enum ScheduleCase: String, CaseIterable {
 
 class ScheduleListViewModel: ObservableObject {
     @Published var selectedScheduleCase: ScheduleCase = .upcoming
-    var scheduleCases = ScheduleCase.allCases
+}
+
+class StatusPickerViewModel: ObservableObject {
+    @Binding var selectedScheduleCase: ScheduleCase
+    let scheduleCases = ScheduleCase.allCases
     var statusPickerOffset: CGFloat {
         selectedScheduleCase == .upcoming ? -40 : 40
+    }
+    
+    init(selectedScheduleCase: Binding<ScheduleCase>) {
+        self._selectedScheduleCase = selectedScheduleCase
     }
     
     func getStatusPickerTextWeight(compareCase: ScheduleCase) -> Font.Weight {

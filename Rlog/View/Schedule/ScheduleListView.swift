@@ -26,7 +26,7 @@ struct ScheduleListView: View {
                 .fill(LinearGradient(colors: [Color.clear, Color.fontLightGray], startPoint: .top, endPoint: .bottom))
                 .frame(height: 83)
             
-            StatusPicker(viewModel: viewModel)
+            StatusPicker(selectedScheduleCase: $viewModel.selectedScheduleCase)
                 .frame(width: 176, height: 40)
                 .padding(.bottom)
         }
