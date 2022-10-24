@@ -23,21 +23,11 @@ struct WorkSpaceCreateCreatingScheduleView: View {
             .navigationBarTitle(Text("근무 일정 추가하기"), displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button{
-                        self.isShowingModal = false
-                    } label: {
-                        Text("취소")
-                        .foregroundColor(.fontLightGray)
-                    }
+                    toolbarCancelButton
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     if viewModel.isShowingConfirmButton {
-                        Button{
-                            scheduleList.append(Schedule(workDays: viewModel.getDayList() ,startHour: viewModel.startHour, startMinute: viewModel.endMinute, endHour: viewModel.endHour, endMinute: viewModel.endMinute))
-                            self.isShowingModal = false
-                        } label: {
-                            Text("완료")
-                        }
+                        toolbarConfirmButton
                     }
                 }
             }
@@ -47,6 +37,23 @@ struct WorkSpaceCreateCreatingScheduleView: View {
 }
 
 private extension WorkSpaceCreateCreatingScheduleView {
+    // 툴바 버튼들
+    var toolbarCancelButton: some View {
+        Button{
+            self.isShowingModal = false
+        } label: {
+            Text("취소")
+            .foregroundColor(.fontLightGray)
+        }
+    }
+    var toolbarConfirmButton: some View {
+        Button{
+            scheduleList.append(Schedule(workDays: viewModel.getDayList() ,startHour: viewModel.startHour, startMinute: viewModel.endMinute, endHour: viewModel.endHour, endMinute: viewModel.endMinute))
+            self.isShowingModal = false
+        } label: {
+            Text("완료")
+        }
+    }
     var guidingText: some View {
         Text("근무 요일과 시간을 입력해주세요.")
             .padding(.top, 40)
