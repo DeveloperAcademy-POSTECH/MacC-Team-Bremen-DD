@@ -92,4 +92,52 @@ extension CoreDataManager {
         save()
     }
 
+    // MARK: - WORKDAY CRUD
+    func createWorkday(of workspace: WorkspaceEntity, weekDay: Int16, yearInt: Int16, monthInt: Int16, dayInt: Int16, startTime: String, endTime: String, spentHour: Int16) {
+        let workday = WorkDayEntity(context: context)
+        workday.workspace = workspace
+        workday.id = UUID()
+        workday.weekDay = weekDay
+        workday.yearInt = yearInt
+        workday.monthInt = monthInt
+        workday.dayInt = dayInt
+        workday.startTime = startTime
+        workday.endTime = endTime
+        workday.spentHour = spentHour
+        save()
+    }
+
+    func getAllWorkdays(of workspace: WorkspaceEntity) -> [WorkDayEntity] {
+        let fetchRequest: NSFetchRequest<WorkDayEntity> = WorkDayEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "workspace.name = %@", workspace.name )
+        let result = try? context.fetch(fetchRequest)
+        return result ?? []
+    }
+
+    func getWorkdays(of workspace: WorkspaceEntity, yearInt: Int, monthInt: Int, limit: Int) -> [WorkDayEntity] {
+        let fetchRequest: NSFetchRequest<WorkDayEntity> = WorkDayEntity.fetchRequest()
+        let workspacePredicate = NSPredicate(format: "workspace.name = %@", workspace.name )
+        let yearPredicate = NSPredicate(format: "yearInt == %i", yearInt)
+        let monthPredicate = NSPredicate(format: "monthInt == %i", monthInt)
+        fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: [workspacePredicate, yearPredicate, monthPredicate])
+        fetchRequest.fetchLimit = limit
+        let result = try? context.fetch(fetchRequest)
+        return result ?? []
+    }
+
+    func editWorkday(of workday: WorkDayEntity, weekDay: Int16, yearInt: Int16, monthInt: Int16, dayInt: Int16, startTime: String, endTime: String, spentHour: Int16) {
+        workday.weekDay = weekDay
+        workday.yearInt = yearInt
+        workday.monthInt = monthInt
+        workday.dayInt = dayInt
+        workday.startTime = startTime
+        workday.endTime = endTime
+        workday.spentHour = spentHour
+        save()
+    }
+
+    func deleteWorkDay(of workday: WorkDayEntity) {
+        context.delete(workday)
+        save()
+    }
 }
