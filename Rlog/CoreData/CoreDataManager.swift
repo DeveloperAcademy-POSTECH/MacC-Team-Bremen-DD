@@ -28,3 +28,36 @@ struct CoreDataManager {
         }
     }
 }
+
+extension CoreDataManager {
+    private func save() {
+        do {
+            try context.save()
+        } catch {
+            print("FAILED TO SAVE CONTEXT")
+        }
+    }
+
+    // MARK: - WORKSPACE CRUD
+    func createWorkspace(name: String, paymentDay: Int16, hourlyWage: Int16, colorString: String, hasTax: Bool, hasJuhyu: Bool) {
+        let workspace = WorkspaceEntity(context: context)
+        workspace.name = name
+        workspace.paymentDay = paymentDay
+        workspace.hourlyWage = hourlyWage
+        workspace.colorString = colorString
+        workspace.hasTax = hasTax
+        workspace.hasJuhyu = hasJuhyu
+        save()
+    }
+
+    func getAllWorkspaces() -> [WorkspaceEntity] {
+        let fetchRequest: NSFetchRequest<WorkspaceEntity> = WorkspaceEntity.fetchRequest()
+        let result = try? context.fetch(fetchRequest)
+        return result ?? []
+    }
+
+    func deleteWorkspace(workspace: WorkspaceEntity) {
+        context.delete(workspace)
+        save()
+    }
+}
