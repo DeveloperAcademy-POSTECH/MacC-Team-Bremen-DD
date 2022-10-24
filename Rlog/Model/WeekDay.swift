@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 enum WeekDay: Int16 {
     case mon
     case tues
