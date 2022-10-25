@@ -30,7 +30,7 @@ struct WorkSpaceCell: View {
     
     var body: some View {
         NavigationLink(
-            destination: { WorkSpaceDetailView() },
+            destination: { Text("DetailView") },
             label: { makeWorkSpaceCardContent(workspace: workspace) }
         )
     }
