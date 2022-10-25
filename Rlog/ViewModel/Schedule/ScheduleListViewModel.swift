@@ -7,8 +7,31 @@
 
 import SwiftUI
 
-struct ScheduleListViewModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+enum ScheduleCase: String, CaseIterable {
+    case upcoming = "예정된 일정"
+    case past = "지나간 일정"
+}
+
+final class ScheduleListViewModel: ObservableObject {
+    @Published var selectedScheduleCase: ScheduleCase = .upcoming
+}
+
+final class StatusPickerViewModel: ObservableObject {
+    @Binding var selectedScheduleCase: ScheduleCase
+    let scheduleCases = ScheduleCase.allCases
+    var statusPickerOffset: CGFloat {
+        selectedScheduleCase == .upcoming ? -40 : 40
+    }
+    
+    init(selectedScheduleCase: Binding<ScheduleCase>) {
+        self._selectedScheduleCase = selectedScheduleCase
+    }
+    
+    func getStatusPickerTextWeight(compareCase: ScheduleCase) -> Font.Weight {
+        return selectedScheduleCase == compareCase ? Font.Weight.bold : Font.Weight.regular
+    }
+    
+    func getStatusPickerForegroundColor(compareCase: ScheduleCase) -> Color {
+        return selectedScheduleCase == compareCase ? .white : Color.fontLightGray
     }
 }
