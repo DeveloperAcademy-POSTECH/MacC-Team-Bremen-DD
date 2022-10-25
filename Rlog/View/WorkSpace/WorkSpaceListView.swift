@@ -29,16 +29,16 @@ struct WorkSpaceListView: View {
                         .fontWeight(.bold)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { print("button pressed") }){
+                    Button(action: { viewModel.didTapPlusButton() }){
                         Image(systemName: "plus")
                             .fontWeight(.bold)
                     }
                 }
             }
             .background(Color.cardBackground)
-        }
-        .onAppear {
-            viewModel.onAppear()
+            .sheet(isPresented: $viewModel.isShowingSheet) {
+                Text("Hello")
+            }
         }
     }
 }

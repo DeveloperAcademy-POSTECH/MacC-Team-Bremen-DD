@@ -10,9 +10,14 @@ import Foundation
 
 final class WorkSpaceListViewModel: ObservableObject {
     @Published var workspaces: [WorkspaceEntity] = []
+    @Published var isShowingSheet = false
 
-    func onAppear() {
+    init() {
         getAllWorkspaces()
+    }
+
+    func didTapPlusButton() {
+        isShowingSheet = true
     }
 }
 
