@@ -25,6 +25,13 @@ struct WorkSpaceCreateScheduleListView: View {
             
         }
         .padding(.horizontal)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                if viewModel.isShowingConfirmButton {
+                    toolbarConfirmButton
+                }
+            }
+        }
     }
 }
 
@@ -41,6 +48,11 @@ private extension WorkSpaceCreateScheduleListView {
         .padding()
         .background(Color(red: 0.962, green: 0.962, blue: 0.962))
         .clipShape(RoundedRectangle(cornerRadius: 10))
+    }
+    var toolbarConfirmButton: some View {
+            NavigationLink(destination: Rectangle()) {
+                Text("완료")
+            }
     }
     var guidingText: some View {
         Text("근무 일정을 입력해주세요.")
