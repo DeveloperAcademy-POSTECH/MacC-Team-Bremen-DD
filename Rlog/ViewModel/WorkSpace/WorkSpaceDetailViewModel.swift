@@ -31,10 +31,14 @@ final class WorkSpaceDetailViewModel: ObservableObject {
     func didTapCompleteButton(completion: @escaping (() -> Void)) {
         editWorkspace()
     }
+
+    func didTapDeleteButton() {
+        deleteWorkspace()
+    }
 }
 
 extension WorkSpaceDetailViewModel {
-    func editWorkspace() {
+    private func editWorkspace() {
         CoreDataManager.shared.editWorkspace(
             workspace: workspace,
             name: name,
@@ -44,5 +48,9 @@ extension WorkSpaceDetailViewModel {
             hasTax: hasTax,
             hasJuhyu: hasJuhyu
         )
+    }
+
+    private func deleteWorkspace() {
+        CoreDataManager.shared.deleteWorkspace(workspace: workspace)
     }
 }

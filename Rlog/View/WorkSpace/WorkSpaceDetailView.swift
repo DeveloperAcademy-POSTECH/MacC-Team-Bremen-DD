@@ -48,10 +48,13 @@ struct WorkSpaceDetailView: View {
             Rectangle() //일정추가 버튼
                 .foregroundColor(.primary)
                 .frame(maxWidth: .infinity, maxHeight: 54)
-            //디바이더
-            Rectangle() //삭제 버튼
-                .foregroundColor(.primary)
-                .frame(maxWidth: .infinity, maxHeight: 54)
+            StrokeButton(label: "+ 근무 일정 추가하기", buttonType: .add) {
+
+            }
+            HDivider()
+            StrokeButton(label: "근무지 삭제하기", buttonType: .destructive) {
+                viewModel.didTapDeleteButton()
+            }
             Spacer()
         }
         .navigationTitle("근무수정") 
@@ -59,9 +62,7 @@ struct WorkSpaceDetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {
-                    viewModel.didTapCompleteButton {
-                        dismiss()
-                    }
+                    dismiss()
                 }){
                     Image(systemName: "chevron.left")
                         .foregroundColor(.fontBlack)
@@ -71,7 +72,11 @@ struct WorkSpaceDetailView: View {
             }
 
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: { dismiss() }){
+                Button(action: {
+                    viewModel.didTapCompleteButton {
+                        dismiss()
+                    }
+                }){
                     Text("완료")
                         .fontWeight(.bold)
                 }

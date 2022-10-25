@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2D5BA7C82900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5BA7C72900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift */; };
 		2D16518F2907D5CE00636D61 /* TitleSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D16518E2907D5CE00636D61 /* TitleSubView.swift */; };
 		2D1651912907D5F300636D61 /* WorkSpaceInfoSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1651902907D5F300636D61 /* WorkSpaceInfoSubView.swift */; };
 		2D1651932907D61800636D61 /* WorkSpaceCreateConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1651922907D61800636D61 /* WorkSpaceCreateConfirmationView.swift */; };
 		2D1651952907D63300636D61 /* WorkSpaceCreateConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1651942907D63300636D61 /* WorkSpaceCreateConfirmationViewModel.swift */; };
+		2D5BA7C82900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5BA7C72900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift */; };
 		2D66DCA228FD4DF000C90400 /* RlogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCA128FD4DF000C90400 /* RlogApp.swift */; };
 		2D66DCA628FD4DF200C90400 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D66DCA528FD4DF200C90400 /* Assets.xcassets */; };
 		2D66DCA928FD4DF200C90400 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D66DCA828FD4DF200C90400 /* Preview Assets.xcassets */; };
@@ -44,7 +44,6 @@
 		898A5EBA2907C79100A6BEF7 /* HDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A5EB92907C79100A6BEF7 /* HDivider.swift */; };
 		89CAA072290276E800504BDE /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA071290276E800504BDE /* UnderlinedTextField.swift */; };
 		89CAA0742902771D00504BDE /* InputFormElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA0732902771D00504BDE /* InputFormElement.swift */; };
-		89CAA070290265F300504BDE /* StrokeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA06F290265F300504BDE /* StrokeButton.swift */; };
 		B9239C812901467500197ECD /* ScheduleListView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9239C802901467500197ECD /* ScheduleListView+.swift */; };
 		C62C338C28FFCEBD00469273 /* CustomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C338B28FFCEBD00469273 /* CustomButtonView.swift */; };
 		C64D97BA28FE918F004F80E7 /* Text+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97B928FE918F004F80E7 /* Text+.swift */; };
@@ -64,14 +63,15 @@
 		C67FC83C290693BD00DE3898 /* ScheduleEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FC83A290693BD00DE3898 /* ScheduleEntity+CoreDataProperties.swift */; };
 		C67FC83E290693F900DE3898 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FC83D290693F900DE3898 /* CoreData.swift */; };
 		C67FC8402906974600DE3898 /* WorkspaceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FC83F2906974600DE3898 /* WorkspaceColor.swift */; };
+		C67FC841290815C000DE3898 /* StrokeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA06F290265F300504BDE /* StrokeButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2D5BA7C72900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCreateScheduleListViewModel.swift; sourceTree = "<group>"; };
 		2D16518E2907D5CE00636D61 /* TitleSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSubView.swift; sourceTree = "<group>"; };
 		2D1651902907D5F300636D61 /* WorkSpaceInfoSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceInfoSubView.swift; sourceTree = "<group>"; };
 		2D1651922907D61800636D61 /* WorkSpaceCreateConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCreateConfirmationView.swift; sourceTree = "<group>"; };
 		2D1651942907D63300636D61 /* WorkSpaceCreateConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCreateConfirmationViewModel.swift; sourceTree = "<group>"; };
+		2D5BA7C72900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCreateScheduleListViewModel.swift; sourceTree = "<group>"; };
 		2D5BA7C92901242E003A6BC7 /* Rlog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rlog.entitlements; sourceTree = "<group>"; };
 		2D66DC9E28FD4DF000C90400 /* Rlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D66DCA128FD4DF000C90400 /* RlogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RlogApp.swift; sourceTree = "<group>"; };
@@ -426,6 +426,7 @@
 				2D66DCD028FD8E1000C90400 /* ScheduleCreateViewModel.swift in Sources */,
 				2D9CE86629003AA600C60F4C /* WorkSpaceCreateScheduleListView.swift in Sources */,
 				C62C338C28FFCEBD00469273 /* CustomButtonView.swift in Sources */,
+				C67FC841290815C000DE3898 /* StrokeButton.swift in Sources */,
 				2D66DCBB28FD8D0E00C90400 /* ScheduleListView.swift in Sources */,
 				C67FC8322906916700DE3898 /* WorkspaceEntity+CoreDataProperties.swift in Sources */,
 				2D66DCBF28FD8D3700C90400 /* ScheduleUpdateView.swift in Sources */,
