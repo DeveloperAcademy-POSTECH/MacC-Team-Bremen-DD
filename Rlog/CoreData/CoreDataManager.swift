@@ -62,12 +62,14 @@ extension CoreDataManager {
     }
 
     // MARK: - SCHEDULE CRUD
-    func createSchedule(of workspace: WorkspaceEntity, repeatedSchedule: [String], startTime: String, endTime: String, spentHour: Int16) {
+    func createSchedule(of workspace: WorkspaceEntity, repeatedSchedule: [String], startHour: Int16, startMinute: Int16,  endHour: Int16, endMinute: Int16, spentHour: Int16) {
         let schedule = ScheduleEntity(context: context)
         schedule.workspace = workspace
         schedule.repeatedSchedule = repeatedSchedule
-        schedule.startTime = startTime
-        schedule.endTime = endTime
+        schedule.startHour = startHour 
+        schedule.startMinute = startMinute
+        schedule.endHour = endHour
+        schedule.endMinute = endMinute
         schedule.spentHour = spentHour
         save()
     }
@@ -79,10 +81,12 @@ extension CoreDataManager {
         return result ?? []
     }
 
-    func editSchedule(of schedule: ScheduleEntity, repeatedSchedule: [String], startTime: String, endTime: String, spentHour: Int16) {
+    func editSchedule(of schedule: ScheduleEntity, repeatedSchedule: [String], startHour: Int16, startMinute: Int16, endHour: Int16, endMinute: Int16, spentHour: Int16) {
         schedule.repeatedSchedule = repeatedSchedule
-        schedule.startTime = startTime
-        schedule.endTime = endTime
+        schedule.startHour = startHour
+        schedule.startMinute = startMinute
+        schedule.endHour = endHour
+        schedule.endMinute = endMinute
         schedule.spentHour = spentHour
         save()
     }
