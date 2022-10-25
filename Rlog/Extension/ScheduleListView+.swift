@@ -54,23 +54,23 @@ extension ScheduleListView {
         var isShow = true
         
         var body: some View {
-            ZStack {
-                // TODO: - 조건에 따른 색깔 처리(ViewModel 예정)
-                backgroundRectangle
-                VStack(spacing: 0) {
-                    cellHeader
+            // TODO: - 조건에 따른 색깔 처리(ViewModel 예정)
+            VStack(spacing: 0) {
+                cellHeader
+                Spacer()
+                HStack(alignment: .bottom, spacing: 0) {
+                    // TODO: - 시작 시간, 끝난 시간 처리
+                    cellContent
                     Spacer()
-                    HStack(alignment: .bottom, spacing: 0) {
-                        // TODO: - 시작 시간, 끝난 시간 처리
-                        cellContent
-                        Spacer()
-                        cellButton
-                    }
-                    .padding(.bottom, -2)
-                    .padding(.leading, 14)
+                    cellButton
                 }
-                .padding()
+                .padding(EdgeInsets(top: 0, leading: 14, bottom: -2, trailing: 0))
             }
+            .padding()
+            .frame(height: 97)
+            .background(
+                backgroundRectangle
+            )
         }
         
         var backgroundRectangle: some View {
@@ -112,7 +112,7 @@ extension ScheduleListView {
                 Text("\(10)월 \(8)일 금요일")
                     .font(.caption)
                     .foregroundColor(Color.fontBlack)
-                // TODO: - 시간 처리
+                // TODO: - 시간 처리, Int로 저장된 값을 String 두 단어로 처리하는 것은 찾아봐야 함
                 Text("17시 00분 ~ 21시 00분")
                     .font(.caption2)
                     .foregroundColor(Color.fontLightGray)

@@ -12,10 +12,6 @@ struct ScheduleListView: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            Rectangle()
-                .fill(Color.cardBackground)
-                .edgesIgnoringSafeArea(.top)
-            
             VStack(spacing: 0) {
                 header
                     .padding(.top, 32)
@@ -34,10 +30,19 @@ struct ScheduleListView: View {
                 .frame(width: 176, height: 40)
                 .padding(.bottom)
         }
+        .background(
+           background
+        )
     }
 }
 
 private extension ScheduleListView {
+    var background: some View {
+        Rectangle()
+            .fill(Color.cardBackground)
+            .edgesIgnoringSafeArea(.top)
+    }
+    
     var header: some View {
         HStack(spacing: 0) {
             Image(systemName: "chevron.backward")
