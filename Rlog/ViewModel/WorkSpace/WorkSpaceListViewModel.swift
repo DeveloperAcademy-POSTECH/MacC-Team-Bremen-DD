@@ -19,11 +19,15 @@ final class WorkSpaceListViewModel: ObservableObject {
     func didTapPlusButton() {
         isShowingSheet = true
     }
+
+    func didDismissed() {
+        getAllWorkspaces()
+    }
 }
 
 extension WorkSpaceListViewModel {
 
-    private func getAllWorkspaces() {
+   private func getAllWorkspaces() {
         let result = CoreDataManager.shared.getAllWorkspaces()
 
         DispatchQueue.main.async { [weak self] in

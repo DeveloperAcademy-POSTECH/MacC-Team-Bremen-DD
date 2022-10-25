@@ -22,9 +22,11 @@ enum WorkSpaceDetailInfo: CaseIterable {
 struct WorkSpaceDetailView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel: WorkSpaceDetailViewModel
+    var action: () -> Void
 
-    init(workspace: WorkspaceEntity) {
+    init(workspace: WorkspaceEntity, action: @escaping () -> Void) {
         viewModel = WorkSpaceDetailViewModel(workspace: workspace)
+        self.action = action
     }
 
     var body: some View {
@@ -53,7 +55,10 @@ struct WorkSpaceDetailView: View {
             }
             HDivider()
             StrokeButton(label: "근무지 삭제하기", buttonType: .destructive) {
-                viewModel.didTapDeleteButton()
+                viewModel.didTapDeleteButton() {
+                    dismiss()
+                    action()
+                }
             }
             Spacer()
         }
@@ -63,6 +68,7 @@ struct WorkSpaceDetailView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {
                     dismiss()
+                    action()
                 }){
                     Image(systemName: "chevron.left")
                         .foregroundColor(.fontBlack)
@@ -75,6 +81,7 @@ struct WorkSpaceDetailView: View {
                 Button(action: {
                     viewModel.didTapCompleteButton {
                         dismiss()
+                        action()
                     }
                 }){
                     Text("완료")

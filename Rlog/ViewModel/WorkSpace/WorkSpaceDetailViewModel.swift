@@ -30,10 +30,12 @@ final class WorkSpaceDetailViewModel: ObservableObject {
 
     func didTapCompleteButton(completion: @escaping (() -> Void)) {
         editWorkspace()
+        completion()
     }
 
-    func didTapDeleteButton() {
+    func didTapDeleteButton(completion: @escaping (() -> Void)) {
         deleteWorkspace()
+        completion()
     }
 }
 

@@ -17,7 +17,7 @@ struct WorkSpaceListView: View {
         NavigationView {
             ScrollView {
                 ForEach(viewModel.workspaces, id: \.self) { workspace in
-                    WorkSpaceCell(workspace: workspace)
+                    makeWorkspaceCell(workspace: workspace)
                 }
             }
             .padding(.top, 32)
@@ -41,6 +41,60 @@ struct WorkSpaceListView: View {
             }
         }
     }
+}
+
+extension WorkSpaceListView {
+
+    @ViewBuilder
+    func makeWorkspaceCell(workspace: WorkspaceEntity) -> some View {
+        NavigationLink(
+            destination: {
+                WorkSpaceDetailView(workspace: workspace) {
+                    viewModel.didDismissed()
+                }
+            },
+            label: { makeWorkSpaceCardContent(workspace: workspace) }
+        )
+    }
+
+    @ViewBuilder
+    func makeWorkSpaceCardHeader(workTitle: String, workTagColor: String) -> some View {
+        HStack(alignment: .center){
+            Rectangle()
+                .foregroundColor(Color(workTagColor))
+                .frame(width: 3, height: 17)
+            Text(workTitle)
+                .font(.callout)
+                .fontWeight(.bold)
+                .foregroundColor(.fontBlack)
+        }.padding(.bottom, 20)
+    }
+
+    @ViewBuilder
+    func makeWorkSpaceCardContent(workspace: WorkspaceEntity) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            makeWorkSpaceCardHeader(workTitle: workspace.name, workTagColor: workspace.colorString)
+
+            VStack(spacing: 8){
+                ForEach(WorkSpaceInfo.allCases, id: \.self) { tab in
+                    HStack() {
+                        Text(tab.text)
+                            .font(.subheadline)
+                            .foregroundColor(.fontLightGray)
+                        Spacer()
+//                        Text( model.getValue(info: tab))
+//                            .font(.subheadline)
+//                            .foregroundColor(.fontBlack)
+                    }
+                }
+            }
+        }
+        .padding()
+        .background(RoundedRectangle(cornerRadius: 10)
+            .fill(Color.background))
+        .padding([.horizontal, .bottom])
+    }
+
 }
 
 // TODO: CoreData의 Model로 변경
@@ -77,47 +131,3 @@ struct CustomModel: Hashable {
         }
     }
 }
-
-// TODO: Data 주입 후, 삭제 해야함
-let models = [
-    CustomModel(
-        name: "팍이네 팍팍 감자탕",
-        hourlyWage: 2000,
-        date: "2022.07.11",
-        hasJuhyu: true,
-        hasTax: false,
-        color: "PointRed",
-        workDays : "월, 화, 수, 목요일",
-        schedules : "10:00 - 12:00"
-    ),
-    CustomModel(
-        name: "팍이네 팍팍팍 감자탕",
-        hourlyWage: 2000,
-        date: "2022.07.11",
-        hasJuhyu: false,
-        hasTax: true,
-        color: "PointPink",
-        workDays : "월, 화, 수, 목요일",
-        schedules : "10:00 - 12:00"
-    ),
-    CustomModel(
-        name: "팍이네 팍팍팍팍 감자탕",
-        hourlyWage: 2000,
-        date: "2022.07.11",
-        hasJuhyu: true,
-        hasTax: false,
-        color: "PointYellow",
-        workDays : "월, 화, 수, 목요일",
-        schedules : "10:00 - 12:00"
-    ),
-    CustomModel(
-        name: "팍이네 팍팍팍팍 감자탕",
-        hourlyWage: 2000,
-        date: "2022.07.11",
-        hasJuhyu: true,
-        hasTax: false,
-        color: "PointYellow",
-        workDays : "월, 화, 수, 목요일",
-        schedules : "10:00 - 12:00"
-    )
-]
