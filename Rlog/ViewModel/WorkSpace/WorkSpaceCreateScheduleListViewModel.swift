@@ -22,7 +22,6 @@ final class WorkSpaceCreateScheduleListViewModel: ObservableObject {
 
         }
     }
-
     
     func didTapAddScheduleButton() {
         showModal()
