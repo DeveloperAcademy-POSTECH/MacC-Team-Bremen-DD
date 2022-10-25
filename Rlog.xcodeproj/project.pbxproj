@@ -37,6 +37,8 @@
 		2D66DCE428FD8F1D00C90400 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCE328FD8F1D00C90400 /* Color+.swift */; };
 		75DE0162290271E600A77369 /* WorkSpaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DE0161290271E600A77369 /* WorkSpaceCell.swift */; };
 		7A937596290035BD00D6D5BE /* FilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A937595290035BD00D6D5BE /* FilledButton.swift */; };
+		89CAA072290276E800504BDE /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA071290276E800504BDE /* UnderlinedTextField.swift */; };
+		89CAA0742902771D00504BDE /* InputFormElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA0732902771D00504BDE /* InputFormElement.swift */; };
 		89CAA070290265F300504BDE /* StrokeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA06F290265F300504BDE /* StrokeButton.swift */; };
 		B9239C812901467500197ECD /* ScheduleListView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9239C802901467500197ECD /* ScheduleListView+.swift */; };
 		C62C338C28FFCEBD00469273 /* CustomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C338B28FFCEBD00469273 /* CustomButtonView.swift */; };
@@ -64,6 +66,7 @@
 		2D1651902907D5F300636D61 /* WorkSpaceInfoSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceInfoSubView.swift; sourceTree = "<group>"; };
 		2D1651922907D61800636D61 /* WorkSpaceCreateConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCreateConfirmationView.swift; sourceTree = "<group>"; };
 		2D1651942907D63300636D61 /* WorkSpaceCreateConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCreateConfirmationViewModel.swift; sourceTree = "<group>"; };
+		2D5BA7C92901242E003A6BC7 /* Rlog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rlog.entitlements; sourceTree = "<group>"; };
 		2D66DC9E28FD4DF000C90400 /* Rlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D66DCA128FD4DF000C90400 /* RlogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RlogApp.swift; sourceTree = "<group>"; };
 		2D66DCA528FD4DF200C90400 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -92,6 +95,8 @@
 		75DE0161290271E600A77369 /* WorkSpaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCell.swift; sourceTree = "<group>"; };
 		7A937595290035BD00D6D5BE /* FilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
 		89CAA06F290265F300504BDE /* StrokeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeButton.swift; sourceTree = "<group>"; };
+		89CAA071290276E800504BDE /* UnderlinedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
+		89CAA0732902771D00504BDE /* InputFormElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFormElement.swift; sourceTree = "<group>"; };
 		B9239C802901467500197ECD /* ScheduleListView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleListView+.swift"; sourceTree = "<group>"; };
 		C62C338B28FFCEBD00469273 /* CustomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomButtonView.swift; path = Rlog/View/Components/CustomButtonView.swift; sourceTree = SOURCE_ROOT; };
 		C64D97B928FE918F004F80E7 /* Text+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+.swift"; sourceTree = "<group>"; };
@@ -143,6 +148,7 @@
 		2D66DCA028FD4DF000C90400 /* Rlog */ = {
 			isa = PBXGroup;
 			children = (
+				2D5BA7C92901242E003A6BC7 /* Rlog.entitlements */,
 				2D66DCA128FD4DF000C90400 /* RlogApp.swift */,
 				2D66DCA528FD4DF200C90400 /* Assets.xcassets */,
 				C64D97C128FE92A2004F80E7 /* Model */,
@@ -283,6 +289,8 @@
 			isa = PBXGroup;
 			children = (
 				C62C338B28FFCEBD00469273 /* CustomButtonView.swift */,
+				89CAA071290276E800504BDE /* UnderlinedTextField.swift */,
+				89CAA0732902771D00504BDE /* InputFormElement.swift */,
 				7A937595290035BD00D6D5BE /* FilledButton.swift */,
 				89CAA06F290265F300504BDE /* StrokeButton.swift */,
 			);
@@ -417,10 +425,12 @@
 				2D66DCCC28FD8DC500C90400 /* MainTabView.swift in Sources */,
 				C67FC8312906916700DE3898 /* WorkspaceEntity+CoreDataClass.swift in Sources */,
 				C64D97BA28FE918F004F80E7 /* Text+.swift in Sources */,
+				89CAA072290276E800504BDE /* UnderlinedTextField.swift in Sources */,
 				C64D97C328FE92B0004F80E7 /* WorkspaceEntity.swift in Sources */,
 				2D66DCD628FD8E5500C90400 /* MonthlyCalculateDetailViewModel.swift in Sources */,
 				2D66DCD828FD8E7100C90400 /* WorkSpaceListViewModel.swift in Sources */,
 				2D1651932907D61800636D61 /* WorkSpaceCreateConfirmationView.swift in Sources */,
+				89CAA0742902771D00504BDE /* InputFormElement.swift in Sources */,
 				2D66DCC728FD8D8900C90400 /* MonthlyCalculateListView.swift in Sources */,
 				2D66DCCA28FD8DA200C90400 /* MonthlyCalculateDetailView.swift in Sources */,
 				75DE0162290271E600A77369 /* WorkSpaceCell.swift in Sources */,
@@ -560,6 +570,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Rlog/Rlog.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -574,15 +585,16 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "group.com.Bremen-DD.Rlog";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Bremen-DD.Rlog";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = RlogApp;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = RlogGroup;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -594,6 +606,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Rlog/Rlog.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -608,15 +621,16 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "group.com.Bremen-DD.Rlog";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Bremen-DD.Rlog";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = RlogApp;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = RlogGroup;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

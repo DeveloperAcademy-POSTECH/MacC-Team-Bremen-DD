@@ -7,14 +7,94 @@
 
 import SwiftUI
 
-struct WorkSpaceDetailView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+enum WorkSpaceDetailInfo: CaseIterable {
+    case hasTax
+    case hasJuhyu
+    
+    var text: (title: String, description: String) {
+        switch self {
+        case .hasTax: return (title: "소득세", description: "3.3% 적용")
+        case .hasJuhyu: return (title: "주휴수당", description: "60시간 근무 시 적용")
+        }
     }
 }
 
-struct WorkSpaceDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        WorkSpaceDetailView()
+struct WorkSpaceDetailView: View {
+    @State var model: CustomModel
+    @Environment(\.dismiss) var dismiss
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            //TODO : Rectangle 자리 공용 컴포넌트 삽입
+            Rectangle() //근무지
+                .foregroundColor(.primary)
+                .frame(maxWidth: .infinity, maxHeight: 68)
+            Rectangle() //시급
+                .foregroundColor(.primary)
+                .frame(maxWidth: .infinity, maxHeight: 68)
+            Rectangle() //급여일
+                .foregroundColor(.primary)
+                .frame(maxWidth: .infinity, maxHeight: 68)
+
+            makePaymentSystemToggle()
+            
+                Text("근무일정")
+                    .font(.subheadline)
+                    .foregroundColor(.fontLightGray)
+                Spacer()
+
+            
+            Rectangle() //근무유형
+                .foregroundColor(.primary)
+                .frame(maxWidth: .infinity, maxHeight: 54)
+            Rectangle() //일정추가 버튼
+                .foregroundColor(.primary)
+                .frame(maxWidth: .infinity, maxHeight: 54)
+            //디바이더
+            Rectangle() //삭제 버튼
+                .foregroundColor(.primary)
+                .frame(maxWidth: .infinity, maxHeight: 54)
+            Spacer()
+        }
+        .navigationTitle("근무수정") 
+        .padding(.horizontal)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: { dismiss() }){
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(.fontBlack)
+                    Text("이전")
+                        .foregroundColor(.fontBlack)
+                }
+            }
+
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: { dismiss() }){
+                    Text("완료")
+                        .fontWeight(.bold)
+                }
+            }
+        }
+        .background(Color.cardBackground)
+        .navigationBarBackButtonHidden()
     }
 }
+
+private extension WorkSpaceDetailView {
+    func makePaymentSystemToggle() -> some View {
+        ForEach(WorkSpaceDetailInfo.allCases, id: \.self) { tab in
+            Toggle(isOn: tab == .hasTax ? $model.hasJuhyu : $model.hasTax, label: {
+                HStack(spacing: 13) {
+                    Text(tab.text.title)
+                        .font(.subheadline)
+                        .foregroundColor(.fontLightGray)
+                    Text(tab.text.description)
+                        .font(.caption)
+                        .foregroundColor(.fontLightGray)
+                }
+            })
+        }
+    }
+}
+
+
