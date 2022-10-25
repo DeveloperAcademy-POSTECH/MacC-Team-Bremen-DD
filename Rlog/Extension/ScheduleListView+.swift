@@ -9,7 +9,7 @@ import SwiftUI
 
 extension ScheduleListView {
     struct StatusPicker: View {
-        var viewModel: StatusPickerViewModel
+        @ObservedObject private var viewModel: StatusPickerViewModel
         
         init(selectedScheduleCase: Binding<ScheduleCase>) {
             self.viewModel = StatusPickerViewModel(selectedScheduleCase: selectedScheduleCase)

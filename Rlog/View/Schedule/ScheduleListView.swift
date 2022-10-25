@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ScheduleListView: View {
-    @ObservedObject var viewModel = ScheduleListViewModel()
+    @ObservedObject private var viewModel = ScheduleListViewModel()
     
     var body: some View {
         ZStack(alignment: .bottom) {
