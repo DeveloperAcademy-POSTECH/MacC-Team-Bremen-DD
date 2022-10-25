@@ -9,13 +9,15 @@ import SwiftUI
 
 
 struct WorkSpaceListView: View {
+
+    @ObservedObject var viewModel = WorkSpaceListViewModel()
     
     var body: some View {
 //  Navgation Header 리팩토링 고려 코드 https://stackoverflow.com/questions/57517803/how-to-remove-the-default-navigation-bar-space-in-swiftui-navigationview
         NavigationView {
             ScrollView {
-                ForEach(models, id: \.self) { model in
-                    WorkSpaceCell(model: model)
+                ForEach(viewModel.workspaces, id: \.self) { workspace in
+                    WorkSpaceCell(workspace: workspace)
                 }
             }
             .padding(.top, 32)
@@ -34,6 +36,9 @@ struct WorkSpaceListView: View {
                 }
             }
             .background(Color.cardBackground)
+        }
+        .onAppear {
+            viewModel.onAppear()
         }
     }
 }

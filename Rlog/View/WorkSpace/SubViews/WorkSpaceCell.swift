@@ -26,12 +26,12 @@ enum WorkSpaceInfo: CaseIterable {
 }
 
 struct WorkSpaceCell: View {
-    var model: CustomModel
+    var workspace: WorkspaceEntity
     
     var body: some View {
         NavigationLink(
             destination: { WorkSpaceDetailView() },
-            label: { makeWorkSpaceCardContent(model: model) }
+            label: { makeWorkSpaceCardContent(workspace: workspace) }
         )
     }
 }
@@ -49,9 +49,9 @@ private extension WorkSpaceCell {
         }.padding(.bottom, 20)
     }
     
-    func makeWorkSpaceCardContent(model: CustomModel) -> some View {
+    func makeWorkSpaceCardContent(workspace: WorkspaceEntity) -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            makeWorkSpaceCardHeader(workTitle: model.name, workTagColor: model.color)
+            makeWorkSpaceCardHeader(workTitle: workspace.name, workTagColor: workspace.colorString)
             
             VStack(spacing: 8){
                 ForEach(WorkSpaceInfo.allCases, id: \.self) { tab in
@@ -60,9 +60,9 @@ private extension WorkSpaceCell {
                             .font(.subheadline)
                             .foregroundColor(.fontLightGray)
                         Spacer()
-                        Text(model.getValue(info: tab))
-                            .font(.subheadline)
-                            .foregroundColor(.fontBlack)
+//                        Text( model.getValue(info: tab))
+//                            .font(.subheadline)
+//                            .foregroundColor(.fontBlack)
                     }
                 }
             }
