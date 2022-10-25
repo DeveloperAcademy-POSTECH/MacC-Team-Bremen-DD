@@ -62,6 +62,12 @@ extension WorkSpaceCreateCreatingScheduleViewModel {
 
     }
     func appendScheduleToList() {
+        if startMinute.isEmpty {
+            startMinute = "00"
+        }
+        if endMinute.isEmpty {
+            endMinute = "00"
+        }
         scheduleList.append(Schedule(repeatedSchedule: getDayList() ,startHour: startHour, startMinute: startMinute, endHour: endHour, endMinute: endMinute))
     }
     func dismissModal() {
