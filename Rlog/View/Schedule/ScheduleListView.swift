@@ -56,6 +56,19 @@ private extension ScheduleListView {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 0) {
                 scheduleListHeader
+                // TODO: - ScheduleCreateView로 연결
+                Button(action: {}, label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.white)
+                            .frame(height: 97)
+                        Image(systemName: "plus")
+                            .font(.title)
+                            .fontWeight(.semibold)
+                            .foregroundColor(Color.primary)
+                    }
+                })
+                .padding(.top)
                 ForEach(0..<3) { index in
                     ScheduleCell()
                 }
