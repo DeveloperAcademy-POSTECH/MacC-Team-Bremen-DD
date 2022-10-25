@@ -112,6 +112,7 @@ private extension WorkSpaceCreateView {
                 Text("확인")
                     .foregroundColor(.white)
             }
+            .padding(.bottom, 20)
         }
         
     }
