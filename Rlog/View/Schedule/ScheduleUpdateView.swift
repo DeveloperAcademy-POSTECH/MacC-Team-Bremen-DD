@@ -12,19 +12,15 @@ struct ScheduleUpdateView: View {
     @State var reason = ""
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: 16) {
             workspace
                 .padding(.top, 40)
             workDate
-                .padding(.top)
             startTime
-                .padding(.top)
             endTime
-                .padding(.top)
             reasonInput
-                .padding(.top)
             deleteButton
-                .padding(.top, 32)
+                .padding(.top, 16)
             Spacer()
         }
         .padding(.horizontal)
