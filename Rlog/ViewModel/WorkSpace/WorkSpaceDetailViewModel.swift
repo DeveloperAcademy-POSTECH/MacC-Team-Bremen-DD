@@ -5,10 +5,44 @@
 //  Created by 송시원 on 2022/10/17.
 //
 
-import SwiftUI
+import Combine
+import Foundation
 
-struct WorkSpaceDetailViewModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+final class WorkSpaceDetailViewModel: ObservableObject {
+    @Published var name: String
+    @Published var hourlyWage: Int16
+    @Published var paymentDay: Int16
+    @Published var hasTax: Bool
+    @Published var hasJuhyu: Bool
+
+    var workspace: WorkspaceEntity
+
+    init(workspace: WorkspaceEntity) {
+        name = workspace.name
+        hourlyWage = workspace.hourlyWage
+        paymentDay = workspace.paymentDay
+        hasTax = workspace.hasTax
+        hasJuhyu = workspace.hasJuhyu
+        self.workspace = workspace
+        print(hasTax)
+        print(hasJuhyu)
+    }
+
+    func didTapCompleteButton(completion: @escaping (() -> Void)) {
+        editWorkspace()
+    }
+}
+
+extension WorkSpaceDetailViewModel {
+    func editWorkspace() {
+        CoreDataManager.shared.editWorkspace(
+            workspace: workspace,
+            name: name,
+            hourlyWage: hourlyWage,
+            paymentDay: paymentDay,
+            colorString: workspace.colorString,
+            hasTax: hasTax,
+            hasJuhyu: hasJuhyu
+        )
     }
 }

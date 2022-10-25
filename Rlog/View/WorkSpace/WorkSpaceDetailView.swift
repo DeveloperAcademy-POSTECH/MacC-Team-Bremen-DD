@@ -20,21 +20,19 @@ enum WorkSpaceDetailInfo: CaseIterable {
 }
 
 struct WorkSpaceDetailView: View {
-    @State var model: CustomModel
     @Environment(\.dismiss) var dismiss
+    @ObservedObject var viewModel: WorkSpaceDetailViewModel
+
+    init(workspace: WorkspaceEntity) {
+        viewModel = WorkSpaceDetailViewModel(workspace: workspace)
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             //TODO : Rectangle 자리 공용 컴포넌트 삽입
-            Rectangle() //근무지
-                .foregroundColor(.primary)
-                .frame(maxWidth: .infinity, maxHeight: 68)
-            Rectangle() //시급
-                .foregroundColor(.primary)
-                .frame(maxWidth: .infinity, maxHeight: 68)
-            Rectangle() //급여일
-                .foregroundColor(.primary)
-                .frame(maxWidth: .infinity, maxHeight: 68)
+            InputFormElement(containerType: .workplace, text: $viewModel.name)
+//            InputFormElement(containerType: .wage, text: $viewModel.hourlyWage)
+//            InputFormElement(containerType: .payday, text: $viewModel.paymentDay)
 
             makePaymentSystemToggle()
             
@@ -60,7 +58,11 @@ struct WorkSpaceDetailView: View {
         .padding(.horizontal)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: { dismiss() }){
+                Button(action: {
+                    viewModel.didTapCompleteButton {
+                        dismiss()
+                    }
+                }){
                     Image(systemName: "chevron.left")
                         .foregroundColor(.fontBlack)
                     Text("이전")
@@ -83,7 +85,7 @@ struct WorkSpaceDetailView: View {
 private extension WorkSpaceDetailView {
     func makePaymentSystemToggle() -> some View {
         ForEach(WorkSpaceDetailInfo.allCases, id: \.self) { tab in
-            Toggle(isOn: tab == .hasTax ? $model.hasJuhyu : $model.hasTax, label: {
+            Toggle(isOn: tab == .hasTax ? $viewModel.hasTax : $viewModel.hasJuhyu, label: {
                 HStack(spacing: 13) {
                     Text(tab.text.title)
                         .font(.subheadline)
