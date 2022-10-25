@@ -15,6 +15,7 @@ final class WorkSpaceCreateViewModel: ObservableObject {
     @Published var isActivatedConfirmButton: Bool = false
     
     // 버튼 숨김 여부
+    @Published var isHiddenToolBarItem = true
     @Published var isHiddenConfirmButton = false
     @Published var isHiddenGuidingTitle = false
     @Published var isHiddenHourlyWage = true
@@ -76,6 +77,7 @@ extension WorkSpaceCreateViewModel {
             case .payday:
                 isHiddenToggleInputs = false
                 isHiddenConfirmButton = true
+                isHiddenToolBarItem = false
                 currentState = .toggleOptions
             case .toggleOptions:
                 return

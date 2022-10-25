@@ -48,15 +48,19 @@ struct WorkSpaceCreateView: View {
         .padding()
         .navigationBarTitle("")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(
-            trailing:
-                NavigationLink(
-                    destination: Rectangle(),
-                    label: {
-                        Text("다음")
-                            .foregroundColor(.fontBlack)
-                    })
-        )
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                if !viewModel.isHiddenToolBarItem {
+                    NavigationLink(
+                        destination: Rectangle()) {
+                            Text("다음")
+                                .foregroundColor(.fontBlack)
+                        }
+                } else {
+                    Text("")
+                }
+            }
+        }
     }
 }
 
