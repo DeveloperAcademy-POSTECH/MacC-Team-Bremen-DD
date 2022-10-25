@@ -76,6 +76,7 @@ private extension WorkSpaceCreateCreatingScheduleView {
                 }
             }
         }
+        
     }
     
     var workTimePicker: some View {
@@ -107,6 +108,26 @@ private extension WorkSpaceCreateCreatingScheduleView {
             Text(viewModel.errorMessage)
                 .font(.caption)
                 .foregroundColor(.red)
+        }
+    }
+    
+    private struct DayButtonSubView: View {
+        
+        let day: String
+        let isSelected: Bool
+        
+        var body: some View {
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(.accentColor)
+                    .opacity(isSelected ? 1 : 0)
+                RoundedRectangle(cornerRadius: 10)
+                    .strokeBorder(Color(red: 0.769, green: 0.769, blue: 0.769), lineWidth: 1)
+                    .opacity(isSelected ? 0 : 1)
+                Text(day)
+                    .foregroundColor(isSelected ? .white : .fontBlack)
+            }
+            .frame(height: 60)
         }
     }
 }
