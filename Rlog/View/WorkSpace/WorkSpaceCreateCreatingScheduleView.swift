@@ -92,6 +92,11 @@ private extension WorkSpaceCreateCreatingScheduleView {
                     .keyboardType(.decimalPad)
                 Text("-")
                     .padding(.horizontal, 10)
+                if viewModel.isShowingOverSingleDay {
+                    Text("익일")
+                        .font(.caption)
+                        .foregroundColor(.fontDarkGray)
+                }
                 TextField("00", text: $viewModel.endHour)
                     .keyboardType(.decimalPad)
                 Text(":")
@@ -99,6 +104,9 @@ private extension WorkSpaceCreateCreatingScheduleView {
                     .keyboardType(.decimalPad)
             }
             .foregroundColor(.fontBlack)
+            Text(viewModel.errorMessage)
+                .font(.caption)
+                .foregroundColor(.fontLightGray)
         }
     }
 }

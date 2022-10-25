@@ -24,7 +24,7 @@ struct WorkSpaceCreateScheduleListView: View {
             Spacer()
             
         }
-        .padding()
+        .padding(.horizontal)
     }
 }
 

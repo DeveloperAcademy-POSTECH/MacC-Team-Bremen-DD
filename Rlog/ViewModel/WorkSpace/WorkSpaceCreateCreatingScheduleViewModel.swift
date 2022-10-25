@@ -12,6 +12,8 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
     @Binding var scheduleList: [Schedule]
     
     @Published var isShowingConfirmButton = false
+    @Published var isShowingOverSingleDay = false
+    @Published var errorMessage = "ananan"
     
     // 어떻게 더 깔끔하게 짤 수 있을까요? enum을 사용하면 깔끔해질까요?
     @Published var sevenDays: [selectedDayModel] = [selectedDayModel(dayName: "월", isSelected: false), selectedDayModel(dayName: "화", isSelected: false), selectedDayModel(dayName: "수", isSelected: false), selectedDayModel(dayName: "목", isSelected: false), selectedDayModel(dayName: "금", isSelected: false), selectedDayModel(dayName: "토", isSelected: false), selectedDayModel(dayName: "일", isSelected: false)]
@@ -20,6 +22,7 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
         didSet {
             // TODO: 입력값이 24시간을 넘어가면 경고처리 하기
             checkAllInputFilled()
+            checkIsOverSingleDay()
         }
     }
     @Published var startMinute = ""
@@ -27,6 +30,7 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
         didSet {
             // TODO: 입력값이 24시간을 넘어가면 경고처리 하기
             checkAllInputFilled()
+            checkIsOverSingleDay()
         }
     }
     @Published var endMinute = ""
@@ -44,11 +48,19 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
         appendScheduleToList()
         dismissModal()
     }
-    
 }
 
 extension WorkSpaceCreateCreatingScheduleViewModel {
-    
+    func checkIsOverSingleDay() {
+        if !startHour.isEmpty && !endHour.isEmpty  {
+            if Int(startHour) ?? 0 >= Int(endHour) ?? 0 {
+                isShowingOverSingleDay = true
+                return
+            }
+        }
+        isShowingOverSingleDay = false
+
+    }
     func appendScheduleToList() {
         scheduleList.append(Schedule(repeatedSchedule: getDayList() ,startHour: startHour, startMinute: startMinute, endHour: endHour, endMinute: endMinute))
     }

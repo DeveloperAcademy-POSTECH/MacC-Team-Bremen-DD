@@ -8,9 +8,21 @@
 import SwiftUI
 
 final class WorkSpaceCreateScheduleListViewModel: ObservableObject {
-    @Published var isNavigationActivated = false
-    @Published var scheduleList: [Schedule] = []
     @Published var isShowingModal = false
+    @Published var isShowingConfirmButton = false
+    
+    @Published var scheduleList: [Schedule] = [] {
+        didSet {
+            if !scheduleList.isEmpty {
+                isShowingConfirmButton = true
+            }
+            print("변경됨")
+            isShowingConfirmButton = true
+            print(isShowingConfirmButton)
+
+        }
+    }
+
     
     func didTapAddScheduleButton() {
         showModal()
