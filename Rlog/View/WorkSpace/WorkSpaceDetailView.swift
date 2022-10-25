@@ -24,7 +24,7 @@ struct WorkSpaceDetailView: View {
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(alignment: .leading, spacing: 16) {
             //TODO : Rectangle 자리 공용 컴포넌트 삽입
             Rectangle() //근무지
                 .foregroundColor(.primary)
@@ -38,12 +38,10 @@ struct WorkSpaceDetailView: View {
 
             makePaymentSystemToggle()
             
-            HStack(){
                 Text("근무 유형")
                     .font(.subheadline)
                     .foregroundColor(.fontLightGray)
                 Spacer()
-            }
             
             Rectangle() //근무유형
                 .foregroundColor(.primary)
