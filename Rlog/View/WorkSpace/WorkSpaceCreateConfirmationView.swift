@@ -10,17 +10,23 @@
 import SwiftUI
 
 struct WorkSpaceCreateConfirmationView: View {
+    @ObservedObject private var viewModel = WorkSpaceCreateConfirmationViewModel()
+    
     var body: some View {
-        // 고민: 폭이 한계까지 닿지 않아서 가운데정렬이 되는데, 컨포넌트를 가져오면 해결된다. 이럴 경우 다른 방식으로 미뤄두는게 필요할까?
         VStack(alignment: .leading, spacing: 20) {
             TitleSubView(title: "새로운 아르바이트를 추가합니다.")
-            WorkSpaceInfoSubView(labelName:"근무지", content:"팍이네 팍팍 감자탕")
-            WorkSpaceInfoSubView(labelName:"시급", content:"9,250원")
-            WorkSpaceInfoSubView(labelName:"급여일", content:"매월 10일")
-            WorkSpaceInfoSubView(labelName:"주휴수당", content:"60시간 근무 시 적용")
-            WorkSpaceInfoSubView(labelName:"근무지", content:"3.3% 적용")
-            WorkTypeInfo(for: "haha")
-            Spacer()
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    WorkSpaceInfoSubView(labelName:"근무지", content:"팍이네 팍팍 감자탕")
+                    WorkSpaceInfoSubView(labelName:"시급", content:"9,250원")
+                    WorkSpaceInfoSubView(labelName:"급여일", content:"매월 10일")
+                    WorkSpaceInfoSubView(labelName:"주휴수당", content:viewModel.hasTax ? "60시간 근무 시 적용" : "미적용")
+                    WorkSpaceInfoSubView(labelName:"근무지", content:viewModel.hasJuhyu ? "3.3% 적용" : "미적용")
+                    WorkTypeInfo(for: "haha")
+                    Spacer()
+                }
+            }
+        }
         }
         .padding()
     }
@@ -33,7 +39,7 @@ private extension WorkSpaceCreateConfirmationView {
             Text("근무 유형")
                 .font(.caption)
                 .foregroundColor(.fontLightGray)
-            // 컨포넌트에 일하는 유형을 넣어준다.
+            // TODO: 컨포넌트에 일하는 유형을 넣어준다.
             RoundedRectangle(cornerRadius: 10)
                 .frame(height: 54)
         }
@@ -45,5 +51,3 @@ struct WorkSpaceCreateConfirmationView_Previews: PreviewProvider {
         WorkSpaceCreateConfirmationView()
     }
 }
-
-

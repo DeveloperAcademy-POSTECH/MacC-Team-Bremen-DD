@@ -34,6 +34,7 @@
 		2D9CE85F290029FE00C60F4C /* WorkSpaceCreateConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9CE85E290029FE00C60F4C /* WorkSpaceCreateConfirmationView.swift */; };
 		2D9CE86129002A3B00C60F4C /* TitleSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9CE86029002A3B00C60F4C /* TitleSubView.swift */; };
 		2D9CE8642900338300C60F4C /* WorkSpaceInfoSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9CE8632900338300C60F4C /* WorkSpaceInfoSubView.swift */; };
+		2DF4EC752907CB08009B48B4 /* WorkSpaceCreateConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF4EC742907CB08009B48B4 /* WorkSpaceCreateConfirmationViewModel.swift */; };
 		C62C338C28FFCEBD00469273 /* CustomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C338B28FFCEBD00469273 /* CustomButtonView.swift */; };
 		C64D97BA28FE918F004F80E7 /* Text+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97B928FE918F004F80E7 /* Text+.swift */; };
 		C64D97BC28FE9197004F80E7 /* TextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97BB28FE9197004F80E7 /* TextField+.swift */; };
@@ -74,6 +75,7 @@
 		2D9CE85E290029FE00C60F4C /* WorkSpaceCreateConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCreateConfirmationView.swift; sourceTree = "<group>"; };
 		2D9CE86029002A3B00C60F4C /* TitleSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSubView.swift; sourceTree = "<group>"; };
 		2D9CE8632900338300C60F4C /* WorkSpaceInfoSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceInfoSubView.swift; sourceTree = "<group>"; };
+		2DF4EC742907CB08009B48B4 /* WorkSpaceCreateConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCreateConfirmationViewModel.swift; sourceTree = "<group>"; };
 		C62C338B28FFCEBD00469273 /* CustomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomButtonView.swift; path = Rlog/View/Components/CustomButtonView.swift; sourceTree = SOURCE_ROOT; };
 		C64D97B928FE918F004F80E7 /* Text+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+.swift"; sourceTree = "<group>"; };
 		C64D97BB28FE9197004F80E7 /* TextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+.swift"; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				2D66DCD728FD8E7100C90400 /* WorkSpaceListViewModel.swift */,
 				2D66DCD928FD8E8F00C90400 /* WorkSpaceDetailViewModel.swift */,
 				2D66DCDB28FD8E9D00C90400 /* WorkSpaceCreateViewModel.swift */,
+				2DF4EC742907CB08009B48B4 /* WorkSpaceCreateConfirmationViewModel.swift */,
 			);
 			path = WorkSpace;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				C64D97C328FE92B0004F80E7 /* WorkspaceEntity.swift in Sources */,
 				2D66DCD628FD8E5500C90400 /* MonthlyCalculateDetailViewModel.swift in Sources */,
 				2D66DCD828FD8E7100C90400 /* WorkSpaceListViewModel.swift in Sources */,
+				2DF4EC752907CB08009B48B4 /* WorkSpaceCreateConfirmationViewModel.swift in Sources */,
 				2D66DCC728FD8D8900C90400 /* MonthlyCalculateListView.swift in Sources */,
 				2D66DCCA28FD8DA200C90400 /* MonthlyCalculateDetailView.swift in Sources */,
 				2D66DCDC28FD8E9D00C90400 /* WorkSpaceCreateViewModel.swift in Sources */,
