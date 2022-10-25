@@ -86,13 +86,17 @@ private extension WorkSpaceCreateCreatingScheduleView {
             HStack(spacing: 0) {
                 // TODO: 컨포넌트 적용
                 TextField("00", text: $viewModel.startHour)
+                    .keyboardType(.decimalPad)
                 Text(":")
                 TextField("00", text: $viewModel.startMinute)
+                    .keyboardType(.decimalPad)
                 Text("-")
                     .padding(.horizontal, 10)
                 TextField("00", text: $viewModel.endHour)
+                    .keyboardType(.decimalPad)
                 Text(":")
                 TextField("00", text: $viewModel.endMinute)
+                    .keyboardType(.decimalPad)
             }
             .foregroundColor(.fontBlack)
         }
