@@ -34,7 +34,7 @@ struct WorkSpaceCreateConfirmationView: View {
                 toolbarConfirmButton
             }
         }
-        .padding()
+        .padding(.horizontal)
     }
 }
 
@@ -57,10 +57,4 @@ private extension WorkSpaceCreateConfirmationView {
                 Text("완료")
             }
         }
-}
-
-struct WorkSpaceCreateConfirmationView_Previews: PreviewProvider {
-    static var previews: some View {
-        WorkSpaceCreateConfirmationView()
-    }
 }

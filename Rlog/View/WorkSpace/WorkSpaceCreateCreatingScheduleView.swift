@@ -56,9 +56,8 @@ private extension WorkSpaceCreateCreatingScheduleView {
         }
     }
     var guidingText: some View {
-        Text("근무 요일과 시간을 입력해주세요.")
-            .padding(.top, 40)
-            .foregroundColor(.fontBlack)
+        TitleSubView(title: "근무 요일과 시간을 입력해주세요.")
+            .padding(.top, 20)
     }
     var workDayPicker: some View {
         VStack(alignment: .leading, spacing: 20) {

@@ -15,7 +15,7 @@ struct WorkSpaceCreateScheduleListView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            guidingText
+            TitleSubView(title: "근무 일정을 입력해주세요.")
             labelText
             VStack(spacing: 16) {
                 ForEach(viewModel.scheduleList, id: \.self) { item in
@@ -55,9 +55,10 @@ private extension WorkSpaceCreateScheduleListView {
         .background(Color(red: 0.962, green: 0.962, blue: 0.962))
         .clipShape(RoundedRectangle(cornerRadius: 10))
     }
-    var toolbarConfirmButton: some View {
-            NavigationLink(destination: Rectangle()) {
-                Text("완료")
+    var toolbarNextButton: some View {
+        NavigationLink(destination: WorkSpaceCreateConfirmationView(isActive: $viewModel.isActive)) {
+                Text("다음")
+                    .foregroundColor(viewModel.isDisabledNextButton ? Color(red: 0.82, green: 0.82, blue: 0.839) : .fontBlack)
             }
     }
     var guidingText: some View {
@@ -85,11 +86,5 @@ private extension WorkSpaceCreateScheduleListView {
                 WorkSpaceCreateCreatingScheduleView(isShowingModal: $viewModel.isShowingModal, scheduleList: $viewModel.scheduleList)
             }
         }
-    }
-}
-
-struct WorkSpaceCreateScheduleListView_Previews: PreviewProvider {
-    static var previews: some View {
-        WorkSpaceCreateScheduleListView()
     }
 }
