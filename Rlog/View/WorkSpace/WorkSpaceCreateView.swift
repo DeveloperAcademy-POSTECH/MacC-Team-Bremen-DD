@@ -48,7 +48,7 @@ struct WorkSpaceCreateView: View {
                 ConfirmButton
             }
         }
-        .padding()
+        .padding(.horizontal)
         .navigationBarTitle("")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -96,9 +96,7 @@ private extension WorkSpaceCreateView {
     }
     // 가이드 텍스트
     var guidingText: some View {
-        Text(viewModel.currentState.title)
-            .font(.title3)
-            .padding(.vertical, 20)
+        TitleSubView(title: viewModel.currentState.title)
     }
     
     // 확인 버튼
@@ -116,11 +114,5 @@ private extension WorkSpaceCreateView {
             }
         }
         
-    }
-}
-
-struct WorkSpaceCreateView_Previews: PreviewProvider {
-    static var previews: some View {
-        WorkSpaceCreateView()
     }
 }
