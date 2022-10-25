@@ -50,13 +50,19 @@ private extension ScheduleContainer {
     var workHourView: some View {
         HStack {
             // 시간이 n시 0분인 경우 두 자릿수인 00으로 표시
-            if startMinute == "0" || startMinute == "00" { Text("\(startHour):00") }
-            else { Text("\(startHour):\(startMinute)") }
+            if startMinute.count == 1 {
+                Text("\(startHour):0\(startMinute)")
+            } else {
+                Text("\(startHour):\(startMinute)")
+            }
             
             Text("-")
             
-            if endMinute == "0" || endMinute == "00" { Text("\(endHour):00") }
-            else { Text("\(endHour):\(endMinute)") }
+            if endMinute.count == 1 {
+                Text("\(endHour):0\(endMinute)")
+            } else {
+                Text("\(endHour):\(endMinute)")
+            }
         }
     }
 }
