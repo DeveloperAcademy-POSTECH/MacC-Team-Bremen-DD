@@ -8,11 +8,14 @@
 import SwiftUI
 
 final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
+    @Binding var isShowingModal: Bool
+    @Binding var scheduleList: [Schedule]
+    
     @Published var isShowingConfirmButton = false
     
     // 어떻게 더 깔끔하게 짤 수 있을까요? enum을 사용하면 깔끔해질까요?
     @Published var sevenDays: [selectedDayModel] = [selectedDayModel(dayName: "월", isSelected: false), selectedDayModel(dayName: "화", isSelected: false), selectedDayModel(dayName: "수", isSelected: false), selectedDayModel(dayName: "목", isSelected: false), selectedDayModel(dayName: "금", isSelected: false), selectedDayModel(dayName: "토", isSelected: false), selectedDayModel(dayName: "일", isSelected: false)]
-//    @Published var pickedDays: [String] = []
+    
     @Published var startHour = "" {
         didSet {
             // TODO: 입력값이 24시간을 넘어가면 경고처리 하기
@@ -28,14 +31,30 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
     }
     @Published var endMinute = ""
     
+    init(isShowingModal: Binding<Bool>, scheduleList: Binding<[Schedule]>) {
+        self._isShowingModal = isShowingModal
+        self._scheduleList = scheduleList
+    }
+    
     func didTapDayPicker(index: Int) {
         sevenDays[index].isSelected.toggle()
         checkAllInputFilled()
     }
-
+    func didTapConfirmButton() {
+        appendScheduleToList()
+        dismissModal()
+    }
+    
 }
 
 extension WorkSpaceCreateCreatingScheduleViewModel {
+    
+    func appendScheduleToList() {
+        scheduleList.append(Schedule(repeatedSchedule: getDayList() ,startHour: startHour, startMinute: startMinute, endHour: endHour, endMinute: endMinute))
+    }
+    func dismissModal() {
+        isShowingModal = false
+    }
     func getDayList() -> [String] {
         var dayList: [String] = []
         for day in sevenDays {

@@ -24,7 +24,7 @@ extension WorkSpaceCreateScheduleListViewModel {
 }
 
 struct Schedule: Hashable{
-    var workDays: [String] = []
+    var repeatedSchedule: [String] = []
     var startHour: String = ""
     var startMinute: String = ""
     var endHour: String = ""

@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct WorkSpaceCreateCreatingScheduleView: View {
-    @ObservedObject var viewModel:  WorkSpaceCreateCreatingScheduleViewModel
-    @Binding var isShowingModal: Bool
-    @Binding var scheduleList: [Schedule]
+    @ObservedObject private var viewModel:  WorkSpaceCreateCreatingScheduleViewModel
+    
+    init(isShowingModal: Binding<Bool>, scheduleList: Binding<[Schedule]>) {
+        self.viewModel = WorkSpaceCreateCreatingScheduleViewModel(isShowingModal: isShowingModal, scheduleList: scheduleList)
+    }
     
     var body: some View {
         NavigationView {
@@ -40,7 +42,7 @@ private extension WorkSpaceCreateCreatingScheduleView {
     // 툴바 버튼들
     var toolbarCancelButton: some View {
         Button{
-            self.isShowingModal = false
+            viewModel.isShowingModal = false
         } label: {
             Text("취소")
             .foregroundColor(.fontLightGray)
@@ -48,9 +50,7 @@ private extension WorkSpaceCreateCreatingScheduleView {
     }
     var toolbarConfirmButton: some View {
         Button{
-            // TODO: 넣기 전 데이터를 가공하는게 필요함
-            scheduleList.append(Schedule(workDays: viewModel.getDayList() ,startHour: viewModel.startHour, startMinute: viewModel.endMinute, endHour: viewModel.endHour, endMinute: viewModel.endMinute))
-            self.isShowingModal = false
+            viewModel.didTapConfirmButton()
         } label: {
             Text("완료")
         }

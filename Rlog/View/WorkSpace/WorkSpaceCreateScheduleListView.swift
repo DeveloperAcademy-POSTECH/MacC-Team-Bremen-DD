@@ -32,7 +32,7 @@ private extension WorkSpaceCreateScheduleListView {
     @ViewBuilder
     func createScheduleListCell(for item: Schedule) -> some View {
         HStack(spacing: 0) {
-            ForEach(item.workDays,id: \.self) { day in
+            ForEach(item.repeatedSchedule,id: \.self) { day in
                 Text("\(day) ")
             }
             Spacer()
