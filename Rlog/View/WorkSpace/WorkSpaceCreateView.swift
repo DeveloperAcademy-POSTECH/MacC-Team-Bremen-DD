@@ -10,7 +10,6 @@ import SwiftUI
 
 struct WorkSpaceCreateView: View {
     @ObservedObject var viewModel = WorkSpaceCreateViewModel()
-    @State var writingState: WritingState = .hourlyWage
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
