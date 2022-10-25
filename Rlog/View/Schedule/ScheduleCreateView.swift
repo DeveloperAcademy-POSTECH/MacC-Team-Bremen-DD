@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ScheduleCreateView: View {
-    @ObservedObject var viewModel = ScheduleCreateViewModel()
+    @ObservedObject private var viewModel = ScheduleCreateViewModel()
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -43,7 +43,7 @@ struct ScheduleCreateView: View {
     }
 }
 
-extension ScheduleCreateView {
+private extension ScheduleCreateView {
     var workspace: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("근무지")
