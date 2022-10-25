@@ -66,10 +66,10 @@ extension ScheduleListView {
                         Spacer()
                         cellButton
                     }
-                    .padding(.bottom, -5)
+                    .padding(.bottom, -2)
                     .padding(.leading, 14)
                 }
-                .padding(20)
+                .padding()
             }
         }
         
@@ -103,6 +103,7 @@ extension ScheduleListView {
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
             }
+            .padding(.horizontal, 4)
         }
         
         var cellContent: some View {
