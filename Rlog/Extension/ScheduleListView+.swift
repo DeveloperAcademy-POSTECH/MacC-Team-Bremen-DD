@@ -124,28 +124,29 @@ extension ScheduleListView {
                 Button(action: {
                     // TODO: - 모달 구현
                 }, label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 11)
-                            .fill(Color(UIColor.systemGray5))
-                            .frame(width: 41, height: 22)
-                        Text("수정")
-                            .font(.footnote)
-                            .foregroundColor(Color.fontBlack)
-                    }
+                    Text("수정")
+                        .font(.footnote)
+                        .foregroundColor(Color.fontBlack)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 2)
+                        .background(
+                            Color(UIColor.systemGray5)
+                        )
+                        .cornerRadius(10)
                 })
                 if isShow {
                     Button(action: {
                         // TODO: - ViewModel에서 확인 로직 구현
                     }, label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 11)
-                            // TODO: - workspace에 맞는 컬러 수정
-                                .fill(Color("PointRed"))
-                                .frame(width: 41, height: 22)
-                            Text("확인")
-                                .font(.footnote)
-                                .foregroundColor(Color.white)
-                        }
+                        Text("확인")
+                            .font(.footnote)
+                            .foregroundColor(Color.white)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 2)
+                            .background(
+                                Color("PointRed")
+                            )
+                            .cornerRadius(10)
                     })
                 }
             }
