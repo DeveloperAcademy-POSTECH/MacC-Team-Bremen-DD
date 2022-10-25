@@ -29,6 +29,9 @@ struct WorkSpaceCreateScheduleListView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 if viewModel.isShowingConfirmButton {
                     toolbarConfirmButton
+                } else {
+                    // TODO: 뷰 연결하면서 navigation 될 때에 삭제해야함.
+                    Text("")
                 }
             }
         }
