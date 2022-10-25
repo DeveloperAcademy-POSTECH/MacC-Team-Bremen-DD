@@ -13,27 +13,56 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
     
     @Published var isShowingConfirmButton = false
     @Published var isShowingOverSingleDay = false
-    @Published var errorMessage = "ananan"
+    @Published var errorMessage = ""
     
     // 어떻게 더 깔끔하게 짤 수 있을까요? enum을 사용하면 깔끔해질까요?
     @Published var sevenDays: [selectedDayModel] = [selectedDayModel(dayName: "월", isSelected: false), selectedDayModel(dayName: "화", isSelected: false), selectedDayModel(dayName: "수", isSelected: false), selectedDayModel(dayName: "목", isSelected: false), selectedDayModel(dayName: "금", isSelected: false), selectedDayModel(dayName: "토", isSelected: false), selectedDayModel(dayName: "일", isSelected: false)]
     
     @Published var startHour = "" {
         didSet {
-            // TODO: 입력값이 24시간을 넘어가면 경고처리 하기
+            
+            if Int(startHour) ?? 0 > 24 {
+                startHour = oldValue
+                errorMessage = "24시간을 초과한 값을 넣을 수 없습니다."
+            } else {
+                errorMessage = ""
+            }
             checkAllInputFilled()
             checkIsOverSingleDay()
         }
     }
-    @Published var startMinute = ""
+    @Published var startMinute = "" {
+        didSet {
+            if Int(startMinute) ?? 0 > 59 {
+                startMinute = oldValue
+                errorMessage = "59분을 초과한 값을 넣을 수 없습니다."
+            } else {
+                errorMessage = ""
+            }
+        }
+    }
     @Published var endHour = "" {
         didSet {
-            // TODO: 입력값이 24시간을 넘어가면 경고처리 하기
+            if Int(endHour) ?? 0 > 24 {
+                endHour = oldValue
+                errorMessage = "24시간을 초과한 값을 넣을 수 없습니다."
+            } else {
+                errorMessage = ""
+            }
             checkAllInputFilled()
             checkIsOverSingleDay()
         }
     }
-    @Published var endMinute = ""
+    @Published var endMinute = "" {
+        didSet {
+            if Int(endMinute) ?? 0 > 59 {
+                endMinute = oldValue
+                errorMessage = "59분을 초과한 값을 넣을 수 없습니다."
+            } else {
+                errorMessage = ""
+            }
+        }
+    }
     
     init(isShowingModal: Binding<Bool>, scheduleList: Binding<[Schedule]>) {
         self._isShowingModal = isShowingModal

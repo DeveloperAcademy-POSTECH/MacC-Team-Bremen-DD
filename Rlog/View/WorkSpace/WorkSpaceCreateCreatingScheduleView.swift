@@ -106,7 +106,7 @@ private extension WorkSpaceCreateCreatingScheduleView {
             .foregroundColor(.fontBlack)
             Text(viewModel.errorMessage)
                 .font(.caption)
-                .foregroundColor(.fontLightGray)
+                .foregroundColor(.red)
         }
     }
 }
