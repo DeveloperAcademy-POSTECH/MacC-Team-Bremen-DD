@@ -5,10 +5,14 @@
 //  Created by 송시원 on 2022/10/17.
 //
 
-import SwiftUI
+import Foundation
 
-struct ScheduleUpdateViewModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+enum TimeUnit: String, CaseIterable {
+    case minusOneHour = "-1시간"
+    case minusHalfHour = "-30분"
+    case plusHalfHour = "+30분"
+    case plusOneHour = "+1시간"
 }
+
+class ScheduleUpdateViewModel: ObservableObject {}
+
