@@ -21,10 +21,9 @@ struct ScheduleListView: View {
             }
             .padding(.horizontal)
             
-            // TODO: - #888888 컬러 추가
             Rectangle()
-                .fill(LinearGradient(colors: [Color.clear, Color.fontLightGray], startPoint: .top, endPoint: .bottom))
-                .frame(height: 83)
+                .fill(LinearGradient(colors: [Color.clear, Color.gradientGray], startPoint: .top, endPoint: .bottom))
+                .frame(height: 68)
             
             StatusPicker(selectedScheduleCase: $viewModel.selectedScheduleCase)
                 .frame(width: 176, height: 40)

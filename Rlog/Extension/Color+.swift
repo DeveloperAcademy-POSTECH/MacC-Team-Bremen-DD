@@ -19,4 +19,6 @@ extension Color {
     static let fontLightGray = Color("Font_LightGray")
     static let background = Color("Background")
     static let cardBackground = Color("CardBackground")
+    static let gradientGray = Color("GradientGray")
+    static let strokeGray = Color("StrokeGray")
 }
