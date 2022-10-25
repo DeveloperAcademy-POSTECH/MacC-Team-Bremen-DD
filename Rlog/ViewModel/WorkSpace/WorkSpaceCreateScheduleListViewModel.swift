@@ -9,14 +9,19 @@ import SwiftUI
 
 final class WorkSpaceCreateScheduleListViewModel: ObservableObject {
     @Binding var isActive: Bool
-    init(isActive: Binding<Bool>) {
+    var workspaceDatas: CreatingWorkSpaceModel
+    
+    init(isActive: Binding<Bool>, workspaceData: CreatingWorkSpaceModel) {
         self._isActive = isActive
+        self.workspaceDatas = workspaceData
+        print(workspaceData)
+        
     }
     
     @Published var isShowingModal = false
     @Published var isDisabledNextButton = true
     
-    @Published var scheduleList: [Schedule] = [] {
+    @Published var scheduleList: [CreatingScheduleModel] = [] {
         didSet {
             if !scheduleList.isEmpty {
                 isDisabledNextButton = false
@@ -27,18 +32,13 @@ final class WorkSpaceCreateScheduleListViewModel: ObservableObject {
     func didTapAddScheduleButton() {
         showModal()
     }
+    func getScheduleData() -> [CreatingScheduleModel] {
+        return scheduleList
+    }
 }
 
 extension WorkSpaceCreateScheduleListViewModel {
     func showModal() {
         isShowingModal = true
     }
-}
-
-struct Schedule: Hashable{
-    var repeatedSchedule: [String] = []
-    var startHour: String = ""
-    var startMinute: String = ""
-    var endHour: String = ""
-    var endMinute: String = ""
 }

@@ -30,7 +30,7 @@ struct WorkSpaceCreateView: View {
             if !viewModel.isHiddenPayday {
                 VStack(alignment: .leading, spacing: 20)  {
                     Text("정산일")
-                    TextField("10", text: $viewModel.payday)
+                    TextField("10", text: $viewModel.paymentDay)
                 }
             }
             if !viewModel.isHiddenHourlyWage {
@@ -41,7 +41,7 @@ struct WorkSpaceCreateView: View {
             }
             VStack(alignment: .leading, spacing: 20)  {
                 Text("근무지")
-                TextField("예시) 편의점", text: $viewModel.workSpaceName)
+                TextField("예시) 편의점", text: $viewModel.name)
             }
             Spacer()
             if !viewModel.isHiddenConfirmButton {
@@ -55,7 +55,7 @@ struct WorkSpaceCreateView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 if !viewModel.isHiddenToolBarItem {
                     NavigationLink(
-                        destination: WorkSpaceCreateScheduleListView(isActive: $viewModel.isActive)) {
+                        destination: WorkSpaceCreateScheduleListView(isActive: $viewModel.isActive, workspaceData: viewModel.getData())) {
                             Text("다음")
                                 .foregroundColor(.fontBlack)
                         }
@@ -76,7 +76,7 @@ private extension WorkSpaceCreateView {
     }
     var toggleInputs: some View {
         VStack(spacing: 10) {
-            Toggle(isOn: $viewModel.isOnIncomeTax, label: {
+            Toggle(isOn: $viewModel.hasTax, label: {
                 HStack(alignment:.bottom) {
                     Text("소득세")
                     Text("3.3% 적용")
@@ -84,7 +84,7 @@ private extension WorkSpaceCreateView {
                         .foregroundColor(.fontLightGray)
                 }
             })
-            Toggle(isOn: $viewModel.isOnHolidayAllowance, label: {
+            Toggle(isOn: $viewModel.hasJuhyu, label: {
                 HStack(alignment:.bottom) {
                     Text("주휴수당")
                     Text("60시간 근무 시 적용")

@@ -9,8 +9,8 @@ import SwiftUI
 
 struct WorkSpaceCreateScheduleListView: View {
     @ObservedObject var viewModel: WorkSpaceCreateScheduleListViewModel
-    init(isActive: Binding<Bool>) {
-        self.viewModel = WorkSpaceCreateScheduleListViewModel(isActive: isActive)
+    init(isActive: Binding<Bool>, workspaceData: CreatingWorkSpaceModel) {
+        self.viewModel = WorkSpaceCreateScheduleListViewModel(isActive: isActive, workspaceData: workspaceData)
     }
     
     var body: some View {
@@ -38,7 +38,7 @@ struct WorkSpaceCreateScheduleListView: View {
 
 private extension WorkSpaceCreateScheduleListView {
     @ViewBuilder
-    func createScheduleListCell(for item: Schedule) -> some View {
+    func createScheduleListCell(for item: CreatingScheduleModel) -> some View {
         HStack(spacing: 0) {
             ForEach(item.repeatedSchedule,id: \.self) { day in
                 Text("\(day) ")
@@ -51,7 +51,7 @@ private extension WorkSpaceCreateScheduleListView {
         .clipShape(RoundedRectangle(cornerRadius: 10))
     }
     var toolbarNextButton: some View {
-        NavigationLink(destination: WorkSpaceCreateConfirmationView(isActive: $viewModel.isActive)) {
+        NavigationLink(destination:  WorkSpaceCreateConfirmationView(isActive: $viewModel.isActive, workspaceData: viewModel.workspaceDatas, scheduleData: viewModel.scheduleList)) {
                 Text("다음")
                     .foregroundColor(viewModel.isDisabledNextButton ? Color(red: 0.82, green: 0.82, blue: 0.839) : .fontBlack)
             }

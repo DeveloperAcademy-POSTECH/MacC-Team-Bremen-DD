@@ -28,16 +28,15 @@ final class WorkSpaceCreateViewModel: ObservableObject {
     @Published var isHiddenToggleInputs = true
 
     // 인풋값과 입력여부
-    @Published var isOnIncomeTax = false
-    @Published var isOnHolidayAllowance = false
-    @Published var workSpaceName = "" {
+    @Published var hasTax = false
+    @Published var hasJuhyu = false
+    @Published var name = "" {
         didSet {
-            if !workSpaceName.isEmpty {
+            if !name.isEmpty {
                 activateButton(inputState: .workSpace)
             } else {
                 inActivateButton(inputState: .workSpace)
             }
-            print(isActivatedConfirmButton)
         }
     }
     @Published var hourlyWage = "" {
@@ -47,12 +46,11 @@ final class WorkSpaceCreateViewModel: ObservableObject {
             } else {
                 inActivateButton(inputState: .hourlyWage)
             }
-            print(isActivatedConfirmButton)
         }
     }
-    @Published var payday = "" {
+    @Published var paymentDay = "" {
         didSet {
-            if !payday.isEmpty {
+            if !paymentDay.isEmpty {
                 activateButton(inputState: .payday)
             } else {
                 inActivateButton(inputState: .payday)
@@ -69,6 +67,9 @@ final class WorkSpaceCreateViewModel: ObservableObject {
 }
 
 extension WorkSpaceCreateViewModel {
+    func getData() -> CreatingWorkSpaceModel {
+        return CreatingWorkSpaceModel(name: name, paymentDay: paymentDay, hourlyWage: hourlyWage, hasTax: hasTax, hasJuhyu: hasJuhyu)
+    }
     func switchToNextStatus() {
         withAnimation(.easeIn) {
             switch currentState {

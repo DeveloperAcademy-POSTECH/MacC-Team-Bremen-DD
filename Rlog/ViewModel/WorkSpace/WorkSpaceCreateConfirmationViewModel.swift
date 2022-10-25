@@ -8,8 +8,14 @@ import SwiftUI
 
 final class WorkSpaceCreateConfirmationViewModel: ObservableObject {
     @Binding var isActive: Bool
-    init(isActive: Binding<Bool>) {
+    var workspaceData: CreatingWorkSpaceModel
+    var scheduleData: [CreatingScheduleModel]
+
+
+    init(isActive: Binding<Bool>, workspaceData: CreatingWorkSpaceModel, scheduleData: [CreatingScheduleModel]) {
         self._isActive = isActive
+        self.workspaceData = workspaceData
+        self.scheduleData = scheduleData
     }
 
     let hasTax = false
