@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+// TODO: 완료 Button isActive 기능 추가하기
+// TODO: 근무지 삭제 Alert 구현
+// TODO: Schedule 추가하기
+
 enum WorkSpaceDetailInfo: CaseIterable {
     case hasTax
     case hasJuhyu
