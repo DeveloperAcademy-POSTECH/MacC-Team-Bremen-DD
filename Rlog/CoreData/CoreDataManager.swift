@@ -108,6 +108,7 @@ extension CoreDataManager {
         workday.startTime = startTime
         workday.endTime = endTime
         workday.spentHour = spentHour
+        workday.hasDone = false
         save()
     }
 
@@ -129,7 +130,7 @@ extension CoreDataManager {
         return result ?? []
     }
 
-    func editWorkday(of workday: WorkDayEntity, weekDay: Int16, yearInt: Int16, monthInt: Int16, dayInt: Int16, startTime: String, endTime: String, spentHour: Int16) {
+    func editWorkday(of workday: WorkDayEntity, weekDay: Int16, yearInt: Int16, monthInt: Int16, dayInt: Int16, startTime: String, endTime: String, spentHour: Int16, hasDone: Bool) {
         workday.weekDay = weekDay
         workday.yearInt = yearInt
         workday.monthInt = monthInt
@@ -137,6 +138,7 @@ extension CoreDataManager {
         workday.startTime = startTime
         workday.endTime = endTime
         workday.spentHour = spentHour
+        workday.hasDone = hasDone
         save()
     }
 

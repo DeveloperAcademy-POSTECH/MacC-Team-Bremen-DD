@@ -12,6 +12,7 @@
     <entity name="WorkDayEntity" representedClassName="WorkDayEntity" syncable="YES">
         <attribute name="dayInt" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="endTime" attributeType="String"/>
+        <attribute name="hasDone" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="monthInt" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="spentHour" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
