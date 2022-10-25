@@ -17,7 +17,7 @@ struct WorkSpaceListView: View {
         NavigationView {
             ScrollView {
                 ForEach(viewModel.workspaces, id: \.self) { workspace in
-                    WorkSpaceCell(workspace: workspace)
+                    makeWorkspaceCell(workspace: workspace)
                 }
             }
             .padding(.top, 32)
@@ -54,12 +54,11 @@ extension WorkSpaceListView {
 
     @ViewBuilder
     func makeWorkspaceCell(workspace: WorkspaceEntity) -> some View {
-        NavigationLink(
-            destination: {
-                WorkSpaceDetailView(workspace: workspace)
-            },
-            label: { makeWorkSpaceCardContent(workspace: workspace) }
-        )
+        NavigationLink {
+            WorkSpaceDetailView(workspace: workspace)
+        } label: {
+            makeWorkSpaceCardContent(workspace: workspace)
+        }
     }
 
     @ViewBuilder

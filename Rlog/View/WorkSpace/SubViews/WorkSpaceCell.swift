@@ -29,14 +29,11 @@ struct WorkSpaceCell: View {
     var workspace: WorkspaceEntity
     
     var body: some View {
-        NavigationLink(
-            destination: {
-                WorkSpaceDetailView(workspace: workspace)
-            },
-            label: {
-                makeWorkSpaceCardContent(workspace: workspace)
-            }
-        )
+        NavigationLink {
+            WorkSpaceDetailView(workspace: workspace)
+        } label: {
+            makeWorkSpaceCardContent(workspace: workspace)
+        }
     }
 }
 
@@ -52,7 +49,6 @@ private extension WorkSpaceCell {
                 .foregroundColor(.fontBlack)
         }
         .padding(.bottom, 20)
-
     }
     
     func makeWorkSpaceCardContent(workspace: WorkspaceEntity) -> some View {
