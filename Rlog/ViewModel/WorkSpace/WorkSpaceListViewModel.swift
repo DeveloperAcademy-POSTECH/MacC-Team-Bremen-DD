@@ -10,6 +10,7 @@ import Foundation
 
 final class WorkSpaceListViewModel: ObservableObject {
     @Published var workspaces: [WorkspaceEntity] = []
+    @Published var schedules: [ScheduleEntity] = []
     @Published var isShowingSheet = false
 
     init() {
@@ -20,16 +21,15 @@ final class WorkSpaceListViewModel: ObservableObject {
         isShowingSheet = true
     }
 
-    func didDismissed() {
+    func didRecieveNotification() {
         getAllWorkspaces()
     }
 }
 
 extension WorkSpaceListViewModel {
 
-   private func getAllWorkspaces() {
+    private func getAllWorkspaces() {
         let result = CoreDataManager.shared.getAllWorkspaces()
-
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.workspaces = result

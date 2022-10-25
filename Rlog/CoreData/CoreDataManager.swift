@@ -63,7 +63,6 @@ extension CoreDataManager {
         workspace.colorString = colorString
         workspace.hasTax = hasTax
         workspace.hasJuhyu = hasJuhyu
-        print(name)
         save()
     }
 

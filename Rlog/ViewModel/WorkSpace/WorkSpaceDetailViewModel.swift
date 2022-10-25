@@ -24,8 +24,6 @@ final class WorkSpaceDetailViewModel: ObservableObject {
         hasTax = workspace.hasTax
         hasJuhyu = workspace.hasJuhyu
         self.workspace = workspace
-        print(hasTax)
-        print(hasJuhyu)
     }
 
     func didTapCompleteButton(completion: @escaping (() -> Void)) {

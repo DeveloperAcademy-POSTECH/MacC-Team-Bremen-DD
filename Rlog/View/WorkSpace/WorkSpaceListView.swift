@@ -17,7 +17,7 @@ struct WorkSpaceListView: View {
         NavigationView {
             ScrollView {
                 ForEach(viewModel.workspaces, id: \.self) { workspace in
-                    makeWorkspaceCell(workspace: workspace)
+                    WorkSpaceCell(workspace: workspace)
                 }
             }
             .padding(.top, 32)
@@ -40,6 +40,13 @@ struct WorkSpaceListView: View {
                 Text("Hello")
             }
         }
+        .onReceive(
+            NotificationCenter.default.publisher(for: NSNotification.disMiss)
+        ) {
+            obj in
+            viewModel.didRecieveNotification()
+        }
+
     }
 }
 
@@ -49,9 +56,7 @@ extension WorkSpaceListView {
     func makeWorkspaceCell(workspace: WorkspaceEntity) -> some View {
         NavigationLink(
             destination: {
-                WorkSpaceDetailView(workspace: workspace) {
-                    viewModel.didDismissed()
-                }
+                WorkSpaceDetailView(workspace: workspace)
             },
             label: { makeWorkSpaceCardContent(workspace: workspace) }
         )
@@ -82,9 +87,9 @@ extension WorkSpaceListView {
                             .font(.subheadline)
                             .foregroundColor(.fontLightGray)
                         Spacer()
-//                        Text( model.getValue(info: tab))
-//                            .font(.subheadline)
-//                            .foregroundColor(.fontBlack)
+                        //                        Text( model.getValue(info: tab))
+                        //                            .font(.subheadline)
+                        //                            .foregroundColor(.fontBlack)
                     }
                 }
             }

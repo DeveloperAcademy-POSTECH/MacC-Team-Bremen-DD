@@ -26,11 +26,9 @@ enum WorkSpaceDetailInfo: CaseIterable {
 struct WorkSpaceDetailView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel: WorkSpaceDetailViewModel
-    var action: () -> Void
 
-    init(workspace: WorkspaceEntity, action: @escaping () -> Void) {
+    init(workspace: WorkspaceEntity) {
         viewModel = WorkSpaceDetailViewModel(workspace: workspace)
-        self.action = action
     }
 
     var body: some View {
@@ -60,8 +58,8 @@ struct WorkSpaceDetailView: View {
             HDivider()
             StrokeButton(label: "근무지 삭제하기", buttonType: .destructive) {
                 viewModel.didTapDeleteButton() {
+                    NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
                     dismiss()
-                    action()
                 }
             }
             Spacer()
@@ -72,7 +70,6 @@ struct WorkSpaceDetailView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {
                     dismiss()
-                    action()
                 }){
                     Image(systemName: "chevron.left")
                         .foregroundColor(.fontBlack)
@@ -85,7 +82,7 @@ struct WorkSpaceDetailView: View {
                 Button(action: {
                     viewModel.didTapCompleteButton {
                         dismiss()
-                        action()
+                        NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
                     }
                 }){
                     Text("완료")
@@ -99,6 +96,7 @@ struct WorkSpaceDetailView: View {
 }
 
 private extension WorkSpaceDetailView {
+    @ViewBuilder
     func makePaymentSystemToggle() -> some View {
         ForEach(WorkSpaceDetailInfo.allCases, id: \.self) { tab in
             Toggle(isOn: tab == .hasTax ? $viewModel.hasTax : $viewModel.hasJuhyu, label: {

@@ -31,12 +31,11 @@ struct WorkSpaceCell: View {
     var body: some View {
         NavigationLink(
             destination: {
-                WorkSpaceDetailView(workspace: workspace) {
-
-                }
-
+                WorkSpaceDetailView(workspace: workspace)
             },
-            label: { makeWorkSpaceCardContent(workspace: workspace) }
+            label: {
+                makeWorkSpaceCardContent(workspace: workspace)
+            }
         )
     }
 }
@@ -51,12 +50,23 @@ private extension WorkSpaceCell {
                 .font(.callout)
                 .fontWeight(.bold)
                 .foregroundColor(.fontBlack)
-        }.padding(.bottom, 20)
+        }
+        .padding(.bottom, 20)
+
     }
     
     func makeWorkSpaceCardContent(workspace: WorkspaceEntity) -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            makeWorkSpaceCardHeader(workTitle: workspace.name, workTagColor: workspace.colorString)
+            HStack(alignment: .center){
+                Rectangle()
+                    .foregroundColor(Color(workspace.colorString))
+                    .frame(width: 3, height: 17)
+                Text(workspace.name)
+                    .font(.callout)
+                    .fontWeight(.bold)
+                    .foregroundColor(.fontBlack)
+            }
+            .padding(.bottom, 20)
             
             VStack(spacing: 8){
                 ForEach(WorkSpaceInfo.allCases, id: \.self) { tab in
