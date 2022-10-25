@@ -27,6 +27,10 @@ struct WorkSpaceCreateConfirmationView: View {
                 }
             }
         }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                toolbarConfirmButton
+            }
         }
         .padding()
     }
@@ -44,6 +48,13 @@ private extension WorkSpaceCreateConfirmationView {
                 .frame(height: 54)
         }
     }
+    var toolbarConfirmButton: some View {
+            Button{
+                viewModel.didTapConfirmButton()
+            } label: {
+                Text("완료")
+            }
+        }
 }
 
 struct WorkSpaceCreateConfirmationView_Previews: PreviewProvider {

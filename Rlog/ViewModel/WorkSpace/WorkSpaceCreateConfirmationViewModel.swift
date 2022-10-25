@@ -10,6 +10,10 @@ import SwiftUI
 final class WorkSpaceCreateConfirmationViewModel: ObservableObject {
     let hasTax = false
     let hasJuhyu = false
+    func didTapConfirmButton() {
+        popToRoot()
+        writeCoredata()
+    }
 }
 extension WorkSpaceCreateConfirmationViewModel {
     func popToRoot() {
