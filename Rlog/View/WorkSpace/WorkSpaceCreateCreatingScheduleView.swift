@@ -12,8 +12,6 @@ struct WorkSpaceCreateCreatingScheduleView: View {
     @Binding var isShowingModal: Bool
     @Binding var scheduleList: [Schedule]
     
-    
-    
     var body: some View {
         NavigationView {
             VStack(alignment: .leading, spacing: 40) {
