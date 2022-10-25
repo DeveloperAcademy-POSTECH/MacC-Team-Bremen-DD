@@ -38,10 +38,11 @@ struct WorkSpaceDetailView: View {
 
             makePaymentSystemToggle()
             
-                Text("근무 유형")
+                Text("근무일정")
                     .font(.subheadline)
                     .foregroundColor(.fontLightGray)
                 Spacer()
+
             
             Rectangle() //근무유형
                 .foregroundColor(.primary)
