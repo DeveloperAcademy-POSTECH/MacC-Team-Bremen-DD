@@ -30,10 +30,19 @@ struct ScheduleListView: View {
                 .frame(width: 176, height: 40)
                 .padding(.bottom)
         }
+        .background(
+           background
+        )
     }
 }
 
 private extension ScheduleListView {
+    var background: some View {
+        Rectangle()
+            .fill(Color.cardBackground)
+            .edgesIgnoringSafeArea(.top)
+    }
+    
     var header: some View {
         HStack(spacing: 0) {
             Image(systemName: "chevron.backward")
@@ -52,11 +61,21 @@ private extension ScheduleListView {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 0) {
                 scheduleListHeader
-                // TODO: - 리스트 cell 구현
+                // TODO: - ScheduleCreateView로 연결
+                Button(action: {}, label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.white)
+                            .frame(height: 97)
+                        Image(systemName: "plus")
+                            .font(.title)
+                            .fontWeight(.semibold)
+                            .foregroundColor(Color.primary)
+                    }
+                })
+                .padding(.top)
                 ForEach(0..<3) { index in
-                    RoundedRectangle(cornerRadius: 10)
-                        .frame(height: 97)
-                        .foregroundColor(viewModel.selectedScheduleCase == .upcoming ? Color.green : Color.red)
+                    ScheduleCell()
                 }
                 .padding(.top)
             }
