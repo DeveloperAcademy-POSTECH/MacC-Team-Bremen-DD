@@ -48,4 +48,108 @@ extension ScheduleListView {
             }
         }
     }
+    
+    struct ScheduleCell: View {
+        // TODO: - 근무지 모델 만들어서, ScheduleCell view model을 만들고, 거기서 값을 가져오는 방법을 사용할 예정
+        var isShow = true
+        
+        var body: some View {
+            // TODO: - 조건에 따른 색깔 처리(ViewModel 예정)
+            VStack(spacing: 0) {
+                cellHeader
+                Spacer()
+                HStack(alignment: .bottom, spacing: 0) {
+                    // TODO: - 시작 시간, 끝난 시간 처리
+                    cellContent
+                    Spacer()
+                    cellButton
+                }
+                .padding(EdgeInsets(top: 0, leading: 14, bottom: -2, trailing: 0))
+            }
+            .padding()
+            .frame(height: 97)
+            .background(
+                backgroundRectangle
+            )
+        }
+        
+        var backgroundRectangle: some View {
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    // TODO: - view model에서 처리
+                    .fill(isShow ? Color("PointRed") : .white)
+                    .frame(height: 97)
+                RoundedRectangle(cornerRadius: 9)
+                    .fill(Color.white)
+                    .padding(1)
+            }
+        }
+        
+        var cellHeader: some View {
+            HStack(spacing: 0) {
+                Rectangle()
+                    .fill(Color("PointRed"))
+                    .frame(width: 3, height: 17)
+                // TODO: - 근무지명 받아오기
+                Text("제이든의 낚시교실")
+                    .font(.callout)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.fontBlack)
+                    .padding(.leading, 3)
+                Spacer()
+                // TODO: - 근무 시간 받아오기
+                Text("\(4)시간")
+                    .font(.subheadline)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.fontBlack)
+            }
+            .padding(.horizontal, 4)
+        }
+        
+        var cellContent: some View {
+            VStack(alignment: .leading, spacing: 0) {
+                // TODO: - 요일 처리
+                Text("\(10)월 \(8)일 금요일")
+                    .font(.caption)
+                    .foregroundColor(Color.fontBlack)
+                // TODO: - 시간 처리, Int로 저장된 값을 String 두 단어로 처리하는 것은 찾아봐야 함
+                Text("17시 00분 ~ 21시 00분")
+                    .font(.caption2)
+                    .foregroundColor(Color.fontLightGray)
+            }
+        }
+        
+        var cellButton: some View {
+            HStack(spacing: 11) {
+                Button(action: {
+                    // TODO: - 모달 구현
+                }, label: {
+                    Text("수정")
+                        .font(.footnote)
+                        .foregroundColor(Color.fontBlack)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 2)
+                        .background(
+                            Color(UIColor.systemGray5)
+                        )
+                        .cornerRadius(10)
+                })
+                if isShow {
+                    Button(action: {
+                        // TODO: - ViewModel에서 확인 로직 구현
+                    }, label: {
+                        Text("확인")
+                            .font(.footnote)
+                            .foregroundColor(Color.white)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 2)
+                            .background(
+                                Color("PointRed")
+                            )
+                            .cornerRadius(10)
+                    })
+                }
+            }
+        }
+    }
 }
