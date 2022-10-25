@@ -56,6 +56,7 @@ struct WorkSpaceDetailView: View {
                 .frame(maxWidth: .infinity, maxHeight: 54)
             Spacer()
         }
+        .navigationTitle("근무수정") 
         .padding(.horizontal)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
