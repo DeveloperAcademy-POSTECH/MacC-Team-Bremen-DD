@@ -111,11 +111,3 @@ enum WritingState: Int {
         }
     }
 }
-
-//struct WorkSpaceInfo {
-//    var workSpaceName: String
-//    var hourlyWage: Int?
-//    var payday: Int
-//    var incomeTax: Bool
-//    var holidayAllowance: Bool
-//}
