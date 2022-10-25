@@ -47,7 +47,7 @@ private extension ScheduleListView {
         HStack(spacing: 0) {
             Image(systemName: "chevron.backward")
             // TODO: - 연도와 월 받아오기
-            Text("2022.10")
+            Text(viewModel.yearAndMonth)
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(Color.fontBlack)

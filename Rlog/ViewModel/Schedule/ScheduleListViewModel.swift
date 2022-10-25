@@ -14,6 +14,7 @@ enum ScheduleCase: String, CaseIterable {
 
 final class ScheduleListViewModel: ObservableObject {
     @Published var selectedScheduleCase: ScheduleCase = .upcoming
+    let yearAndMonth: String = Date().fetchYearAndMonth()
 }
 
 final class StatusPickerViewModel: ObservableObject {
