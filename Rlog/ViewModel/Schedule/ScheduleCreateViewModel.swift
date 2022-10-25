@@ -9,9 +9,6 @@ import Foundation
 import SwiftUI
 
 final class ScheduleCreateViewModel: ObservableObject {
-    // TODO: - 현재 가지고 있는 workspace 받아오기
-    let workspaces = ["제이든의 낚시 교실", "GS25 포항공대점", "제이든의 낚시 교실"]
-    
     @Published var startHourText: String = ""
     @Published var startMinuteText: String = ""
     @Published var endHourText: String = ""
@@ -19,8 +16,18 @@ final class ScheduleCreateViewModel: ObservableObject {
     @Published var workspaceFlags: [Bool]
     @Published var reason = ""
     
-    var confirmButtonForegroundColor: Color {
+    // TODO: - 현재 가지고 있는 workspace 받아오기
+    let workspaces = ["제이든의 낚시 교실", "GS25 포항공대점", "제이든의 낚시 교실"]
+    private var isEmpty: Bool {
         if startHourText != "" && startMinuteText != "" && endHourText != "" && endMinuteText != "" {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    var confirmButtonForegroundColor: Color {
+        if isEmpty {
             return Color.primary
         } else {
             return Color.fontLightGray
