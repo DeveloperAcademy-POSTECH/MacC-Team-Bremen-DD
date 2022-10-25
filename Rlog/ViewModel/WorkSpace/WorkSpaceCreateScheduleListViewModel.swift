@@ -14,17 +14,13 @@ final class WorkSpaceCreateScheduleListViewModel: ObservableObject {
     }
     
     @Published var isShowingModal = false
-    @Published var isShowingConfirmButton = false
+    @Published var isDisabledNextButton = true
     
     @Published var scheduleList: [Schedule] = [] {
         didSet {
             if !scheduleList.isEmpty {
-                isShowingConfirmButton = true
+                isDisabledNextButton = false
             }
-            print("변경됨")
-            isShowingConfirmButton = true
-            print(isShowingConfirmButton)
-
         }
     }
     

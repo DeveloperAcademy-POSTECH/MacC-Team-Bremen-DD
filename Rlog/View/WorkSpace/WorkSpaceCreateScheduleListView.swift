@@ -30,12 +30,7 @@ struct WorkSpaceCreateScheduleListView: View {
         .padding(.horizontal)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                if viewModel.isShowingConfirmButton {
-                    toolbarConfirmButton
-                } else {
-                    // TODO: 뷰 연결하면서 navigation 될 때에 삭제해야함.
-                    Text("")
-                }
+                    toolbarNextButton
             }
         }
     }
@@ -60,10 +55,7 @@ private extension WorkSpaceCreateScheduleListView {
                 Text("다음")
                     .foregroundColor(viewModel.isDisabledNextButton ? Color(red: 0.82, green: 0.82, blue: 0.839) : .fontBlack)
             }
-    }
-    var guidingText: some View {
-        Text("근무 일정을 입력해주세요.")
-            .padding(.vertical, 20)
+            .disabled(viewModel.isDisabledNextButton)
     }
     var labelText: some View {
         Text("근무 유형")
