@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21279" systemVersion="21G115" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ScheduleEntity" representedClassName="ScheduleEntity" syncable="YES">
-        <attribute name="endTime" attributeType="String"/>
+        <attribute name="endHour" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="endMinute" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="repeatedSchedule" attributeType="Transformable" customClassName="[String]"/>
         <attribute name="spentHour" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="startTime" attributeType="String"/>
+        <attribute name="startHour" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="startMinute" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="workspace" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkspaceEntity" inverseName="schedules" inverseEntity="WorkspaceEntity"/>
     </entity>
     <entity name="WorkDayEntity" representedClassName="WorkDayEntity" syncable="YES">
