@@ -12,11 +12,11 @@ enum ScheduleCase: String, CaseIterable {
     case past = "지나간 일정"
 }
 
-class ScheduleListViewModel: ObservableObject {
+final class ScheduleListViewModel: ObservableObject {
     @Published var selectedScheduleCase: ScheduleCase = .upcoming
 }
 
-class StatusPickerViewModel: ObservableObject {
+final class StatusPickerViewModel: ObservableObject {
     @Binding var selectedScheduleCase: ScheduleCase
     let scheduleCases = ScheduleCase.allCases
     var statusPickerOffset: CGFloat {
