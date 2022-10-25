@@ -16,8 +16,10 @@ extension ScheduleEntity {
     }
 
     @NSManaged public var repeatedSchedule: [String]
-    @NSManaged public var startTime: String
-    @NSManaged public var endTime: String
+    @NSManaged public var startHour: Int16
+    @NSManaged public var startMinute: Int16
+    @NSManaged public var endHour: Int16
+    @NSManaged public var endMinute: Int16
     @NSManaged public var spentHour: Int16
     @NSManaged public var workspace: WorkspaceEntity
 
