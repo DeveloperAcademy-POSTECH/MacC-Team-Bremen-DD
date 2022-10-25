@@ -10,8 +10,9 @@ import SwiftUI
 struct HDivider: View {
     var body: some View {
         Rectangle()
-            .foregroundColor(.fontLightGray)
-            .frame(maxWidth: .infinity, maxHeight: 1.5)
+        // TODO: systemGray 적용 필요
+            .foregroundColor(.gray)
+            .frame(maxWidth: .infinity, maxHeight: 1)
             .padding(.vertical)
     }
 }
