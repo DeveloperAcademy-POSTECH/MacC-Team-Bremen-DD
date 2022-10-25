@@ -8,6 +8,11 @@
 import SwiftUI
 
 final class WorkSpaceCreateScheduleListViewModel: ObservableObject {
+    @Binding var isActive: Bool
+    init(isActive: Binding<Bool>) {
+        self._isActive = isActive
+    }
+    
     @Published var isShowingModal = false
     @Published var isShowingConfirmButton = false
     

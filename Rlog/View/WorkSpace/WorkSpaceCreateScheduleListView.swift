@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct WorkSpaceCreateScheduleListView: View {
-    @ObservedObject var viewModel = WorkSpaceCreateScheduleListViewModel()
+    @ObservedObject var viewModel: WorkSpaceCreateScheduleListViewModel
+    init(isActive: Binding<Bool>) {
+        self.viewModel = WorkSpaceCreateScheduleListViewModel(isActive: isActive)
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {

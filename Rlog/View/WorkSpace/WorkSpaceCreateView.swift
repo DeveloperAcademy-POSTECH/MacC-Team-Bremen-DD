@@ -9,7 +9,10 @@ import SwiftUI
 
 
 struct WorkSpaceCreateView: View {
-    @ObservedObject var viewModel = WorkSpaceCreateViewModel()
+    @ObservedObject var viewModel: WorkSpaceCreateViewModel
+    init(isActive: Binding<Bool>) {
+        self.viewModel = WorkSpaceCreateViewModel(isActive: isActive)
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -52,12 +55,10 @@ struct WorkSpaceCreateView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 if !viewModel.isHiddenToolBarItem {
                     NavigationLink(
-                        destination: Rectangle()) {
+                        destination: WorkSpaceCreateScheduleListView(isActive: $viewModel.isActive)) {
                             Text("다음")
                                 .foregroundColor(.fontBlack)
                         }
-                } else {
-                    Text("")
                 }
             }
         }

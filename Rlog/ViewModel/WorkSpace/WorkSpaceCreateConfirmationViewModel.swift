@@ -7,6 +7,11 @@
 import SwiftUI
 
 final class WorkSpaceCreateConfirmationViewModel: ObservableObject {
+    @Binding var isActive: Bool
+    init(isActive: Binding<Bool>) {
+        self._isActive = isActive
+    }
+
     let hasTax = false
     let hasJuhyu = false
     func didTapConfirmButton() {
@@ -16,7 +21,7 @@ final class WorkSpaceCreateConfirmationViewModel: ObservableObject {
 }
 extension WorkSpaceCreateConfirmationViewModel {
     func popToRoot() {
-        //https://stackoverflow.com/questions/57334455/how-can-i-pop-to-the-root-view-using-swiftui
+        isActive = false
     }
     func writeCoredata() {
         // 코어데이터에 저장하는 함수를 구현

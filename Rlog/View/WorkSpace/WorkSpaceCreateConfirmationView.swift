@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct WorkSpaceCreateConfirmationView: View {
-    @ObservedObject private var viewModel = WorkSpaceCreateConfirmationViewModel()
-
+    @ObservedObject private var viewModel: WorkSpaceCreateConfirmationViewModel
+    
+    init(isActive: Binding<Bool>) {
+        self.viewModel = WorkSpaceCreateConfirmationViewModel(isActive: isActive)
+    }
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             TitleSubView(title: "새로운 아르바이트를 추가합니다.")

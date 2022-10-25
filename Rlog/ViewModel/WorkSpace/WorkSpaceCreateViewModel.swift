@@ -10,6 +10,11 @@ import SwiftUI
 
 
 final class WorkSpaceCreateViewModel: ObservableObject {
+    @Binding var isActive: Bool
+    init(isActive: Binding<Bool>) {
+        self._isActive = isActive
+    }
+    
     // 뷰 상태, 버튼 활성화 여부
     @Published var currentState: WritingState = .workSpace
     @Published var isActivatedConfirmButton: Bool = false
