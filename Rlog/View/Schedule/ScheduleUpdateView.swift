@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ScheduleUpdateView: View {
     @ObservedObject var viewModel = ScheduleUpdateViewModel()
-    @State var reason = ""
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -24,6 +24,22 @@ struct ScheduleUpdateView: View {
             Spacer()
         }
         .padding(.horizontal)
+        .navigationTitle("일정 수정하기")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: { dismiss() }, label: {
+                    Text("취소")
+                        .foregroundColor(Color.fontLightGray)
+                })
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {}, label: {
+                    Text("완료")
+                        .foregroundColor(Color.primary)
+                })
+            }
+        }
     }
 }
 
@@ -93,7 +109,7 @@ extension ScheduleUpdateView {
                 .foregroundColor(Color.fontLightGray)
             
             // TODO: - 컴포넌트 텍스트필드로 변경
-            TextField("사유를 입력해주세요.", text: $reason)
+            TextField("사유를 입력해주세요.", text: $viewModel.reason)
                 .frame(height: 40)
                 .padding(.top)
         }

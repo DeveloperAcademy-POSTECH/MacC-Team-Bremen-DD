@@ -61,7 +61,9 @@ private extension ScheduleListView {
             LazyVStack(alignment: .leading, spacing: 0) {
                 scheduleListHeader
                 // TODO: - ScheduleCreateView로 연결
-                Button(action: {}, label: {
+                Button(action: {
+                    viewModel.isShowCreateModal.toggle()
+                }, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(.white)
@@ -73,6 +75,11 @@ private extension ScheduleListView {
                     }
                 })
                 .padding(.top)
+                .sheet(isPresented: $viewModel.isShowCreateModal) {
+                    NavigationView {
+                        ScheduleCreateView()
+                    }
+                }
                 ForEach(0..<3) { index in
                     ScheduleCell()
                 }

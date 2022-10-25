@@ -14,5 +14,7 @@ enum TimeUnit: String, CaseIterable {
     case plusOneHour = "+1시간"
 }
 
-class ScheduleUpdateViewModel: ObservableObject {}
+class ScheduleUpdateViewModel: ObservableObject {
+    @Published var reason = ""
+}
 

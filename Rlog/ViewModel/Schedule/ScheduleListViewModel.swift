@@ -14,6 +14,7 @@ enum ScheduleCase: String, CaseIterable {
 
 final class ScheduleListViewModel: ObservableObject {
     @Published var selectedScheduleCase: ScheduleCase = .upcoming
+    @Published var isShowCreateModal = false
     let yearAndMonth: String = Date().fetchYearAndMonth()
 }
 
@@ -35,4 +36,9 @@ final class StatusPickerViewModel: ObservableObject {
     func getStatusPickerForegroundColor(compareCase: ScheduleCase) -> Color {
         return selectedScheduleCase == compareCase ? .white : Color.fontLightGray
     }
+}
+
+final class ScheduleCellViewModel: ObservableObject {
+    @Published var isShowUpdateModal = false
+    @Published var isShowConfirmButton = true
 }

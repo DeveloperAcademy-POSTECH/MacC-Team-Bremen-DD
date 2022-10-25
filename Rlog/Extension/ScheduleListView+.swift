@@ -50,8 +50,7 @@ extension ScheduleListView {
     }
     
     struct ScheduleCell: View {
-        // TODO: - 근무지 모델 만들어서, ScheduleCell view model을 만들고, 거기서 값을 가져오는 방법을 사용할 예정
-        var isShow = true
+        @ObservedObject private var viewModel = ScheduleCellViewModel()
         
         var body: some View {
             // TODO: - 조건에 따른 색깔 처리(ViewModel 예정)
@@ -77,7 +76,7 @@ extension ScheduleListView {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
                     // TODO: - view model에서 처리
-                    .fill(isShow ? Color("PointRed") : .white)
+                    .fill(viewModel.isShowConfirmButton ? Color("PointRed") : .white)
                     .frame(height: 97)
                 RoundedRectangle(cornerRadius: 9)
                     .fill(Color.white)
@@ -122,7 +121,7 @@ extension ScheduleListView {
         var cellButton: some View {
             HStack(spacing: 11) {
                 Button(action: {
-                    // TODO: - 모달 구현
+                    viewModel.isShowUpdateModal.toggle()
                 }, label: {
                     Text("수정")
                         .font(.footnote)
@@ -134,7 +133,12 @@ extension ScheduleListView {
                         )
                         .cornerRadius(10)
                 })
-                if isShow {
+                .sheet(isPresented: $viewModel.isShowUpdateModal) {
+                    NavigationView {
+                        ScheduleUpdateView()
+                    }
+                }
+                if viewModel.isShowConfirmButton {
                     Button(action: {
                         // TODO: - ViewModel에서 확인 로직 구현
                     }, label: {
