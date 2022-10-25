@@ -12,6 +12,10 @@ struct ScheduleListView: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
+            Rectangle()
+                .fill(Color.cardBackground)
+                .edgesIgnoringSafeArea(.top)
+            
             VStack(spacing: 0) {
                 header
                     .padding(.top, 32)
@@ -52,11 +56,8 @@ private extension ScheduleListView {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 0) {
                 scheduleListHeader
-                // TODO: - 리스트 cell 구현
                 ForEach(0..<3) { index in
-                    RoundedRectangle(cornerRadius: 10)
-                        .frame(height: 97)
-                        .foregroundColor(viewModel.selectedScheduleCase == .upcoming ? Color.green : Color.red)
+                    ScheduleCell()
                 }
                 .padding(.top)
             }
