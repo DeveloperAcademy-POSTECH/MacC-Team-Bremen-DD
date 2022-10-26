@@ -56,6 +56,16 @@ extension CoreDataManager {
         return result ?? []
     }
 
+    func editWorkspace(workspace: WorkspaceEntity, name: String, hourlyWage: Int16, paymentDay: Int16, colorString: String, hasTax: Bool, hasJuhyu: Bool) {
+        workspace.name = name
+        workspace.paymentDay = paymentDay
+        workspace.hourlyWage = hourlyWage
+        workspace.colorString = colorString
+        workspace.hasTax = hasTax
+        workspace.hasJuhyu = hasJuhyu
+        save()
+    }
+
     func deleteWorkspace(workspace: WorkspaceEntity) {
         context.delete(workspace)
         save()

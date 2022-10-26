@@ -110,7 +110,6 @@ private extension WorkSpaceCreateView {
     var ConfirmButton: some View {
         // -------> TODO: 컨포넌트로 대체
         Button {
-            print(viewModel.currentState.rawValue)
             viewModel.didTapConfirmButton()
         } label: {
             ZStack {

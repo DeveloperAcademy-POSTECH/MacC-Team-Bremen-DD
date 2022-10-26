@@ -5,10 +5,43 @@
 //  Created by 송시원 on 2022/10/17.
 //
 
-import SwiftUI
+import Combine
+import Foundation
 
-struct WorkSpaceListViewModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+final class WorkSpaceListViewModel: ObservableObject {
+    @Published var workspaces: [WorkspaceEntity] = []
+    @Published var schedules: [ScheduleEntity] = []
+    @Published var isShowingSheet = false
+
+    init() {
+        getAllWorkspaces()
+//        createMockData()
+    }
+
+    func didTapPlusButton() {
+        isShowingSheet = true
+    }
+
+    func didRecieveNotification() {
+        getAllWorkspaces()
+    }
+}
+
+private extension WorkSpaceListViewModel {
+
+    func getAllWorkspaces() {
+        let result = CoreDataManager.shared.getAllWorkspaces()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.workspaces = result
+        }
+    }
+
+    func createMockData() {
+        CoreDataManager.shared.createWorkspace(name: "김씨네 편의점", hourlyWage: 9000, paymentDay: 10, colorString: WorkspaceColor.pink.name, hasTax: true, hasJuhyu: true)
+
+        CoreDataManager.shared.createWorkspace(name: "김씨네 담배가게", hourlyWage: 9000, paymentDay: 10, colorString: WorkspaceColor.blue.name, hasTax: true, hasJuhyu: true)
+
+        CoreDataManager.shared.createWorkspace(name: "김씨네 돈가스 가게", hourlyWage: 9000, paymentDay: 10, colorString: WorkspaceColor.red.name, hasTax: true, hasJuhyu: true)
     }
 }
