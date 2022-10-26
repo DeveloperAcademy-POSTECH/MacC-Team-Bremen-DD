@@ -133,8 +133,7 @@ private extension ScheduleUpdateView {
             HStack(spacing: 0) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
-                        // TODO: - 컬러 변경
-                        .fill(Color.gray)
+                        .fill(Color(UIColor.systemGray5))
                         .frame(width: 76, height: 32)
                     Text("11 : 30")
                         .font(.title3)
