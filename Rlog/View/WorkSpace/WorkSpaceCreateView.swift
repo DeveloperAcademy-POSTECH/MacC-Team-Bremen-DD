@@ -28,21 +28,28 @@ struct WorkSpaceCreateView: View {
             
             // TODO: 컨포넌트로 대체
             if !viewModel.isHiddenPayday {
+                // -------> TODO: 컨포넌트로 대체
                 VStack(alignment: .leading, spacing: 20)  {
                     Text("정산일")
                     TextField("10", text: $viewModel.paymentDay)
                 }
+                // <------- TODO: 컨포넌트로 대체
             }
             if !viewModel.isHiddenHourlyWage {
+                // -------> TODO: 컨포넌트로 대체
                 VStack(alignment: .leading, spacing: 20)  {
                     Text("시급")
                     TextField("최저시급 9,160원", text: $viewModel.hourlyWage)
                 }
+                // <------- TODO: 컨포넌트로 대체
             }
+            // -------> TODO: 컨포넌트로 대체
             VStack(alignment: .leading, spacing: 20)  {
                 Text("근무지")
                 TextField("예시) 편의점", text: $viewModel.name)
             }
+            // <------- TODO: 컨포넌트로 대체
+
             Spacer()
             if !viewModel.isHiddenConfirmButton {
                 ConfirmButton
@@ -101,6 +108,7 @@ private extension WorkSpaceCreateView {
     
     // 확인 버튼
     var ConfirmButton: some View {
+        // -------> TODO: 컨포넌트로 대체
         Button {
             print(viewModel.currentState.rawValue)
             viewModel.didTapConfirmButton()
@@ -114,6 +122,6 @@ private extension WorkSpaceCreateView {
             }
             .padding(.bottom, 20)
         }
-        
+        // <------- TODO: 컨포넌트로 대체
     }
 }

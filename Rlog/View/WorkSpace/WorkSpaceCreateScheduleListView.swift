@@ -19,8 +19,9 @@ struct WorkSpaceCreateScheduleListView: View {
             labelText
             VStack(spacing: 16) {
                 ForEach(viewModel.scheduleList, id: \.self) { item in
+                    // -------> TODO: 컨포넌트로 대체
                     createScheduleListCell(for: item)
-                    // TODO: 컨포넌트로 대체하기
+                    // <------- TODO: 컨포넌트로 대체
                 }
                 addScheduleButton
             }
@@ -63,7 +64,7 @@ private extension WorkSpaceCreateScheduleListView {
             .foregroundColor(.fontLightGray)
     }
     var addScheduleButton: some View {
-        // TODO: 컨포넌트로 대체하기
+        // -------> TODO: 컨포넌트로 대체
         Button {
             viewModel.didTapAddScheduleButton()
         } label: {
@@ -78,5 +79,6 @@ private extension WorkSpaceCreateScheduleListView {
                 WorkSpaceCreateCreatingScheduleView(isShowingModal: $viewModel.isShowingModal, scheduleList: $viewModel.scheduleList)
             }
         }
+        // <------- TODO: 컨포넌트로 대체
     }
 }

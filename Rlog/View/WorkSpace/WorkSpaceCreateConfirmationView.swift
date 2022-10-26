@@ -40,17 +40,6 @@ struct WorkSpaceCreateConfirmationView: View {
 }
 
 private extension WorkSpaceCreateConfirmationView {
-//    @ViewBuilder
-//    func WorkTypeInfo(for worktype: String) -> some View {
-//        VStack(alignment: .leading, spacing: 10) {
-//            Text("근무 유형")
-//                .font(.caption)
-//                .foregroundColor(.fontLightGray)
-//            // TODO: 컨포넌트에 일하는 유형을 넣어준다.
-//            RoundedRectangle(cornerRadius: 10)
-//                .frame(height: 54)
-//        }
-//    }
     var WorkTypeInfo: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("근무 유형")
@@ -62,10 +51,12 @@ private extension WorkSpaceCreateConfirmationView {
         }
     }
     var toolbarConfirmButton: some View {
+        // -------> TODO: 컨포넌트로 대체
             Button{
                 viewModel.didTapConfirmButton()
             } label: {
                 Text("완료")
             }
+        // <------- TODO: 컨포넌트로 대체
         }
 }
