@@ -9,6 +9,8 @@ import SwiftUI
 
 
 struct WorkSpaceListView: View {
+    // MARK: 뷰모델에 네비게이션 popToRoot 용으로 bool 값 만들어야함
+    //    @State var isActive = false
     
     var body: some View {
         //  Navgation Header 리팩토링 고려 코드 https://stackoverflow.com/questions/57517803/how-to-remove-the-default-navigation-bar-space-in-swiftui-navigationview
@@ -27,6 +29,11 @@ struct WorkSpaceListView: View {
                         .fontWeight(.bold)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
+                    // MARK: 네비게이션으로 변경 필요
+                    //                    NavigationLink(destination: WorkSpaceCreateView(isActive: $isActive), isActive: $isActive) {
+                    //                        Image(systemName: "plus")
+                    //                            .fontWeight(.bold)
+                    //                    }
                     Button(action: { print("button pressed") }){
                         Image(systemName: "plus")
                             .fontWeight(.bold)
