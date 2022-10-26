@@ -57,12 +57,10 @@ extension ScheduleListView {
         }
         
         var body: some View {
-            // TODO: - 조건에 따른 색깔 처리(ViewModel 예정)
             VStack(spacing: 0) {
                 cellHeader
                 Spacer()
                 HStack(alignment: .bottom, spacing: 0) {
-                    // TODO: - 시작 시간, 끝난 시간 처리
                     cellContent
                     Spacer()
                     cellButton
@@ -79,7 +77,6 @@ extension ScheduleListView {
         var backgroundRectangle: some View {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
-                    // TODO: - view model에서 처리
                     .fill(viewModel.isShowConfirmButton ? Color(viewModel.workDay.workspace.colorString) : .white)
                     .frame(height: 97)
                 RoundedRectangle(cornerRadius: 9)
@@ -93,14 +90,12 @@ extension ScheduleListView {
                 Rectangle()
                     .fill(Color(viewModel.workDay.workspace.colorString))
                     .frame(width: 3, height: 17)
-                // TODO: - 근무지명 받아오기
                 Text(viewModel.workDay.workspace.name)
                     .font(.callout)
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
                     .padding(.leading, 3)
                 Spacer()
-                // TODO: - 근무 시간 받아오기
                 Text("\(viewModel.workDay.spentHour)시간")
                     .font(.subheadline)
                     .fontWeight(.bold)

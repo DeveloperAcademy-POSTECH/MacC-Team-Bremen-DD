@@ -83,10 +83,24 @@ final class StatusPickerViewModel: ObservableObject {
 
 final class ScheduleCellViewModel: ObservableObject {
     @Published var isShowUpdateModal = false
-    @Published var isShowConfirmButton = true
+    var isShowConfirmButton: Bool {
+        if isToday(month: workDay.monthInt, day: workDay.dayInt) {
+            return !workDay.hasDone
+        }
+        return false
+    }
     var workDay: WorkDayEntity
     
     init(workDay: WorkDayEntity) {
         self.workDay = workDay
+    }
+    
+    func isToday(month: Int16, day: Int16) -> Bool {
+        if month == Calendar.current.component(.month, from: Date()) {
+            if day == Calendar.current.component(.day, from: Date()) {
+                return true
+            }
+        }
+        return false
     }
 }
