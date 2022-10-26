@@ -151,7 +151,10 @@ private struct UITextFieldRepresentable<T>: UIViewRepresentable {
         
         func textFieldDidChangeSelection(_ textField: UITextField) {
             guard let genericText = textField.text as? T else { return }
-            self.text = genericText
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.text = genericText
+            }
         }
         
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
