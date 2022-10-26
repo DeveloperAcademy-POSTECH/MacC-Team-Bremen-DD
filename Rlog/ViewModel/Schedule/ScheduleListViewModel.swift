@@ -14,8 +14,42 @@ enum ScheduleCase: String, CaseIterable {
 
 final class ScheduleListViewModel: ObservableObject {
     @Published var selectedScheduleCase: ScheduleCase = .upcoming
+    @Published var allWorkDays: [WorkDayEntity] = []
     @Published var isShowCreateModal = false
+    var upcomingWorkDays: [WorkDayEntity] {
+        var updateWorkDays: [WorkDayEntity] = []
+        for workday in allWorkDays {
+            if workday.monthInt == 10 {
+                updateWorkDays.append(workday)
+            }
+        }
+        return updateWorkDays
+    }
+    var pastWorkDays: [WorkDayEntity] {
+        var updateWorkDays: [WorkDayEntity] = []
+        for workday in allWorkDays {
+            if workday.monthInt != 10 {
+                updateWorkDays.append(workday)
+            }
+        }
+        return updateWorkDays
+    }
     let yearAndMonth: String = Date().fetchYearAndMonth()
+    
+    init() {
+        fetchAllWorkDays()
+    }
+    
+    func fetchAllWorkDays() {
+        let result = CoreDataManager.shared.getAllWorkspaces()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            for workspace in result {
+                self.allWorkDays.append(contentsOf: CoreDataManager.shared.getAllWorkdays(of: workspace))
+                print(CoreDataManager.shared.getAllWorkdays(of: workspace))
+            }
+        }
+    }
 }
 
 final class StatusPickerViewModel: ObservableObject {
@@ -41,4 +75,9 @@ final class StatusPickerViewModel: ObservableObject {
 final class ScheduleCellViewModel: ObservableObject {
     @Published var isShowUpdateModal = false
     @Published var isShowConfirmButton = true
+    var workDay: WorkDayEntity
+    
+    init(workDay: WorkDayEntity) {
+        self.workDay = workDay
+    }
 }

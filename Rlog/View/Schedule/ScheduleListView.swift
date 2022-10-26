@@ -45,7 +45,6 @@ private extension ScheduleListView {
     var header: some View {
         HStack(spacing: 0) {
             Image(systemName: "chevron.backward")
-            // TODO: - 연도와 월 받아오기
             Text(viewModel.yearAndMonth)
                 .font(.title)
                 .fontWeight(.bold)
@@ -60,7 +59,6 @@ private extension ScheduleListView {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 0) {
                 scheduleListHeader
-                // TODO: - ScheduleCreateView로 연결
                 Button(action: {
                     viewModel.isShowCreateModal.toggle()
                 }, label: {
@@ -80,10 +78,17 @@ private extension ScheduleListView {
                         ScheduleCreateView()
                     }
                 }
-                ForEach(0..<3) { index in
-                    ScheduleCell()
+                if viewModel.selectedScheduleCase == .upcoming {
+                    ForEach(viewModel.upcomingWorkDays, id: \.self) { schedule in
+                        ScheduleCell(workDay: schedule)
+                    }
+                    .padding(.top)
+                } else {
+                    ForEach(viewModel.pastWorkDays, id: \.self) { schedule in
+                        ScheduleCell(workDay: schedule)
+                    }
+                    .padding(.top)
                 }
-                .padding(.top)
             }
         }
     }
