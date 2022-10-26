@@ -19,7 +19,7 @@ final class ScheduleListViewModel: ObservableObject {
     var upcomingWorkDays: [WorkDayEntity] {
         var updateWorkDays: [WorkDayEntity] = []
         for workday in allWorkDays {
-            if workday.monthInt == 10 {
+            if isUpcomming(month: workday.monthInt, day: workday.dayInt) {
                 updateWorkDays.append(workday)
             }
         }
@@ -28,7 +28,7 @@ final class ScheduleListViewModel: ObservableObject {
     var pastWorkDays: [WorkDayEntity] {
         var updateWorkDays: [WorkDayEntity] = []
         for workday in allWorkDays {
-            if workday.monthInt != 10 {
+            if !isUpcomming(month: workday.monthInt, day: workday.dayInt) {
                 updateWorkDays.append(workday)
             }
         }
@@ -49,6 +49,15 @@ final class ScheduleListViewModel: ObservableObject {
                 print(CoreDataManager.shared.getAllWorkdays(of: workspace))
             }
         }
+    }
+    
+    func isUpcomming(month: Int16, day: Int16) -> Bool {
+        if month >= Calendar.current.component(.month, from: Date()) {
+            if day >= Calendar.current.component(.day, from: Date()) {
+                return true
+            }
+        }
+        return false
     }
 }
 
