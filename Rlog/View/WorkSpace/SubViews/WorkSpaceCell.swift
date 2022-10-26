@@ -7,24 +7,6 @@
 
 import SwiftUI
 
-enum WorkSpaceInfo: CaseIterable {
-    case hourlyWage
-    case paymentDay
-    case hasJuhyu
-    case hasTax
-    case workDays
-    
-    var text: String {
-        switch self {
-        case .hourlyWage: return "시급"
-        case .paymentDay: return "급여일"
-        case .hasJuhyu: return "주휴수당"
-        case .hasTax: return "소득세"
-        case .workDays: return "근무 유형"
-        }
-    }
-}
-
 struct WorkSpaceCell: View {
     var workspace: WorkspaceEntity
     
@@ -38,18 +20,17 @@ struct WorkSpaceCell: View {
 }
 
 private extension WorkSpaceCell {
-    func makeWorkSpaceCardHeader(workTitle: String, workTagColor: String) -> some View {
-        HStack(alignment: .center){
-            Rectangle()
-                .foregroundColor(Color(workTagColor))
-                .frame(width: 3, height: 17)
-            Text(workTitle)
-                .font(.callout)
-                .fontWeight(.bold)
-                .foregroundColor(.fontBlack)
+        func makeWorkSpaceRowInfo(workTitle: String, workInfo: String) -> some View {
+            HStack() {
+                Text(workTitle)
+                    .font(.subheadline)
+                    .foregroundColor(.fontLightGray)
+                Spacer()
+                Text(workInfo)
+                    .font(.subheadline)
+                    .foregroundColor(.fontBlack)
+            }
         }
-        .padding(.bottom, 20)
-    }
     
     func makeWorkSpaceCardContent(workspace: WorkspaceEntity) -> some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -63,19 +44,13 @@ private extension WorkSpaceCell {
                     .foregroundColor(.fontBlack)
             }
             .padding(.bottom, 20)
-            
+
             VStack(spacing: 8){
-                ForEach(WorkSpaceInfo.allCases, id: \.self) { tab in
-                    HStack() {
-                        Text(tab.text)
-                            .font(.subheadline)
-                            .foregroundColor(.fontLightGray)
-                        Spacer()
-//                        Text( model.getValue(info: tab))
-//                            .font(.subheadline)
-//                            .foregroundColor(.fontBlack)
-                    }
-                }
+                makeWorkSpaceRowInfo(workTitle: "시급", workInfo: "\(String(workspace.hourlyWage)) 원")
+                makeWorkSpaceRowInfo(workTitle: "급여일", workInfo: "매월 \(String(workspace.paymentDay)) 일")
+                makeWorkSpaceRowInfo(workTitle: "주휴수당", workInfo: workspace.hasJuhyu ? "적용" : "미적용")
+                makeWorkSpaceRowInfo(workTitle: "소득세", workInfo: workspace.hasTax ? "적용" : "미적용")
+                makeWorkSpaceRowInfo(workTitle: "근무유형", workInfo: "근무유형 연결")
             }
         }
         .padding()

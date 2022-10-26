@@ -15,6 +15,7 @@ final class WorkSpaceListViewModel: ObservableObject {
 
     init() {
         getAllWorkspaces()
+//        createMockData()
     }
 
     func didTapPlusButton() {
