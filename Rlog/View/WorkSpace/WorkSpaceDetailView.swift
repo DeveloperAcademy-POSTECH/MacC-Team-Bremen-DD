@@ -35,20 +35,18 @@ struct WorkSpaceDetailView: View {
         VStack(alignment: .leading, spacing: 16) {
             //TODO : Rectangle 자리 공용 컴포넌트 삽입
             InputFormElement(containerType: .workplace, text: $viewModel.name)
+                .padding(.top, 33)
 //            InputFormElement(containerType: .wage, text: $viewModel.hourlyWage)
 //            InputFormElement(containerType: .payday, text: $viewModel.paymentDay)
 
             makePaymentSystemToggle()
-            
+
             Text("근무일정")
                 .font(.subheadline)
                 .foregroundColor(.fontLightGray)
             ForEach(viewModel.schedules) { schedule in
                 schedulesContainer(schedule: schedule)
             }
-            Rectangle() //일정추가 버튼
-                .foregroundColor(.primary)
-                .frame(maxWidth: .infinity, maxHeight: 54)
             StrokeButton(label: "+ 근무 일정 추가하기", buttonType: .add) {
 
             }
@@ -59,7 +57,7 @@ struct WorkSpaceDetailView: View {
                     dismiss()
                 }
             }
-//            Spacer()
+            Spacer()
         }
         .navigationTitle("근무수정") 
         .padding(.horizontal)
