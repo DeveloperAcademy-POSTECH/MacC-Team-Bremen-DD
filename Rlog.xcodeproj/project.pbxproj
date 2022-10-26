@@ -65,6 +65,7 @@
 		C67FC8402906974600DE3898 /* WorkspaceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FC83F2906974600DE3898 /* WorkspaceColor.swift */; };
 		C67FC841290815C000DE3898 /* StrokeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA06F290265F300504BDE /* StrokeButton.swift */; };
 		C67FC8432908211D00DE3898 /* NSNotification+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FC8422908211D00DE3898 /* NSNotification+.swift */; };
+		C67FC8452908FA8300DE3898 /* WorkSpaceCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FC8442908FA8300DE3898 /* WorkSpaceCellViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,6 +129,7 @@
 		C67FC83D290693F900DE3898 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		C67FC83F2906974600DE3898 /* WorkspaceColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceColor.swift; sourceTree = "<group>"; };
 		C67FC8422908211D00DE3898 /* NSNotification+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+.swift"; sourceTree = "<group>"; };
+		C67FC8442908FA8300DE3898 /* WorkSpaceCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				2D66DCD728FD8E7100C90400 /* WorkSpaceListViewModel.swift */,
+				C67FC8442908FA8300DE3898 /* WorkSpaceCellViewModel.swift */,
 				2D66DCD928FD8E8F00C90400 /* WorkSpaceDetailViewModel.swift */,
 				2D66DCDB28FD8E9D00C90400 /* WorkSpaceCreateViewModel.swift */,
 				2D5BA7C72900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift */,
@@ -418,6 +421,7 @@
 				C64D97C528FE92C1004F80E7 /* ScheduleEntity.swift in Sources */,
 				2D66DCCE28FD8DE600C90400 /* ScheduleListViewModel.swift in Sources */,
 				7A937596290035BD00D6D5BE /* FilledButton.swift in Sources */,
+				C67FC8452908FA8300DE3898 /* WorkSpaceCellViewModel.swift in Sources */,
 				C67FC83E290693F900DE3898 /* CoreData.swift in Sources */,
 				898A5EBA2907C79100A6BEF7 /* HDivider.swift in Sources */,
 				2D66DCE428FD8F1D00C90400 /* Color+.swift in Sources */,

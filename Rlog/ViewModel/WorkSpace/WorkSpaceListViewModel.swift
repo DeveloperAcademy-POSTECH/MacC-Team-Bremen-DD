@@ -27,9 +27,9 @@ final class WorkSpaceListViewModel: ObservableObject {
     }
 }
 
-extension WorkSpaceListViewModel {
+private extension WorkSpaceListViewModel {
 
-    private func getAllWorkspaces() {
+    func getAllWorkspaces() {
         let result = CoreDataManager.shared.getAllWorkspaces()
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -37,7 +37,7 @@ extension WorkSpaceListViewModel {
         }
     }
 
-    private func createMockData() {
+    func createMockData() {
         CoreDataManager.shared.createWorkspace(name: "김씨네 편의점", hourlyWage: 9000, paymentDay: 10, colorString: WorkspaceColor.pink.name, hasTax: true, hasJuhyu: true)
 
         CoreDataManager.shared.createWorkspace(name: "김씨네 담배가게", hourlyWage: 9000, paymentDay: 10, colorString: WorkspaceColor.blue.name, hasTax: true, hasJuhyu: true)
