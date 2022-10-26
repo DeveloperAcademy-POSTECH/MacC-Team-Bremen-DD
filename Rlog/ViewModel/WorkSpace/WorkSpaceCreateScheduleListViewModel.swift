@@ -8,23 +8,32 @@
 import SwiftUI
 
 final class WorkSpaceCreateScheduleListViewModel: ObservableObject {
-    @Published var isShowingModal = false
-    @Published var isShowingConfirmButton = false
+    @Binding var isActive: Bool
+    var workspaceDatas: CreatingWorkSpaceModel
     
-    @Published var scheduleList: [Schedule] = [] {
+    init(isActive: Binding<Bool>, workspaceData: CreatingWorkSpaceModel) {
+        self._isActive = isActive
+        self.workspaceDatas = workspaceData
+        print(workspaceData)
+        
+    }
+    
+    @Published var isShowingModal = false
+    @Published var isDisabledNextButton = true
+    
+    @Published var scheduleList: [CreatingScheduleModel] = [] {
         didSet {
             if !scheduleList.isEmpty {
-                isShowingConfirmButton = true
+                isDisabledNextButton = false
             }
-            print("변경됨")
-            isShowingConfirmButton = true
-            print(isShowingConfirmButton)
-
         }
     }
     
     func didTapAddScheduleButton() {
         showModal()
+    }
+    func getScheduleData() -> [CreatingScheduleModel] {
+        return scheduleList
     }
 }
 
@@ -32,12 +41,4 @@ extension WorkSpaceCreateScheduleListViewModel {
     func showModal() {
         isShowingModal = true
     }
-}
-
-struct Schedule: Hashable{
-    var repeatedSchedule: [String] = []
-    var startHour: String = ""
-    var startMinute: String = ""
-    var endHour: String = ""
-    var endMinute: String = ""
 }

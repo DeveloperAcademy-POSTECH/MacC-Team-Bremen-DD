@@ -9,7 +9,7 @@ import SwiftUI
 
 final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
     @Binding var isShowingModal: Bool
-    @Binding var scheduleList: [Schedule]
+    @Binding var scheduleList: [CreatingScheduleModel]
     
     @Published var isShowingConfirmButton = false
     @Published var isShowingOverSingleDay = false
@@ -64,7 +64,7 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
         }
     }
     
-    init(isShowingModal: Binding<Bool>, scheduleList: Binding<[Schedule]>) {
+    init(isShowingModal: Binding<Bool>, scheduleList: Binding<[CreatingScheduleModel]>) {
         self._isShowingModal = isShowingModal
         self._scheduleList = scheduleList
     }
@@ -97,7 +97,7 @@ extension WorkSpaceCreateCreatingScheduleViewModel {
         if endMinute.isEmpty {
             endMinute = "00"
         }
-        scheduleList.append(Schedule(repeatedSchedule: getDayList() ,startHour: startHour, startMinute: startMinute, endHour: endHour, endMinute: endMinute))
+        scheduleList.append(CreatingScheduleModel(repeatedSchedule: getDayList() ,startHour: startHour, startMinute: startMinute, endHour: endHour, endMinute: endMinute))
     }
     func dismissModal() {
         isShowingModal = false

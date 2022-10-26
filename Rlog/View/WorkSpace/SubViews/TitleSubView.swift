@@ -11,7 +11,8 @@ struct TitleSubView: View {
     var body: some View {
         Text(title)
             .font(.title3)
-            .padding(.bottom,20)
+            .padding(.vertical, 20)
+            .foregroundColor(.fontBlack)
     }
 }
 

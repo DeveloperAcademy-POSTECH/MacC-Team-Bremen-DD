@@ -8,16 +8,20 @@
 import SwiftUI
 
 struct WorkSpaceCreateScheduleListView: View {
-    @ObservedObject var viewModel = WorkSpaceCreateScheduleListViewModel()
+    @ObservedObject var viewModel: WorkSpaceCreateScheduleListViewModel
+    init(isActive: Binding<Bool>, workspaceData: CreatingWorkSpaceModel) {
+        self.viewModel = WorkSpaceCreateScheduleListViewModel(isActive: isActive, workspaceData: workspaceData)
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            guidingText
+            TitleSubView(title: "근무 일정을 입력해주세요.")
             labelText
             VStack(spacing: 16) {
                 ForEach(viewModel.scheduleList, id: \.self) { item in
+                    // -------> TODO: 컨포넌트로 대체
                     createScheduleListCell(for: item)
-                    // TODO: 컨포넌트로 대체하기
+                    // <------- TODO: 컨포넌트로 대체
                 }
                 addScheduleButton
             }
@@ -27,12 +31,7 @@ struct WorkSpaceCreateScheduleListView: View {
         .padding(.horizontal)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                if viewModel.isShowingConfirmButton {
-                    toolbarConfirmButton
-                } else {
-                    // TODO: 뷰 연결하면서 navigation 될 때에 삭제해야함.
-                    Text("")
-                }
+                    toolbarNextButton
             }
         }
     }
@@ -40,7 +39,7 @@ struct WorkSpaceCreateScheduleListView: View {
 
 private extension WorkSpaceCreateScheduleListView {
     @ViewBuilder
-    func createScheduleListCell(for item: Schedule) -> some View {
+    func createScheduleListCell(for item: CreatingScheduleModel) -> some View {
         HStack(spacing: 0) {
             ForEach(item.repeatedSchedule,id: \.self) { day in
                 Text("\(day) ")
@@ -52,14 +51,12 @@ private extension WorkSpaceCreateScheduleListView {
         .background(Color(red: 0.962, green: 0.962, blue: 0.962))
         .clipShape(RoundedRectangle(cornerRadius: 10))
     }
-    var toolbarConfirmButton: some View {
-            NavigationLink(destination: Rectangle()) {
-                Text("완료")
+    var toolbarNextButton: some View {
+        NavigationLink(destination:  WorkSpaceCreateConfirmationView(isActive: $viewModel.isActive, workspaceData: viewModel.workspaceDatas, scheduleData: viewModel.scheduleList)) {
+                Text("다음")
+                    .foregroundColor(viewModel.isDisabledNextButton ? Color(red: 0.82, green: 0.82, blue: 0.839) : .fontBlack)
             }
-    }
-    var guidingText: some View {
-        Text("근무 일정을 입력해주세요.")
-            .padding(.vertical, 20)
+            .disabled(viewModel.isDisabledNextButton)
     }
     var labelText: some View {
         Text("근무 유형")
@@ -67,7 +64,7 @@ private extension WorkSpaceCreateScheduleListView {
             .foregroundColor(.fontLightGray)
     }
     var addScheduleButton: some View {
-        // TODO: 컨포넌트로 대체하기
+        // -------> TODO: 컨포넌트로 대체
         Button {
             viewModel.didTapAddScheduleButton()
         } label: {
@@ -82,11 +79,6 @@ private extension WorkSpaceCreateScheduleListView {
                 WorkSpaceCreateCreatingScheduleView(isShowingModal: $viewModel.isShowingModal, scheduleList: $viewModel.scheduleList)
             }
         }
-    }
-}
-
-struct WorkSpaceCreateScheduleListView_Previews: PreviewProvider {
-    static var previews: some View {
-        WorkSpaceCreateScheduleListView()
+        // <------- TODO: 컨포넌트로 대체
     }
 }
