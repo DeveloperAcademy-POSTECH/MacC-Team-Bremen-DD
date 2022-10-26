@@ -42,21 +42,25 @@ enum UnderlinedTextFieldType: Equatable {
     }
 }
 
-struct UnderlinedTextField: View {
+struct UnderlinedTextField<T>: View {
     let textFieldType: UnderlinedTextFieldType
     @State var isFocused = false
-    @Binding var text: String {
+    @Binding var text: T {
+        // TODO: 코드 미작동 원인 파악 필요
         didSet {
             switch textFieldType {
             case .workplace:
-                if text.count > 20 && oldValue.count <= 20 {
+                guard let string = text as? String else { return }
+                if string.count > 20 && "\(oldValue)".count <= 20 {
                     text = oldValue
                 }
             case .wage:
-                if text.hasPrefix("0") { text = "" }
+                guard let string = text as? String else { return }
+                if string.hasPrefix("0") { text = "" as! T }
             case .payday:
-                guard let textToInt = Int(text) else { return }
-                if text.hasPrefix("0") || textToInt > 31 || textToInt < 1 { text = "" }
+                guard let string = text as? String else { return }
+                guard let textToInt = Int(string) else { return }
+                if string.hasPrefix("0") || textToInt > 28 || textToInt < 1 { text = "" as! T }
             case .reason:
                 return
             case .none:
@@ -87,7 +91,7 @@ private extension UnderlinedTextField {
                 if textFieldType == .workplace {
                     HStack {
                         Spacer()
-                        Text("\(text.count)/20")
+                        Text("\(String(describing: text).count)/20")
                             .font(.caption)
                             .foregroundColor(.gray)
                     }
@@ -97,15 +101,15 @@ private extension UnderlinedTextField {
             
             Rectangle()
                 .frame(maxWidth: .infinity, minHeight: 2, maxHeight: 2)
-                .foregroundColor(isFocused == false ? .fontLightGray : .primary)
+                .foregroundColor(isFocused == false ? .gray : .green)
         }
         .frame(maxWidth: .infinity, minHeight: 30, maxHeight: 30)
     }
 }
 
 // https://medium.com/hcleedev/swift-textfield-기존-focus-방식과-새롭게-등장한-focusstate-활용하기-8725c7425140
-private struct UITextFieldRepresentable: UIViewRepresentable {
-    @Binding var text: String
+private struct UITextFieldRepresentable<T>: UIViewRepresentable {
+    @Binding var text: T
     var placeholder: String
     var isFirstResponder = false
     @Binding var isFocused: Bool
@@ -119,7 +123,7 @@ private struct UITextFieldRepresentable: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UITextField, context: UIViewRepresentableContext<UITextFieldRepresentable>) {
-        uiView.text = self.text
+        uiView.text = String(describing: self.text)
         if isFirstResponder && !context.coordinator.didFirstResponder {
             uiView.becomeFirstResponder()
             context.coordinator.didFirstResponder = true
@@ -131,17 +135,18 @@ private struct UITextFieldRepresentable: UIViewRepresentable {
     }
     
     class Coordinator: NSObject, UITextFieldDelegate {
-        @Binding var text: String
+        @Binding var text: T
         @Binding var isFocused: Bool
         var didFirstResponder = false
         
-        init(text: Binding<String>, isFocused: Binding<Bool>) {
+        init(text: Binding<T>, isFocused: Binding<Bool>) {
             self._text = text
             self._isFocused = isFocused
         }
         
         func textFieldDidChangeSelection(_ textField: UITextField) {
-            self.text = textField.text ?? ""
+            guard let genericText = textField.text as? T else { return }
+            self.text = genericText
         }
         
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
