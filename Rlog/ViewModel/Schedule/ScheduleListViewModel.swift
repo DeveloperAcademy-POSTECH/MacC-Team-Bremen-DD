@@ -90,9 +90,11 @@ final class ScheduleCellViewModel: ObservableObject {
         return false
     }
     var workDay: WorkDayEntity
+    var weekDay: String
     
     init(workDay: WorkDayEntity) {
         self.workDay = workDay
+        self.weekDay = WeekDay(rawValue: workDay.weekDay)?.name ?? "월"
     }
     
     func isToday(month: Int16, day: Int16) -> Bool {

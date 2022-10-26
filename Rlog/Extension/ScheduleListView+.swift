@@ -107,7 +107,7 @@ extension ScheduleListView {
         var cellContent: some View {
             VStack(alignment: .leading, spacing: 0) {
                 // TODO: - 요일 처리
-                Text("\(viewModel.workDay.monthInt)월 \(viewModel.workDay.dayInt)일 금요일")
+                Text("\(viewModel.workDay.monthInt)월 \(viewModel.workDay.dayInt)일 \(viewModel.weekDay)요일")
                     .font(.caption)
                     .foregroundColor(Color.fontBlack)
                 // TODO: - 시간 처리, Int로 저장된 값을 String 두 단어로 처리하는 것은 찾아봐야 함
