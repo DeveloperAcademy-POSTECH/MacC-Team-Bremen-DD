@@ -36,8 +36,8 @@ struct WorkSpaceDetailView: View {
             //TODO : Rectangle 자리 공용 컴포넌트 삽입
             InputFormElement(containerType: .workplace, text: $viewModel.name)
                 .padding(.top, 33)
-//            InputFormElement(containerType: .wage, text: $viewModel.hourlyWage)
-//            InputFormElement(containerType: .payday, text: $viewModel.paymentDay)
+            InputFormElement(containerType: .wage, text: $viewModel.hourlyWage)
+            InputFormElement(containerType: .payday, text: $viewModel.paymentDay)
 
             makePaymentSystemToggle()
 

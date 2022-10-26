@@ -70,7 +70,10 @@ private extension WorkSpaceCreateCreatingScheduleView {
                     Button {
                         viewModel.didTapDayPicker(index: index)
                     } label: {
-                        DayButtonSubView(day: viewModel.sevenDays[index].dayName, isSelected: viewModel.sevenDays[index].isSelected)
+                        DayButtonSubView(
+                            day: viewModel.sevenDays[index].dayName,
+                            isSelected: viewModel.sevenDays[index].isSelected
+                        )
                     }
                 }
             }
@@ -83,39 +86,20 @@ private extension WorkSpaceCreateCreatingScheduleView {
             Text("근무 시간")
                 .font(.caption)
                 .foregroundColor(.fontLightGray)
+
             HStack(spacing: 0) {
-                // TODO: 컨포넌트 적용
-                // -------> TODO: 컨포넌트로 대체
-
-                TextField("00", text: $viewModel.startHour)
-                    .keyboardType(.decimalPad)
-                // <------- TODO: 컨포넌트로 대체
+                UnderlinedTextField(textFieldType: .time, text: $viewModel.startHour)
                 Text(":")
-                // -------> TODO: 컨포넌트로 대체
-
-                TextField("00", text: $viewModel.startMinute)
-                    .keyboardType(.decimalPad)
-                // <------ TODO: 컨포넌트로 대체
+                UnderlinedTextField(textFieldType: .time, text: $viewModel.startMinute)
 
                 Text("-")
                     .padding(.horizontal, 10)
-//                if viewModel.isShowingOverSingleDay {
-//                    Text("익일")
-//                        .font(.caption)
-//                        .foregroundColor(.fontDarkGray)
-//                }
-                // -------> TODO: 컨포넌트로 대체
-                TextField("00", text: $viewModel.endHour)
-                    .keyboardType(.decimalPad)
-                // <------- TODO: 컨포넌트로 대체
+                UnderlinedTextField(textFieldType: .time, text: $viewModel.endHour)
                 Text(":")
-                // -------> TODO: 컨포넌트로 대체
-                TextField("00", text: $viewModel.endMinute)
-                    .keyboardType(.decimalPad)
-                // <------- TODO: 컨포넌트로 대체
-
+                UnderlinedTextField(textFieldType: .time, text: $viewModel.endMinute)
             }
             .foregroundColor(.fontBlack)
+
             Text(viewModel.errorMessage)
                 .font(.caption)
                 .foregroundColor(.red)
@@ -142,3 +126,9 @@ private extension WorkSpaceCreateCreatingScheduleView {
         }
     }
 }
+
+//                if viewModel.isShowingOverSingleDay {
+//                    Text("익일")
+//                        .font(.caption)
+//                        .foregroundColor(.fontDarkGray)
+//                }

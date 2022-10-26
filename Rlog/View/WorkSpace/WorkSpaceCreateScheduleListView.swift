@@ -19,9 +19,13 @@ struct WorkSpaceCreateScheduleListView: View {
             labelText
             VStack(spacing: 16) {
                 ForEach(viewModel.scheduleList, id: \.self) { schedule in
-                    // -------> TODO: 컨포넌트로 대체
-                    createScheduleListCell(for: schedule)
-                    // <------- TODO: 컨포넌트로 대체
+                    ScheduleContainer(
+                        repeatedSchedule: schedule.repeatedSchedule,
+                        startHour: schedule.startHour,
+                        startMinute: schedule.startMinute,
+                        endHour: schedule.endHour,
+                        endMinute: schedule.endMinute
+                    )
                 }
                 addScheduleButton
             }
@@ -42,6 +46,7 @@ struct WorkSpaceCreateScheduleListView: View {
 
 private extension WorkSpaceCreateScheduleListView {
     @ViewBuilder
+    /*
     func createScheduleListCell(for item: ScheduleModel) -> some View {
         HStack(spacing: 0) {
             ForEach(item.repeatedSchedule,id: \.self) { day in
@@ -54,6 +59,7 @@ private extension WorkSpaceCreateScheduleListView {
         .background(Color(red: 0.962, green: 0.962, blue: 0.962))
         .clipShape(RoundedRectangle(cornerRadius: 10))
     }
+    */
     var toolbarNextButton: some View {
         NavigationLink(destination:  WorkSpaceCreateConfirmationView(isActive: $viewModel.isActive, workspaceData: viewModel.workspaceModel, scheduleData: viewModel.scheduleList)) {
                 Text("다음")
@@ -67,16 +73,8 @@ private extension WorkSpaceCreateScheduleListView {
             .foregroundColor(.fontLightGray)
     }
     var addScheduleButton: some View {
-        Button {
+        StrokeButton(label: "+ 근무 일정 추가하기", buttonType: .add) {
             viewModel.didTapAddScheduleButton()
-        } label: {
-            ZStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .frame(height: 58)
-                    .foregroundColor(.fontLightGray)
-                Text("+ 근무 일정 추가하기")
-                    .foregroundColor(.white)
-            }
         }
     }
 }

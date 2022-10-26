@@ -83,7 +83,7 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
     }
 }
 
-extension WorkSpaceCreateCreatingScheduleViewModel {
+private extension WorkSpaceCreateCreatingScheduleViewModel {
     func appendScheduleToList() {
         if startMinute.isEmpty {
             startMinute = "00"

@@ -12,6 +12,7 @@ enum UnderlinedTextFieldType: Equatable {
     case wage
     case payday
     case reason
+    case time
     case none(title: String)
 
     var title: String {
@@ -20,6 +21,7 @@ enum UnderlinedTextFieldType: Equatable {
         case .wage: return "시급"
         case .payday: return "급여일"
         case .reason: return "사유"
+        case .time: return "시간"
         case .none(let title): return title
         }
     }
@@ -30,13 +32,14 @@ enum UnderlinedTextFieldType: Equatable {
         case .wage: return "최저시급 9,160원"
         case .payday: return "10"
         case .reason: return "사유를 입력해주세요."
+        case .time: return "00"
         case .none: return "내용을 입력해주세요."
         }
     }
     
     var keyboardType: UIKeyboardType {
         switch self {
-        case .wage, .payday: return .numberPad
+        case .wage, .payday, .time: return .decimalPad
         case .workplace, .reason, .none: return .default
         }
     }
@@ -63,6 +66,8 @@ struct UnderlinedTextField<T>: View {
                 if string.hasPrefix("0") || textToInt > 28 || textToInt < 1 { text = "" as! T }
             case .reason:
                 return
+            case .time:
+                return 
             case .none:
                 return
             }

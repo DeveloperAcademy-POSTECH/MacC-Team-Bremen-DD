@@ -35,7 +35,7 @@ final class WorkSpaceCreateScheduleListViewModel: ObservableObject {
     }
 }
 
-extension WorkSpaceCreateScheduleListViewModel {
+private extension WorkSpaceCreateScheduleListViewModel {
     func showModal() {
         isShowingModal = true
     }

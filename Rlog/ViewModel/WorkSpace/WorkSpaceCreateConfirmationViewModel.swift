@@ -18,8 +18,8 @@ final class WorkSpaceCreateConfirmationViewModel: ObservableObject {
         self.scheduleData = scheduleData
     }
 
-    let hasTax = false
-    let hasJuhyu = false
+    private let hasTax = false
+    private let hasJuhyu = false
 
     func didTapConfirmButton() {
         createDatas() { [weak self] in
@@ -28,7 +28,7 @@ final class WorkSpaceCreateConfirmationViewModel: ObservableObject {
         }
     }
 }
-extension WorkSpaceCreateConfirmationViewModel {
+private extension WorkSpaceCreateConfirmationViewModel {
     func popToRoot() {
         NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
         isActive = false

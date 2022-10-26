@@ -25,32 +25,16 @@ struct WorkSpaceCreateView: View {
             if !viewModel.isHiddenToggleInputs {
                 toggleInputs
             }
-            
-            // TODO: 컨포넌트로 대체
             if !viewModel.isHiddenPayday {
-                // -------> TODO: 컨포넌트로 대체
-                VStack(alignment: .leading, spacing: 20)  {
-                    Text("정산일")
-                    TextField("10", text: $viewModel.paymentDay)
-                }
-                // <------- TODO: 컨포넌트로 대체
+                InputFormElement(containerType: .payday, text: $viewModel.paymentDay)
             }
             if !viewModel.isHiddenHourlyWage {
-                // -------> TODO: 컨포넌트로 대체
-                VStack(alignment: .leading, spacing: 20)  {
-                    Text("시급")
-                    TextField("최저시급 9,160원", text: $viewModel.hourlyWage)
-                }
-                // <------- TODO: 컨포넌트로 대체
+                InputFormElement(containerType: .wage, text: $viewModel.hourlyWage)
             }
-            // -------> TODO: 컨포넌트로 대체
-            VStack(alignment: .leading, spacing: 20)  {
-                Text("근무지")
-                TextField("예시) 편의점", text: $viewModel.name)
-            }
-            // <------- TODO: 컨포넌트로 대체
+            InputFormElement(containerType: .workplace, text: $viewModel.name)
 
             Spacer()
+
             if !viewModel.isHiddenConfirmButton {
                 ConfirmButton
             }
