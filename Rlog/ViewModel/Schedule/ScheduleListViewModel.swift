@@ -46,7 +46,6 @@ final class ScheduleListViewModel: ObservableObject {
             guard let self = self else { return }
             for workspace in result {
                 self.allWorkDays.append(contentsOf: CoreDataManager.shared.getAllWorkdays(of: workspace))
-                print(CoreDataManager.shared.getAllWorkdays(of: workspace))
             }
         }
     }

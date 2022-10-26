@@ -91,6 +91,7 @@ private extension ScheduleListView {
                 }
             }
         }
+        .scrollIndicators(.hidden)
     }
     
     var scheduleListHeader: some View {
