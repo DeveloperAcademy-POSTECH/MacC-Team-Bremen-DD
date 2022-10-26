@@ -10,7 +10,7 @@ import SwiftUI
 struct WorkSpaceCreateCreatingScheduleView: View {
     @ObservedObject private var viewModel:  WorkSpaceCreateCreatingScheduleViewModel
     
-    init(isShowingModal: Binding<Bool>, scheduleList: Binding<[Schedule]>) {
+    init(isShowingModal: Binding<Bool>, scheduleList: Binding<[CreatingScheduleModel]>) {
         self.viewModel = WorkSpaceCreateCreatingScheduleViewModel(isShowingModal: isShowingModal, scheduleList: scheduleList)
     }
     
@@ -56,9 +56,8 @@ private extension WorkSpaceCreateCreatingScheduleView {
         }
     }
     var guidingText: some View {
-        Text("근무 요일과 시간을 입력해주세요.")
-            .padding(.top, 40)
-            .foregroundColor(.fontBlack)
+        TitleSubView(title: "근무 요일과 시간을 입력해주세요.")
+            .padding(.top, 20)
     }
     var workDayPicker: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -86,23 +85,35 @@ private extension WorkSpaceCreateCreatingScheduleView {
                 .foregroundColor(.fontLightGray)
             HStack(spacing: 0) {
                 // TODO: 컨포넌트 적용
+                // -------> TODO: 컨포넌트로 대체
+
                 TextField("00", text: $viewModel.startHour)
                     .keyboardType(.decimalPad)
+                // <------- TODO: 컨포넌트로 대체
                 Text(":")
+                // -------> TODO: 컨포넌트로 대체
+
                 TextField("00", text: $viewModel.startMinute)
                     .keyboardType(.decimalPad)
+                // <------ TODO: 컨포넌트로 대체
+
                 Text("-")
                     .padding(.horizontal, 10)
-                if viewModel.isShowingOverSingleDay {
-                    Text("익일")
-                        .font(.caption)
-                        .foregroundColor(.fontDarkGray)
-                }
+//                if viewModel.isShowingOverSingleDay {
+//                    Text("익일")
+//                        .font(.caption)
+//                        .foregroundColor(.fontDarkGray)
+//                }
+                // -------> TODO: 컨포넌트로 대체
                 TextField("00", text: $viewModel.endHour)
                     .keyboardType(.decimalPad)
+                // <------- TODO: 컨포넌트로 대체
                 Text(":")
+                // -------> TODO: 컨포넌트로 대체
                 TextField("00", text: $viewModel.endMinute)
                     .keyboardType(.decimalPad)
+                // <------- TODO: 컨포넌트로 대체
+
             }
             .foregroundColor(.fontBlack)
             Text(viewModel.errorMessage)
