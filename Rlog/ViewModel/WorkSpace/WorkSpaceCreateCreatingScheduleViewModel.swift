@@ -12,7 +12,6 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
     @Binding var scheduleList: [ScheduleModel]
     
     @Published var isShowingConfirmButton = false
-    @Published var isShowingOverSingleDay = false
     @Published var errorMessage = ""
     
     // 어떻게 더 깔끔하게 짤 수 있을까요? enum을 사용하면 깔끔해질까요?
@@ -20,15 +19,14 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
     
     @Published var startHour = "" {
         didSet {
-            
             if Int(startHour) ?? 0 > 24 {
                 startHour = oldValue
                 errorMessage = "24시간을 초과한 값을 넣을 수 없습니다."
+                isShowingConfirmButton = false
             } else {
                 errorMessage = ""
+                checkAllInputFilled()
             }
-            checkAllInputFilled()
-            checkIsOverSingleDay()
         }
     }
     @Published var startMinute = "" {
@@ -36,6 +34,7 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
             if Int(startMinute) ?? 0 > 59 {
                 startMinute = oldValue
                 errorMessage = "59분을 초과한 값을 넣을 수 없습니다."
+                isShowingConfirmButton = false
             } else {
                 errorMessage = ""
             }
@@ -43,14 +42,18 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
     }
     @Published var endHour = "" {
         didSet {
-            if Int(endHour) ?? 0 > 24 {
-                endHour = oldValue
+            guard let endHour = Int(endHour) else { return }
+            if endHour > 24 {
+                self.endHour = oldValue
                 errorMessage = "24시간을 초과한 값을 넣을 수 없습니다."
+                isShowingConfirmButton = false
+            } else if Int(startHour) ?? 0 > endHour {
+                errorMessage = "출근시간 보다 퇴근시간이 빠릅니다"
+                isShowingConfirmButton = false
             } else {
                 errorMessage = ""
+                checkAllInputFilled()
             }
-            checkAllInputFilled()
-            checkIsOverSingleDay()
         }
     }
     @Published var endMinute = "" {
@@ -58,6 +61,7 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
             if Int(endMinute) ?? 0 > 59 {
                 endMinute = oldValue
                 errorMessage = "59분을 초과한 값을 넣을 수 없습니다."
+                isShowingConfirmButton = false
             } else {
                 errorMessage = ""
             }
@@ -80,16 +84,6 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
 }
 
 extension WorkSpaceCreateCreatingScheduleViewModel {
-    func checkIsOverSingleDay() {
-        if !startHour.isEmpty && !endHour.isEmpty  {
-            if Int(startHour) ?? 0 >= Int(endHour) ?? 0 {
-                isShowingOverSingleDay = true
-                return
-            }
-        }
-        isShowingOverSingleDay = false
-
-    }
     func appendScheduleToList() {
         if startMinute.isEmpty {
             startMinute = "00"
