@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct InputFormElement: View {
+struct InputFormElement<T>: View {
     let containerType: UnderlinedTextFieldType
-    var text: Binding<String>
+    var text: Binding<T>
     
-    init(containerType: UnderlinedTextFieldType, text: Binding<String>) {
+    init(containerType: UnderlinedTextFieldType, text: Binding<T>) {
         self.containerType = containerType
         self.text = text
     }
@@ -51,8 +51,8 @@ private extension InputFormElement {
                 textFieldType: .workplace,
                 text: text
             )
-            
-            if text.wrappedValue.count > 20 {
+
+            if let text = text.wrappedValue as? String, text.count > 20 {
                 HStack {
                     Text("20자 이상 입력할 수 없어요.")
                         .font(.footnote)
@@ -86,7 +86,7 @@ private extension InputFormElement {
                     text: text
                 )
                 
-                if Int(text.wrappedValue) ?? 10 > 28 {
+                if let number = text.wrappedValue as? Int16, number > 28 || number < 1 {
                     HStack {
                         Text("1~28 사이의 숫자를 입력해주세요")
                             .font(.footnote)
@@ -98,6 +98,7 @@ private extension InputFormElement {
                 
             }
             Spacer()
+            
             Text("일")
         }
     }
@@ -107,7 +108,6 @@ private extension InputFormElement {
             textFieldType: .reason,
             text: text
         )
-        
     }
     
     var noneView: some View {
