@@ -8,19 +8,17 @@
 import SwiftUI
 
 struct WorkSpaceCell: View {
-    var workspace: WorkspaceEntity
     @ObservedObject var viewModel: WorkSpaceCellViewModel
 
     init(workspace: WorkspaceEntity) {
-        self.workspace = workspace
         self.viewModel = WorkSpaceCellViewModel(workspace: workspace)
     }
     
     var body: some View {
         NavigationLink {
-            WorkSpaceDetailView(workspace: workspace)
+            WorkSpaceDetailView(workspace: viewModel.workspace, schedules: viewModel.schedules)
         } label: {
-            makeWorkSpaceCardContent(workspace: workspace, schedules: viewModel.schedules)
+            makeWorkSpaceCardContent(workspace: viewModel.workspace, schedules: viewModel.schedules)
         }
     }
 }

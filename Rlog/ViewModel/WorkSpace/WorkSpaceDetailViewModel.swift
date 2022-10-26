@@ -16,14 +16,16 @@ final class WorkSpaceDetailViewModel: ObservableObject {
     @Published var hasJuhyu: Bool
 
     var workspace: WorkspaceEntity
+    @Published var schedules: [ScheduleEntity]
 
-    init(workspace: WorkspaceEntity) {
+    init(workspace: WorkspaceEntity, schedules: [ScheduleEntity]) {
         name = workspace.name
         hourlyWage = workspace.hourlyWage
         paymentDay = workspace.paymentDay
         hasTax = workspace.hasTax
         hasJuhyu = workspace.hasJuhyu
         self.workspace = workspace
+        self.schedules = schedules
     }
 
     func didTapCompleteButton(completion: @escaping (() -> Void)) {
@@ -35,10 +37,17 @@ final class WorkSpaceDetailViewModel: ObservableObject {
         deleteWorkspace()
         completion()
     }
+
+    func didTapScheduleDeleteButton(schedule: ScheduleEntity) {
+        deleteSchedule(schedule: schedule) { [weak self] in
+            guard let self = self else { return }
+            self.getAllSchedules()
+        }
+    }
 }
 
-extension WorkSpaceDetailViewModel {
-    private func editWorkspace() {
+private extension WorkSpaceDetailViewModel {
+    func editWorkspace() {
         CoreDataManager.shared.editWorkspace(
             workspace: workspace,
             name: name,
@@ -50,7 +59,20 @@ extension WorkSpaceDetailViewModel {
         )
     }
 
-    private func deleteWorkspace() {
+    func deleteWorkspace() {
         CoreDataManager.shared.deleteWorkspace(workspace: workspace)
+    }
+
+    func deleteSchedule(schedule: ScheduleEntity, completion: @escaping (() -> Void)) {
+        CoreDataManager.shared.deleteSchedule(of: schedule)
+        completion()
+    }
+
+    func getAllSchedules() {
+        let result = CoreDataManager.shared.getAllSchedules(of: workspace)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.schedules = result
+        }
     }
 }

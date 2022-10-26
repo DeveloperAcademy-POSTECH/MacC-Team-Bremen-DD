@@ -27,8 +27,8 @@ struct WorkSpaceDetailView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel: WorkSpaceDetailViewModel
 
-    init(workspace: WorkspaceEntity) {
-        viewModel = WorkSpaceDetailViewModel(workspace: workspace)
+    init(workspace: WorkspaceEntity, schedules: [ScheduleEntity]) {
+        viewModel = WorkSpaceDetailViewModel(workspace: workspace, schedules: schedules)
     }
 
     var body: some View {
@@ -40,15 +40,12 @@ struct WorkSpaceDetailView: View {
 
             makePaymentSystemToggle()
             
-                Text("근무일정")
-                    .font(.subheadline)
-                    .foregroundColor(.fontLightGray)
-                Spacer()
-
-            
-            Rectangle() //근무유형
-                .foregroundColor(.primary)
-                .frame(maxWidth: .infinity, maxHeight: 54)
+            Text("근무일정")
+                .font(.subheadline)
+                .foregroundColor(.fontLightGray)
+            ForEach(viewModel.schedules) { schedule in
+                schedulesContainer(schedule: schedule)
+            }
             Rectangle() //일정추가 버튼
                 .foregroundColor(.primary)
                 .frame(maxWidth: .infinity, maxHeight: 54)
@@ -62,7 +59,7 @@ struct WorkSpaceDetailView: View {
                     dismiss()
                 }
             }
-            Spacer()
+//            Spacer()
         }
         .navigationTitle("근무수정") 
         .padding(.horizontal)
@@ -110,6 +107,36 @@ private extension WorkSpaceDetailView {
                 }
             })
         }
+    }
+
+    @ViewBuilder
+    func schedulesContainer(schedule: ScheduleEntity) -> some View {
+        HStack(spacing: 0) {
+            HStack(spacing: 0) {
+                ForEach(schedule.repeatedSchedule, id:\.self) { weekDay in
+                    Text(weekDay)
+                        .font(.body)
+                        .foregroundColor(.fontBlack)
+                        .padding(.horizontal, 1)
+                }
+            }
+            .padding(.trailing, 3)
+            Spacer()
+            Text("\(schedule.startHour):\(schedule.startMinute)0 - \(schedule.endHour):\(schedule.endMinute)0")
+                .font(.body)
+                .foregroundColor(.fontBlack)
+            Button {
+                viewModel.didTapScheduleDeleteButton(schedule: schedule)
+            } label: {
+                Image(systemName: "minus.circle")
+                    .foregroundColor(.red)
+                    .padding(.leading, 16)
+            }
+        }
+        .padding()
+        .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 54)
+        .background(Color.containerBackground)
+        .cornerRadius(10)
     }
 }
 
