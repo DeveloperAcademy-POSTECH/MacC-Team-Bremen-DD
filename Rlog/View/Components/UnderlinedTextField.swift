@@ -47,6 +47,7 @@ enum UnderlinedTextFieldType: Equatable {
 
 struct UnderlinedTextField<T>: View {
     let textFieldType: UnderlinedTextFieldType
+    @FocusState var isNumberFieldFocused: Bool
     @State var isFocused = false
     @Binding var text: T {
         // TODO: 코드 미작동 원인 파악 필요
@@ -75,11 +76,53 @@ struct UnderlinedTextField<T>: View {
     }
 
     var body: some View {
-        underlinedTextFieldView
+        textFieldView
     }
 }
 
 private extension UnderlinedTextField {
+    @ViewBuilder
+    var textFieldView: some View {
+        switch textFieldType {
+        case .workplace, .reason, .none(title: _):
+            underlinedTextFieldView
+        case .payday, .wage, .time:
+            underlinedNumberFieldView
+        }
+    }
+
+    var underlinedNumberFieldView: some View {
+        VStack {
+            HStack {
+                TextField(
+                    textFieldType.placeholder,
+                    value: $text,
+                    formatter: NumberFormatter()
+                )
+                .padding(.horizontal)
+                .keyboardType(textFieldType.keyboardType)
+                .focused($isNumberFieldFocused)
+
+                Spacer()
+
+                if textFieldType == .workplace {
+                    HStack {
+                        Spacer()
+                        Text("\(String(describing: text).count)/20")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                    .padding(.trailing)
+                }
+            }
+
+            Rectangle()
+                .frame(maxWidth: .infinity, minHeight: 2, maxHeight: 2)
+                .foregroundColor(isNumberFieldFocused == false ? .gray : .green)
+        }
+        .frame(maxWidth: .infinity, minHeight: 30, maxHeight: 30)
+
+    }
     var underlinedTextFieldView: some View {
         VStack {
             HStack {
@@ -92,7 +135,7 @@ private extension UnderlinedTextField {
                 .keyboardType(textFieldType.keyboardType)
 
                 Spacer()
-                
+
                 if textFieldType == .workplace {
                     HStack {
                         Spacer()
@@ -103,7 +146,7 @@ private extension UnderlinedTextField {
                     .padding(.trailing)
                 }
             }
-            
+
             Rectangle()
                 .frame(maxWidth: .infinity, minHeight: 2, maxHeight: 2)
                 .foregroundColor(isFocused == false ? .gray : .green)
@@ -118,56 +161,59 @@ private struct UITextFieldRepresentable<T>: UIViewRepresentable {
     var placeholder: String
     var isFirstResponder = false
     @Binding var isFocused: Bool
-    
+
     func makeUIView(context: UIViewRepresentableContext<UITextFieldRepresentable>) -> UITextField {
         let textField = UITextField(frame: .zero)
         textField.delegate = context.coordinator
         textField.placeholder = self.placeholder
-        
+
         return textField
     }
-    
+
     func updateUIView(_ uiView: UITextField, context: UIViewRepresentableContext<UITextFieldRepresentable>) {
-        uiView.text = "\(self.text)"
+        uiView.text = String(describing: self.text)
         if isFirstResponder && !context.coordinator.didFirstResponder {
             uiView.becomeFirstResponder()
             context.coordinator.didFirstResponder = true
         }
     }
-    
+
     func makeCoordinator() -> UITextFieldRepresentable.Coordinator {
         Coordinator(text: self.$text, isFocused: self.$isFocused)
     }
-    
+
     class Coordinator: NSObject, UITextFieldDelegate {
         @Binding var text: T
         @Binding var isFocused: Bool
         var didFirstResponder = false
-        
+
         init(text: Binding<T>, isFocused: Binding<Bool>) {
             self._text = text
             self._isFocused = isFocused
         }
-        
+
         func textFieldDidChangeSelection(_ textField: UITextField) {
             guard let genericText = textField.text as? T else { return }
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.text = genericText
-            }
+            self.text = genericText
         }
-        
+
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
             textField.resignFirstResponder()
             return true
         }
-        
+
         func textFieldDidBeginEditing(_ textField: UITextField) {
             self.isFocused = true
         }
-        
+
         func textFieldDidEndEditing(_ textField: UITextField) {
             self.isFocused = false
         }
     }
 }
+
+//UITextFieldRepresentable(
+//    text: $text,
+//    placeholder: textFieldType.placeholder,
+//    isFocused: $isFocused
+//)
