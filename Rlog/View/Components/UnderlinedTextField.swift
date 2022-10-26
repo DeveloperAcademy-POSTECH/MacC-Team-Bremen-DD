@@ -123,7 +123,7 @@ private struct UITextFieldRepresentable<T>: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UITextField, context: UIViewRepresentableContext<UITextFieldRepresentable>) {
-        uiView.text = String(describing: self.text)
+        uiView.text = "\(self.text)"
         if isFirstResponder && !context.coordinator.didFirstResponder {
             uiView.becomeFirstResponder()
             context.coordinator.didFirstResponder = true
