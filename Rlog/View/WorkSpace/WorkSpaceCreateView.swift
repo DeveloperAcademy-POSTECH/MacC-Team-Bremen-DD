@@ -9,7 +9,10 @@ import SwiftUI
 
 
 struct WorkSpaceCreateView: View {
-    @ObservedObject var viewModel = WorkSpaceCreateViewModel()
+    @ObservedObject var viewModel: WorkSpaceCreateViewModel
+    init(isActive: Binding<Bool>) {
+        self.viewModel = WorkSpaceCreateViewModel(isActive: isActive)
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -25,38 +28,47 @@ struct WorkSpaceCreateView: View {
             
             // TODO: 컨포넌트로 대체
             if !viewModel.isHiddenPayday {
+                // -------> TODO: 컨포넌트로 대체
                 VStack(alignment: .leading, spacing: 20)  {
                     Text("정산일")
-                    TextField("10", text: $viewModel.payday)
+                    TextField("10", text: $viewModel.paymentDay)
                 }
+                // <------- TODO: 컨포넌트로 대체
             }
             if !viewModel.isHiddenHourlyWage {
+                // -------> TODO: 컨포넌트로 대체
                 VStack(alignment: .leading, spacing: 20)  {
                     Text("시급")
                     TextField("최저시급 9,160원", text: $viewModel.hourlyWage)
                 }
+                // <------- TODO: 컨포넌트로 대체
             }
+            // -------> TODO: 컨포넌트로 대체
             VStack(alignment: .leading, spacing: 20)  {
                 Text("근무지")
-                TextField("예시) 편의점", text: $viewModel.workSpaceName)
+                TextField("예시) 편의점", text: $viewModel.name)
             }
+            // <------- TODO: 컨포넌트로 대체
+
             Spacer()
             if !viewModel.isHiddenConfirmButton {
                 ConfirmButton
             }
         }
-        .padding()
+        .padding(.horizontal)
         .navigationBarTitle("")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(
-            trailing:
-                NavigationLink(
-                    destination: Rectangle(),
-                    label: {
-                        Text("다음")
-                            .foregroundColor(.fontBlack)
-                    })
-        )
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                if !viewModel.isHiddenToolBarItem {
+                    NavigationLink(
+                        destination: WorkSpaceCreateScheduleListView(isActive: $viewModel.isActive, workspaceData: viewModel.getData())) {
+                            Text("다음")
+                                .foregroundColor(.fontBlack)
+                        }
+                }
+            }
+        }
     }
 }
 
@@ -71,7 +83,7 @@ private extension WorkSpaceCreateView {
     }
     var toggleInputs: some View {
         VStack(spacing: 10) {
-            Toggle(isOn: $viewModel.isOnIncomeTax, label: {
+            Toggle(isOn: $viewModel.hasTax, label: {
                 HStack(alignment:.bottom) {
                     Text("소득세")
                     Text("3.3% 적용")
@@ -79,7 +91,7 @@ private extension WorkSpaceCreateView {
                         .foregroundColor(.fontLightGray)
                 }
             })
-            Toggle(isOn: $viewModel.isOnHolidayAllowance, label: {
+            Toggle(isOn: $viewModel.hasJuhyu, label: {
                 HStack(alignment:.bottom) {
                     Text("주휴수당")
                     Text("60시간 근무 시 적용")
@@ -91,15 +103,13 @@ private extension WorkSpaceCreateView {
     }
     // 가이드 텍스트
     var guidingText: some View {
-        Text(viewModel.currentState.title)
-            .font(.title3)
-            .padding(.vertical, 20)
+        TitleSubView(title: viewModel.currentState.title)
     }
     
     // 확인 버튼
     var ConfirmButton: some View {
+        // -------> TODO: 컨포넌트로 대체
         Button {
-            print(viewModel.currentState.rawValue)
             viewModel.didTapConfirmButton()
         } label: {
             ZStack {
@@ -109,13 +119,8 @@ private extension WorkSpaceCreateView {
                 Text("확인")
                     .foregroundColor(.white)
             }
+            .padding(.bottom, 20)
         }
-        
-    }
-}
-
-struct WorkSpaceCreateView_Previews: PreviewProvider {
-    static var previews: some View {
-        WorkSpaceCreateView()
+        // <------- TODO: 컨포넌트로 대체
     }
 }

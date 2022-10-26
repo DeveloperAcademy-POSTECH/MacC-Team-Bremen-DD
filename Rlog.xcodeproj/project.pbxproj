@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2D5BA7C82900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5BA7C72900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift */; };
 		2D16518F2907D5CE00636D61 /* TitleSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D16518E2907D5CE00636D61 /* TitleSubView.swift */; };
 		2D1651912907D5F300636D61 /* WorkSpaceInfoSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1651902907D5F300636D61 /* WorkSpaceInfoSubView.swift */; };
 		2D1651932907D61800636D61 /* WorkSpaceCreateConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1651922907D61800636D61 /* WorkSpaceCreateConfirmationView.swift */; };
 		2D1651952907D63300636D61 /* WorkSpaceCreateConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1651942907D63300636D61 /* WorkSpaceCreateConfirmationViewModel.swift */; };
+		2D5BA7C82900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5BA7C72900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift */; };
+		2D6226012908251300846145 /* CreatingWorkSpaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6226002908251300846145 /* CreatingWorkSpaceModel.swift */; };
+		2D6226032908257100846145 /* CreatingScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6226022908257100846145 /* CreatingScheduleModel.swift */; };
 		2D66DCA228FD4DF000C90400 /* RlogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCA128FD4DF000C90400 /* RlogApp.swift */; };
 		2D66DCA628FD4DF200C90400 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D66DCA528FD4DF200C90400 /* Assets.xcassets */; };
 		2D66DCA928FD4DF200C90400 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D66DCA828FD4DF200C90400 /* Preview Assets.xcassets */; };
@@ -41,10 +43,11 @@
 		2DF4EC7329063469009B48B4 /* WorkSpaceCreateCreatingScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF4EC7229063469009B48B4 /* WorkSpaceCreateCreatingScheduleViewModel.swift */; };
 		75DE0162290271E600A77369 /* WorkSpaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DE0161290271E600A77369 /* WorkSpaceCell.swift */; };
 		7A937596290035BD00D6D5BE /* FilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A937595290035BD00D6D5BE /* FilledButton.swift */; };
+		7A94738429084F3F004255E0 /* WIPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A94738329084F3F004255E0 /* WIPView.swift */; };
 		898A5EBA2907C79100A6BEF7 /* HDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A5EB92907C79100A6BEF7 /* HDivider.swift */; };
+		898A5EC22908050D00A6BEF7 /* ScheduleContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A5EC12908050D00A6BEF7 /* ScheduleContainer.swift */; };
 		89CAA072290276E800504BDE /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA071290276E800504BDE /* UnderlinedTextField.swift */; };
 		89CAA0742902771D00504BDE /* InputFormElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA0732902771D00504BDE /* InputFormElement.swift */; };
-		89CAA070290265F300504BDE /* StrokeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA06F290265F300504BDE /* StrokeButton.swift */; };
 		B9239C812901467500197ECD /* ScheduleListView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9239C802901467500197ECD /* ScheduleListView+.swift */; };
 		C62C338C28FFCEBD00469273 /* CustomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C338B28FFCEBD00469273 /* CustomButtonView.swift */; };
 		C64D97BA28FE918F004F80E7 /* Text+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97B928FE918F004F80E7 /* Text+.swift */; };
@@ -64,15 +67,20 @@
 		C67FC83C290693BD00DE3898 /* ScheduleEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FC83A290693BD00DE3898 /* ScheduleEntity+CoreDataProperties.swift */; };
 		C67FC83E290693F900DE3898 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FC83D290693F900DE3898 /* CoreData.swift */; };
 		C67FC8402906974600DE3898 /* WorkspaceColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FC83F2906974600DE3898 /* WorkspaceColor.swift */; };
+		C67FC841290815C000DE3898 /* StrokeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA06F290265F300504BDE /* StrokeButton.swift */; };
+		C67FC8432908211D00DE3898 /* NSNotification+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FC8422908211D00DE3898 /* NSNotification+.swift */; };
+		C67FC8452908FA8300DE3898 /* WorkSpaceCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FC8442908FA8300DE3898 /* WorkSpaceCellViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2D5BA7C72900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCreateScheduleListViewModel.swift; sourceTree = "<group>"; };
 		2D16518E2907D5CE00636D61 /* TitleSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSubView.swift; sourceTree = "<group>"; };
 		2D1651902907D5F300636D61 /* WorkSpaceInfoSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceInfoSubView.swift; sourceTree = "<group>"; };
 		2D1651922907D61800636D61 /* WorkSpaceCreateConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCreateConfirmationView.swift; sourceTree = "<group>"; };
 		2D1651942907D63300636D61 /* WorkSpaceCreateConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCreateConfirmationViewModel.swift; sourceTree = "<group>"; };
+		2D5BA7C72900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCreateScheduleListViewModel.swift; sourceTree = "<group>"; };
 		2D5BA7C92901242E003A6BC7 /* Rlog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rlog.entitlements; sourceTree = "<group>"; };
+		2D6226002908251300846145 /* CreatingWorkSpaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingWorkSpaceModel.swift; sourceTree = "<group>"; };
+		2D6226022908257100846145 /* CreatingScheduleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingScheduleModel.swift; sourceTree = "<group>"; };
 		2D66DC9E28FD4DF000C90400 /* Rlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D66DCA128FD4DF000C90400 /* RlogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RlogApp.swift; sourceTree = "<group>"; };
 		2D66DCA528FD4DF200C90400 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,7 +111,9 @@
 		2DF4EC7229063469009B48B4 /* WorkSpaceCreateCreatingScheduleViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkSpaceCreateCreatingScheduleViewModel.swift; sourceTree = "<group>"; };
 		75DE0161290271E600A77369 /* WorkSpaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCell.swift; sourceTree = "<group>"; };
 		7A937595290035BD00D6D5BE /* FilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
+		7A94738329084F3F004255E0 /* WIPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WIPView.swift; sourceTree = "<group>"; };
 		898A5EB92907C79100A6BEF7 /* HDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDivider.swift; sourceTree = "<group>"; };
+		898A5EC12908050D00A6BEF7 /* ScheduleContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleContainer.swift; sourceTree = "<group>"; };
 		89CAA06F290265F300504BDE /* StrokeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeButton.swift; sourceTree = "<group>"; };
 		89CAA071290276E800504BDE /* UnderlinedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
 		89CAA0732902771D00504BDE /* InputFormElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFormElement.swift; sourceTree = "<group>"; };
@@ -126,6 +136,8 @@
 		C67FC83A290693BD00DE3898 /* ScheduleEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C67FC83D290693F900DE3898 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		C67FC83F2906974600DE3898 /* WorkspaceColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceColor.swift; sourceTree = "<group>"; };
+		C67FC8422908211D00DE3898 /* NSNotification+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+.swift"; sourceTree = "<group>"; };
+		C67FC8442908FA8300DE3898 /* WorkSpaceCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +232,7 @@
 			children = (
 				2D66DCC628FD8D8900C90400 /* MonthlyCalculateListView.swift */,
 				2D66DCC928FD8DA200C90400 /* MonthlyCalculateDetailView.swift */,
+				7A94738329084F3F004255E0 /* WIPView.swift */,
 			);
 			path = MonthlyCalculate;
 			sourceTree = "<group>";
@@ -249,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				2D66DCD728FD8E7100C90400 /* WorkSpaceListViewModel.swift */,
+				C67FC8442908FA8300DE3898 /* WorkSpaceCellViewModel.swift */,
 				2D66DCD928FD8E8F00C90400 /* WorkSpaceDetailViewModel.swift */,
 				2D66DCDB28FD8E9D00C90400 /* WorkSpaceCreateViewModel.swift */,
 				2D5BA7C72900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift */,
@@ -271,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				2D66DCE328FD8F1D00C90400 /* Color+.swift */,
+				C67FC8422908211D00DE3898 /* NSNotification+.swift */,
 				C64D97B928FE918F004F80E7 /* Text+.swift */,
 				C64D97BB28FE9197004F80E7 /* TextField+.swift */,
 				C64D97BD28FE919F004F80E7 /* Date+.swift */,
@@ -308,6 +323,7 @@
 				7A937595290035BD00D6D5BE /* FilledButton.swift */,
 				89CAA06F290265F300504BDE /* StrokeButton.swift */,
 				898A5EB92907C79100A6BEF7 /* HDivider.swift */,
+				898A5EC12908050D00A6BEF7 /* ScheduleContainer.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -321,6 +337,8 @@
 				C64D97C828FE92D8004F80E7 /* Tab.swift */,
 				C67FC8372906931300DE3898 /* WeekDay.swift */,
 				C67FC83F2906974600DE3898 /* WorkspaceColor.swift */,
+				2D6226002908251300846145 /* CreatingWorkSpaceModel.swift */,
+				2D6226022908257100846145 /* CreatingScheduleModel.swift */,
 				C67FC82E2906914600DE3898 /* CoreData */,
 			);
 			path = Model;
@@ -415,6 +433,7 @@
 				C64D97C528FE92C1004F80E7 /* ScheduleEntity.swift in Sources */,
 				2D66DCCE28FD8DE600C90400 /* ScheduleListViewModel.swift in Sources */,
 				7A937596290035BD00D6D5BE /* FilledButton.swift in Sources */,
+				C67FC8452908FA8300DE3898 /* WorkSpaceCellViewModel.swift in Sources */,
 				C67FC83E290693F900DE3898 /* CoreData.swift in Sources */,
 				898A5EBA2907C79100A6BEF7 /* HDivider.swift in Sources */,
 				2D66DCE428FD8F1D00C90400 /* Color+.swift in Sources */,
@@ -426,6 +445,7 @@
 				2D66DCD028FD8E1000C90400 /* ScheduleCreateViewModel.swift in Sources */,
 				2D9CE86629003AA600C60F4C /* WorkSpaceCreateScheduleListView.swift in Sources */,
 				C62C338C28FFCEBD00469273 /* CustomButtonView.swift in Sources */,
+				C67FC841290815C000DE3898 /* StrokeButton.swift in Sources */,
 				2D66DCBB28FD8D0E00C90400 /* ScheduleListView.swift in Sources */,
 				C67FC8322906916700DE3898 /* WorkspaceEntity+CoreDataProperties.swift in Sources */,
 				2D66DCBF28FD8D3700C90400 /* ScheduleUpdateView.swift in Sources */,
@@ -434,6 +454,7 @@
 				2DF4EC7329063469009B48B4 /* WorkSpaceCreateCreatingScheduleViewModel.swift in Sources */,
 				2D66DCD428FD8E4700C90400 /* MonthlyCalculateListViewModel.swift in Sources */,
 				2D5BA7C82900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift in Sources */,
+				2D6226012908251300846145 /* CreatingWorkSpaceModel.swift in Sources */,
 				2D66DCDA28FD8E8F00C90400 /* WorkSpaceDetailViewModel.swift in Sources */,
 				2D66DCC328FD8D6100C90400 /* WorkSpaceDetailView.swift in Sources */,
 				2D66DCAE28FD4DF200C90400 /* DataModel.xcdatamodeld in Sources */,
@@ -448,10 +469,12 @@
 				C64D97C328FE92B0004F80E7 /* WorkspaceEntity.swift in Sources */,
 				2D66DCD628FD8E5500C90400 /* MonthlyCalculateDetailViewModel.swift in Sources */,
 				2D66DCD828FD8E7100C90400 /* WorkSpaceListViewModel.swift in Sources */,
+				898A5EC22908050D00A6BEF7 /* ScheduleContainer.swift in Sources */,
 				2D1651932907D61800636D61 /* WorkSpaceCreateConfirmationView.swift in Sources */,
 				89CAA0742902771D00504BDE /* InputFormElement.swift in Sources */,
 				2D66DCC728FD8D8900C90400 /* MonthlyCalculateListView.swift in Sources */,
 				2D66DCCA28FD8DA200C90400 /* MonthlyCalculateDetailView.swift in Sources */,
+				C67FC8432908211D00DE3898 /* NSNotification+.swift in Sources */,
 				75DE0162290271E600A77369 /* WorkSpaceCell.swift in Sources */,
 				C67FC835290692BD00DE3898 /* WorkDayEntity+CoreDataClass.swift in Sources */,
 				2D66DCDC28FD8E9D00C90400 /* WorkSpaceCreateViewModel.swift in Sources */,
@@ -460,9 +483,11 @@
 				C64D97C028FE91AB004F80E7 /* DateFormatter+.swift in Sources */,
 				2D66DCA228FD4DF000C90400 /* RlogApp.swift in Sources */,
 				2DF4EC712906344B009B48B4 /* WorkSpaceCreateCreatingScheduleView.swift in Sources */,
+				7A94738429084F3F004255E0 /* WIPView.swift in Sources */,
 				C64D97BC28FE9197004F80E7 /* TextField+.swift in Sources */,
 				2D1651952907D63300636D61 /* WorkSpaceCreateConfirmationViewModel.swift in Sources */,
 				2D66DCBD28FD8D2500C90400 /* ScheduleCreateView.swift in Sources */,
+				2D6226032908257100846145 /* CreatingScheduleModel.swift in Sources */,
 				2D66DCE028FD8ECA00C90400 /* MainTabViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
