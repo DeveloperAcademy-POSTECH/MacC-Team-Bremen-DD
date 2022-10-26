@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum WorkspaceColor: String {
+enum WorkspaceColor: String, CaseIterable {
     case blue
     case pink
     case purple

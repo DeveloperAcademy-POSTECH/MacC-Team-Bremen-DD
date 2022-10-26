@@ -67,8 +67,8 @@ final class WorkSpaceCreateViewModel: ObservableObject {
 }
 
 extension WorkSpaceCreateViewModel {
-    func getData() -> CreatingWorkSpaceModel {
-        return CreatingWorkSpaceModel(name: name, paymentDay: paymentDay, hourlyWage: hourlyWage, hasTax: hasTax, hasJuhyu: hasJuhyu)
+    func getData() -> WorkSpaceModel {
+        return WorkSpaceModel(name: name, paymentDay: paymentDay, hourlyWage: hourlyWage, hasTax: hasTax, hasJuhyu: hasJuhyu)
     }
     func switchToNextStatus() {
         withAnimation(.easeIn) {

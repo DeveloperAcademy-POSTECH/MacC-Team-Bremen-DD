@@ -10,7 +10,7 @@ import SwiftUI
 struct WorkSpaceCreateCreatingScheduleView: View {
     @ObservedObject private var viewModel:  WorkSpaceCreateCreatingScheduleViewModel
     
-    init(isShowingModal: Binding<Bool>, scheduleList: Binding<[CreatingScheduleModel]>) {
+    init(isShowingModal: Binding<Bool>, scheduleList: Binding<[ScheduleModel]>) {
         self.viewModel = WorkSpaceCreateCreatingScheduleViewModel(isShowingModal: isShowingModal, scheduleList: scheduleList)
     }
     

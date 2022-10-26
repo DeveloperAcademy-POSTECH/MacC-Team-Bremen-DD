@@ -61,11 +61,19 @@ struct WorkSpaceCreateView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 if !viewModel.isHiddenToolBarItem {
-                    NavigationLink(
-                        destination: WorkSpaceCreateScheduleListView(isActive: $viewModel.isActive, workspaceData: viewModel.getData())) {
-                            Text("다음")
-                                .foregroundColor(.fontBlack)
-                        }
+                    NavigationLink {
+                        WorkSpaceCreateScheduleListView(isActive: $viewModel.isActive, workspaceModel: WorkSpaceModel(
+                            name: viewModel.name,
+                            paymentDay: viewModel.paymentDay,
+                            hourlyWage: viewModel.hourlyWage,
+                            hasTax: viewModel.hasTax,
+                            hasJuhyu: viewModel.hasJuhyu
+                        )
+                        )
+                    } label: {
+                        Text("다음")
+                            .foregroundColor(.fontBlack)
+                    }
                 }
             }
         }
@@ -75,11 +83,11 @@ struct WorkSpaceCreateView: View {
 private extension WorkSpaceCreateView {
     // 타이틀
     var guidingTitle: some View {
-            Text("새로운 아르바이트를 추가합니다.")
-                .font(.title2)
-                .fontWeight(.bold)
-                .foregroundColor(.fontBlack)
-                .padding(.top, 20)
+        Text("새로운 아르바이트를 추가합니다.")
+            .font(.title2)
+            .fontWeight(.bold)
+            .foregroundColor(.fontBlack)
+            .padding(.top, 20)
     }
     var toggleInputs: some View {
         VStack(spacing: 10) {

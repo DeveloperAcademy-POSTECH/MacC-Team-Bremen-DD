@@ -9,19 +9,17 @@ import SwiftUI
 
 final class WorkSpaceCreateScheduleListViewModel: ObservableObject {
     @Binding var isActive: Bool
-    var workspaceDatas: CreatingWorkSpaceModel
+    let workspaceModel: WorkSpaceModel
     
-    init(isActive: Binding<Bool>, workspaceData: CreatingWorkSpaceModel) {
+    init(isActive: Binding<Bool>, workspaceModel: WorkSpaceModel) {
         self._isActive = isActive
-        self.workspaceDatas = workspaceData
-        print(workspaceData)
-        
+        self.workspaceModel = workspaceModel
     }
     
     @Published var isShowingModal = false
     @Published var isDisabledNextButton = true
     
-    @Published var scheduleList: [CreatingScheduleModel] = [] {
+    @Published var scheduleList: [ScheduleModel] = [] {
         didSet {
             if !scheduleList.isEmpty {
                 isDisabledNextButton = false
@@ -32,7 +30,7 @@ final class WorkSpaceCreateScheduleListViewModel: ObservableObject {
     func didTapAddScheduleButton() {
         showModal()
     }
-    func getScheduleData() -> [CreatingScheduleModel] {
+    func getScheduleData() -> [ScheduleModel] {
         return scheduleList
     }
 }

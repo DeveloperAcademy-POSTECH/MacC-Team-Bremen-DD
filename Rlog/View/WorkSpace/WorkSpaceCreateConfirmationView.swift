@@ -11,7 +11,7 @@ struct WorkSpaceCreateConfirmationView: View {
     @ObservedObject private var viewModel: WorkSpaceCreateConfirmationViewModel
     
     
-    init(isActive: Binding<Bool>, workspaceData: CreatingWorkSpaceModel, scheduleData: [CreatingScheduleModel]) {
+    init(isActive: Binding<Bool>, workspaceData: WorkSpaceModel, scheduleData: [ScheduleModel]) {
         self.viewModel = WorkSpaceCreateConfirmationViewModel(isActive: isActive, workspaceData: workspaceData, scheduleData: scheduleData)
     }
     

@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct CreatingScheduleModel: Hashable{
+struct ScheduleModel: Hashable{
     var repeatedSchedule: [String] = []
     var startHour: String = ""
     var startMinute: String = ""

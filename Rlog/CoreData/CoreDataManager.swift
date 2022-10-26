@@ -56,6 +56,14 @@ extension CoreDataManager {
         return result ?? []
     }
 
+    func getWorkspace(by name: String) -> WorkspaceEntity? {
+        let fetchRequest: NSFetchRequest<WorkspaceEntity> = WorkspaceEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name == %@", name)
+        fetchRequest.fetchLimit = 1
+        let result = try? context.fetch(fetchRequest).first
+        return result
+    }
+
     func editWorkspace(workspace: WorkspaceEntity, name: String, hourlyWage: Int16, paymentDay: Int16, colorString: String, hasTax: Bool, hasJuhyu: Bool) {
         workspace.name = name
         workspace.paymentDay = paymentDay
@@ -72,7 +80,7 @@ extension CoreDataManager {
     }
 
     // MARK: - SCHEDULE CRUD
-    func createSchedule(of workspace: WorkspaceEntity, repeatedSchedule: [String], startHour: Int16, startMinute: Int16,  endHour: Int16, endMinute: Int16, spentHour: Int16) {
+    func createSchedule(of workspace: WorkspaceEntity, repeatedSchedule: [String], startHour: Int16, startMinute: Int16,  endHour: Int16, endMinute: Int16, spentHour: Double) {
         let schedule = ScheduleEntity(context: context)
         schedule.workspace = workspace
         schedule.repeatedSchedule = repeatedSchedule
@@ -91,7 +99,7 @@ extension CoreDataManager {
         return result ?? []
     }
 
-    func editSchedule(of schedule: ScheduleEntity, repeatedSchedule: [String], startHour: Int16, startMinute: Int16, endHour: Int16, endMinute: Int16, spentHour: Int16) {
+    func editSchedule(of schedule: ScheduleEntity, repeatedSchedule: [String], startHour: Int16, startMinute: Int16, endHour: Int16, endMinute: Int16, spentHour: Double) {
         schedule.repeatedSchedule = repeatedSchedule
         schedule.startHour = startHour
         schedule.startMinute = startMinute
