@@ -64,8 +64,8 @@ struct WorkSpaceDetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {
-                    dismiss()
                     NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
+                    dismiss()
                 }){
                     Image(systemName: "chevron.left")
                         .foregroundColor(.fontBlack)
@@ -77,8 +77,8 @@ struct WorkSpaceDetailView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
                     viewModel.didTapCompleteButton {
-                        dismiss()
                         NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
+                        dismiss()
                     }
                 }){
                     Text("완료")
