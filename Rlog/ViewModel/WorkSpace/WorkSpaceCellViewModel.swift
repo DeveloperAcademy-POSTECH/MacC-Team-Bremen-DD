@@ -28,7 +28,6 @@ private extension WorkSpaceCellViewModel {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.schedules = result
-            print(self.schedules.count)
         }
     }
 

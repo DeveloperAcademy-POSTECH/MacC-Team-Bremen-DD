@@ -31,7 +31,6 @@ final class WorkSpaceCreateViewModel: ObservableObject {
             } else {
                 inActivateButton(inputState: .workSpace)
             }
-            print(isActivatedConfirmButton)
         }
     }
     @Published var hourlyWage = "" {
@@ -41,7 +40,6 @@ final class WorkSpaceCreateViewModel: ObservableObject {
             } else {
                 inActivateButton(inputState: .hourlyWage)
             }
-            print(isActivatedConfirmButton)
         }
     }
     @Published var payday = "" {

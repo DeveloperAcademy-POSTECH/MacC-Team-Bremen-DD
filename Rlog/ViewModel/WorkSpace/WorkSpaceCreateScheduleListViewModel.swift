@@ -16,10 +16,7 @@ final class WorkSpaceCreateScheduleListViewModel: ObservableObject {
             if !scheduleList.isEmpty {
                 isShowingConfirmButton = true
             }
-            print("변경됨")
             isShowingConfirmButton = true
-            print(isShowingConfirmButton)
-
         }
     }
     

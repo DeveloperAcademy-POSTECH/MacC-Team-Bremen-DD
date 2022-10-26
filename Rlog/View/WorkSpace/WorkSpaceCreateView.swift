@@ -99,7 +99,6 @@ private extension WorkSpaceCreateView {
     // 확인 버튼
     var ConfirmButton: some View {
         Button {
-            print(viewModel.currentState.rawValue)
             viewModel.didTapConfirmButton()
         } label: {
             ZStack {
