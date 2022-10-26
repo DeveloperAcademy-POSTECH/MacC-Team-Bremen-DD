@@ -67,6 +67,7 @@ struct WorkSpaceDetailView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {
                     dismiss()
+                    NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
                 }){
                     Image(systemName: "chevron.left")
                         .foregroundColor(.fontBlack)
