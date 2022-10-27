@@ -15,6 +15,11 @@ enum TimeUnit: String, CaseIterable {
 }
 
 final class ScheduleUpdateViewModel: ObservableObject {
+    @Published var workDay: WorkDayEntity
     @Published var reason = ""
+    
+    init(workDay: WorkDayEntity) {
+        self.workDay = workDay
+    }
 }
 

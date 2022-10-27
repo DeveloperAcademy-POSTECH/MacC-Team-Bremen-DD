@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct ScheduleUpdateView: View {
-    @ObservedObject private var viewModel = ScheduleUpdateViewModel()
+    @ObservedObject private var viewModel: ScheduleUpdateViewModel
     @Environment(\.dismiss) var dismiss
+    
+    init(workDay: WorkDayEntity) {
+        self.viewModel = ScheduleUpdateViewModel(workDay: workDay)
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -51,8 +55,7 @@ private extension ScheduleUpdateView {
                 .foregroundColor(Color.fontLightGray)
             
             VStack(alignment: .leading, spacing: 0) {
-                // TODO: - 리스트 뷰에서 근무지명 받아오기
-                Text("제이든의 낚시 교실")
+                Text(viewModel.workDay.workspace.name)
                     .foregroundColor(Color.fontLightGray)
                     .padding(.horizontal)
                     .padding(.vertical, 9)
@@ -69,8 +72,7 @@ private extension ScheduleUpdateView {
                 .foregroundColor(Color.fontLightGray)
             
             VStack(alignment: .leading, spacing: 0) {
-                // TODO: - 리스트 뷰에서 날짜 받아오기
-                Text("2022년 10월 8일")
+                Text("\(viewModel.workDay.yearInt)년 \(viewModel.workDay.monthInt)월 \(viewModel.workDay.dayInt)일")
                     .foregroundColor(Color.fontLightGray)
                     .padding(.horizontal)
                     .padding(.vertical, 9)

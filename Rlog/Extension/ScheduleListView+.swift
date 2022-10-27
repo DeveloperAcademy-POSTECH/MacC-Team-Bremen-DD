@@ -134,7 +134,7 @@ extension ScheduleListView {
                 })
                 .sheet(isPresented: $viewModel.isShowUpdateModal) {
                     NavigationView {
-                        ScheduleUpdateView()
+                        ScheduleUpdateView(workDay: viewModel.workDay)
                     }
                 }
                 if viewModel.isShowConfirmButton {
