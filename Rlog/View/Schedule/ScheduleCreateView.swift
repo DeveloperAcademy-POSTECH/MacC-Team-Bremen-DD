@@ -78,7 +78,8 @@ private extension ScheduleCreateView {
                 }
                 .frame(height: 23)
                 .padding(.leading, 5)
-                // TODO: - 컴포넌트 Divider 넣기
+                .padding(.bottom, 9)
+                HDivider()
             }
             .padding(.top, 8)
         }
@@ -102,7 +103,7 @@ private extension ScheduleCreateView {
                     DatePicker("", selection: $viewModel.workDate, displayedComponents: .date)
                         .datePickerStyle(.wheel)
                 }
-                // TODO: - 컴포넌트 Divider 넣기
+                HDivider()
             }
             .padding(.top, 8)
         }
@@ -113,29 +114,17 @@ private extension ScheduleCreateView {
             Text("근무 시간")
                 .font(.subheadline)
                 .foregroundColor(Color.fontLightGray)
-            // TODO: - TextField 컴포넌트로 변경
             HStack(spacing: 0) {
-                TextField("00", text: $viewModel.startHourText)
-                    .frame(height: 40)
-                    .multilineTextAlignment(.center)
-                    .keyboardType(.numberPad)
+                UnderlinedTextField(textFieldType: .time, text: $viewModel.startHourText)
                 Text(":")
-                TextField("00", text: $viewModel.startMinuteText)
-                    .frame(height: 40)
-                    .multilineTextAlignment(.center)
-                    .keyboardType(.numberPad)
+                UnderlinedTextField(textFieldType: .time, text: $viewModel.startMinuteText)
                 Text("-")
                     .padding(.horizontal, 10)
-                TextField("00", text: $viewModel.endHourText)
-                    .frame(height: 40)
-                    .multilineTextAlignment(.center)
-                    .keyboardType(.numberPad)
+                UnderlinedTextField(textFieldType: .time, text: $viewModel.endHourText)
                 Text(":")
-                TextField("00", text: $viewModel.endMinuteText)
-                    .frame(height: 40)
-                    .multilineTextAlignment(.center)
-                    .keyboardType(.numberPad)
+                UnderlinedTextField(textFieldType: .time, text: $viewModel.endMinuteText)
             }
+            .padding(.top, 9)
         }
     }
     
@@ -145,10 +134,8 @@ private extension ScheduleCreateView {
                 .font(.subheadline)
                 .foregroundColor(Color.fontLightGray)
             
-            // TODO: - 컴포넌트 텍스트필드로 변경
-            TextField("사유를 입력해주세요.", text: $viewModel.reason)
-                .frame(height: 40)
-                .padding(.top)
+            UnderlinedTextField(textFieldType: .reason, text: $viewModel.reason)
+                .padding(.top, 25)
         }
     }
 }
