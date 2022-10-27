@@ -37,7 +37,7 @@ final class ScheduleCreateViewModel: ObservableObject {
             return Color.fontLightGray
         }
     }
-    // TODO: - 업데이트된 모델에 맞게 수정(삭제), 옵셔널 처리
+    // TODO: - startTime과 endTime이 이후 모델에서 startHour: Int16 이런 식으로 수정되어서 머지된 후 수정 예정
     private var startTime: String {
         return "\(Int(startHourText) ?? 12):\(Int(startMinuteText) ?? 0)"
     }
