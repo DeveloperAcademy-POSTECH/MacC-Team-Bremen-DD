@@ -39,8 +39,10 @@ struct ScheduleUpdateView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    viewModel.confirmButtonTapped()
-                    dismiss()
+                    Task {
+                        await viewModel.didTapConfirmButton()
+                        dismiss()
+                    }
                 }, label: {
                     Text("완료")
                         .foregroundColor(Color.primary)
@@ -91,7 +93,7 @@ private extension ScheduleUpdateView {
                 .font(.subheadline)
                 .foregroundColor(Color.fontLightGray)
             
-            TimeEditer(time: $viewModel.workDay.startTime)
+            TimeEditer(time: $viewModel.startTime)
                 .padding(.top, 8)
         }
     }
@@ -102,7 +104,7 @@ private extension ScheduleUpdateView {
                 .font(.subheadline)
                 .foregroundColor(Color.fontLightGray)
             
-            TimeEditer(time: $viewModel.workDay.endTime)
+            TimeEditer(time: $viewModel.endTime)
                 .padding(.top, 8)
         }
     }
