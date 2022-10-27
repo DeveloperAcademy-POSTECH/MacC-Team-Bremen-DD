@@ -80,9 +80,16 @@ private extension ScheduleCreateView {
                 .foregroundColor(Color.fontLightGray)
             
             VStack(alignment: .leading, spacing: 0) {
-                // TODO: - 디자인 수정
-                DatePicker(selection: $viewModel.workDate, displayedComponents: .date) {
-                    Text("DatePickerTest")
+                Button(action: {
+                    viewModel.isHideDatePicker.toggle()
+                }, label: {
+                    Text("\(Calendar.current.component(.year, from: viewModel.workDate))년 \(Calendar.current.component(.month, from: viewModel.workDate))월 \(Calendar.current.component(.day, from: viewModel.workDate))일")
+                        .foregroundColor(.fontLightGray)
+                        .padding(.vertical, 9)
+                })
+                if viewModel.isHideDatePicker {
+                    DatePicker("", selection: $viewModel.workDate, displayedComponents: .date)
+                        .datePickerStyle(.wheel)
                 }
                 // TODO: - 컴포넌트 Divider 넣기
             }

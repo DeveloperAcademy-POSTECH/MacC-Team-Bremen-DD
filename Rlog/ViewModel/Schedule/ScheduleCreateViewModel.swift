@@ -17,6 +17,7 @@ final class ScheduleCreateViewModel: ObservableObject {
     @Published var reason = ""
     @Published var workDate = Date()
     @Published var workspaces: [WorkspaceEntity] = []
+    @Published var isHideDatePicker = false
     var isEmpty: Bool {
         if startHourText == "" && startMinuteText == "" && endHourText == "" && endMinuteText == "" {
             return true
