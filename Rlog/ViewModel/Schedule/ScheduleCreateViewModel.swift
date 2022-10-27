@@ -58,19 +58,11 @@ final class ScheduleCreateViewModel: ObservableObject {
     }
     
     func fetchWorkspaceButtonBackground(compare: WorkspaceEntity) -> Color {
-        if selectedWorkspace == compare {
-            return Color.primary
-        } else {
-            return Color(UIColor.systemGray6)
-        }
+        return selectedWorkspace == compare ? Color.primary : Color(UIColor.systemGray6)
     }
     
     func fetchWorkspaceButtonFontColor(compare: WorkspaceEntity) -> Color {
-        if selectedWorkspace == compare {
-            return .white
-        } else {
-            return Color.fontBlack
-        }
+        return selectedWorkspace == compare ? .white : Color.fontBlack
     }
 }
 
