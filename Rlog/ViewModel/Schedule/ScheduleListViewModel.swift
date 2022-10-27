@@ -47,6 +47,7 @@ private extension ScheduleListViewModel {
         }
     }
     
+    // TODO: - 날짜 struct 만들기
     func isUpcomming(day: Int16) -> Bool {
         if day >= Calendar.current.component(.day, from: Date()) {
             return true
@@ -118,6 +119,7 @@ private extension ScheduleCellViewModel {
         CoreDataManager.shared.editWorkday(of: workDay, weekDay: weekDay, yearInt: yearInt, monthInt: monthInt, dayInt: dayInt, startTime: startTime, endTime: endTime, spentHour: spentHour, hasDone: true)
     }
     
+    // TODO: - 날짜 struct 만들기
     func isToday(month: Int16, day: Int16) -> Bool {
         if month == Calendar.current.component(.month, from: Date()) {
             if day == Calendar.current.component(.day, from: Date()) {
