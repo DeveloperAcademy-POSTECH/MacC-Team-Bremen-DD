@@ -93,7 +93,7 @@ private extension ScheduleUpdateView {
                 .font(.subheadline)
                 .foregroundColor(Color.fontLightGray)
             
-            TimeEditer(time: $viewModel.startTime)
+            TimeEditer(time: $viewModel.startTime, isTimeChanged: $viewModel.isStartTimeChanaged)
                 .padding(.top, 8)
         }
     }
@@ -104,7 +104,7 @@ private extension ScheduleUpdateView {
                 .font(.subheadline)
                 .foregroundColor(Color.fontLightGray)
             
-            TimeEditer(time: $viewModel.endTime)
+            TimeEditer(time: $viewModel.endTime, isTimeChanged: $viewModel.isEndTimeChanaged)
                 .padding(.top, 8)
         }
     }
@@ -143,8 +143,8 @@ private extension ScheduleUpdateView {
     private struct TimeEditer: View {
         @ObservedObject var viewModel: TimeEditerViewModel
         
-        init(time: Binding<String>) {
-            self.viewModel = TimeEditerViewModel(time: time)
+        init(time: Binding<String>, isTimeChanged: Binding<Bool>) {
+            self.viewModel = TimeEditerViewModel(time: time, isTimeChanged: isTimeChanged)
         }
         
         var body: some View {
@@ -153,17 +153,16 @@ private extension ScheduleUpdateView {
                     .font(.title3)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
-                    .foregroundColor(.fontBlack)
+                    .foregroundColor(viewModel.fontColor)
                     .background(
                         RoundedRectangle(cornerRadius: 10)
-                            // 수정 예정
-                            .fill(viewModel.isTimeChanged ? Color.primary : Color(UIColor.systemGray5))
+                            .fill(viewModel.backgroundColor)
                     )
                     .padding(.trailing, 22)
                 HStack(spacing: 8) {
                     ForEach(TimeUnit.allCases, id: \.self) { unit in
                         Button(unit.rawValue) {
-                            viewModel.didTaptimePresetButton(unit: unit)
+                            viewModel.didTapTimePresetButton(unit: unit)
                         }
                         .buttonStyle(TimeEditButtonStyle())
                     }

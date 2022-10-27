@@ -19,13 +19,15 @@ final class ScheduleUpdateViewModel: ObservableObject {
     @Published var workDay: WorkDayEntity
     @Published var startTime: String
     @Published var endTime: String
-    // TODO: - spendHour를 double로 수정
+    @Published var isStartTimeChanaged = false
+    @Published var isEndTimeChanaged = false
     @Published var reason = ""
     let weekDay: Int16
     let yearInt: Int16
     let monthInt: Int16
     let dayInt: Int16
     let hasDone: Bool
+    // TODO: - spendHour를 double로 수정
     var spendHour: Int16 { return calculateSpentHour(startTime: startTime, endTime: endTime) }
     
     init(workDay: WorkDayEntity) {
@@ -84,13 +86,20 @@ private extension ScheduleUpdateViewModel {
 
 final class TimeEditerViewModel: ObservableObject {
     @Binding var time: String
-    @Published var isTimeChanged = false
-    
-    init(time: Binding<String>) {
-        self._time = time
+    @Binding var isTimeChanged: Bool
+    var fontColor: Color {
+        return isTimeChanged ? .white : .fontBlack
+    }
+    var backgroundColor: Color {
+        return isTimeChanged ? Color.primary : Color(UIColor.systemGray5)
     }
     
-    func didTaptimePresetButton(unit: TimeUnit) {
+    init(time: Binding<String>, isTimeChanged: Binding<Bool>) {
+        self._time = time
+        self._isTimeChanged = isTimeChanged
+    }
+    
+    func didTapTimePresetButton(unit: TimeUnit) {
         var setTime = DateFormatter().fetchTimeStringToDate(time: time)
         switch unit {
         case .minusOneHour:
