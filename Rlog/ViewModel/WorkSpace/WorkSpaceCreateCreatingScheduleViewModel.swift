@@ -11,8 +11,8 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
     @Binding var isShowingModal: Bool
     @Binding var scheduleList: [ScheduleModel]
     
-    @Published var isShowingConfirmButton = false
-    @Published var errorMessage = ""
+    var isShowingConfirmButton = false
+    var errorMessage = ""
     
     // 어떻게 더 깔끔하게 짤 수 있을까요? enum을 사용하면 깔끔해질까요?
     @Published var sevenDays: [selectedDayModel] = [
@@ -37,6 +37,7 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
             }
         }
     }
+
     @Published var startMinute = "" {
         didSet {
             if Int(startMinute) ?? 0 > 59 {
@@ -44,13 +45,11 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
                 errorMessage = "59분을 초과한 값을 넣을 수 없습니다."
                 isShowingConfirmButton = false
             } else {
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    self.errorMessage = ""
-                }
+                errorMessage = ""
             }
         }
     }
+
     @Published var endHour = "" {
         didSet {
             guard let endHour = Int(endHour) else { return }
@@ -67,6 +66,7 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
             }
         }
     }
+
     @Published var endMinute = "" {
         didSet {
             if Int(endMinute) ?? 0 > 59 {
@@ -74,10 +74,7 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
                 errorMessage = "59분을 초과한 값을 넣을 수 없습니다."
                 isShowingConfirmButton = false
             } else {
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    self.errorMessage = ""
-                }
+                errorMessage = ""
             }
         }
     }
@@ -91,46 +88,41 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
         sevenDays[index].isSelected.toggle()
         checkAllInputFilled()
     }
+
     func didTapConfirmButton() {
         Task {
             await appendScheduleToList()
-            dismissModal()
+            await dismissModal()
         }
     }
 }
 
 private extension WorkSpaceCreateCreatingScheduleViewModel {
+
+    @MainActor
     func appendScheduleToList() async {
         if startMinute.isEmpty {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.startMinute = "00"
-            }
+            startMinute = "00"
         }
         if endMinute.isEmpty {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.endMinute = "00"
-            }
+            endMinute = "00"
         }
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.scheduleList.append(
-                ScheduleModel(
-                    repeatedSchedule: self.getDayList(),
-                    startHour: self.startHour,
-                    startMinute: self.startMinute,
-                    endHour: self.endHour,
-                    endMinute: self.endMinute)
+        scheduleList.append(
+            ScheduleModel(
+                repeatedSchedule: self.getDayList(),
+                startHour: self.startHour,
+                startMinute: self.startMinute,
+                endHour: self.endHour,
+                endMinute: self.endMinute
             )
-        }
+        )
     }
+
+    @MainActor
     func dismissModal() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.isShowingModal = false
-        }
+        isShowingModal = false
     }
+
     func getDayList() -> [String] {
         var dayList: [String] = []
         for day in sevenDays {
@@ -140,6 +132,7 @@ private extension WorkSpaceCreateCreatingScheduleViewModel {
         }
         return dayList
     }
+
     func checkAllInputFilled() {
         if !startHour.isEmpty && !endHour.isEmpty && startHour != endHour && !getDayList().isEmpty {
             isShowingConfirmButton = true
