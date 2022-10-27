@@ -122,7 +122,7 @@ extension ScheduleListView {
         var cellButton: some View {
             HStack(spacing: 11) {
                 Button(action: {
-                    viewModel.isShowUpdateModal.toggle()
+                    viewModel.didTapEditButton()
                 }, label: {
                     Text("수정")
                         .font(.footnote)

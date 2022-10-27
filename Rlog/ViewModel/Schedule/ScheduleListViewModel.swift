@@ -27,6 +27,10 @@ final class ScheduleListViewModel: ObservableObject {
     func didSheetDismissed() {
         fetchAllWorkDays()
     }
+    
+    func didTapPlusButton() {
+        isShowCreateModal.toggle()
+    }
 }
 
 private extension ScheduleListViewModel {
@@ -113,6 +117,10 @@ final class ScheduleCellViewModel: ObservableObject {
                 NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info":"dismiss"])
             }
         }
+    }
+    
+    func didTapEditButton() {
+        isShowUpdateModal.toggle()
     }
 }
 

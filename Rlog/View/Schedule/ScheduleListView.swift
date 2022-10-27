@@ -60,7 +60,7 @@ private extension ScheduleListView {
             LazyVStack(alignment: .leading, spacing: 0) {
                 scheduleListHeader
                 Button(action: {
-                    viewModel.isShowCreateModal.toggle()
+                    viewModel.didTapPlusButton()
                 }, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
@@ -83,6 +83,7 @@ private extension ScheduleListView {
                 switch viewModel.selectedScheduleCase {
                 case .upcoming:
                     ForEach(viewModel.upcomingWorkDays, id: \.self) { schedule in
+                        // TODO: - 다른 방법 생각 생각해보기(async 등)
                         ScheduleCell(workDay: schedule) {
                             viewModel.didSheetDismissed()
                         }
@@ -90,6 +91,7 @@ private extension ScheduleListView {
                     .padding(.top)
                 case .past:
                     ForEach(viewModel.pastWorkDays, id: \.self) { schedule in
+                        // TODO: - 다른 방법 생각 생각해보기(async 등)
                         ScheduleCell(workDay: schedule) {
                             viewModel.didSheetDismissed()
                         }
