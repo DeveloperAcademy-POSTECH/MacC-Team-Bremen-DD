@@ -38,12 +38,8 @@ struct WorkSpaceListView: View {
             }
             .background(Color.cardBackground)
         }
-        .onReceive(
-            NotificationCenter.default.publisher(for: NSNotification.disMiss)
-        ) {
-            obj in
+        .onReceive(Notification.publisher) { obj in
             viewModel.didRecieveNotification()
         }
-
     }
 }

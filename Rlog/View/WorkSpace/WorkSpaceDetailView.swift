@@ -63,7 +63,7 @@ struct WorkSpaceDetailView: View {
                     Button("삭제하기", role: .destructive) {
                         viewModel.didTapDeleteButton() {
                             DispatchQueue.main.async {
-                                NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
+                                NotificationCenter.default.post(name: Notification.disMiss, object: nil, userInfo: ["info": "dismiss"])
                                 dismiss()
                             }
                         }
@@ -79,8 +79,10 @@ struct WorkSpaceDetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {
-                    NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
-                    self.dismiss()
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: Notification.disMiss, object: nil, userInfo: ["info": "dismiss"])
+                        dismiss()
+                    }
                 }){
                     Image(systemName: "chevron.left")
                         .foregroundColor(.fontBlack)
@@ -88,12 +90,11 @@ struct WorkSpaceDetailView: View {
                         .foregroundColor(.fontBlack)
                 }
             }
-
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
                     viewModel.didTapCompleteButton {
                         DispatchQueue.main.async {
-                            NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
+                            NotificationCenter.default.post(name: Notification.disMiss, object: nil, userInfo: ["info": "dismiss"])
                             dismiss()
                         }
                     }
