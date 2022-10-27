@@ -16,24 +16,8 @@ final class ScheduleListViewModel: ObservableObject {
     @Published var selectedScheduleCase: ScheduleCase = .upcoming
     @Published var allWorkDays: [WorkDayEntity] = []
     @Published var isShowCreateModal = false
-    var upcomingWorkDays: [WorkDayEntity] {
-        var updateWorkDays: [WorkDayEntity] = []
-        for workday in allWorkDays {
-            if isUpcomming(day: workday.dayInt) {
-                updateWorkDays.append(workday)
-            }
-        }
-        return updateWorkDays
-    }
-    var pastWorkDays: [WorkDayEntity] {
-        var updateWorkDays: [WorkDayEntity] = []
-        for workday in allWorkDays {
-            if !isUpcomming(day: workday.dayInt) {
-                updateWorkDays.append(workday)
-            }
-        }
-        return updateWorkDays
-    }
+    var upcomingWorkDays: [WorkDayEntity] = []
+    var pastWorkDays: [WorkDayEntity] = []
     let yearAndMonth: String = Date().fetchYearAndMonth()
     
     init() {
@@ -45,8 +29,15 @@ final class ScheduleListViewModel: ObservableObject {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             for workspace in result {
-                self.allWorkDays.append(contentsOf: CoreDataManager.shared.getWorkdays(of: workspace, yearInt: Calendar.current.component(.year, from: Date()), monthInt: Calendar.current.component(.month, from: Date()), limit: 20))
+                self.allWorkDays.append(contentsOf: CoreDataManager.shared.getWorkdays(
+                    of: workspace,
+                    yearInt: Calendar.current.component(.year, from: Date()),
+                    monthInt: Calendar.current.component(.month, from: Date()),
+                    limit: 20)
+                )
             }
+            self.upcomingWorkDays = self.allWorkDays.filter { self.isUpcomming(day: $0.dayInt) }
+            self.pastWorkDays = self.allWorkDays.filter { !self.isUpcomming(day: $0.dayInt) }
         }
     }
     
