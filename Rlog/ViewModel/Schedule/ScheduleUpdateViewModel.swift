@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum TimeUnit: String, CaseIterable {
     case minusOneHour = "-1시간"
@@ -20,6 +21,14 @@ final class ScheduleUpdateViewModel: ObservableObject {
     
     init(workDay: WorkDayEntity) {
         self.workDay = workDay
+    }
+}
+
+final class TimeEditerViewModel: ObservableObject {
+    @Binding var time: String
+    
+    init(time: Binding<String>) {
+        self._time = time
     }
 }
 

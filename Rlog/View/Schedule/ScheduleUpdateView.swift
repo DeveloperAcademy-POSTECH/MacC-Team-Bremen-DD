@@ -88,7 +88,7 @@ private extension ScheduleUpdateView {
                 .font(.subheadline)
                 .foregroundColor(Color.fontLightGray)
             
-            TimeEditer()
+            TimeEditer(time: $viewModel.workDay.startTime)
                 .padding(.top, 8)
         }
     }
@@ -99,7 +99,7 @@ private extension ScheduleUpdateView {
                 .font(.subheadline)
                 .foregroundColor(Color.fontLightGray)
             
-            TimeEditer()
+            TimeEditer(time: $viewModel.workDay.endTime)
                 .padding(.top, 8)
         }
     }
@@ -131,13 +131,19 @@ private extension ScheduleUpdateView {
     }
     
     private struct TimeEditer: View {
+        @ObservedObject var viewModel: TimeEditerViewModel
+        
+        init(time: Binding<String>) {
+            self.viewModel = TimeEditerViewModel(time: time)
+        }
+        
         var body: some View {
             HStack(spacing: 0) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(Color(UIColor.systemGray5))
                         .frame(width: 76, height: 32)
-                    Text("11 : 30")
+                    Text(viewModel.time)
                         .font(.title3)
                         .foregroundColor(.fontBlack)
                 }
