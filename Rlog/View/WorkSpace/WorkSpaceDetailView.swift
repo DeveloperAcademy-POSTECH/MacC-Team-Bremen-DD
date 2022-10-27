@@ -49,7 +49,6 @@ struct WorkSpaceDetailView: View {
                 }
                 
                 StrokeButton(label: "+ 근무 일정 추가하기", buttonType: .add) {
-
                 }
                 
                 HDivider()
@@ -62,9 +61,9 @@ struct WorkSpaceDetailView: View {
                 }
                 Spacer()
             }
+            .padding(.horizontal)
         }
-        .navigationTitle("근무수정") 
-        .padding(.horizontal)
+        .navigationTitle("근무수정")
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {

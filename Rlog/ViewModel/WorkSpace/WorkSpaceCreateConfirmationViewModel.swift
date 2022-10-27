@@ -28,6 +28,7 @@ final class WorkSpaceCreateConfirmationViewModel: ObservableObject {
         }
     }
 }
+
 private extension WorkSpaceCreateConfirmationViewModel {
     func popToRoot() {
         NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
@@ -43,7 +44,6 @@ private extension WorkSpaceCreateConfirmationViewModel {
     }
 
     func createWorkspace(completion: @escaping (() -> Void)) {
-
         guard let random = WorkspaceColor.allCases.randomElement(),
               let hourlyWage = Int16(workspaceData.hourlyWage),
               let paymentDay = Int16(workspaceData.paymentDay)
