@@ -15,6 +15,17 @@ final class WorkSpaceDetailViewModel: ObservableObject {
     @Published var hasTax: Bool
     @Published var hasJuhyu: Bool
 
+    @Published var hourlyWageString: String {
+        didSet {
+            self.hourlyWage = Int16(hourlyWageString) ?? 00
+        }
+    }
+    @Published var paymentDayString: String {
+        didSet {
+            self.paymentDay = Int16(paymentDayString) ?? 00
+        }
+    }
+
     var workspace: WorkspaceEntity
     @Published var schedules: [ScheduleEntity]
 
@@ -26,28 +37,35 @@ final class WorkSpaceDetailViewModel: ObservableObject {
         hasJuhyu = workspace.hasJuhyu
         self.workspace = workspace
         self.schedules = schedules
+        paymentDayString = String(workspace.paymentDay)
+        hourlyWageString = String(workspace.hourlyWage)
     }
 
     func didTapCompleteButton(completion: @escaping (() -> Void)) {
-        editWorkspace()
-        completion()
+        Task {
+            await editWorkspace()
+            completion()
+        }
     }
 
     func didTapDeleteButton(completion: @escaping (() -> Void)) {
-        deleteWorkspace()
-        completion()
+        Task {
+            await deleteWorkspace()
+            completion()
+        }
     }
 
     func didTapScheduleDeleteButton(schedule: ScheduleEntity) {
-        deleteSchedule(schedule: schedule) { [weak self] in
-            guard let self = self else { return }
-            self.getAllSchedules()
+        Task {
+            await deleteSchedule(schedule: schedule)
+            getAllSchedules()
         }
     }
 }
 
+// MARK: - Private Functions
 private extension WorkSpaceDetailViewModel {
-    func editWorkspace() {
+    func editWorkspace() async {
         CoreDataManager.shared.editWorkspace(
             workspace: workspace,
             name: name,
@@ -59,13 +77,12 @@ private extension WorkSpaceDetailViewModel {
         )
     }
 
-    func deleteWorkspace() {
+    func deleteWorkspace() async {
         CoreDataManager.shared.deleteWorkspace(workspace: workspace)
     }
 
-    func deleteSchedule(schedule: ScheduleEntity, completion: @escaping (() -> Void)) {
+    func deleteSchedule(schedule: ScheduleEntity) async {
         CoreDataManager.shared.deleteSchedule(of: schedule)
-        completion()
     }
 
     func getAllSchedules() {

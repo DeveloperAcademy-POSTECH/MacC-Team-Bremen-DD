@@ -32,40 +32,45 @@ struct WorkSpaceDetailView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            //TODO : Rectangle 자리 공용 컴포넌트 삽입
-            InputFormElement(containerType: .workplace, text: $viewModel.name)
-                .padding(.top, 33)
-//            InputFormElement(containerType: .wage, text: $viewModel.hourlyWage)
-//            InputFormElement(containerType: .payday, text: $viewModel.paymentDay)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                InputFormElement(containerType: .workplace, text: $viewModel.name)
+                    .padding(.top, 33)
+                InputFormElement(containerType: .wage, text: $viewModel.hourlyWageString)
+                InputFormElement(containerType: .payday, text: $viewModel.paymentDayString)
 
-            makePaymentSystemToggle()
+                makePaymentSystemToggle()
 
-            Text("근무일정")
-                .font(.subheadline)
-                .foregroundColor(.fontLightGray)
-            ForEach(viewModel.schedules) { schedule in
-                schedulesContainer(schedule: schedule)
-            }
-            StrokeButton(label: "+ 근무 일정 추가하기", buttonType: .add) {
-
-            }
-            HDivider()
-            StrokeButton(label: "근무지 삭제하기", buttonType: .destructive) {
-                viewModel.didTapDeleteButton() {
-                    NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
-                    dismiss()
+                Text("근무일정")
+                    .font(.subheadline)
+                    .foregroundColor(.fontLightGray)
+                ForEach(viewModel.schedules) { schedule in
+                    schedulesContainer(schedule: schedule)
                 }
+                
+                StrokeButton(label: "+ 근무 일정 추가하기", buttonType: .add) {
+                }
+                
+                HDivider()
+                
+                StrokeButton(label: "근무지 삭제하기", buttonType: .destructive) {
+                    viewModel.didTapDeleteButton() {
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
+                            dismiss()
+                        }
+                    }
+                }
+                Spacer()
             }
-            Spacer()
+            .padding(.horizontal)
         }
-        .navigationTitle("근무수정") 
-        .padding(.horizontal)
+        .navigationTitle("근무수정")
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {
-                    dismiss()
                     NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
+                    dismiss()
                 }){
                     Image(systemName: "chevron.left")
                         .foregroundColor(.fontBlack)
@@ -77,8 +82,10 @@ struct WorkSpaceDetailView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
                     viewModel.didTapCompleteButton {
-                        dismiss()
-                        NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
+                            dismiss()
+                        }
                     }
                 }){
                     Text("완료")

@@ -13,7 +13,6 @@ struct HDivider: View {
         // TODO: systemGray 적용 필요
             .foregroundColor(.gray)
             .frame(maxWidth: .infinity, maxHeight: 1)
-            .padding(.vertical)
     }
 }
 

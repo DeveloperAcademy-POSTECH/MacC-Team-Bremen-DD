@@ -15,11 +15,6 @@ final class WorkSpaceListViewModel: ObservableObject {
 
     init() {
         getAllWorkspaces()
-//        createMockData()
-    }
-
-    func didTapPlusButton() {
-        isShowingSheet = true
     }
 
     func didRecieveNotification() {
@@ -27,21 +22,13 @@ final class WorkSpaceListViewModel: ObservableObject {
     }
 }
 
+// MARK: - Private Functions
 private extension WorkSpaceListViewModel {
-
     func getAllWorkspaces() {
         let result = CoreDataManager.shared.getAllWorkspaces()
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.workspaces = result
         }
-    }
-
-    func createMockData() {
-        CoreDataManager.shared.createWorkspace(name: "김씨네 편의점", hourlyWage: 9000, paymentDay: 10, colorString: WorkspaceColor.pink.name, hasTax: true, hasJuhyu: true)
-
-        CoreDataManager.shared.createWorkspace(name: "김씨네 담배가게", hourlyWage: 9000, paymentDay: 10, colorString: WorkspaceColor.blue.name, hasTax: true, hasJuhyu: true)
-
-        CoreDataManager.shared.createWorkspace(name: "김씨네 돈가스 가게", hourlyWage: 9000, paymentDay: 10, colorString: WorkspaceColor.red.name, hasTax: true, hasJuhyu: true)
     }
 }

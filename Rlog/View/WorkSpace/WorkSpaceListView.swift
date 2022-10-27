@@ -28,16 +28,15 @@ struct WorkSpaceListView: View {
                         .fontWeight(.bold)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { viewModel.didTapPlusButton() }){
-                        Image(systemName: "plus")
-                            .fontWeight(.bold)
-                    }
+                    NavigationLink(
+                        destination: WorkSpaceCreateView(isActive: $viewModel.isShowingSheet),
+                        isActive: $viewModel.isShowingSheet) {
+                            Image(systemName: "plus")
+                                .fontWeight(.bold)
+                        }
                 }
             }
             .background(Color.cardBackground)
-            .sheet(isPresented: $viewModel.isShowingSheet) {
-                Text("Hello")
-            }
         }
         .onReceive(
             NotificationCenter.default.publisher(for: NSNotification.disMiss)

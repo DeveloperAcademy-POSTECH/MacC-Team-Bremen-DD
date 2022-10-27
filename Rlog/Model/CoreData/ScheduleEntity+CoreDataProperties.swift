@@ -20,7 +20,7 @@ extension ScheduleEntity {
     @NSManaged public var startMinute: Int16
     @NSManaged public var endHour: Int16
     @NSManaged public var endMinute: Int16
-    @NSManaged public var spentHour: Int16
+    @NSManaged public var spentHour: Double
     @NSManaged public var workspace: WorkspaceEntity
 
 }

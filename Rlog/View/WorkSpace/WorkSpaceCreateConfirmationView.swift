@@ -11,8 +11,12 @@ struct WorkSpaceCreateConfirmationView: View {
     @ObservedObject private var viewModel: WorkSpaceCreateConfirmationViewModel
     
     
-    init(isActive: Binding<Bool>, workspaceData: CreatingWorkSpaceModel, scheduleData: [CreatingScheduleModel]) {
-        self.viewModel = WorkSpaceCreateConfirmationViewModel(isActive: isActive, workspaceData: workspaceData, scheduleData: scheduleData)
+    init(isActive: Binding<Bool>, workspaceData: WorkSpaceModel, scheduleData: [ScheduleModel]) {
+        self.viewModel = WorkSpaceCreateConfirmationViewModel(
+            isActive: isActive,
+            workspaceData: workspaceData,
+            scheduleData: scheduleData
+        )
     }
     
     var body: some View {
@@ -45,18 +49,29 @@ private extension WorkSpaceCreateConfirmationView {
             Text("근무 유형")
                 .font(.caption)
                 .foregroundColor(.fontLightGray)
-            // TODO: 컨포넌트에 일하는 유형을 넣어준다.
-            RoundedRectangle(cornerRadius: 10)
-                .frame(height: 54)
+
+            VStack(spacing: 10) {
+                ForEach(viewModel.scheduleData, id: \.self) { schedule in
+                    ScheduleContainer(
+                        repeatedSchedule: schedule.repeatedSchedule,
+                        startHour: schedule.startHour,
+                        startMinute: schedule.startMinute,
+                        endHour: schedule.endHour,
+                        endMinute: schedule.endMinute
+                    )
+                }
+            }
         }
     }
     var toolbarConfirmButton: some View {
-        // -------> TODO: 컨포넌트로 대체
             Button{
-                viewModel.didTapConfirmButton()
+                viewModel.didTapConfirmButton() {
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
+                    }
+                }
             } label: {
                 Text("완료")
             }
-        // <------- TODO: 컨포넌트로 대체
         }
 }

@@ -57,7 +57,6 @@ final class WorkSpaceCreateViewModel: ObservableObject {
             }
         }
     }
-
     func didTapConfirmButton() {
         // 컨포넌트 작동 방식에 따라 수정이 필요할지도!
         if isActivatedConfirmButton {
@@ -66,10 +65,12 @@ final class WorkSpaceCreateViewModel: ObservableObject {
     }
 }
 
-extension WorkSpaceCreateViewModel {
-    func getData() -> CreatingWorkSpaceModel {
-        return CreatingWorkSpaceModel(name: name, paymentDay: paymentDay, hourlyWage: hourlyWage, hasTax: hasTax, hasJuhyu: hasJuhyu)
+private extension WorkSpaceCreateViewModel {
+
+    func getData() -> WorkSpaceModel {
+        return WorkSpaceModel(name: name, paymentDay: paymentDay, hourlyWage: hourlyWage, hasTax: hasTax, hasJuhyu: hasJuhyu)
     }
+
     func switchToNextStatus() {
         withAnimation(.easeIn) {
             switch currentState {
@@ -91,11 +92,13 @@ extension WorkSpaceCreateViewModel {
             isActivatedConfirmButton = false
         }
     }
+
     func inActivateButton(inputState: WritingState) {
         if currentState.rawValue == inputState.rawValue {
             isActivatedConfirmButton = false
         }
     }
+
     func activateButton(inputState: WritingState)  {
         if currentState.rawValue == inputState.rawValue {
             isActivatedConfirmButton = true
