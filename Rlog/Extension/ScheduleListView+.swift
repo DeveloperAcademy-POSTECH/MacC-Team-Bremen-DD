@@ -138,7 +138,7 @@ extension ScheduleListView {
                     viewModel.didDismiss()
                 }) {
                     NavigationView {
-                        ScheduleUpdateView()
+                        ScheduleUpdateView(workDay: viewModel.workDay)
                     }
                 }
                 if viewModel.isShowConfirmButton {
