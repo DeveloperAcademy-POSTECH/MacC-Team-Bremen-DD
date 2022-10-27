@@ -45,21 +45,6 @@ struct WorkSpaceCreateScheduleListView: View {
 }
 
 private extension WorkSpaceCreateScheduleListView {
-    @ViewBuilder
-    /*
-    func createScheduleListCell(for item: ScheduleModel) -> some View {
-        HStack(spacing: 0) {
-            ForEach(item.repeatedSchedule,id: \.self) { day in
-                Text("\(day) ")
-            }
-            Spacer()
-            Text("\(item.startHour):\(item.startMinute) - \(item.endHour):\(item.endMinute)")
-        }
-        .padding()
-        .background(Color(red: 0.962, green: 0.962, blue: 0.962))
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-    }
-    */
     var toolbarNextButton: some View {
         NavigationLink(destination:  WorkSpaceCreateConfirmationView(isActive: $viewModel.isActive, workspaceData: viewModel.workspaceModel, scheduleData: viewModel.scheduleList)) {
                 Text("다음")
@@ -67,11 +52,13 @@ private extension WorkSpaceCreateScheduleListView {
             }
             .disabled(viewModel.isDisabledNextButton)
     }
+
     var labelText: some View {
         Text("근무 유형")
             .font(.caption)
             .foregroundColor(.fontLightGray)
     }
+    
     var addScheduleButton: some View {
         StrokeButton(label: "+ 근무 일정 추가하기", buttonType: .add) {
             viewModel.didTapAddScheduleButton()
