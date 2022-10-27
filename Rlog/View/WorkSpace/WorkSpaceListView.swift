@@ -37,9 +37,9 @@ struct WorkSpaceListView: View {
                 }
             }
             .background(Color.cardBackground)
-        }
-        .onReceive(Notification.publisher) { obj in
-            viewModel.didRecieveNotification()
+            .onAppear {
+                viewModel.onAppear()
+            }
         }
     }
 }

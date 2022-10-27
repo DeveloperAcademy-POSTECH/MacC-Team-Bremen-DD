@@ -38,7 +38,9 @@ struct ScheduleCreateView: View {
                     if !viewModel.hasFilled {
                         Task {
                             await viewModel.didTapConfirmButton()
-                            dismiss()
+                            DispatchQueue.main.async {
+                                dismiss()
+                            }
                         }
                     }
                 }, label: {
