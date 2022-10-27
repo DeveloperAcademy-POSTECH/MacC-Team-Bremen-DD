@@ -24,8 +24,8 @@ final class WorkSpaceCreateConfirmationViewModel: ObservableObject {
     func didTapConfirmButton(completion: @escaping (() -> Void)) {
         Task {
             await createDatas()
-            completion()
             popToRoot()
+            completion()
         }
     }
 }

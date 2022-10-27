@@ -67,7 +67,7 @@ private extension WorkSpaceCreateConfirmationView {
             Button{
                 viewModel.didTapConfirmButton() {
                     DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
+                        NotificationCenter.default.post(name: Notification.disMiss, object: nil, userInfo: ["info": "dismiss"])
                     }
                 }
             } label: {
