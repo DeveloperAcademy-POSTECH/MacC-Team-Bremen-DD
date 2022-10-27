@@ -13,12 +13,10 @@ final class ScheduleCreateViewModel: ObservableObject {
     @Published var startMinuteText: String = ""
     @Published var endHourText: String = ""
     @Published var endMinuteText: String = ""
-    @Published var workspaceFlags: [Bool]
+    @Published var workspaceFlags: [Bool] = []
     @Published var reason = ""
     @Published var workDate = Date()
-    
-    // TODO: - 현재 가지고 있는 workspace 받아오기
-    let workspaces = ["제이든의 낚시 교실", "GS25 포항공대점", "제이든의 낚시 교실"]
+    @Published var workspaces: [WorkspaceEntity] = []
     private var isEmpty: Bool {
         if startHourText != "" && startMinuteText != "" && endHourText != "" && endMinuteText != "" {
             return true
@@ -26,7 +24,6 @@ final class ScheduleCreateViewModel: ObservableObject {
             return false
         }
     }
-    
     var confirmButtonForegroundColor: Color {
         if isEmpty {
             return Color.primary
@@ -36,6 +33,11 @@ final class ScheduleCreateViewModel: ObservableObject {
     }
     
     init() {
-        workspaceFlags = Array(repeating: false, count: workspaces.count)
+        let result = CoreDataManager.shared.getAllWorkspaces()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.workspaces = result
+            self.workspaceFlags = Array(repeating: false, count: result.count)
+        }
     }
 }

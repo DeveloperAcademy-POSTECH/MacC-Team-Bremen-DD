@@ -51,11 +51,10 @@ private extension ScheduleCreateView {
                 .foregroundColor(Color.fontLightGray)
             
             VStack(alignment: .leading, spacing: 0) {
-                // TODO: - 리스트 뷰에서 근무지명 받아오기
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: 8) {
                         ForEach(viewModel.workspaces.indices, id: \.self) { index in
-                            WorkSpaceToggleItem(flagOptions: $viewModel.workspaceFlags, tag: index, label: viewModel.workspaces[index])
+                            WorkSpaceToggleItem(flagOptions: $viewModel.workspaceFlags, tag: index, label: viewModel.workspaces[index].name)
                         }
                     }
                 }
@@ -75,7 +74,7 @@ private extension ScheduleCreateView {
             
             VStack(alignment: .leading, spacing: 0) {
                 // TODO: - 디자인 수정
-                DatePicker(selection: $viewModel.workDate, in: Date()..., displayedComponents: .date) {
+                DatePicker(selection: $viewModel.workDate, displayedComponents: .date) {
                     Text("DatePickerTest")
                 }
                 // TODO: - 컴포넌트 Divider 넣기
