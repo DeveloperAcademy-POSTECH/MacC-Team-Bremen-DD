@@ -29,6 +29,9 @@ struct ScheduleListView: View {
                 .frame(width: 176, height: 40)
                 .padding(.bottom)
         }
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.disMiss), perform: { obj in
+            viewModel.didRecieveNotification()
+        })
         .background(
            background
         )

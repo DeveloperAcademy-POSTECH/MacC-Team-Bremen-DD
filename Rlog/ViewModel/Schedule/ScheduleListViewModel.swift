@@ -24,7 +24,13 @@ final class ScheduleListViewModel: ObservableObject {
         fetchAllWorkDays()
     }
     
-    private func fetchAllWorkDays() {
+    func didRecieveNotification() {
+        fetchAllWorkDays()
+    }
+}
+
+private extension ScheduleListViewModel {
+    func fetchAllWorkDays() {
         let result = CoreDataManager.shared.getAllWorkspaces()
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -41,7 +47,7 @@ final class ScheduleListViewModel: ObservableObject {
         }
     }
     
-    private func isUpcomming(day: Int16) -> Bool {
+    func isUpcomming(day: Int16) -> Bool {
         if day >= Calendar.current.component(.day, from: Date()) {
             return true
         }
@@ -71,18 +77,45 @@ final class StatusPickerViewModel: ObservableObject {
 
 final class ScheduleCellViewModel: ObservableObject {
     @Published var isShowUpdateModal = false
+    var workDay: WorkDayEntity
     var isShowConfirmButton: Bool {
         if isToday(month: workDay.monthInt, day: workDay.dayInt) {
             return !workDay.hasDone
         }
         return false
     }
-    var workDay: WorkDayEntity
-    var weekDay: String
+    let weekDay: Int16
+    let yearInt: Int16
+    let monthInt: Int16
+    let dayInt: Int16
+    let startTime: String
+    let endTime: String
+    let spentHour: Int16
     
     init(workDay: WorkDayEntity) {
         self.workDay = workDay
-        self.weekDay = WeekDay(rawValue: workDay.weekDay)?.name ?? "월"
+        weekDay = workDay.weekDay
+        yearInt = workDay.yearInt
+        monthInt = workDay.monthInt
+        dayInt = workDay.dayInt
+        startTime = workDay.startTime
+        endTime = workDay.endTime
+        spentHour = workDay.spentHour
+    }
+    
+    func didTapConfirmButton() {
+        Task {
+            try? await updateHasDone()
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info":"dismiss"])
+            }
+        }
+    }
+}
+
+private extension ScheduleCellViewModel {
+    func updateHasDone() async throws {
+        CoreDataManager.shared.editWorkday(of: workDay, weekDay: weekDay, yearInt: yearInt, monthInt: monthInt, dayInt: dayInt, startTime: startTime, endTime: endTime, spentHour: spentHour, hasDone: true)
     }
     
     func isToday(month: Int16, day: Int16) -> Bool {
