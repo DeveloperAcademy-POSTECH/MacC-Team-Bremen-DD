@@ -80,7 +80,7 @@ private extension UnderlinedTextField {
     @ViewBuilder
     var textFieldView: some View {
         switch textFieldType {
-        case .workplace, .reason, .none(title: _):
+        case .workplace, .reason, .none:
             underlinedTextFieldView
         case .payday, .wage, .time:
             underlinedNumberFieldView
