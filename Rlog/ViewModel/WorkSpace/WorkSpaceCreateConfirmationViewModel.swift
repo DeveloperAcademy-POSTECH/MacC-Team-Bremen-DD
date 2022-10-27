@@ -91,7 +91,7 @@ private extension WorkSpaceCreateConfirmationViewModel {
     }
 
     func calculateSpentHour(startHour: Int16, startMinute: Int16, endHour: Int16, endMinute: Int16) -> Double {
-        let formatter = DateFormatter.calculateFormatter
+        let formatter = DateFormatter(dateFormatType: .timeAndMinute)
 
         let startDate = formatter.date(from: "\(startHour):\(startMinute)")
         let endDate = formatter.date(from: "\(endHour):\(endMinute)")
