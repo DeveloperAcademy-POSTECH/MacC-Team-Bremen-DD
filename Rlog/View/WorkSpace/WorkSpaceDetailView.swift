@@ -26,7 +26,6 @@ enum WorkSpaceDetailInfo: CaseIterable {
 struct WorkSpaceDetailView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel: WorkSpaceDetailViewModel
-//    @State private var showingAlert = false
 
     init(workspace: WorkspaceEntity, schedules: [ScheduleEntity]) {
         viewModel = WorkSpaceDetailViewModel(workspace: workspace, schedules: schedules)
