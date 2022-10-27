@@ -42,6 +42,10 @@ final class ScheduleUpdateViewModel: ObservableObject {
     func didTapConfirmButton() async {
         try? await updateWorkday()
     }
+    
+    func didTapDeleteButton() async {
+        try? await deleteWorkday()
+    }
 }
 
 private extension ScheduleUpdateViewModel {
@@ -57,6 +61,10 @@ private extension ScheduleUpdateViewModel {
             spentHour: spendHour,
             hasDone: hasDone
         )
+    }
+    
+    func deleteWorkday() async throws {
+        CoreDataManager.shared.deleteWorkDay(of: workDay)
     }
     
     // TODO: - Int16 -> Double로 수정, startTime, endTime 수정

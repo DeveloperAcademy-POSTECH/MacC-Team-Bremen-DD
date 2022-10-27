@@ -124,7 +124,12 @@ private extension ScheduleUpdateView {
     
     // TODO: - 컴포넌트 버튼으로 변경
     var deleteButton: some View {
-        Button(action: {}, label: {
+        Button(action: {
+            Task {
+                await viewModel.didTapDeleteButton()
+                dismiss()
+            }
+        }, label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.red)
