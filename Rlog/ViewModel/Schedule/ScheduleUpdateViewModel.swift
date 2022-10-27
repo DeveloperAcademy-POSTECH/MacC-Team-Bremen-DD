@@ -22,6 +22,21 @@ final class ScheduleUpdateViewModel: ObservableObject {
     init(workDay: WorkDayEntity) {
         self.workDay = workDay
     }
+    
+    func confirmButtonTapped() {
+        // TODO: - spendTime update
+        CoreDataManager.shared.editWorkday(
+            of: workDay,
+            weekDay: workDay.weekDay,
+            yearInt: workDay.yearInt,
+            monthInt: workDay.monthInt,
+            dayInt: workDay.dayInt,
+            startTime: workDay.startTime,
+            endTime: workDay.endTime,
+            spentHour: workDay.spentHour,
+            hasDone: workDay.hasDone
+        )
+    }
 }
 
 final class TimeEditerViewModel: ObservableObject {
@@ -32,12 +47,7 @@ final class TimeEditerViewModel: ObservableObject {
     }
     
     func timePresetButtonTapped(unit: TimeUnit) {
-        // TODO: - DateFormmater+.swift에서 구현
-        let dateFormmater = DateFormatter()
-        dateFormmater.dateFormat = "hh:mm"
-        
-        guard var setTime = dateFormmater.date(from: time) else { return }
-        
+        var setTime = DateFormatter().fetchTimeStringToDate(time: time)
         switch unit {
         case .minusOneHour:
             setTime.addTimeInterval(-60 * 60)
@@ -48,8 +58,7 @@ final class TimeEditerViewModel: ObservableObject {
         case .plusOneHour:
             setTime.addTimeInterval(60 * 60)
         }
-        
-        time = dateFormmater.string(from: setTime)
+        time = DateFormatter().fetchTimeDateToString(time: setTime)
     }
 }
 
