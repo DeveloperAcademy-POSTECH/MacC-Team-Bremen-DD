@@ -69,8 +69,10 @@ struct WorkSpaceDetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {
-                    NotificationCenter.default.post(name: Notification.disMiss, object: nil, userInfo: ["info": "dismiss"])
-                    dismiss()
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: Notification.disMiss, object: nil, userInfo: ["info": "dismiss"])
+                        dismiss()
+                    }
                 }){
                     Image(systemName: "chevron.left")
                         .foregroundColor(.fontBlack)
