@@ -65,7 +65,11 @@ private extension WorkSpaceCreateConfirmationView {
     }
     var toolbarConfirmButton: some View {
             Button{
-                viewModel.didTapConfirmButton()
+                viewModel.didTapConfirmButton() {
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
+                    }
+                }
             } label: {
                 Text("완료")
             }

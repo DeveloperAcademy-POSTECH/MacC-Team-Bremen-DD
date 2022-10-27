@@ -21,23 +21,20 @@ final class WorkSpaceCreateConfirmationViewModel: ObservableObject {
     private let hasTax = false
     private let hasJuhyu = false
 
-    func didTapConfirmButton() {
+    func didTapConfirmButton(completion: @escaping (() -> Void)) {
         Task {
             await createDatas()
+            completion()
             popToRoot()
         }
-//        createDatas() { [weak self] in
-//            guard let self = self else { return }
-//            self.popToRoot()
-//        }
     }
 }
 
+// MARK: - Private Functions
 private extension WorkSpaceCreateConfirmationViewModel {
     func popToRoot() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
             self.isActive = false
         }
     }

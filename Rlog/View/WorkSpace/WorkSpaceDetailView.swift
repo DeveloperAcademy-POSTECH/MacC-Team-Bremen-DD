@@ -55,8 +55,10 @@ struct WorkSpaceDetailView: View {
                 
                 StrokeButton(label: "근무지 삭제하기", buttonType: .destructive) {
                     viewModel.didTapDeleteButton() {
-                        NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
-                        dismiss()
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
+                            dismiss()
+                        }
                     }
                 }
                 Spacer()

@@ -63,6 +63,7 @@ final class WorkSpaceDetailViewModel: ObservableObject {
     }
 }
 
+// MARK: - Private Functions
 private extension WorkSpaceDetailViewModel {
     func editWorkspace() async {
         CoreDataManager.shared.editWorkspace(
