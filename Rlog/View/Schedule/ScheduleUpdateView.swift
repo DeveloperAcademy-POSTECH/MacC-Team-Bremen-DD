@@ -64,7 +64,7 @@ private extension ScheduleUpdateView {
                     .foregroundColor(Color.fontLightGray)
                     .padding(.horizontal)
                     .padding(.vertical, 9)
-                // TODO: - 컴포넌트 Divider 넣기
+                HDivider()
             }
             .padding(.top, 8)
         }
@@ -81,7 +81,7 @@ private extension ScheduleUpdateView {
                     .foregroundColor(Color.fontLightGray)
                     .padding(.horizontal)
                     .padding(.vertical, 9)
-                // TODO: - 컴포넌트 Divider 넣기
+                HDivider()
             }
             .padding(.top, 8)
         }
@@ -115,29 +115,18 @@ private extension ScheduleUpdateView {
                 .font(.subheadline)
                 .foregroundColor(Color.fontLightGray)
             
-            // TODO: - 컴포넌트 텍스트필드로 변경
-            TextField("사유를 입력해주세요.", text: $viewModel.reason)
-                .frame(height: 40)
-                .padding(.top)
+            UnderlinedTextField(textFieldType: .reason, text: $viewModel.reason)
+                .padding(.top, 25)
         }
     }
     
-    // TODO: - 컴포넌트 버튼으로 변경
     var deleteButton: some View {
-        Button(action: {
+        StrokeButton(label: "일정 삭제하기", buttonType: .destructive) {
             Task {
                 await viewModel.didTapDeleteButton()
                 dismiss()
             }
-        }, label: {
-            ZStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.red)
-                    .frame(height: 54)
-                Text("일정 삭제하기")
-                    .foregroundColor(Color.red)
-            }
-        })
+        }
     }
     
     private struct TimeEditer: View {
