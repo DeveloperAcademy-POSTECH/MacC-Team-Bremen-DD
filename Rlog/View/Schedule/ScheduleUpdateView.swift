@@ -149,19 +149,21 @@ private extension ScheduleUpdateView {
         
         var body: some View {
             HStack(spacing: 0) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(Color(UIColor.systemGray5))
-                        .frame(width: 76, height: 32)
-                    Text(viewModel.time)
-                        .font(.title3)
-                        .foregroundColor(.fontBlack)
-                }
-                .padding(.trailing, 22)
+                Text(viewModel.time)
+                    .font(.title3)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .foregroundColor(.fontBlack)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            // 수정 예정
+                            .fill(viewModel.isTimeChanged ? Color.primary : Color(UIColor.systemGray5))
+                    )
+                    .padding(.trailing, 22)
                 HStack(spacing: 8) {
                     ForEach(TimeUnit.allCases, id: \.self) { unit in
                         Button(unit.rawValue) {
-                            viewModel.timePresetButtonTapped(unit: unit)
+                            viewModel.didTaptimePresetButton(unit: unit)
                         }
                         .buttonStyle(TimeEditButtonStyle())
                     }

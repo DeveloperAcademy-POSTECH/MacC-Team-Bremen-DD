@@ -84,12 +84,13 @@ private extension ScheduleUpdateViewModel {
 
 final class TimeEditerViewModel: ObservableObject {
     @Binding var time: String
+    @Published var isTimeChanged = false
     
     init(time: Binding<String>) {
         self._time = time
     }
     
-    func timePresetButtonTapped(unit: TimeUnit) {
+    func didTaptimePresetButton(unit: TimeUnit) {
         var setTime = DateFormatter().fetchTimeStringToDate(time: time)
         switch unit {
         case .minusOneHour:
@@ -102,6 +103,7 @@ final class TimeEditerViewModel: ObservableObject {
             setTime.addTimeInterval(60 * 60)
         }
         time = DateFormatter().fetchTimeDateToString(time: setTime)
+        isTimeChanged = true
     }
 }
 
