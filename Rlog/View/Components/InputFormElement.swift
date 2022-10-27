@@ -41,6 +41,7 @@ private extension InputFormElement {
         case .wage: wageView
         case .payday: paydayView
         case .reason: reasonView
+        case .time: timeView
         case .none: noneView
         }
     }
@@ -106,6 +107,13 @@ private extension InputFormElement {
     var reasonView: some View {
         UnderlinedTextField(
             textFieldType: .reason,
+            text: text
+        )
+    }
+
+    var timeView: some View {
+        UnderlinedTextField(
+            textFieldType: .time,
             text: text
         )
     }

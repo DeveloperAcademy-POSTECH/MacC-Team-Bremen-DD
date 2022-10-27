@@ -4,7 +4,7 @@
         <attribute name="endHour" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="endMinute" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="repeatedSchedule" attributeType="Transformable" customClassName="[String]"/>
-        <attribute name="spentHour" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="spentHour" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startHour" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startMinute" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="workspace" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkspaceEntity" inverseName="schedules" inverseEntity="WorkspaceEntity"/>

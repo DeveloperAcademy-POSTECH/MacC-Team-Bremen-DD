@@ -66,15 +66,3 @@ private extension ScheduleContainer {
         }
     }
 }
-
-//struct ScheduleContainer_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ScheduleContainer(
-//            repeatedSchedule: ["월", "화", "수", "목", "금"],
-//            startHour: 9,
-//            startMinute: 30,
-//            endHour: 18,
-//            endMinute: 0
-//        )
-//    }
-//}

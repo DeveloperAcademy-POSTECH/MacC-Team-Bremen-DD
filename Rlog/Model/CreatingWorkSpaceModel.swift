@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct CreatingWorkSpaceModel {
-let name: String
-let paymentDay: String
-let hourlyWage: String
-let hasTax: Bool
-let hasJuhyu: Bool
+struct WorkSpaceModel {
+    let name: String
+    let paymentDay: String
+    let hourlyWage: String
+    let hasTax: Bool
+    let hasJuhyu: Bool
 }

@@ -8,14 +8,18 @@
 import Foundation
 
 extension DateFormatter {
-    func fetchTimeStringToDate(time: String) -> Date {
-        self.dateFormat = "hh:mm"
-        guard let date = self.date(from: time) else { return Date() }
-        return date
+    enum DateFormatType {
+        case timeAndMinute
+
+        var dateFormat: String {
+            switch self {
+            case .timeAndMinute: return "HH:mm"
+            }
+        }
     }
-    
-    func fetchTimeDateToString(time: Date) -> String {
-        self.dateFormat = "hh:mm"
-        return self.string(from: time)
+
+    convenience init(dateFormatType: DateFormatType) {
+        self.init()
+        self.dateFormat = dateFormatType.dateFormat
     }
 }

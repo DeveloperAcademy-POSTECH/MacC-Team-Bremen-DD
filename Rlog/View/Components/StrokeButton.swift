@@ -65,12 +65,3 @@ struct StrokeButton: View {
         }
     }
 }
-
-//struct StrokeButton_Previews: PreviewProvider {
-//    static var previews: some View {
-//        StrokeButton(
-//            label: "+ 근무 추가하기",
-//            buttonStyle: .destructive
-//        ) { }
-//    }
-//}
