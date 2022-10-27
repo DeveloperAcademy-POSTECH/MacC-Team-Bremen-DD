@@ -50,16 +50,19 @@ extension ScheduleListView {
     }
     
     struct ScheduleCell: View {
-        // TODO: - 근무지 모델 만들어서, ScheduleCell view model을 만들고, 거기서 값을 가져오는 방법을 사용할 예정
-        var isShow = true
+        @ObservedObject private var viewModel: ScheduleCellViewModel
+        
+        init(workDay: WorkDayEntity, didDismiss: @escaping () -> Void) {
+            self.viewModel = ScheduleCellViewModel(workDay: workDay) {
+                didDismiss()
+            }
+        }
         
         var body: some View {
-            // TODO: - 조건에 따른 색깔 처리(ViewModel 예정)
             VStack(spacing: 0) {
                 cellHeader
                 Spacer()
                 HStack(alignment: .bottom, spacing: 0) {
-                    // TODO: - 시작 시간, 끝난 시간 처리
                     cellContent
                     Spacer()
                     cellButton
@@ -76,8 +79,7 @@ extension ScheduleListView {
         var backgroundRectangle: some View {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
-                    // TODO: - view model에서 처리
-                    .fill(isShow ? Color("PointRed") : .white)
+                    .fill(viewModel.isShowConfirmButton ? Color(viewModel.workDay.workspace.colorString) : .white)
                     .frame(height: 97)
                 RoundedRectangle(cornerRadius: 9)
                     .fill(Color.white)
@@ -88,17 +90,15 @@ extension ScheduleListView {
         var cellHeader: some View {
             HStack(spacing: 0) {
                 Rectangle()
-                    .fill(Color("PointRed"))
+                    .fill(Color(viewModel.workDay.workspace.colorString))
                     .frame(width: 3, height: 17)
-                // TODO: - 근무지명 받아오기
-                Text("제이든의 낚시교실")
+                Text(viewModel.workDay.workspace.name)
                     .font(.callout)
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
                     .padding(.leading, 3)
                 Spacer()
-                // TODO: - 근무 시간 받아오기
-                Text("\(4)시간")
+                Text("\(viewModel.workDay.spentHour)시간")
                     .font(.subheadline)
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
@@ -109,11 +109,11 @@ extension ScheduleListView {
         var cellContent: some View {
             VStack(alignment: .leading, spacing: 0) {
                 // TODO: - 요일 처리
-                Text("\(10)월 \(8)일 금요일")
+                Text("\(viewModel.workDay.monthInt)월 \(viewModel.workDay.dayInt)일 \(WeekDay(rawValue: viewModel.workDay.weekDay)?.name ?? "월")요일")
                     .font(.caption)
                     .foregroundColor(Color.fontBlack)
                 // TODO: - 시간 처리, Int로 저장된 값을 String 두 단어로 처리하는 것은 찾아봐야 함
-                Text("17시 00분 ~ 21시 00분")
+                Text("\(viewModel.workDay.startTime)-\(viewModel.workDay.endTime)")
                     .font(.caption2)
                     .foregroundColor(Color.fontLightGray)
             }
@@ -122,7 +122,7 @@ extension ScheduleListView {
         var cellButton: some View {
             HStack(spacing: 11) {
                 Button(action: {
-                    // TODO: - 모달 구현
+                    viewModel.didTapEditButton()
                 }, label: {
                     Text("수정")
                         .font(.footnote)
@@ -134,9 +134,16 @@ extension ScheduleListView {
                         )
                         .cornerRadius(10)
                 })
-                if isShow {
+                .sheet(isPresented: $viewModel.isShowUpdateModal, onDismiss: {
+                    viewModel.didDismiss()
+                }) {
+                    NavigationView {
+                        ScheduleUpdateView(workDay: viewModel.workDay)
+                    }
+                }
+                if viewModel.isShowConfirmButton {
                     Button(action: {
-                        // TODO: - ViewModel에서 확인 로직 구현
+                        viewModel.didTapConfirmButton()
                     }, label: {
                         Text("확인")
                             .font(.footnote)

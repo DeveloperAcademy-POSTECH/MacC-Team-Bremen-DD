@@ -8,5 +8,10 @@
 import Foundation
 
 extension Date {
-    
+    // TODO: - DateFormatter+ 구현 후 삭제
+    func fetchYearAndMonth() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM"
+        return dateFormatter.string(from: self)
+    }
 }

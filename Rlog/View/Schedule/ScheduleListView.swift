@@ -21,10 +21,9 @@ struct ScheduleListView: View {
             }
             .padding(.horizontal)
             
-            // TODO: - #888888 컬러 추가
             Rectangle()
-                .fill(LinearGradient(colors: [Color.clear, Color.fontLightGray], startPoint: .top, endPoint: .bottom))
-                .frame(height: 83)
+                .fill(LinearGradient(colors: [Color.clear, Color.gradientGray], startPoint: .top, endPoint: .bottom))
+                .frame(height: 68)
             
             StatusPicker(selectedScheduleCase: $viewModel.selectedScheduleCase)
                 .frame(width: 176, height: 40)
@@ -46,8 +45,7 @@ private extension ScheduleListView {
     var header: some View {
         HStack(spacing: 0) {
             Image(systemName: "chevron.backward")
-            // TODO: - 연도와 월 받아오기
-            Text("2022.10")
+            Text(viewModel.yearAndMonth)
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(Color.fontBlack)
@@ -61,8 +59,9 @@ private extension ScheduleListView {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 0) {
                 scheduleListHeader
-                // TODO: - ScheduleCreateView로 연결
-                Button(action: {}, label: {
+                Button(action: {
+                    viewModel.didTapPlusButton()
+                }, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(.white)
@@ -74,12 +73,34 @@ private extension ScheduleListView {
                     }
                 })
                 .padding(.top)
-                ForEach(0..<3) { index in
-                    ScheduleCell()
+                .sheet(isPresented: $viewModel.isShowCreateModal, onDismiss: {
+                    viewModel.didSheetDismissed()
+                }) {
+                    NavigationView {
+                        ScheduleCreateView()
+                    }
                 }
-                .padding(.top)
+                switch viewModel.selectedScheduleCase {
+                case .upcoming:
+                    ForEach(viewModel.upcomingWorkDays, id: \.self) { schedule in
+                        // TODO: - 다른 방법 생각 생각해보기(async 등)
+                        ScheduleCell(workDay: schedule) {
+                            viewModel.didSheetDismissed()
+                        }
+                    }
+                    .padding(.top)
+                case .past:
+                    ForEach(viewModel.pastWorkDays, id: \.self) { schedule in
+                        // TODO: - 다른 방법 생각 생각해보기(async 등)
+                        ScheduleCell(workDay: schedule) {
+                            viewModel.didSheetDismissed()
+                        }
+                    }
+                    .padding(.top)
+                }
             }
         }
+        .scrollIndicators(.hidden)
     }
     
     var scheduleListHeader: some View {

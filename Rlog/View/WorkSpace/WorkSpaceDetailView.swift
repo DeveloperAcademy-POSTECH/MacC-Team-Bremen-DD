@@ -53,13 +53,23 @@ struct WorkSpaceDetailView: View {
                 
                 HDivider()
                 
-                StrokeButton(label: "근무지 삭제하기", buttonType: .destructive) {
-                    viewModel.didTapDeleteButton() {
-                        DispatchQueue.main.async {
-                            NotificationCenter.default.post(name: Notification.disMiss, object: nil, userInfo: ["info": "dismiss"])
-                            dismiss()
+                StrokeButton(label: "삭제하기", buttonType: .destructive) {
+                    viewModel.isAlertOpen = true
+                }
+                .alert("근무지 삭제하기", isPresented: $viewModel.isAlertOpen) {
+                    Button("취소", role: .cancel) {
+                        viewModel.isAlertOpen = false
+                    }
+                    Button("삭제하기", role: .destructive) {
+                        viewModel.didTapDeleteButton() {
+                            DispatchQueue.main.async {
+                                NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
+                                dismiss()
+                            }
                         }
                     }
+                } message: {
+                    Text("근무지를 삭제하시겠습니까?")
                 }
                 Spacer()
             }
