@@ -61,6 +61,7 @@ final class ScheduleCreateViewModel: ObservableObject {
     }
 }
 
+// TODO: - 요일 입력 수정
 private extension ScheduleCreateViewModel {
     func createWorkday() async throws {
         CoreDataManager.shared.createWorkday(
