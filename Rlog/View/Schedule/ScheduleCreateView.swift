@@ -34,7 +34,14 @@ struct ScheduleCreateView: View {
                 })
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {}, label: {
+                Button(action: {
+                    if !viewModel.hasFilled {
+                        Task {
+                            await viewModel.didTapConfirmButton()
+                            dismiss()
+                        }
+                    }
+                }, label: {
                     Text("완료")
                         .foregroundColor(viewModel.confirmButtonForegroundColor)
                 })
@@ -51,11 +58,21 @@ private extension ScheduleCreateView {
                 .foregroundColor(Color.fontLightGray)
             
             VStack(alignment: .leading, spacing: 0) {
-                // TODO: - 리스트 뷰에서 근무지명 받아오기
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: 8) {
-                        ForEach(viewModel.workspaces.indices, id: \.self) { index in
-                            WorkSpaceToggleItem(flagOptions: $viewModel.workspaceFlags, tag: index, label: viewModel.workspaces[index])
+                        ForEach(viewModel.workspaces, id: \.self) { workspace in
+                            Button(action: {
+                                viewModel.selectedWorkspace = workspace
+                            }, label: {
+                                Text(workspace.name)
+                                    .padding(.horizontal, 9)
+                                    .padding(.vertical, 3)
+                                    .foregroundColor(viewModel.fetchWorkspaceButtonFontColor(compare: workspace))
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(viewModel.fetchWorkspaceButtonBackground(compare: workspace))
+                                    )
+                            })
                         }
                     }
                 }
@@ -74,11 +91,17 @@ private extension ScheduleCreateView {
                 .foregroundColor(Color.fontLightGray)
             
             VStack(alignment: .leading, spacing: 0) {
-                // TODO: - 리스트 뷰에서 날짜 받아오기
-                Text("2022년 10월 8일")
-                    .foregroundColor(Color.fontLightGray)
-                    .padding(.horizontal)
-                    .padding(.vertical, 9)
+                Button(action: {
+                    viewModel.isHideDatePicker.toggle()
+                }, label: {
+                    Text("\(Calendar.current.component(.year, from: viewModel.workDate))년 \(Calendar.current.component(.month, from: viewModel.workDate))월 \(Calendar.current.component(.day, from: viewModel.workDate))일")
+                        .foregroundColor(.fontLightGray)
+                        .padding(.vertical, 9)
+                })
+                if viewModel.isHideDatePicker {
+                    DatePicker("", selection: $viewModel.workDate, displayedComponents: .date)
+                        .datePickerStyle(.wheel)
+                }
                 // TODO: - 컴포넌트 Divider 넣기
             }
             .padding(.top, 8)
@@ -126,43 +149,6 @@ private extension ScheduleCreateView {
             TextField("사유를 입력해주세요.", text: $viewModel.reason)
                 .frame(height: 40)
                 .padding(.top)
-        }
-    }
-    
-    private struct WorkSpaceToggleItem: View {
-        @Binding var flagOptions: [Bool]
-        var tag: Int
-        var label: String
-        
-        var body: some View {
-            let isOn = Binding ( get: { flagOptions[tag] }, set: { value in
-                flagOptions = flagOptions.enumerated().map { $0.0 == self.tag }
-            })
-            return Toggle(label, isOn: isOn).toggleStyle(WorkSpaceToggleStyle(label: label))
-        }
-    }
-    
-    private struct WorkSpaceToggleStyle: ToggleStyle {
-        var label: String
-        
-        func makeBody(configuration: Configuration) -> some View {
-            HStack(spacing: 0) {
-                Spacer()
-                    .frame(width: 10, height: 23)
-                Text(label)
-                    .font(.footnote)
-                    .foregroundColor(configuration.isOn ? .white : Color.fontLightGray)
-                Spacer()
-                    .frame(width: 10, height: 23)
-            }
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(configuration.isOn ? Color.primary : Color(UIColor.systemGray6))
-                    .frame(height: 24)
-            )
-            .onTapGesture {
-                configuration.isOn.toggle()
-            }
         }
     }
 }
