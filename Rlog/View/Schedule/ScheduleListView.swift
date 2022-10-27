@@ -29,9 +29,6 @@ struct ScheduleListView: View {
                 .frame(width: 176, height: 40)
                 .padding(.bottom)
         }
-        .onReceive(NotificationCenter.default.publisher(for: NSNotification.disMiss), perform: { obj in
-            viewModel.didRecieveNotification()
-        })
         .background(
            background
         )
@@ -76,7 +73,9 @@ private extension ScheduleListView {
                     }
                 })
                 .padding(.top)
-                .sheet(isPresented: $viewModel.isShowCreateModal) {
+                .sheet(isPresented: $viewModel.isShowCreateModal, onDismiss: {
+                    viewModel.didSheetDismissed()
+                }) {
                     NavigationView {
                         ScheduleCreateView()
                     }
@@ -84,12 +83,16 @@ private extension ScheduleListView {
                 switch viewModel.selectedScheduleCase {
                 case .upcoming:
                     ForEach(viewModel.upcomingWorkDays, id: \.self) { schedule in
-                        ScheduleCell(workDay: schedule)
+                        ScheduleCell(workDay: schedule) {
+                            viewModel.didSheetDismissed()
+                        }
                     }
                     .padding(.top)
                 case .past:
                     ForEach(viewModel.pastWorkDays, id: \.self) { schedule in
-                        ScheduleCell(workDay: schedule)
+                        ScheduleCell(workDay: schedule) {
+                            viewModel.didSheetDismissed()
+                        }
                     }
                     .padding(.top)
                 }

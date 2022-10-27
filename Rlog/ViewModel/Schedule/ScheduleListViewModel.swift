@@ -24,7 +24,7 @@ final class ScheduleListViewModel: ObservableObject {
         fetchAllWorkDays()
     }
     
-    func didRecieveNotification() {
+    func didSheetDismissed() {
         fetchAllWorkDays()
     }
 }
@@ -78,6 +78,7 @@ final class StatusPickerViewModel: ObservableObject {
 
 final class ScheduleCellViewModel: ObservableObject {
     @Published var isShowUpdateModal = false
+    var didDismiss: () -> Void
     var workDay: WorkDayEntity
     var isShowConfirmButton: Bool {
         if isToday(month: workDay.monthInt, day: workDay.dayInt) {
@@ -93,7 +94,7 @@ final class ScheduleCellViewModel: ObservableObject {
     let endTime: String
     let spentHour: Int16
     
-    init(workDay: WorkDayEntity) {
+    init(workDay: WorkDayEntity, didDismiss: @escaping () -> Void) {
         self.workDay = workDay
         weekDay = workDay.weekDay
         yearInt = workDay.yearInt
@@ -102,6 +103,7 @@ final class ScheduleCellViewModel: ObservableObject {
         startTime = workDay.startTime
         endTime = workDay.endTime
         spentHour = workDay.spentHour
+        self.didDismiss = didDismiss
     }
     
     func didTapConfirmButton() {

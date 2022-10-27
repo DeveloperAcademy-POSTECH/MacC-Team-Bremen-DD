@@ -52,8 +52,10 @@ extension ScheduleListView {
     struct ScheduleCell: View {
         @ObservedObject private var viewModel: ScheduleCellViewModel
         
-        init(workDay: WorkDayEntity) {
-            self.viewModel = ScheduleCellViewModel(workDay: workDay)
+        init(workDay: WorkDayEntity, didDismiss: @escaping () -> Void) {
+            self.viewModel = ScheduleCellViewModel(workDay: workDay) {
+                didDismiss()
+            }
         }
         
         var body: some View {
@@ -132,7 +134,9 @@ extension ScheduleListView {
                         )
                         .cornerRadius(10)
                 })
-                .sheet(isPresented: $viewModel.isShowUpdateModal) {
+                .sheet(isPresented: $viewModel.isShowUpdateModal, onDismiss: {
+                    viewModel.didDismiss()
+                }) {
                     NavigationView {
                         ScheduleUpdateView()
                     }
