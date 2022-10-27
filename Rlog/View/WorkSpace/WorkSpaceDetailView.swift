@@ -54,11 +54,11 @@ struct WorkSpaceDetailView: View {
                 HDivider()
                 
                 StrokeButton(label: "삭제하기", buttonType: .destructive) {
-                    viewModel.deleteWorkSpace = true
+                    viewModel.isAlertOpen = true
                 }
-                .alert("근무지 삭제하기", isPresented: $viewModel.deleteWorkSpace) {
+                .alert("근무지 삭제하기", isPresented: $viewModel.isAlertOpen) {
                     Button("취소", role: .cancel) {
-                        viewModel.deleteWorkSpace = false
+                        viewModel.isAlertOpen = false
                     }
                     Button("삭제하기", role: .destructive) {
                         viewModel.didTapDeleteButton() {
