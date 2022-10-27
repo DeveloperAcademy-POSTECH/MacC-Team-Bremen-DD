@@ -60,7 +60,7 @@ private extension ScheduleUpdateView {
                 .foregroundColor(Color.fontLightGray)
             
             VStack(alignment: .leading, spacing: 0) {
-                Text(viewModel.workDay.workspace.name)
+                Text(viewModel.workDayEntity.workspace.name)
                     .foregroundColor(Color.fontLightGray)
                     .padding(.horizontal)
                     .padding(.vertical, 9)
@@ -77,7 +77,7 @@ private extension ScheduleUpdateView {
                 .foregroundColor(Color.fontLightGray)
             
             VStack(alignment: .leading, spacing: 0) {
-                Text("\(viewModel.workDay.yearInt)년 \(viewModel.workDay.monthInt)월 \(viewModel.workDay.dayInt)일")
+                Text("\(viewModel.workDayEntity.yearInt)년 \(viewModel.workDayEntity.monthInt)월 \(viewModel.workDayEntity.dayInt)일")
                     .foregroundColor(Color.fontLightGray)
                     .padding(.horizontal)
                     .padding(.vertical, 9)
@@ -93,7 +93,7 @@ private extension ScheduleUpdateView {
                 .font(.subheadline)
                 .foregroundColor(Color.fontLightGray)
             
-            TimeEditer(time: $viewModel.startTime, isTimeChanged: $viewModel.isStartTimeChanaged)
+            TimeEditer(time: $viewModel.workday.startTime, isTimeChanged: $viewModel.isStartTimeChanaged)
                 .padding(.top, 8)
         }
     }
@@ -104,7 +104,7 @@ private extension ScheduleUpdateView {
                 .font(.subheadline)
                 .foregroundColor(Color.fontLightGray)
             
-            TimeEditer(time: $viewModel.endTime, isTimeChanged: $viewModel.isEndTimeChanaged)
+            TimeEditer(time: $viewModel.workday.endTime, isTimeChanged: $viewModel.isEndTimeChanaged)
                 .padding(.top, 8)
         }
     }

@@ -14,30 +14,38 @@ enum TimeUnit: String, CaseIterable {
     case plusOneHour = "+1시간"
 }
 
+// TODO: - 임시로 만든 모델 옮기기(파일 새로 생성 후 적용)
+struct Workday {
+    var weekDay: Int16
+    var yearInt: Int16
+    var monthInt: Int16
+    var dayInt: Int16
+    var startTime: String
+    var endTime: String
+    var hasDone: Bool
+    var spendHour: Int16
+}
+
 final class ScheduleUpdateViewModel: ObservableObject {
-    @Published var workDay: WorkDayEntity
-    @Published var startTime: String
-    @Published var endTime: String
+    @Published var workDayEntity: WorkDayEntity
     @Published var isStartTimeChanaged = false
     @Published var isEndTimeChanaged = false
     @Published var reason = ""
-    let weekDay: Int16
-    let yearInt: Int16
-    let monthInt: Int16
-    let dayInt: Int16
-    let hasDone: Bool
+    var workday: Workday
     // TODO: - spendHour를 double로 수정
-    var spendHour: Int16 { return calculateSpentHour(startTime: startTime, endTime: endTime) }
     
     init(workDay: WorkDayEntity) {
-        self.workDay = workDay
-        weekDay = workDay.weekDay
-        yearInt = workDay.yearInt
-        monthInt = workDay.monthInt
-        dayInt = workDay.dayInt
-        hasDone = workDay.hasDone
-        startTime = workDay.startTime
-        endTime = workDay.endTime
+        workDayEntity = workDay
+        self.workday = Workday(
+            weekDay: workDay.weekDay,
+            yearInt: workDay.yearInt,
+            monthInt: workDay.monthInt,
+            dayInt: workDay.dayInt,
+            startTime: workDay.startTime,
+            endTime: workDay.endTime,
+            hasDone: workDay.hasDone,
+            spendHour: workDay.spentHour
+        )
     }
     
     func didTapConfirmButton() async {
@@ -51,21 +59,22 @@ final class ScheduleUpdateViewModel: ObservableObject {
 
 private extension ScheduleUpdateViewModel {
     func updateWorkday() async throws {
+        workday.spendHour = calculateSpentHour(startTime: workday.startTime, endTime: workday.endTime)
         CoreDataManager.shared.editWorkday(
-            of: workDay,
-            weekDay: weekDay,
-            yearInt: yearInt,
-            monthInt: monthInt,
-            dayInt: dayInt,
-            startTime: startTime,
-            endTime: endTime,
-            spentHour: spendHour,
-            hasDone: hasDone
+            of: workDayEntity,
+            weekDay: workday.weekDay,
+            yearInt: workday.yearInt,
+            monthInt: workday.monthInt,
+            dayInt: workday.dayInt,
+            startTime: workday.startTime,
+            endTime: workday.endTime,
+            spentHour: workday.spendHour,
+            hasDone: workday.hasDone
         )
     }
     
     func deleteWorkday() async throws {
-        CoreDataManager.shared.deleteWorkDay(of: workDay)
+        CoreDataManager.shared.deleteWorkDay(of: workDayEntity)
     }
     
     // TODO: - Int16 -> Double로 수정, startTime, endTime 수정
