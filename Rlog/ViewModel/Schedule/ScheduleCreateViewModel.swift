@@ -13,39 +13,36 @@ final class ScheduleCreateViewModel: ObservableObject {
     @Published var startMinuteText: String = ""
     @Published var endHourText: String = ""
     @Published var endMinuteText: String = ""
-    @Published var workspaceFlags: [Bool] = []
     @Published var reason = ""
     @Published var workDate = Date()
-    @Published var workspaces: [WorkspaceEntity] = []
+    @Published var workspaces: [WorkspaceEntity] = [] {
+        didSet {
+            guard let selectedWorkspace = workspaces.first else { return }
+            self.selectedWorkspace = selectedWorkspace
+        }
+    }
+    @Published var selectedWorkspace: WorkspaceEntity?
     @Published var isHideDatePicker = false
-    var isEmpty: Bool {
-        if startHourText == "" && startMinuteText == "" && endHourText == "" && endMinuteText == "" {
+    var hasFilled: Bool {
+        if startHourText == "" || startMinuteText == "" || endHourText == "" || endMinuteText == "" {
             return true
         } else {
             return false
         }
     }
     var confirmButtonForegroundColor: Color {
-        if !isEmpty {
+        if !hasFilled {
             return Color.primary
         } else {
             return Color.fontLightGray
         }
     }
-    // TODO: - 업데이트된 모델에 맞게 수정(삭제)
+    // TODO: - 업데이트된 모델에 맞게 수정(삭제), 옵셔널 처리
     private var startTime: String {
-        return "\(Int(startHourText)!):\(Int(startMinuteText)!)"
+        return "\(Int(startHourText) ?? 12):\(Int(startMinuteText) ?? 0)"
     }
     private var endTime: String {
-        return "\(Int(endHourText)!):\(Int(endMinuteText)!)"
-    }
-    private var selectedWorkspace: WorkspaceEntity {
-        for (index, flag) in workspaceFlags.enumerated() {
-            if flag {
-                return workspaces[index]
-            }
-        }
-        return workspaces[0]
+        return "\(Int(endHourText) ?? 13):\(Int(endMinuteText) ?? 0)"
     }
     
     init() {
@@ -53,18 +50,34 @@ final class ScheduleCreateViewModel: ObservableObject {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.workspaces = result
-            self.workspaceFlags = Array(repeating: false, count: result.count)
         }
     }
     
     func didTapConfirmButton() async {
         try? await createWorkday()
     }
+    
+    func fetchWorkspaceButtonBackground(compare: WorkspaceEntity) -> Color {
+        if selectedWorkspace == compare {
+            return Color.primary
+        } else {
+            return Color(UIColor.systemGray6)
+        }
+    }
+    
+    func fetchWorkspaceButtonFontColor(compare: WorkspaceEntity) -> Color {
+        if selectedWorkspace == compare {
+            return .white
+        } else {
+            return Color.fontBlack
+        }
+    }
 }
 
 // TODO: - 요일 입력 수정
 private extension ScheduleCreateViewModel {
     func createWorkday() async throws {
+        guard let selectedWorkspace = selectedWorkspace else { return }
         CoreDataManager.shared.createWorkday(
             of: selectedWorkspace,
             weekDay: 0,
@@ -77,6 +90,7 @@ private extension ScheduleCreateViewModel {
         )
     }
     
+    // TODO: - 시간 관련 구조체로 이동
     func calculateSpentHour(startTime: String, endTime: String) -> Int16 {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"

@@ -35,7 +35,7 @@ struct ScheduleCreateView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    if !viewModel.isEmpty {
+                    if !viewModel.hasFilled {
                         Task {
                             await viewModel.didTapConfirmButton()
                             dismiss()
@@ -60,8 +60,19 @@ private extension ScheduleCreateView {
             VStack(alignment: .leading, spacing: 0) {
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: 8) {
-                        ForEach(viewModel.workspaces.indices, id: \.self) { index in
-                            WorkSpaceToggleItem(flagOptions: $viewModel.workspaceFlags, tag: index, label: viewModel.workspaces[index].name)
+                        ForEach(viewModel.workspaces, id: \.self) { workspace in
+                            Button(action: {
+                                viewModel.selectedWorkspace = workspace
+                            }, label: {
+                                Text(workspace.name)
+                                    .padding(.horizontal, 9)
+                                    .padding(.vertical, 3)
+                                    .foregroundColor(viewModel.fetchWorkspaceButtonFontColor(compare: workspace))
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(viewModel.fetchWorkspaceButtonBackground(compare: workspace))
+                                    )
+                            })
                         }
                     }
                 }
@@ -138,43 +149,6 @@ private extension ScheduleCreateView {
             TextField("사유를 입력해주세요.", text: $viewModel.reason)
                 .frame(height: 40)
                 .padding(.top)
-        }
-    }
-    
-    private struct WorkSpaceToggleItem: View {
-        @Binding var flagOptions: [Bool]
-        var tag: Int
-        var label: String
-        
-        var body: some View {
-            let isOn = Binding ( get: { flagOptions[tag] }, set: { value in
-                flagOptions = flagOptions.enumerated().map { $0.0 == self.tag }
-            })
-            return Toggle(label, isOn: isOn).toggleStyle(WorkSpaceToggleStyle(label: label))
-        }
-    }
-    
-    private struct WorkSpaceToggleStyle: ToggleStyle {
-        var label: String
-        
-        func makeBody(configuration: Configuration) -> some View {
-            HStack(spacing: 0) {
-                Spacer()
-                    .frame(width: 10, height: 23)
-                Text(label)
-                    .font(.footnote)
-                    .foregroundColor(configuration.isOn ? .white : Color.fontLightGray)
-                Spacer()
-                    .frame(width: 10, height: 23)
-            }
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(configuration.isOn ? Color.primary : Color(UIColor.systemGray6))
-                    .frame(height: 24)
-            )
-            .onTapGesture {
-                configuration.isOn.toggle()
-            }
         }
     }
 }
