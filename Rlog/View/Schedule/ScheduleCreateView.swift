@@ -74,11 +74,10 @@ private extension ScheduleCreateView {
                 .foregroundColor(Color.fontLightGray)
             
             VStack(alignment: .leading, spacing: 0) {
-                // TODO: - 리스트 뷰에서 날짜 받아오기
-                Text("2022년 10월 8일")
-                    .foregroundColor(Color.fontLightGray)
-                    .padding(.horizontal)
-                    .padding(.vertical, 9)
+                // TODO: - 디자인 수정
+                DatePicker(selection: $viewModel.workDate, in: Date()..., displayedComponents: .date) {
+                    Text("DatePickerTest")
+                }
                 // TODO: - 컴포넌트 Divider 넣기
             }
             .padding(.top, 8)
