@@ -34,7 +34,10 @@ struct ScheduleCreateView: View {
                 })
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {}, label: {
+                Button(action: {
+                    viewModel.confirmButtonTapped()
+                    dismiss()
+                }, label: {
                     Text("완료")
                         .foregroundColor(viewModel.confirmButtonForegroundColor)
                 })

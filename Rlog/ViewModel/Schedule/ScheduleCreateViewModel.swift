@@ -17,7 +17,7 @@ final class ScheduleCreateViewModel: ObservableObject {
     @Published var reason = ""
     @Published var workDate = Date()
     @Published var workspaces: [WorkspaceEntity] = []
-    private var isEmpty: Bool {
+    private var isNotEmpty: Bool {
         if startHourText != "" && startMinuteText != "" && endHourText != "" && endMinuteText != "" {
             return true
         } else {
@@ -25,7 +25,7 @@ final class ScheduleCreateViewModel: ObservableObject {
         }
     }
     var confirmButtonForegroundColor: Color {
-        if isEmpty {
+        if isNotEmpty {
             return Color.primary
         } else {
             return Color.fontLightGray
@@ -38,6 +38,12 @@ final class ScheduleCreateViewModel: ObservableObject {
             guard let self = self else { return }
             self.workspaces = result
             self.workspaceFlags = Array(repeating: false, count: result.count)
+        }
+    }
+    
+    func confirmButtonTapped() {
+        if isNotEmpty {
+            // TODO: - CoreData에 새 workday 생성
         }
     }
 }
