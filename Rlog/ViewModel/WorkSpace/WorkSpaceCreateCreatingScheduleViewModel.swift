@@ -44,7 +44,10 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
                 errorMessage = "59분을 초과한 값을 넣을 수 없습니다."
                 isShowingConfirmButton = false
             } else {
-                errorMessage = ""
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.errorMessage = ""
+                }
             }
         }
     }
@@ -71,7 +74,10 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
                 errorMessage = "59분을 초과한 값을 넣을 수 없습니다."
                 isShowingConfirmButton = false
             } else {
-                errorMessage = ""
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.errorMessage = ""
+                }
             }
         }
     }
@@ -86,30 +92,44 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
         checkAllInputFilled()
     }
     func didTapConfirmButton() {
-        appendScheduleToList()
-        dismissModal()
+        Task {
+            await appendScheduleToList()
+            dismissModal()
+        }
     }
 }
 
 private extension WorkSpaceCreateCreatingScheduleViewModel {
-    func appendScheduleToList() {
+    func appendScheduleToList() async {
         if startMinute.isEmpty {
-            startMinute = "00"
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.startMinute = "00"
+            }
         }
         if endMinute.isEmpty {
-            endMinute = "00"
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.endMinute = "00"
+            }
         }
-        scheduleList.append(
-            ScheduleModel(
-                repeatedSchedule: getDayList(),
-                startHour: startHour,
-                startMinute: startMinute,
-                endHour: endHour,
-                endMinute: endMinute)
-        )
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.scheduleList.append(
+                ScheduleModel(
+                    repeatedSchedule: self.getDayList(),
+                    startHour: self.startHour,
+                    startMinute: self.startMinute,
+                    endHour: self.endHour,
+                    endMinute: self.endMinute)
+            )
+        }
     }
     func dismissModal() {
-        isShowingModal = false
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.isShowingModal = false
+        }
     }
     func getDayList() -> [String] {
         var dayList: [String] = []

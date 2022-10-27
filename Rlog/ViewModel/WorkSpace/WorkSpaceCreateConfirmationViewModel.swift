@@ -22,28 +22,34 @@ final class WorkSpaceCreateConfirmationViewModel: ObservableObject {
     private let hasJuhyu = false
 
     func didTapConfirmButton() {
-        createDatas() { [weak self] in
-            guard let self = self else { return }
-            self.popToRoot()
+        Task {
+            await createDatas()
+            popToRoot()
         }
+//        createDatas() { [weak self] in
+//            guard let self = self else { return }
+//            self.popToRoot()
+//        }
     }
 }
 
 private extension WorkSpaceCreateConfirmationViewModel {
     func popToRoot() {
-        NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
-        isActive = false
-    }
-
-    func createDatas(completion: @escaping (() -> Void)) {
-        createWorkspace { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.createSchedules()
-            completion()
+            NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
+            self.isActive = false
         }
     }
 
-    func createWorkspace(completion: @escaping (() -> Void)) {
+    func createDatas() async {
+        Task {
+            await createWorkspace()
+            await createSchedules()
+        }
+    }
+
+    func createWorkspace() async {
         guard let random = WorkspaceColor.allCases.randomElement(),
               let hourlyWage = Int16(workspaceData.hourlyWage),
               let paymentDay = Int16(workspaceData.paymentDay)
@@ -57,10 +63,9 @@ private extension WorkSpaceCreateConfirmationViewModel {
             hasTax: workspaceData.hasTax,
             hasJuhyu: workspaceData.hasJuhyu
         )
-        completion()
     }
 
-    func createSchedules() {
+    func createSchedules() async {
         let workspace = CoreDataManager.shared.getWorkspace(by: workspaceData.name)
         for schedule in scheduleData {
 

@@ -42,25 +42,29 @@ final class WorkSpaceDetailViewModel: ObservableObject {
     }
 
     func didTapCompleteButton(completion: @escaping (() -> Void)) {
-        editWorkspace()
-        completion()
+        Task {
+            await editWorkspace()
+            completion()
+        }
     }
 
     func didTapDeleteButton(completion: @escaping (() -> Void)) {
-        deleteWorkspace()
-        completion()
+        Task {
+            await deleteWorkspace()
+            completion()
+        }
     }
 
     func didTapScheduleDeleteButton(schedule: ScheduleEntity) {
-        deleteSchedule(schedule: schedule) { [weak self] in
-            guard let self = self else { return }
-            self.getAllSchedules()
+        Task {
+            await deleteSchedule(schedule: schedule)
+            getAllSchedules()
         }
     }
 }
 
 private extension WorkSpaceDetailViewModel {
-    func editWorkspace() {
+    func editWorkspace() async {
         CoreDataManager.shared.editWorkspace(
             workspace: workspace,
             name: name,
@@ -72,13 +76,12 @@ private extension WorkSpaceDetailViewModel {
         )
     }
 
-    func deleteWorkspace() {
+    func deleteWorkspace() async {
         CoreDataManager.shared.deleteWorkspace(workspace: workspace)
     }
 
-    func deleteSchedule(schedule: ScheduleEntity, completion: @escaping (() -> Void)) {
+    func deleteSchedule(schedule: ScheduleEntity) async {
         CoreDataManager.shared.deleteSchedule(of: schedule)
-        completion()
     }
 
     func getAllSchedules() {
