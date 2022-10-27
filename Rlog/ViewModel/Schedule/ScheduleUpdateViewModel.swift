@@ -108,7 +108,9 @@ final class TimeEditorViewModel: ObservableObject {
     }
     
     func didTapTimePresetButton(unit: TimeUnit) {
-        var setTime = DateFormatter().fetchTimeStringToDate(time: time)
+        var formatter = DateFormatter(dateFormatType: .timeAndMinute)
+        guard var setTime = formatter.date(from: time) else { return }
+        
         switch unit {
         case .minusOneHour:
             setTime.addTimeInterval(-60 * 60)
@@ -119,7 +121,7 @@ final class TimeEditorViewModel: ObservableObject {
         case .plusOneHour:
             setTime.addTimeInterval(60 * 60)
         }
-        time = DateFormatter().fetchTimeDateToString(time: setTime)
+        time = formatter.string(from: setTime)
         isTimeChanged = true
     }
 }

@@ -141,10 +141,10 @@ private extension ScheduleUpdateView {
     }
     
     private struct TimeEditer: View {
-        @ObservedObject var viewModel: TimeEditerViewModel
+        @ObservedObject var viewModel: TimeEditorViewModel
         
         init(time: Binding<String>, isTimeChanged: Binding<Bool>) {
-            self.viewModel = TimeEditerViewModel(time: time, isTimeChanged: isTimeChanged)
+            self.viewModel = TimeEditorViewModel(time: time, isTimeChanged: isTimeChanged)
         }
         
         var body: some View {
