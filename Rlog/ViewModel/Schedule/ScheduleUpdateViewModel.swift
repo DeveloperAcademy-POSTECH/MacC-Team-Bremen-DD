@@ -30,5 +30,26 @@ final class TimeEditerViewModel: ObservableObject {
     init(time: Binding<String>) {
         self._time = time
     }
+    
+    func timePresetButtonTapped(unit: TimeUnit) {
+        // TODO: - DateFormmater+.swift에서 구현
+        let dateFormmater = DateFormatter()
+        dateFormmater.dateFormat = "hh:mm"
+        
+        guard var setTime = dateFormmater.date(from: time) else { return }
+        
+        switch unit {
+        case .minusOneHour:
+            setTime.addTimeInterval(-60 * 60)
+        case .minusHalfHour:
+            setTime.addTimeInterval(-30 * 60)
+        case .plusHalfHour:
+            setTime.addTimeInterval(30 * 60)
+        case .plusOneHour:
+            setTime.addTimeInterval(60 * 60)
+        }
+        
+        time = dateFormmater.string(from: setTime)
+    }
 }
 

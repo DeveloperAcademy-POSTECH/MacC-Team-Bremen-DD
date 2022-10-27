@@ -151,7 +151,7 @@ private extension ScheduleUpdateView {
                 HStack(spacing: 8) {
                     ForEach(TimeUnit.allCases, id: \.self) { unit in
                         Button(unit.rawValue) {
-                            // TODO: - ViewModel Action 구현
+                            viewModel.timePresetButtonTapped(unit: unit)
                         }
                         .buttonStyle(TimeEditButtonStyle())
                     }
