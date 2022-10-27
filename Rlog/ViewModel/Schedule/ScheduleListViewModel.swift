@@ -24,7 +24,7 @@ final class ScheduleListViewModel: ObservableObject {
         fetchAllWorkDays()
     }
     
-    func fetchAllWorkDays() {
+    private func fetchAllWorkDays() {
         let result = CoreDataManager.shared.getAllWorkspaces()
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -41,7 +41,7 @@ final class ScheduleListViewModel: ObservableObject {
         }
     }
     
-    func isUpcomming(day: Int16) -> Bool {
+    private func isUpcomming(day: Int16) -> Bool {
         if day >= Calendar.current.component(.day, from: Date()) {
             return true
         }

@@ -78,12 +78,13 @@ private extension ScheduleListView {
                         ScheduleCreateView()
                     }
                 }
-                if viewModel.selectedScheduleCase == .upcoming {
+                switch viewModel.selectedScheduleCase {
+                case .upcoming:
                     ForEach(viewModel.upcomingWorkDays, id: \.self) { schedule in
                         ScheduleCell(workDay: schedule)
                     }
                     .padding(.top)
-                } else {
+                case .past:
                     ForEach(viewModel.pastWorkDays, id: \.self) { schedule in
                         ScheduleCell(workDay: schedule)
                     }
