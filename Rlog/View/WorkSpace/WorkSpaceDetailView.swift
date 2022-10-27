@@ -26,6 +26,7 @@ enum WorkSpaceDetailInfo: CaseIterable {
 struct WorkSpaceDetailView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel: WorkSpaceDetailViewModel
+//    @State private var showingAlert = false
 
     init(workspace: WorkspaceEntity, schedules: [ScheduleEntity]) {
         viewModel = WorkSpaceDetailViewModel(workspace: workspace, schedules: schedules)
@@ -53,11 +54,21 @@ struct WorkSpaceDetailView: View {
                 
                 HDivider()
                 
-                StrokeButton(label: "근무지 삭제하기", buttonType: .destructive) {
-                    viewModel.didTapDeleteButton() {
-                        NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
-                        dismiss()
+                StrokeButton(label: "삭제하기", buttonType: .destructive) {
+                    viewModel.deleteWorkSpace = true
+                }
+                .alert("근무지 삭제하기", isPresented: $viewModel.deleteWorkSpace) {
+                    Button("취소", role: .cancel) {
+                        viewModel.deleteWorkSpace = false
                     }
+                    Button("삭제하기", role: .destructive) {
+                        viewModel.didTapDeleteButton() {
+                            NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
+                            dismiss()
+                        }
+                    }
+                } message: {
+                    Text("근무지를 삭제하시겠습니까?")
                 }
                 Spacer()
             }
