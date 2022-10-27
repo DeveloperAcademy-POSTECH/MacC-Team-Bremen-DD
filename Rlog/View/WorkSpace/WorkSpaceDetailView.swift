@@ -36,8 +36,8 @@ struct WorkSpaceDetailView: View {
             VStack(alignment: .leading, spacing: 16) {
                 InputFormElement(containerType: .workplace, text: $viewModel.name)
                     .padding(.top, 33)
-                InputFormElement(containerType: .wage, text: $viewModel.hourlyWage)
-                InputFormElement(containerType: .payday, text: $viewModel.paymentDay)
+                InputFormElement(containerType: .wage, text: $viewModel.hourlyWageString)
+                InputFormElement(containerType: .payday, text: $viewModel.paymentDayString)
 
                 makePaymentSystemToggle()
 

@@ -57,7 +57,6 @@ final class WorkSpaceCreateViewModel: ObservableObject {
             }
         }
     }
-
     func didTapConfirmButton() {
         // 컨포넌트 작동 방식에 따라 수정이 필요할지도!
         if isActivatedConfirmButton {

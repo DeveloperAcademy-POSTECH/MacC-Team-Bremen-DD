@@ -15,6 +15,17 @@ final class WorkSpaceDetailViewModel: ObservableObject {
     @Published var hasTax: Bool
     @Published var hasJuhyu: Bool
 
+    @Published var hourlyWageString: String {
+        didSet {
+            self.hourlyWage = Int16(hourlyWageString) ?? 00
+        }
+    }
+    @Published var paymentDayString: String {
+        didSet {
+            self.paymentDay = Int16(paymentDayString) ?? 00
+        }
+    }
+
     var workspace: WorkspaceEntity
     @Published var schedules: [ScheduleEntity]
 
@@ -26,6 +37,8 @@ final class WorkSpaceDetailViewModel: ObservableObject {
         hasJuhyu = workspace.hasJuhyu
         self.workspace = workspace
         self.schedules = schedules
+        paymentDayString = String(workspace.paymentDay)
+        hourlyWageString = String(workspace.hourlyWage)
     }
 
     func didTapCompleteButton(completion: @escaping (() -> Void)) {

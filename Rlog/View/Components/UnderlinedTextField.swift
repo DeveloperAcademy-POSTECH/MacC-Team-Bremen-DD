@@ -76,7 +76,7 @@ struct UnderlinedTextField<T>: View {
     }
 
     var body: some View {
-        textFieldView
+        underlinedTextFieldView
     }
 }
 
