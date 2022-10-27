@@ -92,7 +92,7 @@ private extension ScheduleUpdateViewModel {
     }
 }
 
-final class TimeEditerViewModel: ObservableObject {
+final class TimeEditorViewModel: ObservableObject {
     @Binding var time: String
     @Binding var isTimeChanged: Bool
     var fontColor: Color {
