@@ -65,11 +65,7 @@ struct UnderlinedTextField<T>: View {
                 guard let string = text as? String else { return }
                 guard let textToInt = Int(string) else { return }
                 if string.hasPrefix("0") || textToInt > 28 || textToInt < 1 { text = "" as! T }
-            case .reason:
-                return
-            case .time:
-                return 
-            case .none:
+            case .reason, .time, .none:
                 return
             }
         }
