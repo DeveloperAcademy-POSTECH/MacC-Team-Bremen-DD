@@ -32,32 +32,36 @@ struct WorkSpaceDetailView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            //TODO : Rectangle 자리 공용 컴포넌트 삽입
-            InputFormElement(containerType: .workplace, text: $viewModel.name)
-                .padding(.top, 33)
-            InputFormElement(containerType: .wage, text: $viewModel.hourlyWage)
-            InputFormElement(containerType: .payday, text: $viewModel.paymentDay)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                InputFormElement(containerType: .workplace, text: $viewModel.name)
+                    .padding(.top, 33)
+                InputFormElement(containerType: .wage, text: $viewModel.hourlyWage)
+                InputFormElement(containerType: .payday, text: $viewModel.paymentDay)
 
-            makePaymentSystemToggle()
+                makePaymentSystemToggle()
 
-            Text("근무일정")
-                .font(.subheadline)
-                .foregroundColor(.fontLightGray)
-            ForEach(viewModel.schedules) { schedule in
-                schedulesContainer(schedule: schedule)
-            }
-            StrokeButton(label: "+ 근무 일정 추가하기", buttonType: .add) {
-
-            }
-            HDivider()
-            StrokeButton(label: "근무지 삭제하기", buttonType: .destructive) {
-                viewModel.didTapDeleteButton() {
-                    NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
-                    dismiss()
+                Text("근무일정")
+                    .font(.subheadline)
+                    .foregroundColor(.fontLightGray)
+                ForEach(viewModel.schedules) { schedule in
+                    schedulesContainer(schedule: schedule)
                 }
+                
+                StrokeButton(label: "+ 근무 일정 추가하기", buttonType: .add) {
+
+                }
+                
+                HDivider()
+                
+                StrokeButton(label: "근무지 삭제하기", buttonType: .destructive) {
+                    viewModel.didTapDeleteButton() {
+                        NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
+                        dismiss()
+                    }
+                }
+                Spacer()
             }
-            Spacer()
         }
         .navigationTitle("근무수정") 
         .padding(.horizontal)
