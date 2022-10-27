@@ -21,11 +21,10 @@ final class WorkSpaceCreateConfirmationViewModel: ObservableObject {
     private let hasTax = false
     private let hasJuhyu = false
 
-    func didTapConfirmButton(completion: @escaping (() -> Void)) {
+    func didTapConfirmButton() {
         Task {
             await createDatas()
             popToRoot()
-            completion()
         }
     }
 }

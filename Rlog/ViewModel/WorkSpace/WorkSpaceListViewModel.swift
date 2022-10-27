@@ -20,11 +20,7 @@ final class WorkSpaceListViewModel: ObservableObject {
         }
     }
 
-    init() {
-        getAllWorkspaces()
-    }
-
-    func didRecieveNotification() {
+    func onAppear() {
         getAllWorkspaces()
     }
 }
