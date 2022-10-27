@@ -14,6 +14,7 @@ final class WorkSpaceDetailViewModel: ObservableObject {
     @Published var paymentDay: Int16
     @Published var hasTax: Bool
     @Published var hasJuhyu: Bool
+    @Published var isAlertOpen: Bool
 
     @Published var hourlyWageString: String {
         didSet {
@@ -39,6 +40,7 @@ final class WorkSpaceDetailViewModel: ObservableObject {
         self.schedules = schedules
         paymentDayString = String(workspace.paymentDay)
         hourlyWageString = String(workspace.hourlyWage)
+        isAlertOpen = false
     }
 
     func didTapCompleteButton(completion: @escaping (() -> Void)) {
