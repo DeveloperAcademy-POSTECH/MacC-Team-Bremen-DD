@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct MainTabView: View {
+    
+    init() {
+        UITabBar.appearance().backgroundColor = UIColor.white
+    }
+    
     var body: some View {
         TabView {
             ForEach(Tab.allCases, id: \.self) { tab in
