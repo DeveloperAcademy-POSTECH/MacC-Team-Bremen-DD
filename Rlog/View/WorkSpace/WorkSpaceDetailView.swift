@@ -91,8 +91,10 @@ struct WorkSpaceDetailView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
                     viewModel.didTapCompleteButton {
-                        NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
-                        dismiss()
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
+                            dismiss()
+                        }
                     }
                 }){
                     Text("완료")

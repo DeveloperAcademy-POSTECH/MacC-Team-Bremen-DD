@@ -22,8 +22,8 @@ final class WorkSpaceListViewModel: ObservableObject {
     }
 }
 
+// MARK: - Private Functions
 private extension WorkSpaceListViewModel {
-
     func getAllWorkspaces() {
         let result = CoreDataManager.shared.getAllWorkspaces()
         DispatchQueue.main.async { [weak self] in

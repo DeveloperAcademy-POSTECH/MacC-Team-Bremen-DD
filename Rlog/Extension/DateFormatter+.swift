@@ -8,12 +8,6 @@
 import Foundation
 
 extension DateFormatter {
-//    static var calculateFormatter: DateFormatter = {
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "HH:mm"
-//        return formatter
-//    }()
-
     enum DateFormatType {
         case timeAndMinute
 

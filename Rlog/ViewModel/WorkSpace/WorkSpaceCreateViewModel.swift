@@ -65,10 +65,12 @@ final class WorkSpaceCreateViewModel: ObservableObject {
     }
 }
 
-extension WorkSpaceCreateViewModel {
+private extension WorkSpaceCreateViewModel {
+
     func getData() -> WorkSpaceModel {
         return WorkSpaceModel(name: name, paymentDay: paymentDay, hourlyWage: hourlyWage, hasTax: hasTax, hasJuhyu: hasJuhyu)
     }
+
     func switchToNextStatus() {
         withAnimation(.easeIn) {
             switch currentState {
@@ -90,11 +92,13 @@ extension WorkSpaceCreateViewModel {
             isActivatedConfirmButton = false
         }
     }
+
     func inActivateButton(inputState: WritingState) {
         if currentState.rawValue == inputState.rawValue {
             isActivatedConfirmButton = false
         }
     }
+
     func activateButton(inputState: WritingState)  {
         if currentState.rawValue == inputState.rawValue {
             isActivatedConfirmButton = true

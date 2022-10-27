@@ -11,19 +11,10 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
     @Binding var isShowingModal: Bool
     @Binding var scheduleList: [ScheduleModel]
     
-    @Published var isShowingConfirmButton = false
-    @Published var errorMessage = ""
-    
-    // 어떻게 더 깔끔하게 짤 수 있을까요? enum을 사용하면 깔끔해질까요?
-    @Published var sevenDays: [selectedDayModel] = [
-        selectedDayModel(dayName: "월", isSelected: false),
-        selectedDayModel(dayName: "화", isSelected: false),
-        selectedDayModel(dayName: "수", isSelected: false),
-        selectedDayModel(dayName: "목", isSelected: false),
-        selectedDayModel(dayName: "금", isSelected: false),
-        selectedDayModel(dayName: "토", isSelected: false),
-        selectedDayModel(dayName: "일", isSelected: false)
-    ]
+    var isShowingConfirmButton = false
+    var errorMessage = ""
+
+    @Published var sevenDays: [selectedDayModel] = SevenDays.allCases.map { $0.day }
     
     @Published var startHour = "" {
         didSet {
@@ -37,6 +28,7 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
             }
         }
     }
+
     @Published var startMinute = "" {
         didSet {
             if Int(startMinute) ?? 0 > 59 {
@@ -48,6 +40,7 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
             }
         }
     }
+
     @Published var endHour = "" {
         didSet {
             guard let endHour = Int(endHour) else { return }
@@ -64,6 +57,7 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
             }
         }
     }
+
     @Published var endMinute = "" {
         didSet {
             if Int(endMinute) ?? 0 > 59 {
@@ -85,14 +79,19 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
         sevenDays[index].isSelected.toggle()
         checkAllInputFilled()
     }
+
     func didTapConfirmButton() {
-        appendScheduleToList()
-        dismissModal()
+        Task {
+            await appendScheduleToList()
+            await dismissModal()
+        }
     }
 }
 
+// MARK: - Private Functions
 private extension WorkSpaceCreateCreatingScheduleViewModel {
-    func appendScheduleToList() {
+    @MainActor
+    func appendScheduleToList() async {
         if startMinute.isEmpty {
             startMinute = "00"
         }
@@ -101,16 +100,20 @@ private extension WorkSpaceCreateCreatingScheduleViewModel {
         }
         scheduleList.append(
             ScheduleModel(
-                repeatedSchedule: getDayList(),
-                startHour: startHour,
-                startMinute: startMinute,
-                endHour: endHour,
-                endMinute: endMinute)
+                repeatedSchedule: self.getDayList(),
+                startHour: self.startHour,
+                startMinute: self.startMinute,
+                endHour: self.endHour,
+                endMinute: self.endMinute
+            )
         )
     }
+
+    @MainActor
     func dismissModal() {
         isShowingModal = false
     }
+
     func getDayList() -> [String] {
         var dayList: [String] = []
         for day in sevenDays {
@@ -120,6 +123,7 @@ private extension WorkSpaceCreateCreatingScheduleViewModel {
         }
         return dayList
     }
+
     func checkAllInputFilled() {
         if !startHour.isEmpty && !endHour.isEmpty && startHour != endHour && !getDayList().isEmpty {
             isShowingConfirmButton = true
@@ -132,4 +136,27 @@ private extension WorkSpaceCreateCreatingScheduleViewModel {
 struct selectedDayModel: Hashable {
     let dayName: String
     var isSelected: Bool
+}
+
+fileprivate enum SevenDays: CaseIterable {
+    case mon, tues, wed, thurs, fri, sat, sun
+
+    var day: selectedDayModel {
+        switch self {
+        case .mon:
+            return selectedDayModel(dayName: "월", isSelected: false)
+        case .tues:
+            return selectedDayModel(dayName: "화", isSelected: false)
+        case .wed:
+            return selectedDayModel(dayName: "수", isSelected: false)
+        case .thurs:
+            return selectedDayModel(dayName: "목", isSelected: false)
+        case .fri:
+            return selectedDayModel(dayName: "금", isSelected: false)
+        case .sat:
+            return selectedDayModel(dayName: "토", isSelected: false)
+        case .sun:
+            return selectedDayModel(dayName: "일", isSelected: false)
+        }
+    }
 }

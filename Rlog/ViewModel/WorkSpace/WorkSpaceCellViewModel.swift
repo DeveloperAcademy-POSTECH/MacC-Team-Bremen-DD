@@ -20,8 +20,8 @@ final class WorkSpaceCellViewModel: ObservableObject {
 
 }
 
+// MARK: - Private Functions
 private extension WorkSpaceCellViewModel {
-
     func getAllSchedules() {
         let result = CoreDataManager.shared.getAllSchedules(of: workspace)
 
