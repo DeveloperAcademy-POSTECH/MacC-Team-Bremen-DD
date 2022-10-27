@@ -208,8 +208,3 @@ private struct UITextFieldRepresentable<T>: UIViewRepresentable {
     }
 }
 
-//UITextFieldRepresentable(
-//    text: $text,
-//    placeholder: textFieldType.placeholder,
-//    isFocused: $isFocused
-//)
