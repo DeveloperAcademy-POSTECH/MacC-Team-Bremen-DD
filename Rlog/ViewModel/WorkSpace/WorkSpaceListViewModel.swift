@@ -11,7 +11,14 @@ import Foundation
 final class WorkSpaceListViewModel: ObservableObject {
     @Published var workspaces: [WorkspaceEntity] = []
     @Published var schedules: [ScheduleEntity] = []
-    @Published var isShowingSheet = false
+    @Published var isShowingSheet = false {
+        didSet {
+            if isShowingSheet == false {
+                print("DEBUG")
+                getAllWorkspaces()
+            }
+        }
+    }
 
     init() {
         getAllWorkspaces()

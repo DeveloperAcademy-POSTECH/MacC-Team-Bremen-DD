@@ -80,7 +80,6 @@ struct WorkSpaceDetailView: View {
                         .foregroundColor(.fontBlack)
                 }
             }
-
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
                     viewModel.didTapCompleteButton {
