@@ -41,7 +41,9 @@ struct ScheduleUpdateView: View {
                 Button(action: {
                     Task {
                         await viewModel.didTapConfirmButton()
-                        dismiss()
+                        DispatchQueue.main.async {
+                            dismiss()
+                        }
                     }
                 }, label: {
                     Text("완료")
@@ -124,7 +126,9 @@ private extension ScheduleUpdateView {
         StrokeButton(label: "일정 삭제하기", buttonType: .destructive) {
             Task {
                 await viewModel.didTapDeleteButton()
-                dismiss()
+                DispatchQueue.main.async {
+                    dismiss()
+                }
             }
         }
     }

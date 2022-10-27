@@ -9,8 +9,7 @@ import SwiftUI
 
 struct WorkSpaceCreateConfirmationView: View {
     @ObservedObject private var viewModel: WorkSpaceCreateConfirmationViewModel
-    
-    
+
     init(isActive: Binding<Bool>, workspaceData: WorkSpaceModel, scheduleData: [ScheduleModel]) {
         self.viewModel = WorkSpaceCreateConfirmationViewModel(
             isActive: isActive,
@@ -65,11 +64,7 @@ private extension WorkSpaceCreateConfirmationView {
     }
     var toolbarConfirmButton: some View {
             Button{
-                viewModel.didTapConfirmButton() {
-                    DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: Notification.disMiss, object: nil, userInfo: ["info": "dismiss"])
-                    }
-                }
+                viewModel.didTapConfirmButton()
             } label: {
                 Text("완료")
             }
