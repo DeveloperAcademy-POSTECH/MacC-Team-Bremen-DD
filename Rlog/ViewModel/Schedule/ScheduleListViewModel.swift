@@ -113,9 +113,6 @@ final class ScheduleCellViewModel: ObservableObject {
     func didTapConfirmButton() {
         Task {
             try? await updateHasDone()
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info":"dismiss"])
-            }
         }
     }
     

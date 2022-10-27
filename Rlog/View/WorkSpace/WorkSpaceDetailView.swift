@@ -63,7 +63,7 @@ struct WorkSpaceDetailView: View {
                     Button("삭제하기", role: .destructive) {
                         viewModel.didTapDeleteButton() {
                             DispatchQueue.main.async {
-                                NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
+                                NotificationCenter.default.post(name: Notification.disMiss, object: nil, userInfo: ["info": "dismiss"])
                                 dismiss()
                             }
                         }
