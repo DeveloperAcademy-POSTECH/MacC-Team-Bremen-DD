@@ -126,9 +126,3 @@ private extension WorkSpaceCreateCreatingScheduleView {
         }
     }
 }
-
-//                if viewModel.isShowingOverSingleDay {
-//                    Text("익일")
-//                        .font(.caption)
-//                        .foregroundColor(.fontDarkGray)
-//                }
