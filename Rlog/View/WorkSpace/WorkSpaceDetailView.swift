@@ -64,7 +64,7 @@ struct WorkSpaceDetailView: View {
                         viewModel.didTapDeleteButton() {
                             DispatchQueue.main.async {
                                 NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
-                                self.dismiss()
+                                dismiss()
                             }
                         }
                     }
@@ -94,7 +94,7 @@ struct WorkSpaceDetailView: View {
                     viewModel.didTapCompleteButton {
                         DispatchQueue.main.async {
                             NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
-                            self.dismiss()
+                            dismiss()
                         }
                     }
                 }){
