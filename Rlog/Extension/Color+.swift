@@ -20,4 +20,6 @@ extension Color {
     static let background = Color("Background")
     static let cardBackground = Color("CardBackground")
     static let containerBackground = Color("ContainerBackground")
+    static let gradientGray = Color("GradientGray")
+    static let strokeGray = Color("StrokeGray")
 }
