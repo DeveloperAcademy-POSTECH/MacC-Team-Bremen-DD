@@ -64,7 +64,7 @@ struct WorkSpaceDetailView: View {
                         viewModel.didTapDeleteButton() {
                             DispatchQueue.main.async {
                                 NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
-                                dismiss()
+                                self.dismiss()
                             }
                         }
                     }
@@ -80,7 +80,7 @@ struct WorkSpaceDetailView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {
                     NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
-                    dismiss()
+                    self.dismiss()
                 }){
                     Image(systemName: "chevron.left")
                         .foregroundColor(.fontBlack)
@@ -94,7 +94,7 @@ struct WorkSpaceDetailView: View {
                     viewModel.didTapCompleteButton {
                         DispatchQueue.main.async {
                             NotificationCenter.default.post(name: NSNotification.disMiss, object: nil, userInfo: ["info": "dismiss"])
-                            dismiss()
+                            self.dismiss()
                         }
                     }
                 }){
