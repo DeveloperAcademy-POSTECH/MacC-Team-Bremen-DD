@@ -49,6 +49,7 @@
 		89CAA072290276E800504BDE /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA071290276E800504BDE /* UnderlinedTextField.swift */; };
 		89CAA0742902771D00504BDE /* InputFormElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA0732902771D00504BDE /* InputFormElement.swift */; };
 		B9239C812901467500197ECD /* ScheduleListView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9239C802901467500197ECD /* ScheduleListView+.swift */; };
+		B9EC142929138F6D00C3489A /* WorkDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EC142829138F6D00C3489A /* WorkDay.swift */; };
 		C62C338C28FFCEBD00469273 /* CustomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C338B28FFCEBD00469273 /* CustomButtonView.swift */; };
 		C64D97BA28FE918F004F80E7 /* Text+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97B928FE918F004F80E7 /* Text+.swift */; };
 		C64D97BC28FE9197004F80E7 /* TextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97BB28FE9197004F80E7 /* TextField+.swift */; };
@@ -118,6 +119,7 @@
 		89CAA071290276E800504BDE /* UnderlinedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
 		89CAA0732902771D00504BDE /* InputFormElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFormElement.swift; sourceTree = "<group>"; };
 		B9239C802901467500197ECD /* ScheduleListView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleListView+.swift"; sourceTree = "<group>"; };
+		B9EC142829138F6D00C3489A /* WorkDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkDay.swift; sourceTree = "<group>"; };
 		C62C338B28FFCEBD00469273 /* CustomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomButtonView.swift; path = Rlog/View/Components/CustomButtonView.swift; sourceTree = SOURCE_ROOT; };
 		C64D97B928FE918F004F80E7 /* Text+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+.swift"; sourceTree = "<group>"; };
 		C64D97BB28FE9197004F80E7 /* TextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+.swift"; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				C67FC83F2906974600DE3898 /* WorkspaceColor.swift */,
 				2D6226002908251300846145 /* CreatingWorkSpaceModel.swift */,
 				2D6226022908257100846145 /* CreatingScheduleModel.swift */,
+				B9EC142829138F6D00C3489A /* WorkDay.swift */,
 				C67FC82E2906914600DE3898 /* CoreData */,
 			);
 			path = Model;
@@ -489,6 +492,7 @@
 				2D66DCBD28FD8D2500C90400 /* ScheduleCreateView.swift in Sources */,
 				2D6226032908257100846145 /* CreatingScheduleModel.swift in Sources */,
 				2D66DCE028FD8ECA00C90400 /* MainTabViewModel.swift in Sources */,
+				B9EC142929138F6D00C3489A /* WorkDay.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

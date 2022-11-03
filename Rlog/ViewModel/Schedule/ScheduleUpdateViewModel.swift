@@ -14,29 +14,17 @@ enum TimeUnit: String, CaseIterable {
     case plusOneHour = "+1시간"
 }
 
-// TODO: - 임시로 만든 모델 옮기기(파일 새로 생성 후 적용)
-struct Workday {
-    var weekDay: Int16
-    var yearInt: Int16
-    var monthInt: Int16
-    var dayInt: Int16
-    var startTime: String
-    var endTime: String
-    var hasDone: Bool
-    var spendHour: Int16
-}
-
 final class ScheduleUpdateViewModel: ObservableObject {
     @Published var workDayEntity: WorkDayEntity
     @Published var isStartTimeChanaged = false
     @Published var isEndTimeChanaged = false
     @Published var reason = ""
-    var workday: Workday
+    var workDay: WorkDay
     // TODO: - spendHour를 double로 수정
     
     init(workDay: WorkDayEntity) {
         workDayEntity = workDay
-        self.workday = Workday(
+        self.workDay = WorkDay(
             weekDay: workDay.weekDay,
             yearInt: workDay.yearInt,
             monthInt: workDay.monthInt,
@@ -59,17 +47,17 @@ final class ScheduleUpdateViewModel: ObservableObject {
 
 private extension ScheduleUpdateViewModel {
     func updateWorkday() async throws {
-        workday.spendHour = calculateSpentHour(startTime: workday.startTime, endTime: workday.endTime)
+        workDay.spendHour = calculateSpentHour(startTime: workDay.startTime, endTime: workDay.endTime)
         CoreDataManager.shared.editWorkday(
             of: workDayEntity,
-            weekDay: workday.weekDay,
-            yearInt: workday.yearInt,
-            monthInt: workday.monthInt,
-            dayInt: workday.dayInt,
-            startTime: workday.startTime,
-            endTime: workday.endTime,
-            spentHour: workday.spendHour,
-            hasDone: workday.hasDone
+            weekDay: workDay.weekDay,
+            yearInt: workDay.yearInt,
+            monthInt: workDay.monthInt,
+            dayInt: workDay.dayInt,
+            startTime: workDay.startTime,
+            endTime: workDay.endTime,
+            spentHour: workDay.spendHour,
+            hasDone: workDay.hasDone
         )
     }
     
@@ -108,7 +96,7 @@ final class TimeEditorViewModel: ObservableObject {
     }
     
     func didTapTimePresetButton(unit: TimeUnit) {
-        var formatter = DateFormatter(dateFormatType: .timeAndMinute)
+        let formatter = DateFormatter(dateFormatType: .timeAndMinute)
         guard var setTime = formatter.date(from: time) else { return }
         
         switch unit {
