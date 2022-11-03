@@ -55,7 +55,23 @@ private extension ScheduleUpdateViewModel {
     func updateWorkday() async throws {
         // TODO: - spendHour를 double로 수정
         workDay.spentHour = calculateSpentHour(startTime: startTime, endTime: endTime)
-        // TODO: - startHour, startMinute, endHour, endMinute 변경 반영
+        if isStartTimeChanaged {
+            var startIndex = startTime.startIndex
+            var endIndex = startTime.index(startTime.startIndex, offsetBy: 2)
+            workDay.startHour = Int16(startTime[startIndex ..< endIndex]) ?? 12
+            startIndex = startTime.index(startTime.startIndex, offsetBy: 3)
+            endIndex = startTime.endIndex
+            workDay.startMinute = Int16(startTime[startIndex ..< endIndex]) ?? 0
+        }
+        if isEndTimeChanaged {
+            var startIndex = endTime.startIndex
+            var endIndex = endTime.index(endTime.startIndex, offsetBy: 2)
+            workDay.endHour = Int16(endTime[startIndex ..< endIndex]) ?? 12
+            startIndex = endTime.index(endTime.startIndex, offsetBy: 3)
+            endIndex = endTime.endIndex
+            workDay.endMinute = Int16(endTime[startIndex ..< endIndex]) ?? 0
+        }
+        
         CoreDataManager.shared.editWorkday(
             of: workDayEntity,
             weekDay: workDay.weekDay,
