@@ -19,9 +19,9 @@ final class ScheduleUpdateViewModel: ObservableObject {
     @Published var isStartTimeChanaged = false
     @Published var isEndTimeChanaged = false
     @Published var reason = ""
-    var workDay: WorkDay
     @Published var startTime: String
     @Published var endTime: String
+    var workDay: WorkDay
     
     init(workDayEntity: WorkDayEntity) {
         self.workDayEntity = workDayEntity
