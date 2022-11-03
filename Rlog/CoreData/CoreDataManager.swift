@@ -148,6 +148,15 @@ extension CoreDataManager {
         return result ?? []
     }
 
+    func getWorkdaysByMonth(yearInt: Int, monthInt: Int) -> [WorkDayEntity] {
+        let fetchRequest: NSFetchRequest<WorkDayEntity> = WorkDayEntity.fetchRequest()
+        let yearPredicate = NSPredicate(format: "yearInt == %i", yearInt)
+        let monthPredicate = NSPredicate(format: "monthInt == %i", monthInt)
+        fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: [yearPredicate, monthPredicate])
+        let result = try? context.fetch(fetchRequest)
+        return result ?? []
+    }
+
     func editWorkday(of workday: WorkDayEntity, weekDay: Int16, yearInt: Int16, monthInt: Int16, dayInt: Int16, startTime: String, endTime: String, spentHour: Int16, hasDone: Bool) {
         workday.weekDay = weekDay
         workday.yearInt = yearInt
