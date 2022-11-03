@@ -84,7 +84,7 @@ private extension ScheduleListView {
                 case .upcoming:
                     ForEach(viewModel.upcomingWorkDays, id: \.self) { schedule in
                         // TODO: - 다른 방법 생각 생각해보기(async 등)
-                        ScheduleCell(workDay: schedule) {
+                        ScheduleCell(workDayEntity: schedule) {
                             viewModel.didSheetDismissed()
                         }
                     }
@@ -92,7 +92,7 @@ private extension ScheduleListView {
                 case .past:
                     ForEach(viewModel.pastWorkDays, id: \.self) { schedule in
                         // TODO: - 다른 방법 생각 생각해보기(async 등)
-                        ScheduleCell(workDay: schedule) {
+                        ScheduleCell(workDayEntity: schedule) {
                             viewModel.didSheetDismissed()
                         }
                     }

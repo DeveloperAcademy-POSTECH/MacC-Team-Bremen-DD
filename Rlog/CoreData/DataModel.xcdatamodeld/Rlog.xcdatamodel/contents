@@ -3,7 +3,7 @@
     <entity name="ScheduleEntity" representedClassName="ScheduleEntity" syncable="YES">
         <attribute name="endHour" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="endMinute" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="repeatedSchedule" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="repeatedSchedule" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
         <attribute name="spentHour" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startHour" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startMinute" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -11,12 +11,14 @@
     </entity>
     <entity name="WorkDayEntity" representedClassName="WorkDayEntity" syncable="YES">
         <attribute name="dayInt" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="endTime" attributeType="String"/>
+        <attribute name="endHour" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="endMinute" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="hasDone" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="monthInt" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="spentHour" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="startTime" attributeType="String"/>
+        <attribute name="startHour" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="startMinute" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="weekDay" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="workDayType" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="yearInt" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>

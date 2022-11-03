@@ -82,31 +82,28 @@ final class StatusPickerViewModel: ObservableObject {
 
 final class ScheduleCellViewModel: ObservableObject {
     @Published var isShowUpdateModal = false
+    var workDay: WorkDay
+    var workDayEntity: WorkDayEntity
     var didDismiss: () -> Void
-    var workDay: WorkDayEntity
     var isShowConfirmButton: Bool {
         if isToday(month: workDay.monthInt, day: workDay.dayInt) {
             return !workDay.hasDone
         }
         return false
     }
-    let weekDay: Int16
-    let yearInt: Int16
-    let monthInt: Int16
-    let dayInt: Int16
-    let startTime: String
-    let endTime: String
-    let spentHour: Int16
     
-    init(workDay: WorkDayEntity, didDismiss: @escaping () -> Void) {
-        self.workDay = workDay
-        weekDay = workDay.weekDay
-        yearInt = workDay.yearInt
-        monthInt = workDay.monthInt
-        dayInt = workDay.dayInt
-        startTime = workDay.startTime
-        endTime = workDay.endTime
-        spentHour = workDay.spentHour
+    init(workDayEntity: WorkDayEntity, didDismiss: @escaping () -> Void) {
+        self.workDayEntity = workDayEntity
+        self.workDay = WorkDay(
+            weekDay: workDayEntity.weekDay,
+            yearInt: workDayEntity.yearInt,
+            monthInt: workDayEntity.monthInt,
+            dayInt: workDayEntity.dayInt,
+            startTime: workDayEntity.startTime,
+            endTime: workDayEntity.endTime,
+            hasDone: workDayEntity.hasDone,
+            spentHour: workDayEntity.spentHour
+        )
         self.didDismiss = didDismiss
     }
     
@@ -123,7 +120,18 @@ final class ScheduleCellViewModel: ObservableObject {
 
 private extension ScheduleCellViewModel {
     func updateHasDone() async throws {
-        CoreDataManager.shared.editWorkday(of: workDay, weekDay: weekDay, yearInt: yearInt, monthInt: monthInt, dayInt: dayInt, startTime: startTime, endTime: endTime, spentHour: spentHour, hasDone: true, workDayType: 0)
+        workDay.hasDone = true
+        CoreDataManager.shared.editWorkday(
+            of: workDayEntity,
+            weekDay: workDay.weekDay,
+            yearInt: workDay.yearInt,
+            monthInt: workDay.monthInt,
+            dayInt: workDay.dayInt,
+            startTime: workDay.startTime,
+            endTime: workDay.endTime,
+            spentHour: workDay.spentHour,
+            hasDone: workDay.hasDone
+        )
     }
     
     // TODO: - 날짜 struct 만들기

@@ -69,17 +69,28 @@ final class ScheduleCreateViewModel: ObservableObject {
 // TODO: - 요일 입력 수정
 private extension ScheduleCreateViewModel {
     func createWorkday() async throws {
-        guard let selectedWorkspace = selectedWorkspace else { return }
-        CoreDataManager.shared.createWorkday(
-            of: selectedWorkspace,
+        let workDay = WorkDay(
             weekDay: 0,
             yearInt: Int16(Calendar.current.component(.year, from: workDate)),
             monthInt: Int16(Calendar.current.component(.month, from: workDate)),
             dayInt: Int16(Calendar.current.component(.day, from: workDate)),
             startTime: startTime,
             endTime: endTime,
+            hasDone: false,
             spentHour: calculateSpentHour(startTime: startTime, endTime: endTime),
             workDayType: 0
+        )
+        guard let selectedWorkspace = selectedWorkspace else { return }
+        
+        CoreDataManager.shared.createWorkday(
+            of: selectedWorkspace,
+            weekDay: workDay.weekDay,
+            yearInt: workDay.yearInt,
+            monthInt: workDay.monthInt,
+            dayInt: workDay.dayInt,
+            startTime: workDay.startTime,
+            endTime: workDay.endTime,
+            spentHour: workDay.spentHour
         )
     }
     

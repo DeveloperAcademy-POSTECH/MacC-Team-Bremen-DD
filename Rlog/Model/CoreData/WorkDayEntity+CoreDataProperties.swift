@@ -20,9 +20,13 @@ extension WorkDayEntity {
     @NSManaged public var yearInt: Int16
     @NSManaged public var monthInt: Int16
     @NSManaged public var dayInt: Int16
-    @NSManaged public var startTime: String
-    @NSManaged public var endTime: String
+
+    @NSManaged public var startHour: Int16
+    @NSManaged public var startMinute: Int16
+    @NSManaged public var endHour: Int16
+    @NSManaged public var endMinute: Int16
     @NSManaged public var spentHour: Int16
+
     @NSManaged public var hasDone: Bool
     @NSManaged public var workDayType: Int16
     @NSManaged public var workspace: WorkspaceEntity
