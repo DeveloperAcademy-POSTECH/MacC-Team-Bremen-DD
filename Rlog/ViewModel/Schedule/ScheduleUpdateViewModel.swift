@@ -58,7 +58,6 @@ private extension ScheduleUpdateViewModel {
             endTime: workday.endTime,
             spentHour: workday.spendHour,
             hasDone: workday.hasDone,
-            workDayType: 0
         )
     }
     

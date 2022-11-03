@@ -77,8 +77,7 @@ private extension ScheduleCreateViewModel {
             startTime: startTime,
             endTime: endTime,
             hasDone: false,
-            spentHour: calculateSpentHour(startTime: startTime, endTime: endTime),
-            workDayType: 0
+            spentHour: calculateSpentHour(startTime: startTime, endTime: endTime)
         )
         guard let selectedWorkspace = selectedWorkspace else { return }
         
@@ -90,7 +89,8 @@ private extension ScheduleCreateViewModel {
             dayInt: workDay.dayInt,
             startTime: workDay.startTime,
             endTime: workDay.endTime,
-            spentHour: workDay.spentHour
+            spentHour: workDay.spentHour,
+            workDayType: 0
         )
     }
     
