@@ -92,6 +92,12 @@ extension CoreDataManager {
         save()
     }
 
+    func getAllSchedules() -> [ScheduleEntity] {
+        let fetchRequest: NSFetchRequest<ScheduleEntity> = ScheduleEntity.fetchRequest()
+        let result = try? context.fetch(fetchRequest)
+        return result ?? []
+    }
+
     func getAllSchedules(of workspace: WorkspaceEntity) -> [ScheduleEntity] {
         let fetchRequest: NSFetchRequest<ScheduleEntity> = ScheduleEntity.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "workspace.name = %@", workspace.name )
