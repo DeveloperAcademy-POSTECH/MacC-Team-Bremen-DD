@@ -22,17 +22,17 @@ final class ScheduleUpdateViewModel: ObservableObject {
     var workDay: WorkDay
     // TODO: - spendHour를 double로 수정
     
-    init(workDay: WorkDayEntity) {
-        workDayEntity = workDay
+    init(workDayEntity: WorkDayEntity) {
+        self.workDayEntity = workDayEntity
         self.workDay = WorkDay(
-            weekDay: workDay.weekDay,
-            yearInt: workDay.yearInt,
-            monthInt: workDay.monthInt,
-            dayInt: workDay.dayInt,
-            startTime: workDay.startTime,
-            endTime: workDay.endTime,
-            hasDone: workDay.hasDone,
-            spendHour: workDay.spentHour
+            weekDay: workDayEntity.weekDay,
+            yearInt: workDayEntity.yearInt,
+            monthInt: workDayEntity.monthInt,
+            dayInt: workDayEntity.dayInt,
+            startTime: workDayEntity.startTime,
+            endTime: workDayEntity.endTime,
+            hasDone: workDayEntity.hasDone,
+            spentHour: workDayEntity.spentHour
         )
     }
     
@@ -47,7 +47,7 @@ final class ScheduleUpdateViewModel: ObservableObject {
 
 private extension ScheduleUpdateViewModel {
     func updateWorkday() async throws {
-        workDay.spendHour = calculateSpentHour(startTime: workDay.startTime, endTime: workDay.endTime)
+        workDay.spentHour = calculateSpentHour(startTime: workDay.startTime, endTime: workDay.endTime)
         CoreDataManager.shared.editWorkday(
             of: workDayEntity,
             weekDay: workDay.weekDay,
@@ -56,7 +56,7 @@ private extension ScheduleUpdateViewModel {
             dayInt: workDay.dayInt,
             startTime: workDay.startTime,
             endTime: workDay.endTime,
-            spentHour: workDay.spendHour,
+            spentHour: workDay.spentHour,
             hasDone: workDay.hasDone
         )
     }
@@ -65,7 +65,7 @@ private extension ScheduleUpdateViewModel {
         CoreDataManager.shared.deleteWorkDay(of: workDayEntity)
     }
     
-    // TODO: - Int16 -> Double로 수정, startTime, endTime 수정
+    // TODO: - Int16 -> Double로 수정, startTime, endTime 수정, 시간 관련 struct로 이동
     func calculateSpentHour(startTime: String, endTime: String) -> Int16 {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"

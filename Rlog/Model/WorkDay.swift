@@ -13,5 +13,5 @@ struct WorkDay {
     var startTime: String
     var endTime: String
     var hasDone: Bool
-    var spendHour: Int16
+    var spentHour: Int16
 }

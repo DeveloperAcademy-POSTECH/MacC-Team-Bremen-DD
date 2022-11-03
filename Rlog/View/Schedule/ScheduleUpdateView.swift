@@ -11,8 +11,8 @@ struct ScheduleUpdateView: View {
     @ObservedObject private var viewModel: ScheduleUpdateViewModel
     @Environment(\.dismiss) var dismiss
     
-    init(workDay: WorkDayEntity) {
-        self.viewModel = ScheduleUpdateViewModel(workDay: workDay)
+    init(workDayEntity: WorkDayEntity) {
+        self.viewModel = ScheduleUpdateViewModel(workDayEntity: workDayEntity)
     }
     
     var body: some View {
@@ -79,7 +79,7 @@ private extension ScheduleUpdateView {
                 .foregroundColor(Color.fontLightGray)
             
             VStack(alignment: .leading, spacing: 0) {
-                Text("\(viewModel.workDayEntity.yearInt)년 \(viewModel.workDayEntity.monthInt)월 \(viewModel.workDayEntity.dayInt)일")
+                Text("\(viewModel.workDay.yearInt)년 \(viewModel.workDay.monthInt)월 \(viewModel.workDay.dayInt)일")
                     .foregroundColor(Color.fontLightGray)
                     .padding(.horizontal)
                     .padding(.vertical, 9)

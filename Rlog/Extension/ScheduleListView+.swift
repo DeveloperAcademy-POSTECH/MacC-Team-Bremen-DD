@@ -52,8 +52,8 @@ extension ScheduleListView {
     struct ScheduleCell: View {
         @ObservedObject private var viewModel: ScheduleCellViewModel
         
-        init(workDay: WorkDayEntity, didDismiss: @escaping () -> Void) {
-            self.viewModel = ScheduleCellViewModel(workDay: workDay) {
+        init(workDayEntity: WorkDayEntity, didDismiss: @escaping () -> Void) {
+            self.viewModel = ScheduleCellViewModel(workDayEntity: workDayEntity) {
                 didDismiss()
             }
         }
@@ -79,7 +79,7 @@ extension ScheduleListView {
         var backgroundRectangle: some View {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(viewModel.isShowConfirmButton ? Color(viewModel.workDay.workspace.colorString) : .white)
+                    .fill(viewModel.isShowConfirmButton ? Color(viewModel.workDayEntity.workspace.colorString) : .white)
                     .frame(height: 97)
                 RoundedRectangle(cornerRadius: 9)
                     .fill(Color.white)
@@ -90,9 +90,9 @@ extension ScheduleListView {
         var cellHeader: some View {
             HStack(spacing: 0) {
                 Rectangle()
-                    .fill(Color(viewModel.workDay.workspace.colorString))
+                    .fill(Color(viewModel.workDayEntity.workspace.colorString))
                     .frame(width: 3, height: 17)
-                Text(viewModel.workDay.workspace.name)
+                Text(viewModel.workDayEntity.workspace.name)
                     .font(.callout)
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
@@ -138,7 +138,7 @@ extension ScheduleListView {
                     viewModel.didDismiss()
                 }) {
                     NavigationView {
-                        ScheduleUpdateView(workDay: viewModel.workDay)
+                        ScheduleUpdateView(workDayEntity: viewModel.workDayEntity)
                     }
                 }
                 if viewModel.isShowConfirmButton {
