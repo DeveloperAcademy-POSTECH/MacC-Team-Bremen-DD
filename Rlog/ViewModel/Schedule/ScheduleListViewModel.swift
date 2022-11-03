@@ -120,6 +120,7 @@ final class ScheduleCellViewModel: ObservableObject {
 
 private extension ScheduleCellViewModel {
     func updateHasDone() async throws {
+        workDay.hasDone = true
         CoreDataManager.shared.editWorkday(
             of: workDayEntity,
             weekDay: workDay.weekDay,
@@ -129,7 +130,7 @@ private extension ScheduleCellViewModel {
             startTime: workDay.startTime,
             endTime: workDay.endTime,
             spentHour: workDay.spentHour,
-            hasDone: true
+            hasDone: workDay.hasDone
         )
     }
     
