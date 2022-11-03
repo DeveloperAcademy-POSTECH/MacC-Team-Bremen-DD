@@ -50,14 +50,14 @@ private extension ScheduleUpdateViewModel {
         workDay.spentHour = calculateSpentHour(startTime: workDay.startTime, endTime: workDay.endTime)
         CoreDataManager.shared.editWorkday(
             of: workDayEntity,
-            weekDay: workDay.weekDay,
-            yearInt: workDay.yearInt,
-            monthInt: workDay.monthInt,
-            dayInt: workDay.dayInt,
-            startTime: workDay.startTime,
-            endTime: workDay.endTime,
-            spentHour: workDay.spentHour,
-            hasDone: workDay.hasDone
+            weekDay: workday.weekDay,
+            yearInt: workday.yearInt,
+            monthInt: workday.monthInt,
+            dayInt: workday.dayInt,
+            startTime: workday.startTime,
+            endTime: workday.endTime,
+            spentHour: workday.spendHour,
+            hasDone: workday.hasDone,
         )
     }
     

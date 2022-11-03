@@ -71,6 +71,7 @@
 		C67FC841290815C000DE3898 /* StrokeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA06F290265F300504BDE /* StrokeButton.swift */; };
 		C67FC8432908211D00DE3898 /* Notification+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FC8422908211D00DE3898 /* Notification+.swift */; };
 		C67FC8452908FA8300DE3898 /* WorkSpaceCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FC8442908FA8300DE3898 /* WorkSpaceCellViewModel.swift */; };
+		C69C13B029139AB100D9B47F /* WorkDayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69C13AF29139AB100D9B47F /* WorkDayType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -140,6 +141,7 @@
 		C67FC83F2906974600DE3898 /* WorkspaceColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceColor.swift; sourceTree = "<group>"; };
 		C67FC8422908211D00DE3898 /* Notification+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+.swift"; sourceTree = "<group>"; };
 		C67FC8442908FA8300DE3898 /* WorkSpaceCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCellViewModel.swift; sourceTree = "<group>"; };
+		C69C13AF29139AB100D9B47F /* WorkDayType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkDayType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -338,6 +340,7 @@
 				C64D97C628FE92C7004F80E7 /* DayEntity.swift */,
 				C64D97C828FE92D8004F80E7 /* Tab.swift */,
 				C67FC8372906931300DE3898 /* WeekDay.swift */,
+				C69C13AF29139AB100D9B47F /* WorkDayType.swift */,
 				C67FC83F2906974600DE3898 /* WorkspaceColor.swift */,
 				2D6226002908251300846145 /* CreatingWorkSpaceModel.swift */,
 				2D6226022908257100846145 /* CreatingScheduleModel.swift */,
@@ -482,6 +485,7 @@
 				C67FC835290692BD00DE3898 /* WorkDayEntity+CoreDataClass.swift in Sources */,
 				2D66DCDC28FD8E9D00C90400 /* WorkSpaceCreateViewModel.swift in Sources */,
 				C67FC8402906974600DE3898 /* WorkspaceColor.swift in Sources */,
+				C69C13B029139AB100D9B47F /* WorkDayType.swift in Sources */,
 				C67FC8382906931300DE3898 /* WeekDay.swift in Sources */,
 				C64D97C028FE91AB004F80E7 /* DateFormatter+.swift in Sources */,
 				2D66DCA228FD4DF000C90400 /* RlogApp.swift in Sources */,

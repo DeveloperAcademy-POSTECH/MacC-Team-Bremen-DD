@@ -89,7 +89,8 @@ private extension ScheduleCreateViewModel {
             dayInt: workDay.dayInt,
             startTime: workDay.startTime,
             endTime: workDay.endTime,
-            spentHour: workDay.spentHour
+            spentHour: workDay.spentHour,
+            workDayType: 0
         )
     }
     

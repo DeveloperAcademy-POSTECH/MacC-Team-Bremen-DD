@@ -20,6 +20,7 @@
         <attribute name="startHour" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startMinute" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="weekDay" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="workDayType" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="yearInt" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="workspace" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkspaceEntity" inverseName="workDays" inverseEntity="WorkspaceEntity"/>
     </entity>
