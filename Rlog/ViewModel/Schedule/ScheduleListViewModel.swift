@@ -123,7 +123,7 @@ final class ScheduleCellViewModel: ObservableObject {
 
 private extension ScheduleCellViewModel {
     func updateHasDone() async throws {
-        CoreDataManager.shared.editWorkday(of: workDay, weekDay: weekDay, yearInt: yearInt, monthInt: monthInt, dayInt: dayInt, startTime: startTime, endTime: endTime, spentHour: spentHour, hasDone: true)
+        CoreDataManager.shared.editWorkday(of: workDay, weekDay: weekDay, yearInt: yearInt, monthInt: monthInt, dayInt: dayInt, startTime: startTime, endTime: endTime, spentHour: spentHour, hasDone: true, workDayType: 0)
     }
     
     // TODO: - 날짜 struct 만들기

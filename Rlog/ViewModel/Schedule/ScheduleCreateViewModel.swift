@@ -78,7 +78,8 @@ private extension ScheduleCreateViewModel {
             dayInt: Int16(Calendar.current.component(.day, from: workDate)),
             startTime: startTime,
             endTime: endTime,
-            spentHour: calculateSpentHour(startTime: startTime, endTime: endTime)
+            spentHour: calculateSpentHour(startTime: startTime, endTime: endTime),
+            workDayType: 0
         )
     }
     
