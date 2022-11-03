@@ -24,6 +24,7 @@ extension WorkDayEntity {
     @NSManaged public var endTime: String
     @NSManaged public var spentHour: Int16
     @NSManaged public var hasDone: Bool
+    @NSManaged public var workDayType: Int16
     @NSManaged public var workspace: WorkspaceEntity
 
     var weekDayType: WeekDay {
