@@ -92,7 +92,7 @@ private extension ScheduleUpdateViewModel {
         CoreDataManager.shared.deleteWorkDay(of: workDayEntity)
     }
     
-    func calculateSpentHour(startTime: String, endTime: String) -> Int16 {
+    func calculateSpentHour(startTime: String, endTime: String) -> Double {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         
@@ -102,7 +102,7 @@ private extension ScheduleUpdateViewModel {
         guard let startDate = startDate, let endDate = endDate else { return 0 }
         let timeInterval = endDate.timeIntervalSinceReferenceDate - startDate.timeIntervalSinceReferenceDate
         
-        return Int16(timeInterval / 3600)
+        return timeInterval / 3600.0
     }
 }
 

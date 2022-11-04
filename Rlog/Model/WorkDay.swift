@@ -15,6 +15,6 @@ struct WorkDay {
     var endHour: Int16
     var endMinute: Int16
     var hasDone: Bool
-    var spentHour: Int16
+    var spentHour: Double
     var workDayType: Int16
 }
