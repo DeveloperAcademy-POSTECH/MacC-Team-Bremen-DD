@@ -99,10 +99,13 @@ final class ScheduleCellViewModel: ObservableObject {
             yearInt: workDayEntity.yearInt,
             monthInt: workDayEntity.monthInt,
             dayInt: workDayEntity.dayInt,
-            startTime: workDayEntity.startTime,
-            endTime: workDayEntity.endTime,
+            startHour: workDayEntity.startHour,
+            startMinute: workDayEntity.startMinute,
+            endHour: workDayEntity.endHour,
+            endMinute: workDayEntity.endMinute,
             hasDone: workDayEntity.hasDone,
-            spentHour: workDayEntity.spentHour
+            spentHour: workDayEntity.spentHour,
+            workDayType: workDayEntity.workDayType
         )
         self.didDismiss = didDismiss
     }
@@ -127,10 +130,13 @@ private extension ScheduleCellViewModel {
             yearInt: workDay.yearInt,
             monthInt: workDay.monthInt,
             dayInt: workDay.dayInt,
-            startTime: workDay.startTime,
-            endTime: workDay.endTime,
+            startHour: workDay.startHour,
+            startMinute: workDay.startMinute,
+            endHour: workDay.endHour,
+            endMinute: workDay.endMinute,
             spentHour: workDay.spentHour,
-            hasDone: workDay.hasDone
+            hasDone: workDay.hasDone,
+            workDayType: workDay.workDayType
         )
     }
     

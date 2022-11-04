@@ -112,8 +112,7 @@ extension ScheduleListView {
                 Text("\(viewModel.workDay.monthInt)월 \(viewModel.workDay.dayInt)일 \(WeekDay(rawValue: viewModel.workDay.weekDay)?.name ?? "월")요일")
                     .font(.caption)
                     .foregroundColor(Color.fontBlack)
-                // TODO: - 시간 처리, Int로 저장된 값을 String 두 단어로 처리하는 것은 찾아봐야 함
-                Text("\(viewModel.workDay.startTime)-\(viewModel.workDay.endTime)")
+                Text("\(viewModel.workDay.startHour):\(viewModel.workDay.startMinute)-\(viewModel.workDay.endHour):\(viewModel.workDay.endMinute)")
                     .font(.caption2)
                     .foregroundColor(Color.fontLightGray)
             }

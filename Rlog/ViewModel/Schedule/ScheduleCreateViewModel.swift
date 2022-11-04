@@ -37,7 +37,6 @@ final class ScheduleCreateViewModel: ObservableObject {
             return Color.fontLightGray
         }
     }
-    // TODO: - startTime과 endTime이 이후 모델에서 startHour: Int16 이런 식으로 수정되어서 머지된 후 수정 예정
     private var startTime: String {
         return "\(Int(startHourText) ?? 12):\(Int(startMinuteText) ?? 0)"
     }
@@ -74,10 +73,13 @@ private extension ScheduleCreateViewModel {
             yearInt: Int16(Calendar.current.component(.year, from: workDate)),
             monthInt: Int16(Calendar.current.component(.month, from: workDate)),
             dayInt: Int16(Calendar.current.component(.day, from: workDate)),
-            startTime: startTime,
-            endTime: endTime,
+            startHour: Int16(startHourText) ?? 12,
+            startMinute: Int16(startMinuteText) ?? 00,
+            endHour: Int16(endHourText) ?? 13,
+            endMinute: Int16(endMinuteText) ?? 00,
             hasDone: false,
-            spentHour: calculateSpentHour(startTime: startTime, endTime: endTime)
+            spentHour: calculateSpentHour(startTime: startTime, endTime: endTime),
+            workDayType: 3
         )
         guard let selectedWorkspace = selectedWorkspace else { return }
         
@@ -87,10 +89,12 @@ private extension ScheduleCreateViewModel {
             yearInt: workDay.yearInt,
             monthInt: workDay.monthInt,
             dayInt: workDay.dayInt,
-            startTime: workDay.startTime,
-            endTime: workDay.endTime,
+            startHour: workDay.startHour,
+            startMinute: workDay.startMinute,
+            endHour: workDay.endHour,
+            endMinute: workDay.endMinute,
             spentHour: workDay.spentHour,
-            workDayType: 0
+            workDayType: 3
         )
     }
     
