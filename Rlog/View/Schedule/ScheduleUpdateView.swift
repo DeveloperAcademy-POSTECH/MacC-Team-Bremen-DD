@@ -95,7 +95,7 @@ private extension ScheduleUpdateView {
                 .font(.subheadline)
                 .foregroundColor(Color.fontLightGray)
             
-            TimeEditer(time: $viewModel.workDay.startTime, isTimeChanged: $viewModel.isStartTimeChanaged)
+            TimeEditer(time: $viewModel.startTime, isTimeChanged: $viewModel.isStartTimeChanaged)
                 .padding(.top, 8)
         }
     }
@@ -106,7 +106,7 @@ private extension ScheduleUpdateView {
                 .font(.subheadline)
                 .foregroundColor(Color.fontLightGray)
             
-            TimeEditer(time: $viewModel.workDay.endTime, isTimeChanged: $viewModel.isEndTimeChanaged)
+            TimeEditer(time: $viewModel.endTime, isTimeChanged: $viewModel.isEndTimeChanaged)
                 .padding(.top, 8)
         }
     }

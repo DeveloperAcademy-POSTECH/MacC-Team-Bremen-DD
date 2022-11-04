@@ -19,8 +19,9 @@ final class ScheduleUpdateViewModel: ObservableObject {
     @Published var isStartTimeChanaged = false
     @Published var isEndTimeChanaged = false
     @Published var reason = ""
+    @Published var startTime: String
+    @Published var endTime: String
     var workDay: WorkDay
-    // TODO: - spendHour를 double로 수정
     
     init(workDayEntity: WorkDayEntity) {
         self.workDayEntity = workDayEntity
@@ -29,11 +30,16 @@ final class ScheduleUpdateViewModel: ObservableObject {
             yearInt: workDayEntity.yearInt,
             monthInt: workDayEntity.monthInt,
             dayInt: workDayEntity.dayInt,
-            startTime: workDayEntity.startTime,
-            endTime: workDayEntity.endTime,
+            startHour: workDayEntity.startHour,
+            startMinute: workDayEntity.startMinute,
+            endHour: workDayEntity.endHour,
+            endMinute: workDayEntity.endMinute,
             hasDone: workDayEntity.hasDone,
-            spentHour: workDayEntity.spentHour
+            spentHour: workDayEntity.spentHour,
+            workDayType: workDayEntity.workDayType
         )
+        self.startTime = "\(workDayEntity.startHour):\(workDayEntity.startMinute)"
+        self.endTime = "\(workDayEntity.endHour):\(workDayEntity.endMinute)"
     }
     
     func didTapConfirmButton() async {
@@ -47,17 +53,38 @@ final class ScheduleUpdateViewModel: ObservableObject {
 
 private extension ScheduleUpdateViewModel {
     func updateWorkday() async throws {
-        workDay.spentHour = calculateSpentHour(startTime: workDay.startTime, endTime: workDay.endTime)
+        // TODO: - spendHour를 double로 수정
+        workDay.spentHour = calculateSpentHour(startTime: startTime, endTime: endTime)
+        if isStartTimeChanaged {
+            var startIndex = startTime.startIndex
+            var endIndex = startTime.index(startTime.startIndex, offsetBy: 2)
+            workDay.startHour = Int16(startTime[startIndex ..< endIndex]) ?? 12
+            startIndex = startTime.index(startTime.startIndex, offsetBy: 3)
+            endIndex = startTime.endIndex
+            workDay.startMinute = Int16(startTime[startIndex ..< endIndex]) ?? 0
+        }
+        if isEndTimeChanaged {
+            var startIndex = endTime.startIndex
+            var endIndex = endTime.index(endTime.startIndex, offsetBy: 2)
+            workDay.endHour = Int16(endTime[startIndex ..< endIndex]) ?? 12
+            startIndex = endTime.index(endTime.startIndex, offsetBy: 3)
+            endIndex = endTime.endIndex
+            workDay.endMinute = Int16(endTime[startIndex ..< endIndex]) ?? 0
+        }
+        
         CoreDataManager.shared.editWorkday(
             of: workDayEntity,
-            weekDay: workday.weekDay,
-            yearInt: workday.yearInt,
-            monthInt: workday.monthInt,
-            dayInt: workday.dayInt,
-            startTime: workday.startTime,
-            endTime: workday.endTime,
-            spentHour: workday.spendHour,
-            hasDone: workday.hasDone,
+            weekDay: workDay.weekDay,
+            yearInt: workDay.yearInt,
+            monthInt: workDay.monthInt,
+            dayInt: workDay.dayInt,
+            startHour: workDay.startHour,
+            startMinute: workDay.startMinute,
+            endHour: workDay.endHour,
+            endMinute: workDay.endMinute,
+            spentHour: workDay.spentHour,
+            hasDone: workDay.hasDone,
+            workDayType: workDay.workDayType
         )
     }
     
@@ -65,7 +92,6 @@ private extension ScheduleUpdateViewModel {
         CoreDataManager.shared.deleteWorkDay(of: workDayEntity)
     }
     
-    // TODO: - Int16 -> Double로 수정, startTime, endTime 수정, 시간 관련 struct로 이동
     func calculateSpentHour(startTime: String, endTime: String) -> Int16 {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
