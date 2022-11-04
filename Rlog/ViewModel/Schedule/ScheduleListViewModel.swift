@@ -83,7 +83,7 @@ final class StatusPickerViewModel: ObservableObject {
 
 final class ScheduleCellViewModel: ObservableObject {
     @Published var isShowUpdateModal = false
-    var workDay: WorkDay
+    @Published var workDay: WorkDay
     var workDayEntity: WorkDayEntity
     var didDismiss: () -> Void
     var isShowConfirmButton: Bool {
@@ -114,6 +114,7 @@ final class ScheduleCellViewModel: ObservableObject {
     func didTapConfirmButton() {
         Task {
             try? await updateHasDone()
+            didDismiss()
         }
     }
     
@@ -124,21 +125,24 @@ final class ScheduleCellViewModel: ObservableObject {
 
 private extension ScheduleCellViewModel {
     func updateHasDone() async throws {
-        workDay.hasDone = true
-        CoreDataManager.shared.editWorkday(
-            of: workDayEntity,
-            weekDay: workDay.weekDay,
-            yearInt: workDay.yearInt,
-            monthInt: workDay.monthInt,
-            dayInt: workDay.dayInt,
-            startHour: workDay.startHour,
-            startMinute: workDay.startMinute,
-            endHour: workDay.endHour,
-            endMinute: workDay.endMinute,
-            spentHour: workDay.spentHour,
-            hasDone: workDay.hasDone,
-            workDayType: workDay.workDayType
-        )
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.workDay.hasDone = true
+            CoreDataManager.shared.editWorkday(
+                of: self.workDayEntity,
+                weekDay: self.workDay.weekDay,
+                yearInt: self.workDay.yearInt,
+                monthInt: self.workDay.monthInt,
+                dayInt: self.workDay.dayInt,
+                startHour: self.workDay.startHour,
+                startMinute: self.workDay.startMinute,
+                endHour: self.workDay.endHour,
+                endMinute: self.workDay.endMinute,
+                spentHour: self.workDay.spentHour,
+                hasDone: self.workDay.hasDone,
+                workDayType: self.workDay.workDayType
+            )
+        }
     }
     
     // TODO: - 날짜 struct 만들기
