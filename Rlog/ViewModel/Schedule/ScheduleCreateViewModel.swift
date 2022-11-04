@@ -99,17 +99,16 @@ private extension ScheduleCreateViewModel {
     }
     
     // TODO: - 시간 관련 구조체로 이동
-    func calculateSpentHour(startTime: String, endTime: String) -> Int16 {
+    func calculateSpentHour(startTime: String, endTime: String) -> Double {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         
         let startDate = formatter.date(from: startTime)
         let endDate = formatter.date(from: endTime)
         
-        guard let startDate = startDate,
-              let endDate = endDate else { return 0 }
+        guard let startDate = startDate, let endDate = endDate else { return 0 }
         let timeInterval = endDate.timeIntervalSinceReferenceDate - startDate.timeIntervalSinceReferenceDate
         
-        return Int16(timeInterval / 3600)
+        return timeInterval / 3600.0
     }
 }
