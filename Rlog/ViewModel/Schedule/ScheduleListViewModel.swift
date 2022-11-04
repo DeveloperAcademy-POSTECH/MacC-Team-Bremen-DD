@@ -19,6 +19,8 @@ final class ScheduleListViewModel: ObservableObject {
     var upcomingWorkDays: [WorkDayEntity] = []
     var pastWorkDays: [WorkDayEntity] = []
     let yearAndMonth: String = Date().fetchYearAndMonth()
+    let year = Int(Calendar.current.component(.year, from: Date()))
+    let month = Int(Calendar.current.component(.month, from: Date()))
     
     init() {
         fetchAllWorkDays()
@@ -35,25 +37,24 @@ final class ScheduleListViewModel: ObservableObject {
 
 private extension ScheduleListViewModel {
     func fetchAllWorkDays() {
-        let result = CoreDataManager.shared.getAllWorkspaces()
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            for workspace in result {
-                self.allWorkDays.append(contentsOf: CoreDataManager.shared.getWorkdays(
-                    of: workspace,
-                    yearInt: Calendar.current.component(.year, from: Date()),
-                    monthInt: Calendar.current.component(.month, from: Date()),
-                    limit: 20)
-                )
-            }
-            self.upcomingWorkDays = self.allWorkDays.filter { self.isUpcomming(day: $0.dayInt) }
-            self.pastWorkDays = self.allWorkDays.filter { !self.isUpcomming(day: $0.dayInt) }
+            self.allWorkDays = CoreDataManager.shared.getWorkdaysByMonth(yearInt: self.year, monthInt: self.month)
+            self.upcomingWorkDays = self.allWorkDays.filter { self.isUpcomingOrNotDone(hasDone: $0.hasDone, day: $0.dayInt) }
+            self.pastWorkDays = self.allWorkDays.filter { !self.isUpcomingOrNotDone(hasDone: $0.hasDone, day: $0.dayInt) }
         }
     }
     
     // TODO: - 날짜 struct 만들기
     func isUpcomming(day: Int16) -> Bool {
-        if day >= Calendar.current.component(.day, from: Date()) {
+        if day > Calendar.current.component(.day, from: Date()) {
+            return true
+        }
+        return false
+    }
+    
+    func isUpcomingOrNotDone(hasDone: Bool, day: Int16) -> Bool {
+        if !hasDone || isUpcomming(day: day) {
             return true
         }
         return false
@@ -86,7 +87,7 @@ final class ScheduleCellViewModel: ObservableObject {
     var workDayEntity: WorkDayEntity
     var didDismiss: () -> Void
     var isShowConfirmButton: Bool {
-        if isToday(month: workDay.monthInt, day: workDay.dayInt) {
+        if !isUpcomming(day: workDay.dayInt) {
             return !workDay.hasDone
         }
         return false
@@ -141,11 +142,9 @@ private extension ScheduleCellViewModel {
     }
     
     // TODO: - 날짜 struct 만들기
-    func isToday(month: Int16, day: Int16) -> Bool {
-        if month == Calendar.current.component(.month, from: Date()) {
-            if day == Calendar.current.component(.day, from: Date()) {
-                return true
-            }
+    func isUpcomming(day: Int16) -> Bool {
+        if day > Calendar.current.component(.day, from: Date()) {
+            return true
         }
         return false
     }
