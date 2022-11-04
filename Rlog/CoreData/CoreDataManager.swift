@@ -115,7 +115,8 @@ extension CoreDataManager {
     }
 
     // MARK: - WORKDAY CRUD
-    func createWorkday(of workspace: WorkspaceEntity, weekDay: Int16, yearInt: Int16, monthInt: Int16, dayInt: Int16, startHour: Int16, startMinute: Int16, endHour: Int16, endMinute: Int16, spentHour: Int16, workDayType: Int16) {
+
+    func createWorkday(of workspace: WorkspaceEntity, weekDay: Int16, yearInt: Int16, monthInt: Int16, dayInt: Int16, startHour: Int16, startMinute: Int16, endHour: Int16, endMinute: Int16, spentHour: Double, workDayType: Int16) {
         let workday = WorkDayEntity(context: context)
         workday.workspace = workspace
         workday.id = UUID()
@@ -161,7 +162,8 @@ extension CoreDataManager {
         return result ?? []
     }
 
-    func editWorkday(of workday: WorkDayEntity, weekDay: Int16, yearInt: Int16, monthInt: Int16, dayInt: Int16, startHour: Int16, startMinute: Int16, endHour: Int16, endMinute: Int16, spentHour: Int16, hasDone: Bool, workDayType: Int16) {
+
+    func editWorkday(of workday: WorkDayEntity, weekDay: Int16, yearInt: Int16, monthInt: Int16, dayInt: Int16, startHour: Int16, startMinute: Int16, endHour: Int16, endMinute: Int16, spentHour: Double, hasDone: Bool, workDayType: Int16) {
         workday.weekDay = weekDay
         workday.workDayType = workDayType
         workday.yearInt = yearInt
