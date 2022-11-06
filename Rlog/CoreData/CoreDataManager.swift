@@ -98,6 +98,12 @@ extension CoreDataManager {
         let result = try? context.fetch(fetchRequest)
         return result ?? []
     }
+    
+    func getAllSchedules() -> [ScheduleEntity] {
+        let fetchRequest: NSFetchRequest<ScheduleEntity> = ScheduleEntity.fetchRequest()
+        let result = try? context.fetch(fetchRequest)
+        return result ?? []
+    }
 
     func editSchedule(of schedule: ScheduleEntity, repeatedSchedule: [String], startHour: Int16, startMinute: Int16, endHour: Int16, endMinute: Int16, spentHour: Double) {
         schedule.repeatedSchedule = repeatedSchedule
