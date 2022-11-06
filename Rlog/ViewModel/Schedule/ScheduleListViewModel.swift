@@ -31,6 +31,10 @@ final class ScheduleListViewModel: ObservableObject {
     func didTapPlusButton() {
         isShowCreateModal.toggle()
     }
+    
+    func onAppear() {
+        initWorkDays()
+    }
 }
 
 private extension ScheduleListViewModel {
@@ -49,6 +53,11 @@ private extension ScheduleListViewModel {
             self.upcomingWorkDays = self.allWorkDays.filter { self.isUpcomming(day: $0.dayInt) }
             self.pastWorkDays = self.allWorkDays.filter { !self.isUpcomming(day: $0.dayInt) }
         }
+    }
+    
+    func initWorkDays() {
+        let allSchedules = CoreDataManager.shared.getAllSchedules()
+        var date = Date()
     }
     
     // TODO: - 날짜 struct 만들기
