@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct InputFormElement<T>: View {
+struct InputFormElement: View {
     let containerType: UnderlinedTextFieldType
-    var text: Binding<T>
+    var text: Binding<String>
     
-    init(containerType: UnderlinedTextFieldType, text: Binding<T>) {
+    init(containerType: UnderlinedTextFieldType, text: Binding<String>) {
         self.containerType = containerType
         self.text = text
     }

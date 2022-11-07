@@ -45,31 +45,12 @@ enum UnderlinedTextFieldType: Equatable {
     }
 }
 
-struct UnderlinedTextField<T>: View {
+struct UnderlinedTextField: View {
     let textFieldType: UnderlinedTextFieldType
     @FocusState var isNumberFieldFocused: Bool
     @State var isFocused = false
-    @Binding var text: T {
-        // TODO: 코드 미작동 원인 파악 필요
-        didSet {
-            switch textFieldType {
-            case .workplace:
-                guard let string = text as? String else { return }
-                if string.count > 20 && "\(oldValue)".count <= 20 {
-                    text = oldValue
-                }
-            case .wage:
-                guard let string = text as? String else { return }
-                if string.hasPrefix("0") { text = "" as! T }
-            case .payday:
-                guard let string = text as? String else { return }
-                guard let textToInt = Int(string) else { return }
-                if string.hasPrefix("0") || textToInt > 28 || textToInt < 1 { text = "" as! T }
-            case .reason, .time, .none:
-                return
-            }
-        }
-    }
+    @State var maximumText = ""
+    @Binding var text: String
 
     var body: some View {
         underlinedTextFieldView
