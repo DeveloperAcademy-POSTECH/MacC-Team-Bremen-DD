@@ -61,7 +61,7 @@ private extension ScheduleListViewModel {
         let nextMonthWorkDays = CoreDataManager.shared.getWorkdaysByMonth(yearInt: Calendar.current.component(.year, from: dateAfterMonth), monthInt: Calendar.current.component(.month, from: dateAfterMonth))
         workDays.append(contentsOf: nextMonthWorkDays)
         
-        while date <= dateAfterMonth {
+        while date < dateAfterMonth {
             for schedule in allSchedules {
                 for weekDay in schedule.repeatedSchedule {
                     if weekDay == date.fetchDayOfWeek(date: date) {
