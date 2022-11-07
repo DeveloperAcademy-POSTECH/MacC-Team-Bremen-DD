@@ -7,44 +7,6 @@
 
 import SwiftUI
 
-enum UnderlinedTextFieldType: Equatable {
-    case workplace
-    case wage
-    case payday
-    case reason
-    case time
-    case none(title: String)
-
-    var title: String {
-        switch self {
-        case .workplace: return "근무지"
-        case .wage: return "시급"
-        case .payday: return "급여일"
-        case .reason: return "사유"
-        case .time: return "시간"
-        case .none(let title): return title
-        }
-    }
-    
-    var placeholder: String {
-        switch self {
-        case .workplace: return "예시) 편의점"
-        case .wage: return "최저시급 9,160원"
-        case .payday: return "10"
-        case .reason: return "사유를 입력해주세요."
-        case .time: return "00"
-        case .none: return "내용을 입력해주세요."
-        }
-    }
-    
-    var keyboardType: UIKeyboardType {
-        switch self {
-        case .wage, .payday, .time: return .decimalPad
-        case .workplace, .reason, .none: return .default
-        }
-    }
-}
-
 struct UnderlinedTextField: View {
     let textFieldType: UnderlinedTextFieldType
     @FocusState var isNumberFieldFocused: Bool
@@ -120,5 +82,43 @@ private extension UnderlinedTextField {
         }
         
         return .primary
+    }
+}
+
+enum UnderlinedTextFieldType: Equatable {
+    case workplace
+    case wage
+    case payday
+    case reason
+    case time
+    case none(title: String)
+
+    var title: String {
+        switch self {
+        case .workplace: return "근무지"
+        case .wage: return "시급"
+        case .payday: return "급여일"
+        case .reason: return "사유"
+        case .time: return "시간"
+        case .none(let title): return title
+        }
+    }
+    
+    var placeholder: String {
+        switch self {
+        case .workplace: return "예시) 편의점"
+        case .wage: return "최저시급 9,160원"
+        case .payday: return "10"
+        case .reason: return "사유를 입력해주세요."
+        case .time: return "00"
+        case .none: return "내용을 입력해주세요."
+        }
+    }
+    
+    var keyboardType: UIKeyboardType {
+        switch self {
+        case .wage, .payday, .time: return .decimalPad
+        case .workplace, .reason, .none: return .default
+        }
     }
 }
