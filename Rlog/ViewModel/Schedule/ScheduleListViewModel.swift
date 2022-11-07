@@ -19,8 +19,6 @@ final class ScheduleListViewModel: ObservableObject {
     var upcomingWorkDays: [WorkDayEntity] = []
     var pastWorkDays: [WorkDayEntity] = []
     let yearAndMonth: String = Date().fetchYearAndMonth()
-    let year = Int(Calendar.current.component(.year, from: Date()))
-    let month = Int(Calendar.current.component(.month, from: Date()))
     
     init() {
         fetchAllWorkDays()
@@ -37,9 +35,12 @@ final class ScheduleListViewModel: ObservableObject {
 
 private extension ScheduleListViewModel {
     func fetchAllWorkDays() {
+        let year = Calendar.current.component(.year, from: Date())
+        let month = Calendar.current.component(.month, from: Date())
+        
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.allWorkDays = CoreDataManager.shared.getWorkdaysByMonth(yearInt: self.year, monthInt: self.month)
+            self.allWorkDays = CoreDataManager.shared.getWorkdaysByMonth(yearInt: year, monthInt: month)
             self.upcomingWorkDays = self.allWorkDays.filter { self.isUpcomingOrNotDone(hasDone: $0.hasDone, day: $0.dayInt) }
             self.pastWorkDays = self.allWorkDays.filter { !self.isUpcomingOrNotDone(hasDone: $0.hasDone, day: $0.dayInt) }
         }
@@ -47,17 +48,11 @@ private extension ScheduleListViewModel {
     
     // TODO: - 날짜 struct 만들기
     func isUpcomming(day: Int16) -> Bool {
-        if day > Calendar.current.component(.day, from: Date()) {
-            return true
-        }
-        return false
+        return day > Calendar.current.component(.day, from: Date())
     }
     
     func isUpcomingOrNotDone(hasDone: Bool, day: Int16) -> Bool {
-        if !hasDone || isUpcomming(day: day) {
-            return true
-        }
-        return false
+        return !hasDone || isUpcomming(day: day)
     }
 }
 
@@ -147,9 +142,6 @@ private extension ScheduleCellViewModel {
     
     // TODO: - 날짜 struct 만들기
     func isUpcomming(day: Int16) -> Bool {
-        if day > Calendar.current.component(.day, from: Date()) {
-            return true
-        }
-        return false
+        return day > Calendar.current.component(.day, from: Date())
     }
 }
