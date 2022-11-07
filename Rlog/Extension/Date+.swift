@@ -14,4 +14,12 @@ extension Date {
         dateFormatter.dateFormat = "yyyy.MM"
         return dateFormatter.string(from: self)
     }
+    
+    func fetchDayOfWeek(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEEEE"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        let converted = dateFormatter.string(from: date)
+        return converted
+    }
 }
