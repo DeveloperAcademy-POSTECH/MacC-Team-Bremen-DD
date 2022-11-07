@@ -32,9 +32,6 @@ struct ScheduleListView: View {
         .background(
            background
         )
-        .onAppear {
-            viewModel.onAppear()
-        }
     }
 }
 
