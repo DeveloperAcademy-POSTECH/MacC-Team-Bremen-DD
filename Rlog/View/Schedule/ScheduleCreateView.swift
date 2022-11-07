@@ -13,15 +13,12 @@ struct ScheduleCreateView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 0) {
+            VStack(alignment: .leading) {
                 workspace
                     .padding(.top, 40)
                 workDate
-                    .padding(.top)
                 schedule
-                    .padding(.top)
                 reasonInput
-                    .padding(.top)
                 Spacer()
             }
             .padding(.horizontal)
