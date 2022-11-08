@@ -16,18 +16,21 @@ struct ScheduleUpdateView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            workspace
-                .padding(.top, 40)
-            workDate
-            startTime
-            endTime
-            reasonInput
-            deleteButton
-                .padding(.top, 16)
-            Spacer()
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                workspace
+                    .padding(.top, 40)
+                workDate
+                startTime
+                endTime
+                reasonInput
+                deleteButton
+                    .padding(.top, 16)
+                Spacer()
+            }
+            .padding(.horizontal)
         }
-        .padding(.horizontal)
+        .scrollIndicators(.hidden)
         .navigationTitle("일정 수정하기")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

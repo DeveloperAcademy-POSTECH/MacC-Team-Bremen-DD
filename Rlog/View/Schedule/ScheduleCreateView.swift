@@ -12,18 +12,18 @@ struct ScheduleCreateView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            workspace
-                .padding(.top, 40)
-            workDate
-                .padding(.top)
-            schedule
-                .padding(.top)
-            reasonInput
-                .padding(.top)
-            Spacer()
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                workspace
+                    .padding(.top, 40)
+                workDate
+                schedule
+                reasonInput
+                Spacer()
+            }
+            .padding(.horizontal)
         }
-        .padding(.horizontal)
+        .scrollIndicators(.hidden)
         .navigationTitle("일정 추가하기")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
