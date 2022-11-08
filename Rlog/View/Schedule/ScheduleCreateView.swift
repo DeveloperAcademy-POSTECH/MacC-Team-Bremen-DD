@@ -13,7 +13,7 @@ struct ScheduleCreateView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 16) {
                 workspace
                     .padding(.top, 40)
                 workDate
