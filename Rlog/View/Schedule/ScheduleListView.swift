@@ -68,7 +68,7 @@ private extension ScheduleListView {
                             .frame(height: 97)
                         Image(systemName: "plus")
                             .font(.title)
-                            .fontWeight(.semibold)
+//                            .fontWeight(.semibold)
                             .foregroundColor(Color.primary)
                     }
                 })
@@ -100,14 +100,14 @@ private extension ScheduleListView {
                 }
             }
         }
-        .scrollIndicators(.hidden)
+//        .scrollIndicators(.hidden)
     }
     
     var scheduleListHeader: some View {
         HStack(spacing: 0) {
             Image(systemName: "checkmark")
                 .foregroundColor(Color.primary)
-                .fontWeight(.bold)
+//                .fontWeight(.bold)
             Text(viewModel.selectedScheduleCase.rawValue)
                 .font(.title3)
                 .fontWeight(.semibold)

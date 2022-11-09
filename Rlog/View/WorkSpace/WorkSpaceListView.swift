@@ -32,7 +32,7 @@ struct WorkSpaceListView: View {
                         destination: WorkSpaceCreateView(isActive: $viewModel.isShowingSheet),
                         isActive: $viewModel.isShowingSheet) {
                             Image(systemName: "plus")
-                                .fontWeight(.bold)
+//                                .fontWeight(.bold)
                         }
                 }
             }

@@ -39,7 +39,7 @@ struct FilledButton: View {
                     configuration.label
                         .font(.body)
                         .foregroundColor(.white)
-                        .fontWeight(isEnabled ? .none : .bold)
+//                        .fontWeight(isEnabled ? .none : .bold)
                         .frame(maxWidth: .infinity, minHeight: 56, maxHeight: 56)
                         .background(backgroundColor)
                         .cornerRadius(10)
