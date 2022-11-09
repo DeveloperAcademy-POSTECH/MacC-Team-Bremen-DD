@@ -22,7 +22,7 @@ struct ScheduleListView: View {
             .padding(.horizontal)
             
             Rectangle()
-                .fill(LinearGradient(colors: [Color.clear, Color.gradientGray], startPoint: .top, endPoint: .bottom))
+                .fill(LinearGradient(colors: [Color.clear, Color.grayLight], startPoint: .top, endPoint: .bottom))
                 .frame(height: 68)
             
             StatusPicker(selectedScheduleCase: $viewModel.selectedScheduleCase)
@@ -38,7 +38,7 @@ struct ScheduleListView: View {
 private extension ScheduleListView {
     var background: some View {
         Rectangle()
-            .fill(Color.cardBackground)
+            .fill(Color.grayLight)
             .edgesIgnoringSafeArea(.top)
     }
     
@@ -48,7 +48,7 @@ private extension ScheduleListView {
             Text(viewModel.yearAndMonth)
                 .font(.title)
                 .fontWeight(.bold)
-                .foregroundColor(Color.fontBlack)
+                .foregroundColor(Color.black)
                 .padding(.horizontal, 10)
             Image(systemName: "chevron.right")
             Spacer()
@@ -111,7 +111,7 @@ private extension ScheduleListView {
             Text(viewModel.selectedScheduleCase.rawValue)
                 .font(.title3)
                 .fontWeight(.semibold)
-                .foregroundColor(Color.fontBlack)
+                .foregroundColor(Color.black)
                 .padding(.leading, 5)
         }
     }

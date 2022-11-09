@@ -43,7 +43,7 @@ struct WorkSpaceDetailView: View {
 
                 Text("근무일정")
                     .font(.subheadline)
-                    .foregroundColor(.fontLightGray)
+                    .foregroundColor(.grayLight)
                 ForEach(viewModel.schedules) { schedule in
                     schedulesContainer(schedule: schedule)
                 }
@@ -101,7 +101,7 @@ struct WorkSpaceDetailView: View {
                 }
             }
         }
-        .background(Color.cardBackground)
+        .background(Color.grayLight)
         .navigationBarBackButtonHidden()
     }
 }
@@ -114,10 +114,10 @@ private extension WorkSpaceDetailView {
                 HStack(spacing: 13) {
                     Text(tab.text.title)
                         .font(.subheadline)
-                        .foregroundColor(.fontLightGray)
+                        .foregroundColor(.grayLight)
                     Text(tab.text.description)
                         .font(.caption)
-                        .foregroundColor(.fontLightGray)
+                        .foregroundColor(.grayLight)
                 }
             })
         }
@@ -149,7 +149,7 @@ private extension WorkSpaceDetailView {
         }
         .padding()
         .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 54)
-        .background(Color.containerBackground)
+        .background(Color.backgroundWhite)
         .cornerRadius(10)
     }
 }

@@ -32,7 +32,7 @@ struct FilledButton: View {
                 if configuration.isPressed {
                     return .primary.opacity(0.5)
                 }
-                return isEnabled ? .primary : .fontLightGray
+                return isEnabled ? .primary : .grayLight
             }
             
             var body: some View {

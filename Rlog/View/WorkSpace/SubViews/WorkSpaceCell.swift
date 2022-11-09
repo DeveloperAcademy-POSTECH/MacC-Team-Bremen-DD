@@ -28,7 +28,7 @@ private extension WorkSpaceCell {
         HStack() {
             Text(workTitle)
                 .font(.subheadline)
-                .foregroundColor(.fontLightGray)
+                .foregroundColor(.grayLight)
             Spacer()
             Text(workInfo)
                 .font(.subheadline)
@@ -40,7 +40,7 @@ private extension WorkSpaceCell {
         HStack(alignment: .top, spacing: 0) {
             Text(workTitle)
                 .font(.subheadline)
-                .foregroundColor(.fontLightGray)
+                .foregroundColor(.grayLight)
             Spacer()
             VStack(spacing: 0) {
                 ForEach(schedules) { schedule in
@@ -86,8 +86,6 @@ private extension WorkSpaceCell {
             }
         }
         .padding()
-        .background(RoundedRectangle(cornerRadius: 10)
-            .fill(Color.background))
         .padding([.horizontal, .bottom])
     }
 }

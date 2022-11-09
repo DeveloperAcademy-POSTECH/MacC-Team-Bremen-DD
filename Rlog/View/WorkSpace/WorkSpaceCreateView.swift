@@ -80,7 +80,7 @@ private extension WorkSpaceCreateView {
                     Text("소득세")
                     Text("3.3% 적용")
                         .font(.caption)
-                        .foregroundColor(.fontLightGray)
+                        .foregroundColor(.grayLight)
                 }
             })
             Toggle(isOn: $viewModel.hasJuhyu, label: {
@@ -88,7 +88,7 @@ private extension WorkSpaceCreateView {
                     Text("주휴수당")
                     Text("60시간 근무 시 적용")
                         .font(.caption)
-                        .foregroundColor(.fontLightGray)
+                        .foregroundColor(.grayLight)
                 }
             })
         }

@@ -34,7 +34,7 @@ final class ScheduleCreateViewModel: ObservableObject {
         if !hasFilled {
             return Color.primary
         } else {
-            return Color.fontLightGray
+            return Color.grayLight
         }
     }
     private var startTime: String {

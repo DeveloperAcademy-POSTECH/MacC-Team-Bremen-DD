@@ -47,7 +47,7 @@ private extension WorkSpaceCreateConfirmationView {
         VStack(alignment: .leading, spacing: 10) {
             Text("근무 유형")
                 .font(.caption)
-                .foregroundColor(.fontLightGray)
+                .foregroundColor(.grayLight)
 
             VStack(spacing: 10) {
                 ForEach(viewModel.scheduleData, id: \.self) { schedule in

@@ -45,7 +45,7 @@ private extension WorkSpaceCreateCreatingScheduleView {
             viewModel.isShowingModal = false
         } label: {
             Text("취소")
-            .foregroundColor(.fontLightGray)
+                .foregroundColor(.grayLight)
         }
     }
     var toolbarConfirmButton: some View {
@@ -63,7 +63,7 @@ private extension WorkSpaceCreateCreatingScheduleView {
         VStack(alignment: .leading, spacing: 20) {
             Text("근무 요일")
                 .font(.caption)
-                .foregroundColor(.fontLightGray)
+                .foregroundColor(.grayLight)
             HStack(spacing: 8) {
                 // 더 깔끔한 방식으로 하는 방법은 없을까?
                 ForEach(0 ..< viewModel.sevenDays.count, id: \.self) { index in
@@ -85,7 +85,7 @@ private extension WorkSpaceCreateCreatingScheduleView {
         VStack(alignment: .leading, spacing: 20) {
             Text("근무 시간")
                 .font(.caption)
-                .foregroundColor(.fontLightGray)
+                .foregroundColor(.grayLight)
 
             HStack(spacing: 0) {
                 UnderlinedTextField(textFieldType: .time, text: $viewModel.startHour)

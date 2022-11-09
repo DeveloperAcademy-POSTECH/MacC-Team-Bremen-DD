@@ -46,10 +46,10 @@ struct StrokeButton: View {
             var backgroundColor: Color {
                 if configuration.isPressed {
                     return buttonType == .add
-                    ? .fontLightGray.opacity(0.5)
+                    ? .grayLight.opacity(0.5)
                     : .red.opacity(0.5)
                 }
-                return buttonType == .add ? .fontLightGray : .red
+                return buttonType == .add ? .grayLight : .red
             }
             
             var body: some View {

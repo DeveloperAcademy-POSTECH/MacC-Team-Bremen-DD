@@ -56,7 +56,7 @@ private extension WorkSpaceCreateScheduleListView {
     var labelText: some View {
         Text("근무 유형")
             .font(.caption)
-            .foregroundColor(.fontLightGray)
+            .foregroundColor(.grayLight)
     }
     
     var addScheduleButton: some View {

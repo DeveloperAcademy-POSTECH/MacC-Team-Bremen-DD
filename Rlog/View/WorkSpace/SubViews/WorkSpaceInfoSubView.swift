@@ -15,9 +15,9 @@ struct WorkSpaceInfoSubView: View {
         VStack(alignment: .leading, spacing: 10) {
             Text(labelName)
                 .font(.caption)
-                .foregroundColor(.fontLightGray)
+                .foregroundColor(.grayLight)
             Text(content)
-                .foregroundColor(.fontBlack)
+                .foregroundColor(.black)
         }
     }
 }

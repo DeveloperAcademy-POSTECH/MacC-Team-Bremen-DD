@@ -36,7 +36,7 @@ struct WorkSpaceListView: View {
                         }
                 }
             }
-            .background(Color.cardBackground)
+            .background(Color.backgroundCard)
             .onAppear {
                 viewModel.onAppear()
             }
