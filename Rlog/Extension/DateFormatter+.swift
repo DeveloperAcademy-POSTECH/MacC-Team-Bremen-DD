@@ -10,10 +10,12 @@ import Foundation
 extension DateFormatter {
     enum DateFormatType {
         case timeAndMinute
+        case weekday
 
         var dateFormat: String {
             switch self {
             case .timeAndMinute: return "HH:mm"
+            case .weekday: return "E"
             }
         }
     }

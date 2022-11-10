@@ -28,6 +28,24 @@ struct ScheduleListView: View {
     var nextWeek: [CalendarModel] {
         return viewModel.getWeekOfDate(viewModel.nextDate)
     }
+    let mockData: [WorkspaceEntity] = [
+        WorkspaceEntity(
+            name: "팍이네 팍팍 감자탕",
+            schedules: ScheduleEntity(),
+            workdays: WorkdayEntity(date: Date(), endHour: 18)
+        ),
+        WorkspaceEntity(
+            name: "팍이네 팍팍 감자탕",
+            schedules: ScheduleEntity(),
+            workdays: WorkdayEntity(date: Date(), endHour: 15)
+        ),
+        WorkspaceEntity(
+            name: "팍이네 팍팍 감자탕",
+            schedules: ScheduleEntity(),
+            workdays: WorkdayEntity(date: Date(), endHour: 22)
+        )
+    ]
+
     
     var body: some View {
         VStack {
@@ -72,9 +90,9 @@ private extension ScheduleListView {
                     .padding(.top)
                 datesContainer
                     .padding(.bottom, 11)
-                Rectangle()
-                    .foregroundColor(.gray)
-                    .frame(maxWidth: .infinity, maxHeight: 1.5)
+                HDivider()
+                    .padding(.bottom, 32)
+                scheduleList
             }
             .padding(.horizontal, 22)
             Spacer()
@@ -122,9 +140,9 @@ private extension ScheduleListView {
                 ZStack {
                     VStack {
                         Button {
-                            withAnimation {
+//                            withAnimation(.spring()) {
                                 viewModel.didTapDate(currentWeek[index])
-                            }
+//                            }
                         } label: {
                             Text("\(currentWeek[index].day)")
                                 .font(.callout)
@@ -138,17 +156,18 @@ private extension ScheduleListView {
                     }
                     
                     if viewModel.verifyFocusDate(currentWeek[index].day) {
-                        VStack {
-                            Text("\(currentWeek[index].day)")
-                                .font(.callout)
-                                .foregroundColor(.white)
-                            Circle()
-                                .frame(width: 6, height: 6)
-                                .foregroundColor(.white)
-                        }
-                        .padding()
-                        .background(.blue)
-                        .cornerRadius(15)
+                            VStack {
+                                Text("\(currentWeek[index].day)")
+                                    .font(.callout)
+                                    .foregroundColor(.white)
+                                Circle()
+                                    .frame(width: 6, height: 6)
+                                    .foregroundColor(.white)
+                            }
+                            .padding()
+                            .background(.blue)
+                            .cornerRadius(15)
+                            .transition(AnyTransition.opacity.animation(.easeInOut))
                     }
                 }
             }
@@ -179,6 +198,17 @@ private extension ScheduleListView {
                         .frame(width: 6, height: 6)
                         .foregroundColor(.green)
                 }
+            }
+        }
+    }
+    
+    var scheduleList: some View {
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 8) {
+                ForEach(mockData) { data in
+                    ScheduleCell(currentDate: viewModel.currentDate, data: data)
+                }
+                Spacer()
             }
         }
     }
