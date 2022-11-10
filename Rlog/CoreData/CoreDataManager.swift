@@ -121,7 +121,6 @@ extension CoreDataManager {
     }
 
     // MARK: - WORKDAY CRUD
-
     func createWorkday(of workspace: WorkspaceEntity, weekDay: Int16, yearInt: Int16, monthInt: Int16, dayInt: Int16, startHour: Int16, startMinute: Int16, endHour: Int16, endMinute: Int16, spentHour: Double, workDayType: Int16) {
         let workday = WorkDayEntity(context: context)
         workday.workspace = workspace
@@ -166,6 +165,40 @@ extension CoreDataManager {
         fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: [yearPredicate, monthPredicate])
         let result = try? context.fetch(fetchRequest)
         return result ?? []
+    }
+
+    func getWorkdaysForAMonth(yearInt: Int, monthInt: Int, dayInt: Int) -> [WorkDayEntity] {
+        let fromMonthfetchRequest: NSFetchRequest<WorkDayEntity> = WorkDayEntity.fetchRequest()
+        let toMonthfetchRequest: NSFetchRequest<WorkDayEntity> = WorkDayEntity.fetchRequest()
+
+        // from
+        let yearPredicate = NSPredicate(format: "yearInt == %i", yearInt)
+        let fromMonthPredicate = NSPredicate(format: "monthInt == %i", monthInt)
+        let fromDayPredicate = NSPredicate(format: "dayInt >= %i", dayInt)
+
+        // to
+        var toMonthPredicate: NSPredicate
+        if monthInt == 12 {
+            toMonthPredicate = NSPredicate(format: "monthInt == %i", 1)
+        } else {
+            toMonthPredicate = NSPredicate(format: "monthInt == %i", monthInt + 1)
+        }
+        let toDayPredicate = NSPredicate(format: "dayInt < %i", dayInt)
+
+        fromMonthfetchRequest.predicate = NSCompoundPredicate(
+            type: .and,
+            subpredicates: [yearPredicate, fromMonthPredicate, fromDayPredicate]
+        )
+        toMonthfetchRequest.predicate = NSCompoundPredicate(
+            type: .and,
+            subpredicates: [yearPredicate, toMonthPredicate, toDayPredicate]
+        )
+        guard
+            let fromMonthWorkdays = try? context.fetch(fromMonthfetchRequest),
+            let toMonthWorkdays = try? context.fetch(toMonthfetchRequest)
+        else { return [] }
+        let result = fromMonthWorkdays + toMonthWorkdays
+        return result
     }
 
 
