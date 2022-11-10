@@ -21,6 +21,7 @@ final class ScheduleListViewModel: ObservableObject {
     let yearAndMonth: String = Date().fetchYearAndMonth()
     
     init() {
+        initWorkDays()
         fetchAllWorkDays()
     }
     
@@ -46,6 +47,50 @@ private extension ScheduleListViewModel {
         }
     }
     
+    func initWorkDays() {
+        let allSchedules = CoreDataManager.shared.getAllSchedules()
+        var date = Date()
+        guard let dateAfterMonth = Calendar.current.date(byAdding: DateComponents(month: 1), to: date) else { return }
+        // TODO: - CoreDataManager에 한 달 이후의 WorkDays를 가져오는 함수가 들어올 경우에 한 줄로 수정 예정
+        var workDays = CoreDataManager.shared.getWorkdaysByMonth(yearInt: Calendar.current.component(.year, from: date), monthInt: Calendar.current.component(.month, from: date))
+        let nextMonthWorkDays = CoreDataManager.shared.getWorkdaysByMonth(yearInt: Calendar.current.component(.year, from: dateAfterMonth), monthInt: Calendar.current.component(.month, from: dateAfterMonth))
+        workDays.append(contentsOf: nextMonthWorkDays)
+        
+        while date < dateAfterMonth {
+            for schedule in allSchedules {
+                for weekDay in schedule.repeatedSchedule {
+                    if weekDay == date.fetchDayOfWeek(date: date) {
+                        var isAlreadyMade = false
+                        for workDay in workDays {
+                            if workDay.monthInt == Calendar.current.component(.month, from: date) && workDay.dayInt == Calendar.current.component(.day, from: date) {
+                                isAlreadyMade = true
+                            }
+                        }
+                        
+                        if !isAlreadyMade {
+                            CoreDataManager.shared.createWorkday(
+                                of: schedule.workspace,
+                                weekDay: fetchWeekDayInt(weekDay: date.fetchDayOfWeek(date: date)),
+                                yearInt: Int16(Calendar.current.component(.year, from: date)),
+                                monthInt: Int16(Calendar.current.component(.month, from: date)),
+                                dayInt: Int16(Calendar.current.component(.day, from: date)),
+                                startHour: schedule.startHour,
+                                startMinute: schedule.startMinute,
+                                endHour: schedule.endHour,
+                                endMinute: schedule.endMinute,
+                                spentHour: schedule.spentHour,
+                                workDayType: 0
+                            )
+                        }
+                    }
+                }
+            }
+            
+            guard let addDate = Calendar.current.date(byAdding: DateComponents(day: 1), to: date) else { return }
+            date = addDate
+        }
+    }
+    
     // TODO: - 날짜 struct 만들기
     func isUpcomming(day: Int16) -> Bool {
         return day > Calendar.current.component(.day, from: Date())
@@ -53,6 +98,27 @@ private extension ScheduleListViewModel {
     
     func isUpcomingOrNotDone(hasDone: Bool, day: Int16) -> Bool {
         return !hasDone || isUpcomming(day: day)
+    }
+    
+    func fetchWeekDayInt(weekDay: String) -> Int16 {
+        switch weekDay {
+        case "월":
+            return 0
+        case "화":
+            return 1
+        case "수":
+            return 2
+        case "목":
+            return 3
+        case "금":
+            return 4
+        case "토":
+            return 5
+        case "일":
+            return 6
+        default:
+            return 0
+        }
     }
 }
 
