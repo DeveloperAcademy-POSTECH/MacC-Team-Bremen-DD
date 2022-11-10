@@ -9,6 +9,12 @@ import SwiftUI
 
 struct ScheduleListView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            InputFormElement(containerType: .payday, text: .constant("25"))
+            InputFormElement(containerType: .wage, text: .constant("25"))
+            InputFormElement(containerType: .workplace, text: .constant("25"))
+            InputFormElement(containerType: .reason, text: .constant("25"))
+        }
+        .padding(.horizontal)
     }
 }
