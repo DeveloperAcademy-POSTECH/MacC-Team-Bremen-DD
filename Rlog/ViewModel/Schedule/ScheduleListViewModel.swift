@@ -1,5 +1,5 @@
 //
-//  SchduleListViewModel.swift
+//  ScheduleListViewModel.swift
 //  Rlog
 //
 //  Created by Noah's Ark on 2022/11/08.
@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-final class SchduleListViewModel: ObservableObject {
+final class ScheduleListViewModel: ObservableObject {
     @Published var nextDate = Calendar.current.date(byAdding: .weekOfMonth, value: 1, to: Date())! // ✅
     @Published var previousDate = Calendar.current.date(byAdding: .weekOfMonth, value: -1, to: Date())! // ✅
     @Published var currentDate = Date() {
@@ -33,7 +33,7 @@ final class SchduleListViewModel: ObservableObject {
     }
 }
 
-extension SchduleListViewModel {
+extension ScheduleListViewModel {
     // 일주일 뒤의 날짜를 반환합니다.
     private func getNextWeek() {
         guard let dateOfNextWeek = calendar.date(byAdding: .weekOfMonth, value: 1, to: currentDate)

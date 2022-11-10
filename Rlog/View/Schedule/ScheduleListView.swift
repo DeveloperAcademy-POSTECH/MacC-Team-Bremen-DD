@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct ScheduleListView: View {
-    @ObservedObject var viewModel = SchduleListViewModel()
+    @ObservedObject var viewModel = ScheduleListViewModel()
     @State var selection = 1
     let weekDays: [String] = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
     var currentMonth: String {
