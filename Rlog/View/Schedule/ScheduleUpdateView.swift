@@ -30,14 +30,13 @@ struct ScheduleUpdateView: View {
             }
             .padding(.horizontal)
         }
-        .scrollIndicators(.hidden)
         .navigationTitle("일정 수정하기")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: { dismiss() }, label: {
                     Text("취소")
-                        .foregroundColor(Color.fontLightGray)
+                        .foregroundColor(Color.grayLight)
                 })
             }
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -62,11 +61,11 @@ private extension ScheduleUpdateView {
         VStack(alignment: .leading, spacing: 0) {
             Text("근무지")
                 .font(.subheadline)
-                .foregroundColor(Color.fontLightGray)
+                .foregroundColor(Color.grayLight)
             
             VStack(alignment: .leading, spacing: 0) {
                 Text(viewModel.workDayEntity.workspace.name)
-                    .foregroundColor(Color.fontLightGray)
+                    .foregroundColor(Color.grayLight)
                     .padding(.horizontal)
                     .padding(.vertical, 9)
                 HDivider()
@@ -79,11 +78,11 @@ private extension ScheduleUpdateView {
         VStack(alignment: .leading, spacing: 0) {
             Text("근무 날짜")
                 .font(.subheadline)
-                .foregroundColor(Color.fontLightGray)
+                .foregroundColor(Color.grayLight)
             
             VStack(alignment: .leading, spacing: 0) {
                 Text("\(viewModel.workDay.yearInt)년 \(viewModel.workDay.monthInt)월 \(viewModel.workDay.dayInt)일")
-                    .foregroundColor(Color.fontLightGray)
+                    .foregroundColor(Color.grayLight)
                     .padding(.horizontal)
                     .padding(.vertical, 9)
                 HDivider()
@@ -96,7 +95,7 @@ private extension ScheduleUpdateView {
         VStack(alignment: .leading, spacing: 0) {
             Text("출근 시간")
                 .font(.subheadline)
-                .foregroundColor(Color.fontLightGray)
+                .foregroundColor(Color.grayLight)
             
             TimeEditer(time: $viewModel.startTime, isTimeChanged: $viewModel.isStartTimeChanaged)
                 .padding(.top, 8)
@@ -107,7 +106,7 @@ private extension ScheduleUpdateView {
         VStack(alignment: .leading, spacing: 0) {
             Text("퇴근 시간")
                 .font(.subheadline)
-                .foregroundColor(Color.fontLightGray)
+                .foregroundColor(Color.grayLight)
             
             TimeEditer(time: $viewModel.endTime, isTimeChanged: $viewModel.isEndTimeChanaged)
                 .padding(.top, 8)
@@ -118,7 +117,7 @@ private extension ScheduleUpdateView {
         VStack(alignment: .leading, spacing: 0) {
             Text("사유")
                 .font(.subheadline)
-                .foregroundColor(Color.fontLightGray)
+                .foregroundColor(Color.grayLight)
             
             UnderlinedTextField(textFieldType: .reason, text: $viewModel.reason)
                 .padding(.top, 25)
@@ -175,7 +174,7 @@ private extension ScheduleUpdateView {
                     .frame(height: 23)
                 configuration.label
                     .font(.footnote)
-                    .foregroundColor(configuration.isPressed ? .white : Color.fontLightGray)
+                    .foregroundColor(configuration.isPressed ? .white : Color.grayLight)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 2)
             }

@@ -23,14 +23,13 @@ struct ScheduleCreateView: View {
             }
             .padding(.horizontal)
         }
-        .scrollIndicators(.hidden)
         .navigationTitle("일정 추가하기")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: { dismiss() }, label: {
                     Text("취소")
-                        .foregroundColor(Color.fontLightGray)
+                        .foregroundColor(Color.grayLight)
                 })
             }
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -57,7 +56,7 @@ private extension ScheduleCreateView {
         VStack(alignment: .leading, spacing: 0) {
             Text("근무지")
                 .font(.subheadline)
-                .foregroundColor(Color.fontLightGray)
+                .foregroundColor(Color.grayLight)
             
             VStack(alignment: .leading, spacing: 0) {
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -91,14 +90,14 @@ private extension ScheduleCreateView {
         VStack(alignment: .leading, spacing: 0) {
             Text("근무 날짜")
                 .font(.subheadline)
-                .foregroundColor(Color.fontLightGray)
+                .foregroundColor(Color.grayLight)
             
             VStack(alignment: .leading, spacing: 0) {
                 Button(action: {
                     viewModel.isHideDatePicker.toggle()
                 }, label: {
                     Text("\(Calendar.current.component(.year, from: viewModel.workDate))년 \(Calendar.current.component(.month, from: viewModel.workDate))월 \(Calendar.current.component(.day, from: viewModel.workDate))일")
-                        .foregroundColor(.fontLightGray)
+                        .foregroundColor(.grayLight)
                         .padding(.vertical, 9)
                 })
                 if viewModel.isHideDatePicker {
@@ -115,7 +114,7 @@ private extension ScheduleCreateView {
         VStack(alignment: .leading, spacing: 0) {
             Text("근무 시간")
                 .font(.subheadline)
-                .foregroundColor(Color.fontLightGray)
+                .foregroundColor(Color.grayLight)
             HStack(spacing: 0) {
                 UnderlinedTextField(textFieldType: .time, text: $viewModel.startHourText)
                 Text(":")
@@ -134,7 +133,7 @@ private extension ScheduleCreateView {
         VStack(alignment: .leading, spacing: 0) {
             Text("사유")
                 .font(.subheadline)
-                .foregroundColor(Color.fontLightGray)
+                .foregroundColor(Color.grayLight)
             
             UnderlinedTextField(textFieldType: .reason, text: $viewModel.reason)
                 .padding(.top, 25)

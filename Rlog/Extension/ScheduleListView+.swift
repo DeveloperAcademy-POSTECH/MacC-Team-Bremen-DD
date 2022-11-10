@@ -114,7 +114,7 @@ extension ScheduleListView {
                     .foregroundColor(Color.fontBlack)
                 Text("\(viewModel.workDay.startHour):\(viewModel.workDay.startMinute)-\(viewModel.workDay.endHour):\(viewModel.workDay.endMinute)")
                     .font(.caption2)
-                    .foregroundColor(Color.fontLightGray)
+                    .foregroundColor(Color.grayLight)
             }
         }
         

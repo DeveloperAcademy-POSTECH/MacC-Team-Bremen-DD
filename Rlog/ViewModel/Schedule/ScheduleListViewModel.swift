@@ -138,7 +138,7 @@ final class StatusPickerViewModel: ObservableObject {
     }
     
     func getStatusPickerForegroundColor(compareCase: ScheduleCase) -> Color {
-        return selectedScheduleCase == compareCase ? .white : Color.fontLightGray
+        return selectedScheduleCase == compareCase ? .white : Color.grayLight
     }
 }
 
