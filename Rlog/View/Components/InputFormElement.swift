@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct InputFormElement<T>: View {
+struct InputFormElement: View {
     let containerType: UnderlinedTextFieldType
-    var text: Binding<T>
+    var text: Binding<String>
     
-    init(containerType: UnderlinedTextFieldType, text: Binding<T>) {
+    init(containerType: UnderlinedTextFieldType, text: Binding<String>) {
         self.containerType = containerType
         self.text = text
     }
@@ -53,7 +53,7 @@ private extension InputFormElement {
                 text: text
             )
 
-            if let text = text.wrappedValue as? String, text.count > 20 {
+            if text.wrappedValue.count == 20 {
                 HStack {
                     Text("20자 이상 입력할 수 없어요.")
                         .font(.footnote)
@@ -65,15 +65,28 @@ private extension InputFormElement {
     }
     
     var wageView: some View {
-        HStack {
-            UnderlinedTextField(
-                textFieldType: .wage,
-                text: text
-            )
+        VStack {
+            HStack {
+                UnderlinedTextField(
+                    textFieldType: .wage,
+                    text: text
+                )
+                
+                Spacer()
+                
+                Text("원")
+            }
             
-            Spacer()
-            
-            Text("원")
+            if let textToInt = Int(text.wrappedValue), textToInt >= 1000000 {
+                HStack {
+                    Text("1,000,000원 이상 입력할 수 없어요.")
+                        .font(.footnote)
+                        .foregroundColor(.red)
+                    Spacer()
+                }
+                .padding(.top, 4)
+            }
+
         }
     }
     
@@ -87,7 +100,7 @@ private extension InputFormElement {
                     text: text
                 )
                 
-                if let number = text.wrappedValue as? Int16, number > 28 || number < 1 {
+                if let textToInt = Int16(text.wrappedValue), textToInt > 28 || textToInt < 1 {
                     HStack {
                         Text("1~28 사이의 숫자를 입력해주세요")
                             .font(.footnote)
@@ -96,7 +109,6 @@ private extension InputFormElement {
                     }
                     .padding(.top, 4)
                 }
-                
             }
             Spacer()
             
