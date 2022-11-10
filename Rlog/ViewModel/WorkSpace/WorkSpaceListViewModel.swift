@@ -8,30 +8,8 @@
 import Combine
 import Foundation
 
+@MainActor
 final class WorkSpaceListViewModel: ObservableObject {
-    @Published var workspaces: [WorkspaceEntity] = []
-    @Published var schedules: [ScheduleEntity] = []
-    @Published var isShowingSheet = false {
-        didSet {
-            if isShowingSheet == false {
-                print("DEBUG")
-                getAllWorkspaces()
-            }
-        }
-    }
-
-    func onAppear() {
-        getAllWorkspaces()
-    }
-}
-
-// MARK: - Private Functions
-private extension WorkSpaceListViewModel {
-    func getAllWorkspaces() {
-        let result = CoreDataManager.shared.getAllWorkspaces()
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.workspaces = result
-        }
-    }
+    @Published var isShowingSheet = false
+  
 }

@@ -7,37 +7,10 @@
 
 import SwiftUI
 
+@MainActor
 final class WorkSpaceCreateScheduleListViewModel: ObservableObject {
-    @Binding var isActive: Bool
-    let workspaceModel: WorkSpaceModel
-    
-    init(isActive: Binding<Bool>, workspaceModel: WorkSpaceModel) {
-        self._isActive = isActive
-        self.workspaceModel = workspaceModel
-    }
-    
     @Published var isShowingModal = false
-    @Published var isDisabledNextButton = true
-    
-    @Published var scheduleList: [ScheduleModel] = [] {
-        didSet {
-            if !scheduleList.isEmpty {
-                isDisabledNextButton = false
-            }
-        }
-    }
-    
-    func didTapAddScheduleButton() {
-        showModal()
-    }
-    func getScheduleData() -> [ScheduleModel] {
-        return scheduleList
-    }
-}
+    @Published var isDisabledNextButton = false
 
-// MARK: - Private Functions
-private extension WorkSpaceCreateScheduleListViewModel {
-    func showModal() {
-        isShowingModal = true
-    }
+
 }

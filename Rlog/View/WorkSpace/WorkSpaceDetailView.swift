@@ -27,8 +27,8 @@ struct WorkSpaceDetailView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel: WorkSpaceDetailViewModel
 
-    init(workspace: WorkspaceEntity, schedules: [ScheduleEntity]) {
-        viewModel = WorkSpaceDetailViewModel(workspace: workspace, schedules: schedules)
+    init() {
+        viewModel = WorkSpaceDetailViewModel()
     }
 
     var body: some View {
@@ -44,9 +44,9 @@ struct WorkSpaceDetailView: View {
                 Text("근무일정")
                     .font(.subheadline)
                     .foregroundColor(.grayLight)
-                ForEach(viewModel.schedules) { schedule in
-                    schedulesContainer(schedule: schedule)
-                }
+//                ForEach(viewModel.schedules) { schedule in
+//                    schedulesContainer(schedule: schedule)
+//                }
                 
                 StrokeButton(label: "+ 근무 일정 추가하기", buttonType: .add) {
                 }
@@ -54,18 +54,12 @@ struct WorkSpaceDetailView: View {
                 HDivider()
                 
                 StrokeButton(label: "삭제하기", buttonType: .destructive) {
-                    viewModel.isAlertOpen = true
                 }
                 .alert("근무지 삭제하기", isPresented: $viewModel.isAlertOpen) {
                     Button("취소", role: .cancel) {
-                        viewModel.isAlertOpen = false
                     }
                     Button("삭제하기", role: .destructive) {
-                        viewModel.didTapDeleteButton() {
-                            DispatchQueue.main.async {
-                                dismiss()
-                            }
-                        }
+
                     }
                 } message: {
                     Text("근무지를 삭제하시겠습니까?")
@@ -78,9 +72,7 @@ struct WorkSpaceDetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {
-                    DispatchQueue.main.async {
-                        dismiss()
-                    }
+
                 }){
                     Image(systemName: "chevron.left")
                         .foregroundColor(.fontBlack)
@@ -90,11 +82,6 @@ struct WorkSpaceDetailView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    viewModel.didTapCompleteButton {
-                        DispatchQueue.main.async {
-                            dismiss()
-                        }
-                    }
                 }){
                     Text("완료")
                         .fontWeight(.bold)
@@ -124,23 +111,22 @@ private extension WorkSpaceDetailView {
     }
 
     @ViewBuilder
-    func schedulesContainer(schedule: ScheduleEntity) -> some View {
+    func schedulesContainer() -> some View {
         HStack(spacing: 0) {
             HStack(spacing: 0) {
-                ForEach(schedule.repeatedSchedule, id:\.self) { weekDay in
-                    Text(weekDay)
-                        .font(.body)
-                        .foregroundColor(.fontBlack)
-                        .padding(.horizontal, 1)
-                }
+//                ForEach(schedule.repeatedSchedule, id:\.self) { weekDay in
+//                    Text(weekDay)
+//                        .font(.body)
+//                        .foregroundColor(.fontBlack)
+//                        .padding(.horizontal, 1)
+//                }
             }
             .padding(.trailing, 3)
             Spacer()
-            Text("\(schedule.startHour):\(schedule.startMinute)0 - \(schedule.endHour):\(schedule.endMinute)0")
+            Text("11 : 00 - 12 : 00")
                 .font(.body)
                 .foregroundColor(.fontBlack)
             Button {
-                viewModel.didTapScheduleDeleteButton(schedule: schedule)
             } label: {
                 Image(systemName: "minus.circle")
                     .foregroundColor(.red)

@@ -2,19 +2,13 @@
 //  MonthlyCalculateListView.swift
 //  Rlog
 //
-//  Created by 송시원 on 2022/10/17.
+//  Created by Kim Insub on 2022/11/10.
 //
 
 import SwiftUI
 
 struct MonthlyCalculateListView: View {
     var body: some View {
-        WIPView()
-    }
-}
-
-struct MonthlyCalculateListView_Previews: PreviewProvider {
-    static var previews: some View {
-        MonthlyCalculateListView()
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }

@@ -17,13 +17,13 @@ enum WorkDayType: Int {
         get {
             switch self {
             case .regular:
-                return "정규근무"
+                return "정규"
             case .reduce:
-                return "축소근무"
+                return "축소"
             case .overtime:
-                return "연장근무"
+                return "연장"
             case .extraDay:
-                return "추가근무"
+                return "추가"
             }
         }
     }

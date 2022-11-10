@@ -10,8 +10,8 @@ import SwiftUI
 struct WorkSpaceCreateCreatingScheduleView: View {
     @ObservedObject private var viewModel:  WorkSpaceCreateCreatingScheduleViewModel
     
-    init(isShowingModal: Binding<Bool>, scheduleList: Binding<[ScheduleModel]>) {
-        self.viewModel = WorkSpaceCreateCreatingScheduleViewModel(isShowingModal: isShowingModal, scheduleList: scheduleList)
+    init() {
+        self.viewModel = WorkSpaceCreateCreatingScheduleViewModel()
     }
     
     var body: some View {
@@ -28,9 +28,7 @@ struct WorkSpaceCreateCreatingScheduleView: View {
                     toolbarCancelButton
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    if viewModel.isShowingConfirmButton {
-                        toolbarConfirmButton
-                    }
+                  
                 }
             }
             .padding(.horizontal)
@@ -50,7 +48,7 @@ private extension WorkSpaceCreateCreatingScheduleView {
     }
     var toolbarConfirmButton: some View {
         Button{
-            viewModel.didTapConfirmButton()
+            
         } label: {
             Text("완료")
         }
@@ -66,16 +64,16 @@ private extension WorkSpaceCreateCreatingScheduleView {
                 .foregroundColor(.grayLight)
             HStack(spacing: 8) {
                 // 더 깔끔한 방식으로 하는 방법은 없을까?
-                ForEach(0 ..< viewModel.sevenDays.count, id: \.self) { index in
-                    Button {
-                        viewModel.didTapDayPicker(index: index)
-                    } label: {
-                        DayButtonSubView(
-                            day: viewModel.sevenDays[index].dayName,
-                            isSelected: viewModel.sevenDays[index].isSelected
-                        )
-                    }
-                }
+//                ForEach(0 ..< viewModel.sevenDays.count, id: \.self) { index in
+//                    Button {
+//                        viewModel.didTapDayPicker(index: index)
+//                    } label: {
+//                        DayButtonSubView(
+//                            day: viewModel.sevenDays[index].dayName,
+//                            isSelected: viewModel.sevenDays[index].isSelected
+//                        )
+//                    }
+//                }
             }
         }
         
@@ -88,19 +86,19 @@ private extension WorkSpaceCreateCreatingScheduleView {
                 .foregroundColor(.grayLight)
 
             HStack(spacing: 0) {
-                UnderlinedTextField(textFieldType: .time, text: $viewModel.startHour)
+                UnderlinedTextField(textFieldType: .time, text: $viewModel.text)
                 Text(":")
-                UnderlinedTextField(textFieldType: .time, text: $viewModel.startMinute)
+                UnderlinedTextField(textFieldType: .time, text: $viewModel.text)
 
                 Text("-")
                     .padding(.horizontal, 10)
-                UnderlinedTextField(textFieldType: .time, text: $viewModel.endHour)
+                UnderlinedTextField(textFieldType: .time, text: $viewModel.text)
                 Text(":")
-                UnderlinedTextField(textFieldType: .time, text: $viewModel.endMinute)
+                UnderlinedTextField(textFieldType: .time, text: $viewModel.text)
             }
             .foregroundColor(.fontBlack)
 
-            Text(viewModel.errorMessage)
+            Text("")
                 .font(.caption)
                 .foregroundColor(.red)
         }

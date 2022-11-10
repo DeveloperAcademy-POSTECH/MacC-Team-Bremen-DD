@@ -15,9 +15,10 @@ struct WorkSpaceListView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                ForEach(viewModel.workspaces, id: \.self) { workspace in
-                    WorkSpaceCell(workspace: workspace)
-                }
+//                ForEach(viewModel.workspaces, id: \.self) { workspace in
+//                    WorkSpaceCell(workspace: workspace)
+//                }
+                Text("")
             }
             .padding(.top, 32)
             .navigationBarTitleDisplayMode(.inline)
@@ -29,16 +30,15 @@ struct WorkSpaceListView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(
-                        destination: WorkSpaceCreateView(isActive: $viewModel.isShowingSheet),
+                        destination: WorkSpaceCreateView(),
                         isActive: $viewModel.isShowingSheet) {
                             Image(systemName: "plus")
-//                                .fontWeight(.bold)
                         }
                 }
             }
             .background(Color.backgroundCard)
             .onAppear {
-                viewModel.onAppear()
+
             }
         }
     }

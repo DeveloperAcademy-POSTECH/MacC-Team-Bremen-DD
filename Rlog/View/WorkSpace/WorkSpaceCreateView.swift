@@ -10,8 +10,8 @@ import SwiftUI
 
 struct WorkSpaceCreateView: View {
     @ObservedObject var viewModel: WorkSpaceCreateViewModel
-    init(isActive: Binding<Bool>) {
-        self.viewModel = WorkSpaceCreateViewModel(isActive: isActive)
+    init() {
+        self.viewModel = WorkSpaceCreateViewModel()
     }
     
     var body: some View {
@@ -46,14 +46,7 @@ struct WorkSpaceCreateView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 if !viewModel.isHiddenToolBarItem {
                     NavigationLink {
-                        WorkSpaceCreateScheduleListView(isActive: $viewModel.isActive, workspaceModel: WorkSpaceModel(
-                            name: viewModel.name,
-                            paymentDay: viewModel.paymentDay,
-                            hourlyWage: viewModel.hourlyWage,
-                            hasTax: viewModel.hasTax,
-                            hasJuhyu: viewModel.hasJuhyu
-                        )
-                        )
+                        WorkSpaceCreateScheduleListView()
                     } label: {
                         Text("다음")
                             .foregroundColor(.fontBlack)
@@ -95,14 +88,14 @@ private extension WorkSpaceCreateView {
     }
     // 가이드 텍스트
     var guidingText: some View {
-        TitleSubView(title: viewModel.currentState.title)
+        Text("")
+//        TitleSubView(title: viewModel.currentState.title)
     }
     
     // 확인 버튼
     var ConfirmButton: some View {
         // -------> TODO: 컨포넌트로 대체
         Button {
-            viewModel.didTapConfirmButton()
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)

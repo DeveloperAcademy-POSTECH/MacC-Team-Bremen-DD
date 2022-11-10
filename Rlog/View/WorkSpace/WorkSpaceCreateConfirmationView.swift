@@ -10,12 +10,8 @@ import SwiftUI
 struct WorkSpaceCreateConfirmationView: View {
     @ObservedObject private var viewModel: WorkSpaceCreateConfirmationViewModel
 
-    init(isActive: Binding<Bool>, workspaceData: WorkSpaceModel, scheduleData: [ScheduleModel]) {
-        self.viewModel = WorkSpaceCreateConfirmationViewModel(
-            isActive: isActive,
-            workspaceData: workspaceData,
-            scheduleData: scheduleData
-        )
+    init() {
+        self.viewModel = WorkSpaceCreateConfirmationViewModel()
     }
     
     var body: some View {
@@ -23,11 +19,11 @@ struct WorkSpaceCreateConfirmationView: View {
             TitleSubView(title: "새로운 아르바이트를 추가합니다.")
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    WorkSpaceInfoSubView(labelName:"근무지", content: viewModel.workspaceData.name)
-                    WorkSpaceInfoSubView(labelName:"시급", content: viewModel.workspaceData.hourlyWage)
-                    WorkSpaceInfoSubView(labelName:"급여일", content:"매월 \(viewModel.workspaceData.paymentDay)일")
-                    WorkSpaceInfoSubView(labelName:"소득세", content:viewModel.workspaceData.hasTax ? "3.3% 적용" : "미적용")
-                    WorkSpaceInfoSubView(labelName:"주휴수당", content:viewModel.workspaceData.hasJuhyu ? "60시간 근무 시 적용" : "미적용")
+                    WorkSpaceInfoSubView(labelName:"근무지", content: "")
+                    WorkSpaceInfoSubView(labelName:"시급", content: "")
+                    WorkSpaceInfoSubView(labelName:"급여일", content:"매월 \("")일")
+                    WorkSpaceInfoSubView(labelName:"소득세", content: true ? "3.3% 적용" : "미적용")
+                    WorkSpaceInfoSubView(labelName:"주휴수당", content: true ? "60시간 근무 시 적용" : "미적용")
                     WorkTypeInfo
                     Spacer()
                 }
@@ -50,21 +46,20 @@ private extension WorkSpaceCreateConfirmationView {
                 .foregroundColor(.grayLight)
 
             VStack(spacing: 10) {
-                ForEach(viewModel.scheduleData, id: \.self) { schedule in
-                    ScheduleContainer(
-                        repeatedSchedule: schedule.repeatedSchedule,
-                        startHour: schedule.startHour,
-                        startMinute: schedule.startMinute,
-                        endHour: schedule.endHour,
-                        endMinute: schedule.endMinute
-                    )
-                }
+//                ForEach(viewModel.scheduleData, id: \.self) { schedule in
+//                    ScheduleContainer(
+//                        repeatedSchedule: schedule.repeatedSchedule,
+//                        startHour: schedule.startHour,
+//                        startMinute: schedule.startMinute,
+//                        endHour: schedule.endHour,
+//                        endMinute: schedule.endMinute
+//                    )
+//                }
             }
         }
     }
     var toolbarConfirmButton: some View {
             Button{
-                viewModel.didTapConfirmButton()
             } label: {
                 Text("완료")
             }

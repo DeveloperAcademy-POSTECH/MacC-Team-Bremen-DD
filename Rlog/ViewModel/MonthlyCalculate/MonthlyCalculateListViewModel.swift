@@ -2,13 +2,12 @@
 //  MonthlyCalculateListViewModel.swift
 //  Rlog
 //
-//  Created by 송시원 on 2022/10/17.
+//  Created by Kim Insub on 2022/11/10.
 //
 
-import SwiftUI
+import Foundation
 
-struct MonthlyCalculateListViewModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+@MainActor
+final class MonthlyCalculateListViewModel: ObservableObject {
+    
 }
