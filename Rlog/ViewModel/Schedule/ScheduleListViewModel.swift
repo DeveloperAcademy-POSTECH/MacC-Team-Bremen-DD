@@ -35,28 +35,24 @@ final class ScheduleListViewModel: ObservableObject {
 
 private extension ScheduleListViewModel {
     func fetchAllWorkDays() {
-        let result = CoreDataManager.shared.getAllWorkspaces()
+        let year = Calendar.current.component(.year, from: Date())
+        let month = Calendar.current.component(.month, from: Date())
+        
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            for workspace in result {
-                self.allWorkDays.append(contentsOf: CoreDataManager.shared.getWorkdays(
-                    of: workspace,
-                    yearInt: Calendar.current.component(.year, from: Date()),
-                    monthInt: Calendar.current.component(.month, from: Date()),
-                    limit: 20)
-                )
-            }
-            self.upcomingWorkDays = self.allWorkDays.filter { self.isUpcomming(day: $0.dayInt) }
-            self.pastWorkDays = self.allWorkDays.filter { !self.isUpcomming(day: $0.dayInt) }
+            self.allWorkDays = CoreDataManager.shared.getWorkdaysByMonth(yearInt: year, monthInt: month)
+            self.upcomingWorkDays = self.allWorkDays.filter { self.isUpcomingOrNotDone(hasDone: $0.hasDone, day: $0.dayInt) }
+            self.pastWorkDays = self.allWorkDays.filter { !self.isUpcomingOrNotDone(hasDone: $0.hasDone, day: $0.dayInt) }
         }
     }
     
     // TODO: - 날짜 struct 만들기
     func isUpcomming(day: Int16) -> Bool {
-        if day >= Calendar.current.component(.day, from: Date()) {
-            return true
-        }
-        return false
+        return day > Calendar.current.component(.day, from: Date())
+    }
+    
+    func isUpcomingOrNotDone(hasDone: Bool, day: Int16) -> Bool {
+        return !hasDone || isUpcomming(day: day)
     }
 }
 
@@ -82,11 +78,11 @@ final class StatusPickerViewModel: ObservableObject {
 
 final class ScheduleCellViewModel: ObservableObject {
     @Published var isShowUpdateModal = false
-    var workDay: WorkDay
+    @Published var workDay: WorkDay
     var workDayEntity: WorkDayEntity
     var didDismiss: () -> Void
     var isShowConfirmButton: Bool {
-        if isToday(month: workDay.monthInt, day: workDay.dayInt) {
+        if !isUpcomming(day: workDay.dayInt) {
             return !workDay.hasDone
         }
         return false
@@ -113,6 +109,7 @@ final class ScheduleCellViewModel: ObservableObject {
     func didTapConfirmButton() {
         Task {
             try? await updateHasDone()
+            didDismiss()
         }
     }
     
@@ -123,30 +120,28 @@ final class ScheduleCellViewModel: ObservableObject {
 
 private extension ScheduleCellViewModel {
     func updateHasDone() async throws {
-        workDay.hasDone = true
-        CoreDataManager.shared.editWorkday(
-            of: workDayEntity,
-            weekDay: workDay.weekDay,
-            yearInt: workDay.yearInt,
-            monthInt: workDay.monthInt,
-            dayInt: workDay.dayInt,
-            startHour: workDay.startHour,
-            startMinute: workDay.startMinute,
-            endHour: workDay.endHour,
-            endMinute: workDay.endMinute,
-            spentHour: workDay.spentHour,
-            hasDone: workDay.hasDone,
-            workDayType: workDay.workDayType
-        )
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.workDay.hasDone = true
+            CoreDataManager.shared.editWorkday(
+                of: self.workDayEntity,
+                weekDay: self.workDay.weekDay,
+                yearInt: self.workDay.yearInt,
+                monthInt: self.workDay.monthInt,
+                dayInt: self.workDay.dayInt,
+                startHour: self.workDay.startHour,
+                startMinute: self.workDay.startMinute,
+                endHour: self.workDay.endHour,
+                endMinute: self.workDay.endMinute,
+                spentHour: self.workDay.spentHour,
+                hasDone: self.workDay.hasDone,
+                workDayType: self.workDay.workDayType
+            )
+        }
     }
     
     // TODO: - 날짜 struct 만들기
-    func isToday(month: Int16, day: Int16) -> Bool {
-        if month == Calendar.current.component(.month, from: Date()) {
-            if day == Calendar.current.component(.day, from: Date()) {
-                return true
-            }
-        }
-        return false
+    func isUpcomming(day: Int16) -> Bool {
+        return day > Calendar.current.component(.day, from: Date())
     }
 }

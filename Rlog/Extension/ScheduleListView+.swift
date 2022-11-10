@@ -150,7 +150,7 @@ extension ScheduleListView {
                             .padding(.horizontal, 8)
                             .padding(.vertical, 2)
                             .background(
-                                Color("PointRed")
+                                Color(viewModel.workDayEntity.workspace.colorString)
                             )
                             .cornerRadius(10)
                     })
