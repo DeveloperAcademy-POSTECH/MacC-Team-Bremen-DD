@@ -16,7 +16,12 @@ extension ScheduleEntity {
         return NSFetchRequest<ScheduleEntity>(entityName: "ScheduleEntity")
     }
 
-    @NSManaged public var workspace: WorkspaceEntity?
+    @NSManaged public var repeatDays: [String]
+    @NSManaged public var startHour: Int16
+    @NSManaged public var startMinute: Int16
+    @NSManaged public var endHour: Int16
+    @NSManaged public var endMinute: Int16
+    @NSManaged public var workspace: WorkspaceEntity
     @NSManaged public var workdays: NSSet?
 
 }
