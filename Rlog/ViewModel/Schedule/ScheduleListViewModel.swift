@@ -56,13 +56,14 @@ extension ScheduleListViewModel {
         let year = components.year ?? 2000
         let month = components.month ?? 1
         var focusDateComponents = DateComponents(year: year, month: month, day: date.day)
-        var focusDate = calendar.date(from: focusDateComponents)!
+        guard var focusDate = calendar.date(from: focusDateComponents) else { return }
 
         // 캘린더 날짜와 터치된 날짜의 년도, 월이 다른 경우
         // 월 정보만 바뀌어도 년도 케이스 핸들링이 가능하므로 월 정보만 비교합니다.
         if date.month != month {
             focusDateComponents = DateComponents(year: date.year, month: date.month, day: date.day)
-            focusDate = calendar.date(from: focusDateComponents)!
+            guard let data = calendar.date(from: focusDateComponents) else { return }
+            focusDate = data
         }
         
         currentDate = focusDate
