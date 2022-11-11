@@ -37,7 +37,7 @@ private extension MonthlyCalculateListView {
                 })
                 // TODO: - 현재 연도, 월로 바꾸기
                 Text("\(viewModel.fecthYear()).\(viewModel.fetchMonth())")
-                    .fontWeight(.bold)
+                    .fontWeight(.semibold)
                 Button(action: {
                     // TODO: - ViewModel에서 로직 구현
                 }, label: {
