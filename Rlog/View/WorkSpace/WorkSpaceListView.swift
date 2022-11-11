@@ -32,7 +32,7 @@ struct WorkSpaceListView: View {
                     NavigationLink(
                         destination: WorkSpaceCreateView(),
                         isActive: $viewModel.isShowingSheet) {
-                            Image(systemName: "plus")
+                            Image("plus.curved")
                         }
                 }
             }

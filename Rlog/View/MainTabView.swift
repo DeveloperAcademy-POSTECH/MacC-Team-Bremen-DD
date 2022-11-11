@@ -18,10 +18,13 @@ struct MainTabView: View {
             ForEach(Tab.allCases, id: \.self) { tab in
                 tab.view
                     .tabItem {
-                        Image(systemName: tab.systemName)
+                        Image(tab.systemName)
+                            .foregroundColor(.primary)
                         Text(tab.title)
                     }
             }
         }
+        .accentColor(.primary)
     }
 }
+
