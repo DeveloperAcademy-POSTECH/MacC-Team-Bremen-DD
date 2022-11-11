@@ -138,9 +138,7 @@ private extension ScheduleListView {
                 ZStack {
                     VStack {
                         Button {
-//                            withAnimation(.spring()) {
-                                viewModel.didTapDate(currentWeek[index])
-//                            }
+                            viewModel.didTapDate(currentWeek[index])
                         } label: {
                             Text("\(currentWeek[index].day)")
                                 .font(.callout)
