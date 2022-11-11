@@ -26,21 +26,21 @@ struct ScheduleListView: View {
     var nextWeek: [CalendarModel] {
         return viewModel.getWeekOfDate(viewModel.nextDate)
     }
-    let mockData: [WorkspaceEntity] = [
-        WorkspaceEntity(
+    let mockData: [WorkspaceEntitySample] = [
+        WorkspaceEntitySample(
             name: "팍이네 팍팍 감자탕",
-            schedules: ScheduleEntity(),
-            workdays: WorkdayEntity(date: Date(), endHour: 18)
+            schedules: ScheduleEntitySample(),
+            workdays: WorkdayEntitySample(date: Date(), endHour: 18)
         ),
-        WorkspaceEntity(
+        WorkspaceEntitySample(
             name: "팍이네 팍팍 감자탕",
-            schedules: ScheduleEntity(),
-            workdays: WorkdayEntity(date: Date(), endHour: 15)
+            schedules: ScheduleEntitySample(),
+            workdays: WorkdayEntitySample(date: Date(), endHour: 15)
         ),
-        WorkspaceEntity(
+        WorkspaceEntitySample(
             name: "팍이네 팍팍 감자탕",
-            schedules: ScheduleEntity(),
-            workdays: WorkdayEntity(date: Date(), endHour: 22)
+            schedules: ScheduleEntitySample(),
+            workdays: WorkdayEntitySample(date: Date(), endHour: 22)
         )
     ]
 

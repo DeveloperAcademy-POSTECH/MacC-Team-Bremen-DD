@@ -11,7 +11,7 @@ struct ScheduleCell: View {
     // WorkspaceEntity
     @ObservedObject var viewModel = ScheduleListViewModel()
     let currentDate: Date
-    let data: WorkspaceEntity
+    let data: WorkspaceEntitySample
     var weekday: String {
         let formatter = DateFormatter(dateFormatType: .weekday)
         return formatter.string(from: currentDate)
@@ -98,7 +98,7 @@ private extension ScheduleCell {
     }
 }
 
-struct WorkspaceEntity: Identifiable {
+struct WorkspaceEntitySample: Identifiable {
     var id = UUID()
     
     let name: String
@@ -106,11 +106,11 @@ struct WorkspaceEntity: Identifiable {
     let hourlyWage: Int32 = 10000
     let hasTax: Bool = true
     let hasJuhyu: Bool = true
-    let schedules: ScheduleEntity
-    let workdays: WorkdayEntity
+    let schedules: ScheduleEntitySample
+    let workdays: WorkdayEntitySample
 }
 
-struct ScheduleEntity {
+struct ScheduleEntitySample {
     let repeatDays: [String] = ["월", "수", "금"]
     let startHour: Int16 = 9
     let startMinute: Int16 = 30
@@ -118,7 +118,7 @@ struct ScheduleEntity {
     let endMinute: Int16 = 0
 }
 
-struct WorkdayEntity {
+struct WorkdayEntitySample {
     let date: Date
     let hourlyWage: Int32 = 10000
     let startHour: Int16 = 9
