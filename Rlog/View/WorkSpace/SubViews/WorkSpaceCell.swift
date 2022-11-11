@@ -8,12 +8,8 @@
 import SwiftUI
 
 struct WorkSpaceCell: View {
-    //    @ObservedObject var viewModel: WorkSpaceCellViewModel
-    var model: CustomModel
     
-    //    init() {
-    //        self.viewModel = WorkSpaceCellViewModel()
-    //    }
+    var model: CustomModel
     
     var body: some View {
         NavigationLink {
@@ -37,6 +33,7 @@ private extension WorkSpaceCell {
         }
     }
     
+    //TODO : 뷰모델 연동시 사용 예정
     //    func makeWorkSpaceScheduleInfo() -> some View {
     //        HStack(alignment: .top, spacing: 0) {
     //            Text("workTitle")

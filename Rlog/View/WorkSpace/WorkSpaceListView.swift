@@ -28,8 +28,6 @@ enum WorkSpaceInfo: CaseIterable {
 
 struct WorkSpaceListView: View {
     
-    //    @ObservedObject var viewModel = WorkSpaceListViewModel()
-    
     var body: some View {
         
         NavigationView {
@@ -40,21 +38,22 @@ struct WorkSpaceListView: View {
                 }
                 Text("")
             }
-            .padding(.top, 32)
-            .navigationBarTitleDisplayMode(.inline)
+            .padding(.top, 24)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
+                    
                     Text("근무지")
                         .font(.title2)
                         .fontWeight(.bold)
                 }
-                //                ToolbarItem(placement: .navigationBarTrailing) {
-                //                    NavigationLink(
-                //                        destination: WorkSpaceCreateView(),
-                //                        isActive: $viewModel.isShowingSheet) {
-                //                            Image(systemName: "plus")
-                //                        }
-                //                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    
+                    NavigationLink(destination: WorkSpaceCreateView()) {
+                        //TODO : SF심블이 아니므로 별도 PR에 assets 추가 후 적용 예정
+                        Image(systemName: "plus")
+                            .foregroundColor(Color.primary)
+                    }
+                }
             }
             .background(Color.backgroundWhite)
         }
