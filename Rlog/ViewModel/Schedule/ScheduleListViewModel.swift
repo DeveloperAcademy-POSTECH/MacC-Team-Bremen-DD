@@ -4,13 +4,12 @@
 //
 //  Created by Noah's Ark on 2022/11/08.
 //
-// ✅ 강제 unwrapping 이 진행된 경우를 주석으로 표기했습니다.
 
 import SwiftUI
 
 final class ScheduleListViewModel: ObservableObject {
-    @Published var nextDate = Calendar.current.date(byAdding: .weekOfMonth, value: 1, to: Date())! // ✅
-    @Published var previousDate = Calendar.current.date(byAdding: .weekOfMonth, value: -1, to: Date())! // ✅
+    @Published var nextDate = Calendar.current.date(byAdding: .weekOfMonth, value: 1, to: Date()) ?? Date()
+    @Published var previousDate = Calendar.current.date(byAdding: .weekOfMonth, value: -1, to: Date()) ?? Date()
     @Published var currentDate = Date() {
         didSet {
             guard let nextWeek = Calendar.current.date(byAdding: .weekOfMonth, value: 1, to: currentDate)
@@ -59,17 +58,17 @@ extension ScheduleListViewModel {
         //  1  2  3 4 5 6 7 (range)
         // -3 -2 -1 0 1 2 3 (today가 수요일인 경우를 적용, 4 = 수요일)
         //  [3일 전, 2일 전, 1일 전, 오늘, 1일 후, 2일 후, 3일 후] (반환값)
-        let days = calendar
-            .range(of: .weekday, in: .weekOfYear, for: today)! // ✅
-            .compactMap { calendar.date(byAdding: .day, value: $0 - dayOfWeek, to: today) }
+        guard let rangeData = calendar.range(of: .weekday, in: .weekOfYear, for: today)
+        else { return [] }
+        let days = rangeData.compactMap { calendar.date(byAdding: .day, value: $0 - dayOfWeek, to: today) }
         
         // 반환된 배열의 날짜 데이터를 각각 추출합니다.
         // UI 작업을 위해 임시로 사용합니다.
         let weekdayArray = days.map {
             let components = calendar.dateComponents([.year, .month, .day], from: $0)
-            let year = components.year! // ✅
-            let month = components.month! // ✅
-            let day = components.day! // ✅
+            let year = components.year ?? 2000
+            let month = components.month ?? 1
+            let day = components.day ?? 1
             
             return CalendarModel(year: year, month: month, day: day)
         }

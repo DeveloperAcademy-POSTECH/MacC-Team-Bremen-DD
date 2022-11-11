@@ -4,7 +4,6 @@
 //
 //  Created by Noah's Ark on 2022/11/08.
 //
-// ✅ 강제 unwrapping 이 진행된 경우를 주석으로 표기했습니다.
 
 import SwiftUI
 
@@ -13,8 +12,8 @@ struct ScheduleListView: View {
     @State var selection = 1
     var currentMonth: String {
         let components = Calendar.current.dateComponents([.year, .month], from: viewModel.currentDate)
-        let year = components.year! // ✅
-        let month = components.month! // ✅
+        let year = components.year ?? 2000
+        let month = components.month ?? 1
         
         return "\(year). \(month)"
     }
