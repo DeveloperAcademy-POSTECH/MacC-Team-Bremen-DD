@@ -5,7 +5,6 @@
 //  Created by Noah's Ark on 2022/11/10.
 //
 
-import Foundation
 import SwiftUI
 
 extension View {
