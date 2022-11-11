@@ -6,7 +6,6 @@
 //
 // ✅ 강제 unwrapping 이 진행된 경우를 주석으로 표기했습니다.
 
-import Foundation
 import SwiftUI
 
 final class ScheduleListViewModel: ObservableObject {
