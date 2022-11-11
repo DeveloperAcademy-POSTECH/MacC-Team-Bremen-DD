@@ -22,7 +22,6 @@ private extension BorderedTextField {
     var borderedTextFieldView: some View {
         VStack {
             HStack {
-                // 🔥
                 prefixView
                 contents
                 Spacer()
@@ -62,29 +61,8 @@ private extension BorderedTextField {
         .padding(.horizontal)
         .keyboardType(textFieldType.keyboardType)
         .focused($isFocused)
-        .onChange(of: text) { newValue in
-            // 🔥
-            switch textFieldType {
-            case .workplace:
-                if text.count == 20 { maximumText = newValue }
-                if newValue.count > 20 { text = maximumText }
-            case .wage:
-                guard let textToInt = Int(newValue) else { return text = "" }
-                if newValue.hasPrefix("0") { text = "" }
-                if newValue.count == 7 { maximumText = newValue }
-                if textToInt >= 1000000 { text = maximumText }
-            case .payday:
-                guard let textToInt = Int(newValue) else { return text = "" }
-                if newValue.hasPrefix("0") { text = "" }
-                if text.count == 2 { maximumText = newValue }
-                if textToInt > 28 || textToInt < 1 { text = maximumText }
-            case .reason, .time, .none:
-                return
-            }
-        }
     }
 
-    // 🔥
     @ViewBuilder
     var suffixView: some View {
         switch textFieldType {
@@ -108,7 +86,6 @@ private extension BorderedTextField {
         }
     }
     
-    // 🔥
     func isErrorOnTextField() -> Color {
         switch textFieldType {
         case .workplace:
