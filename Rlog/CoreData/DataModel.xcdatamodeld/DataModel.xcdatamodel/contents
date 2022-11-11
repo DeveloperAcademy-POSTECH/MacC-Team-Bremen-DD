@@ -6,7 +6,7 @@
         <attribute name="repeatDays" optional="YES" attributeType="Transformable" customClassName="[String]"/>
         <attribute name="startHour" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startMinute" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="workdays" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkdayEntity" inverseName="schedule" inverseEntity="WorkdayEntity"/>
+        <relationship name="workdays" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="WorkdayEntity" inverseName="schedule" inverseEntity="WorkdayEntity"/>
         <relationship name="workspace" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkspaceEntity" inverseName="schedules" inverseEntity="WorkspaceEntity"/>
     </entity>
     <entity name="WorkdayEntity" representedClassName="WorkdayEntity" syncable="YES">
@@ -23,7 +23,7 @@
         <attribute name="hourlyWage" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="payDay" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="schedules" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ScheduleEntity" inverseName="workspace" inverseEntity="ScheduleEntity"/>
-        <relationship name="workdays" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkdayEntity" inverseName="workspace" inverseEntity="WorkdayEntity"/>
+        <relationship name="schedules" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ScheduleEntity" inverseName="workspace" inverseEntity="ScheduleEntity"/>
+        <relationship name="workdays" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="WorkdayEntity" inverseName="workspace" inverseEntity="WorkdayEntity"/>
     </entity>
 </model>
