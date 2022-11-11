@@ -35,23 +35,24 @@ final class ScheduleListViewModel: ObservableObject {
     }
 }
 
-extension ScheduleListViewModel {
+// MARK: Private functions
+private extension ScheduleListViewModel {
     // 일주일 뒤의 날짜를 반환합니다.
-    private func getNextWeek() {
+    func getNextWeek() {
         guard let dateOfNextWeek = calendar.date(byAdding: .weekOfMonth, value: 1, to: currentDate)
         else { return }
         currentDate = dateOfNextWeek
     }
 
     // 일주일 전의 날짜를 반환합니다.
-    private func getPreviousWeek() {
+    func getPreviousWeek() {
         guard let dateOfPreviousWeek = calendar.date(byAdding: .weekOfMonth, value: -1, to: currentDate)
         else { return }
         currentDate = dateOfPreviousWeek
     }
     
     // 사용자가 다른 날짜를 터치했을 때 Focus를 변경합니다.
-    private func changeFocusDate(_ date: CalendarModel) {
+    func changeFocusDate(_ date: CalendarModel) {
         let components = calendar.dateComponents([.year, .month], from: currentDate)
         let year = components.year ?? 2000
         let month = components.month ?? 1
@@ -68,7 +69,9 @@ extension ScheduleListViewModel {
         
         currentDate = focusDate
     }
-    
+}
+
+extension ScheduleListViewModel {
     // 오늘 날짜가 속한 주의 날짜 데이터를 반환합니다.
     // https://stackoverflow.com/questions/42981665/how-to-get-all-days-in-current-week-in-swift
     func getWeekOfDate(_ date: Date) -> [CalendarModel] {
