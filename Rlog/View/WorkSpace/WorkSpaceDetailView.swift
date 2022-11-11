@@ -41,7 +41,7 @@ struct WorkSpaceDetailView: View {
 
                 makePaymentSystemToggle()
 
-                Text("근무일정")
+                Text("근무패턴")
                     .font(.subheadline)
                     .foregroundColor(.grayLight)
 //                ForEach(viewModel.schedules) { schedule in
@@ -55,14 +55,14 @@ struct WorkSpaceDetailView: View {
                 
                 StrokeButton(label: "삭제하기", buttonType: .destructive) {
                 }
-                .alert("근무지 삭제하기", isPresented: $viewModel.isAlertOpen) {
+                .alert("근무지 삭제", isPresented: $viewModel.isAlertOpen) {
                     Button("취소", role: .cancel) {
                     }
-                    Button("삭제하기", role: .destructive) {
+                    Button("삭제", role: .destructive) {
 
                     }
                 } message: {
-                    Text("근무지를 삭제하시겠습니까?")
+                    Text("해당 근무지를 삭제합니다.?")
                 }
                 Spacer()
             }
@@ -85,10 +85,11 @@ struct WorkSpaceDetailView: View {
                 }){
                     Text("완료")
                         .fontWeight(.bold)
+                        .foregroundColor(Color.primary)
                 }
             }
         }
-        .background(Color.grayLight)
+        .background(Color.backgroundWhite)
         .navigationBarBackButtonHidden()
     }
 }
