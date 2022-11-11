@@ -53,8 +53,8 @@ extension ScheduleListViewModel {
     // 사용자가 다른 날짜를 터치했을 때 Focus를 변경합니다.
     private func changeFocusDate(_ date: CalendarModel) {
         let components = calendar.dateComponents([.year, .month], from: currentDate)
-        let year = components.year! // ✅
-        let month = components.month! // ✅
+        let year = components.year ?? 2000
+        let month = components.month ?? 1
         var focusDateComponents = DateComponents(year: year, month: month, day: date.day)
         var focusDate = calendar.date(from: focusDateComponents)!
 
@@ -101,7 +101,7 @@ extension ScheduleListViewModel {
     // 터치된 날짜를 판단합니다.
     func verifyFocusDate(_ focusDate: Int) -> Bool {
         let components = calendar.dateComponents([.day], from: currentDate)
-        let date = components.day! // ✅
+        guard let date = components.day else { return false }
         
         if focusDate == date { return true }
         else { return false }
