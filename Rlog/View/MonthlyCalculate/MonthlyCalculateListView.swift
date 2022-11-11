@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MonthlyCalculateListView: View {
+    @ObservedObject private var viewModel = MonthlyCalculateListViewModel()
+    
     var body: some View {
         VStack(spacing: 0) {
             header
@@ -34,7 +36,7 @@ private extension MonthlyCalculateListView {
                     Image(systemName: "chevron.left")
                 })
                 // TODO: - 현재 연도, 월로 바꾸기
-                Text("2022.11")
+                Text("\(viewModel.fecthYear()).\(viewModel.fetchMonth())")
                     .fontWeight(.bold)
                 Button(action: {
                     // TODO: - ViewModel에서 로직 구현
@@ -49,7 +51,7 @@ private extension MonthlyCalculateListView {
     
     var total: some View {
         HStack {
-            Text("11월 총 금액")
+            Text("\(viewModel.fetchMonth())월 총 금액")
             Spacer()
             Text("10,200,000원")
                 .fontWeight(.bold)
