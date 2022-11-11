@@ -20,6 +20,7 @@ extension WorkdayEntity {
     @NSManaged public var hourlyWage: Int32
     @NSManaged public var startTime: Date
     @NSManaged public var endTime: Date
+    @NSManaged public var memo: String?
     @NSManaged public var workspace: WorkspaceEntity
     @NSManaged public var schedule: ScheduleEntity?
 
