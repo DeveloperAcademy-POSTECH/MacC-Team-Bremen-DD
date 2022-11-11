@@ -16,6 +16,10 @@ extension WorkdayEntity {
         return NSFetchRequest<WorkdayEntity>(entityName: "WorkdayEntity")
     }
 
+    @NSManaged public var date: Date?
+    @NSManaged public var hourlyWage: Int32
+    @NSManaged public var startTime: Date?
+    @NSManaged public var endTime: Date?
     @NSManaged public var workspace: WorkspaceEntity?
     @NSManaged public var schedule: ScheduleEntity?
 
