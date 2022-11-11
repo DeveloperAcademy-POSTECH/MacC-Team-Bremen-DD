@@ -116,7 +116,7 @@ private extension ScheduleListView {
     
     var weekdayBox: some View {
         HStack(spacing: 0) {
-            ForEach(0..<7) { index in
+            ForEach(0..<currentWeek.count, id: \.self) { index in
                 VStack {
                     Button {
                     } label: {
@@ -136,7 +136,7 @@ private extension ScheduleListView {
     
     var previousWeekdayBox: some View {
         HStack(spacing: 0) {
-            ForEach(0..<7) { index in
+            ForEach(0..<previousWeek.count, id: \.self) { index in
                 VStack {
                     Text("\(previousWeek[index].day)")
                         .frame(maxWidth: .infinity)
@@ -150,7 +150,7 @@ private extension ScheduleListView {
     
     var nextWeekdayBox: some View {
         HStack(spacing: 0) {
-            ForEach(0..<7) { index in
+            ForEach(0..<nextWeek.count, id: \.self) { index in
                 VStack {
                     Text("\(nextWeek[index].day)")
                         .frame(maxWidth: .infinity)
