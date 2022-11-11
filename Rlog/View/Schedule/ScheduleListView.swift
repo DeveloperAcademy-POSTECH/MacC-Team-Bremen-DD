@@ -124,11 +124,20 @@ private extension ScheduleListView {
                             .font(.callout)
                             .foregroundColor(.black)
                     }
-                    .frame(maxWidth: .infinity)
                     
-                    Circle()
-                        .frame(width: 6, height: 6)
-                        .foregroundColor(.green)
+                    if viewModel.verifyFocusDate(currentWeek[index].day) {
+                        VStack {
+                            Text("\(currentWeek[index].day)")
+                                .font(.callout)
+                                .foregroundColor(.white)
+                            Circle()
+                                .frame(width: 6, height: 6)
+                                .foregroundColor(.white)
+                        }
+                        .padding()
+                        .background(.blue)
+                        .cornerRadius(15)
+                    }
                 }
             }
         }
