@@ -12,6 +12,8 @@ struct MonthlyCalculateListView: View {
         VStack(spacing: 0) {
             header
                 .padding(.top, 24)
+            total
+                .padding(.top, 34)
             Spacer()
         }
         .padding(.horizontal)
@@ -43,5 +45,15 @@ private extension MonthlyCalculateListView {
             .font(.title)
             .foregroundColor(.black)
         }
+    }
+    
+    var total: some View {
+        HStack {
+            Text("11월 총 금액")
+            Spacer()
+            Text("10,200,000원")
+                .fontWeight(.bold)
+        }
+        .font(.title3)
     }
 }
