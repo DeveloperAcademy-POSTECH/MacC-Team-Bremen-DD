@@ -11,7 +11,6 @@ import SwiftUI
 struct ScheduleListView: View {
     @ObservedObject var viewModel = ScheduleListViewModel()
     @State var selection = 1
-    let weekDays: [String] = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
     var currentMonth: String {
         let components = Calendar.current.dateComponents([.year, .month], from: viewModel.currentDate)
         let year = components.year! // ✅
@@ -88,8 +87,8 @@ private extension ScheduleListView {
     
     var weekDaysContainer: some View {
         HStack(spacing: 0) {
-            ForEach(0..<7) { index in
-                Text(weekDays[index])
+            ForEach(Weekday.allCases, id: \.self) { weekday in
+                Text(weekday.rawValue)
                     .font(.caption)
                     .frame(maxWidth: .infinity)
             }
