@@ -86,15 +86,15 @@ private extension WorkSpaceCreateCreatingScheduleView {
                 .foregroundColor(.grayLight)
 
             HStack(spacing: 0) {
-                UnderlinedTextField(textFieldType: .time, text: $viewModel.text)
+                BorderedTextField(textFieldType: .time, text: $viewModel.text)
                 Text(":")
-                UnderlinedTextField(textFieldType: .time, text: $viewModel.text)
+                BorderedTextField(textFieldType: .time, text: $viewModel.text)
 
                 Text("-")
                     .padding(.horizontal, 10)
-                UnderlinedTextField(textFieldType: .time, text: $viewModel.text)
+                BorderedTextField(textFieldType: .time, text: $viewModel.text)
                 Text(":")
-                UnderlinedTextField(textFieldType: .time, text: $viewModel.text)
+                BorderedTextField(textFieldType: .time, text: $viewModel.text)
             }
             .foregroundColor(.fontBlack)
 
