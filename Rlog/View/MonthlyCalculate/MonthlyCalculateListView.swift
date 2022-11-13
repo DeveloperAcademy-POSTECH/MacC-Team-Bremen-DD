@@ -29,6 +29,7 @@ private extension MonthlyCalculateListView {
                 .font(.title2)
                 .fontWeight(.bold)
             Spacer()
+            // TODO: - 컴포넌트화 예정
             HStack(spacing: 8) {
                 Button(action: {
                     // TODO: - ViewModel에서 로직 구현
@@ -36,7 +37,7 @@ private extension MonthlyCalculateListView {
                     Image(systemName: "chevron.left")
                 })
                 // TODO: - 현재 연도, 월로 바꾸기
-                Text("\(viewModel.fecthYear()).\(viewModel.fetchMonth())")
+                Text(viewModel.date.fetchYearAndMonth())
                     .fontWeight(.semibold)
                 Button(action: {
                     // TODO: - ViewModel에서 로직 구현
