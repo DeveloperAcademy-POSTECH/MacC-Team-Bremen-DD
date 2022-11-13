@@ -27,6 +27,8 @@
 		2DF4EC712906344B009B48B4 /* WorkSpaceCreateCreatingScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF4EC702906344B009B48B4 /* WorkSpaceCreateCreatingScheduleView.swift */; };
 		2DF4EC7329063469009B48B4 /* WorkSpaceCreateCreatingScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF4EC7229063469009B48B4 /* WorkSpaceCreateCreatingScheduleViewModel.swift */; };
 		75DE0162290271E600A77369 /* WorkSpaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DE0161290271E600A77369 /* WorkSpaceCell.swift */; };
+		7A29B292291D490D0028003A /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A29B291291D490D0028003A /* View+.swift */; };
+		7A2F04B7291EA91E0091BA28 /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2F04B6291EA91E0091BA28 /* Weekday.swift */; };
 		7A937596290035BD00D6D5BE /* FilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A937595290035BD00D6D5BE /* FilledButton.swift */; };
 		898A5EBA2907C79100A6BEF7 /* HDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A5EB92907C79100A6BEF7 /* HDivider.swift */; };
 		898A5EC22908050D00A6BEF7 /* ScheduleContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A5EC12908050D00A6BEF7 /* ScheduleContainer.swift */; };
@@ -75,6 +77,8 @@
 		2DF4EC702906344B009B48B4 /* WorkSpaceCreateCreatingScheduleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkSpaceCreateCreatingScheduleView.swift; sourceTree = "<group>"; };
 		2DF4EC7229063469009B48B4 /* WorkSpaceCreateCreatingScheduleViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkSpaceCreateCreatingScheduleViewModel.swift; sourceTree = "<group>"; };
 		75DE0161290271E600A77369 /* WorkSpaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCell.swift; sourceTree = "<group>"; };
+		7A29B291291D490D0028003A /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
+		7A2F04B6291EA91E0091BA28 /* Weekday.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
 		7A937595290035BD00D6D5BE /* FilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
 		898A5EB92907C79100A6BEF7 /* HDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDivider.swift; sourceTree = "<group>"; };
 		898A5EC12908050D00A6BEF7 /* ScheduleContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleContainer.swift; sourceTree = "<group>"; };
@@ -238,6 +242,7 @@
 				C64D97BB28FE9197004F80E7 /* TextField+.swift */,
 				C64D97BD28FE919F004F80E7 /* Date+.swift */,
 				C64D97BF28FE91AB004F80E7 /* DateFormatter+.swift */,
+				7A29B291291D490D0028003A /* View+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -281,6 +286,7 @@
 			children = (
 				C64D97C828FE92D8004F80E7 /* Tab.swift */,
 				C69C13AF29139AB100D9B47F /* WorkDayType.swift */,
+				7A2F04B6291EA91E0091BA28 /* Weekday.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -378,6 +384,7 @@
 				C64D97C928FE92D8004F80E7 /* Tab.swift in Sources */,
 				2D66DCAB28FD4DF200C90400 /* CoreDataManager.swift in Sources */,
 				2DF4EC7329063469009B48B4 /* WorkSpaceCreateCreatingScheduleViewModel.swift in Sources */,
+				7A2F04B7291EA91E0091BA28 /* Weekday.swift in Sources */,
 				2D5BA7C82900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift in Sources */,
 				2D66DCDA28FD8E8F00C90400 /* WorkSpaceDetailViewModel.swift in Sources */,
 				2D66DCC328FD8D6100C90400 /* WorkSpaceDetailView.swift in Sources */,
@@ -395,6 +402,7 @@
 				2D66DCDC28FD8E9D00C90400 /* WorkSpaceCreateViewModel.swift in Sources */,
 				C69C13B029139AB100D9B47F /* WorkDayType.swift in Sources */,
 				C64D97C028FE91AB004F80E7 /* DateFormatter+.swift in Sources */,
+				7A29B292291D490D0028003A /* View+.swift in Sources */,
 				2D66DCA228FD4DF000C90400 /* RlogApp.swift in Sources */,
 				C63D4457291CE37D005D5AE6 /* DataModel.xcdatamodeld in Sources */,
 				2DF4EC712906344B009B48B4 /* WorkSpaceCreateCreatingScheduleView.swift in Sources */,
