@@ -71,6 +71,7 @@ private extension MonthlyCalculateDetailView {
             }
             .font(.subheadline)
             .foregroundColor(Color.grayDark)
+            .padding(.top, 4)
             
             HStack {
                 Text("주휴수당 적용됨")
