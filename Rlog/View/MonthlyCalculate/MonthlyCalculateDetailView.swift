@@ -103,9 +103,3 @@ private extension MonthlyCalculateDetailView {
         }
     }
 }
-
-struct MonthlyCalculateDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        MonthlyCalculateDetailView()
-    }
-}
