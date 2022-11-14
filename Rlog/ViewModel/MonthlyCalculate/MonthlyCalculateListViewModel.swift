@@ -9,5 +9,5 @@ import Foundation
 
 @MainActor
 final class MonthlyCalculateListViewModel: ObservableObject {
-    
+    @Published var date = Date()
 }
