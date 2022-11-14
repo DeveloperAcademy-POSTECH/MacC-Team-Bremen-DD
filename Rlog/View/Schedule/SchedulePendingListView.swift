@@ -58,17 +58,17 @@ struct SchedulePendingListView: View {
 
 private extension SchedulePendingListView {
     var dateContainer: some View {
-        ForEach(0..<sortedMockData.count, id: \.self) { songcool in
+        ForEach(0..<sortedMockData.count, id: \.self) { index in
             VStack(alignment: .leading) {
-                if sortedMockData[songcool].1 != [] {
+                if sortedMockData[index].1 != [] {
                     HStack {
-                        Text(sortedMockData[songcool].0)
+                        Text(sortedMockData[index].0)
                             .font(.caption)
                             .foregroundColor(.grayLight)
                         Spacer()
                     }
                     HDivider()
-                    ForEach(sortedMockData[songcool].1, id: \.self) { data in
+                    ForEach(sortedMockData[index].1, id: \.self) { data in
                         VStack(alignment: .leading) {
                             Text(data.name)
                             Text(data.date)
