@@ -117,27 +117,27 @@ private extension WorkSpaceCreateViewModel {
         case .hourlyWage:
             if workSpace.isEmpty {return}
             if hourlyWage.isEmpty {return}
-            guard let hourlyWageInt = Int(hourlyWage) else { return hourlyWage = "" }
+            guard let hourlyWageInt = Int(hourlyWage) else { return }
             if hourlyWageInt >= 1000000 {return}
             isActivatedConfirmButton = true
             return
         case .payday:
             if workSpace.isEmpty {return}
             if hourlyWage.isEmpty {return}
-            guard let hourlyWageInt = Int(hourlyWage) else { return hourlyWage = "" }
+            guard let hourlyWageInt = Int(hourlyWage) else { return }
             if hourlyWageInt >= 1000000 {return}
             if payday.isEmpty {return}
-            guard let paydayInt = Int(hourlyWage) else { return hourlyWage = "" }
+            guard let paydayInt = Int(payday) else { return }
             if paydayInt > 28 {return}
             isActivatedConfirmButton = true
             return
         case .toggleOptions:
             if workSpace.isEmpty {return}
             if hourlyWage.isEmpty {return}
-            guard let hourlyWageInt = Int(hourlyWage) else { return hourlyWage = "" }
+            guard let hourlyWageInt = Int(hourlyWage) else { return }
             if hourlyWageInt >= 1000000 {return}
             if payday.isEmpty {return}
-            guard let paydayInt = Int(hourlyWage) else { return hourlyWage = "" }
+            guard let paydayInt = Int(payday) else { return  }
             if paydayInt > 28 {return}
             isHiddenToolBarItem = false
             return
