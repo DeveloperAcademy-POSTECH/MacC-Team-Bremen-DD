@@ -8,9 +8,6 @@
 import Combine
 import SwiftUI
 
-// 예외처리 : 마지막 스텝까지 가놓고 정보를 누락하는경우!!se
-
-
 @MainActor
 final class WorkSpaceCreateViewModel: ObservableObject {
     @Binding var isActive: Bool
@@ -145,7 +142,6 @@ private extension WorkSpaceCreateViewModel {
             isHiddenToolBarItem = false
             return
         }
-
     }
 }
 
