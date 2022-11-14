@@ -10,6 +10,7 @@ import SwiftUI
 struct ScheduleListView: View {
     @ObservedObject var viewModel = ScheduleListViewModel()
     @State var selection = 1
+    @State private var isSchedulePendingListViewActive = false
     var currentMonth: String {
         let components = Calendar.current.dateComponents([.year, .month], from: viewModel.currentDate)
         let year = components.year ?? 2000
@@ -44,11 +45,12 @@ struct ScheduleListView: View {
         )
     ]
 
-    
     var body: some View {
-        VStack {
-            header
-            scheduleContainer
+        NavigationView {
+            VStack {
+                header
+                scheduleContainer
+            }
         }
         .background(.gray)
     }
@@ -71,11 +73,16 @@ private extension ScheduleListView {
             .font(.title)
             .foregroundColor(Color.fontBlack)
             Spacer()
-            Button("메일함") { }
+            Button("메일함") { isSchedulePendingListViewActive.toggle() }
                 .padding(.horizontal)
                 .foregroundColor(.black)
             Button("추가") { }
                 .foregroundColor(.black)
+            
+            NavigationLink(
+                destination: SchedulePendingListView(),
+                isActive: $isSchedulePendingListViewActive
+            ) { EmptyView() }
         }
         .padding(.horizontal, 20)
         .padding(.top, 24)
