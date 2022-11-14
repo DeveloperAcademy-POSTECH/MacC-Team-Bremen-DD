@@ -9,12 +9,14 @@ import SwiftUI
 
 enum BorderedPickerType {
     case date
-    case time
+    case startTime
+    case endTime
     
-    var title: String{
+    var title: String {
         switch self {
         case .date: return "날짜"
-        case .time: return "시간"
+        case .startTime: return "출근 시간"
+        case .endTime: return "퇴근 시간"
         }
     }
 }
@@ -22,14 +24,23 @@ enum BorderedPickerType {
 struct BorderedPicker: View {
     @Binding var date: Date
     @State private var isTapped = false
-
     let type: BorderedPickerType
-    @Binding var isFocused: Bool
-    var title: String {
-        let components = Calendar.current.dateComponents([.hour, .minute], from: date)
+    var timeData: String {
+        let components = Calendar.current.dateComponents(
+            [.year, .month, .day, .hour, .minute],
+            from: date
+        )
+        let year = components.year ?? 2000
+        let month = components.month ?? 1
+        let day = components.day ?? 1
         let hour = components.hour ?? 9
         let minute = components.minute ?? 0
-        return "\(hour):\(minute)"
+        
+        if type == .date {
+            return "\(year)년 \(month)월 \(day)일"
+        } else {
+            return "\(hour):\(minute < 10 ? "0\(minute)" : "\(minute)")"
+        }
     }
     
     var body: some View {
@@ -39,33 +50,37 @@ struct BorderedPicker: View {
 
 private extension BorderedPicker {
     var borderedPicker: some View {
-        ZStack {
-//            if isTapped { Rectangle() }
-            HStack {
-                Text(title)
+        HStack {
+            if type == .date {
+                Text(timeData)
                 Spacer()
-            }
-            .onTapGesture {
-                withAnimation {
-                    isTapped = true
-                    isFocused = true
-                }
-            }
-            .frame(maxWidth: .infinity, maxHeight: 30)
-            .padding(EdgeInsets(top: 13, leading: 16, bottom: 13, trailing: 16))
-            .background(Color.backgroundCard)
-            .cornerRadius(13)
-            .overlay {
-                RoundedRectangle(cornerRadius: 13)
-                    .stroke(
-                        isTapped ? Color.primary : Color.backgroundStroke,
-                        lineWidth: 2
-                    )
-            }
-            .adaptiveSheet(isPresented: $isTapped) {
-                wheelTimePicker
+            } else {
+                Text(type.title)
+                Spacer()
+                Text(timeData)
             }
         }
+        .padding(EdgeInsets(top: 13, leading: 16, bottom: 13, trailing: 16))
+        .cornerRadius(13)
+        .frame(maxWidth: .infinity, maxHeight: 56)
+        .background(Color.backgroundCard)
+        .onTapGesture { isTapped = true }
+        .overlay {
+            RoundedRectangle(cornerRadius: 13)
+                .stroke(
+                    isTapped ? Color.primary : Color.backgroundStroke,
+                    lineWidth: 2
+                )
+        }
+        .popover(isPresented: $isTapped) {
+            wheelTimePicker
+        }
+// 외않되 ㅠ
+//        .adaptiveSheet(isPresented: $isTapped) {
+//            wheelTimePicker
+//                .onAppear { print(isFocused) }
+//                .onDisappear { print(isFocused) }
+//        }
     }
     
     var wheelTimePicker: some View {
@@ -82,7 +97,11 @@ private extension BorderedPicker {
             }
             .padding(.top)
 
-            DatePicker("", selection: $date, displayedComponents: .hourAndMinute)
+            DatePicker(
+                "",
+                selection: $date,
+                displayedComponents: type != .date ? .hourAndMinute : .date
+            )
                 .datePickerStyle(.wheel)
                 .background(.white)
                 .onAppear {
@@ -90,10 +109,7 @@ private extension BorderedPicker {
                 }
                 .onDisappear {
                     UIDatePicker.appearance().minuteInterval = 1
-                    withAnimation {
-//                        isTapped = false
-//                        isFocused = true
-                    }
+                    isTapped = false
                 }
             
             Spacer()
@@ -157,7 +173,6 @@ struct AdaptiveSheet<T: View>: ViewModifier {
     }
 }
 
-
 struct CustomSheetUI<T: View>: UIViewControllerRepresentable {
     @Binding var isPresented: Bool
     var detents : [UISheetPresentationController.Detent] = [.medium(), .large()]
@@ -206,7 +221,6 @@ struct CustomSheetUI<T: View>: UIViewControllerRepresentable {
         }
     }
 }
-
 
 class CustomSheetViewController<Content: View>: UIViewController {
     let content: Content
