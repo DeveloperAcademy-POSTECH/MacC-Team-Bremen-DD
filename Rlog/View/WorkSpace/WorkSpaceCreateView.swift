@@ -10,8 +10,8 @@ import SwiftUI
 
 struct WorkSpaceCreateView: View {
     @ObservedObject var viewModel: WorkSpaceCreateViewModel
-    init() {
-        self.viewModel = WorkSpaceCreateViewModel()
+    init(isActive: Binding<Bool>) {
+        self.viewModel = WorkSpaceCreateViewModel(isActive: isActive)
     }
     
     var body: some View {
@@ -41,7 +41,15 @@ struct WorkSpaceCreateView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 if !viewModel.isHiddenToolBarItem {
                     NavigationLink {
-                        WorkSpaceCreateScheduleListView()
+                        WorkSpaceCreateScheduleListView(
+                            isActive: $viewModel.isActive, workspaceModel: WorkSpaceModel(
+                                name: viewModel.name,
+                                paymentDay: viewModel.paymentDay,
+                                hourlyWage: viewModel.hourlyWage,
+                                hasTax: viewModel.hasTax,
+                                hasJuhyu: viewModel.hasJuhyu
+                            )
+                        )
                     } label: {
                         Text("다음")
                             .foregroundColor(.fontBlack)
@@ -55,8 +63,7 @@ struct WorkSpaceCreateView: View {
 private extension WorkSpaceCreateView {
     // 가이드 텍스트
     var guidingText: some View {
-        Text("")
-//        TitleSubView(title: viewModel.currentState.title)
+        TitleSubView(title: viewModel.currentState.title)
     }
     
     var toggleInputs: some View {

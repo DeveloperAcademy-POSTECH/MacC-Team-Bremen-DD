@@ -13,6 +13,11 @@ import SwiftUI
 
 @MainActor
 final class WorkSpaceCreateViewModel: ObservableObject {
+    @Binding var isActive: Bool
+    init(isActive: Binding<Bool>) {
+        self._isActive = isActive
+    }
+    
     var currentState: WritingState = .workSpace
     var isActivatedConfirmButton: Bool = false
     
@@ -27,36 +32,36 @@ final class WorkSpaceCreateViewModel: ObservableObject {
     @Published var hasTax: Bool = false
     @Published var hasJuhyu: Bool = false
     @Published var hourlyWage = "" {
-            didSet {
-                if !hourlyWage.isEmpty {
-                    activateButton(inputState: .hourlyWage)
-                    isActivatedConfirmButton = true
-                } else {
-                    inActivateButton(inputState: .hourlyWage)
-                    isActivatedConfirmButton = false
-
-                }
+        didSet {
+            if !hourlyWage.isEmpty {
+                activateButton(inputState: .hourlyWage)
+                isActivatedConfirmButton = true
+            } else {
+                inActivateButton(inputState: .hourlyWage)
+                isActivatedConfirmButton = false
+                
             }
         }
-        @Published var paymentDay = "" {
-            didSet {
-                if !paymentDay.isEmpty {
-                    activateButton(inputState: .payday)
-                    isActivatedConfirmButton = true
-
-                } else {
-                    inActivateButton(inputState: .payday)
-                    isActivatedConfirmButton = false
-
-                }
+    }
+    @Published var paymentDay = "" {
+        didSet {
+            if !paymentDay.isEmpty {
+                activateButton(inputState: .payday)
+                isActivatedConfirmButton = true
+                
+            } else {
+                inActivateButton(inputState: .payday)
+                isActivatedConfirmButton = false
+                
             }
         }
+    }
     @Published var name = ""{
         didSet {
             if !name.isEmpty {
                 activateButton(inputState: .workSpace)
                 isActivatedConfirmButton = true
-
+                
             } else {
                 inActivateButton(inputState: .workSpace)
                 isActivatedConfirmButton = false
