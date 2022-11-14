@@ -98,7 +98,6 @@ private extension WorkSpaceCreateView {
             })
         }
     }
-
     
     // 확인 버튼
     var ConfirmButton: some View {
