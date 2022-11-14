@@ -29,6 +29,10 @@ final class ScheduleListViewModel: ObservableObject {
     func didScrollToPreviousWeek() {
         getPreviousWeek()
     }
+    
+    func didTapDate(_ date: CalendarModel) {
+        changeFocusDate(date)
+    }
 }
 
 extension ScheduleListViewModel {
@@ -44,6 +48,24 @@ extension ScheduleListViewModel {
         guard let dateOfPreviousWeek = calendar.date(byAdding: .weekOfMonth, value: -1, to: currentDate)
         else { return }
         currentDate = dateOfPreviousWeek
+    }
+    
+    // 사용자가 다른 날짜를 터치했을 때 Focus를 변경합니다.
+    private func changeFocusDate(_ date: CalendarModel) {
+        let components = calendar.dateComponents([.year, .month], from: currentDate)
+        let year = components.year ?? 2000
+        let month = components.month ?? 1
+        var focusDateComponents = DateComponents(year: year, month: month, day: date.day)
+        var focusDate = calendar.date(from: focusDateComponents)!
+
+        // 캘린더 날짜와 터치된 날짜의 년도, 월이 다른 경우
+        // 월 정보만 바뀌어도 년도 케이스 핸들링이 가능하므로 월 정보만 비교합니다.
+        if date.month != month {
+            focusDateComponents = DateComponents(year: date.year, month: date.month, day: date.day)
+            focusDate = calendar.date(from: focusDateComponents)!
+        }
+        
+        currentDate = focusDate
     }
     
     // 오늘 날짜가 속한 주의 날짜 데이터를 반환합니다.
@@ -74,6 +96,15 @@ extension ScheduleListViewModel {
         }
         
         return weekdayArray
+    }
+    
+    // 터치된 날짜를 판단합니다.
+    func verifyFocusDate(_ focusDate: Int) -> Bool {
+        let components = calendar.dateComponents([.day], from: currentDate)
+        guard let date = components.day else { return false }
+        
+        if focusDate == date { return true }
+        else { return false }
     }
 }
 
