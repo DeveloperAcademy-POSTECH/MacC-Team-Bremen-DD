@@ -69,7 +69,7 @@ private extension ScheduleListView {
                 }
             }
             .font(.title)
-            .foregroundColor(.black)
+            .foregroundColor(Color.fontBlack)
             Spacer()
             Button("메일함") { }
                 .padding(.horizontal)
