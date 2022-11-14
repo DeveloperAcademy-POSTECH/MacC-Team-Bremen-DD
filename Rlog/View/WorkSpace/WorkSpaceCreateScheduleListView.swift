@@ -16,7 +16,7 @@ struct WorkSpaceCreateScheduleListView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            TitleSubView(title: "근무 일정을 입력해주세요.")
+            TitleSubView(title: "근무 패턴을 입력해주세요.")
             labelText
             VStack(spacing: 16) {
                 ForEach(viewModel.scheduleList, id: \.self) { schedule in
@@ -59,13 +59,13 @@ private extension WorkSpaceCreateScheduleListView {
     }
     
     var labelText: some View {
-        Text("근무 유형")
+        Text("근무패턴")
             .font(.caption)
             .foregroundColor(.grayLight)
     }
     
     var addScheduleButton: some View {
-        StrokeButton(label: "+ 근무 일정 추가하기", buttonType: .add) {
+        StrokeButton(label: "+ 근무패턴 추가", buttonType: .add) {
             viewModel.didTapAddScheduleButton()
         }
     }

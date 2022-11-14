@@ -22,7 +22,7 @@ struct WorkSpaceCreateCreatingScheduleView: View {
                 workTimePicker
                 Spacer()
             }
-            .navigationBarTitle(Text("근무 일정 추가하기"), displayMode: .inline)
+            .navigationBarTitle(Text("근무패턴 생성"), displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     toolbarCancelButton
