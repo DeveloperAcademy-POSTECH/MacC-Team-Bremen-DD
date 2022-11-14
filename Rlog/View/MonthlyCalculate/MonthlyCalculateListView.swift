@@ -88,43 +88,45 @@ private extension MonthlyCalculateListView {
                 }
                 .padding(.top)
                 
-                HStack {
-                    Text("일한 시간")
-                        .foregroundColor(Color.grayMedium)
-                    Spacer()
-                    Text("32시간")
-                        .foregroundColor(Color.grayDark)
-                }
-                .font(.subheadline)
-                .padding(.top, 32)
-                
-                HStack {
-                    Text("급여일까지")
-                        .foregroundColor(Color.grayMedium)
-                    Spacer()
-                    Text("D-12")
-                        .foregroundColor(Color.grayDark)
-                }
-                .font(.subheadline)
-                .padding(.top, 8)
-                
-                HDivider()
+                Group {
+                    HStack {
+                        Text("일한 시간")
+                            .foregroundColor(Color.grayMedium)
+                        Spacer()
+                        Text("32시간")
+                            .foregroundColor(Color.grayDark)
+                    }
+                    .font(.subheadline)
+                    .padding(.top, 32)
+                    
+                    HStack {
+                        Text("급여일까지")
+                            .foregroundColor(Color.grayMedium)
+                        Spacer()
+                        Text("D-12")
+                            .foregroundColor(Color.grayDark)
+                    }
+                    .font(.subheadline)
                     .padding(.top, 8)
-                
-                HStack(alignment: .bottom) {
-                    Text("금액")
-                        .font(.subheadline)
-                        .foregroundColor(Color.grayMedium)
-                    Spacer()
-                    Text("422,400원")
-                        .font(.title3)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.fontBlack)
+                    
+                    HDivider()
+                        .padding(.top, 8)
+                    
+                    HStack(alignment: .bottom) {
+                        Text("금액")
+                            .font(.subheadline)
+                            .foregroundColor(Color.grayMedium)
+                        Spacer()
+                        Text("422,400원")
+                            .font(.title3)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.fontBlack)
+                    }
+                    .padding(.horizontal)
                 }
-                .padding(.top)
-                .padding(.bottom)
+                .padding(.leading, 4)
             }
-            .padding(.horizontal, 20)
+            .padding(.horizontal)
             .background(
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
