@@ -118,6 +118,7 @@ private extension BorderedPicker {
     }
 }
 
+/* 연구중... 리뷰 대상 아닙니다~! 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 extension View {
     func adaptiveSheet<T: View>(
         isPresented: Binding<Bool>,
@@ -305,3 +306,4 @@ class CustomSheetViewController<Content: View>: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
     }
 }
+*/
