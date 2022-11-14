@@ -30,6 +30,24 @@ struct ScheduleListView: View {
     var nextWeek: [CalendarModel] {
         return viewModel.getWeekOfDate(viewModel.nextDate)
     }
+    let mockData: [WorkspaceEntitySample] = [
+        WorkspaceEntitySample(
+            name: "팍이네 팍팍 감자탕",
+            schedules: ScheduleEntitySample(),
+            workdays: WorkdayEntitySample(date: Date(), endHour: 18)
+        ),
+        WorkspaceEntitySample(
+            name: "팍이네 팍팍 감자탕",
+            schedules: ScheduleEntitySample(),
+            workdays: WorkdayEntitySample(date: Date(), endHour: 15)
+        ),
+        WorkspaceEntitySample(
+            name: "팍이네 팍팍 감자탕",
+            schedules: ScheduleEntitySample(),
+            workdays: WorkdayEntitySample(date: Date(), endHour: 22)
+        )
+    ]
+
     
     var body: some View {
         
@@ -61,8 +79,7 @@ private extension ScheduleListView {
                 }
             }
             .font(.title)
-            .foregroundColor(Color.black)
-            
+            .foregroundColor(Color.fontBlack)
             Spacer()
             
             // inbox.curved.badge로 조건 처리하면 됩니다.
@@ -90,10 +107,9 @@ private extension ScheduleListView {
                 
                 datesContainer
                     .padding(.bottom, 8)
-                
-                Rectangle()
-                    .foregroundColor(.backgroundStroke)
-                    .frame(maxWidth: .infinity, maxHeight: 1.5)
+                HDivider()
+                    .padding(.bottom, 32)
+                scheduleList
             }
             .padding(.horizontal, 22)
             Spacer()
@@ -144,9 +160,7 @@ private extension ScheduleListView {
                     
                     VStack(spacing: 0) {
                         Button {
-                            withAnimation {
-                                viewModel.didTapDate(currentWeek[index])
-                            }
+                            viewModel.didTapDate(currentWeek[index])
                         } label: {
                             Text("\(currentWeek[index].day)")
                                 .font(.system(size: 16, weight: .medium))
@@ -177,6 +191,7 @@ private extension ScheduleListView {
                         .background(Color.primary)
                         .cornerRadius(10)
                         .padding(.top, 2)
+                          .transition(AnyTransition.opacity.animation(.easeInOut))
                     }
                 }
             }
@@ -213,6 +228,17 @@ private extension ScheduleListView {
                         .frame(width: 6, height: 6)
                         .foregroundColor(Color.primary)
                 }
+            }
+        }
+    }
+    
+    var scheduleList: some View {
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 8) {
+                ForEach(mockData) { data in
+                    ScheduleCell(currentDate: viewModel.currentDate, data: data)
+                }
+                Spacer()
             }
         }
     }
