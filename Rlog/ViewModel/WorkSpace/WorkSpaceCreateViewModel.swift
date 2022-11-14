@@ -108,6 +108,7 @@ private extension WorkSpaceCreateViewModel {
     func inActivateButton() {
         isActivatedConfirmButton = false
         if currentState == .toggleOptions {
+            isHiddenToolBarItem = true
         }
     }
     
@@ -141,6 +142,7 @@ private extension WorkSpaceCreateViewModel {
             if payday.isEmpty {return}
             guard let paydayInt = Int(hourlyWage) else { return hourlyWage = "" }
             if paydayInt > 28 {return}
+            isHiddenToolBarItem = false
             return
         }
 
