@@ -10,6 +10,7 @@ import SwiftUI
 struct ScheduleListView: View {
     @ObservedObject var viewModel = ScheduleListViewModel()
     @State var selection = 1
+    
     var currentMonth: String {
         let components = Calendar.current.dateComponents([.year, .month], from: viewModel.currentDate)
         let year = components.year ?? 2000
@@ -17,92 +18,113 @@ struct ScheduleListView: View {
         
         return "\(year). \(month)"
     }
+    
     var currentWeek: [CalendarModel] {
         return viewModel.getWeekOfDate(viewModel.currentDate)
     }
+    
     var previousWeek: [CalendarModel] {
         return viewModel.getWeekOfDate(viewModel.previousDate)
     }
+    
     var nextWeek: [CalendarModel] {
         return viewModel.getWeekOfDate(viewModel.nextDate)
     }
     
     var body: some View {
-        VStack {
+        
+        VStack(spacing: 0) {
             header
             scheduleContainer
         }
-        .background(.gray)
+        .background(Color.backgroundStroke)
     }
 }
 
 private extension ScheduleListView {
     var header: some View {
+        
         HStack(spacing: 0) {
             Group {
                 Button {
                 } label: {
                     Image(systemName: "chevron.left")
                 }
+                
                 Text(currentMonth)
+                    .fontWeight(.bold)
+                    .padding(.horizontal, 3)
+                
                 Button {
                 } label: {
                     Image(systemName: "chevron.right")
                 }
             }
             .font(.title)
-            .foregroundColor(.black)
+            .foregroundColor(Color.black)
+            
             Spacer()
-            Button("메일함") { }
-                .padding(.horizontal)
-                .foregroundColor(.black)
-            Button("추가") { }
-                .foregroundColor(.black)
+            
+            // inbox.curved.badge로 조건 처리하면 됩니다.
+            Button{} label: {
+                Image("inbox.curved")
+            }
+            .foregroundColor(.grayMedium)
+            .padding(.trailing, 16)
+            
+            Button{} label: {
+                Image("plus.curved")
+            }
+            .foregroundColor(.grayMedium)
         }
-        .padding(.horizontal, 20)
-        .padding(.top, 24)
+        .padding(EdgeInsets(top: 24, leading: 20, bottom: 54, trailing: 20))
     }
     
     var scheduleContainer: some View {
+        
         VStack(spacing: 0) {
             Group {
                 weekDaysContainer
                     .padding(.top)
+                    .padding(.bottom, 3)
+                
                 datesContainer
-                    .padding(.bottom, 11)
+                    .padding(.bottom, 8)
+                
                 Rectangle()
-                    .foregroundColor(.gray)
+                    .foregroundColor(.backgroundStroke)
                     .frame(maxWidth: .infinity, maxHeight: 1.5)
             }
             .padding(.horizontal, 22)
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.white)
+        .background(Color.backgroundWhite)
         .cornerRadius(30, [.topLeft, .topRight])
-        .padding(.top, 54)
         .ignoresSafeArea()
     }
     
     var weekDaysContainer: some View {
+        
         HStack(spacing: 0) {
             ForEach(Weekday.allCases, id: \.self) { weekday in
                 Text(weekday.rawValue)
                     .font(.caption)
                     .frame(maxWidth: .infinity)
+                    .foregroundColor(.grayDark)
             }
         }
-        .padding(.top)
     }
     
     var datesContainer: some View {
+        
         VStack(spacing: 0) {
             TabView(selection: $selection) {
                 previousWeekdayBox.tag(0)
                 weekdayBox.tag(1)
                 nextWeekdayBox.tag(2)
             }
-            .frame(height: 50)
+            .frame(maxHeight: 46)
             .tabViewStyle(.page(indexDisplayMode: .never))
             .onChange(of: selection) { newValue in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -115,10 +137,12 @@ private extension ScheduleListView {
     }
     
     var weekdayBox: some View {
+        
         HStack(spacing: 0) {
             ForEach(0..<currentWeek.count, id: \.self) { index in
                 ZStack {
-                    VStack {
+                    
+                    VStack(spacing: 0) {
                         Button {
                             withAnimation {
                                 viewModel.didTapDate(currentWeek[index])
@@ -126,27 +150,33 @@ private extension ScheduleListView {
                         } label: {
                             Text("\(currentWeek[index].day)")
                                 .font(.callout)
-                                .foregroundColor(.black)
+                                .foregroundColor(.grayDark)
+                                .padding(.bottom, 9)
                         }
                         .frame(maxWidth: .infinity)
-
+                        
                         Circle()
                             .frame(width: 6, height: 6)
                             .foregroundColor(.green)
                     }
-
+                    
                     if viewModel.verifyFocusDate(currentWeek[index].day) {
-                        VStack {
+                        
+                        VStack(spacing: 0) {
                             Text("\(currentWeek[index].day)")
                                 .font(.callout)
-                                .foregroundColor(.white)
+                                .foregroundColor(Color.backgroundWhite)
+                                .padding(.bottom, 9)
+
                             Circle()
                                 .frame(width: 6, height: 6)
                                 .foregroundColor(.white)
                         }
-                        .padding()
-                        .background(.blue)
-                        .cornerRadius(15)
+                        .padding(EdgeInsets(top: 3, leading: 6, bottom: 7, trailing: 6))
+                        .frame(width: 32)
+                        .background(Color.primary)
+                        .cornerRadius(10)
+                        .padding(.top, 2)
                     }
                 }
             }
@@ -154,28 +184,32 @@ private extension ScheduleListView {
     }
     
     var previousWeekdayBox: some View {
+        
         HStack(spacing: 0) {
             ForEach(0..<previousWeek.count, id: \.self) { index in
                 VStack {
                     Text("\(previousWeek[index].day)")
                         .frame(maxWidth: .infinity)
+                    
                     Circle()
                         .frame(width: 6, height: 6)
-                        .foregroundColor(.green)
+                        .foregroundColor(Color.primary)
                 }
             }
         }
     }
     
     var nextWeekdayBox: some View {
+        
         HStack(spacing: 0) {
             ForEach(0..<nextWeek.count, id: \.self) { index in
                 VStack {
                     Text("\(nextWeek[index].day)")
                         .frame(maxWidth: .infinity)
+                    
                     Circle()
                         .frame(width: 6, height: 6)
-                        .foregroundColor(.green)
+                        .foregroundColor(Color.primary)
                 }
             }
         }
