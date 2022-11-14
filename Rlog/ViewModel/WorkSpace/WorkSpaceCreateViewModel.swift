@@ -27,43 +27,53 @@ final class WorkSpaceCreateViewModel: ObservableObject {
     var isHiddenConfirmButton: Bool = false
     var isHiddenToolBarItem: Bool = true
     
-    @Published var hasTax: Bool = false
-    @Published var hasJuhyu: Bool = false
+    @Published var workSpace = "" {
+        didSet {
+            if !workSpace.isEmpty {
+                // TODO: 이전값을 돌려주는게 적합한 UX일까? -> 나중에 고민해보기
+                if workSpace.count >= 21 { workSpace = oldValue }
+                if workSpace.count >= 20 {
+                    inActivateButton()
+                } else {
+                    activateButton()
+                }
+            } else {
+                inActivateButton()
+            }
+        }
+    }
     @Published var hourlyWage = "" {
         didSet {
             if !hourlyWage.isEmpty {
-                activateButton(inputState: .hourlyWage)
-                isActivatedConfirmButton = true
+                guard let textToInt = Int(hourlyWage) else { return hourlyWage = "" }
+                if textToInt  >= 10000000 { hourlyWage = oldValue }
+                if textToInt >= 1000000 {
+                    inActivateButton()
+                } else {
+                    activateButton()
+                }
             } else {
-                inActivateButton(inputState: .hourlyWage)
-                isActivatedConfirmButton = false
-                
+                inActivateButton()
             }
         }
     }
-    @Published var paymentDay = "" {
+    @Published var payday = "" {
         didSet {
-            if !paymentDay.isEmpty {
-                activateButton(inputState: .payday)
-                isActivatedConfirmButton = true
-                
+            if !payday.isEmpty {
+                guard let textToInt = Int(payday) else { return payday = "" }
+                if textToInt > 289 {payday = oldValue}
+                if textToInt > 28 {
+                    inActivateButton()
+                } else {
+                    activateButton()
+                }
             } else {
-                inActivateButton(inputState: .payday)
-                isActivatedConfirmButton = false
+                inActivateButton()
             }
         }
     }
-    @Published var name = ""{
-        didSet {
-            if !name.isEmpty {
-                activateButton(inputState: .workSpace)
-                isActivatedConfirmButton = true
-            } else {
-                inActivateButton(inputState: .workSpace)
-                isActivatedConfirmButton = false
-            }
-        }
-    }
+    @Published var hasTax: Bool = false
+    @Published var hasJuhyu: Bool = false
     
     func didTapConfirmButton() {
         if isActivatedConfirmButton {

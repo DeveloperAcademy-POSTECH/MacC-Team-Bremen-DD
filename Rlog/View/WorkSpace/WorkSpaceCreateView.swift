@@ -23,7 +23,7 @@ struct WorkSpaceCreateView: View {
                 toggleInputs
             }
             if !viewModel.isHiddenPayday {
-                InputFormElement(containerType: .payday, text: $viewModel.paymentDay)
+                InputFormElement(containerType: .payday, text: $viewModel.payday)
                     .focused($checkoutInFocus, equals: .payday)
 
             }
@@ -32,7 +32,7 @@ struct WorkSpaceCreateView: View {
                     .focused($checkoutInFocus, equals: .hourlyWage)
 
             }
-            InputFormElement(containerType: .workplace, text: $viewModel.name)
+            InputFormElement(containerType: .workplace, text: $viewModel.workSpace)
                 .focused($checkoutInFocus, equals: .workSpace)
 
             Spacer()
@@ -50,8 +50,8 @@ struct WorkSpaceCreateView: View {
                     NavigationLink {
                         WorkSpaceCreateScheduleListView(
                             isActive: $viewModel.isActive, workspaceModel: WorkSpaceModel(
-                                name: viewModel.name,
-                                paymentDay: viewModel.paymentDay,
+                                name: viewModel.workSpace,
+                                paymentDay: viewModel.payday,
                                 hourlyWage: viewModel.hourlyWage,
                                 hasTax: viewModel.hasTax,
                                 hasJuhyu: viewModel.hasJuhyu
@@ -98,6 +98,7 @@ private extension WorkSpaceCreateView {
             })
         }
     }
+
     
     // 확인 버튼
     var ConfirmButton: some View {
