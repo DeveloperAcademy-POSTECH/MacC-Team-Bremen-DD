@@ -105,16 +105,45 @@ private extension WorkSpaceCreateViewModel {
         }
     }
     
-    func inActivateButton(inputState: WritingState) {
-        if currentState.hashValue == inputState.hashValue {
-            isActivatedConfirmButton = false
+    func inActivateButton() {
+        isActivatedConfirmButton = false
+        if currentState == .toggleOptions {
         }
     }
     
-    func activateButton(inputState: WritingState)  {
-        if currentState.hashValue == inputState.hashValue {
+    func activateButton()  {
+        switch currentState {
+        case .workSpace:
             isActivatedConfirmButton = true
+            return
+        case .hourlyWage:
+            if workSpace.isEmpty {return}
+            if hourlyWage.isEmpty {return}
+            guard let hourlyWageInt = Int(hourlyWage) else { return hourlyWage = "" }
+            if hourlyWageInt >= 1000000 {return}
+            isActivatedConfirmButton = true
+            return
+        case .payday:
+            if workSpace.isEmpty {return}
+            if hourlyWage.isEmpty {return}
+            guard let hourlyWageInt = Int(hourlyWage) else { return hourlyWage = "" }
+            if hourlyWageInt >= 1000000 {return}
+            if payday.isEmpty {return}
+            guard let paydayInt = Int(hourlyWage) else { return hourlyWage = "" }
+            if paydayInt > 28 {return}
+            isActivatedConfirmButton = true
+            return
+        case .toggleOptions:
+            if workSpace.isEmpty {return}
+            if hourlyWage.isEmpty {return}
+            guard let hourlyWageInt = Int(hourlyWage) else { return hourlyWage = "" }
+            if hourlyWageInt >= 1000000 {return}
+            if payday.isEmpty {return}
+            guard let paydayInt = Int(hourlyWage) else { return hourlyWage = "" }
+            if paydayInt > 28 {return}
+            return
         }
+
     }
 }
 
