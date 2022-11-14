@@ -44,53 +44,64 @@ struct ScheduleCell: View {
 private extension ScheduleCell {
     var scheduleInfo: some View {
         VStack(spacing: 0) {
+            
             HStack {
                 Text(workType.0)
                     .font(.caption2)
-                    .foregroundColor(.white)
-                    .padding(.horizontal, 5)
-                    .padding(.vertical, 2)
+                    .foregroundColor(Color.backgroundWhite)
+                    .padding(EdgeInsets(top: 2, leading: 6, bottom: 2, trailing: 6))
                     .background(workType.1)
                     .cornerRadius(5)
+                
                 Spacer()
+                
                 Text("\(data.workdays.spentHour)시간")
                     .font(.subheadline)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.fontBlack)
             }
-            .padding(.bottom, 8)
             
             HStack {
                 Text("\(data.name)")
                     .font(.body)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.fontBlack)
+                
                 Spacer()
+                
                 Text("\(data.workdays.startHour):\(data.workdays.startMinute) ~ \(data.workdays.endHour):\(data.workdays.endMinute)")
-
+                    .font(.body)
+                    .foregroundColor(Color.fontBlack)
             }
+            .padding(.vertical, 8)
+            
             HStack {
                 Spacer()
+                
                 Button {
                     print(viewModel.currentDate)
                     print(weekday)
                 } label: {
+                    
                     Text("확정하기")
                         .font(.caption)
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 29)
-                        .padding(.vertical, 5)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.backgroundWhite)
+                        .padding(EdgeInsets(top: 8, leading: 47, bottom: 8, trailing: 47))
                         .background(workType.1)
                         .cornerRadius(10)
                 }
             }
-            .padding(.vertical, 8)
 
         }
-        .padding(.horizontal)
-        .padding(.top, 19)
-        .padding(.bottom, 8)
-        .background(.gray)
-        .cornerRadius(7.5)
+        .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+        .background(Color.backgroundCard)
+        .cornerRadius(10)
         .padding(2)
-        .background(.black)
-        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .overlay {
+            RoundedRectangle(cornerRadius: 10)
+                .strokeBorder(Color.backgroundStroke, lineWidth: 2)
+        }
         .transaction { transaction in
             transaction.disablesAnimations = true
         }
