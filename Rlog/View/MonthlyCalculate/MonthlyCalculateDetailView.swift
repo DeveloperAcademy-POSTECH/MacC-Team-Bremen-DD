@@ -15,6 +15,8 @@ struct MonthlyCalculateDetailView: View {
                     .padding(.top, 18)
                 closing
                     .padding(.top, 39)
+                resonList
+                    .padding(.top)
             }
             .padding(.horizontal)
         }
@@ -101,6 +103,66 @@ private extension MonthlyCalculateDetailView {
             }
             .padding(.top)
         }
+    }
+    
+    var resonList: some View {
+        VStack(alignment: .leading) {
+            Text("상세정보")
+                .font(.subheadline)
+                .fontWeight(.bold)
+            
+            ForEach(1..<3) { _ in
+                makeReasonCell()
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func makeReasonCell() -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack {
+                // TODO: - 컴포넌트로 바뀔 예정
+                Text("추가")
+                    .font(.caption2)
+                    .foregroundColor(Color.backgroundWhite)
+                    .padding(EdgeInsets(top: 2, leading: 4, bottom: 2, trailing: 4))
+                    .background(
+                        RoundedRectangle(cornerRadius: 5)
+                            .fill(Color.pointPurple)
+                    )
+                Spacer()
+                Text("4시간")
+                    .font(.subheadline)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.fontBlack)
+            }
+            .padding(.top)
+            
+            HStack {
+                Text("11월 7일")
+                    .fontWeight(.bold)
+                Spacer()
+                Text("10:00 ~ 14:00")
+            }
+            .foregroundColor(Color.fontBlack)
+            // TODO: - Padding 값도 reason의 유무에 따라 16, 8로 변경 될 예정
+            .padding(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+            
+            // TODO: - reason이 있을 때만, 보여지는 처리 필요
+            Text("사장님이 오늘 아프셔서 대신 출근했다.")
+                .font(.footnote)
+                .foregroundColor(Color.grayMedium)
+                .padding(.bottom)
+        }
+        .padding(.horizontal)
+        .background(
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color.backgroundCard)
+                RoundedRectangle(cornerRadius: 10)
+                    .strokeBorder(Color.backgroundStroke, lineWidth: 2)
+            }
+        )
     }
 }
 
