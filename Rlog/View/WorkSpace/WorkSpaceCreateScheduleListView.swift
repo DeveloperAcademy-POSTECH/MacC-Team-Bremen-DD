@@ -18,7 +18,6 @@ struct WorkSpaceCreateScheduleListView: View {
             TitleSubView(title: "근무 패턴을 입력해주세요.")
             labelText
             VStack(spacing: 16) {
-                
                 ForEach(0..<viewModel.scheduleList.count, id: \.self) { Idx in
                     
                     deletableSchedulePattern(scheduleIdx: Idx)
@@ -26,7 +25,6 @@ struct WorkSpaceCreateScheduleListView: View {
                 addScheduleButton
             }
             Spacer()
-            
         }
         .padding(.horizontal)
         .toolbar {
