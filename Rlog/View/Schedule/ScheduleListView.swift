@@ -190,6 +190,7 @@ private extension ScheduleListView {
                 VStack {
                     Text("\(previousWeek[index].day)")
                         .frame(maxWidth: .infinity)
+                        .font(.system(size: 16, weight: .bold))
                     
                     Circle()
                         .frame(width: 6, height: 6)
@@ -206,6 +207,7 @@ private extension ScheduleListView {
                 VStack {
                     Text("\(nextWeek[index].day)")
                         .frame(maxWidth: .infinity)
+                        .font(.system(size: 16, weight: .bold))
                     
                     Circle()
                         .frame(width: 6, height: 6)
