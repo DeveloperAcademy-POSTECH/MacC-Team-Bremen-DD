@@ -35,6 +35,9 @@ final class WorkSpaceCreateScheduleListViewModel: ObservableObject {
     func getScheduleData() -> [ScheduleModel] {
         return scheduleList
     }
+    func didTapDeleteButton(idx: Int) {
+        scheduleList.remove(at: idx)
+    }
 }
 
 // MARK: - Private Functions

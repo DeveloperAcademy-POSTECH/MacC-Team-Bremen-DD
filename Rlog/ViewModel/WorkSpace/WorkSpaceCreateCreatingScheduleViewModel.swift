@@ -88,6 +88,7 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
             await dismissModal()
         }
     }
+
 }
 
 // MARK: - Private Functions
