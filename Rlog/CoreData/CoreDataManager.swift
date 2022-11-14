@@ -37,7 +37,7 @@ struct CoreDataManager {
     }
 }
 
-// MARK: - Workspace Logic
+// MARK: - WorkspaceEntity Logic
 extension CoreDataManager {
     func createWorkspace(
         name: String,
@@ -128,6 +128,62 @@ extension CoreDataManager {
 
     func deleteSchedule(of schedule: ScheduleEntity) {
          context.delete(schedule)
+         save()
+     }
+}
+
+// MARK: - WorkdayEntity Logic
+extension CoreDataManager {
+    func createWorkday(
+        of workspace: WorkspaceEntity,
+        hourlyWage: Int32,
+        hasDone: Bool,
+        date: Date,
+        startTime: Date,
+        endTime: Date,
+        memo: String?,
+        schedule: ScheduleEntity?
+    ) {
+        let workday = WorkdayEntity(context: context)
+        workday.workspace = workspace
+        workday.hourlyWage = hourlyWage
+        workday.hasDone = hasDone
+        workday.date = date
+        workday.startTime = startTime
+        workday.endTime = endTime
+        workday.memo = memo
+        workday.schedule = schedule
+        save()
+    }
+
+    func getWorkdaysBetween(start: Date, target: Date) -> [WorkdayEntity] {
+        let fetchRequest: NSFetchRequest<WorkdayEntity> = WorkdayEntity.fetchRequest()
+        let startPredicate = NSPredicate(format: "date >= %@", start as CVarArg)
+        let targetPredicate = NSPredicate(format: "date < %@", target as CVarArg)
+        fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: [startPredicate, targetPredicate])
+        let result = try? context.fetch(fetchRequest)
+        return result ?? []
+    }
+
+    func getHasNotDoneWorkdays() -> [WorkdayEntity] {
+        let fetchRequest: NSFetchRequest<WorkdayEntity> = WorkdayEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "hasDone == %@", NSNumber(booleanLiteral: false))
+        let result = try? context.fetch(fetchRequest)
+        return result ?? []
+    }
+
+    func getHasDoneWorkdays(of workspace: WorkspaceEntity, start: Date, target: Date) -> [WorkdayEntity] {
+        let fetchRequest: NSFetchRequest<WorkdayEntity> = WorkdayEntity.fetchRequest()
+        let workspacePredicate = NSPredicate(format: "workspace.name", workspace.name)
+        let startPredicate = NSPredicate(format: "date >= %@", start as CVarArg)
+        let targetPredicate = NSPredicate(format: "date < %@", target as CVarArg)
+        fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: [workspacePredicate, startPredicate, targetPredicate])
+        let result = try? context.fetch(fetchRequest)
+        return result ?? []
+    }
+
+    func deleteWorkday(of workday: WorkdayEntity) {
+         context.delete(workday)
          save()
      }
 }

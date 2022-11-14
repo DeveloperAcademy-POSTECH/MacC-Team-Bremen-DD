@@ -3,7 +3,7 @@
     <entity name="ScheduleEntity" representedClassName="ScheduleEntity" syncable="YES">
         <attribute name="endHour" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="endMinute" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="repeatDays" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="repeatDays" attributeType="Transformable" valueTransformerName="NSKeyedUnarchiveFromDataTransformer" customClassName="[String]"/>
         <attribute name="startHour" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startMinute" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="workdays" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="WorkdayEntity" inverseName="schedule" inverseEntity="WorkdayEntity"/>
@@ -12,6 +12,7 @@
     <entity name="WorkdayEntity" representedClassName="WorkdayEntity" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="hasDone" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="hourlyWage" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="memo" optional="YES" attributeType="String"/>
         <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
