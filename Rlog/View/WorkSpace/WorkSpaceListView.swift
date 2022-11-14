@@ -45,6 +45,7 @@ struct WorkSpaceListView: View {
                     Text("근무지")
                         .font(.title2)
                         .fontWeight(.bold)
+                        .foregroundColor(Color.fontBlack)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     
