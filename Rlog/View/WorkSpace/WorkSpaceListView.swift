@@ -30,7 +30,7 @@ struct WorkSpaceListView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(
-                        destination: WorkSpaceCreateView(),
+                        destination: WorkSpaceCreateView(isActive: $viewModel.isShowingSheet),
                         isActive: $viewModel.isShowingSheet) {
                             Image("plus.curved")
                         }
