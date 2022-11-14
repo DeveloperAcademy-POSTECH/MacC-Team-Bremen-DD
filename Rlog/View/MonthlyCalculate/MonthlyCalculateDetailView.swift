@@ -92,8 +92,11 @@ private extension MonthlyCalculateDetailView {
             
             HStack {
                 Text("총 급여")
+                    .foregroundColor(Color.grayMedium)
                 Spacer()
                 Text("422,400원")
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.fontBlack)
             }
             .padding(.top)
         }
