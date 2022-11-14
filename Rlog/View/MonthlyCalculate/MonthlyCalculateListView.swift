@@ -46,17 +46,18 @@ private extension MonthlyCalculateListView {
                 })
             }
             .font(.title)
-            .foregroundColor(.black)
         }
+        .foregroundColor(Color.fontBlack)
     }
     
     var total: some View {
         HStack {
-            Text("\(viewModel.fetchMonth())월 총 금액")
+            Text("\(viewModel.date.fetchMonth())월 총 금액")
             Spacer()
             Text("10,200,000원")
                 .fontWeight(.bold)
         }
         .font(.title3)
+        .foregroundColor(Color.fontBlack)
     }
 }

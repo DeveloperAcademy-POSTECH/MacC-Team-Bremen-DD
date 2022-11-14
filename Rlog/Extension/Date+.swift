@@ -22,4 +22,8 @@ extension Date {
         let converted = dateFormatter.string(from: date)
         return converted
     }
+    
+    func fetchMonth() -> String {
+        return String(Calendar.current.component(.month, from: date))
+    }
 }
