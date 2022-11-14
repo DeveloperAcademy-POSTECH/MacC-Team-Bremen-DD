@@ -9,13 +9,15 @@ import SwiftUI
 
 struct MonthlyCalculateDetailView: View {
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            header
-                .padding(.top, 18)
-            closing
-                .padding(.top, 39)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 0) {
+                header
+                    .padding(.top, 18)
+                closing
+                    .padding(.top, 39)
+            }
+            .padding(.horizontal)
         }
-        .padding(.horizontal)
     }
 }
 
@@ -87,6 +89,13 @@ private extension MonthlyCalculateDetailView {
                     .foregroundColor(Color.grayDark)
             }
             .font(.subheadline)
+            
+            HStack {
+                Text("총 급여")
+                Spacer()
+                Text("422,400원")
+            }
+            .padding(.top)
         }
     }
 }
