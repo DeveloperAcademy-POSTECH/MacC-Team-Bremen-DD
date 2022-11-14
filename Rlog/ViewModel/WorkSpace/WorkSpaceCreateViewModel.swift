@@ -19,15 +19,13 @@ final class WorkSpaceCreateViewModel: ObservableObject {
     }
     
     var currentState: WritingState = .workSpace
-    var isActivatedConfirmButton: Bool = false
+    @Published var isActivatedConfirmButton: Bool = false
     
-    
-    
-    @Published var isHiddenToggleInputs: Bool = true
-    @Published var isHiddenPayday: Bool = true
-    @Published var isHiddenHourlyWage: Bool = true
-    @Published var isHiddenConfirmButton: Bool = false
-    @Published var isHiddenToolBarItem: Bool = true
+     var isHiddenToggleInputs: Bool = true
+     var isHiddenPayday: Bool = true
+     var isHiddenHourlyWage: Bool = true
+     var isHiddenConfirmButton: Bool = false
+     var isHiddenToolBarItem: Bool = true
     
     @Published var hasTax: Bool = false
     @Published var hasJuhyu: Bool = false
@@ -69,15 +67,12 @@ final class WorkSpaceCreateViewModel: ObservableObject {
         }
     }
     
-    
-    
     func didTapConfirmButton() {
         // 컨포넌트 작동 방식에 따라 수정이 필요할지도!
         if isActivatedConfirmButton {
             switchToNextStatus()
         }
     }
-    
 }
 
 private extension WorkSpaceCreateViewModel {
