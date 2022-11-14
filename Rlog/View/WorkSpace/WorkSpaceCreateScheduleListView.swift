@@ -47,7 +47,11 @@ struct WorkSpaceCreateScheduleListView: View {
 
 private extension WorkSpaceCreateScheduleListView {
     var toolbarNextButton: some View {
-        NavigationLink(destination:  WorkSpaceCreateConfirmationView()) {
+        NavigationLink(destination:  WorkSpaceCreateConfirmationView(
+            isActive: $viewModel.isActive,
+            workspaceData: viewModel.workspaceModel,
+            scheduleData: viewModel.scheduleList)
+        ) {
             Text("다음")
                 .foregroundColor(viewModel.isDisabledNextButton ? Color(red: 0.82, green: 0.82, blue: 0.839) : .fontBlack)
         }
