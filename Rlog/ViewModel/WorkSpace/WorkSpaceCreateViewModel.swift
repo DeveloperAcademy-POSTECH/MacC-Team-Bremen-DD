@@ -18,14 +18,16 @@ final class WorkSpaceCreateViewModel: ObservableObject {
         self._isActive = isActive
     }
     
-    var currentState: WritingState = .workSpace
-    @Published var isActivatedConfirmButton: Bool = false
     
-     var isHiddenToggleInputs: Bool = true
-     var isHiddenPayday: Bool = true
-     var isHiddenHourlyWage: Bool = true
-     var isHiddenConfirmButton: Bool = false
-     var isHiddenToolBarItem: Bool = true
+    
+    var currentState: WritingState = .workSpace
+    var isActivatedConfirmButton: Bool = false
+    
+    @Published var isHiddenToggleInputs: Bool = true
+    @Published var isHiddenPayday: Bool = true
+    @Published var isHiddenHourlyWage: Bool = true
+    var isHiddenConfirmButton: Bool = false
+    var isHiddenToolBarItem: Bool = true
     
     @Published var hasTax: Bool = false
     @Published var hasJuhyu: Bool = false
@@ -50,7 +52,6 @@ final class WorkSpaceCreateViewModel: ObservableObject {
             } else {
                 inActivateButton(inputState: .payday)
                 isActivatedConfirmButton = false
-                
             }
         }
     }
@@ -59,7 +60,6 @@ final class WorkSpaceCreateViewModel: ObservableObject {
             if !name.isEmpty {
                 activateButton(inputState: .workSpace)
                 isActivatedConfirmButton = true
-                
             } else {
                 inActivateButton(inputState: .workSpace)
                 isActivatedConfirmButton = false
@@ -103,20 +103,23 @@ private extension WorkSpaceCreateViewModel {
     }
     
     func inActivateButton(inputState: WritingState) {
-        if currentState.rawValue == inputState.rawValue {
+        if currentState.hashValue == inputState.hashValue {
             isActivatedConfirmButton = false
         }
     }
     
     func activateButton(inputState: WritingState)  {
-        if currentState.rawValue == inputState.rawValue {
+        if currentState.hashValue == inputState.hashValue {
             isActivatedConfirmButton = true
         }
     }
 }
 
-enum WritingState: Int {
-    case workSpace, hourlyWage, payday, toggleOptions
+enum WritingState: Hashable {
+    case workSpace
+    case hourlyWage
+    case payday
+    case toggleOptions
     
     var title: String {
         switch self {

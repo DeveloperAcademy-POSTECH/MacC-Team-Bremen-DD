@@ -14,6 +14,8 @@ struct WorkSpaceCreateView: View {
         self.viewModel = WorkSpaceCreateViewModel(isActive: isActive)
     }
     
+    @FocusState var checkoutInFocus: WritingState?
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             guidingText
@@ -22,11 +24,16 @@ struct WorkSpaceCreateView: View {
             }
             if !viewModel.isHiddenPayday {
                 InputFormElement(containerType: .payday, text: $viewModel.paymentDay)
+                    .focused($checkoutInFocus, equals: .payday)
+
             }
             if !viewModel.isHiddenHourlyWage {
                 InputFormElement(containerType: .wage, text: $viewModel.hourlyWage)
+                    .focused($checkoutInFocus, equals: .hourlyWage)
+
             }
             InputFormElement(containerType: .workplace, text: $viewModel.name)
+                .focused($checkoutInFocus, equals: .workSpace)
 
             Spacer()
 
@@ -56,6 +63,11 @@ struct WorkSpaceCreateView: View {
                     }
                 }
             }
+        }
+        .onAppear {
+          DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+              self.checkoutInFocus = .workSpace
+          }
         }
     }
 }
@@ -92,6 +104,13 @@ private extension WorkSpaceCreateView {
     var ConfirmButton: some View {
         Button {
             viewModel.didTapConfirmButton()
+            if checkoutInFocus == .workSpace {
+              checkoutInFocus = .hourlyWage
+            } else if checkoutInFocus == .hourlyWage {
+              checkoutInFocus = .payday
+            } else if checkoutInFocus == .payday {
+              checkoutInFocus = nil
+            }
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
