@@ -24,6 +24,6 @@ extension Date {
     }
     
     func fetchMonth() -> String {
-        return String(Calendar.current.component(.month, from: date))
+        return String(Calendar.current.component(.month, from: self))
     }
 }
