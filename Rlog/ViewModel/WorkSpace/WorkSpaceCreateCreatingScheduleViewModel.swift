@@ -9,11 +9,7 @@ import SwiftUI
 
 @MainActor
 final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
-    @Published var text = ""
-    
     @Binding var isShowingModal: Bool
-    
-    
     @Binding var scheduleList: [ScheduleModel]
     
     var isShowingConfirmButton = false
