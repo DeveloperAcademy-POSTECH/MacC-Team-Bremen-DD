@@ -124,7 +124,7 @@ private extension ScheduleListView {
                 weekdayBox.tag(1)
                 nextWeekdayBox.tag(2)
             }
-            .frame(maxHeight: 46)
+            .frame(maxHeight: 47)
             .tabViewStyle(.page(indexDisplayMode: .never))
             .onChange(of: selection) { newValue in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -149,7 +149,7 @@ private extension ScheduleListView {
                             }
                         } label: {
                             Text("\(currentWeek[index].day)")
-                                .font(.callout)
+                                .font(.system(size: 16, weight: .medium))
                                 .foregroundColor(.grayDark)
                                 .padding(.bottom, 9)
                         }
@@ -190,7 +190,7 @@ private extension ScheduleListView {
                 VStack {
                     Text("\(previousWeek[index].day)")
                         .frame(maxWidth: .infinity)
-                        .font(.system(size: 16, weight: .bold))
+                        .font(.system(size: 16, weight: .medium))
                     
                     Circle()
                         .frame(width: 6, height: 6)
@@ -207,7 +207,7 @@ private extension ScheduleListView {
                 VStack {
                     Text("\(nextWeek[index].day)")
                         .frame(maxWidth: .infinity)
-                        .font(.system(size: 16, weight: .bold))
+                        .font(.system(size: 16, weight: .medium))
                     
                     Circle()
                         .frame(width: 6, height: 6)
