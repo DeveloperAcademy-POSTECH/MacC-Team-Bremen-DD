@@ -122,7 +122,7 @@ private extension MonthlyCalculateListView {
                             .fontWeight(.bold)
                             .foregroundColor(Color.fontBlack)
                     }
-                    .padding(.horizontal)
+                    .padding(.vertical)
                 }
                 .padding(.leading, 4)
             }
