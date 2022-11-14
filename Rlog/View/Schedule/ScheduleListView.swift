@@ -117,18 +117,37 @@ private extension ScheduleListView {
     var weekdayBox: some View {
         HStack(spacing: 0) {
             ForEach(0..<currentWeek.count, id: \.self) { index in
-                VStack {
-                    Button {
-                    } label: {
-                        Text("\(currentWeek[index].day)")
-                            .font(.callout)
-                            .foregroundColor(.black)
+                ZStack {
+                    VStack {
+                        Button {
+                            withAnimation {
+                                viewModel.didTapDate(currentWeek[index])
+                            }
+                        } label: {
+                            Text("\(currentWeek[index].day)")
+                                .font(.callout)
+                                .foregroundColor(.black)
+                        }
+                        .frame(maxWidth: .infinity)
+
+                        Circle()
+                            .frame(width: 6, height: 6)
+                            .foregroundColor(.green)
                     }
-                    .frame(maxWidth: .infinity)
-                    
-                    Circle()
-                        .frame(width: 6, height: 6)
-                        .foregroundColor(.green)
+
+                    if viewModel.verifyFocusDate(currentWeek[index].day) {
+                        VStack {
+                            Text("\(currentWeek[index].day)")
+                                .font(.callout)
+                                .foregroundColor(.white)
+                            Circle()
+                                .frame(width: 6, height: 6)
+                                .foregroundColor(.white)
+                        }
+                        .padding()
+                        .background(.blue)
+                        .cornerRadius(15)
+                    }
                 }
             }
         }
