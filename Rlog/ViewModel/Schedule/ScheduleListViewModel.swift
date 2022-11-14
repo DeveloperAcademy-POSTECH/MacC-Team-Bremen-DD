@@ -36,39 +36,43 @@ final class ScheduleListViewModel: ObservableObject {
     }
 }
 
-extension ScheduleListViewModel {
+// MARK: Private functions
+private extension ScheduleListViewModel {
     // 일주일 뒤의 날짜를 반환합니다.
-    private func getNextWeek() {
+    func getNextWeek() {
         guard let dateOfNextWeek = calendar.date(byAdding: .weekOfMonth, value: 1, to: currentDate)
         else { return }
         currentDate = dateOfNextWeek
     }
 
     // 일주일 전의 날짜를 반환합니다.
-    private func getPreviousWeek() {
+    func getPreviousWeek() {
         guard let dateOfPreviousWeek = calendar.date(byAdding: .weekOfMonth, value: -1, to: currentDate)
         else { return }
         currentDate = dateOfPreviousWeek
     }
     
     // 사용자가 다른 날짜를 터치했을 때 Focus를 변경합니다.
-    private func changeFocusDate(_ date: CalendarModel) {
+    func changeFocusDate(_ date: CalendarModel) {
         let components = calendar.dateComponents([.year, .month], from: currentDate)
         let year = components.year ?? 2000
         let month = components.month ?? 1
         var focusDateComponents = DateComponents(year: year, month: month, day: date.day)
-        var focusDate = calendar.date(from: focusDateComponents)!
+        guard var focusDate = calendar.date(from: focusDateComponents) else { return }
 
         // 캘린더 날짜와 터치된 날짜의 년도, 월이 다른 경우
         // 월 정보만 바뀌어도 년도 케이스 핸들링이 가능하므로 월 정보만 비교합니다.
         if date.month != month {
             focusDateComponents = DateComponents(year: date.year, month: date.month, day: date.day)
-            focusDate = calendar.date(from: focusDateComponents)!
+            guard let data = calendar.date(from: focusDateComponents) else { return }
+            focusDate = data
         }
         
         currentDate = focusDate
     }
-    
+}
+
+extension ScheduleListViewModel {
     // 오늘 날짜가 속한 주의 날짜 데이터를 반환합니다.
     // https://stackoverflow.com/questions/42981665/how-to-get-all-days-in-current-week-in-swift
     func getWeekOfDate(_ date: Date) -> [CalendarModel] {
@@ -106,6 +110,38 @@ extension ScheduleListViewModel {
         
         if focusDate == date { return true }
         else { return false }
+    }
+    
+    // 🔥 필요한 것만 받기 -> 파라미터 너무 많음
+    // 🔥 WorkspaceEntity 하나 받기 -> 간단함 but over-fetching
+    func defineWorkType(
+        repeatDays: [String],
+        workDate: Date,
+        startHour: Int16,
+        startMinute: Int16,
+        endHour: Int16,
+        endMinute: Int16,
+        spentHour: Int16
+    ) -> (type: String, color: Color) {
+        let formatter = DateFormatter(dateFormatType: .weekday)
+        let _ = formatter.string(from: workDate)
+        let spentHourOfNormalCase: Int16 = endHour - startHour
+        let timeDifference = spentHour - spentHourOfNormalCase
+        
+        //        for day in repeatDays {
+        //            if day != weekday { return ("추가", .blue) }
+        //        }
+        
+        switch timeDifference {
+        case 0:
+            return ("정규", .green)
+        case 1...:
+            return ("연장", .orange)
+        case _ where timeDifference < 0:
+            return ("축소", .pink)
+        default:
+            return ("정규", .green)
+        }
     }
 }
 
