@@ -12,10 +12,11 @@ final class ScheduleListViewModel: ObservableObject {
     @Published var previousDate = Calendar.current.date(byAdding: .weekOfMonth, value: -1, to: Date()) ?? Date()
     @Published var currentDate = Date() {
         didSet {
-            guard let nextWeek = Calendar.current.date(byAdding: .weekOfMonth, value: 1, to: currentDate)
+            guard
+                let nextWeek = Calendar.current.date(byAdding: .weekOfMonth, value: 1, to: currentDate),
+                let previousWeek = Calendar.current.date(byAdding: .weekOfMonth, value: -1, to: currentDate)
             else { return }
-            guard let previousWeek = Calendar.current.date(byAdding: .weekOfMonth, value: -1, to: currentDate)
-            else { return }
+            
             nextDate = nextWeek
             previousDate = previousWeek
         }
