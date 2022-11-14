@@ -11,6 +11,7 @@ struct ScheduleListView: View {
     @ObservedObject var viewModel = ScheduleListViewModel()
     @State var selection = 1
     @State private var isSchedulePendingListViewActive = false
+    @State private var isScheduleCreationViewActive = false
     var currentMonth: String {
         let components = Calendar.current.dateComponents([.year, .month], from: viewModel.currentDate)
         let year = components.year ?? 2000
@@ -47,12 +48,13 @@ struct ScheduleListView: View {
 
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(spacing: 0) {
                 header
                 scheduleContainer
             }
+            .background(.gray)
+            .navigationBarHidden(true)
         }
-        .background(.gray)
     }
 }
 
@@ -76,12 +78,16 @@ private extension ScheduleListView {
             Button("메일함") { isSchedulePendingListViewActive.toggle() }
                 .padding(.horizontal)
                 .foregroundColor(.black)
-            Button("추가") { }
+            Button("추가") { isScheduleCreationViewActive.toggle() }
                 .foregroundColor(.black)
             
             NavigationLink(
                 destination: SchedulePendingListView(),
                 isActive: $isSchedulePendingListViewActive
+            ) { EmptyView() }
+            NavigationLink(
+                destination: ScheduleCreationView(),
+                isActive: $isScheduleCreationViewActive
             ) { EmptyView() }
         }
         .padding(.horizontal, 20)

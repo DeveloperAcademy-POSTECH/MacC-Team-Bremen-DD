@@ -31,6 +31,8 @@
 		7A29B296291D60410028003A /* ScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A29B295291D60410028003A /* ScheduleCell.swift */; };
 		7A2F04B7291EA91E0091BA28 /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2F04B6291EA91E0091BA28 /* Weekday.swift */; };
 		7A937596290035BD00D6D5BE /* FilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A937595290035BD00D6D5BE /* FilledButton.swift */; };
+		7AEB916B29222B6000207FFA /* BorderedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB916A29222B6000207FFA /* BorderedPicker.swift */; };
+		7AEB916D29222C7400207FFA /* ScheduleCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEB916C29222C7400207FFA /* ScheduleCreationView.swift */; };
 		894CB4DD29221D19008E4197 /* SchedulePendingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4DC29221D19008E4197 /* SchedulePendingListView.swift */; };
 		894CB4DF29221D41008E4197 /* SchedulePendingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4DE29221D41008E4197 /* SchedulePendingListViewModel.swift */; };
 		898A5EBA2907C79100A6BEF7 /* HDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A5EB92907C79100A6BEF7 /* HDivider.swift */; };
@@ -90,6 +92,8 @@
 		7A29B295291D60410028003A /* ScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCell.swift; sourceTree = "<group>"; };
 		7A2F04B6291EA91E0091BA28 /* Weekday.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
 		7A937595290035BD00D6D5BE /* FilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
+		7AEB916A29222B6000207FFA /* BorderedPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedPicker.swift; sourceTree = "<group>"; };
+		7AEB916C29222C7400207FFA /* ScheduleCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCreationView.swift; sourceTree = "<group>"; };
 		894CB4DC29221D19008E4197 /* SchedulePendingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePendingListView.swift; sourceTree = "<group>"; };
 		894CB4DE29221D41008E4197 /* SchedulePendingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePendingListViewModel.swift; sourceTree = "<group>"; };
 		898A5EB92907C79100A6BEF7 /* HDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDivider.swift; sourceTree = "<group>"; };
@@ -187,6 +191,7 @@
 				C63D4451291CDE86005D5AE6 /* ScheduleListView.swift */,
 				7A29B295291D60410028003A /* ScheduleCell.swift */,
 				894CB4DC29221D19008E4197 /* SchedulePendingListView.swift */,
+				7AEB916C29222C7400207FFA /* ScheduleCreationView.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -298,6 +303,7 @@
 				89CAA06F290265F300504BDE /* StrokeButton.swift */,
 				898A5EB92907C79100A6BEF7 /* HDivider.swift */,
 				898A5EC12908050D00A6BEF7 /* ScheduleContainer.swift */,
+				7AEB916A29222B6000207FFA /* BorderedPicker.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -411,6 +417,7 @@
 				894CB4DF29221D41008E4197 /* SchedulePendingListViewModel.swift in Sources */,
 				7A29B296291D60410028003A /* ScheduleCell.swift in Sources */,
 				C63D4459291CE3B0005D5AE6 /* MonthlyCalculateListViewModel.swift in Sources */,
+				7AEB916B29222B6000207FFA /* BorderedPicker.swift in Sources */,
 				C62C338C28FFCEBD00469273 /* CustomButtonView.swift in Sources */,
 				C63D4452291CDE86005D5AE6 /* ScheduleListView.swift in Sources */,
 				C67FC841290815C000DE3898 /* StrokeButton.swift in Sources */,
@@ -440,6 +447,7 @@
 				C64D97C028FE91AB004F80E7 /* DateFormatter+.swift in Sources */,
 				7A29B292291D490D0028003A /* View+.swift in Sources */,
 				2D66DCA228FD4DF000C90400 /* RlogApp.swift in Sources */,
+				7AEB916D29222C7400207FFA /* ScheduleCreationView.swift in Sources */,
 				C63D4457291CE37D005D5AE6 /* DataModel.xcdatamodeld in Sources */,
 				2DF4EC712906344B009B48B4 /* WorkSpaceCreateCreatingScheduleView.swift in Sources */,
 				C64D97BC28FE9197004F80E7 /* TextField+.swift in Sources */,
@@ -572,12 +580,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rlog/Rlog.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Rlog/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5MNSFLP2V9;
+				DEVELOPMENT_TEAM = DL9N9GFVMW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -595,7 +601,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.BremenDD.Rlog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = rlogDev;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -612,12 +617,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Rlog/Rlog.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Rlog/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5MNSFLP2V9;
+				DEVELOPMENT_TEAM = DL9N9GFVMW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -635,7 +638,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.BremenDD.Rlog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = rlogDev;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
