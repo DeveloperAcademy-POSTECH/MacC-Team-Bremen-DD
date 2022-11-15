@@ -68,31 +68,23 @@ private extension WorkSpaceCreateScheduleListView {
     
     @ViewBuilder
     func createDeletableSchedulePatternView(tappedScheduleID: Int) -> some View {
+        let tappedSchedule = viewModel.scheduleList[tappedScheduleID]
         RoundedRectangle(cornerRadius: 10)
             .frame(maxWidth: .infinity, minHeight: 56, maxHeight: 56)
             .foregroundColor(.gray)
             .overlay {
+                //TODO: 컴포넌트화 예정입니다.
                 HStack {
                     HStack {
-                        ForEach(viewModel.scheduleList[tappedScheduleID].repeatedSchedule, id: \.self) { day in
+                        ForEach(tappedSchedule.repeatedSchedule, id: \.self) { day in
                             Text(day)
                         }
                     }
                     Spacer()
                     HStack {
-                        if viewModel.scheduleList[tappedScheduleID].startMinute.count == 1 {
-                            Text("\(viewModel.scheduleList[tappedScheduleID].startHour):0\(viewModel.scheduleList[tappedScheduleID].startMinute)")
-                        } else {
-                            Text("\(viewModel.scheduleList[tappedScheduleID].startHour):\(viewModel.scheduleList[tappedScheduleID].startMinute)")
-                        }
-                        
+                        Text(tappedSchedule.startMinute.count == 1 ? "\(tappedSchedule.startHour):0\(tappedSchedule.startMinute)" : "\(tappedSchedule.startHour):\(tappedSchedule.startMinute)")
                         Text("-")
-                        
-                        if viewModel.scheduleList[tappedScheduleID].endMinute.count == 1 {
-                            Text("\(viewModel.scheduleList[tappedScheduleID].endHour):0\(viewModel.scheduleList[tappedScheduleID].endMinute)")
-                        } else {
-                            Text("\(viewModel.scheduleList[tappedScheduleID].endHour):\(viewModel.scheduleList[tappedScheduleID].endMinute)")
-                        }
+                        Text(tappedSchedule.endMinute.count == 1 ? "\(tappedSchedule.endHour):0\(tappedSchedule.endMinute)" : "\(tappedSchedule.endHour):\(tappedSchedule.endMinute)")
                     }
                     Button {
                         viewModel.didTapDeleteButton(idx: tappedScheduleID)
