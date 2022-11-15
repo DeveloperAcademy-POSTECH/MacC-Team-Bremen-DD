@@ -13,7 +13,7 @@ private struct MockModel: Hashable {
 }
 
 struct SchedulePendingListView: View {
-    @ObservedObject var viewModel = SchedulePendingListViewModel()
+    @ObservedObject private var viewModel = SchedulePendingListViewModel()
     private let dateArray: [String] = ["11.14", "11.15", "11.20", "11.21"]
     private let mockData: [MockModel] = [
         MockModel(date: "11.14"),

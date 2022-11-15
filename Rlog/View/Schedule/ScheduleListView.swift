@@ -56,6 +56,7 @@ struct ScheduleListView: View {
                 header
                 scheduleContainer
             }
+            //여기ㅏ애요
             .background(.gray)
             .navigationBarHidden(true)
         }
@@ -84,7 +85,6 @@ private extension ScheduleListView {
             .font(.title)
             .foregroundColor(Color.fontBlack)
             Spacer()
-
             // inbox.curved.badge로 조건 처리하면 됩니다.
             Button{ isSchedulePendingListViewActive.toggle() } label: {
                 Image("inbox.curved")
