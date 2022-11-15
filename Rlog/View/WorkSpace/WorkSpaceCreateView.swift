@@ -104,13 +104,23 @@ private extension WorkSpaceCreateView {
     var ConfirmButton: some View {
         Button {
             viewModel.didTapConfirmButton()
-            if checkoutInFocus == .workSpace {
-              checkoutInFocus = .hourlyWage
-            } else if checkoutInFocus == .hourlyWage {
-              checkoutInFocus = .payday
-            } else if checkoutInFocus == .payday {
-              checkoutInFocus = nil
+            switch checkoutInFocus {
+            case .none:
+                break
+            case .some(.workSpace):
+                checkoutInFocus = .hourlyWage
+                break
+            case .some(.hourlyWage):
+                checkoutInFocus = .payday
+                break
+            case .some(.payday):
+                checkoutInFocus = nil
+                break
+            case .some(.toggleOptions):
+                print("잘못된 입력")
+                break
             }
+
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
