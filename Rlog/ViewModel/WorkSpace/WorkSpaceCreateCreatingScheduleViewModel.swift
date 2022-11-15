@@ -85,16 +85,14 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
     func didTapConfirmButton() {
         //MARK: 어떤 코드인지 확인해보기
         // -> 바인딩 해서 처리하는데 비동기처리가 필요할까?
-        Task {
-            await appendScheduleToList()
-            await dismissModal()
-        }
+            appendScheduleToList()
+            dismissModal()
     }
 }
 
 // MARK: - Private Functions
 private extension WorkSpaceCreateCreatingScheduleViewModel {
-    func appendScheduleToList() async {
+    func appendScheduleToList() {
         if startMinute.isEmpty {
             startMinute = "00"
         }
