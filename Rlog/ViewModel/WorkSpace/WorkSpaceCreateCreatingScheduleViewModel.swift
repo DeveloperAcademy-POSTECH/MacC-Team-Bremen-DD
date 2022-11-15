@@ -93,7 +93,6 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
 
 // MARK: - Private Functions
 private extension WorkSpaceCreateCreatingScheduleViewModel {
-    @MainActor
     func appendScheduleToList() async {
         if startMinute.isEmpty {
             startMinute = "00"
@@ -112,7 +111,6 @@ private extension WorkSpaceCreateCreatingScheduleViewModel {
         )
     }
     
-    @MainActor
     func dismissModal() {
         isShowingModal = false
     }
