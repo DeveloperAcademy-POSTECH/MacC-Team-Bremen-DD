@@ -154,14 +154,11 @@ private extension MonthlyCalculateDetailView {
                 .padding(.bottom)
         }
         .padding(.horizontal)
-        .background(
-            ZStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.backgroundCard)
-                RoundedRectangle(cornerRadius: 10)
-                    .strokeBorder(Color.backgroundStroke, lineWidth: 2)
-            }
-        )
+        .background(Color.backgroundCard)
+        .cornerRadius(8)
+        .padding(2)
+        .background(Color.backgroundStroke)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 }
 
