@@ -22,7 +22,7 @@ extension ScheduleEntity {
     @NSManaged public var endHour: Int16
     @NSManaged public var endMinute: Int16
     @NSManaged public var workspace: WorkspaceEntity
-    @NSManaged public var workdays: NSSet?
+    @NSManaged public var workdays: WorkdayEntity?
 
 }
 
