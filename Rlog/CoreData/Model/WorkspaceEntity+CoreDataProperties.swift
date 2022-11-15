@@ -21,8 +21,8 @@ extension WorkspaceEntity {
     @NSManaged public var hourlyWage: Int32
     @NSManaged public var hasTax: Bool
     @NSManaged public var hasJuhyu: Bool
-    @NSManaged public var schedules: NSSet?
-    @NSManaged public var workdays: NSSet?
+    @NSManaged public var schedules: ScheduleEntity?
+    @NSManaged public var workdays: WorkdayEntity?
 
 }
 
