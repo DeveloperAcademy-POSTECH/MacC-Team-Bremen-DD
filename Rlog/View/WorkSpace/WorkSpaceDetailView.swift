@@ -33,9 +33,8 @@ struct WorkSpaceDetailView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: 24) {
                 InputFormElement(containerType: .workplace, text: $viewModel.name)
-                    .padding(.top, 33)
                 InputFormElement(containerType: .wage, text: $viewModel.hourlyWageString)
                 InputFormElement(containerType: .payday, text: $viewModel.paymentDayString)
 
@@ -66,7 +65,7 @@ struct WorkSpaceDetailView: View {
                 }
                 Spacer()
             }
-            .padding(.horizontal)
+            .padding(EdgeInsets(top: 24, leading: 16, bottom: 0, trailing: 16))
         }
         .navigationTitle("근무수정")
         .toolbar {
