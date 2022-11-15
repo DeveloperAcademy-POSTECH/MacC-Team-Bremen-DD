@@ -11,16 +11,18 @@ struct MonthlyCalculateListView: View {
     @ObservedObject private var viewModel = MonthlyCalculateListViewModel()
     
     var body: some View {
-        VStack(spacing: 0) {
-            header
-                .padding(.top, 24)
-            total
-                .padding(.top, 34)
-            calculateByWorkspaceList
-                .padding(.top, 32)
-            Spacer()
+        NavigationView {
+            VStack(spacing: 0) {
+                header
+                    .padding(.top, 24)
+                total
+                    .padding(.top, 34)
+                calculateByWorkspaceList
+                    .padding(.top, 32)
+                Spacer()
+            }
+            .padding(.horizontal)
         }
-        .padding(.horizontal)
     }
 }
 
@@ -76,66 +78,66 @@ private extension MonthlyCalculateListView {
      그래서, @escaping으로 계산 결과를 돌려 받아 월 전체 금액을 계산할지
      이 뷰가 그냥 함수형이나 변수로 뷰를 가지고 있으면 전체 월 계산이 편해지지 않을까까지 고민해봤습니다.
     */
+    // TODO: - 하위 Struct가 아닌, function으로 처리할 예정, 정산 결과 관련된 로직은 아예 다른 Service로 뺄 예정
     private struct CalculateByWorkspaceCell: View {
         var body: some View {
-            VStack(alignment: .leading, spacing: 0) {
-                HStack(spacing: 4) {
-                    Rectangle()
-                        .fill(Color.primary)
-                        .frame(width: 4, height: 16)
-                    Text("GS25 포항공대점")
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.fontBlack)
-                }
-                .padding(.top)
-                
-                Group {
-                    HStack {
-                        Text("일한 시간")
-                            .foregroundColor(Color.grayMedium)
-                        Spacer()
-                        Text("32시간")
-                            .foregroundColor(Color.grayDark)
-                    }
-                    .font(.subheadline)
-                    .padding(.top, 32)
-                    
-                    HStack {
-                        Text("급여일까지")
-                            .foregroundColor(Color.grayMedium)
-                        Spacer()
-                        Text("D-12")
-                            .foregroundColor(Color.grayDark)
-                    }
-                    .font(.subheadline)
-                    .padding(.top, 8)
-                    
-                    HDivider()
-                        .padding(.top, 8)
-                    
-                    HStack(alignment: .bottom) {
-                        Text("금액")
-                            .font(.subheadline)
-                            .foregroundColor(Color.grayMedium)
-                        Spacer()
-                        Text("422,400원")
-                            .font(.title3)
+            NavigationLink(destination: MonthlyCalculateDetailView()) {
+                VStack(alignment: .leading, spacing: 0) {
+                    HStack(spacing: 4) {
+                        Rectangle()
+                            .fill(Color.primary)
+                            .frame(width: 4, height: 16)
+                        Text("GS25 포항공대점")
                             .fontWeight(.bold)
                             .foregroundColor(Color.fontBlack)
                     }
-                    .padding(.vertical)
+                    .padding(.top)
+                    
+                    Group {
+                        HStack {
+                            Text("일한 시간")
+                                .foregroundColor(Color.grayMedium)
+                            Spacer()
+                            Text("32시간")
+                                .foregroundColor(Color.grayDark)
+                        }
+                        .font(.subheadline)
+                        .padding(.top, 32)
+                        
+                        HStack {
+                            Text("급여일까지")
+                                .foregroundColor(Color.grayMedium)
+                            Spacer()
+                            Text("D-12")
+                                .foregroundColor(Color.grayDark)
+                        }
+                        .font(.subheadline)
+                        .padding(.top, 8)
+                        
+                        HDivider()
+                            .padding(.top, 8)
+                        
+                        HStack(alignment: .bottom) {
+                            Text("금액")
+                                .font(.subheadline)
+                                .foregroundColor(Color.grayMedium)
+                            Spacer()
+                            Text("422,400원")
+                                .font(.title3)
+                                .fontWeight(.bold)
+                                .foregroundColor(Color.fontBlack)
+                        }
+                        .padding(.vertical)
+                    }
+                    .padding(.leading, 4)
                 }
-                .padding(.leading, 4)
+                .padding(.horizontal)
+                .background(Color.backgroundCard)
+                .cornerRadius(8)
+                .padding(2)
+                .background(Color.backgroundStroke)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
             }
-            .padding(.horizontal)
-            .background(
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(Color.backgroundCard)
-                    RoundedRectangle(cornerRadius: 10)
-                        .strokeBorder(Color.backgroundStroke, lineWidth: 2)
-                }
-            )
         }
     }
 }
