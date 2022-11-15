@@ -133,7 +133,7 @@ private extension WorkSpaceCreateCreatingScheduleViewModel {
     }
 }
 
-struct selectedDayModel: Hashable {
+struct SelectedDayModel: Hashable {
     let dayName: String
     var isSelected: Bool
 }
