@@ -19,6 +19,7 @@ struct InputFormElement: View {
     var body: some View {
         VStack {
             titleHeader
+                .padding(.bottom, 8)
             container
         }
     }
