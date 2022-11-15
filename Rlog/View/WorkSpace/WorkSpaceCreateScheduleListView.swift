@@ -20,7 +20,7 @@ struct WorkSpaceCreateScheduleListView: View {
             VStack(spacing: 16) {
                 ForEach(0..<viewModel.scheduleList.count, id: \.self) { Idx in
                     
-                    deletableSchedulePattern(scheduleIdx: Idx)
+                    createDeletableSchedulePatternView(tappedScheduleID: Idx)
                 }
                 addScheduleButton
             }
@@ -67,35 +67,35 @@ private extension WorkSpaceCreateScheduleListView {
     }
     
     @ViewBuilder
-    func deletableSchedulePattern(scheduleIdx: Int) -> some View {
+    func createDeletableSchedulePatternView(tappedScheduleID: Int) -> some View {
         RoundedRectangle(cornerRadius: 10)
             .frame(maxWidth: .infinity, minHeight: 56, maxHeight: 56)
             .foregroundColor(.gray)
             .overlay {
                 HStack {
                     HStack {
-                        ForEach(viewModel.scheduleList[scheduleIdx].repeatedSchedule, id: \.self) { day in
+                        ForEach(viewModel.scheduleList[tappedScheduleID].repeatedSchedule, id: \.self) { day in
                             Text(day)
                         }
                     }
                     Spacer()
                     HStack {
-                        if viewModel.scheduleList[scheduleIdx].startMinute.count == 1 {
-                            Text("\(viewModel.scheduleList[scheduleIdx].startHour):0\(viewModel.scheduleList[scheduleIdx].startMinute)")
+                        if viewModel.scheduleList[tappedScheduleID].startMinute.count == 1 {
+                            Text("\(viewModel.scheduleList[tappedScheduleID].startHour):0\(viewModel.scheduleList[tappedScheduleID].startMinute)")
                         } else {
-                            Text("\(viewModel.scheduleList[scheduleIdx].startHour):\(viewModel.scheduleList[scheduleIdx].startMinute)")
+                            Text("\(viewModel.scheduleList[tappedScheduleID].startHour):\(viewModel.scheduleList[tappedScheduleID].startMinute)")
                         }
                         
                         Text("-")
                         
-                        if viewModel.scheduleList[scheduleIdx].endMinute.count == 1 {
-                            Text("\(viewModel.scheduleList[scheduleIdx].endHour):0\(viewModel.scheduleList[scheduleIdx].endMinute)")
+                        if viewModel.scheduleList[tappedScheduleID].endMinute.count == 1 {
+                            Text("\(viewModel.scheduleList[tappedScheduleID].endHour):0\(viewModel.scheduleList[tappedScheduleID].endMinute)")
                         } else {
-                            Text("\(viewModel.scheduleList[scheduleIdx].endHour):\(viewModel.scheduleList[scheduleIdx].endMinute)")
+                            Text("\(viewModel.scheduleList[tappedScheduleID].endHour):\(viewModel.scheduleList[tappedScheduleID].endMinute)")
                         }
                     }
                     Button {
-                        viewModel.didTapDeleteButton(idx: scheduleIdx)
+                        viewModel.didTapDeleteButton(idx: tappedScheduleID)
                     } label: {
                         Image(systemName: "minus.circle")
                             .foregroundColor(.red)
