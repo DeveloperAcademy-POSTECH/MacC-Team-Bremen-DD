@@ -70,7 +70,6 @@ private extension MonthlyCalculateDetailView {
         }
     }
     
-    @ViewBuilder
     func makeCalculationResult(title: String?, result: String) -> some View {
         HStack {
             if let title = title {
