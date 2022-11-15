@@ -115,6 +115,7 @@ private extension WorkSpaceCreateCreatingScheduleView {
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundColor(.primary)
                     .opacity(isSelected ? 1 : 0)
+                //TODO: color asset 변경하기
                 RoundedRectangle(cornerRadius: 10)
                     .strokeBorder(Color(red: 0.769, green: 0.769, blue: 0.769), lineWidth: 1)
                     .opacity(isSelected ? 0 : 1)
