@@ -20,7 +20,7 @@ struct BorderedTextField: View {
 
 private extension BorderedTextField {
     var borderedTextFieldView: some View {
-        VStack {
+        VStack(spacing: 0) {
             HStack {
                 prefixView
                 contents

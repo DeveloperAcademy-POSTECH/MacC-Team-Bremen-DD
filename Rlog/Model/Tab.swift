@@ -8,9 +8,9 @@
 import SwiftUI
 
 enum Tab: String, CaseIterable {
-    case schedule = "나의 알록"
-    case workspace = "근무지 관리"
-    case monthlyCalculte = "정산 현황"
+    case schedule = "일정"
+    case workspace = "근무지"
+    case monthlyCalculte = "정산"
 
     var title: String {
         rawValue
@@ -18,9 +18,9 @@ enum Tab: String, CaseIterable {
 
     var systemName: String {
         switch self {
-        case .schedule: return "square.and.pencil"
-        case .workspace: return "list.bullet.rectangle.portrait.fill"
-        case .monthlyCalculte: return "dollarsign.square.fill"
+        case .schedule: return "calender.clock"
+        case .workspace: return "suitcase"
+        case .monthlyCalculte: return "coin"
         }
     }
 
