@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MonthlyCalculateDetailView: View {
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
@@ -19,6 +21,30 @@ struct MonthlyCalculateDetailView: View {
                     .padding(.top)
             }
             .padding(.horizontal)
+        }
+        .navigationTitle("근무지 수정")
+        .navigationBarBackButtonHidden()
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    dismiss()
+                }, label: {
+                    HStack(spacing: 5) {
+                        Image(systemName: "chevron.backward")
+                        Text("이전")
+                    }
+                    .foregroundColor(Color.fontBlack)
+                })
+            }
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    // TODO: - ViewModel에서 구현
+                }, label: {
+                    Text("공유")
+                        .foregroundColor(Color.primary)
+                })
+            }
         }
     }
 }
