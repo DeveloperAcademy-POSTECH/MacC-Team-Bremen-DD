@@ -56,8 +56,7 @@ struct ScheduleListView: View {
                 header
                 scheduleContainer
             }
-            //여기ㅏ애요
-            .background(.gray)
+            .background(Color.backgroundStroke)
             .navigationBarHidden(true)
         }
     }
