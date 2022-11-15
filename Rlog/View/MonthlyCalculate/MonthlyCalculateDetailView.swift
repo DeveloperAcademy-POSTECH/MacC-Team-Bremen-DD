@@ -117,7 +117,6 @@ private extension MonthlyCalculateDetailView {
         }
     }
     
-    @ViewBuilder
     func makeReasonCell() -> some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
