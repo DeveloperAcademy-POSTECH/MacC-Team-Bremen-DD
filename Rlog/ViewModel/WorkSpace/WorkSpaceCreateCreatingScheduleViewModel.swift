@@ -16,7 +16,7 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
     var errorMessage = ""
     
     //TODO: Picker 적용하면 String이 아니라 Int16으로 편하게 전달 가능할 것으로 사료됩니다. - 테오
-    @Published var sevenDays: [selectedDayModel] = SevenDays.allCases.map { $0.day }
+    @Published var sevenDays: [SelectedDayModel] = SevenDays.allCases.map { $0.day }
     
     @Published var startHour = "" {
         didSet {
@@ -141,22 +141,22 @@ struct SelectedDayModel: Hashable {
 fileprivate enum SevenDays: CaseIterable {
     case mon, tues, wed, thurs, fri, sat, sun
     
-    var day: selectedDayModel {
+    var day: SelectedDayModel {
         switch self {
         case .mon:
-            return selectedDayModel(dayName: "월", isSelected: false)
+            return SelectedDayModel(dayName: "월", isSelected: false)
         case .tues:
-            return selectedDayModel(dayName: "화", isSelected: false)
+            return SelectedDayModel(dayName: "화", isSelected: false)
         case .wed:
-            return selectedDayModel(dayName: "수", isSelected: false)
+            return SelectedDayModel(dayName: "수", isSelected: false)
         case .thurs:
-            return selectedDayModel(dayName: "목", isSelected: false)
+            return SelectedDayModel(dayName: "목", isSelected: false)
         case .fri:
-            return selectedDayModel(dayName: "금", isSelected: false)
+            return SelectedDayModel(dayName: "금", isSelected: false)
         case .sat:
-            return selectedDayModel(dayName: "토", isSelected: false)
+            return SelectedDayModel(dayName: "토", isSelected: false)
         case .sun:
-            return selectedDayModel(dayName: "일", isSelected: false)
+            return SelectedDayModel(dayName: "일", isSelected: false)
         }
     }
 }
