@@ -4,18 +4,12 @@
 //
 //  Created by Noah's Ark on 2022/11/14.
 //
-// isChecked (false) -> re-sorted by workdate
-// load current month and its date -> sort given schedules by dates
-// it's not gonna be a heavy thing even O(n) would be used
 
 import SwiftUI
 
 private struct MockModel: Hashable {
     let name = "팍이네 팍팍 감자탕"
     let date: String
-
-//    let endTime: Date
-//    let hasDone: Bool = false
 }
 
 struct SchedulePendingListView: View {
