@@ -9,8 +9,8 @@ import SwiftUI
 
 struct WorkSpaceCreateScheduleListView: View {
     @ObservedObject var viewModel: WorkSpaceCreateScheduleListViewModel
-    init(isActive: Binding<Bool>, workspaceModel: WorkSpaceModel) {
-        self.viewModel = WorkSpaceCreateScheduleListViewModel(isActive: isActive, workspaceModel: workspaceModel)
+    init(isActiveNavigation: Binding<Bool>, workspaceModel: WorkSpaceModel) {
+        self.viewModel = WorkSpaceCreateScheduleListViewModel(isActiveNavigation: isActiveNavigation, workspaceModel: workspaceModel)
     }
     
     var body: some View {
@@ -44,7 +44,7 @@ struct WorkSpaceCreateScheduleListView: View {
 private extension WorkSpaceCreateScheduleListView {
     var toolbarNextButton: some View {
         NavigationLink(destination:  WorkSpaceCreateConfirmationView(
-            isActive: $viewModel.isActive,
+            isActiveNavigation: $viewModel.isActiveNavigation,
             workspaceData: viewModel.workspaceModel,
             scheduleData: viewModel.scheduleList)
         ) {

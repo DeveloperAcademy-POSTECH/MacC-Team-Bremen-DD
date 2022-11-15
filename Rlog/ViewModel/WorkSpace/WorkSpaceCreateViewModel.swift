@@ -10,9 +10,9 @@ import SwiftUI
 
 @MainActor
 final class WorkSpaceCreateViewModel: ObservableObject {
-    @Binding var isActive: Bool
-    init(isActive: Binding<Bool>) {
-        self._isActive = isActive
+    @Binding var isActiveNavigation: Bool
+    init(isActiveNavigation: Binding<Bool>) {
+        self._isActiveNavigation = isActiveNavigation
     }
     
     var currentState: WritingState = .workSpace

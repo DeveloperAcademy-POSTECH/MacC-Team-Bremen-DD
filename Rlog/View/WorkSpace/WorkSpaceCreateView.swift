@@ -11,7 +11,7 @@ import SwiftUI
 struct WorkSpaceCreateView: View {
     @ObservedObject var viewModel: WorkSpaceCreateViewModel
     init(isActive: Binding<Bool>) {
-        self.viewModel = WorkSpaceCreateViewModel(isActive: isActive)
+        self.viewModel = WorkSpaceCreateViewModel(isActiveNavigation: isActive)
     }
     
     @FocusState var checkoutInFocus: WritingState?
@@ -49,7 +49,7 @@ struct WorkSpaceCreateView: View {
                 if !viewModel.isHiddenToolBarItem {
                     NavigationLink {
                         WorkSpaceCreateScheduleListView(
-                            isActive: $viewModel.isActive, workspaceModel: WorkSpaceModel(
+                            isActiveNavigation: $viewModel.isActiveNavigation, workspaceModel: WorkSpaceModel(
                                 name: viewModel.workSpace,
                                 paymentDay: viewModel.payday,
                                 hourlyWage: viewModel.hourlyWage,

@@ -10,9 +10,9 @@ import SwiftUI
 struct WorkSpaceCreateConfirmationView: View {
     @ObservedObject private var viewModel: WorkSpaceCreateConfirmationViewModel
 
-    init(isActive: Binding<Bool>, workspaceData: WorkSpaceModel, scheduleData: [ScheduleModel]) {
+    init(isActiveNavigation: Binding<Bool>, workspaceData: WorkSpaceModel, scheduleData: [ScheduleModel]) {
         self.viewModel = WorkSpaceCreateConfirmationViewModel(
-            isActive: isActive,
+            isActiveNavigation: isActiveNavigation,
             workspaceData: workspaceData,
             scheduleData: scheduleData
         )
