@@ -40,7 +40,10 @@ struct WorkSpaceCreateScheduleListView: View {
             }
         }
         .sheet(isPresented: $viewModel.isShowingModal) {
-            WorkSpaceCreateCreatingScheduleView(isShowingModal: $viewModel.isShowingModal, scheduleList: $viewModel.scheduleList)
+            WorkSpaceCreateCreatingScheduleView(
+            isShowingModal: $viewModel.isShowingModal, 
+            scheduleList: $viewModel.scheduleList
+            )
         }
     }
 }
