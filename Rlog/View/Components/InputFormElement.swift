@@ -30,7 +30,7 @@ private extension InputFormElement {
         HStack {
             Text(containerType.title)
                 .font(.subheadline)
-                .foregroundColor(.gray)
+                .foregroundColor(.grayMedium)
             
             Spacer()
         }
