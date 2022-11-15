@@ -26,22 +26,23 @@ final class WorkSpaceCreateViewModel: ObservableObject {
     
     @Published var workSpace = "" {
         didSet {
-            if !workSpace.isEmpty {
-                // TODO: 이전값을 돌려주는게 적합한 UX일까? -> 나중에 고민해보기
+            if workSpace.isEmpty  {
+                inActivateButton()
+            } else {
                 if workSpace.count >= 21 { workSpace = oldValue }
                 if workSpace.count >= 20 {
                     inActivateButton()
                 } else {
                     activateButton()
                 }
-            } else {
-                inActivateButton()
             }
         }
     }
     @Published var hourlyWage = "" {
         didSet {
-            if !hourlyWage.isEmpty {
+            if hourlyWage.isEmpty {
+                inActivateButton()
+            } else {
                 guard let textToInt = Int(hourlyWage) else { return hourlyWage = "" }
                 if textToInt  >= 10000000 { hourlyWage = oldValue }
                 if textToInt >= 1000000 {
@@ -49,14 +50,14 @@ final class WorkSpaceCreateViewModel: ObservableObject {
                 } else {
                     activateButton()
                 }
-            } else {
-                inActivateButton()
             }
         }
     }
     @Published var payday = "" {
         didSet {
-            if !payday.isEmpty {
+            if payday.isEmpty {
+                inActivateButton()
+            } else {
                 guard let textToInt = Int(payday) else { return payday = "" }
                 if textToInt > 289 {payday = oldValue}
                 if textToInt > 28 {
@@ -64,8 +65,6 @@ final class WorkSpaceCreateViewModel: ObservableObject {
                 } else {
                     activateButton()
                 }
-            } else {
-                inActivateButton()
             }
         }
     }
