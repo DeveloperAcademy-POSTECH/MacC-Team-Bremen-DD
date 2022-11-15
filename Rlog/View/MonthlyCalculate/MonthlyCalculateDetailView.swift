@@ -43,53 +43,20 @@ private extension MonthlyCalculateDetailView {
                 .font(.subheadline)
                 .fontWeight(.bold)
             
-            HStack {
-                Text("일한 시간")
-                    .foregroundColor(Color.grayMedium)
-                Spacer()
-                Text("32시간")
-                    .foregroundColor(Color.grayDark)
-            }
-            .font(.subheadline)
-            .padding(.top, 4)
+            makeCalculationResult(title: "일한 시간", result: "\(32)시간")
+                .padding(.top, 4)
             
-            HStack {
-                Text("시급")
-                    .foregroundColor(Color.grayMedium)
-                Spacer()
-                Text("11,000원")
-                    .foregroundColor(Color.grayDark)
-            }
-            .font(.subheadline)
-            .padding(.bottom, 4)
+            makeCalculationResult(title: "시급", result: "\(11000)원")
+                .padding(.bottom, 4)
             
             HDivider()
             
-            HStack {
-                Spacer()
-                Text("352,000원")
-            }
-            .font(.subheadline)
-            .foregroundColor(Color.grayDark)
-            .padding(.top, 4)
+            makeCalculationResult(title: nil, result: "\(352000)원")
+                .padding(.top, 4)
             
-            HStack {
-                Text("주휴수당 적용됨")
-                    .foregroundColor(Color.grayMedium)
-                Spacer()
-                Text("70,400원")
-                    .foregroundColor(Color.grayDark)
-            }
-            .font(.subheadline)
+            makeCalculationResult(title: "주휴수당 적용됨", result: "\(70400)원")
             
-            HStack {
-                Text("세금 3.3% 적용")
-                    .foregroundColor(Color.grayMedium)
-                Spacer()
-                Text("13,939원")
-                    .foregroundColor(Color.grayDark)
-            }
-            .font(.subheadline)
+            makeCalculationResult(title: "세금 3.3% 적용", result: "\(13939)원")
             
             HStack {
                 Text("총 급여")
@@ -101,5 +68,19 @@ private extension MonthlyCalculateDetailView {
             }
             .padding(.top)
         }
+    }
+    
+    @ViewBuilder
+    func makeCalculationResult(title: String?, result: String) -> some View {
+        HStack {
+            if let title = title {
+                Text(title)
+                    .foregroundColor(Color.grayMedium)
+            }
+            Spacer()
+            Text(result)
+                .foregroundColor(Color.fontBlack)
+        }
+        .font(.subheadline)
     }
 }
