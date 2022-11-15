@@ -26,43 +26,54 @@ enum WorkSpaceDetailInfo: CaseIterable {
 struct WorkSpaceDetailView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel: WorkSpaceDetailViewModel
-
+    
     init() {
         viewModel = WorkSpaceDetailViewModel()
     }
-
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 InputFormElement(containerType: .workplace, text: $viewModel.name)
                 InputFormElement(containerType: .wage, text: $viewModel.hourlyWageString)
                 InputFormElement(containerType: .payday, text: $viewModel.paymentDayString)
-
                 makePaymentSystemToggle()
-
-                Text("근무패턴")
-                    .font(.subheadline)
-                    .foregroundColor(.grayLight)
-//                ForEach(viewModel.schedules) { schedule in
-//                    schedulesContainer(schedule: schedule)
-//                }
                 
-                StrokeButton(label: "+ 근무 일정 추가하기", buttonType: .add) {
+                Text("근무패턴")
+                    .font(.caption)
+                    .foregroundColor(.grayMedium)
+                    .padding(.bottom, -16)
+                
+                //                ForEach(viewModel.schedules) { schedule in
+                ScheduleContainer(
+                    repeatedSchedule: ["월 화 수 목"],
+                    startHour: "10",
+                    startMinute: "00",
+                    endHour: "12",
+                    endMinute: "00"
+                )
+                //                }
+                .padding(.bottom, -8)
+                
+                StrokeButton(label: "+ 근무패턴 추가", buttonType: .add) {
                 }
+                .padding(.bottom, -8)
                 
                 HDivider()
                 
-                StrokeButton(label: "삭제하기", buttonType: .destructive) {
+                StrokeButton(label: "근무지 삭제", buttonType: .destructive) {
                 }
                 .alert("근무지 삭제", isPresented: $viewModel.isAlertOpen) {
                     Button("취소", role: .cancel) {
                     }
                     Button("삭제", role: .destructive) {
-
+                        
                     }
                 } message: {
                     Text("해당 근무지를 삭제합니다.?")
                 }
+                .padding(.top, -8)
+                
                 Spacer()
             }
             .padding(EdgeInsets(top: 24, leading: 16, bottom: 0, trailing: 16))
@@ -71,7 +82,7 @@ struct WorkSpaceDetailView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {
-
+                    
                 }){
                     Image(systemName: "chevron.left")
                         .foregroundColor(.fontBlack)
@@ -100,26 +111,26 @@ private extension WorkSpaceDetailView {
             Toggle(isOn: tab == .hasTax ? $viewModel.hasTax : $viewModel.hasJuhyu, label: {
                 HStack(spacing: 13) {
                     Text(tab.text.title)
-                        .font(.subheadline)
-                        .foregroundColor(.grayLight)
+                        .font(.body)
+                        .foregroundColor(.grayMedium)
                     Text(tab.text.description)
                         .font(.caption)
-                        .foregroundColor(.grayLight)
+                        .foregroundColor(.grayMedium)
                 }
             })
         }
     }
-
+    
     @ViewBuilder
     func schedulesContainer() -> some View {
         HStack(spacing: 0) {
             HStack(spacing: 0) {
-//                ForEach(schedule.repeatedSchedule, id:\.self) { weekDay in
-//                    Text(weekDay)
-//                        .font(.body)
-//                        .foregroundColor(.fontBlack)
-//                        .padding(.horizontal, 1)
-//                }
+                //                ForEach(schedule.repeatedSchedule, id:\.self) { weekDay in
+                //                    Text(weekDay)
+                //                        .font(.body)
+                //                        .foregroundColor(.fontBlack)
+                //                        .padding(.horizontal, 1)
+                //                }
             }
             .padding(.trailing, 3)
             Spacer()

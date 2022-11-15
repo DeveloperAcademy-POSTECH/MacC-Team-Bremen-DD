@@ -51,7 +51,7 @@ struct WorkSpaceListView: View {
                     
                     NavigationLink(destination: WorkSpaceCreateView()) {
                         //TODO : SF심블이 아니므로 별도 PR에 assets 추가 후 적용 예정
-                        Image(systemName: "plus")
+                        Image("plus.curved")
                             .foregroundColor(Color.primary)
                     }
                 }
