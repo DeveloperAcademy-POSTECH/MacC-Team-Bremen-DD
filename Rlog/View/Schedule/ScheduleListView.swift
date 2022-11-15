@@ -11,6 +11,8 @@ struct ScheduleListView: View {
     @ObservedObject var viewModel = ScheduleListViewModel()
     @State var selection = 1
     @State private var isSchedulePendingListViewActive = false
+    @State private var isScheduleCreationViewActive = false
+
     var currentMonth: String {
         let components = Calendar.current.dateComponents([.year, .month], from: viewModel.currentDate)
         let year = components.year ?? 2000
@@ -54,8 +56,9 @@ struct ScheduleListView: View {
                 header
                 scheduleContainer
             }
+            .background(Color.backgroundStroke)
+            .navigationBarHidden(true)
         }
-        .background(Color.backgroundStroke)
     }
 }
 
@@ -81,18 +84,26 @@ private extension ScheduleListView {
             .font(.title)
             .foregroundColor(Color.fontBlack)
             Spacer()
-            
             // inbox.curved.badge로 조건 처리하면 됩니다.
-            Button{} label: {
+            Button{ isSchedulePendingListViewActive.toggle() } label: {
                 Image("inbox.curved")
             }
             .foregroundColor(.grayMedium)
             .padding(.trailing, 16)
             
-            Button{} label: {
+            Button{ isScheduleCreationViewActive.toggle() } label: {
                 Image("plus.curved")
             }
             .foregroundColor(.grayMedium)
+            
+            NavigationLink(
+                destination: SchedulePendingListView(),
+                isActive: $isSchedulePendingListViewActive
+            ) { EmptyView() }
+            NavigationLink(
+                 destination: ScheduleCreationView(),
+                 isActive: $isScheduleCreationViewActive
+             ) { EmptyView() }
         }
         .padding(EdgeInsets(top: 24, leading: 20, bottom: 54, trailing: 20))
     }
