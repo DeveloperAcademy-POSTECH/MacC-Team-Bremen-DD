@@ -10,7 +10,7 @@ import SwiftUI
 struct ScheduleListView: View {
     @ObservedObject var viewModel = ScheduleListViewModel()
     @State var selection = 1
-    
+    @State private var isSchedulePendingListViewActive = false
     var currentMonth: String {
         let components = Calendar.current.dateComponents([.year, .month], from: viewModel.currentDate)
         let year = components.year ?? 2000
@@ -48,12 +48,12 @@ struct ScheduleListView: View {
         )
     ]
 
-    
     var body: some View {
-        
-        VStack(spacing: 0) {
-            header
-            scheduleContainer
+        NavigationView {
+            VStack(spacing: 0) {
+                header
+                scheduleContainer
+            }
         }
         .background(Color.backgroundStroke)
     }
