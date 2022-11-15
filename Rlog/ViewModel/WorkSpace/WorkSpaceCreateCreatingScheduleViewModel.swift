@@ -15,6 +15,7 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
     var isShowingConfirmButton = false
     var errorMessage = ""
     
+    //TODO: Picker 적용하면 String이 아니라 Int16으로 편하게 전달 가능할 것으로 사료됩니다. - 테오
     @Published var sevenDays: [selectedDayModel] = SevenDays.allCases.map { $0.day }
     
     @Published var startHour = "" {
