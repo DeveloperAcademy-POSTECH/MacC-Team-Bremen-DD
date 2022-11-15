@@ -29,7 +29,7 @@ private extension InputFormElement {
     var titleHeader: some View {
         HStack {
             Text(containerType.title)
-                .font(.subheadline)
+                .font(.caption)
                 .foregroundColor(.grayMedium)
             
             Spacer()
