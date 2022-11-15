@@ -133,12 +133,13 @@ extension ScheduleListViewModel {
         //        }
         
         switch timeDifference {
+        // "추가" case 누락
         case 0:
-            return ("정규", .green)
+            return ("정규", Color.primary)
         case 1...:
-            return ("연장", .orange)
+            return ("연장", Color.pointBlue)
         case _ where timeDifference < 0:
-            return ("축소", .pink)
+            return ("축소", Color.pointRed)
         default:
             return ("정규", .green)
         }
