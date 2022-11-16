@@ -14,13 +14,11 @@ struct ScheduleCreationView: View {
     @State private var date3 = Date()
     
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 24) {
             workspace
             workdate
             components
             memo
-            HDivider()
-            deleteButton
             Spacer()
         }
         .padding(.horizontal)
@@ -30,9 +28,11 @@ struct ScheduleCreationView: View {
 
 private extension ScheduleCreationView {
     var workspace: some View {
+        
+        //TODO : picker로 변경
         InputFormElement(
             containerType: .workplace,
-            text: .constant("Park's park park")
+            text: .constant("근무지를 선택해주세요.")
         )
         .disabled(true)
     }
@@ -41,10 +41,11 @@ private extension ScheduleCreationView {
         VStack(spacing: 8) {
             HStack {
                 Text("근무 날짜")
-                    .foregroundColor(.grayLight)
-                    .font(.subheadline)
+                    .font(.caption)
+                    .foregroundColor(.grayMedium)
                 Spacer()
             }
+            
             BorderedPicker(
                 date: $date,
                 type: .date
@@ -56,14 +57,16 @@ private extension ScheduleCreationView {
         VStack(spacing: 16) {
             HStack {
                 Text("근무 시간")
-                    .foregroundColor(.grayLight)
-                    .font(.subheadline)
+                    .font(.caption)
+                    .foregroundColor(.grayMedium)
                 Spacer()
             }
+            
             BorderedPicker(
                 date: $date2,
                 type: .startTime
             )
+            
             BorderedPicker(
                 date: $date3,
                 type: .endTime
@@ -73,16 +76,8 @@ private extension ScheduleCreationView {
     
     var memo: some View {
         InputFormElement(
-            containerType: .none(title: "메모"),
+            containerType: .none(title: "메모 (선택사항)"),
             text: .constant("hello")
         )
-    }
-    
-    var deleteButton: some View {
-        StrokeButton(
-            label: "근무 삭제하기",
-            buttonType: .destructive) {
-                
-            }
     }
 }
