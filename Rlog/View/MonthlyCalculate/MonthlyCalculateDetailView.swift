@@ -26,24 +26,10 @@ struct MonthlyCalculateDetailView: View {
         .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: {
-                    dismiss()
-                }, label: {
-                    HStack(spacing: 5) {
-                        Image(systemName: "chevron.backward")
-                        Text("이전")
-                    }
-                    .foregroundColor(Color.fontBlack)
-                })
+                backButton
             }
-            
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    // TODO: - ViewModel에서 구현
-                }, label: {
-                    Text("공유")
-                        .foregroundColor(Color.primary)
-                })
+                shareButton
             }
         }
     }
@@ -108,6 +94,27 @@ private extension MonthlyCalculateDetailView {
                 makeReasonCell()
             }
         }
+    }
+    
+    var backButton: some View {
+        Button(action: {
+            dismiss()
+        }, label: {
+            HStack(spacing: 5) {
+                Image(systemName: "chevron.backward")
+                Text("이전")
+            }
+            .foregroundColor(Color.fontBlack)
+        })
+    }
+    
+    var shareButton: some View {
+        Button(action: {
+            // TODO: - ViewModel에서 구현
+        }, label: {
+            Text("공유")
+                .foregroundColor(Color.primary)
+        })
     }
     
     func makeReasonCell() -> some View {
