@@ -25,6 +25,7 @@ struct SchedulePendingListView: View {
         MockModel(date: "11.20"),
         MockModel(date: "11.21"),
     ]
+    
     private var sortedMockData: [(String, [MockModel])] {
         var sortedArray: [(String, [MockModel])] = []
         var scheduleArray: [MockModel] = []
@@ -53,17 +54,21 @@ struct SchedulePendingListView: View {
 private extension SchedulePendingListView {
     var dateContainer: some View {
         ForEach(0..<sortedMockData.count, id: \.self) { index in
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 0) {
                 if sortedMockData[index].1 != [] {
-                    HStack {
+                    HStack(spacing: 0) {
                         Text(sortedMockData[index].0)
                             .font(.caption)
-                            .foregroundColor(.grayLight)
+                            .foregroundColor(.grayMedium)
+                        
                         Spacer()
                     }
+                    
                     HDivider()
+                    
+                    //TODO : 근무 카드 적용
                     ForEach(sortedMockData[index].1, id: \.self) { data in
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .leading, spacing: 0) {
                             Text(data.name)
                             Text(data.date)
                         }
@@ -72,7 +77,7 @@ private extension SchedulePendingListView {
                     }
                 }
             }
-            .padding(.bottom)
+            .padding(.bottom, 24)
         }
     }
 }
