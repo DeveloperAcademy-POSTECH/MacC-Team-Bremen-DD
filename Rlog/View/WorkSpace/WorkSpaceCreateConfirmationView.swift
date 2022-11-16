@@ -71,7 +71,7 @@ private extension WorkSpaceCreateConfirmationView {
     var toggleInputs: some View {
         VStack(spacing: 24) {
             Toggle(isOn: $viewModel.workspaceData.hasTax, label: {
-                HStack(alignment:.bottom) {
+                HStack {
                     Text("소득세")
                     Text("3.3% 적용")
                         .font(.caption)
@@ -79,7 +79,7 @@ private extension WorkSpaceCreateConfirmationView {
                 .foregroundColor(.grayMedium)
             })
             Toggle(isOn: $viewModel.workspaceData.hasJuhyu, label: {
-                HStack(alignment:.bottom) {
+                HStack {
                     Text("주휴수당")
                     Text("60시간 근무 시 적용")
                         .font(.caption)
