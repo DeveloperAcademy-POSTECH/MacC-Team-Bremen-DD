@@ -21,6 +21,7 @@ struct InputFormElement: View {
             titleHeader
                 .padding(.bottom, 8)
             container
+                .padding(.bottom, 8)
         }
     }
 }
