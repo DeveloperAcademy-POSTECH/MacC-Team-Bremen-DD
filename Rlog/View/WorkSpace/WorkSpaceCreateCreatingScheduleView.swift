@@ -16,8 +16,8 @@ struct WorkSpaceCreateCreatingScheduleView: View {
     
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading, spacing: 40) {
-                guidingText
+            VStack(alignment: .leading, spacing: 24) {
+                TitleSubView(title: "근무 요일과 시간을 입력해주세요.")
                 workDayPicker
                 workTimePicker
                 Spacer()
@@ -28,9 +28,7 @@ struct WorkSpaceCreateCreatingScheduleView: View {
                     toolbarCancelButton
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    if viewModel.isShowingConfirmButton {
-                        toolbarConfirmButton
-                    }
+                    toolbarConfirmButton
                 }
             }
             .padding(.horizontal)
@@ -53,17 +51,15 @@ private extension WorkSpaceCreateCreatingScheduleView {
             viewModel.didTapConfirmButton()
         } label: {
             Text("완료")
+
+                .foregroundColor(viewModel.isActivatedConfirmButton ? .primary : .grayLight)
         }
     }
-    var guidingText: some View {
-        TitleSubView(title: "근무 요일과 시간을 입력해주세요.")
-            .padding(.top, 20)
-    }
     var workDayPicker: some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading, spacing: 8) {
             Text("근무 요일")
                 .font(.caption)
-                .foregroundColor(.grayLight)
+                .foregroundColor(.grayMedium)
             HStack(spacing: 8) {
                 ForEach(0 ..< viewModel.sevenDays.count, id: \.self) { index in
                     Button {
@@ -81,12 +77,13 @@ private extension WorkSpaceCreateCreatingScheduleView {
     }
     
     var workTimePicker: some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading, spacing: 8) {
+            // 컴포넌트 적용 예정으로, 스페이싱이 어긋나있을 수 있습니다.
             Text("근무 시간")
                 .font(.caption)
-                .foregroundColor(.grayLight)
+                .foregroundColor(.grayMedium)
 
-            HStack(spacing: 0) {
+            HStack(spacing: 4) {
                 BorderedTextField(textFieldType: .time, text: $viewModel.startHour)
                 Text(":")
                 BorderedTextField(textFieldType: .time, text: $viewModel.startMinute)
@@ -113,16 +110,14 @@ private extension WorkSpaceCreateCreatingScheduleView {
         var body: some View {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(.primary)
-                    .opacity(isSelected ? 1 : 0)
-                //TODO: color asset 변경하기
+                    .foregroundColor(isSelected ? .primary : .backgroundCard)
                 RoundedRectangle(cornerRadius: 10)
-                    .strokeBorder(Color(red: 0.769, green: 0.769, blue: 0.769), lineWidth: 1)
+                    .strokeBorder(Color.backgroundStroke, lineWidth: 2)
                     .opacity(isSelected ? 0 : 1)
                 Text(day)
-                    .foregroundColor(isSelected ? .white : .fontBlack)
+                    .foregroundColor(isSelected ? .white : .grayMedium)
             }
-            .frame(height: 60)
+            .frame(height: 54)
         }
     }
 }

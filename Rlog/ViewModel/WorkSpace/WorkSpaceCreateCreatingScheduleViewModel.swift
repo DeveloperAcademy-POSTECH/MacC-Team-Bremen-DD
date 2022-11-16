@@ -12,7 +12,7 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
     @Binding var isShowingModal: Bool
     @Binding var scheduleList: [ScheduleModel]
     
-    var isShowingConfirmButton = false
+    var isActivatedConfirmButton = false
     var errorMessage = ""
     
     //TODO: Picker 적용하면 String이 아니라 Int16으로 편하게 전달 가능할 것으로 사료됩니다. - 테오
@@ -23,7 +23,7 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
             if Int(startHour) ?? 0 > 24 {
                 startHour = oldValue
                 errorMessage = "24시간을 초과한 값을 넣을 수 없습니다."
-                isShowingConfirmButton = false
+                isActivatedConfirmButton = false
             } else {
                 errorMessage = ""
                 checkAllInputFilled()
@@ -36,7 +36,7 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
             if Int(startMinute) ?? 0 > 59 {
                 startMinute = oldValue
                 errorMessage = "59분을 초과한 값을 넣을 수 없습니다."
-                isShowingConfirmButton = false
+                isActivatedConfirmButton = false
             } else {
                 errorMessage = ""
             }
@@ -49,10 +49,10 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
             if endHour > 24 {
                 self.endHour = oldValue
                 errorMessage = "24시간을 초과한 값을 넣을 수 없습니다."
-                isShowingConfirmButton = false
+                isActivatedConfirmButton = false
             } else if Int(startHour) ?? 0 > endHour {
                 errorMessage = "출근시간 보다 퇴근시간이 빠릅니다"
-                isShowingConfirmButton = false
+                isActivatedConfirmButton = false
             } else {
                 errorMessage = ""
                 checkAllInputFilled()
@@ -65,7 +65,7 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
             if Int(endMinute) ?? 0 > 59 {
                 endMinute = oldValue
                 errorMessage = "59분을 초과한 값을 넣을 수 없습니다."
-                isShowingConfirmButton = false
+                isActivatedConfirmButton = false
             } else {
                 errorMessage = ""
             }
@@ -126,10 +126,10 @@ private extension WorkSpaceCreateCreatingScheduleViewModel {
     
     func checkAllInputFilled() {
         if !startHour.isEmpty && !endHour.isEmpty && startHour != endHour && !getDayList().isEmpty {
-            isShowingConfirmButton = true
+            isActivatedConfirmButton = true
             return
         }
-        isShowingConfirmButton = false
+        isActivatedConfirmButton = false
     }
 }
 

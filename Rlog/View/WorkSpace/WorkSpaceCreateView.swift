@@ -17,7 +17,7 @@ struct WorkSpaceCreateView: View {
     @FocusState var checkoutInFocus: WritingState?
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading, spacing: 24) {
             guidingText
             if !viewModel.isHiddenToggleInputs {
                 toggleInputs
@@ -25,12 +25,10 @@ struct WorkSpaceCreateView: View {
             if !viewModel.isHiddenPayday {
                 InputFormElement(containerType: .payday, text: $viewModel.payday)
                     .focused($checkoutInFocus, equals: .payday)
-
             }
             if !viewModel.isHiddenHourlyWage {
                 InputFormElement(containerType: .wage, text: $viewModel.hourlyWage)
                     .focused($checkoutInFocus, equals: .hourlyWage)
-
             }
             InputFormElement(containerType: .workplace, text: $viewModel.workSpace)
                 .focused($checkoutInFocus, equals: .workSpace)
@@ -42,7 +40,7 @@ struct WorkSpaceCreateView: View {
             }
         }
         .padding(.horizontal)
-        .navigationBarTitle("")
+        .navigationBarTitle("근무지 등록")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -59,7 +57,7 @@ struct WorkSpaceCreateView: View {
                         )
                     } label: {
                         Text("다음")
-                            .foregroundColor(.fontBlack)
+                            .foregroundColor(.primary)
                     }
                 }
             }
@@ -79,27 +77,26 @@ private extension WorkSpaceCreateView {
     }
     
     var toggleInputs: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 24) {
             Toggle(isOn: $viewModel.hasTax, label: {
-                HStack(alignment:.bottom) {
+                HStack {
                     Text("소득세")
                     Text("3.3% 적용")
                         .font(.caption)
-                        .foregroundColor(.grayLight)
                 }
+                .foregroundColor(.grayMedium)
             })
             Toggle(isOn: $viewModel.hasJuhyu, label: {
-                HStack(alignment:.bottom) {
+                HStack {
                     Text("주휴수당")
                     Text("60시간 근무 시 적용")
                         .font(.caption)
-                        .foregroundColor(.grayLight)
                 }
+                .foregroundColor(.grayMedium)
             })
         }
     }
 
-    
     // 확인 버튼
     var ConfirmButton: some View {
         Button {
@@ -133,3 +130,10 @@ private extension WorkSpaceCreateView {
         }
     }
 }
+//
+//extension UINavigationController {
+//    // Remove back button text
+//    open override func viewWillLayoutSubviews() {
+//        navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+//    }
+//}
