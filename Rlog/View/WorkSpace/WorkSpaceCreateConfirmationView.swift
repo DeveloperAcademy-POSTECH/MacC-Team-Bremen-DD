@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WorkSpaceCreateConfirmationView: View {
     @ObservedObject private var viewModel: WorkSpaceCreateConfirmationViewModel
-
+    
     init(isActiveNavigation: Binding<Bool>, workspaceData: WorkSpaceModel, scheduleData: [ScheduleModel]) {
         self.viewModel = WorkSpaceCreateConfirmationViewModel(
             isActiveNavigation: isActiveNavigation,
@@ -19,26 +19,29 @@ struct WorkSpaceCreateConfirmationView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading, spacing: 24) {
             TitleSubView(title: "새로운 아르바이트를 추가합니다.")
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    WorkSpaceInfoSubView(labelName:"근무지", content: viewModel.workspaceData.name)
-                    WorkSpaceInfoSubView(labelName:"시급", content: viewModel.workspaceData.hourlyWage)
-                    WorkSpaceInfoSubView(labelName:"급여일", content:"매월 \(viewModel.workspaceData.paymentDay)일")
-                    WorkSpaceInfoSubView(labelName:"소득세", content: viewModel.workspaceData.hasTax ? "3.3% 적용" : "미적용")
-                    WorkSpaceInfoSubView(labelName:"주휴수당", content: viewModel.workspaceData.hasJuhyu ? "60시간 근무 시 적용" : "미적용")
+                    InputFormElement(containerType: .workplace, text: $viewModel.workspaceData.name)
+                    
+                    InputFormElement(containerType: .wage, text: $viewModel.workspaceData.hourlyWage)
+                    InputFormElement(containerType: .payday, text: $viewModel.workspaceData.paymentDay)
+                    
+                    toggleInputs
+
                     WorkTypeInfo
                     Spacer()
                 }
             }
         }
+        .navigationBarTitle("근무패턴 등록")
+        .padding(.horizontal)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 toolbarConfirmButton
             }
         }
-        .padding(.horizontal)
     }
 }
 
@@ -48,7 +51,7 @@ private extension WorkSpaceCreateConfirmationView {
             Text("근무 유형")
                 .font(.caption)
                 .foregroundColor(.grayLight)
-
+            
             VStack(spacing: 10) {
                 ForEach(viewModel.scheduleData, id: \.self) { schedule in
                     ScheduleContainer(
@@ -63,10 +66,31 @@ private extension WorkSpaceCreateConfirmationView {
         }
     }
     var toolbarConfirmButton: some View {
-            Button{
-                viewModel.didTapConfirmButton()
-            } label: {
-                Text("완료")
-            }
+        Button{
+            viewModel.didTapConfirmButton()
+        } label: {
+            Text("완료")
         }
+    }
+    var toggleInputs: some View {
+        VStack(spacing: 24) {
+            Toggle(isOn: $viewModel.workspaceData.hasTax, label: {
+                HStack(alignment:.bottom) {
+                    Text("소득세")
+                    Text("3.3% 적용")
+                        .font(.caption)
+                }
+                .foregroundColor(.grayMedium)
+            })
+            Toggle(isOn: $viewModel.workspaceData.hasJuhyu, label: {
+                HStack(alignment:.bottom) {
+                    Text("주휴수당")
+                    Text("60시간 근무 시 적용")
+                        .font(.caption)
+                }
+                .foregroundColor(.grayMedium)
+
+            })
+        }
+    }
 }
