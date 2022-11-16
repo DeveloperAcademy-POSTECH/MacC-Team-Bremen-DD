@@ -13,7 +13,7 @@ enum WorkSpaceInfo: CaseIterable {
     case hasJuhyu
     case hasTax
     case workDays
-    
+
     var text: String {
         switch self {
         case .hourlyWage: return "시급"
@@ -27,6 +27,7 @@ enum WorkSpaceInfo: CaseIterable {
 
 
 struct WorkSpaceListView: View {
+    @ObservedObject var viewModel = WorkSpaceListViewModel()
     
     var body: some View {
         
@@ -49,7 +50,9 @@ struct WorkSpaceListView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     
-                    NavigationLink(destination: WorkSpaceCreateView()) {
+                    NavigationLink(
+                        destination: WorkSpaceCreateView(isActive: $viewModel.isShowingSheet),
+                        isActive: $viewModel.isShowingSheet) {
                         //TODO : SF심블이 아니므로 별도 PR에 assets 추가 후 적용 예정
                         Image(systemName: "plus")
                             .foregroundColor(Color.primary)

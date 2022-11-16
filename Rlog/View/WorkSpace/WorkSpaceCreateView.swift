@@ -10,18 +10,13 @@ import SwiftUI
 
 struct WorkSpaceCreateView: View {
     @ObservedObject var viewModel: WorkSpaceCreateViewModel
-    init() {
-        self.viewModel = WorkSpaceCreateViewModel()
+    init(isActive: Binding<Bool>) {
+        self.viewModel = WorkSpaceCreateViewModel(isActive: isActive)
     }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            VStack(alignment: .leading, spacing: 0) {
-                if !viewModel.isHiddenGuidingTitle {
-                    guidingTitle
-                }
-                guidingText
-            }
+            guidingText
             if !viewModel.isHiddenToggleInputs {
                 toggleInputs
             }
@@ -46,7 +41,15 @@ struct WorkSpaceCreateView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 if !viewModel.isHiddenToolBarItem {
                     NavigationLink {
-                        WorkSpaceCreateScheduleListView()
+                        WorkSpaceCreateScheduleListView(
+                            isActive: $viewModel.isActive, workspaceModel: WorkSpaceModel(
+                                name: viewModel.name,
+                                paymentDay: viewModel.paymentDay,
+                                hourlyWage: viewModel.hourlyWage,
+                                hasTax: viewModel.hasTax,
+                                hasJuhyu: viewModel.hasJuhyu
+                            )
+                        )
                     } label: {
                         Text("다음")
                             .foregroundColor(.fontBlack)
@@ -58,14 +61,11 @@ struct WorkSpaceCreateView: View {
 }
 
 private extension WorkSpaceCreateView {
-    // 타이틀
-    var guidingTitle: some View {
-        Text("새로운 아르바이트를 추가합니다.")
-            .font(.title2)
-            .fontWeight(.bold)
-            .foregroundColor(.fontBlack)
-            .padding(.top, 20)
+    // 가이드 텍스트
+    var guidingText: some View {
+        TitleSubView(title: viewModel.currentState.title)
     }
+    
     var toggleInputs: some View {
         VStack(spacing: 10) {
             Toggle(isOn: $viewModel.hasTax, label: {
@@ -86,16 +86,12 @@ private extension WorkSpaceCreateView {
             })
         }
     }
-    // 가이드 텍스트
-    var guidingText: some View {
-        Text("")
-//        TitleSubView(title: viewModel.currentState.title)
-    }
+
     
     // 확인 버튼
     var ConfirmButton: some View {
-        // -------> TODO: 컨포넌트로 대체
         Button {
+            viewModel.didTapConfirmButton()
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
@@ -106,6 +102,5 @@ private extension WorkSpaceCreateView {
             }
             .padding(.bottom, 20)
         }
-        // <------- TODO: 컨포넌트로 대체
     }
 }
