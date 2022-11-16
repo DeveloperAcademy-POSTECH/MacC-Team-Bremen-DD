@@ -19,24 +19,19 @@ struct WorkSpaceCreateConfirmationView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 24) {
-            TitleSubView(title: "새로운 아르바이트를 추가합니다.")
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
-                    InputFormElement(containerType: .workplace, text: $viewModel.workspaceData.name)
-                    
-                    InputFormElement(containerType: .wage, text: $viewModel.workspaceData.hourlyWage)
-                    InputFormElement(containerType: .payday, text: $viewModel.workspaceData.paymentDay)
-                    
-                    toggleInputs
-
-                    WorkTypeInfo
-                    Spacer()
-                }
+        ScrollView {
+            VStack(alignment: .leading, spacing: 24) {
+                TitleSubView(title: "새로운 아르바이트를 추가합니다.")
+                InputFormElement(containerType: .workplace, text: $viewModel.workspaceData.name)
+                InputFormElement(containerType: .wage, text: $viewModel.workspaceData.hourlyWage)
+                InputFormElement(containerType: .payday, text: $viewModel.workspaceData.paymentDay)
+                toggleInputs
+                WorkTypeInfo
+                Spacer()
             }
+            .padding(.horizontal)
         }
-        .navigationBarTitle("근무패턴 등록")
-        .padding(.horizontal)
+        .navigationBarTitle("근무지 등록")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 toolbarConfirmButton
@@ -47,12 +42,12 @@ struct WorkSpaceCreateConfirmationView: View {
 
 private extension WorkSpaceCreateConfirmationView {
     var WorkTypeInfo: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("근무 유형")
+        VStack(alignment: .leading, spacing: 8) {
+            Text("근무 패턴")
                 .font(.caption)
-                .foregroundColor(.grayLight)
+                .foregroundColor(.grayMedium)
             
-            VStack(spacing: 10) {
+            VStack(spacing: 16) {
                 ForEach(viewModel.scheduleData, id: \.self) { schedule in
                     ScheduleContainer(
                         repeatedSchedule: schedule.repeatedSchedule,
@@ -70,6 +65,7 @@ private extension WorkSpaceCreateConfirmationView {
             viewModel.didTapConfirmButton()
         } label: {
             Text("완료")
+                .foregroundColor(.primary)
         }
     }
     var toggleInputs: some View {
@@ -89,7 +85,7 @@ private extension WorkSpaceCreateConfirmationView {
                         .font(.caption)
                 }
                 .foregroundColor(.grayMedium)
-
+                
             })
         }
     }
