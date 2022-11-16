@@ -17,7 +17,7 @@ struct WorkSpaceCreateView: View {
     @FocusState var checkoutInFocus: WritingState?
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading, spacing: 24) {
             guidingText
             if !viewModel.isHiddenToggleInputs {
                 toggleInputs
@@ -42,7 +42,7 @@ struct WorkSpaceCreateView: View {
             }
         }
         .padding(.horizontal)
-        .navigationBarTitle("")
+        .navigationBarTitle("근무지 등록")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -59,7 +59,7 @@ struct WorkSpaceCreateView: View {
                         )
                     } label: {
                         Text("다음")
-                            .foregroundColor(.fontBlack)
+                            .foregroundColor(.primary)
                     }
                 }
             }
@@ -79,7 +79,7 @@ private extension WorkSpaceCreateView {
     }
     
     var toggleInputs: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 24) {
             Toggle(isOn: $viewModel.hasTax, label: {
                 HStack(alignment:.bottom) {
                     Text("소득세")
