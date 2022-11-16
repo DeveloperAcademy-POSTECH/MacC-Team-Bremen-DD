@@ -65,6 +65,7 @@ private extension SchedulePendingListView {
                     }
                     
                     HDivider()
+                        .padding(.bottom, 8)
                     
                     //TODO : 근무 카드 적용
                     ForEach(sortedMockData[index].1, id: \.self) { data in
