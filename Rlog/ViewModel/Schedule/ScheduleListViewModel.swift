@@ -9,8 +9,8 @@ import SwiftUI
 
 final class ScheduleListViewModel: ObservableObject {
     @ObservedObject var timeManager = TimeManager()
-    @Published var schedules: [WorkspaceEntitySample] = []
-    @Published var schedulesOfFocusDate: [WorkspaceEntitySample] = []
+    @Published var workspaces: [WorkspaceEntity] = []
+    @Published var schedulesOfFocusDate: [WorkspaceEntity] = []
     @Published var nextDate = Calendar.current.date(byAdding: .weekOfMonth, value: 1, to: Date()) ?? Date()
     @Published var previousDate = Calendar.current.date(byAdding: .weekOfMonth, value: -1, to: Date()) ?? Date()
     @Published var currentDate = Date() {
@@ -25,26 +25,9 @@ final class ScheduleListViewModel: ObservableObject {
         }
     }
     let calendar = Calendar.current
-    let mockData: [WorkspaceEntitySample] = [
-        WorkspaceEntitySample(
-            name: "팍이네 팍팍 감자탕",
-            schedules: ScheduleEntitySample(),
-            workdays: WorkdayEntitySample(date: Calendar.current.date(from: DateComponents(year: 2022, month: 11, day: 14))!, sampleWorkday: "월", hasDone: false)
-        ),
-        WorkspaceEntitySample(
-            name: "팍이네 팍팍 감자탕",
-            schedules: ScheduleEntitySample(),
-            workdays: WorkdayEntitySample(date: Calendar.current.date(from: DateComponents(year: 2022, month: 11, day: 16))!, sampleWorkday: "수", hasDone: true)
-        ),
-        WorkspaceEntitySample(
-            name: "팍이네 팍팍 감자탕",
-            schedules: ScheduleEntitySample(),
-            workdays: WorkdayEntitySample(date: Calendar.current.date(from: DateComponents(year: 2022, month: 11, day: 18))!, sampleWorkday: "금", hasDone: false)
-        )
-    ]
     
     func onAppear() {
-        getAllSchedules()
+        getAllWorkspaces()
     }
     
     func didScrollToNextWeek() {
@@ -72,8 +55,12 @@ final class ScheduleListViewModel: ObservableObject {
 
 // MARK: Private functions
 private extension ScheduleListViewModel {
-    func getAllSchedules() {
-        schedules = mockData
+    func getAllWorkspaces() {
+        let result = CoreDataManager.shared.getAllWorkspaces()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.workspaces = result
+        }
     }
     
     // 일주일 뒤의 날짜를 반환합니다.
@@ -145,16 +132,16 @@ private extension ScheduleListViewModel {
         let extractedDate = DateComponents(year: year, month: month, day: day)
         let extractedCalendar = calendar.date(from: extractedDate) ?? Date()
         
-        schedulesOfFocusDate.removeAll()
+//        schedulesOfFocusDate.removeAll()
         
-        for data in schedules {
-            print(calendar.startOfDay(for: data.workdays.date))
-            if calendar.startOfDay(for: data.workdays.date) == extractedCalendar {
+        for data in workspaces {
+            print(calendar.startOfDay(for: data.workdays?.date ?? Date()))
+            if calendar.startOfDay(for: data.workdays?.date ?? Date()) == extractedCalendar {
                 schedulesOfFocusDate.append(data)
             }
         }
         
-        print(schedulesOfFocusDate)
+//        print(schedulesOfFocusDate)
     }
 }
 
@@ -250,3 +237,22 @@ struct CalendarModel {
     let month: Int
     let day: Int
 }
+
+
+//    let mockData: [WorkspaceEntitySample] = [
+//        WorkspaceEntitySample(
+//            name: "팍이네 팍팍 감자탕",
+//            schedules: ScheduleEntitySample(),
+//            workdays: WorkdayEntitySample(date: Calendar.current.date(from: DateComponents(year: 2022, month: 11, day: 14))!, sampleWorkday: "월", hasDone: false)
+//        ),
+//        WorkspaceEntitySample(
+//            name: "팍이네 팍팍 감자탕",
+//            schedules: ScheduleEntitySample(),
+//            workdays: WorkdayEntitySample(date: Calendar.current.date(from: DateComponents(year: 2022, month: 11, day: 16))!, sampleWorkday: "수", hasDone: true)
+//        ),
+//        WorkspaceEntitySample(
+//            name: "팍이네 팍팍 감자탕",
+//            schedules: ScheduleEntitySample(),
+//            workdays: WorkdayEntitySample(date: Calendar.current.date(from: DateComponents(year: 2022, month: 11, day: 18))!, sampleWorkday: "금", hasDone: false)
+//        )
+//    ]

@@ -14,9 +14,12 @@ struct ScheduleListView: View {
     @State private var isScheduleCreationViewActive = false
     
     // Sample to recognize when workspace is not found
-    let isWorkspaceNotFound = false
     var weekday: String {
         return viewModel.getWeekdayOfDate(viewModel.currentDate)
+    }
+    
+    var workspaces: [WorkspaceEntity] {
+        return viewModel.workspaces
     }
 
     var currentMonth: String {
@@ -39,7 +42,7 @@ struct ScheduleListView: View {
         return viewModel.getWeekOfDate(viewModel.nextDate)
     }
     
-    var schedulesOfFocusDate: [WorkspaceEntitySample] {
+    var schedulesOfFocusDate: [WorkspaceEntity] {
         return viewModel.schedulesOfFocusDate
     }
 
@@ -97,7 +100,7 @@ private extension ScheduleListView {
         
         VStack(spacing: 0) {
             Group {
-                if isWorkspaceNotFound {
+                if workspaces.isEmpty {
                     workspaceNotFound
                 } else {
                     weekDaysContainer

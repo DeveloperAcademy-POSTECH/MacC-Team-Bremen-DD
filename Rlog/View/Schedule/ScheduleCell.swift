@@ -11,7 +11,7 @@ struct ScheduleCell: View {
     // WorkspaceEntity
     @ObservedObject var viewModel = ScheduleListViewModel()
     let currentDate: Date
-    let data: WorkspaceEntitySample
+    let data: WorkspaceEntity
     var weekday: String {
         let formatter = DateFormatter(dateFormatType: .weekday)
         return formatter.string(from: currentDate)
@@ -19,13 +19,13 @@ struct ScheduleCell: View {
     // 👀 임시 뷰모델 로직
     var workType: (String, Color) {
         return viewModel.defineWorkType(
-            repeatDays: data.schedules.repeatDays,
-            workDate: data.workdays.date,
-            startHour: data.schedules.startHour,
-            startMinute: data.schedules.startMinute,
-            endHour: data.schedules.endHour,
-            endMinute: data.schedules.endMinute,
-            spentHour: data.workdays.spentHour
+            repeatDays: data.schedules?.repeatDays ?? [],
+            workDate: data.workdays?.date ?? Date(),
+            startHour: data.schedules?.startHour ?? 9,
+            startMinute: data.schedules?.startMinute ?? 0,
+            endHour: data.schedules?.endHour ?? 18,
+            endMinute: data.schedules?.endMinute ?? 0,
+            spentHour: 10
         )
     }
     
@@ -49,7 +49,8 @@ private extension ScheduleCell {
                 
                 Spacer()
                 
-                Text("\(data.workdays.spentHour)시간")
+//                Text("\(data.workdays?.endTime)시간")
+                Text("Hello")
                     .font(.subheadline)
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
@@ -64,7 +65,7 @@ private extension ScheduleCell {
                 Spacer()
                 
 //                Text("\(data.workdays.startHour):\(data.workdays.startMinute) ~ \(data.workdays.endHour):\(data.workdays.endMinute)")
-                Text(data.workdays.sampleWorkday)
+                Text("Hello")
                     .font(.body)
                     .foregroundColor(Color.fontBlack)
             }
@@ -113,32 +114,34 @@ private extension ScheduleCell {
     }
 }
 
-struct WorkspaceEntitySample: Identifiable {
-    var id = UUID()
-    
-    let name: String
-    let payDay: Int16 = 25
-    let hourlyWage: Int32 = 10000
-    let hasTax: Bool = true
-    let hasJuhyu: Bool = true
-    let schedules: ScheduleEntitySample
-    let workdays: WorkdayEntitySample
-}
+//struct WorkspaceEntitySample: Identifiable {
+//    var id = UUID()
+//
+//    let name: String
+//    let payDay: Int16 = 25
+//    let hourlyWage: Int32 = 10000
+//    let hasTax: Bool = true
+//    let hasJuhyu: Bool = true
+//    let schedules: ScheduleEntitySample
+//    let workdays: WorkdayEntitySample
+//}
+//
+//struct ScheduleEntitySample {
+//    let repeatDays: [String] = ["월", "수", "금"]
+//    let startHour: Int16 = 9
+//    let startMinute: Int16 = 30
+//    let endHour: Int16 = 18
+//    let endMinute: Int16 = 0
+//}
+//
+//struct WorkdayEntitySample {
+//    let date: Date
+//    let sampleWorkday: String
+//    let hourlyWage: Int32 = 10000
+//    let startTime: Date = Date()
+//    let endTime: Date = Date()
+//    let hasDone: Bool
+//    var spentHour: Int16 = 4
+//}
+//
 
-struct ScheduleEntitySample {
-    let repeatDays: [String] = ["월", "수", "금"]
-    let startHour: Int16 = 9
-    let startMinute: Int16 = 30
-    let endHour: Int16 = 18
-    let endMinute: Int16 = 0
-}
-
-struct WorkdayEntitySample {
-    let date: Date
-    let sampleWorkday: String
-    let hourlyWage: Int32 = 10000
-    let startTime: Date = Date()
-    let endTime: Date = Date()
-    let hasDone: Bool
-    var spentHour: Int16 = 4
-}
