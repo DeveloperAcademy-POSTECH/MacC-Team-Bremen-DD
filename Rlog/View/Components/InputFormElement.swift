@@ -19,6 +19,7 @@ struct InputFormElement: View {
     var body: some View {
         VStack {
             titleHeader
+                .padding(.bottom, 8)
             container
         }
     }
@@ -28,8 +29,8 @@ private extension InputFormElement {
     var titleHeader: some View {
         HStack {
             Text(containerType.title)
-                .font(.subheadline)
-                .foregroundColor(.gray)
+                .font(.caption)
+                .foregroundColor(.grayMedium)
             
             Spacer()
         }

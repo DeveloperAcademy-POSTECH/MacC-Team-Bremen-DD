@@ -12,7 +12,7 @@ struct BorderedTextField: View {
     @FocusState var isFocused: Bool
     @State var maximumText = ""
     @Binding var text: String
-
+    
     var body: some View {
         borderedTextFieldView
     }
@@ -21,14 +21,13 @@ struct BorderedTextField: View {
 private extension BorderedTextField {
     var borderedTextFieldView: some View {
         VStack(spacing: 0) {
-            HStack {
+            HStack(spacing: 0) {
                 prefixView
                 contents
                 Spacer()
                 suffixView
             }
-            .padding(.vertical, 13)
-            .padding(.horizontal)
+            .padding(.vertical, 12)
             .background(Color.backgroundCard)
             .cornerRadius(10)
             .overlay {
@@ -46,9 +45,9 @@ private extension BorderedTextField {
         HStack {
             if textFieldType == .payday {
                 Text("매월")
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                    .padding(.leading)
+                    .font(.body)
+                    .foregroundColor(.grayMedium)
+                    .padding(.leading, 16)
             }
         }
     }
@@ -62,7 +61,7 @@ private extension BorderedTextField {
         .keyboardType(textFieldType.keyboardType)
         .focused($isFocused)
     }
-
+    
     @ViewBuilder
     var suffixView: some View {
         switch textFieldType {
@@ -73,13 +72,13 @@ private extension BorderedTextField {
                 .padding(.trailing)
         case .payday:
             Text("일")
-                .font(.caption)
-                .foregroundColor(.gray)
+                .font(.body)
+                .foregroundColor(.grayMedium)
                 .padding(.trailing)
         case .wage:
             Text("원")
-                .font(.caption)
-                .foregroundColor(.gray)
+                .font(.body)
+                .foregroundColor(.grayMedium)
                 .padding(.trailing)
         case .reason, .time, .none(title: _):
             EmptyView()
@@ -111,7 +110,7 @@ enum BorderedTextFieldType: Equatable {
     case reason
     case time
     case none(title: String)
-
+    
     var title: String {
         switch self {
         case .workplace: return "근무지"
