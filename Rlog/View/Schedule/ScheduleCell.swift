@@ -30,8 +30,8 @@ struct ScheduleCell: View {
     }
     
     var body: some View {
-            scheduleInfo
-                .transition(AnyTransition.opacity.animation(.easeInOut))
+        scheduleInfo
+            .transition(AnyTransition.opacity.animation(.easeInOut))
     }
 }
 

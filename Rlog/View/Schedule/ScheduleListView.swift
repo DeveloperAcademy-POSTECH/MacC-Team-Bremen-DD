@@ -16,8 +16,7 @@ struct ScheduleListView: View {
     // Sample to recognize when workspace is not found
     let isWorkspaceNotFound = false
     var weekday: String {
-        let formatter = DateFormatter(dateFormatType: .weekday)
-        return formatter.string(from: viewModel.currentDate)
+        return viewModel.getWeekdayOfDate(viewModel.currentDate)
     }
 
     var currentMonth: String {

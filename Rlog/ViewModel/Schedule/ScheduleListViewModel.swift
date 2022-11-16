@@ -159,6 +159,12 @@ private extension ScheduleListViewModel {
 }
 
 extension ScheduleListViewModel {
+    func getWeekdayOfDate(_ date: Date) -> String {
+        let weekday = timeManager.getWeekdayOfDate(date)
+        
+        return weekday
+    }
+    
     // 오늘 날짜가 속한 주의 날짜 데이터를 반환합니다.
     // https://stackoverflow.com/questions/42981665/how-to-get-all-days-in-current-week-in-swift
     func getWeekOfDate(_ date: Date) -> [CalendarModel] {
@@ -216,8 +222,7 @@ extension ScheduleListViewModel {
         endMinute: Int16,
         spentHour: Int16
     ) -> (type: String, color: Color) {
-        let formatter = DateFormatter(dateFormatType: .weekday)
-        let _ = formatter.string(from: workDate)
+        let _ = timeManager.getWeekdayOfDate(workDate)
         let spentHourOfNormalCase: Int16 = endHour - startHour
         let timeDifference = spentHour - spentHourOfNormalCase
         
