@@ -36,6 +36,8 @@
 		894CB4E329235B00008E4197 /* BorderedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4E229235B00008E4197 /* BorderedPicker.swift */; };
 		894CB4E529235B2A008E4197 /* ScheduleCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4E429235B2A008E4197 /* ScheduleCreationView.swift */; };
 		894CB4E729235B4F008E4197 /* ScheduleCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4E629235B4F008E4197 /* ScheduleCreationViewModel.swift */; };
+		894CB4EF2924E26C008E4197 /* YearMonthStepperCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4EE2924E26C008E4197 /* YearMonthStepperCalendar.swift */; };
+		894CB4F12924E283008E4197 /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4F02924E283008E4197 /* TimeManager.swift */; };
 		898A5EBA2907C79100A6BEF7 /* HDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A5EB92907C79100A6BEF7 /* HDivider.swift */; };
 		898A5EC22908050D00A6BEF7 /* ScheduleContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A5EC12908050D00A6BEF7 /* ScheduleContainer.swift */; };
 		89CAA072290276E800504BDE /* BorderedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA071290276E800504BDE /* BorderedTextField.swift */; };
@@ -100,6 +102,8 @@
 		894CB4E229235B00008E4197 /* BorderedPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedPicker.swift; sourceTree = "<group>"; };
 		894CB4E429235B2A008E4197 /* ScheduleCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCreationView.swift; sourceTree = "<group>"; };
 		894CB4E629235B4F008E4197 /* ScheduleCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCreationViewModel.swift; sourceTree = "<group>"; };
+		894CB4EE2924E26C008E4197 /* YearMonthStepperCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearMonthStepperCalendar.swift; sourceTree = "<group>"; };
+		894CB4F02924E283008E4197 /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		898A5EB92907C79100A6BEF7 /* HDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDivider.swift; sourceTree = "<group>"; };
 		898A5EC12908050D00A6BEF7 /* ScheduleContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleContainer.swift; sourceTree = "<group>"; };
 		89CAA06F290265F300504BDE /* StrokeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeButton.swift; sourceTree = "<group>"; };
@@ -242,6 +246,7 @@
 				C63D445A291CE408005D5AE6 /* ScheduleListViewModel.swift */,
 				894CB4DE29221D41008E4197 /* SchedulePendingListViewModel.swift */,
 				894CB4E629235B4F008E4197 /* ScheduleCreationViewModel.swift */,
+				894CB4F02924E283008E4197 /* TimeManager.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -313,6 +318,7 @@
 				898A5EB92907C79100A6BEF7 /* HDivider.swift */,
 				898A5EC12908050D00A6BEF7 /* ScheduleContainer.swift */,
 				894CB4E229235B00008E4197 /* BorderedPicker.swift */,
+				894CB4EE2924E26C008E4197 /* YearMonthStepperCalendar.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -447,6 +453,7 @@
 				C64D97BA28FE918F004F80E7 /* Text+.swift in Sources */,
 				89CAA072290276E800504BDE /* BorderedTextField.swift in Sources */,
 				2D66DCD828FD8E7100C90400 /* WorkSpaceListViewModel.swift in Sources */,
+				894CB4EF2924E26C008E4197 /* YearMonthStepperCalendar.swift in Sources */,
 				898A5EC22908050D00A6BEF7 /* ScheduleContainer.swift in Sources */,
 				2D1651932907D61800636D61 /* WorkSpaceCreateConfirmationView.swift in Sources */,
 				89CAA0742902771D00504BDE /* InputFormElement.swift in Sources */,
@@ -465,6 +472,7 @@
 				C64D97BC28FE9197004F80E7 /* TextField+.swift in Sources */,
 				2D1651952907D63300636D61 /* WorkSpaceCreateConfirmationViewModel.swift in Sources */,
 				2D66DCE028FD8ECA00C90400 /* MainTabViewModel.swift in Sources */,
+				894CB4F12924E283008E4197 /* TimeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

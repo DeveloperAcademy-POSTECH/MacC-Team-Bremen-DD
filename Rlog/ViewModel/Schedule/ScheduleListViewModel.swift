@@ -8,6 +8,9 @@
 import SwiftUI
 
 final class ScheduleListViewModel: ObservableObject {
+    @ObservedObject var timeManager = TimeManager()
+    @Published var schedules: [WorkspaceEntitySample] = []
+    @Published var schedulesOfFocusDate: [WorkspaceEntitySample] = []
     @Published var nextDate = Calendar.current.date(byAdding: .weekOfMonth, value: 1, to: Date()) ?? Date()
     @Published var previousDate = Calendar.current.date(byAdding: .weekOfMonth, value: -1, to: Date()) ?? Date()
     @Published var currentDate = Date() {
@@ -22,6 +25,27 @@ final class ScheduleListViewModel: ObservableObject {
         }
     }
     let calendar = Calendar.current
+    let mockData: [WorkspaceEntitySample] = [
+        WorkspaceEntitySample(
+            name: "팍이네 팍팍 감자탕",
+            schedules: ScheduleEntitySample(),
+            workdays: WorkdayEntitySample(date: Calendar.current.date(from: DateComponents(year: 2022, month: 11, day: 14))!, sampleWorkday: "월", hasDone: false)
+        ),
+        WorkspaceEntitySample(
+            name: "팍이네 팍팍 감자탕",
+            schedules: ScheduleEntitySample(),
+            workdays: WorkdayEntitySample(date: Calendar.current.date(from: DateComponents(year: 2022, month: 11, day: 16))!, sampleWorkday: "수", hasDone: true)
+        ),
+        WorkspaceEntitySample(
+            name: "팍이네 팍팍 감자탕",
+            schedules: ScheduleEntitySample(),
+            workdays: WorkdayEntitySample(date: Calendar.current.date(from: DateComponents(year: 2022, month: 11, day: 18))!, sampleWorkday: "금", hasDone: false)
+        )
+    ]
+    
+    func onAppear() {
+        getAllSchedules()
+    }
     
     func didScrollToNextWeek() {
         getNextWeek()
@@ -31,25 +55,49 @@ final class ScheduleListViewModel: ObservableObject {
         getPreviousWeek()
     }
     
+    func didTapNextMonth() {
+        getNextMonth()
+    }
+    
+    func didTapPreviousMonth() {
+        getPreviousMonth()
+    }
+    
     func didTapDate(_ date: CalendarModel) {
         changeFocusDate(date)
+        getSchedulesOfFocusDate(date)
     }
+    
 }
 
 // MARK: Private functions
 private extension ScheduleListViewModel {
+    func getAllSchedules() {
+        schedules = mockData
+    }
+    
     // 일주일 뒤의 날짜를 반환합니다.
     func getNextWeek() {
-        guard let dateOfNextWeek = calendar.date(byAdding: .weekOfMonth, value: 1, to: currentDate)
-        else { return }
-        currentDate = dateOfNextWeek
+        currentDate = timeManager.increaseOneWeek(currentDate)
     }
-
+    
     // 일주일 전의 날짜를 반환합니다.
     func getPreviousWeek() {
-        guard let dateOfPreviousWeek = calendar.date(byAdding: .weekOfMonth, value: -1, to: currentDate)
-        else { return }
-        currentDate = dateOfPreviousWeek
+        currentDate = timeManager.decreaseOneMonth(currentDate)
+    }
+    
+    // 한 달 뒤의 날짜를 반환합니다.
+    // 갱신 이후 한 달 전의 오늘 날짜로 포커싱 됩니다. (ex. 11월 9일 -> 12월 9일)
+    func getNextMonth() {
+        let resetWeeks = resetWeekChanges()
+        currentDate = timeManager.increaseOneMonth(resetWeeks)
+    }
+    
+    // 한 달 전의 날짜를 반환합니다.
+    // 갱신 이후 한 달 전의 오늘 날짜로 포커싱 됩니다. (ex. 11월 9일 -> 10월 9일)
+    func getPreviousMonth() {
+        let resetWeeks = resetWeekChanges()
+        currentDate = timeManager.decreaseOneMonth(resetWeeks)
     }
     
     // 사용자가 다른 날짜를 터치했을 때 Focus를 변경합니다.
@@ -59,7 +107,7 @@ private extension ScheduleListViewModel {
         let month = components.month ?? 1
         var focusDateComponents = DateComponents(year: year, month: month, day: date.day)
         guard var focusDate = calendar.date(from: focusDateComponents) else { return }
-
+        
         // 캘린더 날짜와 터치된 날짜의 년도, 월이 다른 경우
         // 월 정보만 바뀌어도 년도 케이스 핸들링이 가능하므로 월 정보만 비교합니다.
         if date.month != month {
@@ -69,6 +117,44 @@ private extension ScheduleListViewModel {
         }
         
         currentDate = focusDate
+    }
+    
+    // 사용자가 getNextWeek, getPreviousWeek 함수를 통해 주 단위 변경을 진행한 경우를 초기화합니다.
+    func resetWeekChanges() -> Date {
+        // 현재 활성화된 날짜의 연, 월 데이터를 추출합니다.
+        let currentComponents = calendar.dateComponents([.year, .month], from: currentDate)
+        let year = currentComponents.year ?? 2000
+        let month = currentComponents.month ?? 1
+        
+        // 오늘 날짜의 일 데이터를 추출합니다.
+        let todayComponents = calendar.dateComponents([.day], from: Date())
+        let day = todayComponents.day ?? 1
+        
+        // 연, 월, 일 데이터를 사용하여 DateComponents를 생성합니다.
+        let extractedDate = DateComponents(year: year, month: month, day: day)
+        
+        return calendar.date(from: extractedDate) ?? Date()
+    }
+    
+    
+    func getSchedulesOfFocusDate(_ date: CalendarModel) {
+        let currentComponents = calendar.dateComponents([.year, .month, .day], from: currentDate)
+        let year = currentComponents.year ?? 2000
+        let month = currentComponents.month ?? 1
+        let day = currentComponents.day ?? 1
+        let extractedDate = DateComponents(year: year, month: month, day: day)
+        let extractedCalendar = calendar.date(from: extractedDate) ?? Date()
+        
+        schedulesOfFocusDate.removeAll()
+        
+        for data in schedules {
+            print(calendar.startOfDay(for: data.workdays.date))
+            if calendar.startOfDay(for: data.workdays.date) == extractedCalendar {
+                schedulesOfFocusDate.append(data)
+            }
+        }
+        
+        print(schedulesOfFocusDate)
     }
 }
 
@@ -104,12 +190,19 @@ extension ScheduleListViewModel {
     }
     
     // 터치된 날짜를 판단합니다.
-    func verifyFocusDate(_ focusDate: Int) -> Bool {
+    func highlightFocusDate(_ focusDate: Int) -> Bool {
         let components = calendar.dateComponents([.day], from: currentDate)
         guard let date = components.day else { return false }
         
         if focusDate == date { return true }
         else { return false }
+    }
+    
+    // 터치된 날짜의 월 데이터를 판단합니다.
+    func verifyCurrentMonth(_ date: Int) -> Bool {
+        let components = calendar.dateComponents([.year, .month, .day], from: currentDate)
+        if date == components.month { return true }
+        return false
     }
     
     // 🔥 필요한 것만 받기 -> 파라미터 너무 많음
@@ -133,7 +226,7 @@ extension ScheduleListViewModel {
         //        }
         
         switch timeDifference {
-        // "추가" case 누락
+            // "추가" case 누락
         case 0:
             return ("정규", Color.primary)
         case 1...:

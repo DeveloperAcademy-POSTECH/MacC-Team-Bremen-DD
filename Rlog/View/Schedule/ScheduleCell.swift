@@ -30,14 +30,8 @@ struct ScheduleCell: View {
     }
     
     var body: some View {
-        if data.schedules.repeatDays.contains(weekday) {
             scheduleInfo
                 .transition(AnyTransition.opacity.animation(.easeInOut))
-        } else {
-            Text("No Schedule Found")
-                .frame(maxWidth: .infinity)
-                .transition(AnyTransition.opacity.animation(.easeInOut))
-        }
     }
 }
 
@@ -69,7 +63,8 @@ private extension ScheduleCell {
                 
                 Spacer()
                 
-                Text("\(data.workdays.startHour):\(data.workdays.startMinute) ~ \(data.workdays.endHour):\(data.workdays.endMinute)")
+//                Text("\(data.workdays.startHour):\(data.workdays.startMinute) ~ \(data.workdays.endHour):\(data.workdays.endMinute)")
+                Text(data.workdays.sampleWorkday)
                     .font(.body)
                     .foregroundColor(Color.fontBlack)
             }
@@ -102,10 +97,19 @@ private extension ScheduleCell {
             RoundedRectangle(cornerRadius: 10)
                 .strokeBorder(Color.backgroundStroke, lineWidth: 2)
         }
-        .transaction { transaction in
-            transaction.disablesAnimations = true
+    }
+    
+    var scheduleNotFound: some View {
+        VStack(spacing: 0) {
+            Spacer()
+            Image("rlogGreenLogo")
+                .padding(.bottom, 24)
+            Text("예정된 근무일정이 없습니다.")
+                .font(Font.body.bold())
+            Spacer()
         }
-
+        .frame(maxWidth: .infinity)
+        .frame(height: UIScreen.main.bounds.height / 2)
     }
 }
 
@@ -131,12 +135,10 @@ struct ScheduleEntitySample {
 
 struct WorkdayEntitySample {
     let date: Date
+    let sampleWorkday: String
     let hourlyWage: Int32 = 10000
-    let startHour: Int16 = 9
-    let startMinute: Int16 = 30
-    let endHour: Int16
-    let endMinute: Int16 = 0
-    var spentHour: Int16 {
-        return endHour - startHour
-    }
+    let startTime: Date = Date()
+    let endTime: Date = Date()
+    let hasDone: Bool
+    var spentHour: Int16 = 4
 }
