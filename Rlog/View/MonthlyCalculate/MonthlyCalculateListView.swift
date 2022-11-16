@@ -83,51 +83,20 @@ private extension MonthlyCalculateListView {
         var body: some View {
             NavigationLink(destination: MonthlyCalculateDetailView()) {
                 VStack(alignment: .leading, spacing: 0) {
-                    HStack(spacing: 4) {
-                        Rectangle()
-                            .fill(Color.primary)
-                            .frame(width: 4, height: 16)
-                        Text("GS25 포항공대점")
-                            .fontWeight(.bold)
-                            .foregroundColor(Color.fontBlack)
-                    }
-                    .padding(.top)
-                    
+                    workspaceTitle
+                        .padding(.top)
                     Group {
-                        HStack {
-                            Text("일한 시간")
-                                .foregroundColor(Color.grayMedium)
-                            Spacer()
-                            Text("32시간")
-                                .foregroundColor(Color.grayDark)
-                        }
-                        .font(.subheadline)
-                        .padding(.top, 32)
-                        
-                        HStack {
-                            Text("급여일까지")
-                                .foregroundColor(Color.grayMedium)
-                            Spacer()
-                            Text("D-12")
-                                .foregroundColor(Color.grayDark)
-                        }
-                        .font(.subheadline)
-                        .padding(.top, 8)
+                        makeWorkspaceInfomation(title: "일한 시간", content: "32시간")
+                            .padding(.top, 32)
+
+                        makeWorkspaceInfomation(title: "급여일까지", content: "D-12")
+                            .padding(.top, 8)
                         
                         HDivider()
                             .padding(.top, 8)
                         
-                        HStack(alignment: .bottom) {
-                            Text("금액")
-                                .font(.subheadline)
-                                .foregroundColor(Color.grayMedium)
-                            Spacer()
-                            Text("422,400원")
-                                .font(.title3)
-                                .fontWeight(.bold)
-                                .foregroundColor(Color.fontBlack)
-                        }
-                        .padding(.vertical)
+                        calculateResult
+                            .padding(.vertical)
                     }
                     .padding(.leading, 4)
                 }
@@ -138,6 +107,41 @@ private extension MonthlyCalculateListView {
                 .background(Color.backgroundStroke)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
             }
+        }
+        
+        var workspaceTitle: some View {
+            HStack(spacing: 4) {
+                Rectangle()
+                    .fill(Color.primary)
+                    .frame(width: 4, height: 16)
+                Text("GS25 포항공대점")
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.fontBlack)
+            }
+        }
+        
+        var calculateResult: some View {
+            HStack(alignment: .bottom) {
+                Text("금액")
+                    .font(.subheadline)
+                    .foregroundColor(Color.grayMedium)
+                Spacer()
+                Text("422,400원")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.fontBlack)
+            }
+        }
+        
+        func makeWorkspaceInfomation(title: String, content: String) -> some View {
+            HStack {
+                Text(title)
+                    .foregroundColor(Color.grayMedium)
+                Spacer()
+                Text(content)
+                    .foregroundColor(Color.grayDark)
+            }
+            .font(.subheadline)
         }
     }
 }
