@@ -14,19 +14,21 @@ struct WorkSpaceCreateScheduleListView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading, spacing: 24) {
             TitleSubView(title: "근무 패턴을 입력해주세요.")
-            labelText
-            VStack(spacing: 16) {
-                ForEach(0..<viewModel.scheduleList.count, id: \.self) { Idx in
-                    
-                    createDeletableSchedulePatternView(tappedScheduleID: Idx)
+            VStack(alignment: .leading, spacing: 8) {
+                labelText
+                VStack(spacing: 16) {
+                    ForEach(0..<viewModel.scheduleList.count, id: \.self) { Idx in
+                        createDeletableSchedulePatternView(tappedScheduleID: Idx)
+                    }
+                    addScheduleButton
                 }
-                addScheduleButton
             }
             Spacer()
         }
         .padding(.horizontal)
+        .navigationBarTitle("근무패턴 등록")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 toolbarNextButton
@@ -49,7 +51,7 @@ private extension WorkSpaceCreateScheduleListView {
             scheduleData: viewModel.scheduleList)
         ) {
             Text("다음")
-                .foregroundColor(viewModel.isDisabledNextButton ? Color(red: 0.82, green: 0.82, blue: 0.839) : .fontBlack)
+                .foregroundColor(viewModel.isDisabledNextButton ? .grayLight : .primary)
         }
         .disabled(viewModel.isDisabledNextButton)
     }
@@ -57,7 +59,7 @@ private extension WorkSpaceCreateScheduleListView {
     var labelText: some View {
         Text("근무패턴")
             .font(.caption)
-            .foregroundColor(.grayLight)
+            .foregroundColor(.grayMedium)
     }
     
     var addScheduleButton: some View {
@@ -81,9 +83,9 @@ private extension WorkSpaceCreateScheduleListView {
                         }
                     }
                     Spacer()
-                    HStack {
+                    HStack(spacing : 0) {
                         Text(tappedSchedule.startMinute.count == 1 ? "\(tappedSchedule.startHour):0\(tappedSchedule.startMinute)" : "\(tappedSchedule.startHour):\(tappedSchedule.startMinute)")
-                        Text("-")
+                        Text(" - ")
                         Text(tappedSchedule.endMinute.count == 1 ? "\(tappedSchedule.endHour):0\(tappedSchedule.endMinute)" : "\(tappedSchedule.endHour):\(tappedSchedule.endMinute)")
                     }
                     Button {
