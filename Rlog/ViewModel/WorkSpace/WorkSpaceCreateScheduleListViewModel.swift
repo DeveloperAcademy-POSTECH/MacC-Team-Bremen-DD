@@ -10,7 +10,7 @@ import SwiftUI
 @MainActor
 final class WorkSpaceCreateScheduleListViewModel: ObservableObject {
     @Binding var isActiveNavigation: Bool
-    let workspaceModel: WorkSpaceModel
+    var workspaceModel: WorkSpaceModel
     init(isActiveNavigation: Binding<Bool>, workspaceModel: WorkSpaceModel) {
         self._isActiveNavigation = isActiveNavigation
         self.workspaceModel = workspaceModel
@@ -55,9 +55,9 @@ struct ScheduleModel: Hashable{
 
 
 struct WorkSpaceModel {
-    let name: String
-    let paymentDay: String
-    let hourlyWage: String
-    let hasTax: Bool
-    let hasJuhyu: Bool
+    var name: String
+    var paymentDay: String
+    var hourlyWage: String
+    var hasTax: Bool
+    var hasJuhyu: Bool
 }
