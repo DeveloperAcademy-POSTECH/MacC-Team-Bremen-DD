@@ -19,7 +19,6 @@ struct MainTabView: View {
                 tab.view
                     .tabItem {
                         Image(tab.systemName)
-                            .foregroundColor(.primary)
                         Text(tab.title)
                     }
             }
