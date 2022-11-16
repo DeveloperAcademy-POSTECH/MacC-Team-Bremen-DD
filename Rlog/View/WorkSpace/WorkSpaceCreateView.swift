@@ -11,8 +11,10 @@ import SwiftUI
 struct WorkSpaceCreateView: View {
     @ObservedObject var viewModel: WorkSpaceCreateViewModel
     init(isActive: Binding<Bool>) {
-        self.viewModel = WorkSpaceCreateViewModel(isActive: isActive)
+        self.viewModel = WorkSpaceCreateViewModel(isActiveNavigation: isActive)
     }
+    
+    @FocusState var checkoutInFocus: WritingState?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -21,12 +23,17 @@ struct WorkSpaceCreateView: View {
                 toggleInputs
             }
             if !viewModel.isHiddenPayday {
-                InputFormElement(containerType: .payday, text: $viewModel.paymentDay)
+                InputFormElement(containerType: .payday, text: $viewModel.payday)
+                    .focused($checkoutInFocus, equals: .payday)
+
             }
             if !viewModel.isHiddenHourlyWage {
                 InputFormElement(containerType: .wage, text: $viewModel.hourlyWage)
+                    .focused($checkoutInFocus, equals: .hourlyWage)
+
             }
-            InputFormElement(containerType: .workplace, text: $viewModel.name)
+            InputFormElement(containerType: .workplace, text: $viewModel.workSpace)
+                .focused($checkoutInFocus, equals: .workSpace)
 
             Spacer()
 
@@ -42,9 +49,9 @@ struct WorkSpaceCreateView: View {
                 if !viewModel.isHiddenToolBarItem {
                     NavigationLink {
                         WorkSpaceCreateScheduleListView(
-                            isActive: $viewModel.isActive, workspaceModel: WorkSpaceModel(
-                                name: viewModel.name,
-                                paymentDay: viewModel.paymentDay,
+                            isActiveNavigation: $viewModel.isActiveNavigation, workspaceModel: WorkSpaceModel(
+                                name: viewModel.workSpace,
+                                paymentDay: viewModel.payday,
                                 hourlyWage: viewModel.hourlyWage,
                                 hasTax: viewModel.hasTax,
                                 hasJuhyu: viewModel.hasJuhyu
@@ -56,6 +63,11 @@ struct WorkSpaceCreateView: View {
                     }
                 }
             }
+        }
+        .onAppear {
+          DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+              self.checkoutInFocus = .workSpace
+          }
         }
     }
 }
@@ -92,6 +104,23 @@ private extension WorkSpaceCreateView {
     var ConfirmButton: some View {
         Button {
             viewModel.didTapConfirmButton()
+            switch checkoutInFocus {
+            case .none:
+                break
+            case .some(.workSpace):
+                checkoutInFocus = .hourlyWage
+                break
+            case .some(.hourlyWage):
+                checkoutInFocus = .payday
+                break
+            case .some(.payday):
+                checkoutInFocus = nil
+                break
+            case .some(.toggleOptions):
+                print("잘못된 입력")
+                break
+            }
+
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)

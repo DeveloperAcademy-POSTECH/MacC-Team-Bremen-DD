@@ -9,29 +9,22 @@ import SwiftUI
 
 struct WorkSpaceCreateScheduleListView: View {
     @ObservedObject var viewModel: WorkSpaceCreateScheduleListViewModel
-    init(isActive: Binding<Bool>, workspaceModel: WorkSpaceModel) {
-        self.viewModel = WorkSpaceCreateScheduleListViewModel(isActive: isActive, workspaceModel: workspaceModel)
-        
+    init(isActiveNavigation: Binding<Bool>, workspaceModel: WorkSpaceModel) {
+        self.viewModel = WorkSpaceCreateScheduleListViewModel(isActiveNavigation: isActiveNavigation, workspaceModel: workspaceModel)
     }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            TitleSubView(title: "근무 일정을 입력해주세요.")
+            TitleSubView(title: "근무 패턴을 입력해주세요.")
             labelText
             VStack(spacing: 16) {
-                ForEach(viewModel.scheduleList, id: \.self) { schedule in
-                    ScheduleContainer(
-                        repeatedSchedule: schedule.repeatedSchedule,
-                        startHour: schedule.startHour,
-                        startMinute: schedule.startMinute,
-                        endHour: schedule.endHour,
-                        endMinute: schedule.endMinute
-                    )
+                ForEach(0..<viewModel.scheduleList.count, id: \.self) { Idx in
+                    
+                    createDeletableSchedulePatternView(tappedScheduleID: Idx)
                 }
                 addScheduleButton
             }
             Spacer()
-            
         }
         .padding(.horizontal)
         .toolbar {
@@ -51,7 +44,7 @@ struct WorkSpaceCreateScheduleListView: View {
 private extension WorkSpaceCreateScheduleListView {
     var toolbarNextButton: some View {
         NavigationLink(destination:  WorkSpaceCreateConfirmationView(
-            isActive: $viewModel.isActive,
+            isActiveNavigation: $viewModel.isActiveNavigation,
             workspaceData: viewModel.workspaceModel,
             scheduleData: viewModel.scheduleList)
         ) {
@@ -62,14 +55,45 @@ private extension WorkSpaceCreateScheduleListView {
     }
     
     var labelText: some View {
-        Text("근무 유형")
+        Text("근무패턴")
             .font(.caption)
             .foregroundColor(.grayLight)
     }
     
     var addScheduleButton: some View {
-        StrokeButton(label: "+ 근무 일정 추가하기", buttonType: .add) {
+        StrokeButton(label: "+ 근무패턴 추가", buttonType: .add) {
             viewModel.didTapAddScheduleButton()
         }
+    }
+    
+    @ViewBuilder
+    func createDeletableSchedulePatternView(tappedScheduleID: Int) -> some View {
+        let tappedSchedule = viewModel.scheduleList[tappedScheduleID]
+        RoundedRectangle(cornerRadius: 10)
+            .frame(maxWidth: .infinity, minHeight: 56, maxHeight: 56)
+            .foregroundColor(.gray)
+            .overlay {
+                //TODO: 컴포넌트화 예정입니다.
+                HStack {
+                    HStack {
+                        ForEach(tappedSchedule.repeatedSchedule, id: \.self) { day in
+                            Text(day)
+                        }
+                    }
+                    Spacer()
+                    HStack {
+                        Text(tappedSchedule.startMinute.count == 1 ? "\(tappedSchedule.startHour):0\(tappedSchedule.startMinute)" : "\(tappedSchedule.startHour):\(tappedSchedule.startMinute)")
+                        Text("-")
+                        Text(tappedSchedule.endMinute.count == 1 ? "\(tappedSchedule.endHour):0\(tappedSchedule.endMinute)" : "\(tappedSchedule.endHour):\(tappedSchedule.endMinute)")
+                    }
+                    Button {
+                        viewModel.didTapDeleteButton(idx: tappedScheduleID)
+                    } label: {
+                        Image(systemName: "minus.circle")
+                            .foregroundColor(.red)
+                    }
+                }
+                .padding()
+            }
     }
 }

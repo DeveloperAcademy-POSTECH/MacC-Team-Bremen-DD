@@ -9,13 +9,13 @@ import SwiftUI
 
 @MainActor
 final class WorkSpaceCreateConfirmationViewModel: ObservableObject {
-    @Binding var isActive: Bool
+    @Binding var isActiveNavigation: Bool
     
     var workspaceData: WorkSpaceModel
     var scheduleData: [ScheduleModel]
     
-    init(isActive: Binding<Bool>, workspaceData: WorkSpaceModel, scheduleData: [ScheduleModel]) {
-        self._isActive = isActive
+    init(isActiveNavigation: Binding<Bool>, workspaceData: WorkSpaceModel, scheduleData: [ScheduleModel]) {
+        self._isActiveNavigation = isActiveNavigation
         self.workspaceData = workspaceData
         self.scheduleData = scheduleData
     }
@@ -24,22 +24,13 @@ final class WorkSpaceCreateConfirmationViewModel: ObservableObject {
     private let hasJuhyu = false
     
     func didTapConfirmButton() {
-//        Task {
-//            await createDatas()
-//            popToRoot()
-//        }
         popToRoot()
-
     }
 }
 
 private extension WorkSpaceCreateConfirmationViewModel {
     func popToRoot() {
-//        DispatchQueue.main.async { [weak self] in
-//            guard let self = self else { return }
-//            self.isActive = false
-//        }
-        self.isActive = false
+        self.isActiveNavigation = false
     }
     
     func calculateSpentHour(startHour: Int16, startMinute: Int16, endHour: Int16, endMinute: Int16) -> Double {
