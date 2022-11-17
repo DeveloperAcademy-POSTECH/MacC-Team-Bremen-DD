@@ -27,8 +27,8 @@ struct WorkSpaceDetailView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel: WorkSpaceDetailViewModel
     
-    init() {
-        viewModel = WorkSpaceDetailViewModel()
+    init(workspace: WorkspaceEntity) {
+        viewModel = WorkSpaceDetailViewModel(workspace: workspace)
     }
     
     var body: some View {
@@ -44,15 +44,15 @@ struct WorkSpaceDetailView: View {
                     .foregroundColor(.grayMedium)
                     .padding(.bottom, -16)
                 
-                //                ForEach(viewModel.schedules) { schedule in
-                ScheduleContainer(
-                    repeatedSchedule: ["월 화 수 목"],
-                    startHour: "10",
-                    startMinute: "00",
-                    endHour: "12",
-                    endMinute: "00"
-                )
-                //                }
+                ForEach(viewModel.schedules, id: \.self) { schedule in
+                    ScheduleContainer(
+                        repeatedSchedule: schedule.repeatDays,
+                        startHour: String(schedule.startHour),
+                        startMinute: String(schedule.startMinute),
+                        endHour: String(schedule.endHour),
+                        endMinute: String(schedule.endMinute)
+                    )
+                }
                 .padding(.bottom, -8)
                 
                 StrokeButton(label: "+ 근무패턴 추가", buttonType: .add) {
@@ -92,6 +92,9 @@ struct WorkSpaceDetailView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
+                    viewModel.didTapConfirmButton {
+                        dismiss()
+                    }
                 }){
                     Text("완료")
                         .fontWeight(.bold)
@@ -101,6 +104,9 @@ struct WorkSpaceDetailView: View {
         }
         .background(Color.backgroundWhite)
         .navigationBarBackButtonHidden()
+        .onAppear {
+            viewModel.onAppear()
+        }
     }
 }
 
