@@ -62,23 +62,26 @@ struct WorkSpaceDetailView: View {
                 
                 HDivider()
                 
-                StrokeButton(label: "근무지 삭제", buttonType: .destructive) {
-                    viewModel.isAlertOpen.toggle()
-                }
-                .alert("근무지 삭제", isPresented: $viewModel.isAlertOpen) {
-                    Button("취소", role: .cancel) {
+                HStack {
+                    Spacer()
+                    StrokeButton(label: "근무지 삭제", buttonType: .destructive) {
                         viewModel.isAlertOpen.toggle()
                     }
-                    Button("삭제", role: .destructive) {
-                        viewModel.didTapDeleteButton {
-                            dismiss()
+                    .alert("근무지 삭제", isPresented: $viewModel.isAlertOpen) {
+                        Button("취소", role: .cancel) {
+                            viewModel.isAlertOpen.toggle()
                         }
+                        Button("삭제", role: .destructive) {
+                            viewModel.didTapDeleteButton {
+                                dismiss()
+                            }
+                        }
+                    } message: {
+                        Text("해당 근무지를 삭제합니다.?")
                     }
-                } message: {
-                    Text("해당 근무지를 삭제합니다.?")
+                    .padding(.top, -8)
+                    Spacer()
                 }
-                .padding(.top, -8)
-                
                 Spacer()
             }
             .padding(EdgeInsets(top: 24, leading: 16, bottom: 0, trailing: 16))
