@@ -9,10 +9,11 @@ import SwiftUI
 
 @main
 struct RlogApp: App {
+    @StateObject var viewRouter = ViewRouter()
 
     var body: some Scene {
         WindowGroup {
-            MainTabView()
+            MainTabView(viewRouter: viewRouter)
         }
     }
 }

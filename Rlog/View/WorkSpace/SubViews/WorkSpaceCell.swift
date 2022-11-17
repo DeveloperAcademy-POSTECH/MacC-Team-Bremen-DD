@@ -90,6 +90,7 @@ private extension WorkSpaceCell {
         }
         .padding()
         .background(Color.backgroundCard)
+        .cornerRadius(10)
         .overlay {
             RoundedRectangle(cornerRadius: 10)
                 .strokeBorder(Color.backgroundStroke, lineWidth: 2)
