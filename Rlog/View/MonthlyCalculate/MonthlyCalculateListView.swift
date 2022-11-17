@@ -23,6 +23,9 @@ struct MonthlyCalculateListView: View {
             }
             .padding(.horizontal)
         }
+        .onAppear {
+            viewModel.onAppear()
+        }
     }
 }
 
@@ -70,18 +73,9 @@ private extension MonthlyCalculateListView {
             ForEach(viewModel.workspaces, id: \.self) { workspace in
                 makeMonthlyCalculateListViewModel(workspace: workspace)
             }
-//            ForEach(1..<3) { _ in
-//                CalculateByWorkspaceCell()
-//            }
         }
     }
     
-    /* MARK: - 근무지에 해당하는 셀을 하위 struct로 만들어서 각 struct의 ViewModel이 값을 계산하게 할지 아니면 이 뷰가 전부 가지고 있을지를 고민하고 있습니다.
-     따로 struct를 빼버리면, 근무지 별로 필요한 WorkDay를 갖고 있으므로, 코드와 데이터 처리가 깔끔해질 것 같고, 전체 금액 계산하기가 껄끄러워 질 수도 있을 것 같습니다.
-     그래서, @escaping으로 계산 결과를 돌려 받아 월 전체 금액을 계산할지
-     이 뷰가 그냥 함수형이나 변수로 뷰를 가지고 있으면 전체 월 계산이 편해지지 않을까까지 고민해봤습니다.
-    */
-    // TODO: - 하위 Struct가 아닌, function으로 처리할 예정, 정산 결과 관련된 로직은 아예 다른 Service로 뺄 예정
     func makeMonthlyCalculateListViewModel(workspace: WorkspaceEntity) -> some View {
         var workspaceTitle: some View {
             HStack(spacing: 4) {

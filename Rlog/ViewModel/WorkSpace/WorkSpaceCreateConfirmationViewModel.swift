@@ -25,7 +25,7 @@ final class WorkSpaceCreateConfirmationViewModel: ObservableObject {
     
     func didTapConfirmButton() {
         Task {
-            await createWorkSpace()
+            await createWorkspaceAndSchedule()
             popToRoot()
         }
     }
@@ -50,15 +50,25 @@ private extension WorkSpaceCreateConfirmationViewModel {
         return (timeInterval / 3600)
     }
     
-    func createWorkSpace() async {
+    func createWorkspaceAndSchedule() async {
         // TODO: - workspace create test용
-        CoreDataManager.shared.createWorkspace(
-            name: "GS25 포항공대점",
-            payDay: Int16(10),
-            hourlyWage: Int32(9160),
-            hasTax: false,
-            hasJuhyu: false
+        let workspaceEntity = CoreDataManager.shared.createWorkspace(
+            name: workspaceData.name,
+            payDay: Int16(workspaceData.paymentDay) ?? 0,
+            hourlyWage: Int32(workspaceData.hourlyWage) ?? 0,
+            hasTax: workspaceData.hasTax,
+            hasJuhyu: workspaceData.hasJuhyu
         )
+        for schedule in scheduleData  {
+            CoreDataManager.shared.createSchedule(
+                of: workspaceEntity,
+                repeatDays: schedule.repeatedSchedule,
+                startHour: Int16(schedule.startHour) ?? 0,
+                startMinute: Int16(schedule.startMinute) ?? 0,
+                endHour: Int16(schedule.endHour) ?? 0,
+                endMinute: Int16(schedule.endMinute) ?? 0
+            )
+        }
     }
 }
 

@@ -11,6 +11,10 @@ import SwiftUI
 final class MonthlyCalculateListViewModel: ObservableObject {
     @Published var date = Date()
     @Published var workspaces: [WorkspaceEntity] = []
+    
+    func onAppear() {
+        getAllWorkspaces()
+    }
 }
 
 private extension MonthlyCalculateListViewModel {
