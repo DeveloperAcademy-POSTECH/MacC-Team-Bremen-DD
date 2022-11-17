@@ -17,8 +17,10 @@ struct MonthlyCalculateListView: View {
                     .padding(.top, 24)
                 total
                     .padding(.top, 34)
-                calculateByWorkspaceList
-                    .padding(.top, 32)
+                ScrollView {
+                    calculateByWorkspaceList
+                        .padding(.top, 32)
+                }
                 Spacer()
             }
             .padding(.horizontal)

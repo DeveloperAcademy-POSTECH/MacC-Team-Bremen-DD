@@ -11,6 +11,7 @@ import Foundation
 @MainActor
 final class WorkSpaceDetailViewModel: ObservableObject {
     var workspace: WorkspaceEntity
+    var schedulesDummy: [ScheduleModel] = []
     
     @Published var name: String
     @Published var hourlyWageString: String
@@ -18,7 +19,15 @@ final class WorkSpaceDetailViewModel: ObservableObject {
     @Published var hasTax: Bool
     @Published var hasJuhyu: Bool
     @Published var isAlertOpen = false
-    @Published var isCreateScheduleModalShow = false
+    @Published var isCreateScheduleModalShow = false {
+        didSet {
+            Task {
+                print("2")
+                await createSchedule()
+                getAllSchedules()
+            }
+        }
+    }
     @Published var schedules: [ScheduleEntity] = []
     
     init(workspace: WorkspaceEntity) {
@@ -63,6 +72,10 @@ private extension WorkSpaceDetailViewModel {
     
     func deleteWorkspace() async {
         CoreDataManager.shared.deleteWorkspace(workspace: workspace)
+    }
+    
+    func createSchedule() async {
+        print(schedulesDummy)
     }
     
     func getAllSchedules() {

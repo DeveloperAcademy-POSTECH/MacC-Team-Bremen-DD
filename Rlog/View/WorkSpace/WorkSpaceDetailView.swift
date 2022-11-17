@@ -107,8 +107,10 @@ struct WorkSpaceDetailView: View {
                 }
             }
         }
-        .sheet(isPresented: $viewModel.isCreateScheduleModalShow) {
-            Text("근무 패턴 생성")
+        .sheet(isPresented: $viewModel.isCreateScheduleModalShow, onDismiss: {
+            print("1")
+        }) {
+            WorkSpaceCreateCreatingScheduleView(isShowingModal: $viewModel.isCreateScheduleModalShow, scheduleList: $viewModel.schedulesDummy)
         }
         .background(Color.backgroundWhite)
         .navigationBarBackButtonHidden()
