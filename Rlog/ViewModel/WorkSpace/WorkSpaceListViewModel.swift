@@ -10,7 +10,11 @@ import Foundation
 
 @MainActor
 final class WorkSpaceListViewModel: ObservableObject {
-    @Published var isShowingSheet = false
+    @Published var isShowingSheet = false {
+        didSet {
+            getAllWorkspaces()
+        }
+    }
     @Published var workspaces: [WorkspaceEntity] = []
     
     func onAppear() {
