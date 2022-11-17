@@ -11,5 +11,19 @@ import Foundation
 @MainActor
 final class WorkSpaceListViewModel: ObservableObject {
     @Published var isShowingSheet = false
-  
+    @Published var workspaces: [WorkspaceEntity] = []
+    
+    func onAppear() {
+        getAllWorkspaces()
+    }
+}
+
+private extension WorkSpaceListViewModel {
+    func getAllWorkspaces() {
+        let result = CoreDataManager.shared.getAllWorkspaces()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.workspaces = result
+        }
+    }
 }

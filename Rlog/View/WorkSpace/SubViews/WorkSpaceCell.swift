@@ -9,13 +9,13 @@ import SwiftUI
 
 struct WorkSpaceCell: View {
     
-    var model: CustomModel
+    var workspace: WorkspaceEntity
     
     var body: some View {
         NavigationLink {
             WorkSpaceDetailView()
         } label: {
-            makeWorkSpaceCardContent(model: model)
+            makeWorkSpaceCardContent(workspace: workspace)
         }
     }
 }
@@ -62,13 +62,13 @@ private extension WorkSpaceCell {
     //        }
     //    }
     
-    func makeWorkSpaceCardContent(model: CustomModel) -> some View {
+    func makeWorkSpaceCardContent(workspace: WorkspaceEntity) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(alignment: .center){
                 Rectangle()
                     .foregroundColor(Color.primary)
                     .frame(width: 4, height: 16)
-                Text(model.name)
+                Text(workspace.name)
                     .font(.body)
                     .fontWeight(.bold)
                     .foregroundColor(.fontBlack)
@@ -76,11 +76,11 @@ private extension WorkSpaceCell {
             .padding(.bottom, 16)
             
             VStack(spacing: 8){
-                makeWorkSpaceRowInfo(workTitle: "시급", workInfo: "\(String(model.hourlyWage)) 원")
-                makeWorkSpaceRowInfo(workTitle: "급여일", workInfo: "매월 \(String(model.paymentDay)) 일")
-                makeWorkSpaceRowInfo(workTitle: "주휴수당", workInfo: model.hasJuhyu ? "적용" : "미적용")
-                makeWorkSpaceRowInfo(workTitle: "소득세", workInfo: model.hasTax ? "적용" : "미적용")
-                //                makeWorkSpaceScheduleInfo(workTitle: "근무유형", schedules: schedules)
+                makeWorkSpaceRowInfo(workTitle: "시급", workInfo: "\(String(workspace.hourlyWage)) 원")
+                makeWorkSpaceRowInfo(workTitle: "급여일", workInfo: "매월 \(String(workspace.payDay)) 일")
+                makeWorkSpaceRowInfo(workTitle: "주휴수당", workInfo: workspace.hasJuhyu ? "적용" : "미적용")
+                makeWorkSpaceRowInfo(workTitle: "소득세", workInfo: workspace.hasTax ? "적용" : "미적용")
+//                makeWorkSpaceScheduleInfo(workTitle: "근무유형", schedules: workspace.schedules)
             }
         }
         .padding()
