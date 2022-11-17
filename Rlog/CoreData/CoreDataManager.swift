@@ -45,7 +45,7 @@ extension CoreDataManager {
         hourlyWage: Int32,
         hasTax: Bool,
         hasJuhyu: Bool
-    ) {
+    ) -> WorkspaceEntity {
         let workspace = WorkspaceEntity(context: context)
         workspace.name = name
         workspace.payDay = payDay
@@ -53,6 +53,7 @@ extension CoreDataManager {
         workspace.hasTax = hasTax
         workspace.hasJuhyu = hasJuhyu
         save()
+        return workspace
     }
 
     func getAllWorkspaces() -> [WorkspaceEntity] {
@@ -174,7 +175,7 @@ extension CoreDataManager {
 
     func getHasDoneWorkdays(of workspace: WorkspaceEntity, start: Date, target: Date) -> [WorkdayEntity] {
         let fetchRequest: NSFetchRequest<WorkdayEntity> = WorkdayEntity.fetchRequest()
-        let workspacePredicate = NSPredicate(format: "workspace.name", workspace.name)
+        let workspacePredicate = NSPredicate(format: "workspace.name = %@", workspace.name)
         let startPredicate = NSPredicate(format: "date >= %@", start as CVarArg)
         let targetPredicate = NSPredicate(format: "date < %@", target as CVarArg)
         fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: [workspacePredicate, startPredicate, targetPredicate])
