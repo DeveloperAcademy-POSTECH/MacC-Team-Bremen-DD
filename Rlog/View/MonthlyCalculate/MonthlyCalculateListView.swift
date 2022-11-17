@@ -23,6 +23,9 @@ struct MonthlyCalculateListView: View {
             }
             .padding(.horizontal)
         }
+        .onAppear {
+            UITabBar.appearance().barTintColor = UIColor.white
+        }
     }
 }
 
