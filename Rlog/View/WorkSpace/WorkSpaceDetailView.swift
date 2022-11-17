@@ -56,18 +56,23 @@ struct WorkSpaceDetailView: View {
                 .padding(.bottom, -8)
                 
                 StrokeButton(label: "+ 근무패턴 추가", buttonType: .add) {
+                    viewModel.isCreateScheduleModalShow.toggle()
                 }
                 .padding(.bottom, -8)
                 
                 HDivider()
                 
                 StrokeButton(label: "근무지 삭제", buttonType: .destructive) {
+                    viewModel.isAlertOpen.toggle()
                 }
                 .alert("근무지 삭제", isPresented: $viewModel.isAlertOpen) {
                     Button("취소", role: .cancel) {
+                        viewModel.isAlertOpen.toggle()
                     }
                     Button("삭제", role: .destructive) {
-                        
+                        viewModel.didTapDeleteButton {
+                            dismiss()
+                        }
                     }
                 } message: {
                     Text("해당 근무지를 삭제합니다.?")
@@ -102,6 +107,9 @@ struct WorkSpaceDetailView: View {
                 }
             }
         }
+        .sheet(isPresented: $viewModel.isCreateScheduleModalShow) {
+            Text("근무 패턴 생성")
+        }
         .background(Color.backgroundWhite)
         .navigationBarBackButtonHidden()
         .onAppear {
@@ -125,35 +133,6 @@ private extension WorkSpaceDetailView {
                 }
             })
         }
-    }
-    
-    @ViewBuilder
-    func schedulesContainer() -> some View {
-        HStack(spacing: 0) {
-            HStack(spacing: 0) {
-                //                ForEach(schedule.repeatedSchedule, id:\.self) { weekDay in
-                //                    Text(weekDay)
-                //                        .font(.body)
-                //                        .foregroundColor(.fontBlack)
-                //                        .padding(.horizontal, 1)
-                //                }
-            }
-            .padding(.trailing, 3)
-            Spacer()
-            Text("11 : 00 - 12 : 00")
-                .font(.body)
-                .foregroundColor(.fontBlack)
-            Button {
-            } label: {
-                Image(systemName: "minus.circle")
-                    .foregroundColor(.red)
-                    .padding(.leading, 16)
-            }
-        }
-        .padding()
-        .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 54)
-        .background(Color.backgroundWhite)
-        .cornerRadius(10)
     }
 }
 

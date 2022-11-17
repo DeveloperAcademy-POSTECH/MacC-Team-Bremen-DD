@@ -18,6 +18,7 @@ final class WorkSpaceDetailViewModel: ObservableObject {
     @Published var hasTax: Bool
     @Published var hasJuhyu: Bool
     @Published var isAlertOpen = false
+    @Published var isCreateScheduleModalShow = false
     @Published var schedules: [ScheduleEntity] = []
     
     init(workspace: WorkspaceEntity) {
@@ -32,6 +33,13 @@ final class WorkSpaceDetailViewModel: ObservableObject {
     func didTapConfirmButton(completion: @escaping (() -> Void)) {
         Task {
             await updateWorkspace()
+            completion()
+        }
+    }
+    
+    func didTapDeleteButton(completion: @escaping (() -> Void)) {
+        Task {
+            await deleteWorkspace()
             completion()
         }
     }
@@ -51,6 +59,10 @@ private extension WorkSpaceDetailViewModel {
             hasTax: hasTax,
             hasJuhyu: hasJuhyu
         )
+    }
+    
+    func deleteWorkspace() async {
+        CoreDataManager.shared.deleteWorkspace(workspace: workspace)
     }
     
     func getAllSchedules() {
