@@ -22,9 +22,6 @@ final class WorkSpaceCellViewModel: ObservableObject {
 private extension WorkSpaceCellViewModel {
     func getAllSchedules() {
         let result = CoreDataManager.shared.getSchedules(of: workspace)
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.schedules = result
-        }
+        self.schedules = result
     }
 }

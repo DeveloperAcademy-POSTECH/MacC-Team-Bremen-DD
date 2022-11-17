@@ -90,19 +90,16 @@ private extension WorkSpaceDetailViewModel {
     
     func getAllSchedules() {
         let result = CoreDataManager.shared.getSchedules(of: workspace)
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.schedules = []
-            for schedule in result {
-                self.schedules.append(ScheduleModel(
-                    scheduleEntity: schedule,
-                    repeatedSchedule: schedule.repeatDays,
-                    startHour: String(schedule.startHour),
-                    startMinute: String(schedule.startMinute),
-                    endHour: String(schedule.endHour),
-                    endMinute: String(schedule.endMinute)
-                ))
-            }
+        schedules = []
+        for schedule in result {
+            schedules.append(ScheduleModel(
+                scheduleEntity: schedule,
+                repeatedSchedule: schedule.repeatDays,
+                startHour: String(schedule.startHour),
+                startMinute: String(schedule.startMinute),
+                endHour: String(schedule.endHour),
+                endMinute: String(schedule.endMinute)
+            ))
         }
     }
 }
