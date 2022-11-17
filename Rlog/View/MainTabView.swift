@@ -11,7 +11,7 @@ struct MainTabView: View {
     @StateObject var viewRouter: ViewRouter
     
     var body: some View {
-        ZStack {
+        VStack {
             switch viewRouter.currentTab {
             case .schedule:
                 Tab.schedule.view
@@ -22,13 +22,13 @@ struct MainTabView: View {
             }
             tabBarView
         }
+        .ignoresSafeArea(.keyboard)
     }
 }
 
 private extension MainTabView {
     var tabBarView: some View {
         VStack(spacing: 0) {
-            Spacer()
             Rectangle()
                 .frame(height: 1)
                 .foregroundColor(.grayLight)
@@ -37,9 +37,9 @@ private extension MainTabView {
                     tabItem(tab: tab)
                 }
             }
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 49)
-            .background(Color.backgroundWhite)
         }
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 49)
+        .background(Color.backgroundWhite)
     }
 
     func tabItem(tab: Tab) -> some View {
