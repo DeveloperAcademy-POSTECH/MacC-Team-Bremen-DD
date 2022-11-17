@@ -67,9 +67,12 @@ private extension MonthlyCalculateListView {
     
     var calculateByWorkspaceList: some View {
         VStack {
-            ForEach(1..<3) { _ in
-                CalculateByWorkspaceCell()
+            ForEach(viewModel.workspaces, id: \.self) { workspace in
+                makeMonthlyCalculateListViewModel(workspace: workspace)
             }
+//            ForEach(1..<3) { _ in
+//                CalculateByWorkspaceCell()
+//            }
         }
     }
     
@@ -79,42 +82,13 @@ private extension MonthlyCalculateListView {
      이 뷰가 그냥 함수형이나 변수로 뷰를 가지고 있으면 전체 월 계산이 편해지지 않을까까지 고민해봤습니다.
     */
     // TODO: - 하위 Struct가 아닌, function으로 처리할 예정, 정산 결과 관련된 로직은 아예 다른 Service로 뺄 예정
-    private struct CalculateByWorkspaceCell: View {
-        var body: some View {
-            NavigationLink(destination: MonthlyCalculateDetailView()) {
-                VStack(alignment: .leading, spacing: 0) {
-                    workspaceTitle
-                        .padding(.top)
-                    Group {
-                        makeWorkspaceInfomation(title: "일한 시간", content: "32시간")
-                            .padding(.top, 32)
-
-                        makeWorkspaceInfomation(title: "급여일까지", content: "D-12")
-                            .padding(.top, 8)
-                        
-                        HDivider()
-                            .padding(.top, 8)
-                        
-                        calculateResult
-                            .padding(.vertical)
-                    }
-                    .padding(.leading, 4)
-                }
-                .padding(.horizontal)
-                .background(Color.backgroundCard)
-                .cornerRadius(8)
-                .padding(2)
-                .background(Color.backgroundStroke)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-            }
-        }
-        
+    func makeMonthlyCalculateListViewModel(workspace: WorkspaceEntity) -> some View {
         var workspaceTitle: some View {
             HStack(spacing: 4) {
                 Rectangle()
                     .fill(Color.primary)
                     .frame(width: 4, height: 16)
-                Text("GS25 포항공대점")
+                Text(workspace.name)
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
             }
@@ -142,6 +116,33 @@ private extension MonthlyCalculateListView {
                     .foregroundColor(Color.grayDark)
             }
             .font(.subheadline)
+        }
+        
+        return NavigationLink(destination: MonthlyCalculateDetailView()) {
+            VStack(alignment: .leading, spacing: 0) {
+                workspaceTitle
+                    .padding(.top)
+                Group {
+                    makeWorkspaceInfomation(title: "일한 시간", content: "32시간")
+                        .padding(.top, 32)
+                    
+                    makeWorkspaceInfomation(title: "급여일까지", content: "D-12")
+                        .padding(.top, 8)
+                    
+                    HDivider()
+                        .padding(.top, 8)
+                    
+                    calculateResult
+                        .padding(.vertical)
+                }
+                .padding(.leading, 4)
+            }
+            .padding(.horizontal)
+            .background(Color.backgroundCard)
+            .cornerRadius(8)
+            .padding(2)
+            .background(Color.backgroundStroke)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
         }
     }
 }

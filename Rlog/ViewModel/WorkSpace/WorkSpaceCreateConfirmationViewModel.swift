@@ -24,7 +24,10 @@ final class WorkSpaceCreateConfirmationViewModel: ObservableObject {
     private let hasJuhyu = false
     
     func didTapConfirmButton() {
-        popToRoot()
+        Task {
+            await createWorkSpace()
+            popToRoot()
+        }
     }
 }
 
@@ -45,6 +48,17 @@ private extension WorkSpaceCreateConfirmationViewModel {
         let timeInterval = endDate.timeIntervalSinceReferenceDate - startDate.timeIntervalSinceReferenceDate
         
         return (timeInterval / 3600)
+    }
+    
+    func createWorkSpace() async {
+        // TODO: - workspace create test용
+        CoreDataManager.shared.createWorkspace(
+            name: "GS25 포항공대점",
+            payDay: Int16(10),
+            hourlyWage: Int32(9160),
+            hasTax: false,
+            hasJuhyu: false
+        )
     }
 }
 
