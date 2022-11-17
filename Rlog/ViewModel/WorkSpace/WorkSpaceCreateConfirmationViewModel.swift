@@ -51,17 +51,26 @@ private extension WorkSpaceCreateConfirmationViewModel {
     }
     
     func createWorkspaceAndSchedule() async {
-        // TODO: - workspace create test용
-        let workspaceEntity = CoreDataManager.shared.createWorkspace(
+        Task {
+            let workspace = await createWorkSpace()
+            await createSchedules(workspace: workspace)
+        }
+    }
+    
+    func createWorkSpace() async -> WorkspaceEntity {
+        return CoreDataManager.shared.createWorkspace(
             name: workspaceData.name,
             payDay: Int16(workspaceData.paymentDay) ?? 0,
             hourlyWage: Int32(workspaceData.hourlyWage) ?? 0,
             hasTax: workspaceData.hasTax,
             hasJuhyu: workspaceData.hasJuhyu
         )
+    }
+    
+    func createSchedules(workspace: WorkspaceEntity) async {
         for schedule in scheduleData  {
             CoreDataManager.shared.createSchedule(
-                of: workspaceEntity,
+                of: workspace,
                 repeatDays: schedule.repeatedSchedule,
                 startHour: Int16(schedule.startHour) ?? 0,
                 startMinute: Int16(schedule.startMinute) ?? 0,
