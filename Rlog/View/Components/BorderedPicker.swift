@@ -63,13 +63,13 @@ private extension BorderedPicker {
                     }
                 }
             }
-            .padding(EdgeInsets(top: 13, leading: 16, bottom: 13, trailing: 16))
-            .cornerRadius(13)
+            .padding(EdgeInsets(top: 12, leading: 16, bottom: 12, trailing: 16))
+            .cornerRadius(10)
             .frame(maxWidth: .infinity, maxHeight: 56)
             .background(Color.backgroundCard)
             .onTapGesture { withAnimation { isTapped.toggle() } }
             .overlay {
-                RoundedRectangle(cornerRadius: 13)
+                RoundedRectangle(cornerRadius: 10)
                     .stroke(
                         isTapped ? Color.primary : Color.backgroundStroke,
                         lineWidth: 2
