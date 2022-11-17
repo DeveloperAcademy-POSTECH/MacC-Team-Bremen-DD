@@ -49,7 +49,7 @@ private extension InputFormElement {
     }
     
     var workplaceView: some View {
-        VStack {
+        VStack(spacing: 0) {
             BorderedTextField(
                 textFieldType: .workplace,
                 text: text
@@ -62,12 +62,13 @@ private extension InputFormElement {
                         .foregroundColor(.red)
                     Spacer()
                 }
+                .padding(.top)
             }
         }
     }
     
     var wageView: some View {
-        VStack {
+        VStack(spacing: 0) {
             BorderedTextField(
                 textFieldType: .wage,
                 text: text
@@ -80,7 +81,7 @@ private extension InputFormElement {
                         .foregroundColor(.red)
                     Spacer()
                 }
-                .padding(.top, 4)
+                .padding(.top)
             }
         }
     }
@@ -99,7 +100,7 @@ private extension InputFormElement {
                         .foregroundColor(.red)
                     Spacer()
                 }
-                .padding(.top, 4)
+                .padding(.top)
             }
         }
     }

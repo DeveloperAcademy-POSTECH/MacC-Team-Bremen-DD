@@ -49,18 +49,30 @@ struct StrokeButton: View {
                     ? .grayLight.opacity(0.5)
                     : .red.opacity(0.5)
                 }
-                return buttonType == .add ? .grayLight : .red
+                return buttonType == .add ? .grayLight : .pointRed
             }
             
             var body: some View {
-                configuration.label
-                    .font(.body)
-                    .foregroundColor(backgroundColor)
-                    .frame(maxWidth: .infinity, minHeight: 56, maxHeight: 56)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(backgroundColor, lineWidth: 1)
-                    )
+                if buttonType == .add {
+                    configuration.label
+                        .font(.body)
+                        .foregroundColor(backgroundColor)
+                        .frame(maxWidth: .infinity, minHeight: 56, maxHeight: 56)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(backgroundColor, lineWidth: 1)
+                        )
+                } else {
+                    configuration.label
+                        .font(Font.body.bold())
+                        .foregroundColor(backgroundColor)
+                        .overlay {
+                            Rectangle()
+                                .frame(height: 1)
+                                .foregroundColor(.pointRed)
+                                .padding(.top, 18)
+                        }
+                }
             }
         }
     }
