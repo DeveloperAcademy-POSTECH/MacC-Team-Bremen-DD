@@ -11,7 +11,6 @@ import Foundation
 @MainActor
 final class WorkSpaceDetailViewModel: ObservableObject {
     var workspace: WorkspaceEntity
-    var schedulesDummy: [ScheduleModel] = []
     
     @Published var name: String
     @Published var hourlyWageString: String
@@ -19,16 +18,8 @@ final class WorkSpaceDetailViewModel: ObservableObject {
     @Published var hasTax: Bool
     @Published var hasJuhyu: Bool
     @Published var isAlertOpen = false
-    @Published var isCreateScheduleModalShow = false {
-        didSet {
-            Task {
-                print("2")
-                await createSchedule()
-                getAllSchedules()
-            }
-        }
-    }
-    @Published var schedules: [ScheduleEntity] = []
+    @Published var isCreateScheduleModalShow = false
+    @Published var schedules: [ScheduleModel] = []
     
     init(workspace: WorkspaceEntity) {
         self.workspace = workspace
@@ -37,11 +28,13 @@ final class WorkSpaceDetailViewModel: ObservableObject {
         self.paymentDayString = String(workspace.payDay)
         self.hasTax = workspace.hasTax
         self.hasJuhyu = workspace.hasJuhyu
+        getAllSchedules()
     }
     
     func didTapConfirmButton(completion: @escaping (() -> Void)) {
         Task {
             await updateWorkspace()
+            await updateSchedules()
             completion()
         }
     }
@@ -51,10 +44,6 @@ final class WorkSpaceDetailViewModel: ObservableObject {
             await deleteWorkspace()
             completion()
         }
-    }
-    
-    func onAppear() {
-        getAllSchedules()
     }
 }
 
@@ -74,15 +63,44 @@ private extension WorkSpaceDetailViewModel {
         CoreDataManager.shared.deleteWorkspace(workspace: workspace)
     }
     
-    func createSchedule() async {
-        print(schedulesDummy)
+    func updateSchedules() async {
+        for schedule in schedules {
+            if let scheduleEntity = schedule.scheduleEntity {
+                CoreDataManager.shared.editSchedule(
+                    of: scheduleEntity,
+                    repeatDays: schedule.repeatedSchedule,
+                    startHour: Int16(schedule.startHour) ?? 12,
+                    startMinute: Int16(schedule.startMinute) ?? 0,
+                    endHour: Int16(schedule.endHour) ?? 15,
+                    endMinute: Int16(schedule.endMinute) ?? 0
+                )
+            } else {
+                CoreDataManager.shared.createSchedule(
+                    of: workspace,
+                    repeatDays: schedule.repeatedSchedule,
+                    startHour: Int16(schedule.startHour) ?? 12,
+                    startMinute: Int16(schedule.startMinute) ?? 0,
+                    endHour: Int16(schedule.endHour) ?? 15,
+                    endMinute: Int16(schedule.endMinute) ?? 0
+                )
+            }
+        }
     }
     
     func getAllSchedules() {
         let result = CoreDataManager.shared.getSchedules(of: workspace)
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.schedules = result
+            for schedule in result {
+                self.schedules.append(ScheduleModel(
+                    scheduleEntity: schedule,
+                    repeatedSchedule: schedule.repeatDays,
+                    startHour: String(schedule.startHour),
+                    startMinute: String(schedule.startMinute),
+                    endHour: String(schedule.endHour),
+                    endMinute: String(schedule.endMinute)
+                ))
+            }
         }
     }
 }

@@ -46,11 +46,11 @@ struct WorkSpaceDetailView: View {
                 
                 ForEach(viewModel.schedules, id: \.self) { schedule in
                     ScheduleContainer(
-                        repeatedSchedule: schedule.repeatDays,
-                        startHour: String(schedule.startHour),
-                        startMinute: String(schedule.startMinute),
-                        endHour: String(schedule.endHour),
-                        endMinute: String(schedule.endMinute)
+                        repeatedSchedule: schedule.repeatedSchedule,
+                        startHour: schedule.startHour,
+                        startMinute: schedule.startMinute,
+                        endHour: schedule.endHour,
+                        endMinute: schedule.endMinute
                     )
                 }
                 .padding(.bottom, -8)
@@ -113,13 +113,10 @@ struct WorkSpaceDetailView: View {
         .sheet(isPresented: $viewModel.isCreateScheduleModalShow, onDismiss: {
             print("1")
         }) {
-            WorkSpaceCreateCreatingScheduleView(isShowingModal: $viewModel.isCreateScheduleModalShow, scheduleList: $viewModel.schedulesDummy)
+            WorkSpaceCreateCreatingScheduleView(isShowingModal: $viewModel.isCreateScheduleModalShow, scheduleList: $viewModel.schedules)
         }
         .background(Color.backgroundWhite)
         .navigationBarBackButtonHidden()
-        .onAppear {
-            viewModel.onAppear()
-        }
     }
 }
 
