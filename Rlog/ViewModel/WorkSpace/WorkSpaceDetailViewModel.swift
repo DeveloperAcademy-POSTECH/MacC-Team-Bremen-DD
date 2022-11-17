@@ -63,6 +63,7 @@ private extension WorkSpaceDetailViewModel {
         CoreDataManager.shared.deleteWorkspace(workspace: workspace)
     }
     
+    // MARK: - 현재는 스케줄 추가만 가능하지만, 스케줄 수정에 대한 확장 가능성이 있으므로, 함수를 이렇게 설정
     func updateSchedules() async {
         for schedule in schedules {
             if let scheduleEntity = schedule.scheduleEntity {
@@ -91,6 +92,7 @@ private extension WorkSpaceDetailViewModel {
         let result = CoreDataManager.shared.getSchedules(of: workspace)
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
+            self.schedules = []
             for schedule in result {
                 self.schedules.append(ScheduleModel(
                     scheduleEntity: schedule,

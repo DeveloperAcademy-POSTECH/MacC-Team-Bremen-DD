@@ -12,7 +12,7 @@ final class MonthlyCalculateListViewModel: ObservableObject {
     @Published var date = Date()
     @Published var workspaces: [WorkspaceEntity] = []
     
-    func onAppear() {
+    init() {
         getAllWorkspaces()
     }
 }
