@@ -38,12 +38,25 @@ struct ScheduleUpdateView: View {
             Spacer()
         }
         .navigationBarTitle(Text("근무 수정"), displayMode: .inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                toolbarConfirmButton
+            }
+        }
         .padding(.horizontal)
         .padding(.vertical)
     }
 }
 
 private extension ScheduleUpdateView {
+    var toolbarConfirmButton: some View {
+        Button{
+        } label: {
+            Text("완료")
+                .foregroundColor(.primary)
+        }
+    }
+    
     var workspace: some View {
         
         //TODO : picker로 변경
