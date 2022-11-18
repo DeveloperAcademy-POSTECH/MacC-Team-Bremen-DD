@@ -60,6 +60,9 @@ struct WorkSpaceListView: View {
                 }
             }
             .background(Color.backgroundWhite)
+            .onAppear {
+                viewModel.onAppear()
+            }
         }
         .accentColor(.fontBlack)
     }

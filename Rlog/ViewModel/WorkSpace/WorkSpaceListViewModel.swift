@@ -13,7 +13,7 @@ final class WorkSpaceListViewModel: ObservableObject {
     @Published var isShowingSheet = false
     @Published var workspaces: [WorkspaceEntity] = []
     
-    init() {
+    func onAppear() {
         getAllWorkspaces()
     }
 }
