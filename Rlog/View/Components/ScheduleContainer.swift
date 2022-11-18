@@ -14,6 +14,8 @@ struct ScheduleContainer: View {
     let endHour: String
     let endMinute: String
     
+    var completion: (() -> Void)?
+    
     var body: some View {
         scheduleContainerView
     }
@@ -40,7 +42,11 @@ private extension ScheduleContainer {
             
             workHourView
             
-            Button{} label: {
+            Button{
+                if let completion = completion {
+                    completion()
+                }
+            } label: {
                 Image(systemName: "minus.circle")
                     .foregroundColor(.red)
             }.padding(.leading)

@@ -11,6 +11,7 @@ import Foundation
 @MainActor
 final class WorkSpaceDetailViewModel: ObservableObject {
     var workspace: WorkspaceEntity
+    var deleteSchedules: [ScheduleEntity] = []
     
     @Published var name: String
     @Published var hourlyWageString: String
@@ -19,7 +20,7 @@ final class WorkSpaceDetailViewModel: ObservableObject {
     @Published var hasJuhyu: Bool
     @Published var isAlertOpen = false
     @Published var isCreateScheduleModalShow = false
-    @Published var schedules: [ScheduleModel] = []
+    @Published var schedules: [ScheduleEntity] = []
     
     init(workspace: WorkspaceEntity) {
         self.workspace = workspace
@@ -45,6 +46,13 @@ final class WorkSpaceDetailViewModel: ObservableObject {
             completion()
         }
     }
+    
+    func didTapDeleteScheduleButton(schedule: ScheduleEntity) {
+        if let index = schedules.firstIndex(of: schedule) {
+            deleteSchedules.append(schedules[index])
+            schedules.remove(at: index)
+        }
+    }
 }
 
 private extension WorkSpaceDetailViewModel {
@@ -63,43 +71,14 @@ private extension WorkSpaceDetailViewModel {
         CoreDataManager.shared.deleteWorkspace(workspace: workspace)
     }
     
-    // MARK: - 현재는 스케줄 추가만 가능하지만, 스케줄 수정에 대한 확장 가능성이 있으므로, 함수를 이렇게 설정
     func updateSchedules() async {
-        for schedule in schedules {
-            if let scheduleEntity = schedule.scheduleEntity {
-                CoreDataManager.shared.editSchedule(
-                    of: scheduleEntity,
-                    repeatDays: schedule.repeatedSchedule,
-                    startHour: Int16(schedule.startHour) ?? 12,
-                    startMinute: Int16(schedule.startMinute) ?? 0,
-                    endHour: Int16(schedule.endHour) ?? 15,
-                    endMinute: Int16(schedule.endMinute) ?? 0
-                )
-            } else {
-                CoreDataManager.shared.createSchedule(
-                    of: workspace,
-                    repeatDays: schedule.repeatedSchedule,
-                    startHour: Int16(schedule.startHour) ?? 12,
-                    startMinute: Int16(schedule.startMinute) ?? 0,
-                    endHour: Int16(schedule.endHour) ?? 15,
-                    endMinute: Int16(schedule.endMinute) ?? 0
-                )
-            }
+        for schedule in deleteSchedules {
+            CoreDataManager.shared.deleteSchedule(of: schedule)
         }
     }
     
     func getAllSchedules() {
         let result = CoreDataManager.shared.getSchedules(of: workspace)
-        schedules = []
-        for schedule in result {
-            schedules.append(ScheduleModel(
-                scheduleEntity: schedule,
-                repeatedSchedule: schedule.repeatDays,
-                startHour: String(schedule.startHour),
-                startMinute: String(schedule.startMinute),
-                endHour: String(schedule.endHour),
-                endMinute: String(schedule.endMinute)
-            ))
-        }
+        schedules = result
     }
 }
