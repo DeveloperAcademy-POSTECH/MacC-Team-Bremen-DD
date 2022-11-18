@@ -9,4 +9,57 @@ import Foundation
 
 final class ScheduleCreationViewModel: ObservableObject {
     @Published var isFocused = false
+    @Published var workspaces: [WorkspaceEntity] = []
+    @Published var selectedWorkspaceString: String = "" {
+        didSet {
+            let result = workspaces.filter { $0.name == selectedWorkspaceString}
+            self.selectedWorkspaceEntity = result.first
+        }
+    }
+    @Published var selectedWorkspace: WorkspaceEntity? = nil
+    @Published var workday: Date = Date()
+    @Published var startTime: Date = Date()
+    @Published var endTime: Date = Date()
+    @Published var memo: String = ""
+    
+    var selectedWorkspaceEntity: WorkspaceEntity? = nil
+    
+    func onAppear() {
+        getAllWorkspaces()
+    }
+    
+    func didTapCreationButton() {
+        createWorkday()
+    }
+    
+    func getWorkspacesListString() -> [String] {
+        var result: [String] = []
+        for workspace in workspaces {
+            result.append(workspace.name)
+        }
+        return result
+    }
+}
+
+private extension ScheduleCreationViewModel {
+    func getAllWorkspaces() {
+        let result = CoreDataManager.shared.getAllWorkspaces()
+        workspaces = result
+    }
+    
+    func createWorkday() {
+        guard let workspaceEntity = selectedWorkspaceEntity else { return }
+        CoreDataManager.shared.createWorkday(
+            of: workspaceEntity,
+            hourlyWage: workspaceEntity.hourlyWage,
+            hasDone: false,
+            date: workday,
+            startTime: startTime,
+            endTime: endTime,
+            memo: memo,
+            schedule: nil
+        )
+        
+        print(" I AM WORKING ")
+    }
 }
