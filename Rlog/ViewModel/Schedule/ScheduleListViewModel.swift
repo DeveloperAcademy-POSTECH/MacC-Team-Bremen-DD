@@ -242,6 +242,7 @@ extension ScheduleListViewModel {
             return ("정규", .green)
         }
     }
+    
 }
 
 // Sample calendar model
@@ -250,22 +251,3 @@ struct CalendarModel {
     let month: Int
     let day: Int
 }
-
-
-//    let mockData: [WorkspaceEntitySample] = [
-//        WorkspaceEntitySample(
-//            name: "팍이네 팍팍 감자탕",
-//            schedules: ScheduleEntitySample(),
-//            workdays: WorkdayEntitySample(date: Calendar.current.date(from: DateComponents(year: 2022, month: 11, day: 14))!, sampleWorkday: "월", hasDone: false)
-//        ),
-//        WorkspaceEntitySample(
-//            name: "팍이네 팍팍 감자탕",
-//            schedules: ScheduleEntitySample(),
-//            workdays: WorkdayEntitySample(date: Calendar.current.date(from: DateComponents(year: 2022, month: 11, day: 16))!, sampleWorkday: "수", hasDone: true)
-//        ),
-//        WorkspaceEntitySample(
-//            name: "팍이네 팍팍 감자탕",
-//            schedules: ScheduleEntitySample(),
-//            workdays: WorkdayEntitySample(date: Calendar.current.date(from: DateComponents(year: 2022, month: 11, day: 18))!, sampleWorkday: "금", hasDone: false)
-//        )
-//    ]

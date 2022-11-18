@@ -52,6 +52,9 @@ final class ScheduleCellViewModel: ObservableObject {
     
     func didTapConfirmationButton(_ data: WorkdayEntity) {
         // TODO: CoreData WorkdayEntity Edit 함수 적용
+        print("🔥 Confirmation Button is Tapped")
+        print(data.workspace.name)
+        print("=====================================")
     }
 }
 
