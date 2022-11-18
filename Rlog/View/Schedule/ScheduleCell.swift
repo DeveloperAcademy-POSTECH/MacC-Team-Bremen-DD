@@ -7,9 +7,57 @@
 
 import SwiftUI
 
+// Sample
+final class ScheduleCellViewModel: ObservableObject {
+    let timeManager = TimeManager()
+    
+    func defineWorkType(
+        repeatDays: [String],
+        workDate: Date,
+        startHour: Int16,
+        startMinute: Int16,
+        endHour: Int16,
+        endMinute: Int16,
+        spentHour: Int16
+    ) -> (type: String, color: Color) {
+        let weekday = timeManager.getWeekdayOfDate(workDate)
+        let spentHourOfNormalCase: Int16 = endHour - startHour
+        let timeDifference = spentHour - spentHourOfNormalCase
+        
+        for day in repeatDays {
+            if day != weekday { return ("추가", .blue) }
+        }
+        
+        switch timeDifference {
+        case 0:
+            return ("정규", Color.primary)
+        case 1...:
+            return ("연장", Color.pointBlue)
+        case _ where timeDifference < 0:
+            return ("축소", Color.pointRed)
+        default:
+            return ("정규", .green)
+        }
+    }
+    
+    func verifyIsScheduleExpired(endTime: Date) -> Bool {
+        let order = NSCalendar.current.compare(Date(), to: endTime, toGranularity: .minute)
+        switch order {
+        case .orderedDescending:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    func didTapConfirmationButton(_ data: WorkdayEntity) {
+        // TODO: CoreData WorkdayEntity Edit 함수 적용
+    }
+}
+
 struct ScheduleCell: View {
     // WorkspaceEntity
-    @ObservedObject var viewModel = ScheduleListViewModel()
+    @ObservedObject var viewModel = ScheduleCellViewModel()
     let currentDate: Date
     let data: WorkdayEntity
     var weekday: String {
@@ -17,17 +65,37 @@ struct ScheduleCell: View {
         return formatter.string(from: currentDate)
     }
     // 👀 임시 뷰모델 로직
-//    var workType: (String, Color) {
-//        return viewModel.defineWorkType(
-//            repeatDays: data.schedules?.repeatDays ?? [],
-//            workDate: data.workdays?.date ?? Date(),
-//            startHour: data.schedules?.startHour ?? 9,
-//            startMinute: data.schedules?.startMinute ?? 0,
-//            endHour: data.schedules?.endHour ?? 18,
-//            endMinute: data.schedules?.endMinute ?? 0,
-//            spentHour: 10
-//        )
-//    }
+    var workType: (String, Color) {
+        return viewModel.defineWorkType(
+            repeatDays: data.schedule?.repeatDays ?? [],
+            workDate: data.date,
+            startHour: data.schedule?.startHour ?? 9,
+            startMinute: data.schedule?.startMinute ?? 0,
+            endHour: data.schedule?.endHour ?? 18,
+            endMinute: data.schedule?.endMinute ?? 0,
+            spentHour: 10
+        )
+    }
+    
+    var startTimeString: String {
+        let components = Calendar.current.dateComponents([.hour, .minute], from: data.startTime)
+        let hour = components.hour!
+        let minute = components.minute!
+        
+        return "\(hour):\(minute >= 10 ? minute.description : "0\(minute)")"
+    }
+    
+    var endTimeString: String {
+        let components = Calendar.current.dateComponents([.hour, .minute], from: data.endTime)
+        let hour = components.hour!
+        let minute = components.minute!
+        
+        return "\(hour):\(minute >= 10 ? minute.description : "0\(minute)")"
+    }
+    
+    var isScheduleExpired: Bool {
+        return viewModel.verifyIsScheduleExpired(endTime: data.endTime)
+    }
     
     var body: some View {
         scheduleInfo
@@ -40,18 +108,16 @@ private extension ScheduleCell {
         VStack(spacing: 0) {
             
             HStack {
-//                Text(workType.0)
-                Text("Hello")
+                Text(workType.0)
                     .font(.caption2)
                     .foregroundColor(Color.backgroundWhite)
                     .padding(EdgeInsets(top: 2, leading: 6, bottom: 2, trailing: 6))
-//                    .background(workType.1)
+                    .background(workType.1)
                     .cornerRadius(5)
                 
                 Spacer()
                 
-//                Text("\(data.workdays?.endTime)시간")
-                Text("Hello")
+                Text("4시간")
                     .font(.subheadline)
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
@@ -65,29 +131,14 @@ private extension ScheduleCell {
                 
                 Spacer()
                 
-//                Text("\(data.workdays.startHour):\(data.workdays.startMinute) ~ \(data.workdays.endHour):\(data.workdays.endMinute)")
-                Text("Hello")
+                Text("\(startTimeString) ~ \(endTimeString)")
                     .font(.body)
                     .foregroundColor(Color.fontBlack)
             }
             .padding(.vertical, 8)
             
-            HStack {
-                Spacer()
-                
-                Button {
-                    print(viewModel.currentDate)
-                    print(weekday)
-                } label: {
-                    
-                    Text("확정하기")
-                        .font(.caption)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.backgroundWhite)
-                        .padding(EdgeInsets(top: 8, leading: 47, bottom: 8, trailing: 47))
-//                        .background(workType.1)
-                        .cornerRadius(10)
-                }
+            if isScheduleExpired {
+                confirmationButton
             }
 
         }
@@ -99,6 +150,23 @@ private extension ScheduleCell {
             RoundedRectangle(cornerRadius: 10)
                 .strokeBorder(Color.backgroundStroke, lineWidth: 2)
         }
+    }
+    
+    var confirmationButton: some View {
+        HStack {
+            Spacer()
+            Button {
+                viewModel.didTapConfirmationButton(data)
+            } label: {
+                Text("확정하기")
+                    .font(Font.caption.bold())
+                    .padding(EdgeInsets(top: 5, leading: 29, bottom: 5, trailing: 29))
+                    .foregroundColor(.white)
+                    .background(Color.primary)
+                    .cornerRadius(10)
+            }
+        }
+        .padding(.top, 8)
     }
     
     var scheduleNotFound: some View {
@@ -114,35 +182,3 @@ private extension ScheduleCell {
         .frame(height: UIScreen.main.bounds.height / 2)
     }
 }
-
-//struct WorkspaceEntitySample: Identifiable {
-//    var id = UUID()
-//
-//    let name: String
-//    let payDay: Int16 = 25
-//    let hourlyWage: Int32 = 10000
-//    let hasTax: Bool = true
-//    let hasJuhyu: Bool = true
-//    let schedules: ScheduleEntitySample
-//    let workdays: WorkdayEntitySample
-//}
-//
-//struct ScheduleEntitySample {
-//    let repeatDays: [String] = ["월", "수", "금"]
-//    let startHour: Int16 = 9
-//    let startMinute: Int16 = 30
-//    let endHour: Int16 = 18
-//    let endMinute: Int16 = 0
-//}
-//
-//struct WorkdayEntitySample {
-//    let date: Date
-//    let sampleWorkday: String
-//    let hourlyWage: Int32 = 10000
-//    let startTime: Date = Date()
-//    let endTime: Date = Date()
-//    let hasDone: Bool
-//    var spentHour: Int16 = 4
-//}
-//
-
