@@ -57,6 +57,17 @@ struct WorkSpaceDetailView: View {
                 }
                 .padding(.bottom, -8)
                 
+                ForEach(viewModel.shouldCreateSchdeules, id: \.self) { schedule in
+                    ScheduleContainer(
+                        repeatedSchedule: schedule.repeatedSchedule,
+                        startHour: schedule.startHour,
+                        startMinute: schedule.startMinute,
+                        endHour: schedule.endHour,
+                        endMinute: schedule.endMinute
+                    )
+                }
+                .padding(.bottom, -8)
+                
                 StrokeButton(label: "+ 근무패턴 추가", buttonType: .add) {
                     viewModel.isCreateScheduleModalShow.toggle()
                 }
@@ -84,7 +95,7 @@ struct WorkSpaceDetailView: View {
                     .padding(.top, -8)
                     Spacer()
                 }
-                Spacer()
+//                Spacer()
             }
             .padding(EdgeInsets(top: 24, leading: 16, bottom: 0, trailing: 16))
         }
@@ -115,8 +126,7 @@ struct WorkSpaceDetailView: View {
         .sheet(isPresented: $viewModel.isCreateScheduleModalShow, onDismiss: {
             print("1")
         }) {
-            Text("WorkSpaceCreateCreatingScheduleView")
-//            WorkSpaceCreateCreatingScheduleView(isShowingModal: $viewModel.isCreateScheduleModalShow, scheduleList: $viewModel.schedules)
+            WorkSpaceCreateCreatingScheduleView(isShowingModal: $viewModel.isCreateScheduleModalShow, scheduleList: $viewModel.shouldCreateSchdeules)
         }
         .background(Color.backgroundWhite)
         .navigationBarBackButtonHidden()

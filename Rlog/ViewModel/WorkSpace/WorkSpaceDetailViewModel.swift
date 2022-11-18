@@ -21,6 +21,7 @@ final class WorkSpaceDetailViewModel: ObservableObject {
     @Published var isAlertOpen = false
     @Published var isCreateScheduleModalShow = false
     @Published var schedules: [ScheduleEntity] = []
+    @Published var shouldCreateSchdeules: [ScheduleModel] = []
     
     init(workspace: WorkspaceEntity) {
         self.workspace = workspace
@@ -35,7 +36,8 @@ final class WorkSpaceDetailViewModel: ObservableObject {
     func didTapConfirmButton(completion: @escaping (() -> Void)) {
         Task {
             await updateWorkspace()
-            await updateSchedules()
+            await deleteSchedules()
+            await createSchedules()
             completion()
         }
     }
@@ -71,9 +73,22 @@ private extension WorkSpaceDetailViewModel {
         CoreDataManager.shared.deleteWorkspace(workspace: workspace)
     }
     
-    func updateSchedules() async {
+    func deleteSchedules() async {
         for schedule in deleteSchedules {
             CoreDataManager.shared.deleteSchedule(of: schedule)
+        }
+    }
+    
+    func createSchedules() async {
+        for schedule in shouldCreateSchdeules {
+            CoreDataManager.shared.createSchedule(
+                of: workspace,
+                repeatDays: schedule.repeatedSchedule,
+                startHour: Int16(schedule.startHour) ?? 12,
+                startMinute: Int16(schedule.startMinute) ?? 0,
+                endHour: Int16(schedule.endHour) ?? 14,
+                endMinute: Int16(schedule.endMinute) ?? 0
+            )
         }
     }
     
