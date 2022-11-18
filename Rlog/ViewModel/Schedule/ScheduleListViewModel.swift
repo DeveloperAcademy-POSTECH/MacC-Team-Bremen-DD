@@ -8,9 +8,11 @@
 import SwiftUI
 
 final class ScheduleListViewModel: ObservableObject {
+    let calendar = Calendar.current
     @ObservedObject var timeManager = TimeManager()
     @Published var workspaces: [WorkspaceEntity] = []
-    @Published var schedulesOfFocusDate: [WorkspaceEntity] = []
+    @Published var workdays: (upcoming: [WorkdayEntity], expired: [WorkdayEntity]) = ([], [])
+    @Published var schedulesOfFocusDate: (upcoming: [WorkdayEntity], expired: [WorkdayEntity]) = ([], [])
     @Published var nextDate = Calendar.current.date(byAdding: .weekOfMonth, value: 1, to: Date()) ?? Date()
     @Published var previousDate = Calendar.current.date(byAdding: .weekOfMonth, value: -1, to: Date()) ?? Date()
     @Published var currentDate = Date() {
@@ -24,11 +26,12 @@ final class ScheduleListViewModel: ObservableObject {
             previousDate = previousWeek
         }
     }
-    let calendar = Calendar.current
     
     func onAppear() {
         // 생성된 근무지 여부를 확인합니다. 생성된 근무지가 없다면 예외처리 화면을 표시합니다.
         getAllWorkspaces()
+        getWorkdaysOfFiveMonths()
+        getSchedulesOfFocusDate()
     }
     
     func didScrollToNextWeek() {
@@ -49,26 +52,7 @@ final class ScheduleListViewModel: ObservableObject {
     
     func didTapDate(_ date: CalendarModel) {
         changeFocusDate(date)
-//        getSchedulesOfFocusDate(date)
-    }
-    
-    func getWorkdaysOfFiveMonths() -> (upcoming: [WorkdayEntity], expired: [WorkdayEntity]) {
-        // Sample
-        var upcomingWorkdays: [WorkdayEntity] = []
-        var expiredWorkdays: [WorkdayEntity] = []
-        let workdays = CoreDataManager.shared.getWorkdaysBetween(
-            start: Calendar.current.date(byAdding: .month, value: -2, to: Date())!,
-            target: Calendar.current.date(byAdding: .month, value: 3, to: Date())!)
-        
-        for data in workdays {
-            if data.hasDone {
-                expiredWorkdays.append(data)
-            } else {
-                upcomingWorkdays.append(data)
-            }
-        }
-        
-        return (upcomingWorkdays, expiredWorkdays)
+        getSchedulesOfFocusDate()
     }
 }
 
@@ -141,27 +125,6 @@ private extension ScheduleListViewModel {
         
         return calendar.date(from: extractedDate) ?? Date()
     }
-    
-    
-    func getSchedulesOfFocusDate(_ date: CalendarModel) {
-        let currentComponents = calendar.dateComponents([.year, .month, .day], from: currentDate)
-        let year = currentComponents.year ?? 2000
-        let month = currentComponents.month ?? 1
-        let day = currentComponents.day ?? 1
-        let extractedDate = DateComponents(year: year, month: month, day: day)
-        let extractedCalendar = calendar.date(from: extractedDate) ?? Date()
-        
-//        schedulesOfFocusDate.removeAll()
-        
-        for data in workspaces {
-            print(calendar.startOfDay(for: data.workdays?.date ?? Date()))
-            if calendar.startOfDay(for: data.workdays?.date ?? Date()) == extractedCalendar {
-                schedulesOfFocusDate.append(data)
-            }
-        }
-        
-//        print(schedulesOfFocusDate)
-    }
 }
 
 extension ScheduleListViewModel {
@@ -217,38 +180,62 @@ extension ScheduleListViewModel {
         return false
     }
     
-    // 🔥 필요한 것만 받기 -> 파라미터 너무 많음
-    // 🔥 WorkspaceEntity 하나 받기 -> 간단함 but over-fetching
-    func defineWorkType(
-        repeatDays: [String],
-        workDate: Date,
-        startHour: Int16,
-        startMinute: Int16,
-        endHour: Int16,
-        endMinute: Int16,
-        spentHour: Int16
-    ) -> (type: String, color: Color) {
-        let _ = timeManager.getWeekdayOfDate(workDate)
-        let spentHourOfNormalCase: Int16 = endHour - startHour
-        let timeDifference = spentHour - spentHourOfNormalCase
+    // Sample
+    func getWorkdaysOfFiveMonths() {
+        var upcomingWorkdays: [WorkdayEntity] = []
+        var expiredWorkdays: [WorkdayEntity] = []
+        let workdays = CoreDataManager.shared.getWorkdaysBetween(
+            start: Calendar.current.date(byAdding: .month, value: -2, to: Date())!,
+            target: Calendar.current.date(byAdding: .month, value: 3, to: Date())!)
         
-        //        for day in repeatDays {
-        //            if day != weekday { return ("추가", .blue) }
-        //        }
+        for data in workdays {
+            if data.hasDone {
+                expiredWorkdays.append(data)
+            } else {
+                upcomingWorkdays.append(data)
+            }
+        }
         
-        switch timeDifference {
-            // "추가" case 누락
-        case 0:
-            return ("정규", Color.primary)
-        case 1...:
-            return ("연장", Color.pointBlue)
-        case _ where timeDifference < 0:
-            return ("축소", Color.pointRed)
-        default:
-            return ("정규", .green)
+        self.workdays = (upcomingWorkdays, expiredWorkdays)
+    }
+    
+    func getSchedulesOfFocusDate() {
+        let currentComponents = calendar.dateComponents([.year, .month, .day], from: currentDate)
+        let year = currentComponents.year ?? 2000
+        let month = currentComponents.month ?? 1
+        let day = currentComponents.day ?? 1
+        let extractedDate = DateComponents(year: year, month: month, day: day)
+        let extractedCalendar = calendar.date(from: extractedDate) ?? Date()
+        
+        schedulesOfFocusDate.upcoming.removeAll()
+        schedulesOfFocusDate.expired.removeAll()
+        
+        for data in workdays.0 {
+            if calendar.startOfDay(for: data.date) == extractedCalendar {
+                if data.hasDone {
+                    schedulesOfFocusDate.expired.append(data)
+                } else {
+                    schedulesOfFocusDate.upcoming.append(data)
+                }
+            }
         }
     }
     
+    func verifyScheduleDate(_ date: CalendarModel) -> Bool {
+        let extractedDate = calendar.date(from: DateComponents(year: date.year, month: date.month, day: date.day))
+        let startOfGivenDate = calendar.startOfDay(for: extractedDate ?? Date())
+        if !workdays.upcoming.isEmpty || !workdays.expired.isEmpty {
+            for data in workdays.upcoming {
+                if calendar.startOfDay(for: data.date) == startOfGivenDate { return true }
+            }
+            for data in workdays.expired {
+                if calendar.startOfDay(for: data.date) == startOfGivenDate { return true }
+            }
+
+        }
+
+        return false
+    }
 }
 
 // Sample calendar model
@@ -257,3 +244,6 @@ struct CalendarModel {
     let month: Int
     let day: Int
 }
+
+//!allWorkdays.upcoming.isEmpty || !allWorkdays.expired.isEmpty,
+//   currentWeek[index].day == Calendar.current.dateComponents([.day], from: allWorkdays.upcoming[0].date).day!
