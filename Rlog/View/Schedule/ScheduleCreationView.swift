@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ScheduleCreationView: View {
+    @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel = ScheduleCreationViewModel()
     @State private var isCreationButtonTapped = false
     
@@ -84,6 +85,15 @@ private extension ScheduleCreationView {
             viewModel.didTapCreationButton()
         } label: {
             Text("완료")
+        }
+        .alert("근무 추가", isPresented: $viewModel.isAlertActive) {
+            Button("취소", role: .cancel) { }
+            Button("추가", role: .none) {
+                viewModel.didTapConfirmationButton()
+                dismiss()
+            }
+        } message: {
+            Text("일정을 추가할까요?")
         }
     }
 }

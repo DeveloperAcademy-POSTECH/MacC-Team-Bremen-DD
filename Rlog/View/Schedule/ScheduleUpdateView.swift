@@ -90,6 +90,7 @@ private extension ScheduleUpdateView {
         StrokeButton(label: "근무 삭제", buttonType: .destructive) {
             viewModel.didTapDeleteButton()
         }
+        .padding(.top, -8)
         .alert("근무 삭제", isPresented: $viewModel.isAlertActive) {
             Button("취소", role: .cancel) { }
             Button("삭제", role: .destructive) {
@@ -99,6 +100,5 @@ private extension ScheduleUpdateView {
         } message: {
             Text("해당 근무를 삭제합니다.")
         }
-        .padding(.top, -8)
     }
 }

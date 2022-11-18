@@ -21,6 +21,7 @@ final class ScheduleCreationViewModel: ObservableObject {
     @Published var startTime: Date = Date()
     @Published var endTime: Date = Date()
     @Published var memo: String = ""
+    @Published var isAlertActive = false
     
     var selectedWorkspaceEntity: WorkspaceEntity? = nil
     
@@ -29,6 +30,10 @@ final class ScheduleCreationViewModel: ObservableObject {
     }
     
     func didTapCreationButton() {
+        isAlertActive = true
+    }
+    
+    func didTapConfirmationButton() {
         createWorkday()
     }
     
@@ -59,7 +64,5 @@ private extension ScheduleCreationViewModel {
             memo: memo,
             schedule: nil
         )
-        
-        print(" I AM WORKING ")
     }
 }

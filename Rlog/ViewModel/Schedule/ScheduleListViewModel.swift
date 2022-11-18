@@ -10,7 +10,6 @@ import SwiftUI
 final class ScheduleListViewModel: ObservableObject {
     @ObservedObject var timeManager = TimeManager()
     @Published var workspaces: [WorkspaceEntity] = []
-    @Published var workdays: [WorkdayEntity] = []
     @Published var schedulesOfFocusDate: [WorkspaceEntity] = []
     @Published var nextDate = Calendar.current.date(byAdding: .weekOfMonth, value: 1, to: Date()) ?? Date()
     @Published var previousDate = Calendar.current.date(byAdding: .weekOfMonth, value: -1, to: Date()) ?? Date()
@@ -28,6 +27,7 @@ final class ScheduleListViewModel: ObservableObject {
     let calendar = Calendar.current
     
     func onAppear() {
+        // 생성된 근무지 여부를 확인합니다. 생성된 근무지가 없다면 예외처리 화면을 표시합니다.
         getAllWorkspaces()
     }
     
@@ -52,11 +52,23 @@ final class ScheduleListViewModel: ObservableObject {
 //        getSchedulesOfFocusDate(date)
     }
     
-    func getWorkdaysOfFiveMonths() -> [WorkdayEntity] {
+    func getWorkdaysOfFiveMonths() -> (upcoming: [WorkdayEntity], expired: [WorkdayEntity]) {
         // Sample
-        return CoreDataManager.shared.getWorkdaysBetween(
+        var upcomingWorkdays: [WorkdayEntity] = []
+        var expiredWorkdays: [WorkdayEntity] = []
+        let workdays = CoreDataManager.shared.getWorkdaysBetween(
             start: Calendar.current.date(byAdding: .month, value: -2, to: Date())!,
             target: Calendar.current.date(byAdding: .month, value: 3, to: Date())!)
+        
+        for data in workdays {
+            if data.hasDone {
+                expiredWorkdays.append(data)
+            } else {
+                upcomingWorkdays.append(data)
+            }
+        }
+        
+        return (upcomingWorkdays, expiredWorkdays)
     }
 }
 
@@ -70,12 +82,6 @@ private extension ScheduleListViewModel {
 //        }
     }
     
-    func getWorkdays(start date1: Date, target date2: Date) {
-        let result = CoreDataManager.shared.getWorkdaysBetween(start: date1, target: date2)
-        
-        self.workdays = result
-    }
-    
     // 일주일 뒤의 날짜를 반환합니다.
     func getNextWeek() {
         currentDate = timeManager.increaseOneWeek(currentDate)
@@ -83,7 +89,7 @@ private extension ScheduleListViewModel {
     
     // 일주일 전의 날짜를 반환합니다.
     func getPreviousWeek() {
-        currentDate = timeManager.decreaseOneMonth(currentDate)
+        currentDate = timeManager.decreaseOneWeek(currentDate)
     }
     
     // 한 달 뒤의 날짜를 반환합니다.

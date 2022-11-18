@@ -19,7 +19,7 @@ struct ScheduleListView: View {
         return viewModel.getWeekdayOfDate(viewModel.currentDate)
     }
     
-    var workdays: [WorkdayEntity] {
+    var workdays: (upcoming: [WorkdayEntity], expired: [WorkdayEntity]) {
         return viewModel.getWorkdaysOfFiveMonths()
     }
     
@@ -51,10 +51,7 @@ struct ScheduleListView: View {
             }
             .background(Color.backgroundStroke)
             .navigationBarHidden(true)
-            .onAppear {
-                viewModel.onAppear()
-                print(workdays)
-            }
+            .onAppear { viewModel.onAppear() }
         }
     }
 }
@@ -224,13 +221,30 @@ private extension ScheduleListView {
     
     var scheduleList: some View {
         ScrollView(showsIndicators: false) {
-            VStack(spacing: 8) {
-                ForEach(workdays) { data in
+            VStack(alignment: .leading, spacing: 8) {
+                Text("예정된 일정")
+                    .font(Font.callout.bold())
+                    .padding(.bottom, 12)
+                ForEach(workdays.upcoming) { data in
                     NavigationLink(
                         destination: ScheduleUpdateView(workday: data).navigationTitle("근무 일정 수정하기"),
                         isActive: $isScheduleUpdateViewActive
                     ) {
                         ScheduleCell(currentDate: viewModel.currentDate, data: data)
+                    }
+                }
+                if !workdays.expired.isEmpty {
+                    Text("확정된 일정")
+                        .font(Font.callout.bold())
+                        .padding(.top, 32)
+                        .padding(.bottom, 12)
+                    ForEach(workdays.expired) { data in
+                        NavigationLink(
+                            destination: ScheduleUpdateView(workday: data).navigationTitle("근무 일정 수정하기"),
+                            isActive: $isScheduleUpdateViewActive
+                        ) {
+                            ScheduleCell(currentDate: viewModel.currentDate, data: data)
+                        }
                     }
                 }
             }
