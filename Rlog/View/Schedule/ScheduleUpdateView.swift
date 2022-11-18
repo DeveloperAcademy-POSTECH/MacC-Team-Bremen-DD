@@ -37,6 +37,7 @@ struct ScheduleUpdateView: View {
             
             Spacer()
         }
+        .navigationBarTitle(Text("근무 수정"), displayMode: .inline)
         .padding(.horizontal)
         .padding(.vertical)
     }
