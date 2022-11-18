@@ -57,14 +57,16 @@ struct WorkSpaceDetailView: View {
                 }
                 .padding(.bottom, -8)
                 
-                ForEach(viewModel.shouldCreateSchdeules, id: \.self) { schedule in
+                ForEach(viewModel.shouldCreateSchedules, id: \.self) { schedule in
                     ScheduleContainer(
                         repeatedSchedule: schedule.repeatedSchedule,
                         startHour: schedule.startHour,
                         startMinute: schedule.startMinute,
                         endHour: schedule.endHour,
                         endMinute: schedule.endMinute
-                    )
+                    ) {
+                        viewModel.didTapDeleteScheduleModelButton(schedule: schedule)
+                    }
                 }
                 .padding(.bottom, -8)
                 
@@ -126,7 +128,7 @@ struct WorkSpaceDetailView: View {
         .sheet(isPresented: $viewModel.isCreateScheduleModalShow, onDismiss: {
             print("1")
         }) {
-            WorkSpaceCreateCreatingScheduleView(isShowingModal: $viewModel.isCreateScheduleModalShow, scheduleList: $viewModel.shouldCreateSchdeules)
+            WorkSpaceCreateCreatingScheduleView(isShowingModal: $viewModel.isCreateScheduleModalShow, scheduleList: $viewModel.shouldCreateSchedules)
         }
         .background(Color.backgroundWhite)
         .navigationBarBackButtonHidden()

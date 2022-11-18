@@ -21,7 +21,7 @@ final class WorkSpaceDetailViewModel: ObservableObject {
     @Published var isAlertOpen = false
     @Published var isCreateScheduleModalShow = false
     @Published var schedules: [ScheduleEntity] = []
-    @Published var shouldCreateSchdeules: [ScheduleModel] = []
+    @Published var shouldCreateSchedules: [ScheduleModel] = []
     
     init(workspace: WorkspaceEntity) {
         self.workspace = workspace
@@ -55,6 +55,12 @@ final class WorkSpaceDetailViewModel: ObservableObject {
             schedules.remove(at: index)
         }
     }
+    
+    func didTapDeleteScheduleModelButton(schedule: ScheduleModel) {
+        if let index = shouldCreateSchedules.firstIndex(of: schedule) {
+            shouldCreateSchedules.remove(at: index)
+        }
+    }
 }
 
 private extension WorkSpaceDetailViewModel {
@@ -80,7 +86,7 @@ private extension WorkSpaceDetailViewModel {
     }
     
     func createSchedules() async {
-        for schedule in shouldCreateSchdeules {
+        for schedule in shouldCreateSchedules {
             CoreDataManager.shared.createSchedule(
                 of: workspace,
                 repeatDays: schedule.repeatedSchedule,
