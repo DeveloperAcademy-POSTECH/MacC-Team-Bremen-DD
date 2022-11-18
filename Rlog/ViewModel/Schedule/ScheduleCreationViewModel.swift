@@ -38,7 +38,7 @@ final class ScheduleCreationViewModel: ObservableObject {
             result.append(workspace.name)
         }
         return result
-    }
+    }    
 }
 
 private extension ScheduleCreationViewModel {

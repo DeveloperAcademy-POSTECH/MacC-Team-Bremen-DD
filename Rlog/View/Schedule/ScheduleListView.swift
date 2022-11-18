@@ -12,6 +12,7 @@ struct ScheduleListView: View {
     @State var selection = 1
     @State private var isSchedulePendingListViewActive = false
     @State private var isScheduleCreationViewActive = false
+    @State private var isScheduleUpdateViewActive = false
     
     // Sample to recognize when workspace is not found
     var weekday: String {
@@ -225,10 +226,12 @@ private extension ScheduleListView {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 8) {
                 ForEach(workdays) { data in
-                    ScheduleCell(
-                        currentDate: viewModel.currentDate,
-                        data: data
-                    )
+                    NavigationLink(
+                        destination: ScheduleUpdateView(workday: data).navigationTitle("근무 일정 수정하기"),
+                        isActive: $isScheduleUpdateViewActive
+                    ) {
+                        ScheduleCell(currentDate: viewModel.currentDate, data: data)
+                    }
                 }
             }
         }

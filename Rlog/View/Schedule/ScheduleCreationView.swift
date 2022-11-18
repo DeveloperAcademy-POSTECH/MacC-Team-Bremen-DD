@@ -10,9 +10,6 @@ import SwiftUI
 struct ScheduleCreationView: View {
     @ObservedObject var viewModel = ScheduleCreationViewModel()
     @State private var isCreationButtonTapped = false
-    var workspaceListSting: [String] {
-        return viewModel.getWorkspacesListString()
-    }
     
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -42,7 +39,7 @@ private extension ScheduleCreationView {
                 .foregroundColor(.grayMedium)
             WorkspaceListPicker(
                 selection: $viewModel.selectedWorkspaceString,
-                workspaceList: workspaceListSting
+                workspaceList: viewModel.getWorkspacesListString()
             )
         }
     }

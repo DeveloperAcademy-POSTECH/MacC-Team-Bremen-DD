@@ -48,7 +48,7 @@ private extension WorkspaceListPicker {
                 Text(workspace)
             }
         }
-        .pickerStyle(.wheel)
+        .pickerStyle(.segmented)
         .background(.white)
         .padding(.horizontal)
     }
