@@ -11,7 +11,6 @@ import Foundation
 @MainActor
 final class WorkSpaceDetailViewModel: ObservableObject {
     var workspace: WorkspaceEntity
-    var deleteSchedules: [ScheduleEntity] = []
     
     @Published var name: String
     @Published var hourlyWageString: String
@@ -20,6 +19,10 @@ final class WorkSpaceDetailViewModel: ObservableObject {
     @Published var hasJuhyu: Bool
     @Published var isAlertOpen = false
     @Published var isCreateScheduleModalShow = false
+    
+    // TODO: - 리팩토링이 필요한 부분으로 생각됨
+    // https://fdsa0106.atlassian.net/browse/BD-197?atlOrigin=eyJpIjoiZTBjMjczNGMzZmI1NDJmNmFmNmVlOTQ0NjhkOTI2ZGYiLCJwIjoiaiJ9
+    var deleteSchedules: [ScheduleEntity] = []
     @Published var schedules: [ScheduleEntity] = []
     @Published var shouldCreateSchedules: [ScheduleModel] = []
     
