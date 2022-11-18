@@ -12,13 +12,29 @@ struct ScheduleUpdateView: View {
     @State private var date = Date()
     @State private var date2 = Date()
     @State private var date3 = Date()
-    
+    @State private var isAlertOpen = false
+
     var body: some View {
         VStack(spacing: 24) {
             workspace
             workdate
             components
             memo
+            HDivider()
+            
+            StrokeButton(label: "근무지 삭제", buttonType: .destructive) {
+                isAlertOpen.toggle()
+            }
+            .alert("근무지 삭제", isPresented: $isAlertOpen) {
+                Button("취소", role: .cancel) {
+                }
+                Button("삭제", role: .destructive) {
+                }
+            } message: {
+                Text("해당 근무지를 삭제합니다?")
+            }
+            .padding(.top, -8)
+            
             Spacer()
         }
         .padding(.horizontal)
