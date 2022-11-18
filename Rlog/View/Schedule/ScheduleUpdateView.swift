@@ -22,16 +22,16 @@ struct ScheduleUpdateView: View {
             memo
             HDivider()
             
-            StrokeButton(label: "근무지 삭제", buttonType: .destructive) {
+            StrokeButton(label: "근무 삭제", buttonType: .destructive) {
                 isAlertOpen.toggle()
             }
-            .alert("근무지 삭제", isPresented: $isAlertOpen) {
+            .alert("근무 삭제", isPresented: $isAlertOpen) {
                 Button("취소", role: .cancel) {
                 }
                 Button("삭제", role: .destructive) {
                 }
             } message: {
-                Text("해당 근무지를 삭제합니다?")
+                Text("해당 근무를 삭제합니다?")
             }
             .padding(.top, -8)
             
@@ -108,7 +108,7 @@ private extension ScheduleUpdateView {
     var memo: some View {
         InputFormElement(
             containerType: .none(title: "메모 (선택사항)"),
-            text: .constant("hello")
+            text: .constant("")
         )
     }
 }
