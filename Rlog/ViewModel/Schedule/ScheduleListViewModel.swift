@@ -9,7 +9,7 @@ import SwiftUI
 
 final class ScheduleListViewModel: ObservableObject {
     let calendar = Calendar.current
-    @ObservedObject var timeManager = TimeManager()
+    let timeManager = TimeManager()
     @Published var workspaces: [WorkspaceEntity] = []
     @Published var workdays: (upcoming: [WorkdayEntity], expired: [WorkdayEntity]) = ([], [])
     @Published var schedulesOfFocusDate: (upcoming: [WorkdayEntity], expired: [WorkdayEntity]) = ([], [])

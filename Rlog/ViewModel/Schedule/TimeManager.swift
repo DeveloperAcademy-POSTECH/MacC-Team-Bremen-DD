@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class TimeManager: ObservableObject {
+final class TimeManager {
     let calendar = Calendar.current
     let formatter = DateFormatter(dateFormatType: .weekday)
     
