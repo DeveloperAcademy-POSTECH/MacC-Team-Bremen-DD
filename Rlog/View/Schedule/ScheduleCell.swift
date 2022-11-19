@@ -8,7 +8,7 @@
 import SwiftUI
 
 // Sample
-final class ScheduleCellViewModel: ObservableObject {
+final class ScheduleCellViewModel {
     let timeManager = TimeManager()
     
     func defineWorkType(
@@ -60,7 +60,7 @@ final class ScheduleCellViewModel: ObservableObject {
 
 struct ScheduleCell: View {
     // WorkspaceEntity
-    @ObservedObject var viewModel = ScheduleCellViewModel()
+    let viewModel = ScheduleCellViewModel()
     let currentDate: Date
     let data: WorkdayEntity
     var weekday: String {
