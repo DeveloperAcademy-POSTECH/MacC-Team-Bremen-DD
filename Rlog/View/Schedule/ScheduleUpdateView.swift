@@ -11,7 +11,7 @@ struct ScheduleUpdateView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel = ScheduleUpdateViewModel()
     let workday: WorkdayEntity
-    
+
     var body: some View {
         VStack(spacing: 24) {
             workspace
@@ -19,8 +19,6 @@ struct ScheduleUpdateView: View {
             components
             memo
             HDivider()
-            deleteButton
-            Spacer()
         }
         .padding()
         .onAppear { viewModel.onAppear(workday) }
@@ -29,7 +27,6 @@ struct ScheduleUpdateView: View {
                 toolbarConfirmButton
             }
         }
-
     }
 }
 
