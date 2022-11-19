@@ -5,9 +5,21 @@
 //  Created by Kim Insub on 2022/11/10.
 //
 
-import Foundation
+import SwiftUI
 
 @MainActor
 final class MonthlyCalculateListViewModel: ObservableObject {
     @Published var date = Date()
+    @Published var workspaces: [WorkspaceEntity] = []
+    
+    func onAppear() {
+        getAllWorkspaces()
+    }
+}
+
+private extension MonthlyCalculateListViewModel {
+    func getAllWorkspaces() {
+        let result = CoreDataManager.shared.getAllWorkspaces()
+        workspaces = result
+    }
 }

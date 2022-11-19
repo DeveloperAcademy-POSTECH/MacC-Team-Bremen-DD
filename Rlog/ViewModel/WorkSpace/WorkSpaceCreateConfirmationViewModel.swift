@@ -24,7 +24,10 @@ final class WorkSpaceCreateConfirmationViewModel: ObservableObject {
     private let hasJuhyu = false
     
     func didTapConfirmButton() {
-        popToRoot()
+        Task {
+            await createWorkspaceAndSchedule()
+            popToRoot()
+        }
     }
 }
 
@@ -45,6 +48,36 @@ private extension WorkSpaceCreateConfirmationViewModel {
         let timeInterval = endDate.timeIntervalSinceReferenceDate - startDate.timeIntervalSinceReferenceDate
         
         return (timeInterval / 3600)
+    }
+    
+    func createWorkspaceAndSchedule() async {
+        Task {
+            let workspace = await createWorkSpace()
+            await createSchedules(workspace: workspace)
+        }
+    }
+    
+    func createWorkSpace() async -> WorkspaceEntity {
+        return CoreDataManager.shared.createWorkspace(
+            name: workspaceData.name,
+            payDay: Int16(workspaceData.paymentDay) ?? 0,
+            hourlyWage: Int32(workspaceData.hourlyWage) ?? 0,
+            hasTax: workspaceData.hasTax,
+            hasJuhyu: workspaceData.hasJuhyu
+        )
+    }
+    
+    func createSchedules(workspace: WorkspaceEntity) async {
+        for schedule in scheduleData  {
+            CoreDataManager.shared.createSchedule(
+                of: workspace,
+                repeatDays: schedule.repeatedSchedule,
+                startHour: Int16(schedule.startHour) ?? 0,
+                startMinute: Int16(schedule.startMinute) ?? 0,
+                endHour: Int16(schedule.endHour) ?? 0,
+                endMinute: Int16(schedule.endMinute) ?? 0
+            )
+        }
     }
 }
 

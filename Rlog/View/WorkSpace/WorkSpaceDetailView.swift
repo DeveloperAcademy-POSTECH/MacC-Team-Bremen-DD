@@ -27,8 +27,8 @@ struct WorkSpaceDetailView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel: WorkSpaceDetailViewModel
     
-    init() {
-        viewModel = WorkSpaceDetailViewModel()
+    init(workspace: WorkspaceEntity) {
+        viewModel = WorkSpaceDetailViewModel(workspace: workspace)
     }
     
     var body: some View {
@@ -44,37 +44,60 @@ struct WorkSpaceDetailView: View {
                     .foregroundColor(.grayMedium)
                     .padding(.bottom, -16)
                 
-                //                ForEach(viewModel.schedules) { schedule in
-                ScheduleContainer(
-                    repeatedSchedule: ["월 화 수 목"],
-                    startHour: "10",
-                    startMinute: "00",
-                    endHour: "12",
-                    endMinute: "00"
-                )
-                //                }
+                ForEach(viewModel.schedules, id: \.self) { schedule in
+                    ScheduleContainer(
+                        repeatedSchedule: schedule.repeatDays,
+                        startHour: String(schedule.startHour),
+                        startMinute: String(schedule.startMinute),
+                        endHour: String(schedule.endHour),
+                        endMinute: String(schedule.endMinute)
+                    ) {
+                        viewModel.didTapDeleteScheduleButton(schedule: schedule)
+                    }
+                }
+                .padding(.bottom, -8)
+                
+                ForEach(viewModel.shouldCreateSchedules, id: \.self) { schedule in
+                    ScheduleContainer(
+                        repeatedSchedule: schedule.repeatedSchedule,
+                        startHour: schedule.startHour,
+                        startMinute: schedule.startMinute,
+                        endHour: schedule.endHour,
+                        endMinute: schedule.endMinute
+                    ) {
+                        viewModel.didTapDeleteScheduleModelButton(schedule: schedule)
+                    }
+                }
                 .padding(.bottom, -8)
                 
                 StrokeButton(label: "+ 근무패턴 추가", buttonType: .add) {
+                    viewModel.isCreateScheduleModalShow.toggle()
                 }
                 .padding(.bottom, -8)
                 
                 HDivider()
                 
-                StrokeButton(label: "근무지 삭제", buttonType: .destructive) {
-                }
-                .alert("근무지 삭제", isPresented: $viewModel.isAlertOpen) {
-                    Button("취소", role: .cancel) {
+                HStack {
+                    Spacer()
+                    StrokeButton(label: "근무지 삭제", buttonType: .destructive) {
+                        viewModel.isAlertOpen.toggle()
                     }
-                    Button("삭제", role: .destructive) {
-                        
+                    .alert("근무지 삭제", isPresented: $viewModel.isAlertOpen) {
+                        Button("취소", role: .cancel) {
+                            viewModel.isAlertOpen.toggle()
+                        }
+                        Button("삭제", role: .destructive) {
+                            viewModel.didTapDeleteButton {
+                                dismiss()
+                            }
+                        }
+                    } message: {
+                        Text("해당 근무지를 삭제합니다.?")
                     }
-                } message: {
-                    Text("해당 근무지를 삭제합니다.?")
+                    .padding(.top, -8)
+                    Spacer()
                 }
-                .padding(.top, -8)
-                
-                Spacer()
+//                Spacer()
             }
             .padding(EdgeInsets(top: 24, leading: 16, bottom: 0, trailing: 16))
         }
@@ -92,12 +115,20 @@ struct WorkSpaceDetailView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
+                    viewModel.didTapConfirmButton {
+                        dismiss()
+                    }
                 }){
                     Text("완료")
                         .fontWeight(.bold)
                         .foregroundColor(Color.primary)
                 }
             }
+        }
+        .sheet(isPresented: $viewModel.isCreateScheduleModalShow, onDismiss: {
+            print("1")
+        }) {
+            WorkSpaceCreateCreatingScheduleView(isShowingModal: $viewModel.isCreateScheduleModalShow, scheduleList: $viewModel.shouldCreateSchedules)
         }
         .background(Color.backgroundWhite)
         .navigationBarBackButtonHidden()
@@ -119,35 +150,6 @@ private extension WorkSpaceDetailView {
                 }
             })
         }
-    }
-    
-    @ViewBuilder
-    func schedulesContainer() -> some View {
-        HStack(spacing: 0) {
-            HStack(spacing: 0) {
-                //                ForEach(schedule.repeatedSchedule, id:\.self) { weekDay in
-                //                    Text(weekDay)
-                //                        .font(.body)
-                //                        .foregroundColor(.fontBlack)
-                //                        .padding(.horizontal, 1)
-                //                }
-            }
-            .padding(.trailing, 3)
-            Spacer()
-            Text("11 : 00 - 12 : 00")
-                .font(.body)
-                .foregroundColor(.fontBlack)
-            Button {
-            } label: {
-                Image(systemName: "minus.circle")
-                    .foregroundColor(.red)
-                    .padding(.leading, 16)
-            }
-        }
-        .padding()
-        .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 54)
-        .background(Color.backgroundWhite)
-        .cornerRadius(10)
     }
 }
 

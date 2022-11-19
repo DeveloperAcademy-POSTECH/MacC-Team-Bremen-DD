@@ -8,14 +8,20 @@
 import SwiftUI
 
 struct WorkSpaceCell: View {
+    @ObservedObject private var viewModel: WorkSpaceCellViewModel
     
-    var model: CustomModel
+    var workspace: WorkspaceEntity
+    
+    init(workspace: WorkspaceEntity) {
+        self.workspace = workspace
+        viewModel = WorkSpaceCellViewModel(workspace: workspace)
+    }
     
     var body: some View {
         NavigationLink {
-            WorkSpaceDetailView()
+            WorkSpaceDetailView(workspace: viewModel.workspace)
         } label: {
-            makeWorkSpaceCardContent(model: model)
+            makeWorkSpaceCardContent(workspace: workspace)
         }
     }
 }
@@ -33,42 +39,41 @@ private extension WorkSpaceCell {
         }
     }
     
-    //TODO : 뷰모델 연동시 사용 예정
-    //    func makeWorkSpaceScheduleInfo() -> some View {
-    //        HStack(alignment: .top, spacing: 0) {
-    //            Text("workTitle")
-    //                .font(.subheadline)
-    //                .foregroundColor(.grayMedium)
-    //            Spacer()
-    //            VStack(spacing: 0) {
-    //                ForEach(schedules) { schedule in
-    //                    HStack(spacing: 0) {
-    //                        HStack(spacing: 0) {
-    //                            ForEach(schedule.repeatedSchedule, id:\.self) { week in
-    //                                Text(week)
-    //                                    .font(.subheadline)
-    //                                    .foregroundColor(.fontBlack)
-    //                                    .padding(.horizontal, 1)
-    //                            }
-    //                        }
-    //                        .padding(.trailing, 3)
-    //
-    //                        Text("\(schedule.startHour):\(schedule.startMinute)0 - \(schedule.endHour):\(schedule.endMinute)0")
-    //                            .font(.subheadline)
-    //                            .foregroundColor(.fontBlack)
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
+    func makeWorkSpaceScheduleInfo(workTitle: String) -> some View {
+        HStack(alignment: .top, spacing: 0) {
+            Text(workTitle)
+                .font(.subheadline)
+                .foregroundColor(.grayMedium)
+            Spacer()
+            VStack(alignment: .trailing, spacing: 0) {
+                ForEach(viewModel.schedules, id: \.self) { schedule in
+                    HStack(spacing: 0) {
+                        HStack(spacing: 0) {
+                            ForEach(schedule.repeatDays, id: \.self) { week in
+                                Text(week)
+                                    .font(.subheadline)
+                                    .foregroundColor(.fontBlack)
+                                    .padding(.horizontal, 1)
+                            }
+                        }
+                        .padding(.trailing, 3)
+                        
+                        Text("\(schedule.startHour):\(schedule.startMinute)0 - \(schedule.endHour):\(schedule.endMinute)0")
+                            .font(.subheadline)
+                            .foregroundColor(.fontBlack)
+                    }
+                }
+            }
+        }
+    }
     
-    func makeWorkSpaceCardContent(model: CustomModel) -> some View {
+    func makeWorkSpaceCardContent(workspace: WorkspaceEntity) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(alignment: .center){
                 Rectangle()
                     .foregroundColor(Color.primary)
                     .frame(width: 4, height: 16)
-                Text(model.name)
+                Text(workspace.name)
                     .font(.body)
                     .fontWeight(.bold)
                     .foregroundColor(.fontBlack)
@@ -76,11 +81,11 @@ private extension WorkSpaceCell {
             .padding(.bottom, 16)
             
             VStack(spacing: 8){
-                makeWorkSpaceRowInfo(workTitle: "시급", workInfo: "\(String(model.hourlyWage)) 원")
-                makeWorkSpaceRowInfo(workTitle: "급여일", workInfo: "매월 \(String(model.paymentDay)) 일")
-                makeWorkSpaceRowInfo(workTitle: "주휴수당", workInfo: model.hasJuhyu ? "적용" : "미적용")
-                makeWorkSpaceRowInfo(workTitle: "소득세", workInfo: model.hasTax ? "적용" : "미적용")
-                //                makeWorkSpaceScheduleInfo(workTitle: "근무유형", schedules: schedules)
+                makeWorkSpaceRowInfo(workTitle: "시급", workInfo: "\(String(workspace.hourlyWage)) 원")
+                makeWorkSpaceRowInfo(workTitle: "급여일", workInfo: "매월 \(String(workspace.payDay)) 일")
+                makeWorkSpaceRowInfo(workTitle: "주휴수당", workInfo: workspace.hasJuhyu ? "적용" : "미적용")
+                makeWorkSpaceRowInfo(workTitle: "소득세", workInfo: workspace.hasTax ? "적용" : "미적용")
+                makeWorkSpaceScheduleInfo(workTitle: "근무유형")
             }
         }
         .padding()

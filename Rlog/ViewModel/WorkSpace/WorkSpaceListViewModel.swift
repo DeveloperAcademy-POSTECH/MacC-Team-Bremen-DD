@@ -11,5 +11,16 @@ import Foundation
 @MainActor
 final class WorkSpaceListViewModel: ObservableObject {
     @Published var isShowingSheet = false
-  
+    @Published var workspaces: [WorkspaceEntity] = []
+    
+    func onAppear() {
+        getAllWorkspaces()
+    }
+}
+
+private extension WorkSpaceListViewModel {
+    func getAllWorkspaces() {
+        let result = CoreDataManager.shared.getAllWorkspaces()
+        workspaces = result
+    }
 }
