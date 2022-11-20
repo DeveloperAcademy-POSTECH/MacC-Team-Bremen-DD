@@ -20,7 +20,7 @@ final class MainTabViewModel: ObservableObject {
                 let workdaysOfSchedule = workdays.filter { $0.schedule == schedule }
                 
                 guard let after4monthOfCurrent = Calendar.current.date(byAdding: DateComponents(month: 4), to: Date()) else { return }
-                guard var latestWorkday = workdaysOfSchedule.last else { return }
+                guard let latestWorkday = workdaysOfSchedule.last else { return }
                 
                 if latestWorkday.date < after4monthOfCurrent {
                     guard var range = Calendar.current.date(byAdding: DateComponents(day: 1), to: latestWorkday.date) else { return }
