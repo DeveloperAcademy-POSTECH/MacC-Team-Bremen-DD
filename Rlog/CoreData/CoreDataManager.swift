@@ -157,6 +157,13 @@ extension CoreDataManager {
         workday.schedule = schedule
         save()
     }
+    
+    func getAllWorkdays(of workspace: WorkspaceEntity) -> [WorkdayEntity] {
+        let fetchRequest: NSFetchRequest<WorkdayEntity> = WorkdayEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "workspace.name == %@", workspace.name)
+        let result = try? context.fetch(fetchRequest)
+        return result ?? []
+    }
 
     func getWorkdaysBetween(start: Date, target: Date) -> [WorkdayEntity] {
         let fetchRequest: NSFetchRequest<WorkdayEntity> = WorkdayEntity.fetchRequest()
