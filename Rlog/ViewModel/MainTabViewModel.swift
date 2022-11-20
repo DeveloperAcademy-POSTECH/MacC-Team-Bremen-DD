@@ -19,14 +19,8 @@ final class MainTabViewModel: ObservableObject {
             for schedule in schedules {
                 let workdaysOfSchedule = workdays.filter { $0.schedule == schedule }
                 
-                // MARK: - Testing
-                guard let testDate = Calendar.current.date(byAdding: DateComponents(month: 1), to: Date()) else { return }
-                
-//                guard let after4monthOfCurrent = Calendar.current.date(byAdding: DateComponents(month: 4), to: Date()) else { return }
-                guard let after4monthOfCurrent = Calendar.current.date(byAdding: DateComponents(month: 4), to: testDate) else { return }
+                guard let after4monthOfCurrent = Calendar.current.date(byAdding: DateComponents(month: 4), to: Date()) else { return }
                 guard var latestWorkday = workdaysOfSchedule.last else { return }
-                print("DEBUG: - TestDate : \(after4monthOfCurrent)")
-                print("DEBUG: - LatestDate : \(latestWorkday.date)")
                 
                 if latestWorkday.date < after4monthOfCurrent {
                     guard var range = Calendar.current.date(byAdding: DateComponents(day: 1), to: latestWorkday.date) else { return }
@@ -34,21 +28,19 @@ final class MainTabViewModel: ObservableObject {
                     
                     while range < after1MonthOfLatestDate {
                         if schedule.repeatDays.contains(range.fetchDayOfWeek(date: range)) {
-                            print(range)
-                            
-//                            guard let startTime = Calendar.current.date(bySettingHour: Int(schedule.startHour), minute: Int(schedule.startMinute), second: 0, of: range) else { return }
-//                            guard let endTime = Calendar.current.date(bySettingHour: Int(schedule.endHour), minute: Int(schedule.endMinute), second: 0, of: range) else { return }
-//
-//                            CoreDataManager.shared.createWorkday(
-//                                of: workspace,
-//                                hourlyWage: workspace.hourlyWage,
-//                                hasDone: false,
-//                                date: range,
-//                                startTime: startTime,
-//                                endTime: endTime,
-//                                memo: nil,
-//                                schedule: schedule
-//                            )
+                            guard let startTime = Calendar.current.date(bySettingHour: Int(schedule.startHour), minute: Int(schedule.startMinute), second: 0, of: range) else { return }
+                            guard let endTime = Calendar.current.date(bySettingHour: Int(schedule.endHour), minute: Int(schedule.endMinute), second: 0, of: range) else { return }
+
+                            CoreDataManager.shared.createWorkday(
+                                of: workspace,
+                                hourlyWage: workspace.hourlyWage,
+                                hasDone: false,
+                                date: range,
+                                startTime: startTime,
+                                endTime: endTime,
+                                memo: nil,
+                                schedule: schedule
+                            )
                         }
                         
                         guard let next = Calendar.current.date(byAdding: DateComponents(day: 1), to: range) else { return }
