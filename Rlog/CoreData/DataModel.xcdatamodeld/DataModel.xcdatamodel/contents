@@ -3,7 +3,7 @@
     <entity name="ScheduleEntity" representedClassName="ScheduleEntity" syncable="YES">
         <attribute name="endHour" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="endMinute" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="repeatDays" attributeType="Transformable" valueTransformerName="NSKeyedUnarchiveFromDataTransformer" customClassName="[String]"/>
+        <attribute name="repeatDays" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
         <attribute name="startHour" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startMinute" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="workdays" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkdayEntity" inverseName="schedule" inverseEntity="WorkdayEntity"/>
