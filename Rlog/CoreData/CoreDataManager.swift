@@ -129,9 +129,14 @@ extension CoreDataManager {
     }
 
     func deleteSchedule(of schedule: ScheduleEntity) {
-         context.delete(schedule)
-         save()
-     }
+        let workdays = getHasNotDoneWorkdays()
+        let filtered = workdays.filter { $0.schedule?.objectID == schedule.objectID}
+        for workday in filtered {
+          deleteWorkday(of: workday)
+        }
+        context.delete(schedule)
+        save()
+       }
 }
 
 // MARK: - WorkdayEntity Logic
@@ -165,6 +170,18 @@ extension CoreDataManager {
         return result ?? []
     }
 
+    func editWorkday(
+        of workday: WorkdayEntity,
+        startTime: Date,
+        endTime: Date,
+        memo: String?
+    ) {
+            workday.startTime = startTime
+            workday.endTime = endTime
+            workday.memo = memo
+            save()
+    }
+
     func getWorkdaysBetween(start: Date, target: Date) -> [WorkdayEntity] {
         let fetchRequest: NSFetchRequest<WorkdayEntity> = WorkdayEntity.fetchRequest()
         let startPredicate = NSPredicate(format: "date >= %@", start as CVarArg)
@@ -189,6 +206,11 @@ extension CoreDataManager {
         fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: [workspacePredicate, startPredicate, targetPredicate])
         let result = try? context.fetch(fetchRequest)
         return result ?? []
+    }
+
+    func toggleHasDone(of workday: WorkdayEntity) {
+        workday.hasDone.toggle()
+        save()
     }
 
     func deleteWorkday(of workday: WorkdayEntity) {
