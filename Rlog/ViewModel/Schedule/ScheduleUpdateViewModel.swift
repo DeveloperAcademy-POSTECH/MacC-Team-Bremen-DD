@@ -8,62 +8,48 @@
 import Foundation
 
 final class ScheduleUpdateViewModel: ObservableObject {
-    @Published var workday: WorkdayEntity? = nil {
-        didSet {
-            guard
-                let workday = workday,
-                let memo = workday.memo,
-                memo != ""
-            else { return }
-            name = workday.workspace.name
-            date = workday.date
-            startTime = workday.startTime
-            endTime = workday.endTime
-            self.memo = memo
-        }
-    }
-    @Published var name = ""
-    @Published var date = Date()
-    @Published var startTime = Date()
-    @Published var endTime = Date()
-    @Published var memo = ""
+    let workday: WorkdayEntity
+    
+    @Published var name: String
+    @Published var date: Date
+    @Published var startTime: Date
+    @Published var endTime: Date
+    @Published var memo: String
     @Published var isAlertActive = false
     
-    func onAppear(_ data: WorkdayEntity) {
-        getWorkdayInformation(data)
+    init(workday: WorkdayEntity) {
+        self.workday = workday
+        self.name = workday.workspace.name
+        self.date = workday.date
+        self.startTime = workday.startTime
+        self.endTime = workday.endTime
+        self.memo = workday.memo ?? ""
     }
     
-    func didTapConfirmationButton() {
-        changeWorkdayInformation()
+    func didTapConfirmationButton() async {
+        await updateWorkday()
     }
     
     func didTapDeleteButton() {
-        isAlertActive = true
+        isAlertActive.toggle()
     }
     
-    func didConfirmDeleteWorday() {
-        deleteWorkday()
+    func didConfirmDeleteWorday() async {
+        await deleteWorkday()
     }
 }
 
 private extension ScheduleUpdateViewModel {
-    func getWorkdayInformation(_ data: WorkdayEntity) {
-        workday = data
+    func updateWorkday() async {
+        CoreDataManager.shared.editWorkday(
+            of: workday,
+            startTime: startTime,
+            endTime: endTime,
+            memo: memo
+        )
     }
     
-    func changeWorkdayInformation() {
-        // TODO: Use editWorkday CoreDataManager
-        print("👀 Edited Workday Information")
-        print(name)
-        print("\(date)")
-        print("\(startTime)")
-        print("\(endTime)")
-        print("\(memo)")
-        print("=============================")
-    }
-    
-    func deleteWorkday() {
-        guard let workday = self.workday else { return }
+    func deleteWorkday() async {
         CoreDataManager.shared.deleteWorkday(of: workday)
         isAlertActive = false
     }
