@@ -128,8 +128,14 @@ extension CoreDataManager {
     }
 
     func deleteSchedule(of schedule: ScheduleEntity) {
-         context.delete(schedule)
-         save()
+        Task {
+            let workdays = await getHasNotDoneWorkdays(of: schedule)
+            for workday in workdays {
+                deleteWorkday(of: workday)
+            }
+        }
+        context.delete(schedule)
+        save()
      }
 }
 
@@ -169,6 +175,15 @@ extension CoreDataManager {
     func getHasNotDoneWorkdays() -> [WorkdayEntity] {
         let fetchRequest: NSFetchRequest<WorkdayEntity> = WorkdayEntity.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "hasDone == %@", NSNumber(booleanLiteral: false))
+        let result = try? context.fetch(fetchRequest)
+        return result ?? []
+    }
+
+    func getHasNotDoneWorkdays(of schedule: ScheduleEntity) async -> [WorkdayEntity] {
+        let fetchRequest: NSFetchRequest<WorkdayEntity> = WorkdayEntity.fetchRequest()
+        let schedulePredicate = NSPredicate(format: "schedule.objectID = %@", schedule.objectID)
+        let hasDonePredicate = NSPredicate(format: "hasDone == %@", NSNumber(booleanLiteral: false))
+        fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: [schedulePredicate, hasDonePredicate])
         let result = try? context.fetch(fetchRequest)
         return result ?? []
     }
