@@ -27,7 +27,7 @@ struct YearMonthStepperCalendar: View {
                     Image(systemName: "chevron.right")
                 }
             }
-            .foregroundColor(.black)
+            .foregroundColor(.fontBlack)
             .font(.title)
         }
     }
