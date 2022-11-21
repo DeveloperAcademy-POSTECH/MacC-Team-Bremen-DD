@@ -162,6 +162,18 @@ extension CoreDataManager {
         save()
     }
 
+    func editWorkday(
+        of workday: WorkdayEntity,
+        startTime: Date,
+        endTime: Date,
+        memo: String?
+    ) {
+            workday.startTime = startTime
+            workday.endTime = endTime
+            workday.memo = memo
+            save()
+    }
+
     func getWorkdaysBetween(start: Date, target: Date) -> [WorkdayEntity] {
         let fetchRequest: NSFetchRequest<WorkdayEntity> = WorkdayEntity.fetchRequest()
         let startPredicate = NSPredicate(format: "date >= %@", start as CVarArg)
