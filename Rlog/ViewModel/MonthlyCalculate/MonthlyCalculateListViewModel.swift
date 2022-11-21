@@ -7,13 +7,22 @@
 
 import SwiftUI
 
-@MainActor
 final class MonthlyCalculateListViewModel: ObservableObject {
+    let timeManager = TimeManager()
+    
     @Published var date = Date()
     @Published var workspaces: [WorkspaceEntity] = []
     
     func onAppear() {
         getAllWorkspaces()
+    }
+    
+    func didTapPreviousMonth() {
+        date = timeManager.decreaseOneMonth(date)
+    }
+    
+    func didTapNextMonth() {
+        date = timeManager.increaseOneMonth(date)
     }
 }
 
