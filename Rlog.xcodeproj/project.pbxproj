@@ -10,9 +10,9 @@
 		2D16518F2907D5CE00636D61 /* TitleSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D16518E2907D5CE00636D61 /* TitleSubView.swift */; };
 		2D1651912907D5F300636D61 /* WorkSpaceInfoSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1651902907D5F300636D61 /* WorkSpaceInfoSubView.swift */; };
 		2D1651932907D61800636D61 /* WorkSpaceCreateConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1651922907D61800636D61 /* WorkSpaceCreateConfirmationView.swift */; };
-		2D1651952907D63300636D61 /* WorkSpaceCreateConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1651942907D63300636D61 /* WorkSpaceCreateConfirmationViewModel.swift */; };
+		2D1651952907D63300636D61 /* WorkspaceCreateConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1651942907D63300636D61 /* WorkspaceCreateConfirmationViewModel.swift */; };
 		2D4377AA29277A2800AB7F94 /* ScheduleUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4377A929277A2800AB7F94 /* ScheduleUpdateView.swift */; };
-		2D5BA7C82900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5BA7C72900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift */; };
+		2D5BA7C82900EE34003A6BC7 /* WorkspaceCreateScheduleListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5BA7C72900EE34003A6BC7 /* WorkspaceCreateScheduleListViewModel.swift */; };
 		2D66DCA228FD4DF000C90400 /* RlogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCA128FD4DF000C90400 /* RlogApp.swift */; };
 		2D66DCAB28FD4DF200C90400 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCAA28FD4DF200C90400 /* CoreDataManager.swift */; };
 		2D66DCC128FD8D5100C90400 /* WorkSpaceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCC028FD8D5100C90400 /* WorkSpaceListView.swift */; };
@@ -76,9 +76,9 @@
 		2D16518E2907D5CE00636D61 /* TitleSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSubView.swift; sourceTree = "<group>"; };
 		2D1651902907D5F300636D61 /* WorkSpaceInfoSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceInfoSubView.swift; sourceTree = "<group>"; };
 		2D1651922907D61800636D61 /* WorkSpaceCreateConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCreateConfirmationView.swift; sourceTree = "<group>"; };
-		2D1651942907D63300636D61 /* WorkSpaceCreateConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCreateConfirmationViewModel.swift; sourceTree = "<group>"; };
+		2D1651942907D63300636D61 /* WorkspaceCreateConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceCreateConfirmationViewModel.swift; sourceTree = "<group>"; };
 		2D4377A929277A2800AB7F94 /* ScheduleUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleUpdateView.swift; sourceTree = "<group>"; };
-		2D5BA7C72900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCreateScheduleListViewModel.swift; sourceTree = "<group>"; };
+		2D5BA7C72900EE34003A6BC7 /* WorkspaceCreateScheduleListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceCreateScheduleListViewModel.swift; sourceTree = "<group>"; };
 		2D5BA7C92901242E003A6BC7 /* Rlog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rlog.entitlements; sourceTree = "<group>"; };
 		2D66DC9E28FD4DF000C90400 /* Rlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D66DCA128FD4DF000C90400 /* RlogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RlogApp.swift; sourceTree = "<group>"; };
@@ -269,9 +269,9 @@
 				C67FC8442908FA8300DE3898 /* WorkspaceCellViewModel.swift */,
 				2D66DCD928FD8E8F00C90400 /* WorkspaceDetailViewModel.swift */,
 				2D66DCDB28FD8E9D00C90400 /* WorkspaceCreateViewModel.swift */,
-				2D5BA7C72900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift */,
+				2D5BA7C72900EE34003A6BC7 /* WorkspaceCreateScheduleListViewModel.swift */,
 				2DF4EC7229063469009B48B4 /* WorkspaceCreateCreatingScheduleViewModel.swift */,
-				2D1651942907D63300636D61 /* WorkSpaceCreateConfirmationViewModel.swift */,
+				2D1651942907D63300636D61 /* WorkspaceCreateConfirmationViewModel.swift */,
 			);
 			path = Workspace;
 			sourceTree = "<group>";
@@ -455,7 +455,7 @@
 				2DF4EC7329063469009B48B4 /* WorkspaceCreateCreatingScheduleViewModel.swift in Sources */,
 				C695A00A291E17BD008FEF4E /* ScheduleEntity+CoreDataClass.swift in Sources */,
 				7A2F04B7291EA91E0091BA28 /* Weekday.swift in Sources */,
-				2D5BA7C82900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift in Sources */,
+				2D5BA7C82900EE34003A6BC7 /* WorkspaceCreateScheduleListViewModel.swift in Sources */,
 				2D66DCDA28FD8E8F00C90400 /* WorkspaceDetailViewModel.swift in Sources */,
 				2D66DCC328FD8D6100C90400 /* WorkSpaceDetailView.swift in Sources */,
 				B936495A2921CA4500196E76 /* MonthlyCalculateDetailView.swift in Sources */,
@@ -486,7 +486,7 @@
 				894CB4E329235B00008E4197 /* BorderedPicker.swift in Sources */,
 				2DF4EC712906344B009B48B4 /* WorkSpaceCreateCreatingScheduleView.swift in Sources */,
 				C64D97BC28FE9197004F80E7 /* TextField+.swift in Sources */,
-				2D1651952907D63300636D61 /* WorkSpaceCreateConfirmationViewModel.swift in Sources */,
+				2D1651952907D63300636D61 /* WorkspaceCreateConfirmationViewModel.swift in Sources */,
 				2D66DCE028FD8ECA00C90400 /* MainTabViewModel.swift in Sources */,
 				894CB4F729277164008E4197 /* TimeManager.swift in Sources */,
 			);
