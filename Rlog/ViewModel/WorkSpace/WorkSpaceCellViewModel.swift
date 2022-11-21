@@ -8,7 +8,7 @@
 import Foundation
 
 @MainActor
-final class WorkSpaceCellViewModel: ObservableObject {
+final class WorkspaceCellViewModel: ObservableObject {
     var workspace: WorkspaceEntity
     
     @Published var schedules: [ScheduleEntity] = []
@@ -19,7 +19,7 @@ final class WorkSpaceCellViewModel: ObservableObject {
     }
 }
 
-private extension WorkSpaceCellViewModel {
+private extension WorkspaceCellViewModel {
     func getAllSchedules() {
         let result = CoreDataManager.shared.getSchedules(of: workspace)
         self.schedules = result

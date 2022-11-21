@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct WorkSpaceCreateCreatingScheduleView: View {
-    @ObservedObject private var viewModel:  WorkSpaceCreateCreatingScheduleViewModel
+    @ObservedObject private var viewModel:  WorkspaceCreateCreatingScheduleViewModel
     
     init(isShowingModal: Binding<Bool>, scheduleList: Binding<[ScheduleModel]>) {
-        self.viewModel = WorkSpaceCreateCreatingScheduleViewModel(isShowingModal: isShowingModal, scheduleList: scheduleList)
+        self.viewModel = WorkspaceCreateCreatingScheduleViewModel(isShowingModal: isShowingModal, scheduleList: scheduleList)
     }
     
     var body: some View {

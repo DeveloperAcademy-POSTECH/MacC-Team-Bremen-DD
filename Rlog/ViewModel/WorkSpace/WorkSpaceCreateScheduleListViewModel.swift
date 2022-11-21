@@ -8,7 +8,7 @@
 import SwiftUI
 
 @MainActor
-final class WorkSpaceCreateScheduleListViewModel: ObservableObject {
+final class WorkspaceCreateScheduleListViewModel: ObservableObject {
     @Binding var isActiveNavigation: Bool
     var workspaceModel: WorkSpaceModel
     init(isActiveNavigation: Binding<Bool>, workspaceModel: WorkSpaceModel) {
@@ -39,7 +39,7 @@ final class WorkSpaceCreateScheduleListViewModel: ObservableObject {
 }
 
 // MARK: - Private Functions
-private extension WorkSpaceCreateScheduleListViewModel {
+private extension WorkspaceCreateScheduleListViewModel {
     func showModal() {
         isShowingModal = true
     }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 @MainActor
-final class WorkSpaceCreateConfirmationViewModel: ObservableObject {
+final class WorkspaceCreateConfirmationViewModel: ObservableObject {
     @Binding var isActiveNavigation: Bool
     
     var workspaceData: WorkSpaceModel
@@ -31,7 +31,7 @@ final class WorkSpaceCreateConfirmationViewModel: ObservableObject {
     }
 }
 
-private extension WorkSpaceCreateConfirmationViewModel {
+private extension WorkspaceCreateConfirmationViewModel {
     func popToRoot() {
         self.isActiveNavigation = false
     }

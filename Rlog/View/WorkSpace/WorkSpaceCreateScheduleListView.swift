@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct WorkSpaceCreateScheduleListView: View {
-    @ObservedObject var viewModel: WorkSpaceCreateScheduleListViewModel
+    @ObservedObject var viewModel: WorkspaceCreateScheduleListViewModel
     init(isActiveNavigation: Binding<Bool>, workspaceModel: WorkSpaceModel) {
-        self.viewModel = WorkSpaceCreateScheduleListViewModel(isActiveNavigation: isActiveNavigation, workspaceModel: workspaceModel)
+        self.viewModel = WorkspaceCreateScheduleListViewModel(isActiveNavigation: isActiveNavigation, workspaceModel: workspaceModel)
     }
     
     var body: some View {

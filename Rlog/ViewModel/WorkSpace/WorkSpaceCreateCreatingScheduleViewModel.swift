@@ -8,7 +8,7 @@
 import SwiftUI
 
 @MainActor
-final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
+final class WorkspaceCreateCreatingScheduleViewModel: ObservableObject {
     @Binding var isShowingModal: Bool
     @Binding var scheduleList: [ScheduleModel]
     
@@ -91,7 +91,7 @@ final class WorkSpaceCreateCreatingScheduleViewModel: ObservableObject {
 }
 
 // MARK: - Private Functions
-private extension WorkSpaceCreateCreatingScheduleViewModel {
+private extension WorkspaceCreateCreatingScheduleViewModel {
     func appendScheduleToList() {
         if startMinute.isEmpty {
             startMinute = "00"

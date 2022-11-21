@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 @MainActor
-final class WorkSpaceDetailViewModel: ObservableObject {
+final class WorkspaceDetailViewModel: ObservableObject {
     var workspace: WorkspaceEntity
     
     @Published var name: String
@@ -69,7 +69,7 @@ final class WorkSpaceDetailViewModel: ObservableObject {
     }
 }
 
-private extension WorkSpaceDetailViewModel {
+private extension WorkspaceDetailViewModel {
     func updateWorkspace() async {
         CoreDataManager.shared.editWorkspace(
             workspace: workspace,
