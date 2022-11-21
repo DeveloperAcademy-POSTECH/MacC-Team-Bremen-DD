@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ScheduleListView: View {
-    @ObservedObject var viewModel = ScheduleListViewModel()
+    @StateObject var viewModel = ScheduleListViewModel()
     @State var selection = 1
     @State private var isSchedulePendingListViewActive = false
     @State private var isScheduleCreationViewActive = false
