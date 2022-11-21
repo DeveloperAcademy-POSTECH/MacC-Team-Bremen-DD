@@ -23,7 +23,7 @@ struct WorkSpaceListView: View {
                     Spacer()
                     
                     NavigationLink(
-                        destination: WorkSpaceCreateView(isActive: $viewModel.isShowingSheet),
+                        destination: WorkspaceCreateView(isActive: $viewModel.isShowingSheet),
                         isActive: $viewModel.isShowingSheet) {
                             
                         Image("plus.curved")
@@ -34,7 +34,7 @@ struct WorkSpaceListView: View {
                 
                 ScrollView {
                     ForEach(viewModel.workspaces, id: \.self) { workspace in
-                        WorkSpaceCell(workspace: workspace)
+                        WorkspaceCell(workspace: workspace)
                     }
                 }
             }
