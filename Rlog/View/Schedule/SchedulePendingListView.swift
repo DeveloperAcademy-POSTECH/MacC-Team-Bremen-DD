@@ -13,6 +13,7 @@ private struct MockModel: Hashable {
 }
 
 struct SchedulePendingListView: View {
+    @Environment(\.dismiss) var dismiss
     @ObservedObject private var viewModel = SchedulePendingListViewModel()
     private let dateArray: [String] = ["11.14", "11.15", "11.20", "11.21"]
     private let mockData: [MockModel] = [
@@ -48,6 +49,19 @@ struct SchedulePendingListView: View {
             dateContainer
         }
         .padding(.horizontal)
+        .accentColor(.black)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    dismiss()
+                }){
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(.fontBlack)
+                    Text("이전")
+                        .foregroundColor(.fontBlack)
+                }
+            }
+        }
     }
 }
 
