@@ -90,9 +90,11 @@ private extension BorderedTextField {
         case .workplace:
             if text.count == 20 { return .red }
         case .wage:
+            if text == "" { return .primary }
             guard let textToInt = Int(text) else { return .red }
             if textToInt >= 1000000 { return .red }
         case .payday:
+            if text == "" { return .primary }
             guard let textToInt = Int(text) else { return .red }
             if textToInt > 28 || textToInt < 1 { return .red }
         case .reason, .time, .none:

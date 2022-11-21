@@ -8,67 +8,66 @@
 import SwiftUI
 
 struct ScheduleCreationView: View {
+    @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel = ScheduleCreationViewModel()
-    @State private var date = Date()
-    @State private var date2 = Date()
-    @State private var date3 = Date()
+    @State private var isCreationButtonTapped = false
     
     var body: some View {
-        VStack(spacing: 24) {
-            workspace
-            workdate
-            components
-            memo
-            Spacer()
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 24) {
+                workspace
+                workdate
+                components
+                memo
+                Spacer()
+            }
+            .padding()
         }
-        .padding(.horizontal)
-        .padding(.vertical)
+        .onAppear { viewModel.onAppear() }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                creationButton
+            }
+        }
     }
 }
 
 private extension ScheduleCreationView {
     var workspace: some View {
-        
-        //TODO : picker로 변경
-        InputFormElement(
-            containerType: .workplace,
-            text: .constant("근무지를 선택해주세요.")
-        )
-        .disabled(true)
+        VStack(alignment: .leading, spacing: 8) {
+            Text("근무 날짜")
+                .font(.caption)
+                .foregroundColor(.grayMedium)
+            WorkspaceListPicker(
+                selection: $viewModel.selectedWorkspaceString,
+                workspaceList: viewModel.getWorkspacesListString()
+            )
+        }
     }
     
     var workdate: some View {
-        VStack(spacing: 8) {
-            HStack {
-                Text("근무 날짜")
-                    .font(.caption)
-                    .foregroundColor(.grayMedium)
-                Spacer()
-            }
-            
+        VStack(alignment: .leading, spacing: 8) {
+            Text("근무 날짜")
+                .font(.caption)
+                .foregroundColor(.grayMedium)
             BorderedPicker(
-                date: $date,
+                date: $viewModel.workday,
                 type: .date
             )
         }
     }
     
     var components: some View {
-        VStack(spacing: 16) {
-            HStack {
-                Text("근무 시간")
-                    .font(.caption)
-                    .foregroundColor(.grayMedium)
-                Spacer()
-            }
-            
+        VStack(alignment: .leading, spacing: 16) {
+            Text("근무 시간")
+                .font(.caption)
+                .foregroundColor(.grayMedium)
             BorderedPicker(
-                date: $date2,
+                date: $viewModel.startTime,
                 type: .startTime
             )
-            
             BorderedPicker(
-                date: $date3,
+                date: $viewModel.endTime,
                 type: .endTime
             )
         }
@@ -77,7 +76,24 @@ private extension ScheduleCreationView {
     var memo: some View {
         InputFormElement(
             containerType: .none(title: "메모 (선택사항)"),
-            text: .constant("hello")
+            text: $viewModel.memo
         )
+    }
+    
+    var creationButton: some View {
+        Button {
+            viewModel.didTapCreationButton()
+        } label: {
+            Text("완료")
+        }
+        .alert("근무 추가", isPresented: $viewModel.isAlertActive) {
+            Button("취소", role: .cancel) { }
+            Button("추가", role: .none) {
+                viewModel.didTapConfirmationButton()
+                dismiss()
+            }
+        } message: {
+            Text("일정을 추가할까요?")
+        }
     }
 }
