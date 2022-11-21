@@ -188,6 +188,11 @@ extension CoreDataManager {
         return result ?? []
     }
 
+    func toggleHasDone(of workday: WorkdayEntity) {
+        workday.hasDone.toggle()
+        save()
+    }
+
     func deleteWorkday(of workday: WorkdayEntity) {
          context.delete(workday)
          save()
