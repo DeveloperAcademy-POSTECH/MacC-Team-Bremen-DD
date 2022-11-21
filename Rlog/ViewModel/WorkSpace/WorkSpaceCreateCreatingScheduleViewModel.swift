@@ -11,94 +11,48 @@ import SwiftUI
 final class WorkspaceCreateCreatingScheduleViewModel: ObservableObject {
     @Binding var isShowingModal: Bool
     @Binding var scheduleList: [ScheduleModel]
+    @Published var sevenDays: [SelectedDayModel] = SevenDays.allCases.map { $0.day }
+    @Published var startTime: Date {
+        didSet {
+            startHour = Int16(timeManager.getHour(startTime))
+            startMinute = Int16(timeManager.getMinute(startTime))
+        }
+    }
+    @Published var endTime: Date {
+        didSet {
+            endHour = Int16(timeManager.getHour(endTime))
+            endMinute = Int16(timeManager.getMinute(endTime))
+        }
+    }
     
+    let timeManager = TimeManager()
     var isActivatedConfirmButton = false
     var errorMessage = ""
-    
-    //TODO: Picker 적용하면 String이 아니라 Int16으로 편하게 전달 가능할 것으로 사료됩니다. - 테오
-    @Published var sevenDays: [SelectedDayModel] = SevenDays.allCases.map { $0.day }
-    
-    @Published var startHour = "" {
-        didSet {
-            if Int(startHour) ?? 0 > 24 {
-                startHour = oldValue
-                errorMessage = "24시간을 초과한 값을 넣을 수 없습니다."
-                isActivatedConfirmButton = false
-            } else {
-                errorMessage = ""
-                checkAllInputFilled()
-            }
-        }
-    }
-    
-    @Published var startMinute = "" {
-        didSet {
-            if Int(startMinute) ?? 0 > 59 {
-                startMinute = oldValue
-                errorMessage = "59분을 초과한 값을 넣을 수 없습니다."
-                isActivatedConfirmButton = false
-            } else {
-                errorMessage = ""
-            }
-        }
-    }
-    
-    @Published var endHour = "" {
-        didSet {
-            guard let endHour = Int(endHour) else { return }
-            if endHour > 24 {
-                self.endHour = oldValue
-                errorMessage = "24시간을 초과한 값을 넣을 수 없습니다."
-                isActivatedConfirmButton = false
-            } else if Int(startHour) ?? 0 > endHour {
-                errorMessage = "출근시간 보다 퇴근시간이 빠릅니다"
-                isActivatedConfirmButton = false
-            } else {
-                errorMessage = ""
-                checkAllInputFilled()
-            }
-        }
-    }
-    
-    @Published var endMinute = "" {
-        didSet {
-            if Int(endMinute) ?? 0 > 59 {
-                endMinute = oldValue
-                errorMessage = "59분을 초과한 값을 넣을 수 없습니다."
-                isActivatedConfirmButton = false
-            } else {
-                errorMessage = ""
-            }
-        }
-    }
+    var startHour: Int16 = 0
+    var startMinute: Int16 = 0
+    var endHour: Int16 = 0
+    var endMinute: Int16 = 0
     
     init(isShowingModal: Binding<Bool>, scheduleList: Binding<[ScheduleModel]>) {
         self._isShowingModal = isShowingModal
         self._scheduleList = scheduleList
+        self.startTime = timeManager.getDefaultStartTime()
+        self.endTime = timeManager.getDefaultEndTime()
     }
     
     func didTapDayPicker(index: Int) {
-        sevenDays[index].isSelected.toggle()
-        checkAllInputFilled()
+        checkAllInputFilled(index)
     }
     
     func didTapConfirmButton() {
-        //MARK: 어떤 코드인지 확인해보기
-        // -> 바인딩 해서 처리하는데 비동기처리가 필요할까?
-            appendScheduleToList()
-            dismissModal()
+        appendScheduleToList()
+        dismissModal()
     }
 }
 
 // MARK: - Private Functions
 private extension WorkspaceCreateCreatingScheduleViewModel {
     func appendScheduleToList() {
-        if startMinute.isEmpty {
-            startMinute = "00"
-        }
-        if endMinute.isEmpty {
-            endMinute = "00"
-        }
         scheduleList.append(
             ScheduleModel(
                 repeatedSchedule: self.getDayList(),
@@ -124,12 +78,14 @@ private extension WorkspaceCreateCreatingScheduleViewModel {
         return dayList
     }
     
-    func checkAllInputFilled() {
-        if !startHour.isEmpty && !endHour.isEmpty && startHour != endHour && !getDayList().isEmpty {
+    func checkAllInputFilled(_ index: Int) {
+        sevenDays[index].isSelected.toggle()
+        let selectedArray = sevenDays.filter { $0.isSelected == true }
+        if selectedArray.isEmpty {
+            isActivatedConfirmButton = false
+        } else {
             isActivatedConfirmButton = true
-            return
         }
-        isActivatedConfirmButton = false
     }
 }
 

@@ -77,10 +77,10 @@ private extension WorkspaceCreateConfirmationViewModel {
                 CoreDataManager.shared.createSchedule(
                     of: workspace,
                     repeatDays: schedule.repeatedSchedule,
-                    startHour: Int16(schedule.startHour) ?? 0,
-                    startMinute: Int16(schedule.startMinute) ?? 0,
-                    endHour: Int16(schedule.endHour) ?? 0,
-                    endMinute: Int16(schedule.endMinute) ?? 0
+                    startHour: schedule.startHour,
+                    startMinute: schedule.startMinute,
+                    endHour: schedule.endHour,
+                    endMinute: schedule.endMinute
                 )
             )
         }

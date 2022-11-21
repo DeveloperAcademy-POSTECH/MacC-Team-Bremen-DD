@@ -26,7 +26,7 @@ struct WorkSpaceCreateConfirmationView: View {
                 InputFormElement(containerType: .wage, text: $viewModel.workspaceData.hourlyWage)
                 InputFormElement(containerType: .payday, text: $viewModel.workspaceData.paymentDay)
                 toggleInputs
-                WorkTypeInfo
+                workTypeInfo
                 Spacer()
             }
             .padding(.horizontal)
@@ -41,7 +41,7 @@ struct WorkSpaceCreateConfirmationView: View {
 }
 
 private extension WorkSpaceCreateConfirmationView {
-    var WorkTypeInfo: some View {
+    var workTypeInfo: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("근무 패턴")
                 .font(.caption)
@@ -51,10 +51,10 @@ private extension WorkSpaceCreateConfirmationView {
                 ForEach(viewModel.scheduleData, id: \.self) { schedule in
                     ScheduleContainer(
                         repeatedSchedule: schedule.repeatedSchedule,
-                        startHour: schedule.startHour,
-                        startMinute: schedule.startMinute,
-                        endHour: schedule.endHour,
-                        endMinute: schedule.endMinute
+                        startHour: Int16(schedule.startHour),
+                        startMinute: Int16(schedule.startMinute),
+                        endHour: Int16(schedule.endHour),
+                        endMinute: Int16(schedule.endMinute)
                     )
                 }
             }

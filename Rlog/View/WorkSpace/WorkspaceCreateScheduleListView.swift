@@ -84,9 +84,9 @@ private extension WorkSpaceCreateScheduleListView {
                     }
                     Spacer()
                     HStack(spacing : 0) {
-                        Text(tappedSchedule.startMinute.count == 1 ? "\(tappedSchedule.startHour):0\(tappedSchedule.startMinute)" : "\(tappedSchedule.startHour):\(tappedSchedule.startMinute)")
+                        Text(tappedSchedule.startMinute < 30 ? "\(tappedSchedule.startHour):0\(tappedSchedule.startMinute)" : "\(tappedSchedule.startHour):\(tappedSchedule.startMinute)")
                         Text(" - ")
-                        Text(tappedSchedule.endMinute.count == 1 ? "\(tappedSchedule.endHour):0\(tappedSchedule.endMinute)" : "\(tappedSchedule.endHour):\(tappedSchedule.endMinute)")
+                        Text(tappedSchedule.endMinute < 30 ? "\(tappedSchedule.endHour):0\(tappedSchedule.endMinute)" : "\(tappedSchedule.endHour):\(tappedSchedule.endMinute)")
                     }
                     Button {
                         viewModel.didTapDeleteButton(idx: tappedScheduleID)

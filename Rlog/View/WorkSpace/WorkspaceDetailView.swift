@@ -29,27 +29,7 @@ struct WorkspaceDetailView: View {
                 schedules
                 addScheduleButton
                 HDivider()
-                
-                HStack {
-                    Spacer()
-                    StrokeButton(label: "근무지 삭제", buttonType: .destructive) {
-                        viewModel.isAlertOpen.toggle()
-                    }
-                    .alert("근무지 삭제", isPresented: $viewModel.isAlertOpen) {
-                        Button("취소", role: .cancel) {
-                            viewModel.isAlertOpen.toggle()
-                        }
-                        Button("삭제", role: .destructive) {
-                            viewModel.didTapDeleteButton {
-                                dismiss()
-                            }
-                        }
-                    } message: {
-                        Text("해당 근무지를 삭제합니다.?")
-                    }
-                    .padding(.top, -8)
-                    Spacer()
-                }
+                deleteScheduleButton
             }
             .padding(EdgeInsets(top: 24, leading: 16, bottom: 0, trailing: 16))
         }
@@ -120,10 +100,10 @@ private extension WorkspaceDetailView {
             ForEach(viewModel.schedules, id: \.self) { schedule in
                 ScheduleContainer(
                     repeatedSchedule: schedule.repeatDays,
-                    startHour: String(schedule.startHour),
-                    startMinute: String(schedule.startMinute),
-                    endHour: String(schedule.endHour),
-                    endMinute: String(schedule.endMinute)
+                    startHour: Int16(schedule.startHour),
+                    startMinute: Int16(schedule.startMinute),
+                    endHour: Int16(schedule.endHour),
+                    endMinute: Int16(schedule.endMinute)
                 ) {
                     viewModel.didTapDeleteScheduleButton(schedule: schedule)
                 }
@@ -167,7 +147,7 @@ private extension WorkspaceDetailView {
                     }
                 }
             } message: {
-                Text("해당 근무지를 삭제합니다.?")
+                Text("해당 근무지를 삭제합니다.")
             }
             .padding(.top, -8)
             Spacer()

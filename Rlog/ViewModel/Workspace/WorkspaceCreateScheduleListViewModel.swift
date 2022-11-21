@@ -47,10 +47,10 @@ private extension WorkspaceCreateScheduleListViewModel {
 
 struct ScheduleModel: Hashable{
     var repeatedSchedule: [String] = []
-    var startHour: String = ""
-    var startMinute: String = ""
-    var endHour: String = ""
-    var endMinute: String = ""
+    var startHour: Int16 = 0
+    var startMinute: Int16 = 0
+    var endHour: Int16 = 0
+    var endMinute: Int16 = 0
 }
 
 

@@ -103,7 +103,6 @@ private extension WorkspaceCreateView {
         }
     }
     
-    @ViewBuilder
     var workspace: some View {
         InputFormElement(containerType: .workplace, text: $viewModel.workSpace)
             .focused($checkoutInFocus, equals: .workSpace)
