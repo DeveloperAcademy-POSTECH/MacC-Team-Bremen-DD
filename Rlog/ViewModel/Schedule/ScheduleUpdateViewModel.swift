@@ -51,6 +51,5 @@ private extension ScheduleUpdateViewModel {
     
     func deleteWorkday() async {
         CoreDataManager.shared.deleteWorkday(of: workday)
-        isAlertActive = false
     }
 }
