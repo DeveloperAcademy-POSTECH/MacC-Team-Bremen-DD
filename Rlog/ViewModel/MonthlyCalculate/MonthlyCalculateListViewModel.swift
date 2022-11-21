@@ -10,7 +10,8 @@ import SwiftUI
 final class MonthlyCalculateListViewModel: ObservableObject {
     let timeManager = TimeManager()
     
-    @Published var date = Date()
+    @Published var currentDate = Date()
+    @Published var switchedDate = Date()
     @Published var workspaces: [WorkspaceEntity] = []
     
     func onAppear() {
@@ -18,11 +19,15 @@ final class MonthlyCalculateListViewModel: ObservableObject {
     }
     
     func didTapPreviousMonth() {
-        date = timeManager.decreaseOneMonth(date)
+        switchedDate = timeManager.decreaseOneMonth(switchedDate)
     }
     
     func didTapNextMonth() {
-        date = timeManager.increaseOneMonth(date)
+        switchedDate = timeManager.increaseOneMonth(switchedDate)
+    }
+    
+    func fetchIsCurrentMonth() -> Bool {
+        return Calendar.current.component(.month, from: currentDate) == Calendar.current.component(.month, from: switchedDate)
     }
 }
 
@@ -31,4 +36,11 @@ private extension MonthlyCalculateListViewModel {
         let result = CoreDataManager.shared.getAllWorkspaces()
         workspaces = result
     }
+    
+//    func fetchRemainedDay(workspace: WorkspaceEntity) -> Int {
+//        let currentDayInt = Calendar.current.component(.day, from: currentDate)
+//        if Int(workspace.payDay) < currentDayInt {
+//            
+//        }
+//    }
 }
