@@ -6,7 +6,7 @@
         <attribute name="repeatDays" attributeType="Transformable" valueTransformerName="NSKeyedUnarchiveFromDataTransformer" customClassName="[String]"/>
         <attribute name="startHour" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startMinute" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="workdays" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="WorkdayEntity" inverseName="schedule" inverseEntity="WorkdayEntity"/>
+        <relationship name="workdays" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkdayEntity" inverseName="schedule" inverseEntity="WorkdayEntity"/>
         <relationship name="workspace" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkspaceEntity" inverseName="schedules" inverseEntity="WorkspaceEntity"/>
     </entity>
     <entity name="WorkdayEntity" representedClassName="WorkdayEntity" syncable="YES">
