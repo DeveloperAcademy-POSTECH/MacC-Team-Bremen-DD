@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MonthlyCalculateListView: View {
-    @StateObject private var viewModel = MonthlyCalculateListViewModel()
+    @ObservedObject private var viewModel = MonthlyCalculateListViewModel()
     
     var body: some View {
         NavigationView {

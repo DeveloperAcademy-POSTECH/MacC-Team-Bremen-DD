@@ -27,7 +27,7 @@ enum WorkSpaceInfo: CaseIterable {
 
 
 struct WorkSpaceListView: View {
-    @StateObject var viewModel = WorkSpaceListViewModel()
+    @ObservedObject var viewModel = WorkSpaceListViewModel()
     
     var body: some View {
         
