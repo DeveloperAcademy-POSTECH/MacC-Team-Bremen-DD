@@ -85,7 +85,7 @@ private extension WorkSpaceCell {
                 makeWorkSpaceRowInfo(workTitle: "급여일", workInfo: "매월 \(String(workspace.payDay)) 일")
                 makeWorkSpaceRowInfo(workTitle: "주휴수당", workInfo: workspace.hasJuhyu ? "적용" : "미적용")
                 makeWorkSpaceRowInfo(workTitle: "소득세", workInfo: workspace.hasTax ? "적용" : "미적용")
-                makeWorkSpaceScheduleInfo(workTitle: "근무유형")
+                makeWorkSpaceScheduleInfo(workTitle: "근무패턴")
             }
         }
         .padding()

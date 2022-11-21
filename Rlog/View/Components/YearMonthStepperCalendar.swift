@@ -21,6 +21,8 @@ struct YearMonthStepperCalendar: View {
                     Image(systemName: "chevron.left")
                 }
                 Text(currentMonth)
+                    .fontWeight(.bold)
+                
                 Button {
                     tapToNextMonth()
                 } label: {
