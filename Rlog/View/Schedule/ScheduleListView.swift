@@ -12,7 +12,21 @@ struct ScheduleListView: View {
     @State var selection = 1
     @State private var isSchedulePendingListViewActive = false
     @State private var isScheduleCreationViewActive = false
-
+    @State private var isScheduleUpdateViewActive = false
+    
+    // Sample to recognize when workspace is not found
+    var weekday: String {
+        return viewModel.getWeekdayOfDate(viewModel.currentDate)
+    }
+    
+    var allWorkdays: (upcoming: [WorkdayEntity], expired: [WorkdayEntity]) {
+        return viewModel.workdays
+    }
+    
+    var workdays: (upcoming: [WorkdayEntity], expired: [WorkdayEntity]) {
+        return viewModel.schedulesOfFocusDate
+    }
+    
     var currentMonth: String {
         let components = Calendar.current.dateComponents([.year, .month], from: viewModel.currentDate)
         let year = components.year ?? 2000
@@ -32,23 +46,11 @@ struct ScheduleListView: View {
     var nextWeek: [CalendarModel] {
         return viewModel.getWeekOfDate(viewModel.nextDate)
     }
-    let mockData: [WorkspaceEntitySample] = [
-        WorkspaceEntitySample(
-            name: "팍이네 팍팍 감자탕",
-            schedules: ScheduleEntitySample(),
-            workdays: WorkdayEntitySample(date: Date(), endHour: 18)
-        ),
-        WorkspaceEntitySample(
-            name: "팍이네 팍팍 감자탕",
-            schedules: ScheduleEntitySample(),
-            workdays: WorkdayEntitySample(date: Date(), endHour: 15)
-        ),
-        WorkspaceEntitySample(
-            name: "팍이네 팍팍 감자탕",
-            schedules: ScheduleEntitySample(),
-            workdays: WorkdayEntitySample(date: Date(), endHour: 22)
-        )
-    ]
+    
+    var currentDay: Int {
+        let components = Calendar.current.dateComponents([.day], from: viewModel.currentDate)
+        return components.day!
+    }
 
     var body: some View {
         NavigationView {
@@ -58,6 +60,7 @@ struct ScheduleListView: View {
             }
             .background(Color.backgroundStroke)
             .navigationBarHidden(true)
+            .onAppear { viewModel.onAppear() }
         }
     }
 }
@@ -66,23 +69,11 @@ private extension ScheduleListView {
     var header: some View {
         
         HStack(spacing: 0) {
-            Group {
-                Button {
-                } label: {
-                    Image(systemName: "chevron.left")
-                }
-                
-                Text(currentMonth)
-                    .fontWeight(.bold)
-                    .padding(.horizontal, 3)
-                
-                Button {
-                } label: {
-                    Image(systemName: "chevron.right")
-                }
-            }
-            .font(.title)
-            .foregroundColor(Color.fontBlack)
+            YearMonthStepperCalendar(
+                tapToPreviousMonth: viewModel.didTapPreviousMonth,
+                tapToNextMonth: viewModel.didTapNextMonth,
+                currentMonth: currentMonth
+            )
             Spacer()
             // inbox.curved.badge로 조건 처리하면 됩니다.
             Button{ isSchedulePendingListViewActive.toggle() } label: {
@@ -97,11 +88,11 @@ private extension ScheduleListView {
             .foregroundColor(.grayMedium)
             
             NavigationLink(
-                destination: SchedulePendingListView(),
+                destination: SchedulePendingListView().navigationTitle("미확인 일정"),
                 isActive: $isSchedulePendingListViewActive
             ) { EmptyView() }
             NavigationLink(
-                 destination: ScheduleCreationView(),
+                destination: ScheduleCreationView().navigationTitle("근무 일정 추가하기"),
                  isActive: $isScheduleCreationViewActive
              ) { EmptyView() }
         }
@@ -112,18 +103,20 @@ private extension ScheduleListView {
         
         VStack(spacing: 0) {
             Group {
-                weekDaysContainer
-                    .padding(.top)
-                    .padding(.bottom, 3)
-                
-                datesContainer
-                    .padding(.bottom, 8)
-                HDivider()
-                    .padding(.bottom, 32)
-                scheduleList
+                if viewModel.workspaces.isEmpty {
+                    workspaceNotFound
+                } else {
+                    weekDaysContainer
+                        .padding(.top)
+                        .padding(.bottom, 3)
+                    datesContainer
+                        .padding(.bottom, 8)
+                    HDivider()
+                        .padding(.bottom, 32)
+                    scheduleList
+                }
             }
             .padding(.horizontal, 22)
-            Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.backgroundWhite)
@@ -132,7 +125,6 @@ private extension ScheduleListView {
     }
     
     var weekDaysContainer: some View {
-        
         HStack(spacing: 0) {
             ForEach(Weekday.allCases, id: \.self) { weekday in
                 Text(weekday.rawValue)
@@ -175,34 +167,46 @@ private extension ScheduleListView {
                         } label: {
                             Text("\(currentWeek[index].day)")
                                 .font(.system(size: 16, weight: .medium))
-                                .foregroundColor(.grayDark)
+                                .foregroundColor(
+                                    viewModel.verifyCurrentMonth(currentWeek[index].month) ? .grayDark : .gray
+                                )
                                 .padding(.bottom, 9)
                         }
                         .frame(maxWidth: .infinity)
+                        .padding(.top, 5)
                         
-                        Circle()
-                            .frame(width: 6, height: 6)
-                            .foregroundColor(.green)
+                        if viewModel.verifyScheduleDate(currentWeek[index]) {
+                            Circle()
+                                .frame(width: 6, height: 6)
+                                .foregroundColor(
+                                    viewModel.verifyCurrentMonth(currentWeek[index].month) ? .primary : .gray
+                                )
+                        }
+                        
+                        Spacer()
                     }
                     
-                    if viewModel.verifyFocusDate(currentWeek[index].day) {
-                        
+                    if viewModel.highlightFocusDate(currentWeek[index].day) {
+
                         VStack(spacing: 0) {
                             Text("\(currentWeek[index].day)")
                                 .font(.callout)
                                 .foregroundColor(Color.backgroundWhite)
                                 .padding(.bottom, 9)
-
-                            Circle()
-                                .frame(width: 6, height: 6)
-                                .foregroundColor(.white)
+                            if viewModel.verifyScheduleDate(currentWeek[index]) {
+                                Circle()
+                                    .frame(width: 6, height: 6)
+                                    .foregroundColor(.white)
+                            } else {
+                                Spacer()
+                            }
                         }
                         .padding(EdgeInsets(top: 3, leading: 6, bottom: 7, trailing: 6))
                         .frame(width: 32)
                         .background(Color.primary)
                         .cornerRadius(10)
                         .padding(.top, 2)
-                          .transition(AnyTransition.opacity.animation(.easeInOut))
+                        .transition(AnyTransition.opacity.animation(.easeInOut))
                     }
                 }
             }
@@ -217,10 +221,8 @@ private extension ScheduleListView {
                     Text("\(previousWeek[index].day)")
                         .frame(maxWidth: .infinity)
                         .font(.system(size: 16, weight: .medium))
-                    
-                    Circle()
-                        .frame(width: 6, height: 6)
-                        .foregroundColor(Color.primary)
+                        .padding(.top, 5)
+                    Spacer()
                 }
             }
         }
@@ -234,23 +236,69 @@ private extension ScheduleListView {
                     Text("\(nextWeek[index].day)")
                         .frame(maxWidth: .infinity)
                         .font(.system(size: 16, weight: .medium))
-                    
-                    Circle()
-                        .frame(width: 6, height: 6)
-                        .foregroundColor(Color.primary)
+                        .padding(.top, 5)
+                    Spacer()
                 }
             }
         }
     }
     
+    @ViewBuilder
     var scheduleList: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(spacing: 8) {
-                ForEach(mockData) { data in
-                    ScheduleCell(currentDate: viewModel.currentDate, data: data)
+        if workdays.upcoming.isEmpty && workdays.expired.isEmpty {
+            scheduleNotFound
+        } else {
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("예정된 일정")
+                        .font(Font.callout.bold())
+                        .padding(.bottom, 12)
+                    ForEach(workdays.upcoming) { data in
+                        NavigationLink(
+                            destination: ScheduleUpdateView(workday: data).navigationTitle("근무 일정 수정하기"),
+                            isActive: $isScheduleUpdateViewActive
+                        ) {
+                            ScheduleCell(currentDate: viewModel.currentDate, data: data)
+                        }
+                    }
+                    if !workdays.expired.isEmpty {
+                        Text("확정된 일정")
+                            .font(Font.callout.bold())
+                            .padding(.top, 32)
+                            .padding(.bottom, 12)
+                        ForEach(workdays.expired) { data in
+                            NavigationLink(
+                                destination: ScheduleUpdateView(workday: data).navigationTitle("근무 일정 수정하기"),
+                                isActive: $isScheduleUpdateViewActive
+                            ) {
+                                ScheduleCell(currentDate: viewModel.currentDate, data: data)
+                            }
+                        }
+                    }
                 }
-                Spacer()
             }
+        }
+    }
+    
+    var scheduleNotFound: some View {
+        VStack(spacing: 0) {
+            Spacer()
+            Image("rlogGreenLogo")
+            Text("예정된 근무가 없습니다.")
+                .font(Font.body.bold())
+                .padding(.top, 24)
+                .padding(.bottom, 100)
+            Spacer()
+        }
+    }
+    
+    var workspaceNotFound: some View {
+        VStack(spacing: 0) {
+            Spacer()
+            Text("근무지탭에서 근무지를 등록해주세요.")
+                .padding(.bottom, 100)
+                .font(Font.body.bold())
+            Spacer()
         }
     }
 }
