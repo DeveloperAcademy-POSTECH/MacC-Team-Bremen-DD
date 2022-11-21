@@ -29,16 +29,58 @@ struct WorkspaceDetailView: View {
                 schedules
                 addScheduleButton
                 HDivider()
-                deleteScheduleButton
+                
+                HStack {
+                    Spacer()
+                    StrokeButton(label: "근무지 삭제", buttonType: .destructive) {
+                        viewModel.isAlertOpen.toggle()
+                    }
+                    .alert("근무지 삭제", isPresented: $viewModel.isAlertOpen) {
+                        Button("취소", role: .cancel) {
+                            viewModel.isAlertOpen.toggle()
+                        }
+                        Button("삭제", role: .destructive) {
+                            viewModel.didTapDeleteButton {
+                                dismiss()
+                            }
+                        }
+                    } message: {
+                        Text("해당 근무지를 삭제합니다.?")
+                    }
+                    .padding(.top, -8)
+                    Spacer()
+                }
             }
             .padding(EdgeInsets(top: 24, leading: 16, bottom: 0, trailing: 16))
         }
-        .navigationTitle("근무수정")
-        // TODO: 제이든의 작업물로 변경할 예정입니다.
-        .navigationToolbarSetting {
-            dismiss()
-        } rightAction: {
-            viewModel.didTapConfirmButton { dismiss() }
+        .navigationBarTitle (Text("근무수정"), displayMode: .inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    dismiss()
+                }){
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(.fontBlack)
+                    Text("이전")
+                        .foregroundColor(.fontBlack)
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    viewModel.didTapConfirmButton {
+                        dismiss()
+                    }
+                }){
+                    Text("완료")
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.primary)
+                }
+            }
+        }
+        .sheet(isPresented: $viewModel.isCreateScheduleModalShow, onDismiss: {
+            print("1")
+        }) {
+            WorkSpaceCreateCreatingScheduleView(isShowingModal: $viewModel.isCreateScheduleModalShow, scheduleList: $viewModel.shouldCreateSchedules)
         }
         .background(Color.backgroundWhite)
         .navigationBarBackButtonHidden()

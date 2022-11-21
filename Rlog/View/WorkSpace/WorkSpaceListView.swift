@@ -12,36 +12,37 @@ struct WorkSpaceListView: View {
     
     var body: some View {
         NavigationView {
-            workspaceList
-        }
-    }
-}
-
-private extension WorkSpaceListView {
-    var workspaceList: some View {
-        ScrollView(showsIndicators: false) {
-            ForEach(viewModel.workspaces, id: \.self) { workspace in
-                WorkspaceCell(workspace: workspace)
-            }
-        }
-        .padding(.top, 24)
-        .accentColor(.fontBlack)
-        .background(Color.backgroundWhite)
-        .onAppear { viewModel.onAppear() }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Text("근무지")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.fontBlack)
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink(
-                    destination: WorkspaceCreateView(isActive: $viewModel.isShowingSheet),
-                    isActive: $viewModel.isShowingSheet) {
-                    Image("plus.curved")
-                        .foregroundColor(Color.primary)
+            
+            VStack(spacing: 0){
+                HStack(){
+                    Text("근무지")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.fontBlack)
+                    
+                    Spacer()
+                    
+                    NavigationLink(
+                        destination: WorkSpaceCreateView(isActive: $viewModel.isShowingSheet),
+                        isActive: $viewModel.isShowingSheet) {
+                            
+                        Image("plus.curved")
+                            .foregroundColor(Color.primary)
+                    }
                 }
+                .padding(EdgeInsets(top: 27, leading: 16, bottom: 24, trailing: 16))
+                
+                ScrollView {
+                    ForEach(viewModel.workspaces, id: \.self) { workspace in
+                        WorkSpaceCell(workspace: workspace)
+                    }
+                }
+            }
+            .navigationBarTitle("", displayMode: .automatic)
+            .navigationBarHidden(true)
+            .background(Color.backgroundWhite)
+            .onAppear {
+                viewModel.onAppear()
             }
         }
     }
