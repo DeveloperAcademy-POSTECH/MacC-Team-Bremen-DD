@@ -27,6 +27,7 @@ struct MonthlyCalculateListView: View {
             .onAppear {
                 viewModel.onAppear()
             }
+            .navigationBarHidden(true)
         }
     }
 }
