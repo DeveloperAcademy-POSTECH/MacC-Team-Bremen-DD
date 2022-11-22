@@ -64,19 +64,19 @@ private extension MonthlyCalculateListView {
     
     var calculateByWorkspaceList: some View {
         VStack {
-            ForEach(viewModel.workspaces, id: \.self) { workspace in
-                makeMonthlyCalculateListViewModel(workspace: workspace)
+            ForEach(0..<viewModel.calculates.count, id: \.self) { index in
+                makeMonthlyCalculateListViewModel(calculate: viewModel.calculates[index])
             }
         }
     }
     
-    func makeMonthlyCalculateListViewModel(workspace: WorkspaceEntity) -> some View {
+    func makeMonthlyCalculateListViewModel(calculate: Calculate) -> some View {
         var workspaceTitle: some View {
             HStack(spacing: 4) {
                 Rectangle()
                     .fill(Color.primary)
                     .frame(width: 4, height: 16)
-                Text(workspace.name)
+                Text(calculate.workspace.name)
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
             }
@@ -115,7 +115,7 @@ private extension MonthlyCalculateListView {
                         .padding(.top, 32)
                     
                     if viewModel.fetchIsCurrentMonth() {
-                        makeWorkspaceInfomation(title: "급여일까지", content: "D-\(viewModel.fetchRemainedDays(workspace: workspace))")
+                        makeWorkspaceInfomation(title: "급여일까지", content: "D-\(calculate.leftDays)")
                             .padding(.top, 8)
                     }
                     
