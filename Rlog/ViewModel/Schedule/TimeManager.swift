@@ -7,6 +7,14 @@
 
 import Foundation
 
+
+// Sample calendar model
+struct CalendarModel {
+    let year: Int
+    let month: Int
+    let day: Int
+}
+
 final class TimeManager {
     let calendar = Calendar.current
     let formatter = DateFormatter(dateFormatType: .weekday)
