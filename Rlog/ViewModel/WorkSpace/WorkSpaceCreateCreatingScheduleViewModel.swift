@@ -12,6 +12,20 @@ final class WorkspaceCreateCreatingScheduleViewModel: ObservableObject {
     @Binding var isShowingModal: Bool
     @Binding var scheduleList: [ScheduleModel]
     @Published var sevenDays: [SelectedDayModel] = SevenDays.allCases.map { $0.day }
+    @Published var isStartTimePickerActive = false {
+        willSet {
+            if newValue == true {
+                withAnimation { self.isEndTimePickerActive = false }
+            }
+        }
+    }
+    @Published var isEndTimePickerActive = false {
+        willSet {
+            if newValue == true {
+                withAnimation { self.isStartTimePickerActive = false }
+            }
+        }
+    }
     @Published var startTime: Date {
         didSet {
             startHour = Int16(timeManager.getHour(startTime))
@@ -28,9 +42,9 @@ final class WorkspaceCreateCreatingScheduleViewModel: ObservableObject {
     let timeManager = TimeManager()
     var isActivatedConfirmButton = false
     var errorMessage = ""
-    var startHour: Int16 = 0
+    var startHour: Int16 = 9
     var startMinute: Int16 = 0
-    var endHour: Int16 = 0
+    var endHour: Int16 = 18
     var endMinute: Int16 = 0
     
     init(isShowingModal: Binding<Bool>, scheduleList: Binding<[ScheduleModel]>) {
