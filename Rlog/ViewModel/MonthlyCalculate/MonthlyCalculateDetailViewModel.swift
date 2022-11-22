@@ -12,6 +12,7 @@ final class MonthlyCalculateDetailViewModel: ObservableObject {
     var workspace: WorkspaceModel
     @Published var workdays: [WorkdayModel] = []
     @Published var calendarDays: [Date] = []
+    @Published var emptyCalendarDays: [Int] = []
 
     @Published var startDate = Date()
     @Published var target = Date()
@@ -20,7 +21,10 @@ final class MonthlyCalculateDetailViewModel: ObservableObject {
 
     init() {
         self.workspace = WorkspaceModel(payDay: 20)
-        makeCalendarDates()
+        Task {
+            await makeCalendarDates()
+            makeEmptyCalendarDates()
+        }
     }
 
     func calculateLeftDays() -> Int {
@@ -31,7 +35,7 @@ final class MonthlyCalculateDetailViewModel: ObservableObject {
 }
 
 private extension MonthlyCalculateDetailViewModel {
-    func makeCalendarDates() {
+    func makeCalendarDates() async {
         let yearMonthDayFormatter = DateFormatter(dateFormatType: .yearMonthDay)
         let dayInt = current.dayInt
         let monthInt = current.monthInt
@@ -63,6 +67,12 @@ private extension MonthlyCalculateDetailViewModel {
             calendarDays.append(range)
             guard let next = Calendar.current.date(byAdding: DateComponents(day: 1), to: range) else { return }
             range = next
+        }
+    }
+
+    func makeEmptyCalendarDates() {
+        for count in 0..<startDate.weekDayInt - 1 {
+            emptyCalendarDays.append(count)
         }
     }
 }

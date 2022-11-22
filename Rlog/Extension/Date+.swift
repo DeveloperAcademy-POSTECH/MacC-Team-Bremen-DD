@@ -28,6 +28,10 @@ extension Date {
     var yearInt: Int {
         Calendar.current.component(.year, from: self)
     }
+
+    var weekDayInt: Int {
+        Calendar.current.component(.weekday, from: self)
+    }
     
     // TODO: - DateFormatter+ 구현 후 삭제
     func fetchYearAndMonth() -> String {

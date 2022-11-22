@@ -117,6 +117,9 @@ private extension MonthlyCalculateDetailView {
 
     var calendarBody: some View {
         LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 20) {
+            ForEach(viewModel.emptyCalendarDays, id:\.self) { day in
+                Text("")
+            }
             ForEach(viewModel.calendarDays, id: \.self) { day in
                 calendarBodyCell(day)
             }
