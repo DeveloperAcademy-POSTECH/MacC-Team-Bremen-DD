@@ -9,26 +9,48 @@ import Foundation
 
 @MainActor
 final class MonthlyCalculateDetailViewModel: ObservableObject {
-    let workspace: WorkspaceModel
-    let workdays: [WorkdayModel] = []
-    let calendarDays: [Date] = []
+    var workspace: WorkspaceModel
+    var workdays: [WorkdayModel] = []
+    var calendarDays: [Date] = []
 
     init() {
-        self.workspace = WorkspaceModel(payDay: 25)
+        self.workspace = WorkspaceModel(payDay: 20)
+        makeCalendarDates()
     }
 
     func makeCalendarDates() {
+        let yearMonthDayFormatter = DateFormatter(dateFormatType: .yearMonthDay)
         let current = Date()
-        
+        let dayInt = current.dayInt
+        let monthInt = current.monthInt
+        let yearInt = current.yearInt
 
         var range = Date()
-           guard let after5Month = Calendar.current.date(byAdding: DateComponents(month: 1), to: range) else { return }
+        var target = Date()
 
-           while range < after5Month {
+        if dayInt < workspace.payDay {
+            let previousMonth = monthInt - 1
+            let rangeString = "\(yearInt)/\(previousMonth)/\(workspace.payDay)"
+            let targetString = "\(yearInt)/\(monthInt)/\(workspace.payDay)"
+            range = yearMonthDayFormatter.date(from: rangeString)!
+            target = yearMonthDayFormatter.date(from: targetString)!
+            print(range)
+            print(target)
+        } else {
+            let nextMonth = monthInt + 1
+            let rangeString = "\(yearInt)/\(monthInt)/\(workspace.payDay)"
+            let targetString = "\(yearInt)/\(nextMonth)/\(workspace.payDay)"
+            range = yearMonthDayFormatter.date(from: rangeString)!
+            target = yearMonthDayFormatter.date(from: targetString)!
+            print(range)
+            print(target)
+        }
 
-               guard let next = Calendar.current.date(byAdding: DateComponents(day: 1), to: range) else { return }
-               range = next
-           }
+        while range < target {
+            calendarDays.append(range)
+            guard let next = Calendar.current.date(byAdding: DateComponents(day: 1), to: range) else { return }
+            range = next
+        }
     }
 }
 

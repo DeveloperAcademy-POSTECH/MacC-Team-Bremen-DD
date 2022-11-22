@@ -91,12 +91,15 @@ private extension MonthlyCalculateDetailView {
     }
 
     var calendarView: some View {
-        VStack {
+        VStack(spacing: 0) {
             calendarHeader
             calendarBody
+            Spacer()
+            calendarFooter
         }
-        .frame(minWidth: 0, maxWidth: .infinity)
+        .frame(minWidth: 0, maxWidth: .infinity, idealHeight: 383)
         .background(Color.backgroundCard)
+        .cornerRadius(10)
     }
 
     var calendarHeader: some View {
@@ -106,21 +109,49 @@ private extension MonthlyCalculateDetailView {
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundColor(.grayLight)
             }
-            .frame(minWidth: 0, maxWidth: .infinity)
-
+            .frame(minWidth: 0, maxWidth: .infinity, idealHeight: 18)
         }
-        .padding(.top)
+        .padding(.top, 16)
         .padding(.horizontal, 20)
     }
 
     var calendarBody: some View {
-        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7)) {
-            ForEach(viewModel.workdays, id: \.self) { workday in
-                Text(workday.date.formatted())
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 20) {
+            ForEach(viewModel.calendarDays, id: \.self) { day in
+                calendarBodyCell(day)
             }
+            .frame(width: 40, height: 40)
         }
+        .frame(minWidth: 0, maxWidth: .infinity)
         .padding(.top, 5)
-        .padding(.horizontal)
+        .padding(.horizontal, 16)
+    }
+
+    func calendarBodyCell(_ day: Date) -> some View {
+        Text("\(day.dayInt)")
+    }
+
+    var calendarFooter: some View {
+        HStack(spacing: 10) {
+            ForEach(WorkDayType.allCases, id:\.self) { workdayType in
+                calendarFooterCell(workdayType)
+            }
+            Spacer()
+        }
+        .padding(.horizontal, 24)
+        .padding(.bottom)
+    }
+
+    @ViewBuilder
+    func calendarFooterCell(_ type: WorkDayType) -> some View {
+        HStack(spacing: 4) {
+            Circle()
+                .foregroundColor(type.color)
+                .frame(width: 8, height: 8)
+            Text(type.fullName)
+                .font(.caption2)
+                .foregroundColor(.grayMedium)
+        }
     }
     
     var resonList: some View {

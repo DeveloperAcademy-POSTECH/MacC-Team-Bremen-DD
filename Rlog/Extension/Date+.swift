@@ -16,6 +16,18 @@ extension Date {
             return calender.date(from: dateComponents)
         }
     }
+
+    var dayInt: Int {
+         Calendar.current.component(.day, from: self)
+     }
+
+     var monthInt: Int {
+         Calendar.current.component(.month, from: self)
+     }
+
+    var yearInt: Int {
+        Calendar.current.component(.year, from: self)
+    }
     
     // TODO: - DateFormatter+ 구현 후 삭제
     func fetchYearAndMonth() -> String {
