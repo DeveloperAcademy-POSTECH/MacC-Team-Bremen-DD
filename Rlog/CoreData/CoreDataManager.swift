@@ -93,7 +93,7 @@ extension CoreDataManager {
         startMinute: Int16,
         endHour: Int16,
         endMinute: Int16
-    ) {
+    ) -> ScheduleEntity {
         let schedule = ScheduleEntity(context: context)
         schedule.workspace = workspace
         schedule.repeatDays = repeatDays
@@ -102,6 +102,7 @@ extension CoreDataManager {
         schedule.endHour = endHour
         schedule.endMinute = endMinute
         save()
+        return schedule
     }
 
     func getSchedules(of workspace: WorkspaceEntity) -> [ScheduleEntity] {
@@ -160,6 +161,13 @@ extension CoreDataManager {
         workday.memo = memo
         workday.schedule = schedule
         save()
+    }
+    
+    func getAllWorkdays(of workspace: WorkspaceEntity) -> [WorkdayEntity] {
+        let fetchRequest: NSFetchRequest<WorkdayEntity> = WorkdayEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "workspace.name == %@", workspace.name)
+        let result = try? context.fetch(fetchRequest)
+        return result ?? []
     }
 
     func editWorkday(
