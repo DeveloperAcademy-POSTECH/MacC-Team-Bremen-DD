@@ -23,6 +23,14 @@ final class MonthlyCalculateDetailViewModel: ObservableObject {
         makeCalendarDates()
     }
 
+    func calculateLeftDays() -> Int {
+        let components = Calendar.current.dateComponents([.day], from: current, to: target)
+        guard let leftDay = components.day else { return 0 }
+        return leftDay
+    }
+}
+
+private extension MonthlyCalculateDetailViewModel {
     func makeCalendarDates() {
         let yearMonthDayFormatter = DateFormatter(dateFormatType: .yearMonthDay)
         let dayInt = current.dayInt

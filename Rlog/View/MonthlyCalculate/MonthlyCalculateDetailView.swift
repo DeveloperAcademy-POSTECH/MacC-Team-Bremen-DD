@@ -51,7 +51,7 @@ private extension MonthlyCalculateDetailView {
             Text("\(viewModel.startDate.fetchYearMonthDay()) ~ \(viewModel.target.fetchYearMonthDay())")
                 .font(.subheadline)
                 .foregroundColor(Color.fontBlack)
-            Text("정산일까지 D-12")
+            Text("정산일까지 D-\(viewModel.calculateLeftDays())")
                 .font(.caption2)
                 .foregroundColor(Color.pointRed)
         }
