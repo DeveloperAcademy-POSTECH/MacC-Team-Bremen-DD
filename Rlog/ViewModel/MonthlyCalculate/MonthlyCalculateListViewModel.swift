@@ -65,7 +65,7 @@ struct Calculate {
     }
     
     func fetchStartDate(workspace: WorkspaceEntity, date: Date) -> Date {
-        if workspace.payDay < Calendar.current.component(.day, from: date) {
+        if workspace.payDay >= Calendar.current.component(.day, from: date) {
             guard let lastMonth = Calendar.current.date(byAdding: DateComponents(month: -1), to: date) else { return Date() }
             
             guard let lastPayDate = Calendar.current.date(from: DateComponents(
@@ -86,7 +86,7 @@ struct Calculate {
     }
     
     func fetchEndDate(workspace: WorkspaceEntity, date: Date) -> Date {
-        if workspace.payDay < Calendar.current.component(.day, from: date) {
+        if workspace.payDay >= Calendar.current.component(.day, from: date) {
             guard let payDate = Calendar.current.date(from: DateComponents(
                 year: Calendar.current.component(.year, from: date),
                 month: Calendar.current.component(.month, from: date),
