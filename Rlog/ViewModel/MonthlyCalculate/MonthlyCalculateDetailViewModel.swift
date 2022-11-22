@@ -10,8 +10,13 @@ import Foundation
 @MainActor
 final class MonthlyCalculateDetailViewModel: ObservableObject {
     var workspace: WorkspaceModel
-    var workdays: [WorkdayModel] = []
-    var calendarDays: [Date] = []
+    @Published var workdays: [WorkdayModel] = []
+    @Published var calendarDays: [Date] = []
+
+    @Published var startDate = Date()
+    @Published var target = Date()
+
+    let current = Date()
 
     init() {
         self.workspace = WorkspaceModel(payDay: 20)
@@ -20,13 +25,11 @@ final class MonthlyCalculateDetailViewModel: ObservableObject {
 
     func makeCalendarDates() {
         let yearMonthDayFormatter = DateFormatter(dateFormatType: .yearMonthDay)
-        let current = Date()
         let dayInt = current.dayInt
         let monthInt = current.monthInt
         let yearInt = current.yearInt
 
         var range = Date()
-        var target = Date()
 
         if dayInt < workspace.payDay {
             let previousMonth = monthInt - 1
@@ -34,16 +37,18 @@ final class MonthlyCalculateDetailViewModel: ObservableObject {
             let targetString = "\(yearInt)/\(monthInt)/\(workspace.payDay)"
             range = yearMonthDayFormatter.date(from: rangeString)!
             target = yearMonthDayFormatter.date(from: targetString)!
-            print(range)
-            print(target)
+            startDate = range
+            print(range.fetchYearMonthDay())
+            print(target.fetchYearMonthDay())
         } else {
             let nextMonth = monthInt + 1
             let rangeString = "\(yearInt)/\(monthInt)/\(workspace.payDay)"
             let targetString = "\(yearInt)/\(nextMonth)/\(workspace.payDay)"
             range = yearMonthDayFormatter.date(from: rangeString)!
             target = yearMonthDayFormatter.date(from: targetString)!
-            print(range)
-            print(target)
+            startDate = range
+            print(range.fetchYearMonthDay())
+            print(target.fetchYearMonthDay())
         }
 
         while range < target {

@@ -43,6 +43,12 @@ extension Date {
         let converted = dateFormatter.string(from: date)
         return converted
     }
+
+    func fetchYearMonthDay() -> String {
+        let dateFormatter = DateFormatter(dateFormatType: .yearMonthDayKR)
+        let converted = dateFormatter.string(from: self)
+        return converted
+    }
     
     func fetchMonth() -> String {
         return String(Calendar.current.component(.month, from: self))

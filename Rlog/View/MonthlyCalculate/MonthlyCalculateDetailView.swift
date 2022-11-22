@@ -48,7 +48,7 @@ private extension MonthlyCalculateDetailView {
                 .font(.title2)
                 .fontWeight(.bold)
                 .foregroundColor(Color.fontBlack)
-            Text("2022년 10월 25일 ~ 2022년 11월 24일")
+            Text("\(viewModel.startDate.fetchYearMonthDay()) ~ \(viewModel.target.fetchYearMonthDay())")
                 .font(.subheadline)
                 .foregroundColor(Color.fontBlack)
             Text("정산일까지 D-12")
