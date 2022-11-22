@@ -9,6 +9,14 @@ import SwiftUI
 
 @MainActor
 final class MainTabViewModel: ObservableObject {
+    func onAppear() {
+        Task {
+            await updateAllSchedules()
+        }
+    }
+}
+
+private extension MainTabViewModel {
     func updateAllSchedules() async {
         let workspaces = CoreDataManager.shared.getAllWorkspaces()
         
