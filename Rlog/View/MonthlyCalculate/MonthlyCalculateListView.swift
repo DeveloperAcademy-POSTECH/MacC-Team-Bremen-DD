@@ -55,7 +55,7 @@ private extension MonthlyCalculateListView {
         HStack {
             Text("\(viewModel.switchedDate.fetchMonth())월 총 금액")
             Spacer()
-            Text("10,200,000원")
+            Text("\(viewModel.total)원")
                 .fontWeight(.bold)
         }
         .font(.title3)
@@ -88,7 +88,7 @@ private extension MonthlyCalculateListView {
                     .font(.subheadline)
                     .foregroundColor(Color.grayMedium)
                 Spacer()
-                Text("422,400원")
+                Text("\(calculate.total)원")
                     .font(.title3)
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
@@ -111,7 +111,7 @@ private extension MonthlyCalculateListView {
                 workspaceTitle
                     .padding(.top)
                 Group {
-                    makeWorkspaceInfomation(title: "일한 시간", content: "32시간")
+                    makeWorkspaceInfomation(title: "일한 시간", content: "\(calculate.workHours)시간")
                         .padding(.top, 32)
                     
                     if viewModel.fetchIsCurrentMonth() {
