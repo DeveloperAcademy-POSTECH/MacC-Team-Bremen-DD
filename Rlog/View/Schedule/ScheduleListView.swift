@@ -256,20 +256,22 @@ private extension ScheduleListView {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("예정된 일정")
                         .font(Font.callout.bold())
-                        .padding(.bottom, 12)
-                    ForEach(workdays.hasNotDone) { data in
-                        NavigationLink(
-                            destination: ScheduleUpdateView(workday: data).navigationTitle("근무 일정 수정하기"),
-                            isActive: $isScheduleUpdateViewActive
-                        ) {
-                            ScheduleCell(currentDate: viewModel.currentDate, data: data)
+                    HDivider()
+                    if !workdays.hasNotDone.isEmpty {
+                        ForEach(workdays.hasNotDone) { data in
+                            NavigationLink(
+                                destination: ScheduleUpdateView(workday: data).navigationTitle("근무 일정 수정하기"),
+                                isActive: $isScheduleUpdateViewActive
+                            ) {
+                                ScheduleCell(currentDate: viewModel.currentDate, data: data)
+                            }
                         }
                     }
+                    Text("확정된 일정")
+                        .font(Font.callout.bold())
+                        .padding(.top, 16)
+                    HDivider()
                     if !workdays.hasDone.isEmpty {
-                        Text("확정된 일정")
-                            .font(Font.callout.bold())
-                            .padding(.top, 32)
-                            .padding(.bottom, 12)
                         ForEach(workdays.hasDone) { data in
                             NavigationLink(
                                 destination: ScheduleUpdateView(workday: data).navigationTitle("근무 일정 수정하기"),

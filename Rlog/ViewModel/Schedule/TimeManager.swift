@@ -57,4 +57,18 @@ final class TimeManager {
         
         return weekday
     }
+    
+    func calculateTimeGap(startHour: Int16, startMinute: Int16, endHour: Int16, endMinute: Int16) -> Double {
+        let startTime = calendar.date(bySettingHour: Int(startHour), minute: Int(startMinute), second: 0, of: Date()) ?? Date()
+        let endTime = calendar.date(bySettingHour: Int(endHour), minute: Int(endMinute), second: 0, of: Date()) ?? Date()
+        
+        let gap = endTime - startTime
+        
+        return gap
+    }
+    
+    func secondsToHoursMinutesSeconds(_ seconds: Double) -> (Int, Int, Int) {
+        let time = Int(seconds)
+        return (time / 3600, (time % 3600) / 60, (time % 3600) % 60)
+    }
 }

@@ -60,10 +60,7 @@ final class ScheduleListViewModel: ObservableObject {
 private extension ScheduleListViewModel {
     func getAllWorkspaces() {
         let result = CoreDataManager.shared.getAllWorkspaces()
-//        DispatchQueue.main.async { [weak self] in
-//            guard let self = self else { return }
-            self.workspaces = result
-//        }
+        self.workspaces = result
     }
     
     // 일주일 뒤의 날짜를 반환합니다.
@@ -183,12 +180,14 @@ extension ScheduleListViewModel {
     // ✅ Sample
     // 임시로 현재 날짜의 이전 2개월, 이후 3개월의 일정을 불러옵니다.
     func getWorkdaysOfFiveMonths() {
-        var hasNotDoneWorkdays: [WorkdayEntity] = []
         var hasDoneWorkdays: [WorkdayEntity] = []
+        var hasNotDoneWorkdays: [WorkdayEntity] = []
         
         let workdays = CoreDataManager.shared.getWorkdaysBetween(
-            start: Calendar.current.date(byAdding: .month, value: -2, to: Date())!,
-            target: Calendar.current.date(byAdding: .month, value: 3, to: Date())!)
+            start: Calendar.current.date(byAdding: .month, value: -2, to: Date()) ?? Date(),
+            target: Calendar.current.date(byAdding: .month, value: 3, to: Date()) ?? Date()
+        )
+        
         
         for data in workdays {
             if data.hasDone {
@@ -207,15 +206,17 @@ extension ScheduleListViewModel {
         schedulesOfFocusDate.hasNotDone.removeAll()
         schedulesOfFocusDate.hasDone.removeAll()
         
-        for data in workdays.0 {
+        for data in workdays.hasNotDone {
             if data.date.onlyDate == currentDate.onlyDate {
-                if data.hasDone {
-                    schedulesOfFocusDate.hasDone.append(data)
-                } else {
-                    schedulesOfFocusDate.hasNotDone.append(data)
-                }
+                schedulesOfFocusDate.hasNotDone.append(data)
             }
         }
+        
+        for data in workdays.hasDone {
+            if data.date.onlyDate == currentDate.onlyDate {
+                schedulesOfFocusDate.hasDone.append(data)
+            }
+        }        
     }
     
     // 🔥 네이밍 추천 받습니다.
@@ -232,7 +233,7 @@ extension ScheduleListViewModel {
                 if data.date.onlyDate == givenDate.onlyDate { return true }
             }
         }
-
+        
         return false
     }
 }

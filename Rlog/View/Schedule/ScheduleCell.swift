@@ -7,57 +7,6 @@
 
 import SwiftUI
 
-// Sample
-final class ScheduleCellViewModel {
-    let timeManager = TimeManager()
-    
-    func defineWorkType(
-        repeatDays: [String],
-        workDate: Date,
-        startHour: Int16,
-        startMinute: Int16,
-        endHour: Int16,
-        endMinute: Int16,
-        spentHour: Int16
-    ) -> (type: String, color: Color) {
-        let weekday = timeManager.getWeekdayOfDate(workDate)
-        let spentHourOfNormalCase: Int16 = endHour - startHour
-        let timeDifference = spentHour - spentHourOfNormalCase
-        
-        for day in repeatDays {
-            if day != weekday { return ("추가", .blue) }
-        }
-        
-        switch timeDifference {
-        case 0:
-            return ("정규", Color.primary)
-        case 1...:
-            return ("연장", Color.pointBlue)
-        case _ where timeDifference < 0:
-            return ("축소", Color.pointRed)
-        default:
-            return ("정규", .green)
-        }
-    }
-    
-    func verifyIsScheduleExpired(endTime: Date) -> Bool {
-        let order = NSCalendar.current.compare(Date(), to: endTime, toGranularity: .minute)
-        switch order {
-        case .orderedDescending:
-            return true
-        default:
-            return false
-        }
-    }
-    
-    func didTapConfirmationButton(_ data: WorkdayEntity) {
-        // TODO: CoreData WorkdayEntity Edit 함수 적용
-        print("🔥 Confirmation Button is Tapped")
-        print(data.workspace.name)
-        print("=====================================")
-    }
-}
-
 struct ScheduleCell: View {
     // WorkspaceEntity
     let viewModel = ScheduleCellViewModel()
@@ -71,13 +20,21 @@ struct ScheduleCell: View {
     var workType: (String, Color) {
         return viewModel.defineWorkType(
             repeatDays: data.schedule?.repeatDays ?? [],
-            workDate: data.date,
-            startHour: data.schedule?.startHour ?? 9,
-            startMinute: data.schedule?.startMinute ?? 0,
-            endHour: data.schedule?.endHour ?? 18,
-            endMinute: data.schedule?.endMinute ?? 0,
-            spentHour: 10
+            data: data
         )
+    }
+    
+    var spentHour: String {
+        let result = viewModel.getSpentHour(data.endTime, data.startTime)
+        var spentHour = ""
+        
+        if result.1 < 30 {
+            spentHour = "\(result.0)시간"
+        } else {
+            spentHour = "\(result.0)시간 \(result.1)분"
+        }
+        
+        return spentHour
     }
     
     var startTimeString: String {
@@ -96,13 +53,14 @@ struct ScheduleCell: View {
         return "\(hour):\(minute >= 10 ? minute.description : "0\(minute)")"
     }
     
-    var isScheduleExpired: Bool {
+    var hasDone: Bool {
         return viewModel.verifyIsScheduleExpired(endTime: data.endTime)
     }
     
     var body: some View {
         scheduleInfo
             .transition(AnyTransition.opacity.animation(.easeInOut))
+            .onAppear { print(data) }
     }
 }
 
@@ -111,6 +69,7 @@ private extension ScheduleCell {
         VStack(spacing: 0) {
             
             HStack {
+                Text("\(String(describing: data.hasDone))")
                 Text(workType.0)
                     .font(.caption2)
                     .foregroundColor(Color.backgroundWhite)
@@ -120,7 +79,7 @@ private extension ScheduleCell {
                 
                 Spacer()
                 
-                Text("4시간")
+                Text(spentHour)
                     .font(.subheadline)
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
@@ -140,7 +99,7 @@ private extension ScheduleCell {
             }
             .padding(.vertical, 8)
             
-            if isScheduleExpired {
+            if !hasDone && !data.hasDone {
                 confirmationButton
             }
 
@@ -165,7 +124,7 @@ private extension ScheduleCell {
                     .font(Font.caption.bold())
                     .padding(EdgeInsets(top: 5, leading: 29, bottom: 5, trailing: 29))
                     .foregroundColor(.white)
-                    .background(Color.primary)
+                    .background(workType.1)
                     .cornerRadius(10)
             }
         }
