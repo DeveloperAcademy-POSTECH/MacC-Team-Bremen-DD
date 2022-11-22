@@ -100,6 +100,9 @@ private extension MonthlyCalculateDetailView {
         .frame(minWidth: 0, maxWidth: .infinity)
         .background(Color.backgroundCard)
         .cornerRadius(10)
+        .padding(2)
+        .background(Color.backgroundStroke)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 
     var calendarHeader: some View {
