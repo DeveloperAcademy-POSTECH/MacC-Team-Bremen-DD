@@ -115,7 +115,7 @@ private extension MonthlyCalculateListView {
                         .padding(.top, 32)
                     
                     if viewModel.fetchIsCurrentMonth() {
-                        makeWorkspaceInfomation(title: "급여일까지", content: "D-12")
+                        makeWorkspaceInfomation(title: "급여일까지", content: "D-\(viewModel.fetchRemainedDays(workspace: workspace))")
                             .padding(.top, 8)
                     }
                     
