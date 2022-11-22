@@ -79,6 +79,10 @@ private extension MonthlyCalculateListView {
                 Text(calculate.workspace.name)
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
+                Spacer()
+                Text("\(calculate.startDate.fetchMonth())월 \(calculate.startDate.fetchDay())일 ~ \(calculate.endDate.fetchMonth())월 \(calculate.endDate.fetchDay())일")
+                    .font(.caption)
+                    .foregroundColor(Color.fontBlack)
             }
         }
         

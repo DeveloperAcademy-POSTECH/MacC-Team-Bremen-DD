@@ -16,7 +16,7 @@ struct Calculate {
         return fetchWorkdays(workspace: workspace, startDate: startDate, endDate: endDate)
     }
     var total: Int {
-        return totalWithoutTaxAndJuhu - calculateTax
+        return calculateTotal()
     }
     var totalWithoutTaxAndJuhu: Int {
         return calculateTotalWithoutTaxAndJuhu()
@@ -129,6 +129,14 @@ struct Calculate {
             let endTime = workday.endTime
             let difference = endTime.timeIntervalSinceReferenceDate - startTime.timeIntervalSinceReferenceDate
             total += (Int(difference) / 3600 * Int(workday.hourlyWage))
+        }
+        return total
+    }
+    
+    func calculateTotal() -> Int {
+        var total = totalWithoutTaxAndJuhu
+        if workspace.hasTax {
+            total -= calculateTax
         }
         return total
     }
