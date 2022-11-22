@@ -23,7 +23,15 @@ extension Date {
         return converted
     }
     
+    func fetchYear() -> String {
+        return String(Calendar.current.component(.year, from: self))
+    }
+    
     func fetchMonth() -> String {
         return String(Calendar.current.component(.month, from: self))
+    }
+    
+    func fetchDay() -> String {
+        return String(Calendar.current.component(.day, from: self))
     }
 }

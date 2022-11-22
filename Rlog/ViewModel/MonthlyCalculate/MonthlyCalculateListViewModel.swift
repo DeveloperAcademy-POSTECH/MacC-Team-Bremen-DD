@@ -13,7 +13,7 @@ struct Calculate {
     
     var date: Date
     var hasDoneWorkdays: [WorkdayEntity] {
-        return fetchWorkdays(workspace: workspace, date: date)
+        return fetchWorkdays(workspace: workspace, startDate: startDate, endDate: endDate)
     }
     var total: Int {
         return totalWithoutTaxAndJuhu - calculateTax
@@ -30,6 +30,12 @@ struct Calculate {
 //    var calculateJuhu: Int
     var leftDays: Int {
         return calculateleftDays(workspace: workspace)
+    }
+    var startDate: Date {
+        return fetchStartDate(workspace: workspace, date: date)
+    }
+    var endDate: Date {
+        return fetchEndDate(workspace: workspace, date: date)
     }
     
     init(workspace: WorkspaceEntity, date: Date) {
@@ -58,41 +64,51 @@ struct Calculate {
         }
     }
     
-    func fetchWorkdays(workspace: WorkspaceEntity, date: Date) -> [WorkdayEntity] {
-        var hasDoneWorkdays: [WorkdayEntity] = []
-        
-        // payDay가 오늘 날짜보다 클 때와 작을 때를 다르게 계산해줘야 합니다(10월 10일 -> 15일일 때는 9월 16일 ~ 10월 15일, 5일 일때는 10월 5일 ~ 11월 4일치를 보여줘야 함
+    func fetchStartDate(workspace: WorkspaceEntity, date: Date) -> Date {
         if workspace.payDay < Calendar.current.component(.day, from: date) {
-            guard let lastMonth = Calendar.current.date(byAdding: DateComponents(month: -1), to: date) else { return hasDoneWorkdays }
+            guard let lastMonth = Calendar.current.date(byAdding: DateComponents(month: -1), to: date) else { return Date() }
             
             guard let lastPayDate = Calendar.current.date(from: DateComponents(
                 year: Calendar.current.component(.year, from: lastMonth),
                 month: Calendar.current.component(.month, from: lastMonth),
-                day: Int(workspace.payDay)
-            )), let payDate = Calendar.current.date(from: DateComponents(
+                day: Int(workspace.payDay))) else { return Date() }
+            
+            return lastPayDate
+        } else {
+            guard let payDate = Calendar.current.date(from: DateComponents(
                 year: Calendar.current.component(.year, from: date),
                 month: Calendar.current.component(.month, from: date),
                 day: Int(workspace.payDay)
-            )) else { return hasDoneWorkdays }
+            )) else { return Date() }
             
-            hasDoneWorkdays = CoreDataManager.shared.getHasDoneWorkdays(of: workspace, start: lastPayDate, target: payDate)
+            return payDate
+        }
+    }
+    
+    func fetchEndDate(workspace: WorkspaceEntity, date: Date) -> Date {
+        if workspace.payDay < Calendar.current.component(.day, from: date) {
+            guard let payDate = Calendar.current.date(from: DateComponents(
+                year: Calendar.current.component(.year, from: date),
+                month: Calendar.current.component(.month, from: date),
+                day: Int(workspace.payDay) - 1
+            )) else { return Date() }
+            
+            return payDate
         } else {
-            guard let nextMonth = Calendar.current.date(byAdding: DateComponents(month: 1), to: date) else { return hasDoneWorkdays }
+            guard let nextMonth = Calendar.current.date(byAdding: DateComponents(month: 1), to: date) else { return Date() }
             
             guard let nextPayDate = Calendar.current.date(from: DateComponents(
                 year: Calendar.current.component(.year, from: nextMonth),
                 month: Calendar.current.component(.month, from: nextMonth),
-                day: Int(workspace.payDay)
-            )), let payDate = Calendar.current.date(from: DateComponents(
-                year: Calendar.current.component(.year, from: date),
-                month: Calendar.current.component(.month, from: date),
-                day: Int(workspace.payDay)
-            )) else { return hasDoneWorkdays }
+                day: Int(workspace.payDay) - 1
+            )) else { return Date() }
             
-            hasDoneWorkdays = CoreDataManager.shared.getHasDoneWorkdays(of: workspace, start: payDate, target: nextPayDate)
+            return nextPayDate
         }
-        
-        return hasDoneWorkdays
+    }
+    
+    func fetchWorkdays(workspace: WorkspaceEntity, startDate: Date, endDate: Date) -> [WorkdayEntity] {
+        return CoreDataManager.shared.getHasDoneWorkdays(of: workspace, start: startDate, target: endDate)
     }
     
     func calculateWorkHours() -> Int {
