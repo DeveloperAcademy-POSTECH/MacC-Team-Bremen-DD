@@ -20,7 +20,7 @@ final class MonthlyCalculateDetailViewModel: ObservableObject {
     let current = Date()
 
     init() {
-        self.workspace = WorkspaceModel(payDay: 20)
+        self.workspace = WorkspaceModel(payDay: 5)
         Task {
             await makeCalendarDates()
             makeEmptyCalendarDates()

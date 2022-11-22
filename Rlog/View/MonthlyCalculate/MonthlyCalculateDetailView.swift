@@ -97,7 +97,7 @@ private extension MonthlyCalculateDetailView {
             Spacer()
             calendarFooter
         }
-        .frame(minWidth: 0, maxWidth: .infinity, idealHeight: 383)
+        .frame(minWidth: 0, maxWidth: .infinity)
         .background(Color.backgroundCard)
         .cornerRadius(10)
     }
