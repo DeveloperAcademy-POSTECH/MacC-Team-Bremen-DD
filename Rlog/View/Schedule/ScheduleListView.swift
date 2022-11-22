@@ -88,11 +88,15 @@ private extension ScheduleListView {
             .foregroundColor(.grayMedium)
             
             NavigationLink(
-                destination: SchedulePendingListView().navigationTitle("미확인 일정"),
+                destination: SchedulePendingListView()
+                    .navigationBarBackButtonHidden(true)
+                    .navigationBarTitle (Text("미확정 일정"), displayMode: .inline),
                 isActive: $isSchedulePendingListViewActive
             ) { EmptyView() }
             NavigationLink(
-                destination: ScheduleCreationView().navigationTitle("근무 일정 추가하기"),
+                destination: ScheduleCreationView()
+                    .navigationBarBackButtonHidden(true)
+                    .navigationBarTitle(Text("근무 일정 추가하기"), displayMode: .inline),
                  isActive: $isScheduleCreationViewActive
              ) { EmptyView() }
         }
