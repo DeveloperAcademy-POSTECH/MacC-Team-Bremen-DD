@@ -224,6 +224,7 @@ extension ScheduleListViewModel {
     func verifyScheduleDate(_ date: CalendarModel) -> Bool {
         let extractedDate = calendar.date(from: DateComponents(year: date.year, month: date.month, day: date.day))
         let startOfGivenDate = calendar.startOfDay(for: extractedDate ?? Date())
+        
         if !workdays.upcoming.isEmpty || !workdays.expired.isEmpty {
             for data in workdays.upcoming {
                 if calendar.startOfDay(for: data.date) == startOfGivenDate { return true }

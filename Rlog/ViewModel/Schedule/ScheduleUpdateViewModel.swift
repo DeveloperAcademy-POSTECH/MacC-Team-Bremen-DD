@@ -8,6 +8,12 @@
 import Foundation
 
 final class ScheduleUpdateViewModel: ObservableObject {
+    @Published var name = ""
+    @Published var date = Date()
+    @Published var startTime = Date()
+    @Published var endTime = Date()
+    @Published var memo = ""
+    @Published var isAlertActive = false
     @Published var workday: WorkdayEntity? = nil {
         didSet {
             guard
@@ -22,12 +28,9 @@ final class ScheduleUpdateViewModel: ObservableObject {
             self.memo = memo
         }
     }
-    @Published var name = ""
-    @Published var date = Date()
-    @Published var startTime = Date()
-    @Published var endTime = Date()
-    @Published var memo = ""
-    @Published var isAlertActive = false
+    @Published var isDatePickerActive = false
+    @Published var isStartTimePickerActive = false
+    @Published var isEndTimePickerActive = false
     
     func onAppear(_ data: WorkdayEntity) {
         getWorkdayInformation(data)

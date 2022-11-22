@@ -68,7 +68,7 @@ private extension ScheduleContainer {
         HStack {
             // 시간이 n시 0분인 경우 두 자릿수인 00으로 표시
             if startMinute < 30 {
-                Text("\(startHour):0\(startMinute)")
+                Text("\(startHour):\(startMinute)0")
                     .font(.body)
                     .foregroundColor(Color.fontBlack)
             } else {
@@ -80,7 +80,7 @@ private extension ScheduleContainer {
             Text("-")
             
             if endMinute < 30 {
-                Text("\(endHour):0\(endMinute)")
+                Text("\(endHour):\(endMinute)0")
                     .font(.body)
                     .foregroundColor(Color.fontBlack)
             } else {

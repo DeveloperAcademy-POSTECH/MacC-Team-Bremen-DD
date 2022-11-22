@@ -87,7 +87,7 @@ private extension WorkspaceCell {
                         }
                         .padding(.trailing, 3)
                         
-                        Text("\(schedule.startHour):\(schedule.startMinute)0 - \(schedule.endHour):\(schedule.endMinute)0")
+                        Text("\(schedule.startHour):\(schedule.startMinute < 30 ? "00" : "30") - \(schedule.endHour):\(schedule.endMinute < 30 ? "00" : "30")")
                             .font(.subheadline)
                             .foregroundColor(.fontBlack)
                     }
