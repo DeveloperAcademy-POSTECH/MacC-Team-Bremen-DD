@@ -32,6 +32,10 @@ extension Date {
     var weekDayInt: Int {
         Calendar.current.component(.weekday, from: self)
     }
+
+    var previousDate: Date {
+        return Calendar.current.date(byAdding: .day, value: -1, to: self)!
+    }
     
     // TODO: - DateFormatter+ 구현 후 삭제
     func fetchYearAndMonth() -> String {
@@ -50,6 +54,12 @@ extension Date {
 
     func fetchYearMonthDay() -> String {
         let dateFormatter = DateFormatter(dateFormatType: .yearMonthDayKR)
+        let converted = dateFormatter.string(from: self)
+        return converted
+    }
+
+    func fetchMonthDay() -> String {
+        let dateFormatter = DateFormatter(dateFormatType: .monthDayKR)
         let converted = dateFormatter.string(from: self)
         return converted
     }

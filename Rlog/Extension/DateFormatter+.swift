@@ -15,6 +15,7 @@ extension DateFormatter {
         case year
         case yearMonthDay
         case yearMonthDayKR
+        case monthDayKR
         case weekday
 
         var dateFormat: String {
@@ -25,6 +26,7 @@ extension DateFormatter {
             case .year: return "yyyy"
             case .yearMonthDay: return "yyyy/MM/dd"
             case .yearMonthDayKR: return "yyyy년 MM월 dd일"
+            case .monthDayKR: return "MM월 dd일"
             case .weekday: return "E"
             }
         }

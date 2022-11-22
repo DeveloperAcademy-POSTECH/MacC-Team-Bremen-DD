@@ -43,13 +43,10 @@ struct MonthlyCalculateDetailView: View {
 
 private extension MonthlyCalculateDetailView {
     var header: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: 8) {
             Text("GS25 포항공대점")
                 .font(.title2)
                 .fontWeight(.bold)
-                .foregroundColor(Color.fontBlack)
-            Text("\(viewModel.startDate.fetchYearMonthDay()) ~ \(viewModel.target.fetchYearMonthDay())")
-                .font(.subheadline)
                 .foregroundColor(Color.fontBlack)
             Text("정산일까지 D-\(viewModel.calculateLeftDays())")
                 .font(.caption2)
@@ -92,17 +89,34 @@ private extension MonthlyCalculateDetailView {
 
     var calendarView: some View {
         VStack(spacing: 0) {
-            calendarHeader
-            calendarBody
-            Spacer()
-            calendarFooter
+            calendarTitle
+            VStack(spacing: 0) {
+                calendarHeader
+                calendarBody
+                Spacer()
+                calendarFooter
+            }
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .background(Color.backgroundCard)
+            .cornerRadius(10)
+            .padding(2)
+            .background(Color.backgroundStroke)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
         }
-        .frame(minWidth: 0, maxWidth: .infinity)
-        .background(Color.backgroundCard)
-        .cornerRadius(10)
-        .padding(2)
-        .background(Color.backgroundStroke)
-        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .padding(.top, 40)
+    }
+
+    var calendarTitle: some View {
+        HStack(spacing: 16) {
+            Text("근무표")
+                .font(.system(size: 15, weight: .bold))
+            Text("\(viewModel.startDate.fetchMonthDay()) ~ \(viewModel.target.previousDate.fetchMonthDay())")
+                .font(.subheadline)
+                .foregroundColor(Color.fontBlack)
+            Spacer()
+        }
+        .padding(.horizontal, 16)
+        .padding(.bottom, 8)
     }
 
     var calendarHeader: some View {

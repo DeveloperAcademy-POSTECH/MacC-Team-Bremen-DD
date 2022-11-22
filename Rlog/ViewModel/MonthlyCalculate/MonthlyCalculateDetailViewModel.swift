@@ -20,7 +20,7 @@ final class MonthlyCalculateDetailViewModel: ObservableObject {
     let current = Date()
 
     init() {
-        self.workspace = WorkspaceModel(payDay: 5)
+        self.workspace = WorkspaceModel(payDay: 20)
         Task {
             await makeCalendarDates()
             makeEmptyCalendarDates()
@@ -50,8 +50,6 @@ private extension MonthlyCalculateDetailViewModel {
             range = yearMonthDayFormatter.date(from: rangeString)!
             target = yearMonthDayFormatter.date(from: targetString)!
             startDate = range
-            print(range.fetchYearMonthDay())
-            print(target.fetchYearMonthDay())
         } else {
             let nextMonth = monthInt + 1
             let rangeString = "\(yearInt)/\(monthInt)/\(workspace.payDay)"
@@ -59,8 +57,6 @@ private extension MonthlyCalculateDetailViewModel {
             range = yearMonthDayFormatter.date(from: rangeString)!
             target = yearMonthDayFormatter.date(from: targetString)!
             startDate = range
-            print(range.fetchYearMonthDay())
-            print(target.fetchYearMonthDay())
         }
 
         while range < target {
