@@ -9,18 +9,24 @@ import SwiftUI
 
 struct MonthlyCalculateDetailView: View {
     @Environment(\.dismiss) var dismiss
+    @StateObject var viewModel = MonthlyCalculateDetailViewModel()
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 header
                     .padding(.top, 18)
+                    .padding(.horizontal)
                 closing
                     .padding(.top, 39)
+                    .padding(.horizontal)
+                calendarView
+                    .padding(.top)
                 resonList
                     .padding(.top)
+                    .padding(.horizontal)
+
             }
-            .padding(.horizontal)
         }
         .navigationBarTitle (Text("근무 정산"), displayMode: .inline)
         .navigationBarBackButtonHidden()
@@ -82,6 +88,39 @@ private extension MonthlyCalculateDetailView {
             }
             .padding(.top)
         }
+    }
+
+    var calendarView: some View {
+        VStack {
+            calendarHeader
+            calendarBody
+        }
+        .frame(minWidth: 0, maxWidth: .infinity)
+        .background(Color.backgroundCard)
+    }
+
+    var calendarHeader: some View {
+        HStack {
+            ForEach(Weekday.allCases, id: \.self) { weekday in
+                Text(weekday.rawValue)
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundColor(.grayLight)
+            }
+            .frame(minWidth: 0, maxWidth: .infinity)
+
+        }
+        .padding(.top)
+        .padding(.horizontal, 20)
+    }
+
+    var calendarBody: some View {
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7)) {
+            ForEach(viewModel.workdays, id: \.self) { workday in
+                Text(workday.date.formatted())
+            }
+        }
+        .padding(.top, 5)
+        .padding(.horizontal)
     }
     
     var resonList: some View {
