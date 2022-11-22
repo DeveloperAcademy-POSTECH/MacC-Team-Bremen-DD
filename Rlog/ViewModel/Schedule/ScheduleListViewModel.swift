@@ -31,7 +31,7 @@ final class ScheduleListViewModel: ObservableObject {
         // 생성된 근무지 여부를 확인합니다. 생성된 근무지가 없다면 예외처리 화면을 표시합니다.
         getAllWorkspaces()
         getWorkdaysOfFiveMonths()
-        getSchedulesOfFocusDate()
+        getWorkdaysOfFocusDate()
     }
     
     func didScrollToNextWeek() {
@@ -52,7 +52,7 @@ final class ScheduleListViewModel: ObservableObject {
     
     func didTapDate(_ date: CalendarModel) {
         changeFocusDate(date)
-        getSchedulesOfFocusDate()
+        getWorkdaysOfFocusDate()
     }
 }
 
@@ -203,7 +203,7 @@ extension ScheduleListViewModel {
     
     // 🔥 네이밍 추천 받습니다.
     // 사용자가 터치한 날짜의 근무 일정이 있을 경우 화면에 표시합니다.
-    func getSchedulesOfFocusDate() {
+    func getWorkdaysOfFocusDate() {
         schedulesOfFocusDate.hasNotDone.removeAll()
         schedulesOfFocusDate.hasDone.removeAll()
         
@@ -218,10 +218,9 @@ extension ScheduleListViewModel {
         }
     }
     
-    // 🔥 네이밍 추천 받습니다.
     // 스크롤 캘린더에 Circle 표시를 하기 위한 함수입니다.
     // 해당 일자에 근무 일정이 있을 경우 Circle을 표시합니다.
-    func verifyScheduleDate(_ date: CalendarModel) -> Bool {
+    func getWorkdayIndicator(_ date: CalendarModel) -> Bool {
         let givenDate = calendar.date(from: DateComponents(year: date.year, month: date.month, day: date.day)) ?? Date()
         
         if !workdays.hasNotDone.isEmpty || !workdays.hasDone.isEmpty {

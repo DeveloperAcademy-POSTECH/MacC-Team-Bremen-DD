@@ -179,7 +179,7 @@ private extension ScheduleListView {
                         .frame(maxWidth: .infinity)
                         .padding(.top, 5)
                         
-                        if viewModel.verifyScheduleDate(currentWeek[index]) {
+                        if viewModel.getWorkdayIndicator(currentWeek[index]) {
                             Circle()
                                 .frame(width: 6, height: 6)
                                 .foregroundColor(
