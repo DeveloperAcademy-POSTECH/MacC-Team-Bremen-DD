@@ -140,10 +140,12 @@ struct Calculate {
     }
 }
 
+@MainActor
 final class MonthlyCalculateListViewModel: ObservableObject {
     let timeManager = TimeManager()
+    let currentDate = Date()
+    let workspaces: [WorkspaceEntity]
     
-    @Published var currentDate = Date()
     @Published var switchedDate = Date()
     @Published var calculates: [Calculate] = []
     
@@ -157,21 +159,20 @@ final class MonthlyCalculateListViewModel: ObservableObject {
     
     init() {
         let workspaces = CoreDataManager.shared.getAllWorkspaces()
+        self.workspaces = workspaces
         for workspace in workspaces {
             calculates.append(Calculate(workspace: workspace, date: switchedDate))
         }
     }
     
-    func onAppear() {
-        getAllWorkspaces()
-    }
-    
     func didTapPreviousMonth() {
         switchedDate = timeManager.decreaseOneMonth(switchedDate)
+        updateDate()
     }
     
     func didTapNextMonth() {
         switchedDate = timeManager.increaseOneMonth(switchedDate)
+        updateDate()
     }
     
     func fetchIsCurrentMonth() -> Bool {
@@ -180,7 +181,10 @@ final class MonthlyCalculateListViewModel: ObservableObject {
 }
 
 private extension MonthlyCalculateListViewModel {
-    func getAllWorkspaces() {
-        let result = CoreDataManager.shared.getAllWorkspaces()
+    func updateDate() {
+        calculates = []
+        for workspace in workspaces {
+            calculates.append(Calculate(workspace: workspace, date: switchedDate))
+        }
     }
 }

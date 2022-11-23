@@ -24,9 +24,6 @@ struct MonthlyCalculateListView: View {
                 Spacer()
             }
             .padding(.horizontal)
-            .onAppear {
-                viewModel.onAppear()
-            }
         }
     }
 }
