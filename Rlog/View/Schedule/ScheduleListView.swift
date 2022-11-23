@@ -24,7 +24,7 @@ struct ScheduleListView: View {
     }
     
     var workdays: (hasNotDone: [WorkdayEntity], hasDone: [WorkdayEntity]) {
-        return viewModel.schedulesOfFocusDate
+        return viewModel.schedulesOfFocusedDate
     }
     
     var currentMonth: String {

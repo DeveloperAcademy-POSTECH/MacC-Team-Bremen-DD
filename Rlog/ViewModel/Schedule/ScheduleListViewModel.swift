@@ -12,7 +12,7 @@ final class ScheduleListViewModel: ObservableObject {
     let timeManager = TimeManager()
     @Published var workspaces: [WorkspaceEntity] = []
     @Published var workdays: (hasNotDone: [WorkdayEntity], hasDone: [WorkdayEntity]) = ([], [])
-    @Published var schedulesOfFocusDate: (hasNotDone: [WorkdayEntity], hasDone: [WorkdayEntity]) = ([], [])
+    @Published var schedulesOfFocusedDate: (hasNotDone: [WorkdayEntity], hasDone: [WorkdayEntity]) = ([], [])
     @Published var nextDate = Calendar.current.date(byAdding: .weekOfMonth, value: 1, to: Date()) ?? Date()
     @Published var previousDate = Calendar.current.date(byAdding: .weekOfMonth, value: -1, to: Date()) ?? Date()
     @Published var currentDate = Date() {
@@ -204,15 +204,15 @@ extension ScheduleListViewModel {
     // 🔥 네이밍 추천 받습니다.
     // 사용자가 터치한 날짜의 근무 일정이 있을 경우 화면에 표시합니다.
     func getWorkdaysOfFocusDate() {
-        schedulesOfFocusDate.hasNotDone.removeAll()
-        schedulesOfFocusDate.hasDone.removeAll()
+        schedulesOfFocusedDate.hasNotDone.removeAll()
+        schedulesOfFocusedDate.hasDone.removeAll()
         
         for data in workdays.0 {
             if data.date.onlyDate == currentDate.onlyDate {
                 if data.hasDone {
-                    schedulesOfFocusDate.hasDone.append(data)
+                    schedulesOfFocusedDate.hasDone.append(data)
                 } else {
-                    schedulesOfFocusDate.hasNotDone.append(data)
+                    schedulesOfFocusedDate.hasNotDone.append(data)
                 }
             }
         }
