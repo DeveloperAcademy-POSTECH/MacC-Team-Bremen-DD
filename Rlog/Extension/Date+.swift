@@ -16,6 +16,26 @@ extension Date {
             return calender.date(from: dateComponents)
         }
     }
+
+    var dayInt: Int {
+         Calendar.current.component(.day, from: self)
+     }
+
+     var monthInt: Int {
+         Calendar.current.component(.month, from: self)
+     }
+
+    var yearInt: Int {
+        Calendar.current.component(.year, from: self)
+    }
+
+    var weekDayInt: Int {
+        Calendar.current.component(.weekday, from: self)
+    }
+
+    var previousDate: Date {
+        return Calendar.current.date(byAdding: .day, value: -1, to: self)!
+    }
     
     // TODO: - DateFormatter+ 구현 후 삭제
     func fetchYearAndMonth() -> String {
@@ -29,6 +49,18 @@ extension Date {
         dateFormatter.dateFormat = "EEEEEE"
         dateFormatter.locale = Locale(identifier: "ko_KR")
         let converted = dateFormatter.string(from: date)
+        return converted
+    }
+
+    func fetchYearMonthDay() -> String {
+        let dateFormatter = DateFormatter(dateFormatType: .yearMonthDayKR)
+        let converted = dateFormatter.string(from: self)
+        return converted
+    }
+
+    func fetchMonthDay() -> String {
+        let dateFormatter = DateFormatter(dateFormatType: .monthDayKR)
+        let converted = dateFormatter.string(from: self)
         return converted
     }
     

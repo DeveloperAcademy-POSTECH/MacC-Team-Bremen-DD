@@ -9,18 +9,24 @@ import SwiftUI
 
 struct MonthlyCalculateDetailView: View {
     @Environment(\.dismiss) var dismiss
+    @StateObject var viewModel = MonthlyCalculateDetailViewModel()
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 header
                     .padding(.top, 18)
+                    .padding(.horizontal)
                 closing
                     .padding(.top, 39)
+                    .padding(.horizontal)
+                calendarView
+                    .padding(.top)
                 resonList
                     .padding(.top)
+                    .padding(.horizontal)
+
             }
-            .padding(.horizontal)
         }
         .navigationBarTitle (Text("근무 정산"), displayMode: .inline)
         .navigationBarBackButtonHidden()
@@ -37,15 +43,12 @@ struct MonthlyCalculateDetailView: View {
 
 private extension MonthlyCalculateDetailView {
     var header: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: 8) {
             Text("GS25 포항공대점")
                 .font(.title2)
                 .fontWeight(.bold)
                 .foregroundColor(Color.fontBlack)
-            Text("2022년 10월 25일 ~ 2022년 11월 24일")
-                .font(.subheadline)
-                .foregroundColor(Color.fontBlack)
-            Text("정산일까지 D-12")
+            Text("정산일까지 D-\(viewModel.calculateLeftDays())")
                 .font(.caption2)
                 .foregroundColor(Color.pointRed)
         }
@@ -81,6 +84,93 @@ private extension MonthlyCalculateDetailView {
                     .foregroundColor(Color.fontBlack)
             }
             .padding(.top)
+        }
+    }
+
+    var calendarView: some View {
+        VStack(spacing: 0) {
+            calendarTitle
+            VStack(spacing: 0) {
+                calendarHeader
+                calendarBody
+                Spacer()
+                calendarFooter
+            }
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .background(Color.backgroundCard)
+            .cornerRadius(10)
+            .padding(2)
+            .background(Color.backgroundStroke)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+        }
+        .padding(.top, 40)
+    }
+
+    var calendarTitle: some View {
+        HStack(spacing: 16) {
+            Text("근무표")
+                .font(.system(size: 15, weight: .bold))
+            Text("\(viewModel.startDate.fetchMonthDay()) ~ \(viewModel.target.previousDate.fetchMonthDay())")
+                .font(.subheadline)
+                .foregroundColor(Color.fontBlack)
+            Spacer()
+        }
+        .padding(.horizontal, 16)
+        .padding(.bottom, 8)
+    }
+
+    var calendarHeader: some View {
+        HStack {
+            ForEach(Weekday.allCases, id: \.self) { weekday in
+                Text(weekday.rawValue)
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundColor(.grayLight)
+            }
+            .frame(minWidth: 0, maxWidth: .infinity, idealHeight: 18)
+        }
+        .padding(.top, 16)
+        .padding(.horizontal, 20)
+    }
+
+    var calendarBody: some View {
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 20) {
+            ForEach(viewModel.emptyCalendarDays, id:\.self) { day in
+                Text("")
+            }
+            ForEach(viewModel.calendarDays, id: \.self) { day in
+                calendarBodyCell(day)
+            }
+            .frame(width: 40, height: 40)
+        }
+        .frame(minWidth: 0, maxWidth: .infinity)
+        .padding(.top, 5)
+        .padding(.horizontal, 16)
+    }
+
+    func calendarBodyCell(_ day: Date) -> some View {
+        Text("\(day.dayInt)")
+    }
+
+    var calendarFooter: some View {
+        HStack(spacing: 10) {
+            ForEach(WorkDayType.allCases, id:\.self) { workdayType in
+                calendarFooterCell(workdayType)
+            }
+            Spacer()
+        }
+        .padding(.horizontal, 24)
+        .padding(.bottom)
+    }
+
+    @ViewBuilder
+    func calendarFooterCell(_ type: WorkDayType) -> some View {
+        HStack(spacing: 4) {
+            Circle()
+                .foregroundColor(type.color)
+                .frame(width: 8, height: 8)
+            Text(type.fullName)
+                .font(.caption2)
+                .foregroundColor(.grayMedium)
         }
     }
     
