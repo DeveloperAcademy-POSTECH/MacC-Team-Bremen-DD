@@ -7,23 +7,75 @@
 
 import SwiftUI
 
-extension Date {
+final class ScheduleCellViewModel: ObservableObject{
+    let timeManager = TimeManager()
+    @Published var workTypeString: String = ""
+    @Published var workTypeColor: Color = .black
+    @Published var spentHour: String = ""
+    @Published var startTimeString: String = ""
+    @Published var endTimeString: String = ""
+    @Published var hasDone: Bool = false
+    
+    func onAppear(repeatDays: [String], data: WorkdayEntity) {
+        defineWorkType(repeatDays: repeatDays, data: data)
+        getSpentHour(data.endTime, data.startTime)
+        getStartAndEndTimeAndMinute(data.startTime, data.endTime)
+        verifyIsScheduleExpired(data.endTime)
+    }
+    
+    func didTapConfirmationButton(_ data: WorkdayEntity) {
+        toggleWorkdayHasDoneEntity(data)
+    }
 }
 
-final class ScheduleCellViewModel {
-    let timeManager = TimeManager()
+extension ScheduleCellViewModel {
+    func toggleWorkdayHasDoneEntity(_ data: WorkdayEntity) {
+        CoreDataManager.shared.toggleHasDone(of: data)
+    }
     
-    func defineWorkType(
-        repeatDays: [String],
-        data: WorkdayEntity
-    ) -> (type: String, color: Color) {
+    func getSpentHour(_ endTime: Date, _ startTime: Date) {
+        let timeGap = endTime - startTime
+        let result = timeManager.secondsToHoursMinutesSeconds(timeGap)
+        
+        var spentHour = ""
+        
+        if result.1 < 30 {
+            spentHour = "\(result.0)시간"
+        } else {
+            spentHour = "\(result.0)시간 \(result.1)분"
+        }
+        
+        self.spentHour = spentHour
+    }
+
+    func getStartAndEndTimeAndMinute(_ startTime: Date, _ endTime: Date) {
+        let startTime = timeManager.getHourAndMinute(startTime)
+        let endTime = timeManager.getHourAndMinute(endTime)
+        
+        startTimeString = "\(startTime.hour):\(startTime.minute >= 10 ? startTime.minute.description : "0\(startTime.minute)")"
+        endTimeString = "\(endTime.hour):\(endTime.minute >= 10 ? endTime.minute.description : "0\(endTime.minute)")"
+    }
+
+    func verifyIsScheduleExpired(_ endTime: Date) {
+        let order = NSCalendar.current.compare(Date(), to: endTime, toGranularity: .minute)
+        switch order {
+        case .orderedAscending:
+            self.hasDone = true
+            return
+        default:
+            self.hasDone = false
+            return
+        }
+    }
+
+    func defineWorkType(repeatDays: [String], data: WorkdayEntity) {
         guard
             let repeatDays = data.schedule?.repeatDays,
             let startHour = data.schedule?.startHour,
             let startMinute = data.schedule?.startMinute,
             let endHour = data.schedule?.endHour,
             let endMinute = data.schedule?.endMinute
-        else { return ("추가", Color.pointPurple) }
+        else { return }
         let weekday = timeManager.getWeekdayOfDate(data.date)
         let normalSpentHour = data.endTime - data.startTime
         let spentHour = timeManager.calculateTimeGap(
@@ -33,48 +85,26 @@ final class ScheduleCellViewModel {
             endMinute: endMinute
         )
 
-        if
-            repeatDays.contains(weekday),
-            normalSpentHour == spentHour {
-            return ("정규", Color.primary)
+        if repeatDays.contains(weekday), normalSpentHour == spentHour {
+            workTypeString = "정규"
+            workTypeColor = Color.primary
         }
 
         switch spentHour  {
         case 0:
-            return ("정규", Color.primary)
+            workTypeString = "정규"
+            workTypeColor = Color.primary
+            return
         case 1...:
-            return ("연장", Color.pointBlue)
+            workTypeString = "연장"
+            workTypeColor = Color.pointBlue
+            return
         case _ where spentHour < 0:
-            return ("축소", Color.pointRed)
+            workTypeString = "축소"
+            workTypeColor = Color.pointRed
+            return
         default:
-            return ("정규", .green)
+            return
         }
-    }
-    
-    func verifyIsScheduleExpired(endTime: Date) -> Bool {
-        let order = NSCalendar.current.compare(Date(), to: endTime, toGranularity: .minute)
-        switch order {
-        case .orderedAscending:
-            return true
-        default:
-            return false
-        }
-    }
-    
-    func didTapConfirmationButton(_ data: WorkdayEntity) {
-        toggleWorkdayHasDoneEntity(data)
-    }
-    
-    func getSpentHour(_ endTime: Date, _ startTime: Date) -> (Int, Int) {
-        let timeGap = endTime - startTime
-        let result = timeManager.secondsToHoursMinutesSeconds(timeGap)
-        
-        return (result.0, result.1)
-    }
-}
-
-private extension ScheduleCellViewModel {
-    func toggleWorkdayHasDoneEntity(_ data: WorkdayEntity) {
-        CoreDataManager.shared.toggleHasDone(of: data)
     }
 }
