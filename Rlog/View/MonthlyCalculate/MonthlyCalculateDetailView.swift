@@ -10,6 +10,10 @@ import SwiftUI
 struct MonthlyCalculateDetailView: View {
     @Environment(\.dismiss) var dismiss
     
+    init(calculate: Calculate) {
+        
+    }
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {

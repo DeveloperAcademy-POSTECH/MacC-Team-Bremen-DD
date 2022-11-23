@@ -110,7 +110,7 @@ private extension MonthlyCalculateListView {
             .font(.subheadline)
         }
         
-        return NavigationLink(destination: MonthlyCalculateDetailView()) {
+        return NavigationLink(destination: MonthlyCalculateDetailView(calculate: calculate)) {
             VStack(alignment: .leading, spacing: 0) {
                 workspaceTitle
                     .padding(.top)

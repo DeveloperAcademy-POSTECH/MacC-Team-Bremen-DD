@@ -13,7 +13,7 @@ struct Calculate {
     
     var date: Date
     var hasDoneWorkdays: [WorkdayEntity] {
-        return fetchWorkdays(workspace: workspace, startDate: startDate, endDate: endDate)
+        return getWorkdays(workspace: workspace, startDate: startDate, endDate: endDate)
     }
     var total: Int {
         return calculateTotal()
@@ -32,17 +32,15 @@ struct Calculate {
         return calculateleftDays(workspace: workspace)
     }
     var startDate: Date {
-        return fetchStartDate(workspace: workspace, date: date)
+        return getStartDate(workspace: workspace, date: date)
     }
     var endDate: Date {
-        return fetchEndDate(workspace: workspace, date: date)
+        return getEndDate(workspace: workspace, date: date)
     }
     
     init(workspace: WorkspaceEntity, date: Date) {
         self.workspace = workspace
         self.date = date
-        
-        
     }
     
     func calculateleftDays(workspace: WorkspaceEntity) -> Int {
@@ -64,7 +62,7 @@ struct Calculate {
         }
     }
     
-    func fetchStartDate(workspace: WorkspaceEntity, date: Date) -> Date {
+    func getStartDate(workspace: WorkspaceEntity, date: Date) -> Date {
         if workspace.payDay >= Calendar.current.component(.day, from: date) {
             guard let lastMonth = Calendar.current.date(byAdding: DateComponents(month: -1), to: date) else { return Date() }
             
@@ -85,7 +83,7 @@ struct Calculate {
         }
     }
     
-    func fetchEndDate(workspace: WorkspaceEntity, date: Date) -> Date {
+    func getEndDate(workspace: WorkspaceEntity, date: Date) -> Date {
         if workspace.payDay >= Calendar.current.component(.day, from: date) {
             guard let payDate = Calendar.current.date(from: DateComponents(
                 year: Calendar.current.component(.year, from: date),
@@ -107,7 +105,7 @@ struct Calculate {
         }
     }
     
-    func fetchWorkdays(workspace: WorkspaceEntity, startDate: Date, endDate: Date) -> [WorkdayEntity] {
+    func getWorkdays(workspace: WorkspaceEntity, startDate: Date, endDate: Date) -> [WorkdayEntity] {
         return CoreDataManager.shared.getHasDoneWorkdays(of: workspace, start: startDate, target: endDate)
     }
     
