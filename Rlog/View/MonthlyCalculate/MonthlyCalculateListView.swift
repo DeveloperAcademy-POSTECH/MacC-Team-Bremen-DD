@@ -61,23 +61,23 @@ private extension MonthlyCalculateListView {
     
     var calculateByWorkspaceList: some View {
         VStack {
-            ForEach(0..<viewModel.monthlyResults.count, id: \.self) { index in
-                makeMonthlyCalculateListViewModel(monthlyResult: viewModel.monthlyResults[index])
+            ForEach(0..<viewModel.monthlyCalculateServices.count, id: \.self) { index in
+                makeMonthlyCalculateListViewModel(monthlyCalculateService: viewModel.monthlyCalculateServices[index])
             }
         }
     }
     
-    func makeMonthlyCalculateListViewModel(monthlyResult: MonthlyReusult) -> some View {
+    func makeMonthlyCalculateListViewModel(monthlyCalculateService: MonthlyCalculateService) -> some View {
         var workspaceTitle: some View {
             HStack(spacing: 4) {
                 Rectangle()
                     .fill(Color.primary)
                     .frame(width: 4, height: 16)
-                Text(monthlyResult.workspace.name)
+                Text(monthlyCalculateService.workspace.name)
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
                 Spacer()
-                Text("\(monthlyResult.startDate.fetchMonth())월 \(monthlyResult.startDate.fetchDay())일 ~ \(monthlyResult.endDate.fetchMonth())월 \(monthlyResult.endDate.fetchDay())일")
+                Text("\(monthlyCalculateService.startDate.fetchMonth())월 \(monthlyCalculateService.startDate.fetchDay())일 ~ \(monthlyCalculateService.endDate.fetchMonth())월 \(monthlyCalculateService.endDate.fetchDay())일")
                     .font(.caption)
                     .foregroundColor(Color.fontBlack)
             }
@@ -89,7 +89,7 @@ private extension MonthlyCalculateListView {
                     .font(.subheadline)
                     .foregroundColor(Color.grayMedium)
                 Spacer()
-                Text("\(monthlyResult.total)원")
+                Text("\(monthlyCalculateService.total)원")
                     .font(.title3)
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
@@ -107,16 +107,16 @@ private extension MonthlyCalculateListView {
             .font(.subheadline)
         }
         
-        return NavigationLink(destination: MonthlyCalculateDetailView(monthlyResult: monthlyResult)) {
+        return NavigationLink(destination: MonthlyCalculateDetailView(monthlyCalculateService: monthlyCalculateService)) {
             VStack(alignment: .leading, spacing: 0) {
                 workspaceTitle
                     .padding(.top)
                 Group {
-                    makeWorkspaceInfomation(title: "일한 시간", content: "\(monthlyResult.workHours)시간")
+                    makeWorkspaceInfomation(title: "일한 시간", content: "\(monthlyCalculateService.workHours)시간")
                         .padding(.top, 32)
                     
                     if viewModel.fetchIsCurrentMonth() {
-                        makeWorkspaceInfomation(title: "급여일까지", content: "D-\(monthlyResult.leftDays)")
+                        makeWorkspaceInfomation(title: "급여일까지", content: "D-\(monthlyCalculateService.leftDays)")
                             .padding(.top, 8)
                     }
                     

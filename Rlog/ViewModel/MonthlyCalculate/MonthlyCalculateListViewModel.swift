@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MonthlyReusult {
+class MonthlyCalculateService {
     let timeManager = TimeManager()
     let workspace: WorkspaceEntity
     
@@ -147,12 +147,12 @@ final class MonthlyCalculateListViewModel: ObservableObject {
     let workspaces: [WorkspaceEntity]
     
     @Published var switchedDate = Date()
-    @Published var monthlyResults: [MonthlyReusult] = []
+    @Published var monthlyCalculateServices: [MonthlyCalculateService] = []
     
     var total: Int {
         var total = 0
-        for monthlyResult in monthlyResults {
-            total += monthlyResult.total
+        for monthlyCalculateService in monthlyCalculateServices {
+            total += monthlyCalculateService.total
         }
         return total
     }
@@ -161,7 +161,7 @@ final class MonthlyCalculateListViewModel: ObservableObject {
         let workspaces = CoreDataManager.shared.getAllWorkspaces()
         self.workspaces = workspaces
         for workspace in workspaces {
-            monthlyResults.append(MonthlyReusult(workspace: workspace, date: switchedDate))
+            monthlyCalculateServices.append(MonthlyCalculateService(workspace: workspace, date: switchedDate))
         }
     }
     
@@ -182,9 +182,9 @@ final class MonthlyCalculateListViewModel: ObservableObject {
 
 private extension MonthlyCalculateListViewModel {
     func updateDate() {
-        monthlyResults = []
+        monthlyCalculateServices = []
         for workspace in workspaces {
-            monthlyResults.append(MonthlyReusult(workspace: workspace, date: switchedDate))
+            monthlyCalculateServices.append(MonthlyCalculateService(workspace: workspace, date: switchedDate))
         }
     }
 }
