@@ -7,11 +7,9 @@
 
 import SwiftUI
 
-class MonthlyCalculateService {
-    let timeManager = TimeManager()
+struct MonthlyCalculateResult {
     let workspace: WorkspaceEntity
-    
-    var date: Date
+    let date: Date
     var hasDoneWorkdays: [WorkdayEntity] {
         return getWorkdays(workspace: workspace, startDate: startDate, endDate: endDate)
     }
@@ -43,12 +41,12 @@ class MonthlyCalculateService {
         self.date = date
     }
     
-    func calculateleftDays(workspace: WorkspaceEntity) -> Int {
+    private func calculateleftDays(workspace: WorkspaceEntity) -> Int {
         let currentDay = Calendar.current.component(.day, from: date)
         if Int(workspace.payDay) > currentDay {
             return Int(workspace.payDay) - currentDay
         } else {
-            let nextMonth = timeManager.increaseOneMonth(date)
+            guard let nextMonth = Calendar.current.date(byAdding: DateComponents(month: 1), to: date) else { return 0 }
             
             let nextMonthYear = Calendar.current.component(.year, from: nextMonth)
             let nextMonthMonth = Calendar.current.component(.month, from: nextMonth)
@@ -62,7 +60,7 @@ class MonthlyCalculateService {
         }
     }
     
-    func getStartDate(workspace: WorkspaceEntity, date: Date) -> Date {
+    private func getStartDate(workspace: WorkspaceEntity, date: Date) -> Date {
         if workspace.payDay >= Calendar.current.component(.day, from: date) {
             guard let lastMonth = Calendar.current.date(byAdding: DateComponents(month: -1), to: date) else { return Date() }
             
@@ -83,7 +81,7 @@ class MonthlyCalculateService {
         }
     }
     
-    func getEndDate(workspace: WorkspaceEntity, date: Date) -> Date {
+    private func getEndDate(workspace: WorkspaceEntity, date: Date) -> Date {
         if workspace.payDay >= Calendar.current.component(.day, from: date) {
             guard let payDate = Calendar.current.date(from: DateComponents(
                 year: Calendar.current.component(.year, from: date),
@@ -105,11 +103,11 @@ class MonthlyCalculateService {
         }
     }
     
-    func getWorkdays(workspace: WorkspaceEntity, startDate: Date, endDate: Date) -> [WorkdayEntity] {
+    private func getWorkdays(workspace: WorkspaceEntity, startDate: Date, endDate: Date) -> [WorkdayEntity] {
         return CoreDataManager.shared.getHasDoneWorkdays(of: workspace, start: startDate, target: endDate)
     }
     
-    func calculateWorkHours() -> Int {
+    private func calculateWorkHours() -> Int {
         var total = 0
         for workday in hasDoneWorkdays {
             let startTime = workday.startTime
@@ -120,7 +118,7 @@ class MonthlyCalculateService {
         return total
     }
     
-    func calculateTotalWithoutTaxAndJuhu() -> Int {
+    private func calculateTotalWithoutTaxAndJuhu() -> Int {
         var total = 0
         for workday in hasDoneWorkdays {
             let startTime = workday.startTime
@@ -131,7 +129,7 @@ class MonthlyCalculateService {
         return total
     }
     
-    func calculateTotal() -> Int {
+    private func calculateTotal() -> Int {
         var total = totalWithoutTaxAndJuhu
         if workspace.hasTax {
             total -= calculateTax
@@ -147,12 +145,12 @@ final class MonthlyCalculateListViewModel: ObservableObject {
     let workspaces: [WorkspaceEntity]
     
     @Published var switchedDate = Date()
-    @Published var monthlyCalculateServices: [MonthlyCalculateService] = []
+    @Published var monthlyCalculateResults: [MonthlyCalculateResult] = []
     
     var total: Int {
         var total = 0
-        for monthlyCalculateService in monthlyCalculateServices {
-            total += monthlyCalculateService.total
+        for result in monthlyCalculateResults {
+            total += result.total
         }
         return total
     }
@@ -161,7 +159,7 @@ final class MonthlyCalculateListViewModel: ObservableObject {
         let workspaces = CoreDataManager.shared.getAllWorkspaces()
         self.workspaces = workspaces
         for workspace in workspaces {
-            monthlyCalculateServices.append(MonthlyCalculateService(workspace: workspace, date: switchedDate))
+            monthlyCalculateResults.append(MonthlyCalculateResult(workspace: workspace, date: switchedDate))
         }
     }
     
@@ -182,9 +180,9 @@ final class MonthlyCalculateListViewModel: ObservableObject {
 
 private extension MonthlyCalculateListViewModel {
     func updateDate() {
-        monthlyCalculateServices = []
+        monthlyCalculateResults = []
         for workspace in workspaces {
-            monthlyCalculateServices.append(MonthlyCalculateService(workspace: workspace, date: switchedDate))
+            monthlyCalculateResults.append(MonthlyCalculateResult(workspace: workspace, date: switchedDate))
         }
     }
 }

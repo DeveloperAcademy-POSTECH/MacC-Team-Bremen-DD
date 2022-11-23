@@ -10,7 +10,7 @@ import SwiftUI
 struct MonthlyCalculateDetailView: View {
     @Environment(\.dismiss) var dismiss
     
-    init(monthlyCalculateService: MonthlyCalculateService) {
+    init(monthlyCalculateResult: MonthlyCalculateResult) {
         
     }
     
