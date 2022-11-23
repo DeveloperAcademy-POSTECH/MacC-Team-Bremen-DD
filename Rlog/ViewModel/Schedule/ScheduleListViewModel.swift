@@ -12,7 +12,7 @@ final class ScheduleListViewModel: ObservableObject {
     let timeManager = TimeManager()
     @Published var workspaces: [WorkspaceEntity] = []
     @Published var workdays: (hasNotDone: [WorkdayEntity], hasDone: [WorkdayEntity]) = ([], [])
-    @Published var schedulesOfFocusDate: (hasNotDone: [WorkdayEntity], hasDone: [WorkdayEntity]) = ([], [])
+    @Published var schedulesOfFocusedDate: (hasNotDone: [WorkdayEntity], hasDone: [WorkdayEntity]) = ([], [])
     @Published var nextDate = Calendar.current.date(byAdding: .weekOfMonth, value: 1, to: Date()) ?? Date()
     @Published var previousDate = Calendar.current.date(byAdding: .weekOfMonth, value: -1, to: Date()) ?? Date()
     @Published var currentDate = Date() {
@@ -31,7 +31,7 @@ final class ScheduleListViewModel: ObservableObject {
         // 생성된 근무지 여부를 확인합니다. 생성된 근무지가 없다면 예외처리 화면을 표시합니다.
         getAllWorkspaces()
         getWorkdaysOfFiveMonths()
-        getSchedulesOfFocusDate()
+        getschedulesOfFocusedDate()
     }
     
     func didScrollToNextWeek() {
@@ -52,7 +52,7 @@ final class ScheduleListViewModel: ObservableObject {
     
     func didTapDate(_ date: CalendarModel) {
         changeFocusDate(date)
-        getSchedulesOfFocusDate()
+        getschedulesOfFocusedDate()
     }
 }
 
@@ -202,19 +202,19 @@ extension ScheduleListViewModel {
     
     // 🔥 네이밍 추천 받습니다.
     // 사용자가 터치한 날짜의 근무 일정이 있을 경우 화면에 표시합니다.
-    func getSchedulesOfFocusDate() {
-        schedulesOfFocusDate.hasNotDone.removeAll()
-        schedulesOfFocusDate.hasDone.removeAll()
+    func getschedulesOfFocusedDate() {
+        schedulesOfFocusedDate.hasNotDone.removeAll()
+        schedulesOfFocusedDate.hasDone.removeAll()
         
         for data in workdays.hasNotDone {
             if data.date.onlyDate == currentDate.onlyDate {
-                schedulesOfFocusDate.hasNotDone.append(data)
+                schedulesOfFocusedDate.hasNotDone.append(data)
             }
         }
         
         for data in workdays.hasDone {
             if data.date.onlyDate == currentDate.onlyDate {
-                schedulesOfFocusDate.hasDone.append(data)
+                schedulesOfFocusedDate.hasDone.append(data)
             }
         }        
     }
