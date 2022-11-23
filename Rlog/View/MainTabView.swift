@@ -25,9 +25,7 @@ struct MainTabView: View {
         }
         .ignoresSafeArea(.keyboard)
         .onAppear {
-            Task {
-                await viewModel.updateAllSchedules()
-            }
+            viewModel.onAppear()
         }
     }
 }

@@ -26,7 +26,7 @@ struct MonthlyCalculateDetailView: View {
             }
             .padding(.horizontal)
         }
-        .navigationTitle("근무지 수정")
+        .navigationBarTitle (Text("근무 정산"), displayMode: .inline)
         .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {

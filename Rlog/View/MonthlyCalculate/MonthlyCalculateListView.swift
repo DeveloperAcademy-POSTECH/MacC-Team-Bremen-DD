@@ -24,6 +24,7 @@ struct MonthlyCalculateListView: View {
                 Spacer()
             }
             .padding(.horizontal)
+            .navigationBarHidden(true)
         }
     }
 }

@@ -97,11 +97,10 @@ struct WorkSpaceDetailView: View {
                     .padding(.top, -8)
                     Spacer()
                 }
-//                Spacer()
             }
             .padding(EdgeInsets(top: 24, leading: 16, bottom: 0, trailing: 16))
         }
-        .navigationTitle("근무수정")
+        .navigationBarTitle (Text("근무수정"), displayMode: .inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {

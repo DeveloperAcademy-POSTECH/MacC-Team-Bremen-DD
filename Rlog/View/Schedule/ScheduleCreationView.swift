@@ -25,6 +25,16 @@ struct ScheduleCreationView: View {
         }
         .onAppear { viewModel.onAppear() }
         .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    dismiss()
+                }){
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(.fontBlack)
+                    Text("이전")
+                        .foregroundColor(.fontBlack)
+                }
+            }
             ToolbarItem(placement: .navigationBarTrailing) {
                 creationButton
             }
@@ -85,6 +95,7 @@ private extension ScheduleCreationView {
             viewModel.didTapCreationButton()
         } label: {
             Text("완료")
+                .foregroundColor(Color.primary)
         }
         .alert("근무 추가", isPresented: $viewModel.isAlertActive) {
             Button("취소", role: .cancel) { }
