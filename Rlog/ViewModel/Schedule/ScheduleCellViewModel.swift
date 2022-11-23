@@ -70,12 +70,15 @@ extension ScheduleCellViewModel {
 
     func defineWorkType(repeatDays: [String], data: WorkdayEntity) {
         guard
-            let repeatDays = data.schedule?.repeatDays,
             let startHour = data.schedule?.startHour,
             let startMinute = data.schedule?.startMinute,
             let endHour = data.schedule?.endHour,
             let endMinute = data.schedule?.endMinute
-        else { return }
+        else {
+            workTypeString = "추가"
+            workTypeColor = Color.pointPurple
+            return
+        }
         let weekday = timeManager.getWeekdayOfDate(data.date)
         let normalSpentHour = data.endTime - data.startTime
         let spentHour = timeManager.calculateTimeGap(
