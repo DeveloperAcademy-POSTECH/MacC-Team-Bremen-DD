@@ -108,7 +108,7 @@ private extension ScheduleListView {
         VStack(spacing: 0) {
             Group {
                 if viewModel.workspaces.isEmpty {
-                    workspaceNotFound
+                    emptyWorkspaceView
                 } else {
                     weekDaysContainer
                         .padding(.top)
@@ -160,11 +160,11 @@ private extension ScheduleListView {
     }
     
     var weekdayBox: some View {
-        
+
         HStack(spacing: 0) {
             ForEach(0..<currentWeek.count, id: \.self) { index in
                 ZStack {
-                    
+
                     VStack(spacing: 0) {
                         Button {
                             viewModel.didTapDate(currentWeek[index])
@@ -178,7 +178,7 @@ private extension ScheduleListView {
                         }
                         .frame(maxWidth: .infinity)
                         .padding(.top, 5)
-                        
+
                         if viewModel.getWorkdayIndicator(currentWeek[index]) {
                             Circle()
                                 .frame(width: 6, height: 6)
@@ -186,34 +186,38 @@ private extension ScheduleListView {
                                     viewModel.verifyCurrentMonth(currentWeek[index].month) ? .primary : .gray
                                 )
                         }
-                        
+
                         Spacer()
                     }
-                    
-                    if viewModel.highlightFocusDate(currentWeek[index].day) {
 
-                        VStack(spacing: 0) {
-                            Text("\(currentWeek[index].day)")
-                                .font(.callout)
-                                .foregroundColor(Color.backgroundWhite)
-                                .padding(.bottom, 9)
-                            if viewModel.verifyScheduleDate(currentWeek[index]) {
-                                Circle()
-                                    .frame(width: 6, height: 6)
-                                    .foregroundColor(.white)
-                            } else {
-                                Spacer()
-                            }
-                        }
-                        .padding(EdgeInsets(top: 3, leading: 6, bottom: 7, trailing: 6))
-                        .frame(width: 32)
-                        .background(Color.primary)
-                        .cornerRadius(10)
-                        .padding(.top, 2)
-                        .transition(AnyTransition.opacity.animation(.easeInOut))
-                    }
+                    focusedDate(index)
                 }
             }
+        }
+    }
+    
+    @ViewBuilder
+    func focusedDate(_ index: Int) -> some View {
+        if viewModel.highlightFocusDate(currentWeek[index].day) {
+            VStack(spacing: 0) {
+                Text("\(currentWeek[index].day)")
+                    .font(.callout)
+                    .foregroundColor(Color.backgroundWhite)
+                    .padding(.bottom, 9)
+                if viewModel.getWorkdayIndicator(currentWeek[index]) {
+                    Circle()
+                        .frame(width: 6, height: 6)
+                        .foregroundColor(.white)
+                } else {
+                    Spacer()
+                }
+            }
+            .padding(EdgeInsets(top: 3, leading: 6, bottom: 7, trailing: 6))
+            .frame(width: 32)
+            .background(Color.primary)
+            .cornerRadius(10)
+            .padding(.top, 2)
+            .transition(AnyTransition.opacity.animation(.easeInOut))
         }
     }
     
@@ -250,7 +254,7 @@ private extension ScheduleListView {
     @ViewBuilder
     var scheduleList: some View {
         if workdays.hasNotDone.isEmpty && workdays.hasDone.isEmpty {
-            scheduleNotFound
+            emptyScheduleView
         } else {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 8) {
@@ -284,7 +288,7 @@ private extension ScheduleListView {
         }
     }
     
-    var scheduleNotFound: some View {
+    var emptyScheduleView: some View {
         VStack(spacing: 0) {
             Spacer()
             Image("rlogGreenLogo")
@@ -296,7 +300,7 @@ private extension ScheduleListView {
         }
     }
     
-    var workspaceNotFound: some View {
+    var emptyWorkspaceView: some View {
         VStack(spacing: 0) {
             Spacer()
             Text("근무지탭에서 근무지를 등록해주세요.")
