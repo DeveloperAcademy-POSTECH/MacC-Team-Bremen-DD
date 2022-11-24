@@ -16,8 +16,8 @@ struct CalendarModel {
 }
 
 final class TimeManager {
-    let calendar = Calendar.current
-    let formatter = DateFormatter(dateFormatType: .weekday)
+    private let calendar = Calendar.current
+    private let formatter = DateFormatter(dateFormatType: .weekday)
     
     // 1주 증가
     func increaseOneWeek(_ date: Date) -> Date {

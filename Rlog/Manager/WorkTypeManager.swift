@@ -8,7 +8,7 @@
 import SwiftUI
 
 final class WorkTypeManager {
-    let timeManager = TimeManager()
+    private let timeManager = TimeManager()
     
     // 판단하고자 하는 일정의 WorkdayEntity를 파라미터로 받습니디.
     // (title, color) 형태로 반환

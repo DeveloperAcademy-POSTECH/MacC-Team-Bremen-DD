@@ -8,8 +8,8 @@
 import SwiftUI
 
 final class ScheduleCellViewModel: ObservableObject{
-    let timeManager = TimeManager()
-    let workTypeManager = WorkTypeManager()
+    private let timeManager = TimeManager()
+    private let workTypeManager = WorkTypeManager()
     @Published var workType: (title: String, color: Color) = ("", .black)
     @Published var spentHour: String = ""
     @Published var startTimeString: String = ""
