@@ -11,7 +11,7 @@ final class ScheduleCellViewModel: ObservableObject{
     private let timeManager = TimeManager()
     private let workTypeManager = WorkTypeManager()
     let data: WorkdayEntity
-    @Published var workType: (title: String, color: Color) = ("", .black)
+    @Published var workType: WorkDayType = .regular
     @Published var spentHour = ""
     @Published var startTimeString = ""
     @Published var endTimeString = ""

@@ -26,7 +26,7 @@ private extension ScheduleCell {
         VStack(spacing: 0) {
             
             HStack {
-                Text(viewModel.workType.title)
+                Text(viewModel.workType.name)
                     .font(.caption2)
                     .foregroundColor(Color.backgroundWhite)
                     .padding(EdgeInsets(top: 2, leading: 6, bottom: 2, trailing: 6))
