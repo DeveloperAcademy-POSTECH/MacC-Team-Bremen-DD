@@ -10,10 +10,6 @@ import SwiftUI
 final class WorkTypeManager {
     private let timeManager = TimeManager()
     
-    // 판단하고자 하는 일정의 WorkdayEntity를 파라미터로 받습니디.
-    // (title, color) 형태로 반환
-    // 추가, 축소, 연장과 같은 근무 유형이 String으로 반환합니다.
-    // 유형에 따른 고유 색상을 Color 형태로 반환합니다.
     func defineWorkType(data: WorkdayEntity) -> WorkDayType {
         guard
             let repeatDays = data.schedule?.repeatDays,
