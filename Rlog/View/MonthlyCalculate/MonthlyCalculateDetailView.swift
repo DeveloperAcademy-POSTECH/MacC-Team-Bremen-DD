@@ -11,6 +11,10 @@ struct MonthlyCalculateDetailView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var viewModel = MonthlyCalculateDetailViewModel()
     
+    init(monthlyCalculateResult: MonthlyCalculateResult) {
+        
+    }
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
