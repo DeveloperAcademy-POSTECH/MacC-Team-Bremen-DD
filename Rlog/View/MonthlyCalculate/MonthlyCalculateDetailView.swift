@@ -97,7 +97,6 @@ private extension MonthlyCalculateDetailView {
             VStack(spacing: 0) {
                 calendarHeader
                 calendarBody
-                Spacer()
                 calendarFooter
             }
             .frame(minWidth: 0, maxWidth: .infinity)
@@ -142,7 +141,7 @@ private extension MonthlyCalculateDetailView {
                 Text("")
             }
             ForEach(viewModel.calendarDays, id: \.self) { day in
-                MonthlyCalculateCellView(day: day)
+                MonthlyCalculateCellView(day: day, workdays: viewModel.filterWorkdayOfDay(day: day))
             }
             .frame(width: 40, height: 40)
         }
@@ -162,6 +161,7 @@ private extension MonthlyCalculateDetailView {
             }
             Spacer()
         }
+        .padding(.top, 35)
         .padding(.horizontal, 24)
         .padding(.bottom)
     }

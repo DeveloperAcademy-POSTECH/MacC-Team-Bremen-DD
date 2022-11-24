@@ -58,7 +58,8 @@ private extension ScheduleCreationViewModel {
         CoreDataManager.shared.createWorkday(
             of: workspaceEntity,
             hourlyWage: workspaceEntity.hourlyWage,
-            hasDone: false,
+            // WARNING
+            hasDone: true,
             date: date,
             startTime: startTime,
             endTime: endTime,

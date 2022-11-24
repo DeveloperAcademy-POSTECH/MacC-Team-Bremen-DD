@@ -31,6 +31,10 @@ final class MonthlyCalculateDetailViewModel: ObservableObject {
         guard let leftDay = components.day else { return 0 }
         return leftDay
     }
+
+    func filterWorkdayOfDay(day: Date) -> [WorkdayEntity] {
+        return calculateResult.hasDoneWorkdays.filter{ $0.date == day }
+    }
 }
 
 private extension MonthlyCalculateDetailViewModel {
