@@ -58,10 +58,8 @@ extension ScheduleCellViewModel {
         switch order {
         case .orderedAscending:
             self.hasDone = true
-            return
         default:
             self.hasDone = false
-            return
         }
     }
 
