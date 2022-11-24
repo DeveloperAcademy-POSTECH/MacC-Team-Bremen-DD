@@ -142,7 +142,7 @@ private extension MonthlyCalculateDetailView {
                 Text("")
             }
             ForEach(viewModel.calendarDays, id: \.self) { day in
-                calendarBodyCell(day)
+                MonthlyCalculateCellView(day: day)
             }
             .frame(width: 40, height: 40)
         }

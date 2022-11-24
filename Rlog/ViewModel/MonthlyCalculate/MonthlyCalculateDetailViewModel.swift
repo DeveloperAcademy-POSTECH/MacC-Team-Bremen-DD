@@ -10,7 +10,6 @@ import Foundation
 @MainActor
 final class MonthlyCalculateDetailViewModel: ObservableObject {
     let calculateResult: MonthlyCalculateResult
-    @Published var workdays: [WorkdayModel] = []
     @Published var calendarDays: [Date] = []
     @Published var emptyCalendarDays: [Int] = []
 
@@ -71,8 +70,4 @@ private extension MonthlyCalculateDetailViewModel {
             emptyCalendarDays.append(count)
         }
     }
-}
-
-struct WorkdayModel: Hashable {
-    var date: Date
 }
