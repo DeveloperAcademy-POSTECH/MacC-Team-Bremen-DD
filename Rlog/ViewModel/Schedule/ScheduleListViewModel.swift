@@ -218,7 +218,7 @@ extension ScheduleListViewModel {
         
         for data in workdays.hasDone {
             if data.date.onlyDate == currentDate.onlyDate {
-                schedulesOfFocusedDate.hasDone.append(data)
+                workdaysOfFocusedDate.hasDone.append(data)
             }
         }        
     }
