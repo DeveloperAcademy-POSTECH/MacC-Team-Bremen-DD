@@ -180,6 +180,7 @@
 				2D66DCB828FD8C8E00C90400 /* ViewModel */,
 				2D66DCE228FD8F0500C90400 /* CoreData */,
 				2D66DCE128FD8EF900C90400 /* Extension */,
+				894CB500292F4392008E4197 /* Manager */,
 				2D66DCA728FD4DF200C90400 /* Preview Content */,
 			);
 			path = Rlog;
@@ -258,7 +259,6 @@
 				C63D445A291CE408005D5AE6 /* ScheduleListViewModel.swift */,
 				894CB4DE29221D41008E4197 /* SchedulePendingListViewModel.swift */,
 				894CB4E629235B4F008E4197 /* ScheduleCreationViewModel.swift */,
-				894CB4F629277164008E4197 /* TimeManager.swift */,
 				7A9090592927E83A00AB6019 /* ScheduleUpdateViewModel.swift */,
 				894CB4FC292CB448008E4197 /* ScheduleCellViewModel.swift */,
 			);
@@ -319,6 +319,14 @@
 				2D1651902907D5F300636D61 /* WorkSpaceInfoSubView.swift */,
 			);
 			path = SubViews;
+			sourceTree = "<group>";
+		};
+		894CB500292F4392008E4197 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				894CB4F629277164008E4197 /* TimeManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		C64D97B828FE9146004F80E7 /* Components */ = {
