@@ -54,11 +54,12 @@ private extension ScheduleCreationViewModel {
     
     func createWorkday() {
         guard let workspaceEntity = selectedWorkspaceEntity else { return }
+        guard let date = workday.onlyDate else { return }
         CoreDataManager.shared.createWorkday(
             of: workspaceEntity,
             hourlyWage: workspaceEntity.hourlyWage,
             hasDone: false,
-            date: workday,
+            date: date,
             startTime: startTime,
             endTime: endTime,
             memo: memo,
