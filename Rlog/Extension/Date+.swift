@@ -35,4 +35,10 @@ extension Date {
     func fetchMonth() -> String {
         return String(Calendar.current.component(.month, from: self))
     }
+    
+    func fetchMonthAndDay() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM월 dd일"
+        return dateFormatter.string(from: self)
+    }
 }

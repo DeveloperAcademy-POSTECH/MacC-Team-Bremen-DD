@@ -20,9 +20,9 @@ struct SchedulePendingListView: View {
         .onAppear { viewModel.onAppear() }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: {
+                Button {
                     dismiss()
-                }){
+                } label: {
                     Image(systemName: "chevron.left")
                         .foregroundColor(.fontBlack)
                     Text("이전")
@@ -37,20 +37,15 @@ private extension SchedulePendingListView {
     var dateContainer: some View {
         ForEach(0..<viewModel.sortedHasNotDoneWorkdays.count, id: \.self) { index in
             VStack(alignment: .leading, spacing: 0) {
-                if viewModel.sortedHasNotDoneWorkdays[index].1 != [] {
+                if !viewModel.sortedHasNotDoneWorkdays[index].1.isEmpty {
                     HStack(spacing: 0) {
-                        // TODO: Date+ 에서 월,일 함수 구현 필요
-                        Text("\(String(describing: viewModel.sortedHasNotDoneWorkdays[index].0.fetchYearAndMonth()))")
+                        Text("\(viewModel.sortedHasNotDoneWorkdays[index].0.fetchMonthAndDay())")
                             .font(.caption)
                             .foregroundColor(.grayMedium)
-                        
                         Spacer()
                     }
-                    
                     HDivider()
                         .padding(.bottom, 8)
-                    
-                    //TODO : 근무 카드 적용
                     VStack(alignment: .leading, spacing: 16) {
                         ForEach(viewModel.sortedHasNotDoneWorkdays[index].1, id: \.self) { data in
                             ScheduleCell(currentDate: Date(), data: data)

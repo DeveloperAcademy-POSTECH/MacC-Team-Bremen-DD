@@ -41,6 +41,7 @@
 		894CB4F729277164008E4197 /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4F629277164008E4197 /* TimeManager.swift */; };
 		894CB4F92927727C008E4197 /* WorkspaceListPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4F82927727C008E4197 /* WorkspaceListPicker.swift */; };
 		894CB4FB292772F8008E4197 /* YearMonthStepperCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4FA292772F8008E4197 /* YearMonthStepperCalendar.swift */; };
+		894CB4FF292F3DBA008E4197 /* Sequence+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4FE292F3DBA008E4197 /* Sequence+.swift */; };
 		898A5EBA2907C79100A6BEF7 /* HDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A5EB92907C79100A6BEF7 /* HDivider.swift */; };
 		898A5EC22908050D00A6BEF7 /* ScheduleContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A5EC12908050D00A6BEF7 /* ScheduleContainer.swift */; };
 		89CAA072290276E800504BDE /* BorderedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA071290276E800504BDE /* BorderedTextField.swift */; };
@@ -111,6 +112,7 @@
 		894CB4F629277164008E4197 /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		894CB4F82927727C008E4197 /* WorkspaceListPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceListPicker.swift; sourceTree = "<group>"; };
 		894CB4FA292772F8008E4197 /* YearMonthStepperCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearMonthStepperCalendar.swift; sourceTree = "<group>"; };
+		894CB4FE292F3DBA008E4197 /* Sequence+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+.swift"; sourceTree = "<group>"; };
 		898A5EB92907C79100A6BEF7 /* HDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDivider.swift; sourceTree = "<group>"; };
 		898A5EC12908050D00A6BEF7 /* ScheduleContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleContainer.swift; sourceTree = "<group>"; };
 		89CAA06F290265F300504BDE /* StrokeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeButton.swift; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				C64D97BD28FE919F004F80E7 /* Date+.swift */,
 				C64D97BF28FE91AB004F80E7 /* DateFormatter+.swift */,
 				7A29B291291D490D0028003A /* View+.swift */,
+				894CB4FE292F3DBA008E4197 /* Sequence+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				C63D4452291CDE86005D5AE6 /* ScheduleListView.swift in Sources */,
 				C67FC841290815C000DE3898 /* StrokeButton.swift in Sources */,
 				C64D97C928FE92D8004F80E7 /* Tab.swift in Sources */,
+				894CB4FF292F3DBA008E4197 /* Sequence+.swift in Sources */,
 				894CB4E729235B4F008E4197 /* ScheduleCreationViewModel.swift in Sources */,
 				2D66DCAB28FD4DF200C90400 /* CoreDataManager.swift in Sources */,
 				2DF4EC7329063469009B48B4 /* WorkSpaceCreateCreatingScheduleViewModel.swift in Sources */,
