@@ -184,11 +184,10 @@ extension ScheduleListViewModel {
         var hasNotDoneWorkdays: [WorkdayEntity] = []
         
         let workdays = CoreDataManager.shared.getWorkdaysBetween(
-            start: Calendar.current.date(byAdding: .month, value: -2, to: Date()) ?? Date(),
-            target: Calendar.current.date(byAdding: .month, value: 3, to: Date()) ?? Date()
+            start: Calendar.current.date(byAdding: .month, value: -2, to: Date()) ?? Date() - (86400 * 60),
+            target: Calendar.current.date(byAdding: .month, value: 3, to: Date()) ?? Date() + (86400 * 90)
         )
-        
-        
+                
         for data in workdays {
             if data.hasDone {
                 hasDoneWorkdays.append(data)

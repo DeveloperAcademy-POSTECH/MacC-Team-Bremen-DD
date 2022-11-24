@@ -22,6 +22,7 @@ final class WorkTypeManager {
             let endHour = data.schedule?.endHour,
             let endMinute = data.schedule?.endMinute
         else { return ("추가", Color.pointPurple) }
+        
         let weekday = timeManager.getWeekdayOfDate(data.date)
         let normalSpentHour = data.endTime - data.startTime
         guard let spentHour = timeManager.calculateTimeGap(
