@@ -8,19 +8,16 @@
 import SwiftUI
 
 struct ScheduleCell: View {
-    @ObservedObject var viewModel = ScheduleCellViewModel()
-    let currentDate: Date
-    let data: WorkdayEntity
+    @ObservedObject var viewModel: ScheduleCellViewModel
+    
+    init(of data: WorkdayEntity) {
+        self.viewModel = ScheduleCellViewModel(of: data)
+    }
     
     var body: some View {
         scheduleInfo
             .transition(AnyTransition.opacity.animation(.easeInOut))
-            .onAppear {
-                viewModel.onAppear(
-                    repeatDays: data.schedule?.repeatDays ?? [],
-                    data: data
-                )
-            }
+            .onAppear { viewModel.onAppear() }
     }
 }
 
@@ -45,7 +42,7 @@ private extension ScheduleCell {
             }
             
             HStack {
-                Text("\(data.workspace.name)")
+                Text("\(viewModel.data.workspace.name)")
                     .font(.body)
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
@@ -58,7 +55,7 @@ private extension ScheduleCell {
             }
             .padding(.vertical, 8)
             
-            if !viewModel.hasDone && !data.hasDone {
+            if !viewModel.hasDone && !viewModel.data.hasDone {
                 confirmationButton
             }
             
@@ -77,7 +74,7 @@ private extension ScheduleCell {
         HStack {
             Spacer()
             Button {
-                viewModel.didTapConfirmationButton(data)
+                viewModel.didTapConfirmationButton(viewModel.data)
             } label: {
                 Text("확정하기")
                     .font(Font.caption.bold())

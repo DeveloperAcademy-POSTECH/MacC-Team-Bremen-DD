@@ -10,13 +10,18 @@ import SwiftUI
 final class ScheduleCellViewModel: ObservableObject{
     private let timeManager = TimeManager()
     private let workTypeManager = WorkTypeManager()
+    let data: WorkdayEntity
     @Published var workType: (title: String, color: Color) = ("", .black)
     @Published var spentHour = ""
     @Published var startTimeString = ""
     @Published var endTimeString = ""
     @Published var hasDone = false
     
-    func onAppear(repeatDays: [String], data: WorkdayEntity) {
+    init(of data: WorkdayEntity) {
+        self.data = data
+    }
+    
+    func onAppear() {
         self.workType = workTypeManager.defineWorkType(data: data)
         getSpentHour(data.endTime, data.startTime)
         getStartAndEndTimeAndMinute(data.startTime, data.endTime)
