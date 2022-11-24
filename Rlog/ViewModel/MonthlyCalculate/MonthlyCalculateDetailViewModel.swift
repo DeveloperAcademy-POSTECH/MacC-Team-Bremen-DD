@@ -9,7 +9,7 @@ import Foundation
 
 @MainActor
 final class MonthlyCalculateDetailViewModel: ObservableObject {
-    var workspace: WorkspaceModel
+    let calculateResult: MonthlyCalculateResult
     @Published var workdays: [WorkdayModel] = []
     @Published var calendarDays: [Date] = []
     @Published var emptyCalendarDays: [Int] = []
@@ -19,8 +19,8 @@ final class MonthlyCalculateDetailViewModel: ObservableObject {
 
     let current = Date()
 
-    init() {
-        self.workspace = WorkspaceModel(payDay: 20)
+    init(calculateResult: MonthlyCalculateResult) {
+        self.calculateResult = calculateResult
         Task {
             await makeCalendarDates()
             makeEmptyCalendarDates()
@@ -40,20 +40,20 @@ private extension MonthlyCalculateDetailViewModel {
         let dayInt = current.dayInt
         let monthInt = current.monthInt
         let yearInt = current.yearInt
-
+        let payDay = calculateResult.workspace.payDay
         var range = Date()
 
-        if dayInt < workspace.payDay {
+        if dayInt < payDay {
             let previousMonth = monthInt - 1
-            let rangeString = "\(yearInt)/\(previousMonth)/\(workspace.payDay)"
-            let targetString = "\(yearInt)/\(monthInt)/\(workspace.payDay)"
+            let rangeString = "\(yearInt)/\(previousMonth)/\(payDay)"
+            let targetString = "\(yearInt)/\(monthInt)/\(payDay)"
             range = yearMonthDayFormatter.date(from: rangeString)!
             target = yearMonthDayFormatter.date(from: targetString)!
             startDate = range
         } else {
             let nextMonth = monthInt + 1
-            let rangeString = "\(yearInt)/\(monthInt)/\(workspace.payDay)"
-            let targetString = "\(yearInt)/\(nextMonth)/\(workspace.payDay)"
+            let rangeString = "\(yearInt)/\(monthInt)/\(payDay)"
+            let targetString = "\(yearInt)/\(nextMonth)/\(payDay)"
             range = yearMonthDayFormatter.date(from: rangeString)!
             target = yearMonthDayFormatter.date(from: targetString)!
             startDate = range
@@ -76,8 +76,3 @@ private extension MonthlyCalculateDetailViewModel {
 struct WorkdayModel: Hashable {
     var date: Date
 }
-
-struct WorkspaceModel {
-    var payDay: Int16
-}
-

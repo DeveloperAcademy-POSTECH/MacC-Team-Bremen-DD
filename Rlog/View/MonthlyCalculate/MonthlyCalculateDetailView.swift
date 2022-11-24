@@ -9,10 +9,10 @@ import SwiftUI
 
 struct MonthlyCalculateDetailView: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject var viewModel = MonthlyCalculateDetailViewModel()
+    @StateObject var viewModel: MonthlyCalculateDetailViewModel
     
     init(monthlyCalculateResult: MonthlyCalculateResult) {
-        
+        _viewModel = StateObject(wrappedValue: MonthlyCalculateDetailViewModel(calculateResult: monthlyCalculateResult))
     }
     
     var body: some View {
