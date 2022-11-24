@@ -262,7 +262,7 @@ private extension ScheduleListView {
                             destination: ScheduleUpdateView(workday: data).navigationTitle("근무 일정 수정하기"),
                             isActive: $isScheduleUpdateViewActive
                         ) {
-                            ScheduleCell(currentDate: viewModel.currentDate, data: data)
+                            ScheduleCell(of: data)
                         }
                     }
                     if !workdaysOfFocusedDate.hasDone.isEmpty {
@@ -275,7 +275,7 @@ private extension ScheduleListView {
                                 destination: ScheduleUpdateView(workday: data).navigationTitle("근무 일정 수정하기"),
                                 isActive: $isScheduleUpdateViewActive
                             ) {
-                                ScheduleCell(currentDate: viewModel.currentDate, data: data)
+                                ScheduleCell(of: data)
                             }
                         }
                     }
