@@ -12,12 +12,18 @@ struct SchedulePendingListView: View {
     @ObservedObject private var viewModel = SchedulePendingListViewModel()
     
     var body: some View {
-        ScrollView {
-            dateContainer
+        VStack(spacing: 0) {
+            if viewModel.hasNotDoneWorkdays.isEmpty {
+                emptyHasNotDoneList
+            } else {
+                ScrollView {
+                    hasNotDoneList
+                }
+                .padding(.horizontal)
+                .accentColor(.black)
+                .onAppear { viewModel.onAppear() }
+            }
         }
-        .padding(.horizontal)
-        .accentColor(.black)
-        .onAppear { viewModel.onAppear() }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
@@ -34,7 +40,7 @@ struct SchedulePendingListView: View {
 }
 
 private extension SchedulePendingListView {
-    var dateContainer: some View {
+    var hasNotDoneList: some View {
         ForEach(0..<viewModel.sortedHasNotDoneWorkdays.count, id: \.self) { index in
             VStack(alignment: .leading, spacing: 0) {
                 if !viewModel.sortedHasNotDoneWorkdays[index].1.isEmpty {
@@ -56,5 +62,17 @@ private extension SchedulePendingListView {
             .padding(.bottom, 24)
         }
         .padding(.top, 22)
+    }
+    
+    var emptyHasNotDoneList: some View {
+        VStack(spacing: 0) {
+            Spacer()
+            Image("rlogGreenLogo")
+            Text("모든 근무를 확인했어요.")
+                .padding(.top, 24)
+                .padding(.bottom, 100)
+            Spacer()
+        }
+        .font(Font.body.bold())
     }
 }
