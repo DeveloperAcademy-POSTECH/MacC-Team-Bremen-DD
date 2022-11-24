@@ -42,15 +42,7 @@ extension ScheduleCellViewModel {
         let timeGap = endTime - startTime
         let result = timeManager.secondsToHoursMinutesSeconds(timeGap)
         
-        var spentHour = ""
-        
-        if result.1 < 30 {
-            spentHour = "\(result.0)시간"
-        } else {
-            spentHour = "\(result.0)시간 \(result.1)분"
-        }
-        
-        self.spentHour = spentHour
+        self.spentHour = result.1 < 30 ? "\(result.0)시간" : "\(result.0)시간 \(result.1)분"
     }
 
     func getStartAndEndTimeAndMinute(_ startTime: Date, _ endTime: Date) {
