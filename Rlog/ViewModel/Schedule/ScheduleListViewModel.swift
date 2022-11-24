@@ -205,16 +205,16 @@ extension ScheduleListViewModel {
         workdaysOfFocusedDate.hasNotDone.removeAll()
         workdaysOfFocusedDate.hasDone.removeAll()
         
-        for data in workdays.hasNotDone {
-            if data.date.onlyDate == currentDate.onlyDate {
-                if data.hasDone {
-                    workdaysOfFocusedDate.hasDone.append(data)
-                } else {
-                    workdaysOfFocusedDate.hasNotDone.append(data)
-                }
+        
+        let hasNotDoneData = workdays.hasNotDone.filter { $0.date.onlyDate == currentDate.onlyDate }
+        for data in hasNotDoneData {
+            if data.hasDone {
+                workdaysOfFocusedDate.hasDone.append(data)
+            } else {
+                workdaysOfFocusedDate.hasNotDone.append(data)
             }
         }
-        
+
         for data in workdays.hasDone {
             if data.date.onlyDate == currentDate.onlyDate {
                 workdaysOfFocusedDate.hasDone.append(data)
