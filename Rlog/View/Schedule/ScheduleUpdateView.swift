@@ -8,20 +8,27 @@
 import SwiftUI
 
 struct ScheduleUpdateView: View {
+    @ObservedObject var viewModel: ScheduleUpdateViewModel
+    
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var viewModel = ScheduleUpdateViewModel()
-    let workday: WorkdayEntity
-
+    
+    init(workday: WorkdayEntity) {
+        viewModel = ScheduleUpdateViewModel(workday: workday)
+    }
+    
     var body: some View {
-        VStack(spacing: 24) {
-            workspace
-            workdate
-            components
-            memo
-            HDivider()
+        ScrollView {
+            VStack(spacing: 24) {
+                workspace
+                workdate
+                components
+                memo
+                HDivider()
+                deleteButton
+                Spacer()
+            }
+            .padding()
         }
-        .padding()
-        .onAppear { viewModel.onAppear(workday) }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 toolbarConfirmButton
@@ -32,8 +39,11 @@ struct ScheduleUpdateView: View {
 
 private extension ScheduleUpdateView {
     var toolbarConfirmButton: some View {
-        Button{
-            viewModel.didTapConfirmationButton()
+        Button {
+            Task {
+                await viewModel.didTapConfirmationButton()
+                dismiss()
+            }
         } label: {
             Text("완료")
                 .foregroundColor(.primary)
@@ -58,6 +68,7 @@ private extension ScheduleUpdateView {
                 type: .date
             )
         }
+        .disabled(true)
     }
     
     var components: some View {
@@ -89,10 +100,12 @@ private extension ScheduleUpdateView {
         }
         .padding(.top, -8)
         .alert("근무 삭제", isPresented: $viewModel.isAlertActive) {
-            Button("취소", role: .cancel) { }
+            Button("취소", role: .cancel) {}
             Button("삭제", role: .destructive) {
-                viewModel.didConfirmDeleteWorday()
-                dismiss()
+                Task {
+                    await viewModel.didConfirmDeleteWorday()
+                    dismiss()
+                }
             }
         } message: {
             Text("해당 근무를 삭제합니다.")

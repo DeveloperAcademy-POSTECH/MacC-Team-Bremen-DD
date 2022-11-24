@@ -16,6 +16,26 @@ extension Date {
             return calender.date(from: dateComponents)
         }
     }
+
+    var dayInt: Int {
+         Calendar.current.component(.day, from: self)
+     }
+
+     var monthInt: Int {
+         Calendar.current.component(.month, from: self)
+     }
+
+    var yearInt: Int {
+        Calendar.current.component(.year, from: self)
+    }
+
+    var weekDayInt: Int {
+        Calendar.current.component(.weekday, from: self)
+    }
+
+    var previousDate: Date {
+        return Calendar.current.date(byAdding: .day, value: -1, to: self)!
+    }
     
     // 시간, 분까지 고려한 날짜 차이 계산
     // https://stackoverflow.com/questions/50950092/calculating-the-difference-between-two-dates-in-swift
@@ -35,6 +55,18 @@ extension Date {
         dateFormatter.dateFormat = "EEEEEE"
         dateFormatter.locale = Locale(identifier: "ko_KR")
         let converted = dateFormatter.string(from: date)
+        return converted
+    }
+
+    func fetchYearMonthDay() -> String {
+        let dateFormatter = DateFormatter(dateFormatType: .yearMonthDayKR)
+        let converted = dateFormatter.string(from: self)
+        return converted
+    }
+
+    func fetchMonthDay() -> String {
+        let dateFormatter = DateFormatter(dateFormatType: .monthDayKR)
+        let converted = dateFormatter.string(from: self)
         return converted
     }
     
