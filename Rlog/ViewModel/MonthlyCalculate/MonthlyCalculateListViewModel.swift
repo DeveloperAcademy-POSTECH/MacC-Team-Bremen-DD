@@ -25,7 +25,9 @@ struct MonthlyCalculateResult {
     var calculateTax: Int {
         return Int(Double(totalWithoutTaxAndJuhu) * 0.033)
     }
-//    var calculateJuhu: Int
+    var calculateJuhu: Int {
+        return calculateJuhuTest()
+    }
     var leftDays: Int {
         return calculateleftDays(workspace: workspace)
     }
@@ -135,6 +137,10 @@ struct MonthlyCalculateResult {
             total -= calculateTax
         }
         return total
+    }
+    
+    private func calculateJuhuTest() -> Int {
+        return Int((Double(workspace.hourlyWage) * 1.2) * Double(workHours) - Double(total))
     }
 }
 
