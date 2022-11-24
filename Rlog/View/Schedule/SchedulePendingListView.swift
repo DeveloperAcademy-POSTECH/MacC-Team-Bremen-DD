@@ -39,7 +39,7 @@ private extension SchedulePendingListView {
             VStack(alignment: .leading, spacing: 0) {
                 if !viewModel.sortedHasNotDoneWorkdays[index].1.isEmpty {
                     HStack(spacing: 0) {
-                        Text("\(viewModel.sortedHasNotDoneWorkdays[index].0.fetchMonthAndDay())")
+                        Text("\(viewModel.sortedHasNotDoneWorkdays[index].0.monthInt)월 \(viewModel.sortedHasNotDoneWorkdays[index].0.dayInt)일")
                             .font(.caption)
                             .foregroundColor(.grayMedium)
                         Spacer()
