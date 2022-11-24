@@ -19,12 +19,8 @@ struct ScheduleListView: View {
         return viewModel.getWeekdayOfDate(viewModel.currentDate)
     }
     
-    var allWorkdays: (hasNotDone: [WorkdayEntity], hasDone: [WorkdayEntity]) {
-        return viewModel.workdays
-    }
-    
-    var workdays: (hasNotDone: [WorkdayEntity], hasDone: [WorkdayEntity]) {
-        return viewModel.schedulesOfFocusedDate
+    var workdaysOfFocusedDate: (hasNotDone: [WorkdayEntity], hasDone: [WorkdayEntity]) {
+        return viewModel.workdaysOfFocusedDate
     }
     
     var currentMonth: String {
@@ -253,7 +249,7 @@ private extension ScheduleListView {
     
     @ViewBuilder
     var scheduleList: some View {
-        if workdays.hasNotDone.isEmpty && workdays.hasDone.isEmpty {
+        if workdaysOfFocusedDate.hasNotDone.isEmpty && workdaysOfFocusedDate.hasDone.isEmpty {
             emptyScheduleView
         } else {
             ScrollView(showsIndicators: false) {
@@ -261,7 +257,7 @@ private extension ScheduleListView {
                     Text("예정된 일정")
                         .font(Font.callout.bold())
                         .padding(.bottom, 12)
-                    ForEach(workdays.hasNotDone) { data in
+                    ForEach(workdaysOfFocusedDate.hasNotDone) { data in
                         NavigationLink(
                             destination: ScheduleUpdateView(workday: data).navigationTitle("근무 일정 수정하기"),
                             isActive: $isScheduleUpdateViewActive
@@ -269,12 +265,12 @@ private extension ScheduleListView {
                             ScheduleCell(currentDate: viewModel.currentDate, data: data)
                         }
                     }
-                    if !workdays.hasDone.isEmpty {
+                    if !workdaysOfFocusedDate.hasDone.isEmpty {
                         Text("확정된 일정")
                             .font(Font.callout.bold())
                             .padding(.top, 32)
                             .padding(.bottom, 12)
-                        ForEach(workdays.hasDone) { data in
+                        ForEach(workdaysOfFocusedDate.hasDone) { data in
                             NavigationLink(
                                 destination: ScheduleUpdateView(workday: data).navigationTitle("근무 일정 수정하기"),
                                 isActive: $isScheduleUpdateViewActive
