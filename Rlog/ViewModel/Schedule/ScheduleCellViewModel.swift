@@ -9,15 +9,15 @@ import SwiftUI
 
 final class ScheduleCellViewModel: ObservableObject{
     let timeManager = TimeManager()
-    @Published var workTypeString: String = ""
-    @Published var workTypeColor: Color = .black
+    let workTypeManager = WorkTypeManager()
+    @Published var workType: (title: String, color: Color) = ("", .black)
     @Published var spentHour: String = ""
     @Published var startTimeString: String = ""
     @Published var endTimeString: String = ""
     @Published var hasDone: Bool = false
     
     func onAppear(repeatDays: [String], data: WorkdayEntity) {
-        defineWorkType(repeatDays: repeatDays, data: data)
+        self.workType = workTypeManager.defineWorkType(data: data)
         getSpentHour(data.endTime, data.startTime)
         getStartAndEndTimeAndMinute(data.startTime, data.endTime)
         verifyIsScheduleExpired(data.endTime)
@@ -68,46 +68,5 @@ extension ScheduleCellViewModel {
         }
     }
 
-    func defineWorkType(repeatDays: [String], data: WorkdayEntity) {
-        guard
-            let startHour = data.schedule?.startHour,
-            let startMinute = data.schedule?.startMinute,
-            let endHour = data.schedule?.endHour,
-            let endMinute = data.schedule?.endMinute
-        else {
-            workTypeString = "추가"
-            workTypeColor = Color.pointPurple
-            return
-        }
-        let weekday = timeManager.getWeekdayOfDate(data.date)
-        let normalSpentHour = data.endTime - data.startTime
-        let spentHour = timeManager.calculateTimeGap(
-            startHour: startHour,
-            startMinute: startMinute,
-            endHour: endHour,
-            endMinute: endMinute
-        )
 
-        if repeatDays.contains(weekday), normalSpentHour == spentHour {
-            workTypeString = "정규"
-            workTypeColor = Color.primary
-        }
-
-        switch spentHour  {
-        case 0:
-            workTypeString = "정규"
-            workTypeColor = Color.primary
-            return
-        case 1...:
-            workTypeString = "연장"
-            workTypeColor = Color.pointBlue
-            return
-        case _ where spentHour < 0:
-            workTypeString = "축소"
-            workTypeColor = Color.pointRed
-            return
-        default:
-            return
-        }
-    }
 }

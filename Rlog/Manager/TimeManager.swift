@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+// TODO: 삭제 필요🔥 날짜 핸들링을 위해 임시로 세팅해둔 모델입니다. 현재 대체 작업 중에 있습니다.
 // Sample calendar model
 struct CalendarModel {
     let year: Int
@@ -66,9 +66,11 @@ final class TimeManager {
         return (hour, minute)
     }
     
-    func calculateTimeGap(startHour: Int16, startMinute: Int16, endHour: Int16, endMinute: Int16) -> Double {
-        let startTime = calendar.date(bySettingHour: Int(startHour), minute: Int(startMinute), second: 0, of: Date()) ?? Date()
-        let endTime = calendar.date(bySettingHour: Int(endHour), minute: Int(endMinute), second: 0, of: Date()) ?? Date()
+    func calculateTimeGap(startHour: Int16, startMinute: Int16, endHour: Int16, endMinute: Int16) -> Double? {
+        guard
+            let startTime = calendar.date(bySettingHour: Int(startHour), minute: Int(startMinute), second: 0, of: Date()),
+            let endTime = calendar.date(bySettingHour: Int(endHour), minute: Int(endMinute), second: 0, of: Date())
+        else { return nil }
         
         let gap = endTime - startTime
         

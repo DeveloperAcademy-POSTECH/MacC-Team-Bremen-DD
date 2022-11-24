@@ -29,12 +29,11 @@ private extension ScheduleCell {
         VStack(spacing: 0) {
             
             HStack {
-                Text("\(String(describing: data.hasDone))")
-                Text(viewModel.workTypeString)
+                Text(viewModel.workType.title)
                     .font(.caption2)
                     .foregroundColor(Color.backgroundWhite)
                     .padding(EdgeInsets(top: 2, leading: 6, bottom: 2, trailing: 6))
-                    .background(viewModel.workTypeColor)
+                    .background(viewModel.workType.color)
                     .cornerRadius(5)
                 
                 Spacer()
@@ -84,7 +83,7 @@ private extension ScheduleCell {
                     .font(Font.caption.bold())
                     .padding(EdgeInsets(top: 5, leading: 29, bottom: 5, trailing: 29))
                     .foregroundColor(.white)
-                    .background(viewModel.workTypeColor)
+                    .background(viewModel.workType.color)
                     .cornerRadius(10)
             }
         }
