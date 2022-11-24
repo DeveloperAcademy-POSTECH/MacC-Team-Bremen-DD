@@ -11,10 +11,10 @@ final class ScheduleCellViewModel: ObservableObject{
     private let timeManager = TimeManager()
     private let workTypeManager = WorkTypeManager()
     @Published var workType: (title: String, color: Color) = ("", .black)
-    @Published var spentHour: String = ""
-    @Published var startTimeString: String = ""
-    @Published var endTimeString: String = ""
-    @Published var hasDone: Bool = false
+    @Published var spentHour = ""
+    @Published var startTimeString = ""
+    @Published var endTimeString = ""
+    @Published var hasDone = false
     
     func onAppear(repeatDays: [String], data: WorkdayEntity) {
         self.workType = workTypeManager.defineWorkType(data: data)
