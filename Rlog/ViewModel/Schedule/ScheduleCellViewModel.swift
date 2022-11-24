@@ -12,7 +12,7 @@ final class ScheduleCellViewModel: ObservableObject{
     private let workTypeManager = WorkTypeManager()
     let data: WorkdayEntity
     let didTapConfirm: () -> Void
-    @Published var workType: (title: String, color: Color) = ("", .black)
+    @Published var workType: WorkDayType = .regular
     @Published var spentHour = ""
     @Published var startTimeString = ""
     @Published var endTimeString = ""
@@ -61,10 +61,8 @@ extension ScheduleCellViewModel {
         switch order {
         case .orderedAscending:
             self.hasDone = true
-            return
         default:
             self.hasDone = false
-            return
         }
     }
 
