@@ -63,6 +63,4 @@ extension ScheduleCellViewModel {
             self.hasDone = false
         }
     }
-
-
 }
