@@ -43,7 +43,7 @@ private extension MonthlyCalculateListView {
                 tapToNextMonth: {
                     viewModel.didTapNextMonth()
                 },
-                currentMonth: viewModel.switchedDate.fetchYearAndMonth()
+                currentMonth: "\(viewModel.switchedDate.yearInt).\(viewModel.switchedDate.monthInt)"
             )
         }
         .foregroundColor(Color.fontBlack)
@@ -51,7 +51,7 @@ private extension MonthlyCalculateListView {
     
     var total: some View {
         HStack {
-            Text("\(viewModel.switchedDate.fetchMonth())월 총 금액")
+            Text("\(viewModel.switchedDate.monthInt)월 총 금액")
             Spacer()
             Text("\(viewModel.total)원")
                 .fontWeight(.bold)
@@ -78,7 +78,7 @@ private extension MonthlyCalculateListView {
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
                 Spacer()
-                Text("\(monthlyCalculateResult.startDate.fetchMonth())월 \(monthlyCalculateResult.startDate.fetchDay())일 ~ \(monthlyCalculateResult.endDate.fetchMonth())월 \(monthlyCalculateResult.endDate.fetchDay())일")
+                Text("\(monthlyCalculateResult.startDate.monthInt)월 \(monthlyCalculateResult.startDate.dayInt)일 ~ \(monthlyCalculateResult.endDate.monthInt)월 \(monthlyCalculateResult.endDate.dayInt)일")
                     .font(.caption)
                     .foregroundColor(Color.fontBlack)
             }

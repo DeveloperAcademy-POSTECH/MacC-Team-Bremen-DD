@@ -90,7 +90,7 @@ private extension ScheduleListView {
                 isActive: $isSchedulePendingListViewActive
             ) { EmptyView() }
             NavigationLink(
-                destination: ScheduleCreationView()
+                destination: ScheduleCreationView(of: viewModel.currentDate)
                     .navigationBarBackButtonHidden(true)
                     .navigationBarTitle(Text("근무 일정 추가하기"), displayMode: .inline),
                  isActive: $isScheduleCreationViewActive
@@ -262,7 +262,9 @@ private extension ScheduleListView {
                             destination: ScheduleUpdateView(workday: data).navigationTitle("근무 일정 수정하기"),
                             isActive: $isScheduleUpdateViewActive
                         ) {
-                            ScheduleCell(of: data)
+                            ScheduleCell(of: data) {
+                                viewModel.onAppear()
+                            }
                         }
                     }
                     if !workdaysOfFocusedDate.hasDone.isEmpty {
@@ -275,7 +277,9 @@ private extension ScheduleListView {
                                 destination: ScheduleUpdateView(workday: data).navigationTitle("근무 일정 수정하기"),
                                 isActive: $isScheduleUpdateViewActive
                             ) {
-                                ScheduleCell(of: data)
+                                ScheduleCell(of: data) {
+                                    viewModel.onAppear()
+                                }
                             }
                         }
                     }
