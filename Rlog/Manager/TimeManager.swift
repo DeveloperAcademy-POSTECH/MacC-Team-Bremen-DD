@@ -76,6 +76,10 @@ final class TimeManager {
         
         return gap
     }
+
+    func calculateTimeGapBetweenTwoDate(start: Date, end: Date) -> Double {
+        return end.timeIntervalSinceReferenceDate - start.timeIntervalSinceReferenceDate
+    }
     
     func secondsToHoursMinutesSeconds(_ seconds: Double) -> (Int, Int, Int) {
         let time = Int(seconds)

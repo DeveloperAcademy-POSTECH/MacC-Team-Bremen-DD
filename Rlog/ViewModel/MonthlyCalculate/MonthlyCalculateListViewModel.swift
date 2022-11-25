@@ -25,7 +25,6 @@ struct MonthlyCalculateResult {
     var calculateTax: Int {
         return Int(Double(totalWithoutTaxAndJuhu) * 0.033)
     }
-
     var leftDays: Int {
         return calculateleftDays(workspace: workspace)
     }
