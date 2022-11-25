@@ -92,7 +92,7 @@ struct WorkSpaceDetailView: View {
                             }
                         }
                     } message: {
-                        Text("해당 근무지를 삭제합니다.?")
+                        Text("해당 근무지를 삭제합니다.")
                     }
                     .padding(.top, -8)
                     Spacer()
