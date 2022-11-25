@@ -1,16 +1,14 @@
 //
-//  WorkSpaceDetailView.swift
+//  WorkspaceDetailView.swift
 //  Rlog
 //
 //  Created by 송시원 on 2022/10/17.
 //
-
 import SwiftUI
 
 // TODO: 완료 Button isActive 기능 추가하기
 // TODO: 근무지 삭제 Alert 구현
 // TODO: Schedule 추가하기
-
 struct WorkspaceDetailView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel: WorkspaceDetailViewModel
