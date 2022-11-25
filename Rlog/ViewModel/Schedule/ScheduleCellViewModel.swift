@@ -25,7 +25,7 @@ final class ScheduleCellViewModel: ObservableObject{
     }
     
     func onAppear() {
-        self.workType = workTypeManager.defineWorkType(data: data)
+        self.workType = workTypeManager.defineWorkType(workday: data)
         getSpentHour(data.endTime, data.startTime)
         getStartAndEndTimeAndMinute(data.startTime, data.endTime)
         verifyIsScheduleExpired(data.endTime)
