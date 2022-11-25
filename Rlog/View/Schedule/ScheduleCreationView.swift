@@ -9,8 +9,12 @@ import SwiftUI
 
 struct ScheduleCreationView: View {
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var viewModel = ScheduleCreationViewModel()
+    @ObservedObject var viewModel: ScheduleCreationViewModel
     @State private var isCreationButtonTapped = false
+    
+    init(of selectedDate: Date) {
+        self.viewModel = ScheduleCreationViewModel(of: selectedDate)
+    }
     
     var body: some View {
         ScrollView(showsIndicators: false) {
