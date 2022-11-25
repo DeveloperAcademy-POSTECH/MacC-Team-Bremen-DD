@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ScheduleCell: View {
-    @StateObject var viewModel: ScheduleCellViewModel
+    @ObservedObject var viewModel: ScheduleCellViewModel
     
     init(of data: WorkdayEntity, didTapConfirm: @escaping () -> Void) {
-        _viewModel = StateObject(wrappedValue: ScheduleCellViewModel(of: data, didTapConfirm: didTapConfirm))
+        self.viewModel = ScheduleCellViewModel(of: data, didTapConfirm: didTapConfirm)
     }
     
     var body: some View {
