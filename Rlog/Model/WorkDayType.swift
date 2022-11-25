@@ -47,7 +47,7 @@ enum WorkDayType: Int, CaseIterable {
         get {
             switch self {
             case .regular:
-                return Color.grayMedium
+                return Color.primary
             case .reduce:
                 return Color.pointRed
             case .overtime:
