@@ -21,6 +21,7 @@ final class ScheduleCellViewModel: ObservableObject{
     init(of data: WorkdayEntity, didTapConfirm: @escaping () -> Void) {
         self.data = data
         self.didTapConfirm = didTapConfirm
+        onAppear()
     }
     
     func onAppear() {
@@ -65,6 +66,4 @@ extension ScheduleCellViewModel {
             self.hasDone = false
         }
     }
-
-
 }

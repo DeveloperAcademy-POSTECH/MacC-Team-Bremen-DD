@@ -90,7 +90,7 @@ private extension ScheduleListView {
                 isActive: $isSchedulePendingListViewActive
             ) { EmptyView() }
             NavigationLink(
-                destination: ScheduleCreationView()
+                destination: ScheduleCreationView(of: viewModel.currentDate)
                     .navigationBarBackButtonHidden(true)
                     .navigationBarTitle(Text("근무 일정 추가하기"), displayMode: .inline),
                  isActive: $isScheduleCreationViewActive

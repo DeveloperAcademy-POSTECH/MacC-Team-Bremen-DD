@@ -23,6 +23,12 @@ final class ScheduleCreationViewModel: ObservableObject {
     @Published var memo: String = ""
     @Published var isAlertActive = false
     
+    init(of selectedDate: Date) {
+        workday = selectedDate
+        self.startTime = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: selectedDate) ?? Date()
+        self.endTime = Calendar.current.date(bySettingHour: 18, minute: 0, second: 0, of: selectedDate) ?? Date()
+    }
+    
     var selectedWorkspaceEntity: WorkspaceEntity? = nil
     
     func onAppear() {
@@ -50,15 +56,20 @@ private extension ScheduleCreationViewModel {
     func getAllWorkspaces() {
         let result = CoreDataManager.shared.getAllWorkspaces()
         workspaces = result
+        
+        if result.count == 1 {
+            self.selectedWorkspaceString = result[0].name
+        }
     }
     
     func createWorkday() {
         guard let workspaceEntity = selectedWorkspaceEntity else { return }
+        guard let date = workday.onlyDate else { return }
         CoreDataManager.shared.createWorkday(
             of: workspaceEntity,
             hourlyWage: workspaceEntity.hourlyWage,
             hasDone: false,
-            date: workday,
+            date: date,
             startTime: startTime,
             endTime: endTime,
             memo: memo,
