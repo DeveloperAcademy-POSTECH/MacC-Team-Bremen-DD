@@ -259,7 +259,8 @@ private extension ScheduleListView {
                         .padding(.bottom, 12)
                     ForEach(workdaysOfFocusedDate.hasNotDone) { data in
                         NavigationLink(
-                            destination: ScheduleUpdateView(workday: data).navigationTitle("근무일정 수정"),
+                            destination: ScheduleUpdateView(workday: data).navigationTitle("근무 수정")         .navigationBarBackButtonHidden(true)
+                                .navigationBarTitle (Text("미확정 일정"), displayMode: .inline),
                             isActive: $isScheduleUpdateViewActive
                         ) {
                             ScheduleCell(of: data) {
@@ -274,7 +275,8 @@ private extension ScheduleListView {
                             .padding(.bottom, 12)
                         ForEach(workdaysOfFocusedDate.hasDone) { data in
                             NavigationLink(
-                                destination: ScheduleUpdateView(workday: data).navigationTitle("근무일정 수정"),
+                                destination: ScheduleUpdateView(workday: data).navigationTitle("근무 수정")         .navigationBarBackButtonHidden(true)
+                                    .navigationBarTitle (Text("미확정 일정"), displayMode: .inline),
                                 isActive: $isScheduleUpdateViewActive
                             ) {
                                 ScheduleCell(of: data) {
