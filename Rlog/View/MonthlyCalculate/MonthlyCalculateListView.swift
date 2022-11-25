@@ -53,7 +53,7 @@ private extension MonthlyCalculateListView {
         HStack {
             Text("\(viewModel.switchedDate.monthInt)월 총 금액")
             Spacer()
-            Text("\(viewModel.total)원")
+            Text("\(viewModel.monthlySalaryTotal)원")
                 .fontWeight(.bold)
         }
         .font(.title3)
@@ -90,7 +90,7 @@ private extension MonthlyCalculateListView {
                     .font(.subheadline)
                     .foregroundColor(Color.grayMedium)
                 Spacer()
-                Text("\(monthlyCalculateResult.total)원")
+                Text("\(monthlyCalculateResult.monthlySalary)원")
                     .font(.title3)
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
