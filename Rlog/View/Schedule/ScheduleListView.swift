@@ -273,13 +273,8 @@ private extension ScheduleListView {
                             .padding(.top, 32)
                             .padding(.bottom, 12)
                         ForEach(workdaysOfFocusedDate.hasDone) { data in
-                            NavigationLink(
-                                destination: ScheduleUpdateView(workday: data).navigationTitle("근무 일정 수정하기"),
-                                isActive: $isScheduleUpdateViewActive
-                            ) {
-                                ScheduleCell(of: data) {
-                                    viewModel.onAppear()
-                                }
+                            ScheduleCell(of: data) {
+                                viewModel.onAppear()
                             }
                         }
                     }
