@@ -8,16 +8,15 @@
 import SwiftUI
 
 struct ScheduleCell: View {
-    @ObservedObject var viewModel: ScheduleCellViewModel
+    @StateObject var viewModel: ScheduleCellViewModel
     
     init(of data: WorkdayEntity, didTapConfirm: @escaping () -> Void) {
-        self.viewModel = ScheduleCellViewModel(of: data, didTapConfirm: didTapConfirm)
+        _viewModel = StateObject(wrappedValue: ScheduleCellViewModel(of: data, didTapConfirm: didTapConfirm))
     }
     
     var body: some View {
         scheduleInfo
             .transition(AnyTransition.opacity.animation(.easeInOut))
-            .onAppear { viewModel.onAppear() }
     }
 }
 
