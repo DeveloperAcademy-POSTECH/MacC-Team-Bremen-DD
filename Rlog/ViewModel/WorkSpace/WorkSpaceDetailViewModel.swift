@@ -114,14 +114,15 @@ private extension WorkspaceDetailViewModel {
         
         while range < after5Month {
             if schedule.repeatDays.contains(range.fetchDayOfWeek(date: range)) {
-                guard let startTime = Calendar.current.date(bySettingHour: Int(schedule.startHour), minute: Int(schedule.startMinute), second: 0, of: range) else { return }
-                guard let endTime = Calendar.current.date(bySettingHour: Int(schedule.endHour), minute: Int(schedule.endMinute), second: 0, of: range) else { return }
+                guard let startTime = Calendar.current.date(bySettingHour: Int(schedule.startHour), minute: Int(schedule.startMinute), second: 0, of: range),
+                      let endTime = Calendar.current.date(bySettingHour: Int(schedule.endHour), minute: Int(schedule.endMinute), second: 0, of: range),
+                      let date = range.onlyDate else { return }
                 
                 CoreDataManager.shared.createWorkday(
                     of: workspace,
                     hourlyWage: workspace.hourlyWage,
                     hasDone: false,
-                    date: range,
+                    date: date,
                     startTime: startTime,
                     endTime: endTime,
                     memo: nil,

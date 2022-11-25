@@ -201,9 +201,10 @@ extension CoreDataManager {
     func getHasDoneWorkdays(of workspace: WorkspaceEntity, start: Date, target: Date) -> [WorkdayEntity] {
         let fetchRequest: NSFetchRequest<WorkdayEntity> = WorkdayEntity.fetchRequest()
         let workspacePredicate = NSPredicate(format: "workspace.name = %@", workspace.name)
+        let hasDonePredicate = NSPredicate(format: "hasDone == %@", NSNumber(booleanLiteral: true))
         let startPredicate = NSPredicate(format: "date >= %@", start as CVarArg)
         let targetPredicate = NSPredicate(format: "date < %@", target as CVarArg)
-        fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: [workspacePredicate, startPredicate, targetPredicate])
+        fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: [workspacePredicate, startPredicate, targetPredicate, hasDonePredicate])
         let result = try? context.fetch(fetchRequest)
         return result ?? []
     }

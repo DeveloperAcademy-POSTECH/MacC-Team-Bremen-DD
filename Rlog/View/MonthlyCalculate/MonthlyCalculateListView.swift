@@ -24,9 +24,6 @@ struct MonthlyCalculateListView: View {
                 Spacer()
             }
             .padding(.horizontal)
-            .onAppear {
-                viewModel.onAppear()
-            }
             .navigationBarHidden(true)
         }
     }
@@ -39,32 +36,24 @@ private extension MonthlyCalculateListView {
                 .font(.title2)
                 .fontWeight(.bold)
             Spacer()
-            // TODO: - 컴포넌트화 예정
-            HStack(spacing: 8) {
-                Button(action: {
-                    // TODO: - ViewModel에서 로직 구현
-                }, label: {
-                    Image(systemName: "chevron.left")
-                })
-                // TODO: - 현재 연도, 월로 바꾸기
-                Text(viewModel.date.fetchYearAndMonth())
-                    .fontWeight(.semibold)
-                Button(action: {
-                    // TODO: - ViewModel에서 로직 구현
-                }, label: {
-                    Image(systemName: "chevron.right")
-                })
-            }
-            .font(.title)
+            YearMonthStepperCalendar(
+                tapToPreviousMonth: {
+                    viewModel.didTapPreviousMonth()
+                },
+                tapToNextMonth: {
+                    viewModel.didTapNextMonth()
+                },
+                currentMonth: "\(viewModel.switchedDate.yearInt).\(viewModel.switchedDate.monthInt)"
+            )
         }
         .foregroundColor(Color.fontBlack)
     }
     
     var total: some View {
         HStack {
-            Text("\(viewModel.date.fetchMonth())월 총 금액")
+            Text("\(viewModel.switchedDate.monthInt)월 총 금액")
             Spacer()
-            Text("10,200,000원")
+            Text("\(viewModel.total)원")
                 .fontWeight(.bold)
         }
         .font(.title3)
@@ -73,20 +62,24 @@ private extension MonthlyCalculateListView {
     
     var calculateByWorkspaceList: some View {
         VStack {
-            ForEach(viewModel.workspaces, id: \.self) { workspace in
-                makeMonthlyCalculateListViewModel(workspace: workspace)
+            ForEach(0..<viewModel.monthlyCalculateResults.count, id: \.self) { index in
+                makeMonthlyCalculateListViewModel(monthlyCalculateResult: viewModel.monthlyCalculateResults[index])
             }
         }
     }
     
-    func makeMonthlyCalculateListViewModel(workspace: WorkspaceEntity) -> some View {
+    func makeMonthlyCalculateListViewModel(monthlyCalculateResult: MonthlyCalculateResult) -> some View {
         var workspaceTitle: some View {
             HStack(spacing: 4) {
                 Rectangle()
                     .fill(Color.primary)
                     .frame(width: 4, height: 16)
-                Text(workspace.name)
+                Text(monthlyCalculateResult.workspace.name)
                     .fontWeight(.bold)
+                    .foregroundColor(Color.fontBlack)
+                Spacer()
+                Text("\(monthlyCalculateResult.startDate.monthInt)월 \(monthlyCalculateResult.startDate.dayInt)일 ~ \(monthlyCalculateResult.endDate.monthInt)월 \(monthlyCalculateResult.endDate.dayInt)일")
+                    .font(.caption)
                     .foregroundColor(Color.fontBlack)
             }
         }
@@ -97,7 +90,7 @@ private extension MonthlyCalculateListView {
                     .font(.subheadline)
                     .foregroundColor(Color.grayMedium)
                 Spacer()
-                Text("422,400원")
+                Text("\(monthlyCalculateResult.total)원")
                     .font(.title3)
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
@@ -115,16 +108,18 @@ private extension MonthlyCalculateListView {
             .font(.subheadline)
         }
         
-        return NavigationLink(destination: MonthlyCalculateDetailView()) {
+        return NavigationLink(destination: MonthlyCalculateDetailView(monthlyCalculateResult: monthlyCalculateResult)) {
             VStack(alignment: .leading, spacing: 0) {
                 workspaceTitle
                     .padding(.top)
                 Group {
-                    makeWorkspaceInfomation(title: "일한 시간", content: "32시간")
+                    makeWorkspaceInfomation(title: "일한 시간", content: "\(monthlyCalculateResult.workHours)시간")
                         .padding(.top, 32)
                     
-                    makeWorkspaceInfomation(title: "급여일까지", content: "D-12")
-                        .padding(.top, 8)
+                    if viewModel.fetchIsCurrentMonth() {
+                        makeWorkspaceInfomation(title: "급여일까지", content: "D-\(monthlyCalculateResult.leftDays)")
+                            .padding(.top, 8)
+                    }
                     
                     HDivider()
                         .padding(.top, 8)
