@@ -110,6 +110,9 @@ private extension WorkspaceCreateView {
     var workspace: some View {
         InputFormElement(containerType: .workplace, text: $viewModel.workSpace)
             .focused($checkoutInFocus, equals: .workSpace)
+            .onSubmit {
+                viewModel.didTapConfirmButton()
+            }
     }
     
     @ViewBuilder
