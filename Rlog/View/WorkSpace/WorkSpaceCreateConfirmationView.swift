@@ -10,6 +10,8 @@ import SwiftUI
 struct WorkSpaceCreateConfirmationView: View {
     @ObservedObject private var viewModel: WorkSpaceCreateConfirmationViewModel
     
+    @Environment(\.dismiss) var dismiss
+    
     init(isActiveNavigation: Binding<Bool>, workspaceData: WorkSpaceModel, scheduleData: [ScheduleModel]) {
         self.viewModel = WorkSpaceCreateConfirmationViewModel(
             isActiveNavigation: isActiveNavigation,
@@ -32,7 +34,12 @@ struct WorkSpaceCreateConfirmationView: View {
             .padding(.horizontal)
         }
         .navigationBarTitle("근무지 등록")
+        .navigationBarBackButtonHidden()
         .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                backButton
+            }
+            
             ToolbarItem(placement: .navigationBarTrailing) {
                 toolbarConfirmButton
             }
@@ -41,6 +48,18 @@ struct WorkSpaceCreateConfirmationView: View {
 }
 
 private extension WorkSpaceCreateConfirmationView {
+    var backButton: some View {
+        Button(action: {
+            dismiss()
+        }, label: {
+            HStack(spacing: 5) {
+                Image(systemName: "chevron.backward")
+                Text("이전")
+            }
+            .foregroundColor(Color.fontBlack)
+        })
+    }
+    
     var WorkTypeInfo: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("근무 패턴")

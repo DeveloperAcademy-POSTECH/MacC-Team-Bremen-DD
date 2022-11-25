@@ -9,6 +9,9 @@ import SwiftUI
 
 struct WorkSpaceCreateScheduleListView: View {
     @ObservedObject var viewModel: WorkSpaceCreateScheduleListViewModel
+    
+    @Environment(\.dismiss) var dismiss
+    
     init(isActiveNavigation: Binding<Bool>, workspaceModel: WorkSpaceModel) {
         self.viewModel = WorkSpaceCreateScheduleListViewModel(isActiveNavigation: isActiveNavigation, workspaceModel: workspaceModel)
     }
@@ -29,7 +32,12 @@ struct WorkSpaceCreateScheduleListView: View {
         }
         .padding(.horizontal)
         .navigationBarTitle("근무패턴 등록")
+        .navigationBarBackButtonHidden()
         .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                backButton
+            }
+            
             ToolbarItem(placement: .navigationBarTrailing) {
                 toolbarNextButton
             }
@@ -44,6 +52,18 @@ struct WorkSpaceCreateScheduleListView: View {
 }
 
 private extension WorkSpaceCreateScheduleListView {
+    var backButton: some View {
+        Button(action: {
+            dismiss()
+        }, label: {
+            HStack(spacing: 5) {
+                Image(systemName: "chevron.backward")
+                Text("이전")
+            }
+            .foregroundColor(Color.fontBlack)
+        })
+    }
+    
     var toolbarNextButton: some View {
         NavigationLink(destination:  WorkSpaceCreateConfirmationView(
             isActiveNavigation: $viewModel.isActiveNavigation,
