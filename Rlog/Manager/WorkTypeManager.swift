@@ -9,7 +9,7 @@ import SwiftUI
 
 final class WorkTypeManager {
     private let timeManager = TimeManager()
-    
+
     func defineWorkType(workday: WorkdayEntity) -> WorkDayType {
         let calendar = Calendar.current
         let workspace = workday.workspace
