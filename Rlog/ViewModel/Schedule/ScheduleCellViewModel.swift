@@ -11,14 +11,16 @@ final class ScheduleCellViewModel: ObservableObject{
     private let timeManager = TimeManager()
     private let workTypeManager = WorkTypeManager()
     let data: WorkdayEntity
+    let didTapConfirm: () -> Void
     @Published var workType: WorkDayType = .regular
     @Published var spentHour = ""
     @Published var startTimeString = ""
     @Published var endTimeString = ""
     @Published var hasDone = false
     
-    init(of data: WorkdayEntity) {
+    init(of data: WorkdayEntity, didTapConfirm: @escaping () -> Void) {
         self.data = data
+        self.didTapConfirm = didTapConfirm
         onAppear()
     }
     
@@ -31,6 +33,7 @@ final class ScheduleCellViewModel: ObservableObject{
     
     func didTapConfirmationButton(_ data: WorkdayEntity) {
         toggleWorkdayHasDoneEntity(data)
+        didTapConfirm()
     }
 }
 
