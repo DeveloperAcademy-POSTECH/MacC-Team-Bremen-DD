@@ -21,10 +21,8 @@ final class MonthlyCalculateCellViewModel: ObservableObject {
         self.workdays = workdays
         self.workHours = calculateWorkHours()
         guard !workdays.isEmpty else { return }
-        if workdays.count == 1 {
-            self.workType = workTypeManager.defineWorkType(data: workdays[0] )
-        } else {
-            self.workType = workTypeManager.defineWorkType(data: workdays[workdays.count-1])
+        for workday in workdays {
+            self.workType = workTypeManager.defineWorkType(workday: workday)
         }
     }
 }
