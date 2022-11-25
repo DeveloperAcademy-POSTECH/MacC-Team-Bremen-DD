@@ -4,7 +4,6 @@
 //
 //  Created by 송시원 on 2022/10/17.
 //
-
 import SwiftUI
 
 
@@ -33,7 +32,7 @@ struct WorkspaceCreateView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 if !viewModel.isHiddenToolBarItem {
                     NavigationLink {
-                        WorkSpaceCreateScheduleListView(
+                        WorkspaceCreateScheduleListView(
                             isActiveNavigation: $viewModel.isActiveNavigation, workspaceModel: WorkSpaceModel(
                                 name: viewModel.workSpace,
                                 paymentDay: viewModel.payday,

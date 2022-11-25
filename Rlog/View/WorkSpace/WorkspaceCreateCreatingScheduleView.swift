@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WorkSpaceCreateCreatingScheduleView: View {
+struct WorkspaceCreateCreatingScheduleView: View {
     @ObservedObject private var viewModel:  WorkspaceCreateCreatingScheduleViewModel
     
     init(isShowingModal: Binding<Bool>, scheduleList: Binding<[ScheduleModel]>) {
@@ -36,7 +36,7 @@ struct WorkSpaceCreateCreatingScheduleView: View {
     }
 }
 
-private extension WorkSpaceCreateCreatingScheduleView {
+private extension WorkspaceCreateCreatingScheduleView {
     var workDayPicker: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("근무 요일")

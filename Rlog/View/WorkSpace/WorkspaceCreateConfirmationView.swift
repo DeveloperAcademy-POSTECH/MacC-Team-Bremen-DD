@@ -7,7 +7,7 @@
 // TODO: 네비게이션 연결, 뷰모델 연결, 고민 공유, 컨포넌트 적용
 import SwiftUI
 
-struct WorkSpaceCreateConfirmationView: View {
+struct WorkspaceCreateConfirmationView: View {
     @ObservedObject private var viewModel: WorkspaceCreateConfirmationViewModel
     
     @Environment(\.dismiss) var dismiss
@@ -47,7 +47,19 @@ struct WorkSpaceCreateConfirmationView: View {
     }
 }
 
-private extension WorkSpaceCreateConfirmationView {
+private extension WorkspaceCreateConfirmationView {
+    var backButton: some View {
+        Button(action: {
+            dismiss()
+        }, label: {
+            HStack(spacing: 5) {
+                Image(systemName: "chevron.backward")
+                Text("이전")
+            }
+            .foregroundColor(Color.fontBlack)
+        })
+    }
+    
     var workTypeInfo: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("근무 패턴")

@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct WorkSpaceCreateScheduleListView: View {
+struct WorkspaceCreateScheduleListView: View {
     @ObservedObject var viewModel: WorkspaceCreateScheduleListViewModel
+    @Environment(\.dismiss) var dismiss
     init(isActiveNavigation: Binding<Bool>, workspaceModel: WorkSpaceModel) {
         self.viewModel = WorkspaceCreateScheduleListViewModel(isActiveNavigation: isActiveNavigation, workspaceModel: workspaceModel)
     }
@@ -40,7 +41,7 @@ struct WorkSpaceCreateScheduleListView: View {
             }
         }
         .sheet(isPresented: $viewModel.isShowingModal) {
-            WorkSpaceCreateCreatingScheduleView(
+            WorkspaceCreateCreatingScheduleView(
             isShowingModal: $viewModel.isShowingModal, 
             scheduleList: $viewModel.scheduleList
             )
@@ -48,7 +49,7 @@ struct WorkSpaceCreateScheduleListView: View {
     }
 }
 
-private extension WorkSpaceCreateScheduleListView {
+private extension WorkspaceCreateScheduleListView {
     var backButton: some View {
         Button(action: {
             dismiss()
@@ -62,7 +63,7 @@ private extension WorkSpaceCreateScheduleListView {
     }
     
     var toolbarNextButton: some View {
-        NavigationLink(destination:  WorkSpaceCreateConfirmationView(
+        NavigationLink(destination:  WorkspaceCreateConfirmationView(
             isActiveNavigation: $viewModel.isActiveNavigation,
             workspaceData: viewModel.workspaceModel,
             scheduleData: viewModel.scheduleList)

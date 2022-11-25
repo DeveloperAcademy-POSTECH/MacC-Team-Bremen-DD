@@ -60,12 +60,12 @@ struct WorkspaceDetailView: View {
         .sheet(isPresented: $viewModel.isCreateScheduleModalShow, onDismiss: {
             print("1")
         }) {
-            WorkSpaceCreateCreatingScheduleView(isShowingModal: $viewModel.isCreateScheduleModalShow, scheduleList: $viewModel.shouldCreateSchedules)
+            WorkspaceCreateCreatingScheduleView(isShowingModal: $viewModel.isCreateScheduleModalShow, scheduleList: $viewModel.shouldCreateSchedules)
         }
         .background(Color.backgroundWhite)
         .navigationBarBackButtonHidden()
         .sheet(isPresented: $viewModel.isCreateScheduleModalShow) {
-            WorkSpaceCreateCreatingScheduleView(
+            WorkspaceCreateCreatingScheduleView(
                 isShowingModal: $viewModel.isCreateScheduleModalShow,
                 scheduleList: $viewModel.shouldCreateSchedules
             )
