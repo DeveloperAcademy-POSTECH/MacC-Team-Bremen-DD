@@ -71,6 +71,8 @@
 		C695A00A291E17BD008FEF4E /* ScheduleEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C695A008291E17BD008FEF4E /* ScheduleEntity+CoreDataClass.swift */; };
 		C695A00B291E17BD008FEF4E /* ScheduleEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C695A009291E17BD008FEF4E /* ScheduleEntity+CoreDataProperties.swift */; };
 		C69C13B029139AB100D9B47F /* WorkDayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69C13AF29139AB100D9B47F /* WorkDayType.swift */; };
+		C6B601D6292F447B00A05BCC /* MonthlyCalculateCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B601D5292F447B00A05BCC /* MonthlyCalculateCellView.swift */; };
+		C6B601D8292F643800A05BCC /* MonthlyCalculateCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B601D7292F643800A05BCC /* MonthlyCalculateCellViewModel.swift */; };
 		C6E8A457291CE5880018A2D1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D66DCA828FD4DF200C90400 /* Preview Assets.xcassets */; };
 		C6E8A458291CE58B0018A2D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D66DCA528FD4DF200C90400 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -144,6 +146,8 @@
 		C695A008291E17BD008FEF4E /* ScheduleEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C695A009291E17BD008FEF4E /* ScheduleEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C69C13AF29139AB100D9B47F /* WorkDayType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkDayType.swift; sourceTree = "<group>"; };
+		C6B601D5292F447B00A05BCC /* MonthlyCalculateCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MonthlyCalculateCellView.swift; path = ../../../../../../Documents/MonthlyCalculateCellView.swift; sourceTree = "<group>"; };
+		C6B601D7292F643800A05BCC /* MonthlyCalculateCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalculateCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +245,7 @@
 			children = (
 				C6959F84291CE78E008FEF4E /* MonthlyCalculateListView.swift */,
 				B93649592921CA4500196E76 /* MonthlyCalculateDetailView.swift */,
+				C6B601D5292F447B00A05BCC /* MonthlyCalculateCellView.swift */,
 			);
 			path = MonthlyCalculate;
 			sourceTree = "<group>";
@@ -288,6 +293,7 @@
 			children = (
 				C63D4458291CE3B0005D5AE6 /* MonthlyCalculateListViewModel.swift */,
 				B936495B2921CA6600196E76 /* MonthlyCalculateDetailViewModel.swift */,
+				C6B601D7292F643800A05BCC /* MonthlyCalculateCellViewModel.swift */,
 			);
 			path = MonthlyCalculate;
 			sourceTree = "<group>";
@@ -446,6 +452,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D66DCC528FD8D6D00C90400 /* WorkSpaceCreateView.swift in Sources */,
+				C6B601D6292F447B00A05BCC /* MonthlyCalculateCellView.swift in Sources */,
 				894CB4DD29221D19008E4197 /* SchedulePendingListView.swift in Sources */,
 				7A937596290035BD00D6D5BE /* FilledButton.swift in Sources */,
 				C67FC8452908FA8300DE3898 /* WorkSpaceCellViewModel.swift in Sources */,
@@ -454,6 +461,7 @@
 				2D66DCE428FD8F1D00C90400 /* Color+.swift in Sources */,
 				2D66DCC128FD8D5100C90400 /* WorkSpaceListView.swift in Sources */,
 				2D1651912907D5F300636D61 /* WorkSpaceInfoSubView.swift in Sources */,
+				C6B601D8292F643800A05BCC /* MonthlyCalculateCellViewModel.swift in Sources */,
 				2D9CE86629003AA600C60F4C /* WorkSpaceCreateScheduleListView.swift in Sources */,
 				C695A006291E1748008FEF4E /* WorkdayEntity+CoreDataClass.swift in Sources */,
 				C695A007291E1748008FEF4E /* WorkdayEntity+CoreDataProperties.swift in Sources */,
