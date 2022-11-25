@@ -11,7 +11,6 @@ final class WorkTypeManager {
     private let timeManager = TimeManager()
 
     func defineWorkType(workday: WorkdayEntity) -> WorkDayType {
-        print("✅✅✅", workday.date)
         let calendar = Calendar.current
         let workspace = workday.workspace
         let schedules = CoreDataManager.shared.getSchedules(of: workspace)
