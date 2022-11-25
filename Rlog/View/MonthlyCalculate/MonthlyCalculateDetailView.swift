@@ -160,6 +160,7 @@ private extension MonthlyCalculateDetailView {
             }
             Spacer()
         }
+        .padding(.top, 35)
         .padding(.horizontal, 24)
         .padding(.bottom)
     }
