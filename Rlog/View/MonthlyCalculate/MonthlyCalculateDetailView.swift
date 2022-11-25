@@ -19,16 +19,15 @@ struct MonthlyCalculateDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 header
-                    .padding(.top, 18)
+                    .padding(.top, 24)
                     .padding(.horizontal)
                 closing
-                    .padding(.top, 39)
+                    .padding(.top, 32)
                     .padding(.horizontal)
                 calendarView
-                    .padding(.top)
+                    .padding(.top, 40)
                 resonList
-                    .padding(.top)
-                    .padding(.horizontal)
+                    .padding(EdgeInsets(top: 32, leading: 16, bottom: 16, trailing: 16))
 
             }
         }
@@ -107,7 +106,6 @@ private extension MonthlyCalculateDetailView {
             .background(Color.backgroundStroke)
             .clipShape(RoundedRectangle(cornerRadius: 10))
         }
-        .padding(.top, 40)
     }
 
     var calendarTitle: some View {
