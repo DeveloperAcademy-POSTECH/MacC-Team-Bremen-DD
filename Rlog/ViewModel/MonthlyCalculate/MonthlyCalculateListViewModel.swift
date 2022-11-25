@@ -25,6 +25,7 @@ struct MonthlyCalculateResult {
     var calculateTax: Int {
         return Int(Double(totalWithoutTaxAndJuhu) * 0.033)
     }
+
     var leftDays: Int {
         return calculateleftDays(workspace: workspace)
     }
@@ -50,9 +51,7 @@ struct MonthlyCalculateResult {
             let nextMonthYear = Calendar.current.component(.year, from: nextMonth)
             let nextMonthMonth = Calendar.current.component(.month, from: nextMonth)
             
-            guard let nextPayDate = Calendar.current.date(from: DateComponents(year: nextMonthYear, month: nextMonthMonth, day: Int(workspace.payDay))) else {
-                return 0
-            }
+            guard let nextPayDate = Calendar.current.date(from: DateComponents(year: nextMonthYear, month: nextMonthMonth, day: Int(workspace.payDay))) else { return 0 }
             let interval = nextPayDate.timeIntervalSince(date)
             
             return Int(interval / 86400) + 1

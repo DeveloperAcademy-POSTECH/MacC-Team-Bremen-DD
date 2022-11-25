@@ -16,6 +16,8 @@ struct WorkSpaceCreateView: View {
     
     @FocusState var checkoutInFocus: WritingState?
     
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
             guidingText
@@ -42,23 +44,15 @@ struct WorkSpaceCreateView: View {
         .padding(.horizontal)
         .navigationBarTitle("근무지 등록")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden()
         .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                backButton
+            }
+            
             ToolbarItem(placement: .navigationBarTrailing) {
                 if !viewModel.isHiddenToolBarItem {
-                    NavigationLink {
-                        WorkSpaceCreateScheduleListView(
-                            isActiveNavigation: $viewModel.isActiveNavigation, workspaceModel: WorkSpaceModel(
-                                name: viewModel.workSpace,
-                                paymentDay: viewModel.payday,
-                                hourlyWage: viewModel.hourlyWage,
-                                hasTax: viewModel.hasTax,
-                                hasJuhyu: viewModel.hasJuhyu
-                            )
-                        )
-                    } label: {
-                        Text("다음")
-                            .foregroundColor(.primary)
-                    }
+                    nextButton
                 }
             }
         }
@@ -71,6 +65,35 @@ struct WorkSpaceCreateView: View {
 }
 
 private extension WorkSpaceCreateView {
+    var backButton: some View {
+        Button(action: {
+            dismiss()
+        }, label: {
+            HStack(spacing: 5) {
+                Image(systemName: "chevron.backward")
+                Text("이전")
+            }
+            .foregroundColor(Color.fontBlack)
+        })
+    }
+    
+    var nextButton: some View {
+        NavigationLink {
+            WorkSpaceCreateScheduleListView(
+                isActiveNavigation: $viewModel.isActiveNavigation, workspaceModel: WorkSpaceModel(
+                    name: viewModel.workSpace,
+                    paymentDay: viewModel.payday,
+                    hourlyWage: viewModel.hourlyWage,
+                    hasTax: viewModel.hasTax,
+                    hasJuhyu: viewModel.hasJuhyu
+                )
+            )
+        } label: {
+            Text("다음")
+                .foregroundColor(.primary)
+        }
+    }
+    
     // 가이드 텍스트
     var guidingText: some View {
         TitleSubView(title: viewModel.currentState.title)
@@ -130,10 +153,3 @@ private extension WorkSpaceCreateView {
         }
     }
 }
-//
-//extension UINavigationController {
-//    // Remove back button text
-//    open override func viewWillLayoutSubviews() {
-//        navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-//    }
-//}
