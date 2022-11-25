@@ -39,14 +39,7 @@ struct CustomToolbar: ViewModifier {
         content
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        leftAction()
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(.fontBlack)
-                        Text("이전")
-                            .foregroundColor(.fontBlack)
-                    }
+                    BackButton { leftAction() }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {

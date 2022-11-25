@@ -36,14 +36,7 @@ struct WorkspaceDetailView: View {
         .navigationBarTitle (Text("근무수정"), displayMode: .inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: {
-                    dismiss()
-                }){
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.fontBlack)
-                    Text("이전")
-                        .foregroundColor(.fontBlack)
-                }
+                BackButton { dismiss() }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {

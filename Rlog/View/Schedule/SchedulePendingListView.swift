@@ -26,14 +26,7 @@ struct SchedulePendingListView: View {
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.fontBlack)
-                    Text("이전")
-                        .foregroundColor(.fontBlack)
-                }
+                BackButton { dismiss() }
             }
         }
     }

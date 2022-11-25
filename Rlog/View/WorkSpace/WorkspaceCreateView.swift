@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WorkspaceCreateView: View {
     @ObservedObject var viewModel: WorkspaceCreateViewModel
+    @Environment(\.dismiss) var dismiss
     @FocusState var checkoutInFocus: WritingState?
     
     init(isActive: Binding<Bool>) {
@@ -27,8 +28,12 @@ struct WorkspaceCreateView: View {
         }
         .padding(.horizontal)
         .navigationBarTitle("근무지 등록")
+        .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                BackButton { dismiss() }
+            }
             ToolbarItem(placement: .navigationBarTrailing) {
                 if !viewModel.isHiddenToolBarItem {
                     NavigationLink {

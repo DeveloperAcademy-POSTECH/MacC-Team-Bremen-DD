@@ -31,13 +31,14 @@ struct WorkspaceCreateConfirmationView: View {
                 workTypeInfo
                 Spacer()
             }
+            .disabled(true)
             .padding(.horizontal)
         }
         .navigationBarTitle("근무지 등록")
         .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                backButton
+                BackButton { dismiss() }
             }
             
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -48,18 +49,6 @@ struct WorkspaceCreateConfirmationView: View {
 }
 
 private extension WorkspaceCreateConfirmationView {
-    var backButton: some View {
-        Button(action: {
-            dismiss()
-        }, label: {
-            HStack(spacing: 5) {
-                Image(systemName: "chevron.backward")
-                Text("이전")
-            }
-            .foregroundColor(Color.fontBlack)
-        })
-    }
-    
     var workTypeInfo: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("근무 패턴")

@@ -33,9 +33,8 @@ struct WorkspaceCreateScheduleListView: View {
         .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                backButton
+                BackButton { dismiss() }
             }
-            
             ToolbarItem(placement: .navigationBarTrailing) {
                 toolbarNextButton
             }
@@ -49,19 +48,7 @@ struct WorkspaceCreateScheduleListView: View {
     }
 }
 
-private extension WorkspaceCreateScheduleListView {
-    var backButton: some View {
-        Button(action: {
-            dismiss()
-        }, label: {
-            HStack(spacing: 5) {
-                Image(systemName: "chevron.backward")
-                Text("이전")
-            }
-            .foregroundColor(Color.fontBlack)
-        })
-    }
-    
+private extension WorkspaceCreateScheduleListView {    
     var toolbarNextButton: some View {
         NavigationLink(destination:  WorkspaceCreateConfirmationView(
             isActiveNavigation: $viewModel.isActiveNavigation,

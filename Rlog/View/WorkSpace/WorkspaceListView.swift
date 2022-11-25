@@ -31,7 +31,6 @@ private extension WorkspaceListView {
                 NavigationLink(
                     destination: WorkspaceCreateView(isActive: $viewModel.isShowingSheet),
                     isActive: $viewModel.isShowingSheet) {
-                        
                         Image("plus.curved")
                             .foregroundColor(Color.primary)
                     }
