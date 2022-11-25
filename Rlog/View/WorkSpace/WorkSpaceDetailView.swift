@@ -84,7 +84,7 @@ struct WorkSpaceDetailView: View {
                     }
                     .alert("근무지 삭제", isPresented: $viewModel.isAlertOpen) {
                         Button("취소", role: .cancel) {
-                            viewModel.isAlertOpen.toggle()
+                            viewModel.isAlertOpen = false
                         }
                         Button("삭제", role: .destructive) {
                             viewModel.didTapDeleteButton {
