@@ -42,7 +42,7 @@ struct ScheduleCreationView: View {
 private extension ScheduleCreationView {
     var workspace: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("근무 날짜")
+            Text("근무지")
                 .font(.caption)
                 .foregroundColor(.grayMedium)
             WorkspaceListPicker(

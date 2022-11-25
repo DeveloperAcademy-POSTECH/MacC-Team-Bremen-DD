@@ -47,7 +47,9 @@ private extension SchedulePendingListView {
                         .padding(.bottom, 8)
                     VStack(alignment: .leading, spacing: 16) {
                         ForEach(viewModel.sortedHasNotDoneWorkdays[index].1, id: \.self) { data in
-                            ScheduleCell(of: data)
+                            ScheduleCell(of: data) {
+                                viewModel.onAppear()
+                            }
                         }
                     }
                 }
