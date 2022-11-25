@@ -19,6 +19,7 @@ final class ScheduleCellViewModel: ObservableObject{
     
     init(of data: WorkdayEntity) {
         self.data = data
+        onAppear()
     }
     
     func onAppear() {
@@ -62,6 +63,4 @@ extension ScheduleCellViewModel {
             self.hasDone = false
         }
     }
-
-
 }
