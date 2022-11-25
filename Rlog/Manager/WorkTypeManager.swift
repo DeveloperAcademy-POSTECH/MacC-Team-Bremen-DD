@@ -39,18 +39,18 @@ final class WorkTypeManager {
                   )
             else { return .extraDay }
 
-            // 만약 시작 시간이 같다면 아래 경우를 검사한다
-            // if : 시작 시간이 같고 일한 시간이 같다면 -> 정규 근무
-            // else if : 시작 시간이 같지만 일한 시간이 더 적다면 -> 축소 근무
-            // else : 시작 시간이 같지만 일한 시간이 같거나 적지 않다면 -> 연장 근무
-            if workdaySpentHour == spentHour {
-                return .regular
-            } else if workdaySpentHour < spentHour {
-                return .reduce
-            } else {
-                return .overtime
-            }
+        // 만약 시작 시간이 같다면 아래 경우를 검사한다
+        // if : 시작 시간이 같고 일한 시간이 같다면 -> 정규 근무
+        // else if : 시작 시간이 같지만 일한 시간이 더 적다면 -> 축소 근무
+        // else : 시작 시간이 같지만 일한 시간이 같거나 적지 않다면 -> 연장 근무
+        if workdaySpentHour == spentHour {
+            return .regular
+        } else if workdaySpentHour < spentHour {
+            return .reduce
+        } else {
+            return .overtime
         }
-        return .extraDay
+    }
+    return .extraDay
     }
 }
