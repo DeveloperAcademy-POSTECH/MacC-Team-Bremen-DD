@@ -29,6 +29,9 @@ struct ScheduleUpdateView: View {
             }
             .padding()
         }
+        .navigationTitle("근무 수정")
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 backButton
