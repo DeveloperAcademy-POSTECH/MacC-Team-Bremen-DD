@@ -7,13 +7,13 @@
 // TODO: 네비게이션 연결, 뷰모델 연결, 고민 공유, 컨포넌트 적용
 import SwiftUI
 
-struct WorkSpaceCreateConfirmationView: View {
-    @ObservedObject private var viewModel: WorkSpaceCreateConfirmationViewModel
+struct WorkspaceCreateConfirmationView: View {
+    @ObservedObject private var viewModel: WorkspaceCreateConfirmationViewModel
     
     @Environment(\.dismiss) var dismiss
     
     init(isActiveNavigation: Binding<Bool>, workspaceData: WorkSpaceModel, scheduleData: [ScheduleModel]) {
-        self.viewModel = WorkSpaceCreateConfirmationViewModel(
+        self.viewModel = WorkspaceCreateConfirmationViewModel(
             isActiveNavigation: isActiveNavigation,
             workspaceData: workspaceData,
             scheduleData: scheduleData
@@ -28,16 +28,17 @@ struct WorkSpaceCreateConfirmationView: View {
                 InputFormElement(containerType: .wage, text: $viewModel.workspaceData.hourlyWage)
                 InputFormElement(containerType: .payday, text: $viewModel.workspaceData.paymentDay)
                 toggleInputs
-                WorkTypeInfo
+                workTypeInfo
                 Spacer()
             }
+            .disabled(true)
             .padding(.horizontal)
         }
         .navigationBarTitle("근무지 등록")
         .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                backButton
+                BackButton { dismiss() }
             }
             
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -47,20 +48,8 @@ struct WorkSpaceCreateConfirmationView: View {
     }
 }
 
-private extension WorkSpaceCreateConfirmationView {
-    var backButton: some View {
-        Button(action: {
-            dismiss()
-        }, label: {
-            HStack(spacing: 5) {
-                Image(systemName: "chevron.backward")
-                Text("이전")
-            }
-            .foregroundColor(Color.fontBlack)
-        })
-    }
-    
-    var WorkTypeInfo: some View {
+private extension WorkspaceCreateConfirmationView {
+    var workTypeInfo: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("근무 패턴")
                 .font(.caption)
@@ -70,10 +59,10 @@ private extension WorkSpaceCreateConfirmationView {
                 ForEach(viewModel.scheduleData, id: \.self) { schedule in
                     ScheduleContainer(
                         repeatedSchedule: schedule.repeatedSchedule,
-                        startHour: schedule.startHour,
-                        startMinute: schedule.startMinute,
-                        endHour: schedule.endHour,
-                        endMinute: schedule.endMinute
+                        startHour: Int16(schedule.startHour),
+                        startMinute: Int16(schedule.startMinute),
+                        endHour: Int16(schedule.endHour),
+                        endMinute: Int16(schedule.endMinute)
                     )
                 }
             }

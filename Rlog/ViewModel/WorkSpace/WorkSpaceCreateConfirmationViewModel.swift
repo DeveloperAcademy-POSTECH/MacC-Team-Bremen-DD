@@ -8,7 +8,7 @@
 import SwiftUI
 
 @MainActor
-final class WorkSpaceCreateConfirmationViewModel: ObservableObject {
+final class WorkspaceCreateConfirmationViewModel: ObservableObject {
     @Binding var isActiveNavigation: Bool
     
     var workspaceData: WorkSpaceModel
@@ -31,7 +31,7 @@ final class WorkSpaceCreateConfirmationViewModel: ObservableObject {
     }
 }
 
-private extension WorkSpaceCreateConfirmationViewModel {
+private extension WorkspaceCreateConfirmationViewModel {
     func popToRoot() {
         self.isActiveNavigation = false
     }
@@ -77,10 +77,10 @@ private extension WorkSpaceCreateConfirmationViewModel {
                 CoreDataManager.shared.createSchedule(
                     of: workspace,
                     repeatDays: schedule.repeatedSchedule,
-                    startHour: Int16(schedule.startHour) ?? 0,
-                    startMinute: Int16(schedule.startMinute) ?? 0,
-                    endHour: Int16(schedule.endHour) ?? 0,
-                    endMinute: Int16(schedule.endMinute) ?? 0
+                    startHour: schedule.startHour,
+                    startMinute: schedule.startMinute,
+                    endHour: schedule.endHour,
+                    endMinute: schedule.endMinute
                 )
             )
         }

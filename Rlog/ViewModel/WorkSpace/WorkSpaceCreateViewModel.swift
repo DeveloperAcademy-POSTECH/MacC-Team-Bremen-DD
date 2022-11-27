@@ -9,7 +9,7 @@ import Combine
 import SwiftUI
 
 @MainActor
-final class WorkSpaceCreateViewModel: ObservableObject {
+final class WorkspaceCreateViewModel: ObservableObject {
     @Binding var isActiveNavigation: Bool
     init(isActiveNavigation: Binding<Bool>) {
         self._isActiveNavigation = isActiveNavigation
@@ -78,7 +78,7 @@ final class WorkSpaceCreateViewModel: ObservableObject {
     }
 }
 
-private extension WorkSpaceCreateViewModel {
+private extension WorkspaceCreateViewModel {
     
     func switchToNextStatus() {
         withAnimation(.easeIn) {
