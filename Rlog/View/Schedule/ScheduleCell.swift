@@ -17,7 +17,6 @@ struct ScheduleCell: View {
     var body: some View {
         scheduleInfo
             .transition(AnyTransition.opacity.animation(.easeInOut))
-            .onAppear { viewModel.onAppear() }
     }
 }
 
@@ -30,7 +29,7 @@ private extension ScheduleCell {
                     .font(.caption2)
                     .foregroundColor(Color.backgroundWhite)
                     .padding(EdgeInsets(top: 2, leading: 6, bottom: 2, trailing: 6))
-                    .background(viewModel.workType.color)
+                    .background(viewModel.data.hasDone ? Color.grayLight : viewModel.workType.color)
                     .cornerRadius(5)
                 
                 Spacer()
@@ -38,20 +37,20 @@ private extension ScheduleCell {
                 Text(viewModel.spentHour)
                     .font(.subheadline)
                     .fontWeight(.bold)
-                    .foregroundColor(Color.fontBlack)
+                    .foregroundColor(viewModel.data.hasDone ? Color.grayLight : Color.fontBlack)
             }
             
             HStack {
                 Text("\(viewModel.data.workspace.name)")
                     .font(.body)
                     .fontWeight(.bold)
-                    .foregroundColor(Color.fontBlack)
+                    .foregroundColor(viewModel.data.hasDone ? Color.grayLight : Color.fontBlack)
                 
                 Spacer()
                 
                 Text("\(viewModel.startTimeString) ~ \(viewModel.endTimeString)")
                     .font(.body)
-                    .foregroundColor(Color.fontBlack)
+                    .foregroundColor(viewModel.data.hasDone ? Color.grayLight : Color.fontBlack)
             }
             .padding(.vertical, 8)
             

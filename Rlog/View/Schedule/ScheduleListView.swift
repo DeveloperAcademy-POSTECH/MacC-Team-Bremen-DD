@@ -269,11 +269,9 @@ private extension ScheduleListView {
                             .font(Font.callout.bold())
                             .padding(.top, 32)
                             .padding(.bottom, 12)
-                        ForEach(workdaysOfFocusedDate.hasDone, id: \.self) { data in
-                            NavigationLink(destination: ScheduleUpdateView(workday: data)) {
-                                ScheduleCell(of: data) {
-                                    viewModel.onAppear()
-                                }
+                        ForEach(workdaysOfFocusedDate.hasDone) { data in
+                            ScheduleCell(of: data) {
+                                viewModel.onAppear()
                             }
                         }
                     }

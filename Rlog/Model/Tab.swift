@@ -28,7 +28,7 @@ enum Tab: String, CaseIterable {
     var view: some View {
         switch self {
         case .schedule: ScheduleListView()
-        case .workspace: WorkSpaceListView()
+        case .workspace: WorkspaceListView()
         case .monthlyCalculte: MonthlyCalculateListView()
         }
     }
