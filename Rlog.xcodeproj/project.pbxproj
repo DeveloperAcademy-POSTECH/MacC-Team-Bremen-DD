@@ -51,6 +51,7 @@
 		89CAA0742902771D00504BDE /* InputFormElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA0732902771D00504BDE /* InputFormElement.swift */; };
 		B936495A2921CA4500196E76 /* MonthlyCalculateDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93649592921CA4500196E76 /* MonthlyCalculateDetailView.swift */; };
 		B936495C2921CA6600196E76 /* MonthlyCalculateDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B936495B2921CA6600196E76 /* MonthlyCalculateDetailViewModel.swift */; };
+		B9901C0E29308D420089C8BC /* MonthlyCalculateResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9901C0D29308D420089C8BC /* MonthlyCalculateResult.swift */; };
 		C61880A32926056C00265644 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61880A22926056C00265644 /* ViewRouter.swift */; };
 		C62C338C28FFCEBD00469273 /* CustomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C338B28FFCEBD00469273 /* CustomButtonView.swift */; };
 		C63D4452291CDE86005D5AE6 /* ScheduleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63D4451291CDE86005D5AE6 /* ScheduleListView.swift */; };
@@ -129,6 +130,7 @@
 		89CAA0732902771D00504BDE /* InputFormElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFormElement.swift; sourceTree = "<group>"; };
 		B93649592921CA4500196E76 /* MonthlyCalculateDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalculateDetailView.swift; sourceTree = "<group>"; };
 		B936495B2921CA6600196E76 /* MonthlyCalculateDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalculateDetailViewModel.swift; sourceTree = "<group>"; };
+		B9901C0D29308D420089C8BC /* MonthlyCalculateResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalculateResult.swift; sourceTree = "<group>"; };
 		C61880A22926056C00265644 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
 		C62C338B28FFCEBD00469273 /* CustomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomButtonView.swift; path = Rlog/View/Components/CustomButtonView.swift; sourceTree = SOURCE_ROOT; };
 		C63D4451291CDE86005D5AE6 /* ScheduleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleListView.swift; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 				C64D97C828FE92D8004F80E7 /* Tab.swift */,
 				C69C13AF29139AB100D9B47F /* WorkDayType.swift */,
 				7A2F04B6291EA91E0091BA28 /* Weekday.swift */,
+				B9901C0D29308D420089C8BC /* MonthlyCalculateResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 				898A5EC22908050D00A6BEF7 /* ScheduleContainer.swift in Sources */,
 				2D1651932907D61800636D61 /* WorkspaceCreateConfirmationView.swift in Sources */,
 				89CAA0742902771D00504BDE /* InputFormElement.swift in Sources */,
+				B9901C0E29308D420089C8BC /* MonthlyCalculateResult.swift in Sources */,
 				75DE0162290271E600A77369 /* WorkSpaceCell.swift in Sources */,
 				B936495C2921CA6600196E76 /* MonthlyCalculateDetailViewModel.swift in Sources */,
 				2D66DCDC28FD8E9D00C90400 /* WorkspaceCreateViewModel.swift in Sources */,
