@@ -17,7 +17,6 @@ struct ScheduleCell: View {
     var body: some View {
         scheduleInfo
             .transition(AnyTransition.opacity.animation(.easeInOut))
-            .onAppear { viewModel.onAppear() }
     }
 }
 
