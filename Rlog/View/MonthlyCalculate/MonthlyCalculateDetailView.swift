@@ -35,7 +35,7 @@ struct MonthlyCalculateDetailView: View {
         .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                backButton
+                BackButton { dismiss() }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 shareButton
@@ -187,18 +187,6 @@ private extension MonthlyCalculateDetailView {
                 makeReasonCell()
             }
         }
-    }
-    
-    var backButton: some View {
-        Button(action: {
-            dismiss()
-        }, label: {
-            HStack(spacing: 5) {
-                Image(systemName: "chevron.backward")
-                Text("이전")
-            }
-            .foregroundColor(Color.fontBlack)
-        })
     }
     
     var shareButton: some View {
