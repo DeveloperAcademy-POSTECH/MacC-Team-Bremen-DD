@@ -258,13 +258,7 @@ private extension ScheduleListView {
                         .font(Font.callout.bold())
                         .padding(.bottom, 12)
                     ForEach(workdaysOfFocusedDate.hasNotDone) { data in
-                        NavigationLink(
-                            destination: ScheduleUpdateView(workday: data)
-                                .navigationTitle("근무 수정")
-                                .navigationBarBackButtonHidden(true)
-                                .navigationBarTitle (Text("미확정 일정"), displayMode: .inline),
-                            isActive: $isScheduleUpdateViewActive
-                        ) {
+                        NavigationLink(destination: ScheduleUpdateView(workday: data)) {
                             ScheduleCell(of: data) {
                                 viewModel.onAppear()
                             }
