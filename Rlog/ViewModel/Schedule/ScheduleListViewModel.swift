@@ -175,10 +175,29 @@ extension ScheduleListViewModel {
     }
     
     // 터치된 날짜의 월 데이터를 판단합니다.
-    func verifyCurrentMonth(_ date: Int) -> Bool {
+    func isCurrentMonth(_ date: Int) -> Bool {
         let components = calendar.dateComponents([.year, .month, .day], from: currentDate)
         if date == components.month { return true }
         return false
+    }
+    
+    // 확정이 안된 Workday 중, 확정하기 버튼이 활성화 되어있는 것만 true를 반환합니다.
+    func isPassedAndHasNotDone(_ date: CalendarModel) -> Bool {
+        let workdays = workdays.hasNotDone.filter { $0.date.yearInt == date.year && $0.date.monthInt == date.month && $0.date.dayInt == date.day }
+        for workday in workdays {
+            return isPassedWorkday(workday.endTime)
+        }
+        return false
+    }
+    
+    func isPassedWorkday(_ endTime: Date) -> Bool {
+        let order = NSCalendar.current.compare(Date(), to: endTime, toGranularity: .minute)
+        switch order {
+        case .orderedAscending:
+            return false
+        default:
+            return true
+        }
     }
     
     // ✅ Sample
