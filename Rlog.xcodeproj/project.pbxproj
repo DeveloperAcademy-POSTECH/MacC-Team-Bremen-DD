@@ -72,6 +72,9 @@
 		C695A00A291E17BD008FEF4E /* ScheduleEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C695A008291E17BD008FEF4E /* ScheduleEntity+CoreDataClass.swift */; };
 		C695A00B291E17BD008FEF4E /* ScheduleEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C695A009291E17BD008FEF4E /* ScheduleEntity+CoreDataProperties.swift */; };
 		C69C13B029139AB100D9B47F /* WorkDayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69C13AF29139AB100D9B47F /* WorkDayType.swift */; };
+		C6B601E02930B33800A05BCC /* MonthlyCalculateCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B601DF2930B33800A05BCC /* MonthlyCalculateCellView.swift */; };
+		C6B601E22930B36F00A05BCC /* WorkTypeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B601E12930B36F00A05BCC /* WorkTypeManager.swift */; };
+		C6B601E42930B3A100A05BCC /* MonthlyCalculateCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B601E32930B3A100A05BCC /* MonthlyCalculateCellViewModel.swift */; };
 		C6E8A457291CE5880018A2D1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D66DCA828FD4DF200C90400 /* Preview Assets.xcassets */; };
 		C6E8A458291CE58B0018A2D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D66DCA528FD4DF200C90400 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -146,6 +149,9 @@
 		C695A008291E17BD008FEF4E /* ScheduleEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C695A009291E17BD008FEF4E /* ScheduleEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C69C13AF29139AB100D9B47F /* WorkDayType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkDayType.swift; sourceTree = "<group>"; };
+		C6B601DF2930B33800A05BCC /* MonthlyCalculateCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalculateCellView.swift; sourceTree = "<group>"; };
+		C6B601E12930B36F00A05BCC /* WorkTypeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkTypeManager.swift; sourceTree = "<group>"; };
+		C6B601E32930B3A100A05BCC /* MonthlyCalculateCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalculateCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +249,7 @@
 			children = (
 				C6959F84291CE78E008FEF4E /* MonthlyCalculateListView.swift */,
 				B93649592921CA4500196E76 /* MonthlyCalculateDetailView.swift */,
+				C6B601DF2930B33800A05BCC /* MonthlyCalculateCellView.swift */,
 			);
 			path = MonthlyCalculate;
 			sourceTree = "<group>";
@@ -290,6 +297,7 @@
 			children = (
 				C63D4458291CE3B0005D5AE6 /* MonthlyCalculateListViewModel.swift */,
 				B936495B2921CA6600196E76 /* MonthlyCalculateDetailViewModel.swift */,
+				C6B601E32930B3A100A05BCC /* MonthlyCalculateCellViewModel.swift */,
 			);
 			path = MonthlyCalculate;
 			sourceTree = "<group>";
@@ -332,7 +340,7 @@
 			isa = PBXGroup;
 			children = (
 				894CB4F629277164008E4197 /* TimeManager.swift */,
-				894CB501292F4616008E4197 /* WorkTypeManager.swift */,
+				C6B601E12930B36F00A05BCC /* WorkTypeManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -482,9 +490,12 @@
 				2D66DCDA28FD8E8F00C90400 /* WorkspaceDetailViewModel.swift in Sources */,
 				2D5BA7C82900EE34003A6BC7 /* WorkspaceCreateScheduleListViewModel.swift in Sources */,
 				2D66DCDA28FD8E8F00C90400 /* WorkspaceDetailViewModel.swift in Sources */,
+				2D5BA7C82900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift in Sources */,
+				2D66DCDA28FD8E8F00C90400 /* WorkSpaceDetailViewModel.swift in Sources */,
+				C6B601E42930B3A100A05BCC /* MonthlyCalculateCellViewModel.swift in Sources */,
+				C6B601E22930B36F00A05BCC /* WorkTypeManager.swift in Sources */,
 				894CB4FD292CB448008E4197 /* ScheduleCellViewModel.swift in Sources */,
 				B936495A2921CA4500196E76 /* MonthlyCalculateDetailView.swift in Sources */,
-				894CB502292F4616008E4197 /* WorkTypeManager.swift in Sources */,
 				2D16518F2907D5CE00636D61 /* TitleSubView.swift in Sources */,
 				C695A00B291E17BD008FEF4E /* ScheduleEntity+CoreDataProperties.swift in Sources */,
 				894CB4FB292772F8008E4197 /* YearMonthStepperCalendar.swift in Sources */,
@@ -515,6 +526,8 @@
 				C64D97BC28FE9197004F80E7 /* TextField+.swift in Sources */,
 				894CB504293098C6008E4197 /* WorkspaceCreateView.swift in Sources */,
 				2D1651952907D63300636D61 /* WorkspaceCreateConfirmationViewModel.swift in Sources */,
+				2D1651952907D63300636D61 /* WorkSpaceCreateConfirmationViewModel.swift in Sources */,
+				C6B601E02930B33800A05BCC /* MonthlyCalculateCellView.swift in Sources */,
 				2D66DCE028FD8ECA00C90400 /* MainTabViewModel.swift in Sources */,
 				894CB50629309E20008E4197 /* BackButton.swift in Sources */,
 				894CB4F729277164008E4197 /* TimeManager.swift in Sources */,
