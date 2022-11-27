@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 @MainActor
-final class WorkSpaceDetailViewModel: ObservableObject {
+final class WorkspaceDetailViewModel: ObservableObject {
     var workspace: WorkspaceEntity
     
     @Published var name: String
@@ -69,7 +69,7 @@ final class WorkSpaceDetailViewModel: ObservableObject {
     }
 }
 
-private extension WorkSpaceDetailViewModel {
+private extension WorkspaceDetailViewModel {
     func updateWorkspace() async {
         CoreDataManager.shared.editWorkspace(
             workspace: workspace,
@@ -98,10 +98,10 @@ private extension WorkSpaceDetailViewModel {
                 CoreDataManager.shared.createSchedule(
                     of: workspace,
                     repeatDays: schedule.repeatedSchedule,
-                    startHour: Int16(schedule.startHour) ?? 12,
-                    startMinute: Int16(schedule.startMinute) ?? 0,
-                    endHour: Int16(schedule.endHour) ?? 14,
-                    endMinute: Int16(schedule.endMinute) ?? 0
+                    startHour: schedule.startHour,
+                    startMinute: schedule.startMinute,
+                    endHour: schedule.endHour,
+                    endMinute: schedule.endMinute
                 )
             )
         }

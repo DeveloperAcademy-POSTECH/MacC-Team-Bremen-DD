@@ -9,10 +9,10 @@ import SwiftUI
 
 struct ScheduleContainer: View {
     let repeatedSchedule: [String]
-    let startHour: String
-    let startMinute: String
-    let endHour: String
-    let endMinute: String
+    let startHour: Int16
+    let startMinute: Int16
+    let endHour: Int16
+    let endMinute: Int16
     
     var completion: (() -> Void)?
     
@@ -67,8 +67,8 @@ private extension ScheduleContainer {
     var workHourView: some View {
         HStack {
             // 시간이 n시 0분인 경우 두 자릿수인 00으로 표시
-            if startMinute.count == 1 {
-                Text("\(startHour):0\(startMinute)")
+            if startMinute < 30 {
+                Text("\(startHour):\(startMinute)0")
                     .font(.body)
                     .foregroundColor(Color.fontBlack)
             } else {
@@ -79,8 +79,8 @@ private extension ScheduleContainer {
             
             Text("-")
             
-            if endMinute.count == 1 {
-                Text("\(endHour):0\(endMinute)")
+            if endMinute < 30 {
+                Text("\(endHour):\(endMinute)0")
                     .font(.body)
                     .foregroundColor(Color.fontBlack)
             } else {
