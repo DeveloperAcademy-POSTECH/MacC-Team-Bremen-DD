@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 @MainActor
-final class WorkSpaceListViewModel: ObservableObject {
+final class WorkspaceListViewModel: ObservableObject {
     @Published var isShowingSheet = false
     @Published var workspaces: [WorkspaceEntity] = []
     
@@ -18,7 +18,7 @@ final class WorkSpaceListViewModel: ObservableObject {
     }
 }
 
-private extension WorkSpaceListViewModel {
+private extension WorkspaceListViewModel {
     func getAllWorkspaces() {
         let result = CoreDataManager.shared.getAllWorkspaces()
         workspaces = result
