@@ -21,10 +21,6 @@ final class ScheduleCellViewModel: ObservableObject{
     init(of data: WorkdayEntity, didTapConfirm: @escaping () -> Void) {
         self.data = data
         self.didTapConfirm = didTapConfirm
-        onAppear()
-    }
-    
-    func onAppear() {
         self.workType = workTypeManager.defineWorkType(workday: data)
         getSpentHour(data.endTime, data.startTime)
         getStartAndEndTimeAndMinute(data.startTime, data.endTime)
