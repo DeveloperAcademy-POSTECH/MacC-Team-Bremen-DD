@@ -66,18 +66,6 @@ private extension WorkspaceCreateCreatingScheduleView {
                 .foregroundColor(.grayMedium)
 
             VStack(spacing: 24) {
-                /* TODO: 하기 코드로 변경 필요
-                 BorderedPicker(
-                     date: $viewModel.startTime,
-                     isTapped: $viewModel.isStartTimePickerActive,
-                     type: .startTime
-                 )
-                 BorderedPicker(
-                     date: $viewModel.endTime,
-                     isTapped: $viewModel.isEndTimePickerActive,
-                     type: .endTime
-                 )
-                 */
                 BorderedPicker(
                     date: $viewModel.startTime,
                     type: .startTime
