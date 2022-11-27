@@ -175,18 +175,19 @@ extension ScheduleListViewModel {
     }
     
     // 터치된 날짜의 월 데이터를 판단합니다.
-    func verifyCurrentMonth(_ date: CalendarModel) -> Bool {
+    func verifyCurrentMonth(_ date: Int) -> Bool {
         let components = calendar.dateComponents([.year, .month, .day], from: currentDate)
-        if date.month == components.month {
-            let workdays = workdays.hasNotDone.filter { $0.date.yearInt == date.year && $0.date.monthInt == date.month && $0.date.dayInt == date.day }
-            for workday in workdays {
-                print(workday)
-                return verifyIsScheduleExpired(workday.endTime)
-            }
-            return false
-        } else {
-            return false
+        if date == components.month { return true }
+        return false
+    }
+    
+    // 확정이 안된 Workday 중, 확정하기 버튼이 활성화 되어있는 것만 true를 반환합니다.
+    func verifyWorkdayExpired(_ date: CalendarModel) -> Bool {
+        let workdays = workdays.hasNotDone.filter { $0.date.yearInt == date.year && $0.date.monthInt == date.month && $0.date.dayInt == date.day }
+        for workday in workdays {
+            return verifyIsScheduleExpired(workday.endTime)
         }
+        return false
     }
     
     func verifyIsScheduleExpired(_ endTime: Date) -> Bool {

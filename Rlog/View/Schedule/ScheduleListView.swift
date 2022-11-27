@@ -168,7 +168,7 @@ private extension ScheduleListView {
                             Text("\(currentWeek[index].day)")
                                 .font(.system(size: 16, weight: .medium))
                                 .foregroundColor(
-                                    viewModel.verifyCurrentMonth(currentWeek[index]) ? .grayDark : .gray
+                                    viewModel.verifyCurrentMonth(currentWeek[index].month) ? .grayDark : .gray
                                 )
                                 .padding(.bottom, 9)
                         }
@@ -179,7 +179,7 @@ private extension ScheduleListView {
                             Circle()
                                 .frame(width: 6, height: 6)
                                 .foregroundColor(
-                                    viewModel.verifyCurrentMonth(currentWeek[index]) ? .primary : .gray
+                                    viewModel.verifyWorkdayExpired(currentWeek[index]) ? .primary : .gray
                                 )
                         }
 
