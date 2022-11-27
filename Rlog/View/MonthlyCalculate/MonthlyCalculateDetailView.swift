@@ -9,10 +9,10 @@ import SwiftUI
 
 struct MonthlyCalculateDetailView: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject var viewModel = MonthlyCalculateDetailViewModel()
+    @StateObject var viewModel: MonthlyCalculateDetailViewModel
     
     init(monthlyCalculateResult: MonthlyCalculateResult) {
-        
+        _viewModel = StateObject(wrappedValue: MonthlyCalculateDetailViewModel(calculateResult: monthlyCalculateResult))
     }
     
     var body: some View {
@@ -47,11 +47,11 @@ struct MonthlyCalculateDetailView: View {
 private extension MonthlyCalculateDetailView {
     var header: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("GS25 포항공대점")
+            Text(viewModel.calculateResult.workspace.name)
                 .font(.title2)
                 .fontWeight(.bold)
                 .foregroundColor(Color.fontBlack)
-            Text("정산일까지 D-\(viewModel.calculateLeftDays())")
+            Text("정산일까지 D-\(viewModel.calculateResult.leftDays)")
                 .font(.caption2)
                 .foregroundColor(Color.pointRed)
         }
@@ -63,26 +63,26 @@ private extension MonthlyCalculateDetailView {
                 .font(.subheadline)
                 .fontWeight(.bold)
             
-            makeCalculationResult(title: "일한 시간", result: "\(32)시간")
+            makeCalculationResult(title: "일한 시간", result: "\(viewModel.calculateResult.workHours)시간")
                 .padding(.top, 4)
             
-            makeCalculationResult(title: "시급", result: "\(11000)원")
+            makeCalculationResult(title: "시급", result: "\(viewModel.calculateResult.workspace.hourlyWage)원")
                 .padding(.bottom, 4)
             
             HDivider()
             
-            makeCalculationResult(title: nil, result: "\(352000)원")
+            makeCalculationResult(title: nil, result: "\(viewModel.calculateResult.monthlySalaryWithoutTaxAndJuhyu)원")
                 .padding(.top, 4)
             
-            makeCalculationResult(title: "주휴수당 적용됨", result: "\(70400)원")
+            makeCalculationResult(title: "주휴수당 적용됨", result: "\(viewModel.calculateResult.juhyu)원")
             
-            makeCalculationResult(title: "세금 3.3% 적용", result: "\(13939)원")
+            makeCalculationResult(title: "세금 3.3% 적용", result: "\(viewModel.calculateResult.tax)원")
             
             HStack {
                 Text("총 급여")
                     .foregroundColor(Color.grayMedium)
                 Spacer()
-                Text("422,400원")
+                Text("\(viewModel.calculateResult.monthlySalary)")
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
             }
@@ -140,7 +140,7 @@ private extension MonthlyCalculateDetailView {
                 Text("")
             }
             ForEach(viewModel.calendarDays, id: \.self) { day in
-                calendarBodyCell(day)
+                MonthlyCalculateCellView(day: day, workdays: viewModel.filterWorkday(for: day))
             }
             .frame(width: 40, height: 40)
         }
@@ -160,6 +160,7 @@ private extension MonthlyCalculateDetailView {
             }
             Spacer()
         }
+        .padding(.top, 35)
         .padding(.horizontal, 24)
         .padding(.bottom)
     }
