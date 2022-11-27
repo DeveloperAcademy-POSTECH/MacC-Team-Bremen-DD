@@ -49,6 +49,7 @@
 		89CAA0742902771D00504BDE /* InputFormElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA0732902771D00504BDE /* InputFormElement.swift */; };
 		B936495A2921CA4500196E76 /* MonthlyCalculateDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93649592921CA4500196E76 /* MonthlyCalculateDetailView.swift */; };
 		B936495C2921CA6600196E76 /* MonthlyCalculateDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B936495B2921CA6600196E76 /* MonthlyCalculateDetailViewModel.swift */; };
+		C6145A692933627400BC29EE /* UINavigationController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6145A682933627400BC29EE /* UINavigationController+.swift */; };
 		C61880A32926056C00265644 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61880A22926056C00265644 /* ViewRouter.swift */; };
 		C62C338C28FFCEBD00469273 /* CustomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C338B28FFCEBD00469273 /* CustomButtonView.swift */; };
 		C63D4452291CDE86005D5AE6 /* ScheduleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63D4451291CDE86005D5AE6 /* ScheduleListView.swift */; };
@@ -125,6 +126,7 @@
 		89CAA0732902771D00504BDE /* InputFormElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFormElement.swift; sourceTree = "<group>"; };
 		B93649592921CA4500196E76 /* MonthlyCalculateDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalculateDetailView.swift; sourceTree = "<group>"; };
 		B936495B2921CA6600196E76 /* MonthlyCalculateDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalculateDetailViewModel.swift; sourceTree = "<group>"; };
+		C6145A682933627400BC29EE /* UINavigationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+.swift"; sourceTree = "<group>"; };
 		C61880A22926056C00265644 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
 		C62C338B28FFCEBD00469273 /* CustomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomButtonView.swift; path = Rlog/View/Components/CustomButtonView.swift; sourceTree = SOURCE_ROOT; };
 		C63D4451291CDE86005D5AE6 /* ScheduleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleListView.swift; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 				C64D97BF28FE91AB004F80E7 /* DateFormatter+.swift */,
 				7A29B291291D490D0028003A /* View+.swift */,
 				894CB4FE292F3DBA008E4197 /* Sequence+.swift */,
+				C6145A682933627400BC29EE /* UINavigationController+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				C695A006291E1748008FEF4E /* WorkdayEntity+CoreDataClass.swift in Sources */,
 				C695A007291E1748008FEF4E /* WorkdayEntity+CoreDataProperties.swift in Sources */,
 				C6959F85291CE78E008FEF4E /* MonthlyCalculateListView.swift in Sources */,
+				C6145A692933627400BC29EE /* UINavigationController+.swift in Sources */,
 				894CB4DF29221D41008E4197 /* SchedulePendingListViewModel.swift in Sources */,
 				7A29B296291D60410028003A /* ScheduleCell.swift in Sources */,
 				894CB4F92927727C008E4197 /* WorkspaceListPicker.swift in Sources */,
