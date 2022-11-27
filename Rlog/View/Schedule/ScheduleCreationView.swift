@@ -9,8 +9,12 @@ import SwiftUI
 
 struct ScheduleCreationView: View {
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var viewModel = ScheduleCreationViewModel()
+    @ObservedObject var viewModel: ScheduleCreationViewModel
     @State private var isCreationButtonTapped = false
+    
+    init(of selectedDate: Date) {
+        self.viewModel = ScheduleCreationViewModel(of: selectedDate)
+    }
     
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -26,14 +30,7 @@ struct ScheduleCreationView: View {
         .onAppear { viewModel.onAppear() }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: {
-                    dismiss()
-                }){
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.fontBlack)
-                    Text("이전")
-                        .foregroundColor(.fontBlack)
-                }
+                BackButton { dismiss() }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 creationButton
@@ -45,7 +42,7 @@ struct ScheduleCreationView: View {
 private extension ScheduleCreationView {
     var workspace: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("근무 날짜")
+            Text("근무지")
                 .font(.caption)
                 .foregroundColor(.grayMedium)
             WorkspaceListPicker(

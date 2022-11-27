@@ -12,7 +12,7 @@ struct MainTabView: View {
     @StateObject var viewRouter: ViewRouter
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             switch viewRouter.currentTab {
             case .schedule:
                 Tab.schedule.view

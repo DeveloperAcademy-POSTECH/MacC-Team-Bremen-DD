@@ -36,18 +36,22 @@ final class ScheduleListViewModel: ObservableObject {
     
     func didScrollToNextWeek() {
         getNextWeek()
+        getWorkdaysOfFocusDate()
     }
     
     func didScrollToPreviousWeek() {
         getPreviousWeek()
+        getWorkdaysOfFocusDate()
     }
     
     func didTapNextMonth() {
         getNextMonth()
+        getWorkdaysOfFocusDate()
     }
     
     func didTapPreviousMonth() {
         getPreviousMonth()
+        getWorkdaysOfFocusDate()
     }
     
     func didTapDate(_ date: CalendarModel) {

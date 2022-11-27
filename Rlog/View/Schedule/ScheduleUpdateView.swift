@@ -30,10 +30,14 @@ struct ScheduleUpdateView: View {
             .padding()
         }
         .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                backButton
+            }
             ToolbarItem(placement: .navigationBarTrailing) {
                 toolbarConfirmButton
             }
         }
+
     }
 }
 
@@ -110,5 +114,17 @@ private extension ScheduleUpdateView {
         } message: {
             Text("해당 근무를 삭제합니다.")
         }
+    }
+    
+    var backButton: some View {
+        Button(action: {
+            dismiss()
+        }, label: {
+            HStack(spacing: 5) {
+                Image(systemName: "chevron.backward")
+                Text("이전")
+            }
+            .foregroundColor(Color.fontBlack)
+        })
     }
 }

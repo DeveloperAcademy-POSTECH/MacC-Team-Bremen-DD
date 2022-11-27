@@ -23,6 +23,7 @@ enum BorderedPickerType {
 
 struct BorderedPicker: View {
     @Binding var date: Date
+    // TODO: @Binding var isTapped: Bool 으로 변경 필요
     @State private var isTapped = false
     let type: BorderedPickerType
     var timeData: String {
