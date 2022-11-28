@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SchedulePendingListView: View {
+struct ScheduleHasNotDoneListView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject private var viewModel = SchedulePendingListViewModel()
     
@@ -32,7 +32,7 @@ struct SchedulePendingListView: View {
     }
 }
 
-private extension SchedulePendingListView {
+private extension ScheduleHasNotDoneListView {
     var hasNotDoneList: some View {
         ForEach(0..<viewModel.sortedHasNotDoneWorkdays.count, id: \.self) { index in
             VStack(alignment: .leading, spacing: 0) {

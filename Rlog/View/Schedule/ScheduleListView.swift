@@ -10,7 +10,7 @@ import SwiftUI
 struct ScheduleListView: View {
     @StateObject var viewModel = ScheduleListViewModel()
     @State var selection = 1
-    @State private var isSchedulePendingListViewActive = false
+    @State private var isScheduleHasNotDoneListViewActive = false
     @State private var isScheduleCreationViewActive = false
     @State private var isScheduleUpdateViewActive = false
     
@@ -72,7 +72,7 @@ private extension ScheduleListView {
             )
             Spacer()
             // inbox.curved.badge로 조건 처리하면 됩니다.
-            Button{ isSchedulePendingListViewActive.toggle() } label: {
+            Button{ isScheduleHasNotDoneListViewActive.toggle() } label: {
                 Image("inbox.curved")
             }
             .foregroundColor(.grayMedium)
@@ -84,10 +84,10 @@ private extension ScheduleListView {
             .foregroundColor(.grayMedium)
             
             NavigationLink(
-                destination: SchedulePendingListView()
+                destination: ScheduleHasNotDoneListView()
                     .navigationBarBackButtonHidden(true)
                     .navigationBarTitle (Text("미확정 일정"), displayMode: .inline),
-                isActive: $isSchedulePendingListViewActive
+                isActive: $isScheduleHasNotDoneListViewActive
             ) { EmptyView() }
             NavigationLink(
                 destination: ScheduleCreationView(of: viewModel.currentDate)
