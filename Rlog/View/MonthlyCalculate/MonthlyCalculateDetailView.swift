@@ -76,15 +76,19 @@ private extension MonthlyCalculateDetailView {
             makeCalculationResult(title: nil, result: "\(viewModel.calculateResult.monthlySalaryWithoutTaxAndJuhyu)원")
                 .padding(.top, 4)
             
-            makeCalculationResult(title: "주휴수당 적용됨", result: "\(viewModel.calculateResult.juhyu)원")
+            if viewModel.calculateResult.workspace.hasJuhyu {
+                makeCalculationResult(title: "주휴수당 적용됨", result: "\(viewModel.calculateResult.juhyu)원")
+            }
             
-            makeCalculationResult(title: "세금 3.3% 적용", result: "\(viewModel.calculateResult.tax)원")
+            if viewModel.calculateResult.workspace.hasTax {
+                makeCalculationResult(title: "세금 3.3% 적용", result: "\(viewModel.calculateResult.tax)원")
+            }
             
             HStack {
                 Text("총 급여")
                     .foregroundColor(Color.grayMedium)
                 Spacer()
-                Text("\(viewModel.calculateResult.monthlySalary)")
+                Text("\(viewModel.calculateResult.monthlySalary)원")
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
             }
