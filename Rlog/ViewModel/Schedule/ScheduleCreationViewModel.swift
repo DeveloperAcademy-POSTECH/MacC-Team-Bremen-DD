@@ -8,6 +8,8 @@
 import Foundation
 
 final class ScheduleCreationViewModel: ObservableObject {
+    let alreadyExistWorkdays: [WorkdayEntity]
+    
     @Published var isFocused = false
     @Published var workspaces: [WorkspaceEntity] = []
     @Published var selectedWorkspaceString: String = "" {
@@ -22,21 +24,28 @@ final class ScheduleCreationViewModel: ObservableObject {
     @Published var endTime: Date = Date()
     @Published var memo: String = ""
     @Published var isAlertActive = false
+    @Published var isConflictAlertActive = false
+    
+    var selectedWorkspaceEntity: WorkspaceEntity? = nil
     
     init(of selectedDate: Date) {
         workday = selectedDate
         self.startTime = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: selectedDate) ?? Date()
         self.endTime = Calendar.current.date(bySettingHour: 18, minute: 0, second: 0, of: selectedDate) ?? Date()
+        self.alreadyExistWorkdays = CoreDataManager.shared.getWorkdaysBetween(start: selectedDate, target: Calendar.current.date(byAdding: DateComponents(day: 1), to: selectedDate) ?? selectedDate)
+        print(self.alreadyExistWorkdays)
     }
-    
-    var selectedWorkspaceEntity: WorkspaceEntity? = nil
     
     func onAppear() {
         getAllWorkspaces()
     }
     
     func didTapCreationButton() {
-        isAlertActive = true
+        if checkConflict() {
+            isAlertActive.toggle()
+        } else {
+            isConflictAlertActive.toggle()
+        }
     }
     
     func didTapConfirmationButton() {
@@ -75,5 +84,15 @@ private extension ScheduleCreationViewModel {
             memo: memo,
             schedule: nil
         )
+    }
+    
+    func checkConflict() -> Bool {
+        var isNotConflict = true
+        for workday in alreadyExistWorkdays {
+            if startTime > workday.endTime || endTime < workday.startTime {
+                isNotConflict = false
+            }
+        }
+        return isNotConflict
     }
 }
