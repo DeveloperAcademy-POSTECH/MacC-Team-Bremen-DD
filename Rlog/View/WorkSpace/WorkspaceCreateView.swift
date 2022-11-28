@@ -1,5 +1,5 @@
 //
-//  WorkSpaceCreateView.swift
+//  WorkspaceCreateView.swift
 //  Rlog
 //
 //  Created by 송시원 on 2022/10/17.
@@ -39,7 +39,7 @@ struct WorkspaceCreateView: View {
                     NavigationLink {
                         WorkspaceCreateScheduleListView(
                             isActiveNavigation: $viewModel.isActiveNavigation, workspaceModel: WorkSpaceModel(
-                                name: viewModel.workSpace,
+                                name: viewModel.workspace,
                                 paymentDay: viewModel.payday,
                                 hourlyWage: viewModel.hourlyWage,
                                 hasTax: viewModel.hasTax,
@@ -55,7 +55,7 @@ struct WorkspaceCreateView: View {
         }
         .onAppear {
           DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
-              self.checkoutInFocus = .workSpace
+              self.checkoutInFocus = .workspace
           }
         }
     }
@@ -108,8 +108,8 @@ private extension WorkspaceCreateView {
     }
     
     var workspace: some View {
-        InputFormElement(containerType: .workplace, text: $viewModel.workSpace)
-            .focused($checkoutInFocus, equals: .workSpace)
+        InputFormElement(containerType: .workplace, text: $viewModel.workspace)
+            .focused($checkoutInFocus, equals: .workspace)
             .onSubmit {
                 viewModel.didTapConfirmButton()
             }
@@ -123,7 +123,7 @@ private extension WorkspaceCreateView {
                 switch checkoutInFocus {
                 case .none:
                     break
-                case .some(.workSpace):
+                case .some(.workspace):
                     checkoutInFocus = .hourlyWage
                     break
                 case .some(.hourlyWage):

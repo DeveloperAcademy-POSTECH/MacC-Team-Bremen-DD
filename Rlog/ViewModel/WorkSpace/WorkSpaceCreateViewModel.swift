@@ -15,7 +15,7 @@ final class WorkspaceCreateViewModel: ObservableObject {
         self._isActiveNavigation = isActiveNavigation
     }
     
-    var currentState: WritingState = .workSpace
+    var currentState: WritingState = .workspace
     var isActivatedConfirmButton: Bool = false
     
     @Published var isHiddenToggleInputs: Bool = true
@@ -24,13 +24,13 @@ final class WorkspaceCreateViewModel: ObservableObject {
     var isHiddenConfirmButton: Bool = false
     var isHiddenToolBarItem: Bool = true
     
-    @Published var workSpace = "" {
+    @Published var workspace = "" {
         didSet {
-            if workSpace.isEmpty  {
+            if workspace.isEmpty  {
                 inActivateButton()
             } else {
-                if workSpace.count >= 21 { workSpace = oldValue }
-                if workSpace.count >= 20 {
+                if workspace.count >= 21 { workspace = oldValue }
+                if workspace.count >= 20 {
                     inActivateButton()
                 } else {
                     activateButton()
@@ -83,7 +83,7 @@ private extension WorkspaceCreateViewModel {
     func switchToNextStatus() {
         withAnimation(.easeIn) {
             switch currentState {
-            case .workSpace:
+            case .workspace:
                 isHiddenHourlyWage = false
                 currentState = .hourlyWage
             case .hourlyWage:
@@ -110,18 +110,18 @@ private extension WorkspaceCreateViewModel {
     
     func activateButton()  {
         switch currentState {
-        case .workSpace:
+        case .workspace:
             isActivatedConfirmButton = true
             return
         case .hourlyWage:
-            if workSpace.isEmpty {return}
+            if workspace.isEmpty {return}
             if hourlyWage.isEmpty {return}
             guard let hourlyWageInt = Int(hourlyWage) else { return }
             if hourlyWageInt >= 1000000 {return}
             isActivatedConfirmButton = true
             return
         case .payday:
-            if workSpace.isEmpty {return}
+            if workspace.isEmpty {return}
             if hourlyWage.isEmpty {return}
             guard let hourlyWageInt = Int(hourlyWage) else { return }
             if hourlyWageInt >= 1000000 {return}
@@ -131,7 +131,7 @@ private extension WorkspaceCreateViewModel {
             isActivatedConfirmButton = true
             return
         case .toggleOptions:
-            if workSpace.isEmpty {return}
+            if workspace.isEmpty {return}
             if hourlyWage.isEmpty {return}
             guard let hourlyWageInt = Int(hourlyWage) else { return }
             if hourlyWageInt >= 1000000 {return}
@@ -145,14 +145,14 @@ private extension WorkspaceCreateViewModel {
 }
 
 enum WritingState: Hashable {
-    case workSpace
+    case workspace
     case hourlyWage
     case payday
     case toggleOptions
     
     var title: String {
         switch self {
-        case .workSpace:
+        case .workspace:
             return "근무지를 입력해주세요."
         case .hourlyWage:
             return "시급을 입력해주세요."
