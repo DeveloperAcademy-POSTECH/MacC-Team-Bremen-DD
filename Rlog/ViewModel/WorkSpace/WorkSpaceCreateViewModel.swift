@@ -23,51 +23,11 @@ final class WorkspaceCreateViewModel: ObservableObject {
     @Published var isHiddenHourlyWage: Bool = true
     var isHiddenConfirmButton: Bool = false
     var isHiddenToolBarItem: Bool = true
+    var textLimited = ""
     
-    @Published var workspace = "" {
-        didSet {
-            if workspace.isEmpty  {
-                inActivateButton()
-            } else {
-                if workspace.count >= 21 { workspace = oldValue }
-                if workspace.count >= 20 {
-                    inActivateButton()
-                } else {
-                    activateButton()
-                }
-            }
-        }
-    }
-    @Published var hourlyWage = "" {
-        didSet {
-            if hourlyWage.isEmpty {
-                inActivateButton()
-            } else {
-                guard let textToInt = Int(hourlyWage) else { return hourlyWage = "" }
-                if textToInt  >= 10000000 { hourlyWage = oldValue }
-                if textToInt >= 1000000 {
-                    inActivateButton()
-                } else {
-                    activateButton()
-                }
-            }
-        }
-    }
-    @Published var payday = "" {
-        didSet {
-            if payday.isEmpty {
-                inActivateButton()
-            } else {
-                guard let textToInt = Int(payday) else { return payday = "" }
-                if textToInt > 289 {payday = oldValue}
-                if textToInt > 28 {
-                    inActivateButton()
-                } else {
-                    activateButton()
-                }
-            }
-        }
-    }
+    @Published var workspace = ""
+    @Published var hourlyWage = ""
+    @Published var payday = ""
     @Published var hasTax: Bool = false
     @Published var hasJuhyu: Bool = false
     
@@ -141,6 +101,46 @@ private extension WorkspaceCreateViewModel {
             isHiddenToolBarItem = false
             return
         }
+    }
+}
+
+extension WorkspaceCreateViewModel {
+    func checkErrorOfInputText(type: WritingState, _ text: String) {
+        switch type {
+        case .workspace:
+            if text.isEmpty { inActivateButton() }
+            else { activateButton() }
+            if text.count == 20 { textLimited = text }
+            if text.count >= 20 {
+                workspace = textLimited
+                inActivateButton()
+            }
+        case .hourlyWage:
+            if text.isEmpty { inActivateButton() }
+            guard let textToInt = Int(text) else { return self.hourlyWage = "" }
+            
+            if textToInt > 1000000 && text.count < 8 { textLimited = text }
+            if textToInt  >= 1000000 {
+                hourlyWage = textLimited
+                inActivateButton()
+            } else {
+                activateButton()
+            }
+        case .payday:
+            if text.isEmpty { inActivateButton() }
+            guard let textToInt = Int(text) else { return self.payday = "" }
+            
+            if textToInt > 28 && text.count <= 3 { textLimited = text }
+            if textToInt > 28 {
+                payday = textLimited
+                inActivateButton()
+            } else {
+                activateButton()
+            }
+        case .toggleOptions:
+            return
+        }
+
     }
 }
 

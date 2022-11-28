@@ -96,6 +96,9 @@ private extension WorkspaceCreateView {
         if !viewModel.isHiddenPayday {
             InputFormElement(containerType: .payday, text: $viewModel.payday)
                 .focused($checkoutInFocus, equals: .payday)
+                .onChange(of: viewModel.payday) { newValue in
+                    viewModel.checkErrorOfInputText(type: .payday, newValue)
+                }
         }
     }
     
@@ -104,14 +107,18 @@ private extension WorkspaceCreateView {
         if !viewModel.isHiddenHourlyWage {
             InputFormElement(containerType: .wage, text: $viewModel.hourlyWage)
                 .focused($checkoutInFocus, equals: .hourlyWage)
+                .onChange(of: viewModel.hourlyWage) { newValue in
+                    viewModel.checkErrorOfInputText(type: .hourlyWage, newValue)
+                }
         }
     }
     
     var workspace: some View {
         InputFormElement(containerType: .workplace, text: $viewModel.workspace)
             .focused($checkoutInFocus, equals: .workspace)
-            .onSubmit {
-                viewModel.didTapConfirmButton()
+            .onSubmit { viewModel.didTapConfirmButton() }
+            .onChange(of: viewModel.workspace) { newValue in
+                viewModel.checkErrorOfInputText(type: .workspace, newValue)
             }
     }
     

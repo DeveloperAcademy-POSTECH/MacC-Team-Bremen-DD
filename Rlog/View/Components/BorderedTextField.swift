@@ -88,7 +88,7 @@ private extension BorderedTextField {
     func isErrorOnTextField() -> Color {
         switch textFieldType {
         case .workplace:
-            if text.count == 20 { return .red }
+            if text.count > 20 { return .red }
         case .wage:
             if text == "" { return .primary }
             guard let textToInt = Int(text) else { return .red }
