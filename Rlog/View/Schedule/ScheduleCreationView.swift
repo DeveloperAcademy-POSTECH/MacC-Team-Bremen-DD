@@ -101,7 +101,7 @@ private extension ScheduleCreationView {
                 dismiss()
             }
         } message: {
-            Text("일정을 추가할까요?")
+            Text("근무를 추가합니다")
         }
     }
 }

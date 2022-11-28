@@ -7,7 +7,6 @@
 import SwiftUI
 
 // TODO: 완료 Button isActive 기능 추가하기
-// TODO: 근무지 삭제 Alert 구현
 // TODO: Schedule 추가하기
 struct WorkspaceDetailView: View {
     @Environment(\.dismiss) var dismiss
@@ -130,7 +129,7 @@ private extension WorkspaceDetailView {
             }
             .alert("근무지 삭제", isPresented: $viewModel.isAlertOpen) {
                 Button("취소", role: .cancel) {
-                    viewModel.isAlertOpen.toggle()
+                    viewModel.isAlertOpen = false
                 }
                 Button("삭제", role: .destructive) {
                     viewModel.didTapDeleteButton {
