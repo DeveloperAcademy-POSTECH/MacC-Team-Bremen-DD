@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class SchedulePendingListViewModel: ObservableObject {
+final class ScheduleHasNotDoneListViewModel: ObservableObject {
     @Published var sortedHasNotDoneWorkdays: [(Date, [WorkdayEntity])] = []
     @Published var hasNotDoneWorkdays: [WorkdayEntity] = [] {
         didSet {
@@ -20,7 +20,7 @@ final class SchedulePendingListViewModel: ObservableObject {
     }
 }
 
-private extension SchedulePendingListViewModel {
+private extension ScheduleHasNotDoneListViewModel {
     // 현재 날짜를 기준으로 과거의 근무 일정 중,
     // 확정하지 않은 일정만 필터링합니다.
     func getSortedHasNotDoneWorkdays() {
