@@ -256,7 +256,7 @@ private extension ScheduleListView {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("예정된 일정")
                         .font(Font.callout.bold())
-                        .padding(.bottom, 12)
+                    HDivider()
                     ForEach(workdaysOfFocusedDate.hasNotDone) { data in
                         NavigationLink(destination: ScheduleUpdateView(workday: data)) {
                             ScheduleCell(of: data) {
@@ -268,7 +268,7 @@ private extension ScheduleListView {
                         Text("확정된 일정")
                             .font(Font.callout.bold())
                             .padding(.top, 32)
-                            .padding(.bottom, 12)
+                        HDivider()
                         ForEach(workdaysOfFocusedDate.hasDone) { data in
                             ScheduleCell(of: data) {
                                 viewModel.onAppear()
