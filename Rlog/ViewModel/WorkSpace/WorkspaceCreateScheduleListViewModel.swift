@@ -17,12 +17,14 @@ final class WorkspaceCreateScheduleListViewModel: ObservableObject {
     }
     
     @Published var isShowingModal = false
-    @Published var isDisabledNextButton = false
+    @Published var isDisabledNextButton = true
     
     @Published var scheduleList: [ScheduleModel] = [] {
         didSet {
             if !scheduleList.isEmpty {
                 isDisabledNextButton = false
+            } else {
+                isDisabledNextButton = true
             }
         }
     }
