@@ -41,7 +41,6 @@
 		894CB4FB292772F8008E4197 /* YearMonthStepperCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4FA292772F8008E4197 /* YearMonthStepperCalendar.swift */; };
 		894CB4FD292CB448008E4197 /* ScheduleCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4FC292CB448008E4197 /* ScheduleCellViewModel.swift */; };
 		894CB4FF292F3DBA008E4197 /* Sequence+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4FE292F3DBA008E4197 /* Sequence+.swift */; };
-		894CB502292F4616008E4197 /* WorkTypeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB501292F4616008E4197 /* WorkTypeManager.swift */; };
 		894CB504293098C6008E4197 /* WorkspaceCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB503293098C6008E4197 /* WorkspaceCreateView.swift */; };
 		894CB50629309E20008E4197 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB50529309E20008E4197 /* BackButton.swift */; };
 		894CB5082930A1CC008E4197 /* WorkspaceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB5072930A1CC008E4197 /* WorkspaceDetailView.swift */; };
@@ -51,8 +50,8 @@
 		89CAA0742902771D00504BDE /* InputFormElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA0732902771D00504BDE /* InputFormElement.swift */; };
 		B936495A2921CA4500196E76 /* MonthlyCalculateDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93649592921CA4500196E76 /* MonthlyCalculateDetailView.swift */; };
 		B936495C2921CA6600196E76 /* MonthlyCalculateDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B936495B2921CA6600196E76 /* MonthlyCalculateDetailViewModel.swift */; };
-		C6145A692933627400BC29EE /* UINavigationController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6145A682933627400BC29EE /* UINavigationController+.swift */; };
 		B9901C0E29308D420089C8BC /* MonthlyCalculateResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9901C0D29308D420089C8BC /* MonthlyCalculateResult.swift */; };
+		C6145A692933627400BC29EE /* UINavigationController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6145A682933627400BC29EE /* UINavigationController+.swift */; };
 		C61880A32926056C00265644 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61880A22926056C00265644 /* ViewRouter.swift */; };
 		C62C338C28FFCEBD00469273 /* CustomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C338B28FFCEBD00469273 /* CustomButtonView.swift */; };
 		C63D4452291CDE86005D5AE6 /* ScheduleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63D4451291CDE86005D5AE6 /* ScheduleListView.swift */; };
@@ -120,7 +119,6 @@
 		894CB4FA292772F8008E4197 /* YearMonthStepperCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearMonthStepperCalendar.swift; sourceTree = "<group>"; };
 		894CB4FC292CB448008E4197 /* ScheduleCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCellViewModel.swift; sourceTree = "<group>"; };
 		894CB4FE292F3DBA008E4197 /* Sequence+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+.swift"; sourceTree = "<group>"; };
-		894CB501292F4616008E4197 /* WorkTypeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkTypeManager.swift; sourceTree = "<group>"; };
 		894CB503293098C6008E4197 /* WorkspaceCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceCreateView.swift; sourceTree = "<group>"; };
 		894CB50529309E20008E4197 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		894CB5072930A1CC008E4197 /* WorkspaceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceDetailView.swift; sourceTree = "<group>"; };
@@ -131,8 +129,8 @@
 		89CAA0732902771D00504BDE /* InputFormElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFormElement.swift; sourceTree = "<group>"; };
 		B93649592921CA4500196E76 /* MonthlyCalculateDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalculateDetailView.swift; sourceTree = "<group>"; };
 		B936495B2921CA6600196E76 /* MonthlyCalculateDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalculateDetailViewModel.swift; sourceTree = "<group>"; };
-		C6145A682933627400BC29EE /* UINavigationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+.swift"; sourceTree = "<group>"; };
 		B9901C0D29308D420089C8BC /* MonthlyCalculateResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalculateResult.swift; sourceTree = "<group>"; };
+		C6145A682933627400BC29EE /* UINavigationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+.swift"; sourceTree = "<group>"; };
 		C61880A22926056C00265644 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
 		C62C338B28FFCEBD00469273 /* CustomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomButtonView.swift; path = Rlog/View/Components/CustomButtonView.swift; sourceTree = SOURCE_ROOT; };
 		C63D4451291CDE86005D5AE6 /* ScheduleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleListView.swift; sourceTree = "<group>"; };
@@ -462,7 +460,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D66DCC528FD8D6D00C90400 /* WorkSpaceCreateView.swift in Sources */,
 				894CB4DD29221D19008E4197 /* SchedulePendingListView.swift in Sources */,
 				7A937596290035BD00D6D5BE /* FilledButton.swift in Sources */,
 				C67FC8452908FA8300DE3898 /* WorkspaceCellViewModel.swift in Sources */,
@@ -472,8 +469,7 @@
 				2D66DCC128FD8D5100C90400 /* WorkspaceListView.swift in Sources */,
 				2D1651912907D5F300636D61 /* WorkSpaceInfoSubView.swift in Sources */,
 				2D9CE86629003AA600C60F4C /* WorkspaceCreateScheduleListView.swift in Sources */,
-				C6B601D8292F643800A05BCC /* MonthlyCalculateCellViewModel.swift in Sources */,
-				2D9CE86629003AA600C60F4C /* WorkSpaceCreateScheduleListView.swift in Sources */,
+				2D9CE86629003AA600C60F4C /* WorkspaceCreateScheduleListView.swift in Sources */,
 				C695A006291E1748008FEF4E /* WorkdayEntity+CoreDataClass.swift in Sources */,
 				C695A007291E1748008FEF4E /* WorkdayEntity+CoreDataProperties.swift in Sources */,
 				C6959F85291CE78E008FEF4E /* MonthlyCalculateListView.swift in Sources */,
@@ -497,8 +493,8 @@
 				2D66DCDA28FD8E8F00C90400 /* WorkspaceDetailViewModel.swift in Sources */,
 				2D5BA7C82900EE34003A6BC7 /* WorkspaceCreateScheduleListViewModel.swift in Sources */,
 				2D66DCDA28FD8E8F00C90400 /* WorkspaceDetailViewModel.swift in Sources */,
-				2D5BA7C82900EE34003A6BC7 /* WorkSpaceCreateScheduleListViewModel.swift in Sources */,
-				2D66DCDA28FD8E8F00C90400 /* WorkSpaceDetailViewModel.swift in Sources */,
+				2D5BA7C82900EE34003A6BC7 /* WorkspaceCreateScheduleListViewModel.swift in Sources */,
+				2D66DCDA28FD8E8F00C90400 /* WorkspaceDetailViewModel.swift in Sources */,
 				C6B601E42930B3A100A05BCC /* MonthlyCalculateCellViewModel.swift in Sources */,
 				C6B601E22930B36F00A05BCC /* WorkTypeManager.swift in Sources */,
 				894CB4FD292CB448008E4197 /* ScheduleCellViewModel.swift in Sources */,
@@ -534,7 +530,7 @@
 				C64D97BC28FE9197004F80E7 /* TextField+.swift in Sources */,
 				894CB504293098C6008E4197 /* WorkspaceCreateView.swift in Sources */,
 				2D1651952907D63300636D61 /* WorkspaceCreateConfirmationViewModel.swift in Sources */,
-				2D1651952907D63300636D61 /* WorkSpaceCreateConfirmationViewModel.swift in Sources */,
+				2D1651952907D63300636D61 /* WorkspaceCreateConfirmationViewModel.swift in Sources */,
 				C6B601E02930B33800A05BCC /* MonthlyCalculateCellView.swift in Sources */,
 				2D66DCE028FD8ECA00C90400 /* MainTabViewModel.swift in Sources */,
 				894CB50629309E20008E4197 /* BackButton.swift in Sources */,
@@ -595,7 +591,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -649,7 +645,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
