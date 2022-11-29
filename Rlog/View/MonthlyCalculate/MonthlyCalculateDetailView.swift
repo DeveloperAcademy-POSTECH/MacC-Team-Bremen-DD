@@ -37,20 +37,24 @@ private extension MonthlyCalculateDetailView {
                     .padding(.top, 40)
                 resonList
                     .padding(EdgeInsets(top: 32, leading: 16, bottom: 16, trailing: 16))
-
+                
             }
         }
         .navigationBarTitle (Text("근무 정산"), displayMode: .inline)
         .navigationBarBackButtonHidden()
+        .background(
+            GeometryReader { proxy in
+                Color.clear.onAppear { viewModel.viewHeight = proxy.size.height }
+            }
+        )
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 BackButton { dismiss() }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                shareButton
+                shareButton(viewHeight: viewModel.viewHeight)
             }
         }
-
     }
     
     var header: some View {
@@ -205,9 +209,12 @@ private extension MonthlyCalculateDetailView {
         }
     }
     
-    var shareButton: some View {
+    func shareButton(viewHeight height: CGFloat) -> some View {
         Button(action: {
-            viewModel.didTapShareButton(calculateDetail)
+            viewModel.didTapShareButton(
+                view: calculateDetail,
+                height: height
+            )
         }, label: {
             Text("공유")
                 .foregroundColor(Color.primary)

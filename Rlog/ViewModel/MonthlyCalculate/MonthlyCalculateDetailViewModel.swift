@@ -12,6 +12,7 @@ final class MonthlyCalculateDetailViewModel: ObservableObject {
     let calculateResult: MonthlyCalculateResult
     @Published var isShareSheetActive = false
     @Published var items: [Any] = []
+    @Published var viewHeight: CGFloat = 0
     @Published var calendarDays: [Date] = []
     @Published var emptyCalendarDays: [Int] = []
     @Published var startDate = Date()
@@ -51,8 +52,8 @@ final class MonthlyCalculateDetailViewModel: ObservableObject {
         return result.1 < 30 ? "\(result.0)시간" : "\(result.0)시간 \(result.1)분"
     }
     
-    func didTapShareButton(_ view: some View) {
-        makeViewToImage(view) { [weak self] in
+    func didTapShareButton(view: some View, height: CGFloat) {
+        makeViewToImage(view: view, height: height) { [weak self] in
             guard let self = self else { return }
             self.shareViewImage()
         }
@@ -98,9 +99,8 @@ private extension MonthlyCalculateDetailViewModel {
         }
     }
     
-    func makeViewToImage(_ view: some View, completion: @escaping () -> Void) {
+    func makeViewToImage(view: some View, height: CGFloat, completion: @escaping () -> Void) {
         let width = UIScreen.main.bounds.width
-        let height = UIScreen.main.bounds.height
         let image = view.snapshot(width: width, height: height)
 
         items.removeAll()
