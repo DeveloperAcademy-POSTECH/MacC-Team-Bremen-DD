@@ -94,6 +94,9 @@ private extension WorkspaceCreateCreatingScheduleView {
             Text("완료")
                 .foregroundColor(viewModel.isActivatedConfirmButton ? .primary : .grayLight)
         }
+        .alert("선택된 요일에 스케줄이 있습니다", isPresented: $viewModel.isAlertActive) {
+            Button("확인", role: .cancel) { viewModel.isAlertActive = false }
+        }
     }
     
     private struct DayButtonSubView: View {

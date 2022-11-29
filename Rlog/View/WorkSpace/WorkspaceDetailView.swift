@@ -39,9 +39,7 @@ struct WorkspaceDetailView: View {
                 confirmButton
             }
         }
-        .sheet(isPresented: $viewModel.isCreateScheduleModalShow, onDismiss: {
-            print("1")
-        }) {
+        .sheet(isPresented: $viewModel.isCreateScheduleModalShow) {
             WorkspaceCreateCreatingScheduleView(isShowingModal: $viewModel.isCreateScheduleModalShow, scheduleList: $viewModel.shouldCreateSchedules)
         }
         .background(Color.backgroundWhite)
@@ -66,8 +64,8 @@ private extension WorkspaceDetailView {
                 .fontWeight(.bold)
                 .foregroundColor(Color.primary)
         }
-        .alert("스케줄 오류", isPresented: $viewModel.isAlertActive) {
-            Button("Cancel", role: .cancel) { viewModel.isAlertActive = false }
+        .alert("요일이 겹치는 근무패턴이 있습니다.", isPresented: $viewModel.isAlertActive) {
+            Button("확인", role: .cancel) { viewModel.isAlertActive = false }
         }
     }
     

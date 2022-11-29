@@ -147,9 +147,6 @@ private extension WorkspaceDetailViewModel {
     }
     
     func checkScheduleConflict(creatSchedules: [ScheduleModel], existSchedules: [ScheduleEntity]) -> Bool {
-        print(creatSchedules)
-        print(existSchedules)
-        
         for creatSchedule in creatSchedules {
             for existSchedule in existSchedules {
                 for day in existSchedule.repeatDays {
