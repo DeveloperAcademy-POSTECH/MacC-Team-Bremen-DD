@@ -36,15 +36,7 @@ struct WorkspaceDetailView: View {
                 BackButton { dismiss() }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    viewModel.didTapConfirmButton {
-                        dismiss()
-                    }
-                }){
-                    Text("완료")
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.primary)
-                }
+                confirmButton
             }
         }
         .sheet(isPresented: $viewModel.isCreateScheduleModalShow, onDismiss: {
@@ -64,6 +56,21 @@ struct WorkspaceDetailView: View {
 }
 
 private extension WorkspaceDetailView {
+    var confirmButton: some View {
+        Button(action: {
+            viewModel.didTapConfirmButton {
+                dismiss()
+            }
+        }){
+            Text("완료")
+                .fontWeight(.bold)
+                .foregroundColor(Color.primary)
+        }
+        .alert("스케줄 오류", isPresented: $viewModel.isAlertActive) {
+            Button("Cancel", role: .cancel) { viewModel.isAlertActive = false }
+        }
+    }
+    
     @ViewBuilder
     var paymentSystemToggle: some View {
         ForEach(WorkspaceDetailInfo.allCases, id: \.self) { tab in

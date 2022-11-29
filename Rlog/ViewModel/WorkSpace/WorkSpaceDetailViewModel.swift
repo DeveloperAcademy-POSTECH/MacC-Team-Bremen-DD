@@ -19,6 +19,7 @@ final class WorkspaceDetailViewModel: ObservableObject {
     @Published var hasJuhyu: Bool
     @Published var isAlertOpen = false
     @Published var isCreateScheduleModalShow = false
+    @Published var isAlertActive = false
     
     // TODO: - 리팩토링이 필요한 부분으로 생각됨
     // https://fdsa0106.atlassian.net/browse/BD-197?atlOrigin=eyJpIjoiZTBjMjczNGMzZmI1NDJmNmFmNmVlOTQ0NjhkOTI2ZGYiLCJwIjoiaiJ9
@@ -37,15 +38,19 @@ final class WorkspaceDetailViewModel: ObservableObject {
     }
     
     func didTapConfirmButton(completion: @escaping (() -> Void)) {
-        if checkScheduleConflict(creatSchedules: shouldCreateSchedules, existSchedules: schedules.filter {  })
-        Task {
-            await updateWorkspace()
-            await deleteSchedules()
-            let schedules = await createSchedules()
-            for schedule in schedules {
-                await createInitWorkdays(worspace: workspace, schedule: schedule)
+        if !checkScheduleConflict(creatSchedules: shouldCreateSchedules, existSchedules: schedules.filter { !deleteSchedules.contains($0) }) {
+            //            print("Hello")
+            Task {
+                await updateWorkspace()
+                await deleteSchedules()
+                let schedules = await createSchedules()
+                for schedule in schedules {
+                    await createInitWorkdays(worspace: workspace, schedule: schedule)
+                }
+                completion()
             }
-            completion()
+        } else {
+            isAlertActive.toggle()
         }
     }
     
@@ -142,10 +147,14 @@ private extension WorkspaceDetailViewModel {
     }
     
     func checkScheduleConflict(creatSchedules: [ScheduleModel], existSchedules: [ScheduleEntity]) -> Bool {
+        print(creatSchedules)
+        print(existSchedules)
+        
         for creatSchedule in creatSchedules {
             for existSchedule in existSchedules {
                 for day in existSchedule.repeatDays {
-                    if creatSchedule.repeatedSchedule. contains(day) {
+                    if creatSchedule.repeatedSchedule.contains(day) {
+                        print(day)
                         return true
                     }
                 }
