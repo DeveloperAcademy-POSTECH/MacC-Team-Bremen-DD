@@ -89,9 +89,12 @@ private extension ScheduleCreationViewModel {
     func checkConflict() -> Bool {
         var isNotConflict = true
         for workday in alreadyExistWorkdays {
-            if startTime > workday.endTime || endTime < workday.startTime {
-                isNotConflict = false
+            if workday.startTime >= endTime {
+                continue
+            } else if workday.endTime <= startTime {
+                continue
             }
+            isNotConflict = false
         }
         return isNotConflict
     }

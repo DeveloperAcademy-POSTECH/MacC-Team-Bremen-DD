@@ -22,7 +22,7 @@ struct MonthlyCalculateCellView: View {
                 Text("\(viewModel.day.dayInt)")
                     .foregroundColor(.white)
                     .frame(width: 40, height: 40)
-                    .background(viewModel.workType?.color)
+                    .background(viewModel.workType?.calenderColor)
                     .cornerRadius(20)
                 Text("\(viewModel.workHours)h")
                     .font(.caption2)
