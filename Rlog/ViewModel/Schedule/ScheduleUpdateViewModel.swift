@@ -16,21 +16,11 @@ final class ScheduleUpdateViewModel: ObservableObject {
     @Published var endTime: Date
     @Published var memo: String
     @Published var isAlertActive = false
-    @Published var isWorkdayPickerActive = false {
-        willSet {
-            if newValue == true {
-                withAnimation {
-                    self.isStartTimePickerActive = false
-                    self.isEndTimePickerActive = false
-                }
-            }
-        }
-    }
+    @Published var isWorkdayPickerActive = false
     @Published var isStartTimePickerActive = false {
         willSet {
             if newValue == true {
                 withAnimation {
-                    self.isWorkdayPickerActive = false
                     self.isEndTimePickerActive = false
                 }
             }
@@ -40,13 +30,11 @@ final class ScheduleUpdateViewModel: ObservableObject {
         willSet {
             if newValue == true {
                 withAnimation {
-                    self.isWorkdayPickerActive = false
                     self.isStartTimePickerActive = false
                 }
             }
         }
     }
-
     
     init(workday: WorkdayEntity) {
         self.workday = workday
