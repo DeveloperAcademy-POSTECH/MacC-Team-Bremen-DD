@@ -41,13 +41,13 @@
 - Github
 - Jira
 - Notion
-- Slack
+- Slack (Github action)
 
 <br/>
 
 ## 🗂️ 데이터 구조
 
-// 이미지 업로드 예정입니다
+<img src="https://user-images.githubusercontent.com/85481204/204137877-4b00faaa-5131-4a60-8855-372ed5324053.png" width="500px" alt="데이터  구조">
 
 <br/>
 
