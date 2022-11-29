@@ -93,7 +93,7 @@ extension CoreDataManager {
         startMinute: Int16,
         endHour: Int16,
         endMinute: Int16
-    ) {
+    ) -> ScheduleEntity {
         let schedule = ScheduleEntity(context: context)
         schedule.workspace = workspace
         schedule.repeatDays = repeatDays
@@ -102,6 +102,7 @@ extension CoreDataManager {
         schedule.endHour = endHour
         schedule.endMinute = endMinute
         save()
+        return schedule
     }
 
     func getSchedules(of workspace: WorkspaceEntity) -> [ScheduleEntity] {
@@ -161,6 +162,13 @@ extension CoreDataManager {
         workday.schedule = schedule
         save()
     }
+    
+    func getAllWorkdays(of workspace: WorkspaceEntity) -> [WorkdayEntity] {
+        let fetchRequest: NSFetchRequest<WorkdayEntity> = WorkdayEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "workspace.name == %@", workspace.name)
+        let result = try? context.fetch(fetchRequest)
+        return result ?? []
+    }
 
     func editWorkday(
         of workday: WorkdayEntity,
@@ -193,9 +201,10 @@ extension CoreDataManager {
     func getHasDoneWorkdays(of workspace: WorkspaceEntity, start: Date, target: Date) -> [WorkdayEntity] {
         let fetchRequest: NSFetchRequest<WorkdayEntity> = WorkdayEntity.fetchRequest()
         let workspacePredicate = NSPredicate(format: "workspace.name = %@", workspace.name)
+        let hasDonePredicate = NSPredicate(format: "hasDone == %@", NSNumber(booleanLiteral: true))
         let startPredicate = NSPredicate(format: "date >= %@", start as CVarArg)
         let targetPredicate = NSPredicate(format: "date < %@", target as CVarArg)
-        fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: [workspacePredicate, startPredicate, targetPredicate])
+        fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: [workspacePredicate, startPredicate, targetPredicate, hasDonePredicate])
         let result = try? context.fetch(fetchRequest)
         return result ?? []
     }

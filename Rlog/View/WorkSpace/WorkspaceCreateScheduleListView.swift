@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-struct WorkSpaceCreateScheduleListView: View {
-    @ObservedObject var viewModel: WorkSpaceCreateScheduleListViewModel
+struct WorkspaceCreateScheduleListView: View {
+    @ObservedObject var viewModel: WorkspaceCreateScheduleListViewModel
+    @Environment(\.dismiss) var dismiss
     init(isActiveNavigation: Binding<Bool>, workspaceModel: WorkSpaceModel) {
-        self.viewModel = WorkSpaceCreateScheduleListViewModel(isActiveNavigation: isActiveNavigation, workspaceModel: workspaceModel)
+        self.viewModel = WorkspaceCreateScheduleListViewModel(isActiveNavigation: isActiveNavigation, workspaceModel: workspaceModel)
     }
     
     var body: some View {
@@ -29,13 +30,17 @@ struct WorkSpaceCreateScheduleListView: View {
         }
         .padding(.horizontal)
         .navigationBarTitle("근무패턴 등록")
+        .navigationBarBackButtonHidden()
         .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                BackButton { dismiss() }
+            }
             ToolbarItem(placement: .navigationBarTrailing) {
                 toolbarNextButton
             }
         }
         .sheet(isPresented: $viewModel.isShowingModal) {
-            WorkSpaceCreateCreatingScheduleView(
+            WorkspaceCreateCreatingScheduleView(
             isShowingModal: $viewModel.isShowingModal, 
             scheduleList: $viewModel.scheduleList
             )
@@ -43,9 +48,9 @@ struct WorkSpaceCreateScheduleListView: View {
     }
 }
 
-private extension WorkSpaceCreateScheduleListView {
+private extension WorkspaceCreateScheduleListView {    
     var toolbarNextButton: some View {
-        NavigationLink(destination:  WorkSpaceCreateConfirmationView(
+        NavigationLink(destination:  WorkspaceCreateConfirmationView(
             isActiveNavigation: $viewModel.isActiveNavigation,
             workspaceData: viewModel.workspaceModel,
             scheduleData: viewModel.scheduleList)
@@ -84,9 +89,9 @@ private extension WorkSpaceCreateScheduleListView {
                     }
                     Spacer()
                     HStack(spacing : 0) {
-                        Text(tappedSchedule.startMinute.count == 1 ? "\(tappedSchedule.startHour):0\(tappedSchedule.startMinute)" : "\(tappedSchedule.startHour):\(tappedSchedule.startMinute)")
+                        Text(tappedSchedule.startMinute < 30 ? "\(tappedSchedule.startHour):0\(tappedSchedule.startMinute)" : "\(tappedSchedule.startHour):\(tappedSchedule.startMinute)")
                         Text(" - ")
-                        Text(tappedSchedule.endMinute.count == 1 ? "\(tappedSchedule.endHour):0\(tappedSchedule.endMinute)" : "\(tappedSchedule.endHour):\(tappedSchedule.endMinute)")
+                        Text(tappedSchedule.endMinute < 30 ? "\(tappedSchedule.endHour):0\(tappedSchedule.endMinute)" : "\(tappedSchedule.endHour):\(tappedSchedule.endMinute)")
                     }
                     Button {
                         viewModel.didTapDeleteButton(idx: tappedScheduleID)

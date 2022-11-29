@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @ObservedObject private var viewModel = MainTabViewModel()
     @StateObject var viewRouter: ViewRouter
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             switch viewRouter.currentTab {
             case .schedule:
                 Tab.schedule.view
@@ -23,6 +24,9 @@ struct MainTabView: View {
             tabBarView
         }
         .ignoresSafeArea(.keyboard)
+        .onAppear {
+            viewModel.onAppear()
+        }
     }
 }
 

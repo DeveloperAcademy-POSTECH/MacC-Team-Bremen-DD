@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct WorkSpaceCreateCreatingScheduleView: View {
-    @ObservedObject private var viewModel:  WorkSpaceCreateCreatingScheduleViewModel
+struct WorkspaceCreateCreatingScheduleView: View {
+    @ObservedObject private var viewModel:  WorkspaceCreateCreatingScheduleViewModel
     
     init(isShowingModal: Binding<Bool>, scheduleList: Binding<[ScheduleModel]>) {
-        self.viewModel = WorkSpaceCreateCreatingScheduleViewModel(isShowingModal: isShowingModal, scheduleList: scheduleList)
+        self.viewModel = WorkspaceCreateCreatingScheduleViewModel(isShowingModal: isShowingModal, scheduleList: scheduleList)
     }
     
     var body: some View {
@@ -36,25 +36,7 @@ struct WorkSpaceCreateCreatingScheduleView: View {
     }
 }
 
-private extension WorkSpaceCreateCreatingScheduleView {
-    // 툴바 버튼들
-    var toolbarCancelButton: some View {
-        Button{
-            viewModel.isShowingModal = false
-        } label: {
-            Text("취소")
-                .foregroundColor(.grayLight)
-        }
-    }
-    var toolbarConfirmButton: some View {
-        Button{
-            viewModel.didTapConfirmButton()
-        } label: {
-            Text("완료")
-
-                .foregroundColor(viewModel.isActivatedConfirmButton ? .primary : .grayLight)
-        }
-    }
+private extension WorkspaceCreateCreatingScheduleView {
     var workDayPicker: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("근무 요일")
@@ -83,22 +65,34 @@ private extension WorkSpaceCreateCreatingScheduleView {
                 .font(.caption)
                 .foregroundColor(.grayMedium)
 
-            HStack(spacing: 4) {
-                BorderedTextField(textFieldType: .time, text: $viewModel.startHour)
-                Text(":")
-                BorderedTextField(textFieldType: .time, text: $viewModel.startMinute)
-
-                Text("-")
-                    .padding(.horizontal, 10)
-                BorderedTextField(textFieldType: .time, text: $viewModel.endHour)
-                Text(":")
-                BorderedTextField(textFieldType: .time, text: $viewModel.endMinute)
+            VStack(spacing: 24) {
+                BorderedPicker(
+                    date: $viewModel.startTime,
+                    type: .startTime
+                )
+                BorderedPicker(
+                    date: $viewModel.endTime,
+                    type: .endTime
+                )
             }
-            .foregroundColor(.fontBlack)
-
-            Text("")
-                .font(.caption)
-                .foregroundColor(.red)
+        }
+    }
+    
+    // 툴바 버튼들
+    var toolbarCancelButton: some View {
+        Button{
+            viewModel.isShowingModal = false
+        } label: {
+            Text("취소")
+                .foregroundColor(.grayLight)
+        }
+    }
+    var toolbarConfirmButton: some View {
+        Button{
+            viewModel.didTapConfirmButton()
+        } label: {
+            Text("완료")
+                .foregroundColor(viewModel.isActivatedConfirmButton ? .primary : .grayLight)
         }
     }
     

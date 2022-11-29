@@ -8,7 +8,7 @@
 import SwiftUI
 
 @MainActor
-final class WorkSpaceCreateConfirmationViewModel: ObservableObject {
+final class WorkspaceCreateConfirmationViewModel: ObservableObject {
     @Binding var isActiveNavigation: Bool
     
     var workspaceData: WorkSpaceModel
@@ -31,7 +31,7 @@ final class WorkSpaceCreateConfirmationViewModel: ObservableObject {
     }
 }
 
-private extension WorkSpaceCreateConfirmationViewModel {
+private extension WorkspaceCreateConfirmationViewModel {
     func popToRoot() {
         self.isActiveNavigation = false
     }
@@ -53,7 +53,10 @@ private extension WorkSpaceCreateConfirmationViewModel {
     func createWorkspaceAndSchedule() async {
         Task {
             let workspace = await createWorkSpace()
-            await createSchedules(workspace: workspace)
+            let schedules = await createSchedules(workspace: workspace)
+            for schedule in schedules {
+                await createInitWorkdays(workspace: workspace, schedule: schedule)
+            }
         }
     }
     
@@ -67,16 +70,47 @@ private extension WorkSpaceCreateConfirmationViewModel {
         )
     }
     
-    func createSchedules(workspace: WorkspaceEntity) async {
+    func createSchedules(workspace: WorkspaceEntity) async -> [ScheduleEntity] {
+        var schedules: [ScheduleEntity] = []
         for schedule in scheduleData  {
-            CoreDataManager.shared.createSchedule(
-                of: workspace,
-                repeatDays: schedule.repeatedSchedule,
-                startHour: Int16(schedule.startHour) ?? 0,
-                startMinute: Int16(schedule.startMinute) ?? 0,
-                endHour: Int16(schedule.endHour) ?? 0,
-                endMinute: Int16(schedule.endMinute) ?? 0
+            schedules.append(
+                CoreDataManager.shared.createSchedule(
+                    of: workspace,
+                    repeatDays: schedule.repeatedSchedule,
+                    startHour: schedule.startHour,
+                    startMinute: schedule.startMinute,
+                    endHour: schedule.endHour,
+                    endMinute: schedule.endMinute
+                )
             )
+        }
+        return schedules
+    }
+    
+    func createInitWorkdays(workspace: WorkspaceEntity, schedule: ScheduleEntity) async {
+        var range = Date()
+        guard let after5Month = Calendar.current.date(byAdding: DateComponents(month: 5), to: range) else { return }
+        
+        while range < after5Month {
+            if schedule.repeatDays.contains(range.fetchDayOfWeek(date: range)) {
+                guard let startTime = Calendar.current.date(bySettingHour: Int(schedule.startHour), minute: Int(schedule.startMinute), second: 0, of: range),
+                      let endTime = Calendar.current.date(bySettingHour: Int(schedule.endHour), minute: Int(schedule.endMinute), second: 0, of: range),
+                      let date = range.onlyDate else { return }
+                
+                CoreDataManager.shared.createWorkday(
+                    of: workspace,
+                    hourlyWage: workspace.hourlyWage,
+                    hasDone: false,
+                    date: date,
+                    startTime: startTime,
+                    endTime: endTime,
+                    memo: nil,
+                    schedule: schedule
+                )
+            }
+            
+            guard let next = Calendar.current.date(byAdding: DateComponents(day: 1), to: range) else { return }
+            range = next
         }
     }
 }

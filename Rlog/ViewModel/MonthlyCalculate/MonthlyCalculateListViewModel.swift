@@ -9,17 +9,49 @@ import SwiftUI
 
 @MainActor
 final class MonthlyCalculateListViewModel: ObservableObject {
-    @Published var date = Date()
-    @Published var workspaces: [WorkspaceEntity] = []
+    let timeManager = TimeManager()
+    let currentDate = Date()
+    let workspaces: [WorkspaceEntity]
     
-    func onAppear() {
-        getAllWorkspaces()
+    @Published var switchedDate = Date()
+    @Published var monthlyCalculateResults: [MonthlyCalculateResult] = []
+    
+    var monthlySalaryTotal: Int {
+        var total = 0
+        for result in monthlyCalculateResults {
+            total += result.monthlySalary
+        }
+        return total
+    }
+    
+    init() {
+        let workspaces = CoreDataManager.shared.getAllWorkspaces()
+        self.workspaces = workspaces
+        for workspace in workspaces {
+            monthlyCalculateResults.append(MonthlyCalculateResult(workspace: workspace, date: switchedDate))
+        }
+    }
+    
+    func didTapPreviousMonth() {
+        switchedDate = timeManager.decreaseOneMonth(switchedDate)
+        updateDate()
+    }
+    
+    func didTapNextMonth() {
+        switchedDate = timeManager.increaseOneMonth(switchedDate)
+        updateDate()
+    }
+    
+    func fetchIsCurrentMonth() -> Bool {
+        return Calendar.current.component(.month, from: currentDate) == Calendar.current.component(.month, from: switchedDate)
     }
 }
 
 private extension MonthlyCalculateListViewModel {
-    func getAllWorkspaces() {
-        let result = CoreDataManager.shared.getAllWorkspaces()
-        workspaces = result
+    func updateDate() {
+        monthlyCalculateResults = []
+        for workspace in workspaces {
+            monthlyCalculateResults.append(MonthlyCalculateResult(workspace: workspace, date: switchedDate))
+        }
     }
 }

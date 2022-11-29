@@ -9,24 +9,33 @@ import SwiftUI
 
 struct MonthlyCalculateDetailView: View {
     @Environment(\.dismiss) var dismiss
+    @StateObject var viewModel: MonthlyCalculateDetailViewModel
+    
+    init(monthlyCalculateResult: MonthlyCalculateResult) {
+        _viewModel = StateObject(wrappedValue: MonthlyCalculateDetailViewModel(calculateResult: monthlyCalculateResult))
+    }
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 header
-                    .padding(.top, 18)
+                    .padding(.top, 24)
+                    .padding(.horizontal)
                 closing
-                    .padding(.top, 39)
+                    .padding(.top, 32)
+                    .padding(.horizontal)
+                calendarView
+                    .padding(.top, 40)
                 resonList
-                    .padding(.top)
+                    .padding(EdgeInsets(top: 32, leading: 16, bottom: 16, trailing: 16))
+
             }
-            .padding(.horizontal)
         }
         .navigationBarTitle (Text("근무 정산"), displayMode: .inline)
         .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                backButton
+                BackButton { dismiss() }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 shareButton
@@ -37,15 +46,12 @@ struct MonthlyCalculateDetailView: View {
 
 private extension MonthlyCalculateDetailView {
     var header: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text("GS25 포항공대점")
+        VStack(alignment: .leading, spacing: 8) {
+            Text(viewModel.calculateResult.workspace.name)
                 .font(.title2)
                 .fontWeight(.bold)
                 .foregroundColor(Color.fontBlack)
-            Text("2022년 10월 25일 ~ 2022년 11월 24일")
-                .font(.subheadline)
-                .foregroundColor(Color.fontBlack)
-            Text("정산일까지 D-12")
+            Text("정산일까지 D-\(viewModel.calculateResult.leftDays)")
                 .font(.caption2)
                 .foregroundColor(Color.pointRed)
         }
@@ -57,30 +63,117 @@ private extension MonthlyCalculateDetailView {
                 .font(.subheadline)
                 .fontWeight(.bold)
             
-            makeCalculationResult(title: "일한 시간", result: "\(32)시간")
+            makeCalculationResult(title: "일한 시간", result: "\(viewModel.calculateResult.workHours)시간")
                 .padding(.top, 4)
             
-            makeCalculationResult(title: "시급", result: "\(11000)원")
+            makeCalculationResult(title: "시급", result: "\(viewModel.calculateResult.workspace.hourlyWage)원")
                 .padding(.bottom, 4)
             
             HDivider()
             
-            makeCalculationResult(title: nil, result: "\(352000)원")
+            makeCalculationResult(title: nil, result: "\(viewModel.calculateResult.monthlySalaryWithoutTaxAndJuhyu)원")
                 .padding(.top, 4)
             
-            makeCalculationResult(title: "주휴수당 적용됨", result: "\(70400)원")
+            makeCalculationResult(title: "주휴수당 적용됨", result: "\(viewModel.calculateResult.juhyu)원")
             
-            makeCalculationResult(title: "세금 3.3% 적용", result: "\(13939)원")
+            makeCalculationResult(title: "세금 3.3% 적용", result: "\(viewModel.calculateResult.tax)원")
             
             HStack {
                 Text("총 급여")
                     .foregroundColor(Color.grayMedium)
                 Spacer()
-                Text("422,400원")
+                Text("\(viewModel.calculateResult.monthlySalary)")
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
             }
             .padding(.top)
+        }
+    }
+
+    var calendarView: some View {
+        VStack(spacing: 0) {
+            calendarTitle
+            VStack(spacing: 0) {
+                calendarHeader
+                calendarBody
+                Spacer()
+                calendarFooter
+            }
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .background(Color.backgroundCard)
+            .cornerRadius(10)
+            .padding(2)
+            .background(Color.backgroundStroke)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+        }
+    }
+
+    var calendarTitle: some View {
+        HStack(spacing: 16) {
+            Text("근무표")
+                .font(.system(size: 15, weight: .bold))
+            Text("\(viewModel.startDate.fetchMonthDay()) ~ \(viewModel.target.previousDate.fetchMonthDay())")
+                .font(.subheadline)
+                .foregroundColor(Color.fontBlack)
+            Spacer()
+        }
+        .padding(.horizontal, 16)
+        .padding(.bottom, 8)
+    }
+
+    var calendarHeader: some View {
+        HStack {
+            ForEach(Weekday.allCases, id: \.self) { weekday in
+                Text(weekday.rawValue)
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundColor(.grayLight)
+            }
+            .frame(minWidth: 0, maxWidth: .infinity, idealHeight: 18)
+        }
+        .padding(.top, 16)
+        .padding(.horizontal, 20)
+    }
+
+    var calendarBody: some View {
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 20) {
+            ForEach(viewModel.emptyCalendarDays, id:\.self) { day in
+                Text("")
+            }
+            ForEach(viewModel.calendarDays, id: \.self) { day in
+                MonthlyCalculateCellView(day: day, workdays: viewModel.filterWorkday(for: day))
+            }
+            .frame(width: 40, height: 40)
+        }
+        .frame(minWidth: 0, maxWidth: .infinity)
+        .padding(.top, 5)
+        .padding(.horizontal, 16)
+    }
+
+    func calendarBodyCell(_ day: Date) -> some View {
+        Text("\(day.dayInt)")
+    }
+
+    var calendarFooter: some View {
+        HStack(spacing: 10) {
+            ForEach(WorkDayType.allCases, id:\.self) { workdayType in
+                calendarFooterCell(workdayType)
+            }
+            Spacer()
+        }
+        .padding(.top, 35)
+        .padding(.horizontal, 24)
+        .padding(.bottom)
+    }
+
+    @ViewBuilder
+    func calendarFooterCell(_ type: WorkDayType) -> some View {
+        HStack(spacing: 4) {
+            Circle()
+                .foregroundColor(type.color)
+                .frame(width: 8, height: 8)
+            Text(type.fullName)
+                .font(.caption2)
+                .foregroundColor(.grayMedium)
         }
     }
     
@@ -94,18 +187,6 @@ private extension MonthlyCalculateDetailView {
                 makeReasonCell()
             }
         }
-    }
-    
-    var backButton: some View {
-        Button(action: {
-            dismiss()
-        }, label: {
-            HStack(spacing: 5) {
-                Image(systemName: "chevron.backward")
-                Text("이전")
-            }
-            .foregroundColor(Color.fontBlack)
-        })
     }
     
     var shareButton: some View {

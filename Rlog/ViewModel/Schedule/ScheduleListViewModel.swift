@@ -11,8 +11,8 @@ final class ScheduleListViewModel: ObservableObject {
     let calendar = Calendar.current
     let timeManager = TimeManager()
     @Published var workspaces: [WorkspaceEntity] = []
-    @Published var workdays: (upcoming: [WorkdayEntity], expired: [WorkdayEntity]) = ([], [])
-    @Published var schedulesOfFocusDate: (upcoming: [WorkdayEntity], expired: [WorkdayEntity]) = ([], [])
+    @Published var workdays: (hasNotDone: [WorkdayEntity], hasDone: [WorkdayEntity]) = ([], [])
+    @Published var workdaysOfFocusedDate: (hasNotDone: [WorkdayEntity], hasDone: [WorkdayEntity]) = ([], [])
     @Published var nextDate = Calendar.current.date(byAdding: .weekOfMonth, value: 1, to: Date()) ?? Date()
     @Published var previousDate = Calendar.current.date(byAdding: .weekOfMonth, value: -1, to: Date()) ?? Date()
     @Published var currentDate = Date() {
@@ -31,28 +31,32 @@ final class ScheduleListViewModel: ObservableObject {
         // 생성된 근무지 여부를 확인합니다. 생성된 근무지가 없다면 예외처리 화면을 표시합니다.
         getAllWorkspaces()
         getWorkdaysOfFiveMonths()
-        getSchedulesOfFocusDate()
+        getWorkdaysOfFocusDate()
     }
     
     func didScrollToNextWeek() {
         getNextWeek()
+        getWorkdaysOfFocusDate()
     }
     
     func didScrollToPreviousWeek() {
         getPreviousWeek()
+        getWorkdaysOfFocusDate()
     }
     
     func didTapNextMonth() {
         getNextMonth()
+        getWorkdaysOfFocusDate()
     }
     
     func didTapPreviousMonth() {
         getPreviousMonth()
+        getWorkdaysOfFocusDate()
     }
     
     func didTapDate(_ date: CalendarModel) {
         changeFocusDate(date)
-        getSchedulesOfFocusDate()
+        getWorkdaysOfFocusDate()
     }
 }
 
@@ -60,10 +64,7 @@ final class ScheduleListViewModel: ObservableObject {
 private extension ScheduleListViewModel {
     func getAllWorkspaces() {
         let result = CoreDataManager.shared.getAllWorkspaces()
-//        DispatchQueue.main.async { [weak self] in
-//            guard let self = self else { return }
-            self.workspaces = result
-//        }
+        self.workspaces = result
     }
     
     // 일주일 뒤의 날짜를 반환합니다.
@@ -174,76 +175,90 @@ extension ScheduleListViewModel {
     }
     
     // 터치된 날짜의 월 데이터를 판단합니다.
-    func verifyCurrentMonth(_ date: Int) -> Bool {
+    func isCurrentMonth(_ date: Int) -> Bool {
         let components = calendar.dateComponents([.year, .month, .day], from: currentDate)
         if date == components.month { return true }
         return false
     }
     
-    // Sample
+    // 확정이 안된 Workday 중, 확정하기 버튼이 활성화 되어있는 것만 true를 반환합니다.
+    func isPassedAndHasNotDone(_ date: CalendarModel) -> Bool {
+        let workdays = workdays.hasNotDone.filter { $0.date.yearInt == date.year && $0.date.monthInt == date.month && $0.date.dayInt == date.day }
+        for workday in workdays {
+            return isPassedWorkday(workday.endTime)
+        }
+        return false
+    }
+    
+    func isPassedWorkday(_ endTime: Date) -> Bool {
+        let order = NSCalendar.current.compare(Date(), to: endTime, toGranularity: .minute)
+        switch order {
+        case .orderedAscending:
+            return false
+        default:
+            return true
+        }
+    }
+    
+    // ✅ Sample
+    // 임시로 현재 날짜의 이전 2개월, 이후 3개월의 일정을 불러옵니다.
     func getWorkdaysOfFiveMonths() {
-        var upcomingWorkdays: [WorkdayEntity] = []
-        var expiredWorkdays: [WorkdayEntity] = []
-        let workdays = CoreDataManager.shared.getWorkdaysBetween(
-            start: Calendar.current.date(byAdding: .month, value: -2, to: Date())!,
-            target: Calendar.current.date(byAdding: .month, value: 3, to: Date())!)
+        var hasDoneWorkdays: [WorkdayEntity] = []
+        var hasNotDoneWorkdays: [WorkdayEntity] = []
         
+        let workdays = CoreDataManager.shared.getWorkdaysBetween(
+            start: Calendar.current.date(byAdding: .month, value: -2, to: Date()) ?? Date() - (86400 * 60),
+            target: Calendar.current.date(byAdding: .month, value: 3, to: Date()) ?? Date() + (86400 * 90)
+        )
+                
         for data in workdays {
             if data.hasDone {
-                expiredWorkdays.append(data)
+                hasDoneWorkdays.append(data)
             } else {
-                upcomingWorkdays.append(data)
+                hasNotDoneWorkdays.append(data)
             }
         }
         
-        self.workdays = (upcomingWorkdays, expiredWorkdays)
+        self.workdays = (hasNotDoneWorkdays, hasDoneWorkdays)
     }
     
-    func getSchedulesOfFocusDate() {
-        let currentComponents = calendar.dateComponents([.year, .month, .day], from: currentDate)
-        let year = currentComponents.year ?? 2000
-        let month = currentComponents.month ?? 1
-        let day = currentComponents.day ?? 1
-        let extractedDate = DateComponents(year: year, month: month, day: day)
-        let extractedCalendar = calendar.date(from: extractedDate) ?? Date()
+    // 🔥 네이밍 추천 받습니다.
+    // 사용자가 터치한 날짜의 근무 일정이 있을 경우 화면에 표시합니다.
+    func getWorkdaysOfFocusDate() {
+        workdaysOfFocusedDate.hasNotDone.removeAll()
+        workdaysOfFocusedDate.hasDone.removeAll()
         
-        schedulesOfFocusDate.upcoming.removeAll()
-        schedulesOfFocusDate.expired.removeAll()
         
-        for data in workdays.0 {
-            if calendar.startOfDay(for: data.date) == extractedCalendar {
-                if data.hasDone {
-                    schedulesOfFocusDate.expired.append(data)
-                } else {
-                    schedulesOfFocusDate.upcoming.append(data)
-                }
+        let hasNotDoneData = workdays.hasNotDone.filter { $0.date.onlyDate == currentDate.onlyDate }
+        for data in hasNotDoneData {
+            if data.hasDone {
+                workdaysOfFocusedDate.hasDone.append(data)
+            } else {
+                workdaysOfFocusedDate.hasNotDone.append(data)
             }
         }
+
+        for data in workdays.hasDone {
+            if data.date.onlyDate == currentDate.onlyDate {
+                workdaysOfFocusedDate.hasDone.append(data)
+            }
+        }        
     }
     
-    func verifyScheduleDate(_ date: CalendarModel) -> Bool {
-        let extractedDate = calendar.date(from: DateComponents(year: date.year, month: date.month, day: date.day))
-        let startOfGivenDate = calendar.startOfDay(for: extractedDate ?? Date())
-        if !workdays.upcoming.isEmpty || !workdays.expired.isEmpty {
-            for data in workdays.upcoming {
-                if calendar.startOfDay(for: data.date) == startOfGivenDate { return true }
+    // 스크롤 캘린더에 Circle 표시를 하기 위한 함수입니다.
+    // 해당 일자에 근무 일정이 있을 경우 Circle을 표시합니다.
+    func getWorkdayIndicator(_ date: CalendarModel) -> Bool {
+        let givenDate = calendar.date(from: DateComponents(year: date.year, month: date.month, day: date.day)) ?? Date()
+        
+        if !workdays.hasNotDone.isEmpty || !workdays.hasDone.isEmpty {
+            for data in workdays.hasNotDone {
+                if data.date.onlyDate == givenDate.onlyDate { return true }
             }
-            for data in workdays.expired {
-                if calendar.startOfDay(for: data.date) == startOfGivenDate { return true }
+            for data in workdays.hasDone {
+                if data.date.onlyDate == givenDate.onlyDate { return true }
             }
-
         }
-
+        
         return false
     }
 }
-
-// Sample calendar model
-struct CalendarModel {
-    let year: Int
-    let month: Int
-    let day: Int
-}
-
-//!allWorkdays.upcoming.isEmpty || !allWorkdays.expired.isEmpty,
-//   currentWeek[index].day == Calendar.current.dateComponents([.day], from: allWorkdays.upcoming[0].date).day!
