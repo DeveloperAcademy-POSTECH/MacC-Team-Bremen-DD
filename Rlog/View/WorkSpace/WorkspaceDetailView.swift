@@ -146,8 +146,8 @@ private extension WorkspaceDetailView {
 }
 
 fileprivate enum WorkspaceDetailInfo: CaseIterable {
-    case hasTax
     case hasJuhyu
+    case hasTax
     
     var text: (title: String, description: String) {
         switch self {
