@@ -37,6 +37,7 @@ final class WorkspaceDetailViewModel: ObservableObject {
     }
     
     func didTapConfirmButton(completion: @escaping (() -> Void)) {
+        if checkScheduleConflict(creatSchedules: shouldCreateSchedules, existSchedules: schedules.filter {  })
         Task {
             await updateWorkspace()
             await deleteSchedules()
@@ -138,5 +139,18 @@ private extension WorkspaceDetailViewModel {
     func getAllSchedules() {
         let result = CoreDataManager.shared.getSchedules(of: workspace)
         schedules = result
+    }
+    
+    func checkScheduleConflict(creatSchedules: [ScheduleModel], existSchedules: [ScheduleEntity]) -> Bool {
+        for creatSchedule in creatSchedules {
+            for existSchedule in existSchedules {
+                for day in existSchedule.repeatDays {
+                    if creatSchedule.repeatedSchedule. contains(day) {
+                        return true
+                    }
+                }
+            }
+        }
+        return false
     }
 }

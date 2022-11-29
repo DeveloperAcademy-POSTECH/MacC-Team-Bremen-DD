@@ -224,7 +224,7 @@ private extension MonthlyCalculateDetailView {
                     .font(.caption2)
                     .foregroundColor(Color.backgroundWhite)
                     .padding(EdgeInsets(top: 2, leading: 6, bottom: 2, trailing: 6))
-                    .background(worktype.color)
+                    .background(worktype.mainColor)
                     .cornerRadius(5)
                 Spacer()
                 Text(viewModel.getSpentHour(workday.endTime, workday.startTime))
