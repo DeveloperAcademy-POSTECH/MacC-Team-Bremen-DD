@@ -11,6 +11,22 @@ extension View {
     func cornerRadius(_ radius: CGFloat, _ corners: UIRectCorner) -> some View {
         clipShape( RoundedCorner(radius: radius, corners: corners) )
     }
+    
+    // 화면을 이미지로 변환
+    func snapshot(width: CGFloat, height: CGFloat) -> UIImage {
+        let controller = UIHostingController(rootView: self)
+        let view = controller.view
+
+        let targetSize = CGSize(width: width, height: height)
+        view?.bounds = CGRect(origin: .zero, size: targetSize)
+        view?.backgroundColor = .clear
+
+        let renderer = UIGraphicsImageRenderer(size: targetSize)
+
+        return renderer.image { _ in
+            view?.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
+        }
+    }
 }
 
 // 도형의 일부분에 곡선 적용하기

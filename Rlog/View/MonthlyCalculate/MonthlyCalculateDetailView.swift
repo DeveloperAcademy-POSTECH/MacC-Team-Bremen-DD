@@ -16,6 +16,15 @@ struct MonthlyCalculateDetailView: View {
     }
     
     var body: some View {
+        calculateDetail
+            .sheet(isPresented: $viewModel.isShareSheetActive) {
+                ShareSheet(items: viewModel.items)
+            }
+    }
+}
+
+private extension MonthlyCalculateDetailView {
+    var calculateDetail: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 header
@@ -41,10 +50,9 @@ struct MonthlyCalculateDetailView: View {
                 shareButton
             }
         }
-    }
-}
 
-private extension MonthlyCalculateDetailView {
+    }
+    
     var header: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(viewModel.calculateResult.workspace.name)
@@ -199,7 +207,7 @@ private extension MonthlyCalculateDetailView {
     
     var shareButton: some View {
         Button(action: {
-            // TODO: - ViewModel에서 구현
+            viewModel.didTapShareButton(calculateDetail)
         }, label: {
             Text("공유")
                 .foregroundColor(Color.primary)
