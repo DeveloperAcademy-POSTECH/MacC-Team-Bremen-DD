@@ -51,9 +51,11 @@ private extension MonthlyCalculateDetailView {
                 .font(.title2)
                 .fontWeight(.bold)
                 .foregroundColor(Color.fontBlack)
-            Text("정산일까지 D-\(viewModel.calculateResult.leftDays)")
-                .font(.caption2)
-                .foregroundColor(Color.pointRed)
+            if viewModel.current.monthInt == Date().monthInt {
+                Text("정산일까지 D-\(viewModel.calculateResult.leftDays)")
+                    .font(.caption2)
+                    .foregroundColor(Color.pointRed)
+            }
         }
     }
     
@@ -74,15 +76,19 @@ private extension MonthlyCalculateDetailView {
             makeCalculationResult(title: nil, result: "\(viewModel.calculateResult.monthlySalaryWithoutTaxAndJuhyu)원")
                 .padding(.top, 4)
             
-            makeCalculationResult(title: "주휴수당 적용됨", result: "\(viewModel.calculateResult.juhyu)원")
+            if viewModel.calculateResult.workspace.hasJuhyu {
+                makeCalculationResult(title: "주휴수당 적용됨", result: "\(viewModel.calculateResult.juhyu)원")
+            }
             
-            makeCalculationResult(title: "세금 3.3% 적용", result: "\(viewModel.calculateResult.tax)원")
+            if viewModel.calculateResult.workspace.hasTax {
+                makeCalculationResult(title: "세금 3.3% 적용", result: "\(viewModel.calculateResult.tax)원")
+            }
             
             HStack {
                 Text("총 급여")
                     .foregroundColor(Color.grayMedium)
                 Spacer()
-                Text("\(viewModel.calculateResult.monthlySalary)")
+                Text("\(viewModel.calculateResult.monthlySalary)원")
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
             }
@@ -164,8 +170,7 @@ private extension MonthlyCalculateDetailView {
         .padding(.horizontal, 24)
         .padding(.bottom)
     }
-
-    @ViewBuilder
+    
     func calendarFooterCell(_ type: WorkDayType) -> some View {
         HStack(spacing: 4) {
             Circle()
@@ -177,14 +182,17 @@ private extension MonthlyCalculateDetailView {
         }
     }
     
+    @ViewBuilder
     var resonList: some View {
-        VStack(alignment: .leading) {
-            Text("상세정보")
-                .font(.subheadline)
-                .fontWeight(.bold)
-            
-            ForEach(1..<3) { _ in
-                makeReasonCell()
+        if !viewModel.notRegularWorkdays.isEmpty {
+            VStack(alignment: .leading) {
+                Text("상세정보")
+                    .font(.subheadline)
+                    .fontWeight(.bold)
+                
+                ForEach(viewModel.notRegularWorkdays, id: \.self) { workday in
+                    makeReasonCell(workday)
+                }
             }
         }
     }
@@ -198,20 +206,28 @@ private extension MonthlyCalculateDetailView {
         })
     }
     
-    func makeReasonCell() -> some View {
-        VStack(alignment: .leading, spacing: 0) {
+    func makeReasonCell(_ workday: WorkdayEntity) -> some View {
+        let workday = workday
+        var worktype: WorkDayType {
+            return viewModel.workTypeManager.defineWorkType(workday: workday)
+        }
+        var startTime: String {
+            return "\(viewModel.timeManager.getHour(workday.startTime)):\(viewModel.timeManager.getMinute(workday.startTime) >= 10 ? viewModel.timeManager.getMinute(workday.startTime).description : "0\(viewModel.timeManager.getMinute(workday.startTime))")"
+        }
+        var endTime: String {
+            return "\(viewModel.timeManager.getHour(workday.endTime)):\(viewModel.timeManager.getMinute(workday.endTime) >= 10 ? viewModel.timeManager.getMinute(workday.endTime).description : "0\(viewModel.timeManager.getMinute(workday.endTime))")"
+        }
+        
+        return VStack(alignment: .leading, spacing: 0) {
             HStack {
-                // TODO: - 컴포넌트로 바뀔 예정
-                Text("추가")
+                Text(worktype.name)
                     .font(.caption2)
                     .foregroundColor(Color.backgroundWhite)
-                    .padding(EdgeInsets(top: 2, leading: 4, bottom: 2, trailing: 4))
-                    .background(
-                        RoundedRectangle(cornerRadius: 5)
-                            .fill(Color.pointPurple)
-                    )
+                    .padding(EdgeInsets(top: 2, leading: 6, bottom: 2, trailing: 6))
+                    .background(worktype.color)
+                    .cornerRadius(5)
                 Spacer()
-                Text("4시간")
+                Text(viewModel.getSpentHour(workday.endTime, workday.startTime))
                     .font(.subheadline)
                     .fontWeight(.bold)
                     .foregroundColor(Color.fontBlack)
@@ -219,20 +235,21 @@ private extension MonthlyCalculateDetailView {
             .padding(.top)
             
             HStack {
-                Text("11월 7일")
+                Text("\(workday.date.monthInt)월 \(workday.date.dayInt)일")
                     .fontWeight(.bold)
                 Spacer()
-                Text("10:00 ~ 14:00")
+                Text("\(startTime) ~ \(endTime)")
             }
             .foregroundColor(Color.fontBlack)
-            // TODO: - Padding 값도 reason의 유무에 따라 16, 8로 변경 될 예정
-            .padding(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+            .padding(EdgeInsets(top: 8, leading: 0, bottom: 16, trailing: 0))
             
-            // TODO: - reason이 있을 때만, 보여지는 처리 필요
-            Text("사장님이 오늘 아프셔서 대신 출근했다.")
-                .font(.footnote)
-                .foregroundColor(Color.grayMedium)
-                .padding(.bottom)
+            if workday.memo != nil && workday.memo != "" {
+                Text(workday.memo ?? "")
+                    .font(.footnote)
+                    .foregroundColor(Color.grayMedium)
+                    .padding(.top, -8)
+                    .padding(.bottom)
+            }
         }
         .padding(.horizontal)
         .background(Color.backgroundCard)
