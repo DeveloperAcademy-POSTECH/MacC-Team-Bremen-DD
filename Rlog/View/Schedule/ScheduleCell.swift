@@ -29,7 +29,7 @@ private extension ScheduleCell {
                     .font(.caption2)
                     .foregroundColor(Color.backgroundWhite)
                     .padding(EdgeInsets(top: 2, leading: 6, bottom: 2, trailing: 6))
-                    .background(viewModel.data.hasDone ? Color.grayLight : viewModel.workType.color)
+                    .background(viewModel.data.hasDone ? Color.grayLight : viewModel.workType.mainColor)
                     .cornerRadius(5)
                 
                 Spacer()
@@ -79,7 +79,7 @@ private extension ScheduleCell {
                     .font(Font.caption.bold())
                     .padding(EdgeInsets(top: 5, leading: 29, bottom: 5, trailing: 29))
                     .foregroundColor(.white)
-                    .background(viewModel.workType.color)
+                    .background(viewModel.workType.mainColor)
                     .cornerRadius(10)
             }
         }

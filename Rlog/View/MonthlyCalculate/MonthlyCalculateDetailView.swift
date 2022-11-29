@@ -174,7 +174,7 @@ private extension MonthlyCalculateDetailView {
     func calendarFooterCell(_ type: WorkDayType) -> some View {
         HStack(spacing: 4) {
             Circle()
-                .foregroundColor(type.color)
+                .foregroundColor(type.mainColor)
                 .frame(width: 8, height: 8)
             Text(type.fullName)
                 .font(.caption2)
