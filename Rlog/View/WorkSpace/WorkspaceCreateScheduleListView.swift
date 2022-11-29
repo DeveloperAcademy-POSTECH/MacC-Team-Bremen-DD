@@ -20,9 +20,7 @@ struct WorkspaceCreateScheduleListView: View {
             VStack(alignment: .leading, spacing: 8) {
                 labelText
                 VStack(spacing: 16) {
-                    ForEach(0..<viewModel.scheduleList.count, id: \.self) { Idx in
-                        createDeletableSchedulePatternView(tappedScheduleID: Idx)
-                    }
+                    schedulePatternList
                     addScheduleButton
                 }
             }
@@ -72,35 +70,18 @@ private extension WorkspaceCreateScheduleListView {
             viewModel.didTapAddScheduleButton()
         }
     }
-    
-    @ViewBuilder
-    func createDeletableSchedulePatternView(tappedScheduleID: Int) -> some View {
-        let tappedSchedule = viewModel.scheduleList[tappedScheduleID]
-        RoundedRectangle(cornerRadius: 10)
-            .frame(maxWidth: .infinity, minHeight: 56, maxHeight: 56)
-            .foregroundColor(.gray)
-            .overlay {
-                //TODO: 컴포넌트화 예정입니다.
-                HStack {
-                    HStack {
-                        ForEach(tappedSchedule.repeatedSchedule, id: \.self) { day in
-                            Text(day)
-                        }
-                    }
-                    Spacer()
-                    HStack(spacing : 0) {
-                        Text(tappedSchedule.startMinute < 30 ? "\(tappedSchedule.startHour):0\(tappedSchedule.startMinute)" : "\(tappedSchedule.startHour):\(tappedSchedule.startMinute)")
-                        Text(" - ")
-                        Text(tappedSchedule.endMinute < 30 ? "\(tappedSchedule.endHour):0\(tappedSchedule.endMinute)" : "\(tappedSchedule.endHour):\(tappedSchedule.endMinute)")
-                    }
-                    Button {
-                        viewModel.didTapDeleteButton(idx: tappedScheduleID)
-                    } label: {
-                        Image(systemName: "minus.circle")
-                            .foregroundColor(.red)
-                    }
-                }
-                .padding()
+    var schedulePatternList: some View {
+        
+        ForEach(0..<viewModel.scheduleList.count, id: \.self) { Idx in
+            ScheduleContainer(
+                repeatedSchedule: viewModel.scheduleList[Idx].repeatedSchedule,
+                startHour: Int16(viewModel.scheduleList[Idx].startHour),
+                startMinute: Int16(viewModel.scheduleList[Idx].startMinute),
+                endHour: Int16(viewModel.scheduleList[Idx].endHour),
+                endMinute: Int16(viewModel.scheduleList[Idx].endMinute)
+            ) {
+                viewModel.didTapDeleteButton(idx: Idx)
             }
+        }
     }
 }
