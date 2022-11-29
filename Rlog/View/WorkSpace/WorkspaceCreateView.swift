@@ -71,18 +71,18 @@ private extension WorkspaceCreateView {
     var toggle: some View {
         if !viewModel.isHiddenToggleInputs {
             VStack(spacing: 24) {
-                Toggle(isOn: $viewModel.hasTax, label: {
-                    HStack {
-                        Text("소득세")
-                        Text("3.3% 적용")
-                            .font(.caption)
-                    }
-                    .foregroundColor(.grayMedium)
-                })
                 Toggle(isOn: $viewModel.hasJuhyu, label: {
                     HStack {
                         Text("주휴수당")
                         Text("60시간 근무 시 적용")
+                            .font(.caption)
+                    }
+                    .foregroundColor(.grayMedium)
+                })
+                Toggle(isOn: $viewModel.hasTax, label: {
+                    HStack {
+                        Text("소득세")
+                        Text("3.3% 적용")
                             .font(.caption)
                     }
                     .foregroundColor(.grayMedium)
