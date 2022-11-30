@@ -21,9 +21,11 @@ struct ScheduleHasNotDoneListView: View {
                 }
                 .padding(.horizontal)
                 .accentColor(.black)
-                .onAppear { viewModel.onAppear() }
             }
         }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarTitle ("미확정 일정", displayMode: .inline)
+        .onAppear { viewModel.onAppear() }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 BackButton { dismiss() }

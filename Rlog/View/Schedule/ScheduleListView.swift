@@ -84,9 +84,7 @@ private extension ScheduleListView {
             .foregroundColor(.grayMedium)
             
             NavigationLink(
-                destination: ScheduleHasNotDoneListView()
-                    .navigationBarBackButtonHidden(true)
-                    .navigationBarTitle (Text("미확정 일정"), displayMode: .inline),
+                destination: ScheduleHasNotDoneListView(),
                 isActive: $isScheduleHasNotDoneListViewActive
             ) { EmptyView() }
             NavigationLink(
