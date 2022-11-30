@@ -15,7 +15,7 @@ final class ScheduleCreationViewModel: ObservableObject {
     @Published var selectedWorkspaceString: String = "" {
         didSet {
             let result = workspaces.filter { $0.name == selectedWorkspaceString}
-            self.selectedWorkspaceEntity = result.first
+            self.selectedWorkspace = result.first
         }
     }
     @Published var selectedWorkspace: WorkspaceEntity? = nil
@@ -24,6 +24,7 @@ final class ScheduleCreationViewModel: ObservableObject {
     @Published var endTime: Date = Date()
     @Published var memo: String = ""
     @Published var isAlertActive = false
+    @Published var isConflictAlertActive = false
     @Published var isWorkdayPickerActive = false {
         willSet {
             if newValue == true {
@@ -99,7 +100,7 @@ private extension ScheduleCreationViewModel {
     }
     
     func createWorkday() {
-        guard let workspaceEntity = selectedWorkspaceEntity else { return }
+        guard let workspaceEntity = selectedWorkspace else { return }
         guard let date = workday.onlyDate else { return }
         CoreDataManager.shared.createWorkday(
             of: workspaceEntity,
