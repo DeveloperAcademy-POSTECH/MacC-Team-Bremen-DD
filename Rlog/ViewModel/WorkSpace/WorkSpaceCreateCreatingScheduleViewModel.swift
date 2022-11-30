@@ -110,11 +110,10 @@ private extension WorkspaceCreateCreatingScheduleViewModel {
     }
     
     func checkScheduleConflict(creatSchedules: [ScheduleModel]) -> Bool {
-        for i in 0..<creatSchedules.count {
-            for j in i..<creatSchedules.count {
-                for day in creatSchedules[i].repeatedSchedule {
-                    if creatSchedules[j].repeatedSchedule.contains(day) {
-                        print(day)
+        for creatSchedule in creatSchedules {
+            for day in sevenDays {
+                if day.isSelected {
+                    if creatSchedule.repeatedSchedule.contains(day.dayName) {
                         return true
                     }
                 }
