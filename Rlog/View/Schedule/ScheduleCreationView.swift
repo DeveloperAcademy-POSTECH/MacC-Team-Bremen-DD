@@ -59,6 +59,7 @@ private extension ScheduleCreationView {
                 .foregroundColor(.grayMedium)
             BorderedPicker(
                 date: $viewModel.workday,
+                isActive: $viewModel.isWorkdayPickerActive,
                 type: .date
             )
         }
@@ -71,10 +72,12 @@ private extension ScheduleCreationView {
                 .foregroundColor(.grayMedium)
             BorderedPicker(
                 date: $viewModel.startTime,
+                isActive: $viewModel.isStartTimePickerActive,
                 type: .startTime
             )
             BorderedPicker(
                 date: $viewModel.endTime,
+                isActive: $viewModel.isEndTimePickerActive,
                 type: .endTime
             )
         }

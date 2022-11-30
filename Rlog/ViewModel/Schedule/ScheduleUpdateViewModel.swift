@@ -5,7 +5,7 @@
 //  Created by Noah's Ark on 2022/11/19.
 //
 
-import Foundation
+import SwiftUI
 
 final class ScheduleUpdateViewModel: ObservableObject {
     let workday: WorkdayEntity
@@ -16,6 +16,38 @@ final class ScheduleUpdateViewModel: ObservableObject {
     @Published var endTime: Date
     @Published var memo: String
     @Published var isAlertActive = false
+    @Published var isWorkdayPickerActive = false {
+        willSet {
+            if newValue == true {
+                withAnimation {
+                    self.isStartTimePickerActive = false
+                    self.isEndTimePickerActive = false
+
+                }
+            }
+        }
+    }
+    @Published var isStartTimePickerActive = false {
+        willSet {
+            if newValue == true {
+                withAnimation {
+                    self.isWorkdayPickerActive = false
+                    self.isEndTimePickerActive = false
+                }
+            }
+        }
+    }
+    @Published var isEndTimePickerActive = false {
+        willSet {
+            if newValue == true {
+                withAnimation {
+                    self.isWorkdayPickerActive = false
+                    self.isStartTimePickerActive = false
+                }
+            }
+        }
+    }
+
     
     init(workday: WorkdayEntity) {
         self.workday = workday

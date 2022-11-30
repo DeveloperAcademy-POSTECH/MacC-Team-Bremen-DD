@@ -5,7 +5,7 @@
 //  Created by Hyeon-sang Lee on 2022/11/14.
 //
 
-import Foundation
+import SwiftUI
 
 final class ScheduleCreationViewModel: ObservableObject {
     @Published var isFocused = false
@@ -22,7 +22,39 @@ final class ScheduleCreationViewModel: ObservableObject {
     @Published var endTime: Date = Date()
     @Published var memo: String = ""
     @Published var isAlertActive = false
-    
+    @Published var isWorkdayPickerActive = false {
+        willSet {
+            if newValue == true {
+                print(newValue)
+                withAnimation {
+                    self.isStartTimePickerActive = false
+                    self.isEndTimePickerActive = false
+
+                }
+            }
+        }
+    }
+    @Published var isStartTimePickerActive = false {
+        willSet {
+            if newValue == true {
+                withAnimation {
+                    self.isWorkdayPickerActive = false
+                    self.isEndTimePickerActive = false
+                }
+            }
+        }
+    }
+    @Published var isEndTimePickerActive = false {
+        willSet {
+            if newValue == true {
+                withAnimation {
+                    self.isWorkdayPickerActive = false
+                    self.isStartTimePickerActive = false
+                }
+            }
+        }
+    }
+
     init(of selectedDate: Date) {
         workday = selectedDate
         self.startTime = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: selectedDate) ?? Date()

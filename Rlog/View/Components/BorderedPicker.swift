@@ -24,7 +24,7 @@ enum BorderedPickerType {
 struct BorderedPicker: View {
     @Binding var date: Date
     // TODO: @Binding var isTapped: Bool 으로 변경 필요
-    @State private var isTapped = false
+    @Binding var isActive: Bool
     let type: BorderedPickerType
     var timeData: String {
         let components = Calendar.current.dateComponents(
@@ -68,16 +68,16 @@ private extension BorderedPicker {
             .cornerRadius(10)
             .frame(maxWidth: .infinity, maxHeight: 56)
             .background(Color.backgroundCard)
-            .onTapGesture { withAnimation { isTapped.toggle() } }
+            .onTapGesture { withAnimation { isActive.toggle() } }
             .overlay {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(
-                        isTapped ? Color.primary : Color.backgroundStroke,
+                        isActive ? Color.primary : Color.backgroundStroke,
                         lineWidth: 2
                     )
             }
             
-            if isTapped {
+            if isActive {
                 wheelTimePicker
             }
         }
@@ -96,7 +96,7 @@ private extension BorderedPicker {
         }
         .onDisappear {
             UIDatePicker.appearance().minuteInterval = 1
-            isTapped = false
+            isActive = false
         }
         .padding(.horizontal)
     }
