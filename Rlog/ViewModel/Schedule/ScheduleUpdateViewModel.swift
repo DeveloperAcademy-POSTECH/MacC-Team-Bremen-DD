@@ -9,6 +9,7 @@ import SwiftUI
 
 final class ScheduleUpdateViewModel: ObservableObject {
     let workday: WorkdayEntity
+    let alreadyExistWorkdays: [WorkdayEntity]
     
     @Published var name: String
     @Published var date: Date
@@ -35,6 +36,7 @@ final class ScheduleUpdateViewModel: ObservableObject {
             }
         }
     }
+    @Published var isConflictAlertActive = false
     
     init(workday: WorkdayEntity) {
         self.workday = workday
@@ -43,6 +45,7 @@ final class ScheduleUpdateViewModel: ObservableObject {
         self.startTime = workday.startTime
         self.endTime = workday.endTime
         self.memo = workday.memo ?? ""
+        self.alreadyExistWorkdays = CoreDataManager.shared.getWorkdaysBetween(start: workday.date, target: Calendar.current.date(byAdding: DateComponents(day: 1), to: workday.date) ?? workday.date).filter { $0.objectID != workday.objectID }
     }
     
     func didTapConfirmationButton() async {
@@ -55,6 +58,26 @@ final class ScheduleUpdateViewModel: ObservableObject {
     
     func didConfirmDeleteWorday() async {
         await deleteWorkday()
+    }
+    
+    func checkConflict() -> Bool {
+        var isNotConflict = true
+        
+        for workday in alreadyExistWorkdays {
+            if workday.startTime <= startTime && endTime <= workday.endTime {
+                isNotConflict = false
+            } else if startTime < workday.startTime {
+                if workday.startTime < endTime {
+                    isNotConflict = false
+                }
+            } else if workday.endTime < endTime {
+                if startTime < workday.endTime {
+                    isNotConflict = false
+                }
+            }
+        }
+        
+        return isNotConflict
     }
 }
 

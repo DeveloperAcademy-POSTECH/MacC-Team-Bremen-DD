@@ -55,13 +55,17 @@ final class ScheduleCreationViewModel: ObservableObject {
             }
         }
     }
+    
+    var isSelectedWorkspace: Bool {
+        return selectedWorkspaceString != ""
+    }
 
     init(of selectedDate: Date) {
         workday = selectedDate
         self.startTime = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: selectedDate) ?? Date()
         self.endTime = Calendar.current.date(bySettingHour: 18, minute: 0, second: 0, of: selectedDate) ?? Date()
         self.alreadyExistWorkdays = CoreDataManager.shared.getWorkdaysBetween(start: selectedDate, target: Calendar.current.date(byAdding: DateComponents(day: 1), to: selectedDate) ?? selectedDate)
-        print(self.alreadyExistWorkdays)
+        print(alreadyExistWorkdays)
     }
     
     func onAppear() {
@@ -81,7 +85,7 @@ final class ScheduleCreationViewModel: ObservableObject {
     }
     
     func getWorkspacesListString() -> [String] {
-        var result: [String] = []
+        var result: [String] = [""]
         for workspace in workspaces {
             result.append(workspace.name)
         }
