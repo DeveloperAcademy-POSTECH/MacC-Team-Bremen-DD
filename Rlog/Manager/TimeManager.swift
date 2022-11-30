@@ -67,14 +67,26 @@ final class TimeManager {
     }
     
     func calculateTimeGap(startHour: Int16, startMinute: Int16, endHour: Int16, endMinute: Int16) -> Double? {
-        guard
-            let startTime = calendar.date(bySettingHour: Int(startHour), minute: Int(startMinute), second: 0, of: Date()),
-            let endTime = calendar.date(bySettingHour: Int(endHour), minute: Int(endMinute), second: 0, of: Date())
-        else { return nil }
-        
-        let gap = endTime - startTime
-        
-        return gap
+        if startHour < endHour {
+            guard
+                let startTime = calendar.date(bySettingHour: Int(startHour), minute: Int(startMinute), second: 0, of: Date()),
+                let endTime = calendar.date(bySettingHour: Int(endHour), minute: Int(endMinute), second: 0, of: Date())
+            else { return nil }
+            
+            let gap = endTime - startTime
+            
+            return gap
+        } else {
+            guard
+                let startTime = calendar.date(bySettingHour: Int(startHour), minute: Int(startMinute), second: 0, of: Date()),
+                let endTime = calendar.date(bySettingHour: Int(endHour), minute: Int(endMinute), second: 0, of: Date()),
+                let endTimePlus1Day = calendar.date(byAdding: DateComponents(day: 1), to: endTime)
+            else { return nil }
+            
+            let gap = endTimePlus1Day - startTime
+            
+            return gap
+        }
     }
 
     func calculateTimeGapBetweenTwoDate(start: Date, end: Date) -> Double {
