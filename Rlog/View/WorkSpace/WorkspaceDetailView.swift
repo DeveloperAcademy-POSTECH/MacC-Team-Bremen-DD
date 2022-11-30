@@ -64,7 +64,7 @@ private extension WorkspaceDetailView {
                 .fontWeight(.bold)
                 .foregroundColor(Color.primary)
         }
-        .alert("요일이 겹치는 근무패턴이 있습니다.", isPresented: $viewModel.isAlertActive) {
+        .alert("선택된 요일에 근무가 있습니다.", isPresented: $viewModel.isAlertActive) {
             Button("확인", role: .cancel) { viewModel.isAlertActive = false }
         }
     }
