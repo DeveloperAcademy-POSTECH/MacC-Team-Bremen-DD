@@ -71,9 +71,20 @@ private extension ScheduleListView {
                 currentMonth: currentMonth
             )
             Spacer()
-            // inbox.curved.badge로 조건 처리하면 됩니다.
             Button{ isScheduleHasNotDoneListViewActive.toggle() } label: {
-                Image("inbox.curved")
+                if viewModel.hasHasNotDoneWorkdays {
+                    ZStack {
+                        Image("inbox.curved.badge")
+                        Circle()
+                            .foregroundColor(Color.primary)
+                            .frame(width: 5.5, height: 5.5)
+                            .padding(.bottom, 14)
+                            .padding(.leading, 12.4)
+                    }
+
+                } else {
+                    Image("inbox.curved")
+                }
             }
             .disabled(!viewModel.hasWorkspace)
             .foregroundColor(.grayMedium)
