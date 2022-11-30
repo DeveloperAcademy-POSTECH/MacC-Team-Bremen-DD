@@ -15,7 +15,7 @@ final class WorkspaceCreateViewModel: ObservableObject {
         self._isActiveNavigation = isActiveNavigation
     }
     
-    var currentState: WritingState = .workSpace
+    var currentState: WritingState = .workspace
     var isActivatedConfirmButton: Bool = false
     
     @Published var isHiddenToggleInputs: Bool = true
@@ -23,51 +23,11 @@ final class WorkspaceCreateViewModel: ObservableObject {
     @Published var isHiddenHourlyWage: Bool = true
     var isHiddenConfirmButton: Bool = false
     var isHiddenToolBarItem: Bool = true
+    var textLimited = ""
     
-    @Published var workSpace = "" {
-        didSet {
-            if workSpace.isEmpty  {
-                inActivateButton()
-            } else {
-                if workSpace.count >= 21 { workSpace = oldValue }
-                if workSpace.count >= 20 {
-                    inActivateButton()
-                } else {
-                    activateButton()
-                }
-            }
-        }
-    }
-    @Published var hourlyWage = "" {
-        didSet {
-            if hourlyWage.isEmpty {
-                inActivateButton()
-            } else {
-                guard let textToInt = Int(hourlyWage) else { return hourlyWage = "" }
-                if textToInt  >= 10000000 { hourlyWage = oldValue }
-                if textToInt >= 1000000 {
-                    inActivateButton()
-                } else {
-                    activateButton()
-                }
-            }
-        }
-    }
-    @Published var payday = "" {
-        didSet {
-            if payday.isEmpty {
-                inActivateButton()
-            } else {
-                guard let textToInt = Int(payday) else { return payday = "" }
-                if textToInt > 289 {payday = oldValue}
-                if textToInt > 28 {
-                    inActivateButton()
-                } else {
-                    activateButton()
-                }
-            }
-        }
-    }
+    @Published var workspace = ""
+    @Published var hourlyWage = ""
+    @Published var payday = ""
     @Published var hasTax: Bool = false
     @Published var hasJuhyu: Bool = false
     
@@ -83,7 +43,7 @@ private extension WorkspaceCreateViewModel {
     func switchToNextStatus() {
         withAnimation(.easeIn) {
             switch currentState {
-            case .workSpace:
+            case .workspace:
                 isHiddenHourlyWage = false
                 currentState = .hourlyWage
             case .hourlyWage:
@@ -110,18 +70,18 @@ private extension WorkspaceCreateViewModel {
     
     func activateButton()  {
         switch currentState {
-        case .workSpace:
+        case .workspace:
             isActivatedConfirmButton = true
             return
         case .hourlyWage:
-            if workSpace.isEmpty {return}
+            if workspace.isEmpty {return}
             if hourlyWage.isEmpty {return}
             guard let hourlyWageInt = Int(hourlyWage) else { return }
             if hourlyWageInt >= 1000000 {return}
             isActivatedConfirmButton = true
             return
         case .payday:
-            if workSpace.isEmpty {return}
+            if workspace.isEmpty {return}
             if hourlyWage.isEmpty {return}
             guard let hourlyWageInt = Int(hourlyWage) else { return }
             if hourlyWageInt >= 1000000 {return}
@@ -131,7 +91,7 @@ private extension WorkspaceCreateViewModel {
             isActivatedConfirmButton = true
             return
         case .toggleOptions:
-            if workSpace.isEmpty {return}
+            if workspace.isEmpty {return}
             if hourlyWage.isEmpty {return}
             guard let hourlyWageInt = Int(hourlyWage) else { return }
             if hourlyWageInt >= 1000000 {return}
@@ -144,15 +104,55 @@ private extension WorkspaceCreateViewModel {
     }
 }
 
+extension WorkspaceCreateViewModel {
+    func checkErrorOfInputText(type: WritingState, _ text: String) {
+        switch type {
+        case .workspace:
+            if text.isEmpty { inActivateButton() }
+            else { activateButton() }
+            if text.count == 20 { textLimited = text }
+            if text.count >= 20 {
+                workspace = textLimited
+                inActivateButton()
+            }
+        case .hourlyWage:
+            if text.isEmpty { inActivateButton() }
+            guard let textToInt = Int(text) else { return self.hourlyWage = "" }
+            
+            if textToInt > 1000000 && text.count < 8 { textLimited = text }
+            if textToInt  >= 1000000 {
+                hourlyWage = textLimited
+                inActivateButton()
+            } else {
+                activateButton()
+            }
+        case .payday:
+            if text.isEmpty { inActivateButton() }
+            guard let textToInt = Int(text) else { return self.payday = "" }
+            
+            if textToInt > 28 && text.count <= 3 { textLimited = text }
+            if textToInt > 28 {
+                payday = textLimited
+                inActivateButton()
+            } else {
+                activateButton()
+            }
+        case .toggleOptions:
+            return
+        }
+
+    }
+}
+
 enum WritingState: Hashable {
-    case workSpace
+    case workspace
     case hourlyWage
     case payday
     case toggleOptions
     
     var title: String {
         switch self {
-        case .workSpace:
+        case .workspace:
             return "근무지를 입력해주세요."
         case .hourlyWage:
             return "시급을 입력해주세요."

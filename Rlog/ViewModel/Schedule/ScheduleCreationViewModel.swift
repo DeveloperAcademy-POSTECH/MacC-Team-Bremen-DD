@@ -8,6 +8,8 @@
 import SwiftUI
 
 final class ScheduleCreationViewModel: ObservableObject {
+    let alreadyExistWorkdays: [WorkdayEntity]
+    
     @Published var isFocused = false
     @Published var workspaces: [WorkspaceEntity] = []
     @Published var selectedWorkspaceString: String = "" {
@@ -57,16 +59,20 @@ final class ScheduleCreationViewModel: ObservableObject {
         workday = selectedDate
         self.startTime = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: selectedDate) ?? Date()
         self.endTime = Calendar.current.date(bySettingHour: 18, minute: 0, second: 0, of: selectedDate) ?? Date()
+        self.alreadyExistWorkdays = CoreDataManager.shared.getWorkdaysBetween(start: selectedDate, target: Calendar.current.date(byAdding: DateComponents(day: 1), to: selectedDate) ?? selectedDate)
+        print(self.alreadyExistWorkdays)
     }
-    
-    var selectedWorkspaceEntity: WorkspaceEntity? = nil
     
     func onAppear() {
         getAllWorkspaces()
     }
     
     func didTapCreationButton() {
-        isAlertActive = true
+        if checkConflict() {
+            isAlertActive.toggle()
+        } else {
+            isConflictAlertActive.toggle()
+        }
     }
     
     func didTapConfirmationButton() {
@@ -105,5 +111,25 @@ private extension ScheduleCreationViewModel {
             memo: memo,
             schedule: nil
         )
+    }
+    
+    func checkConflict() -> Bool {
+        var isNotConflict = true
+        
+        for workday in alreadyExistWorkdays {
+            if workday.startTime <= startTime && endTime <= workday.endTime {
+                isNotConflict = false
+            } else if startTime < workday.startTime {
+                if workday.startTime < endTime {
+                    isNotConflict = false
+                }
+            } else if workday.endTime < endTime {
+                if startTime < workday.endTime {
+                    isNotConflict = false
+                }
+            }
+        }
+        
+        return isNotConflict
     }
 }

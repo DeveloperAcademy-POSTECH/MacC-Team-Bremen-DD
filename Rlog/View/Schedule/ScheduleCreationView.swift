@@ -98,13 +98,16 @@ private extension ScheduleCreationView {
                 .foregroundColor(Color.primary)
         }
         .alert("근무 추가", isPresented: $viewModel.isAlertActive) {
-            Button("취소", role: .cancel) { }
+            Button("취소", role: .cancel) { viewModel.isAlertActive = false }
             Button("추가", role: .none) {
                 viewModel.didTapConfirmationButton()
                 dismiss()
             }
         } message: {
             Text("근무를 추가합니다")
+        }
+        .alert("근무가 중복됩니다.", isPresented: $viewModel.isConflictAlertActive) {
+            Button("확인", role: .cancel) { viewModel.isConflictAlertActive = false }
         }
     }
 }

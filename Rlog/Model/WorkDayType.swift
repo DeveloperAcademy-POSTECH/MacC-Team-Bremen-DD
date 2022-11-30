@@ -43,7 +43,22 @@ enum WorkDayType: Int, CaseIterable {
         }
     }
 
-    var color: Color {
+    var mainColor: Color {
+        get {
+            switch self {
+            case .regular:
+                return Color.primary
+            case .reduce:
+                return Color.pointRed
+            case .overtime:
+                return Color.pointBlue
+            case .extraDay:
+                return Color.pointPurple
+            }
+        }
+    }
+    
+    var calenderColor: Color {
         get {
             switch self {
             case .regular:

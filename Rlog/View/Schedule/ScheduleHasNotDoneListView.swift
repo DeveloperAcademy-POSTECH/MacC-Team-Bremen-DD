@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct SchedulePendingListView: View {
+struct ScheduleHasNotDoneListView: View {
     @Environment(\.dismiss) var dismiss
-    @ObservedObject private var viewModel = SchedulePendingListViewModel()
+    @ObservedObject private var viewModel = ScheduleHasNotDoneListViewModel()
     
     var body: some View {
         VStack(spacing: 0) {
@@ -21,9 +21,11 @@ struct SchedulePendingListView: View {
                 }
                 .padding(.horizontal)
                 .accentColor(.black)
-                .onAppear { viewModel.onAppear() }
             }
         }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarTitle ("미확정 일정", displayMode: .inline)
+        .onAppear { viewModel.onAppear() }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 BackButton { dismiss() }
@@ -32,7 +34,7 @@ struct SchedulePendingListView: View {
     }
 }
 
-private extension SchedulePendingListView {
+private extension ScheduleHasNotDoneListView {
     var hasNotDoneList: some View {
         ForEach(0..<viewModel.sortedHasNotDoneWorkdays.count, id: \.self) { index in
             VStack(alignment: .leading, spacing: 0) {

@@ -1,5 +1,5 @@
 //
-//  WorkSpaceCreateView.swift
+//  WorkspaceCreateView.swift
 //  Rlog
 //
 //  Created by 송시원 on 2022/10/17.
@@ -39,7 +39,7 @@ struct WorkspaceCreateView: View {
                     NavigationLink {
                         WorkspaceCreateScheduleListView(
                             isActiveNavigation: $viewModel.isActiveNavigation, workspaceModel: WorkSpaceModel(
-                                name: viewModel.workSpace,
+                                name: viewModel.workspace,
                                 paymentDay: viewModel.payday,
                                 hourlyWage: viewModel.hourlyWage,
                                 hasTax: viewModel.hasTax,
@@ -55,7 +55,7 @@ struct WorkspaceCreateView: View {
         }
         .onAppear {
           DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
-              self.checkoutInFocus = .workSpace
+              self.checkoutInFocus = .workspace
           }
         }
     }
@@ -71,18 +71,18 @@ private extension WorkspaceCreateView {
     var toggle: some View {
         if !viewModel.isHiddenToggleInputs {
             VStack(spacing: 24) {
-                Toggle(isOn: $viewModel.hasTax, label: {
-                    HStack {
-                        Text("소득세")
-                        Text("3.3% 적용")
-                            .font(.caption)
-                    }
-                    .foregroundColor(.grayMedium)
-                })
                 Toggle(isOn: $viewModel.hasJuhyu, label: {
                     HStack {
                         Text("주휴수당")
                         Text("60시간 근무 시 적용")
+                            .font(.caption)
+                    }
+                    .foregroundColor(.grayMedium)
+                })
+                Toggle(isOn: $viewModel.hasTax, label: {
+                    HStack {
+                        Text("소득세")
+                        Text("3.3% 적용")
                             .font(.caption)
                     }
                     .foregroundColor(.grayMedium)
@@ -96,6 +96,9 @@ private extension WorkspaceCreateView {
         if !viewModel.isHiddenPayday {
             InputFormElement(containerType: .payday, text: $viewModel.payday)
                 .focused($checkoutInFocus, equals: .payday)
+                .onChange(of: viewModel.payday) { newValue in
+                    viewModel.checkErrorOfInputText(type: .payday, newValue)
+                }
         }
     }
     
@@ -104,14 +107,18 @@ private extension WorkspaceCreateView {
         if !viewModel.isHiddenHourlyWage {
             InputFormElement(containerType: .wage, text: $viewModel.hourlyWage)
                 .focused($checkoutInFocus, equals: .hourlyWage)
+                .onChange(of: viewModel.hourlyWage) { newValue in
+                    viewModel.checkErrorOfInputText(type: .hourlyWage, newValue)
+                }
         }
     }
     
     var workspace: some View {
-        InputFormElement(containerType: .workplace, text: $viewModel.workSpace)
-            .focused($checkoutInFocus, equals: .workSpace)
-            .onSubmit {
-                viewModel.didTapConfirmButton()
+        InputFormElement(containerType: .workplace, text: $viewModel.workspace)
+            .focused($checkoutInFocus, equals: .workspace)
+            .onSubmit { viewModel.didTapConfirmButton() }
+            .onChange(of: viewModel.workspace) { newValue in
+                viewModel.checkErrorOfInputText(type: .workspace, newValue)
             }
     }
     
@@ -123,7 +130,7 @@ private extension WorkspaceCreateView {
                 switch checkoutInFocus {
                 case .none:
                     break
-                case .some(.workSpace):
+                case .some(.workspace):
                     checkoutInFocus = .hourlyWage
                     break
                 case .some(.hourlyWage):

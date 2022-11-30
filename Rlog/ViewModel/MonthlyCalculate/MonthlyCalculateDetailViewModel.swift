@@ -16,10 +16,17 @@ final class MonthlyCalculateDetailViewModel: ObservableObject {
     @Published var startDate = Date()
     @Published var target = Date()
 
-    let current = Date()
+    let current: Date
+    let workTypeManager = WorkTypeManager()
+    let timeManager = TimeManager()
+    
+    var notRegularWorkdays: [WorkdayEntity] {
+        return calculateResult.hasDoneWorkdays.filter { workTypeManager.defineWorkType(workday: $0) != .regular }
+    }
 
     init(calculateResult: MonthlyCalculateResult) {
         self.calculateResult = calculateResult
+        self.current = calculateResult.currentMonth
         Task {
             await makeCalendarDates()
             makeEmptyCalendarDates()
@@ -34,6 +41,13 @@ final class MonthlyCalculateDetailViewModel: ObservableObject {
 
     func filterWorkday(for day: Date) -> [WorkdayEntity] {
         return calculateResult.hasDoneWorkdays.filter{ $0.date == day }
+    }
+    
+    func getSpentHour(_ endTime: Date, _ startTime: Date) -> String {
+        let timeGap = endTime - startTime
+        let result = timeManager.secondsToHoursMinutesSeconds(timeGap)
+        
+        return result.1 < 30 ? "\(result.0)시간" : "\(result.0)시간 \(result.1)분"
     }
 }
 

@@ -59,8 +59,10 @@ final class WorkspaceCreateCreatingScheduleViewModel: ObservableObject {
     }
     
     func didTapConfirmButton() {
-        appendScheduleToList()
-        dismissModal()
+        if isActivatedConfirmButton {
+            appendScheduleToList()
+            dismissModal()
+        }
     }
 }
 
