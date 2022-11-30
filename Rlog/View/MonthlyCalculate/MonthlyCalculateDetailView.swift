@@ -230,6 +230,9 @@ private extension MonthlyCalculateDetailView {
         var endTime: String {
             return "\(viewModel.timeManager.getHour(workday.endTime)):\(viewModel.timeManager.getMinute(workday.endTime) >= 10 ? viewModel.timeManager.getMinute(workday.endTime).description : "0\(viewModel.timeManager.getMinute(workday.endTime))")"
         }
+        var isShowPlus1: Bool {
+            return workday.startTime.dayInt != workday.endTime.dayInt
+        }
         
         return VStack(alignment: .leading, spacing: 0) {
             HStack {
@@ -247,11 +250,16 @@ private extension MonthlyCalculateDetailView {
             }
             .padding(.top)
             
-            HStack {
+            HStack(alignment: .top, spacing: 2) {
                 Text("\(workday.date.monthInt)월 \(workday.date.dayInt)일")
                     .fontWeight(.bold)
                 Spacer()
                 Text("\(startTime) ~ \(endTime)")
+                if isShowPlus1 {
+                    Text("+1")
+                        .font(.caption)
+                        .foregroundColor(Color.grayMedium)
+                }
             }
             .foregroundColor(Color.fontBlack)
             .padding(EdgeInsets(top: 8, leading: 0, bottom: 16, trailing: 0))
