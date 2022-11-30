@@ -47,13 +47,20 @@ struct ScheduleUpdateView: View {
 private extension ScheduleUpdateView {
     var toolbarConfirmButton: some View {
         Button {
-            Task {
-                await viewModel.didTapConfirmationButton()
-                dismiss()
+            if viewModel.checkConflict() {
+                Task {
+                    await viewModel.didTapConfirmationButton()
+                    dismiss()
+                }
+            } else {
+                viewModel.isConflictAlertActive.toggle()
             }
         } label: {
             Text("완료")
                 .foregroundColor(.primary)
+        }
+        .alert("근무가 중복됩니다.", isPresented: $viewModel.isConflictAlertActive) {
+            Button("확인", role: .cancel) { viewModel.isConflictAlertActive = false }
         }
     }
     

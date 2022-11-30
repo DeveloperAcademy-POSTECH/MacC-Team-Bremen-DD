@@ -75,6 +75,7 @@ private extension ScheduleListView {
             Button{ isScheduleHasNotDoneListViewActive.toggle() } label: {
                 Image("inbox.curved")
             }
+            .disabled(!viewModel.hasWorkspace)
             .foregroundColor(.grayMedium)
             .padding(.trailing, 16)
             

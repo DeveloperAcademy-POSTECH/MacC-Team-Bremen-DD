@@ -61,7 +61,6 @@ final class ScheduleCreationViewModel: ObservableObject {
         self.startTime = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: selectedDate) ?? Date()
         self.endTime = Calendar.current.date(bySettingHour: 18, minute: 0, second: 0, of: selectedDate) ?? Date()
         self.alreadyExistWorkdays = CoreDataManager.shared.getWorkdaysBetween(start: selectedDate, target: Calendar.current.date(byAdding: DateComponents(day: 1), to: selectedDate) ?? selectedDate)
-        print(self.alreadyExistWorkdays)
     }
     
     func onAppear() {
