@@ -87,9 +87,21 @@ private extension WorkspaceCell {
                         }
                         .padding(.trailing, 3)
                         
-                        Text("\(schedule.startHour):\(schedule.startMinute < 30 ? "00" : "30") - \(schedule.endHour):\(schedule.endMinute < 30 ? "00" : "30")")
+                        HStack(alignment: .top, spacing: 0) {
+                            Group {
+                                Text("\(schedule.startHour):\(schedule.startMinute < 30 ? "00" : "30") - ")
+                                Text("\(schedule.endHour):\(schedule.endMinute < 30 ? "00" : "30")")
+                            }
                             .font(.subheadline)
                             .foregroundColor(.fontBlack)
+                            
+                            if schedule.startHour >= schedule.endHour {
+                                Text("+1")
+                                    .font(.caption)
+                                    .foregroundColor(Color.grayMedium)
+                                    .padding(.leading, 2)
+                            }
+                        }
                     }
                 }
             }
