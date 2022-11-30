@@ -65,7 +65,7 @@ private extension ScheduleContainer {
     }
     
     var workHourView: some View {
-        HStack {
+        HStack(alignment: .top) {
             // 시간이 n시 0분인 경우 두 자릿수인 00으로 표시
             if startMinute < 30 {
                 Text("\(startHour):\(startMinute)0")
@@ -87,6 +87,13 @@ private extension ScheduleContainer {
                 Text("\(endHour):\(endMinute)")
                     .font(.body)
                     .foregroundColor(Color.fontBlack)
+            }
+            
+            if startHour >= endHour {
+                Text("+1")
+                    .font(.caption)
+                    .foregroundColor(.grayMedium)
+                    .padding(.leading, -6)
             }
         }
     }

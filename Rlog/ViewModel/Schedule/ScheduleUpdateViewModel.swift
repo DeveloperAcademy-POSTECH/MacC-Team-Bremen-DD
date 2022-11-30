@@ -61,7 +61,13 @@ final class ScheduleUpdateViewModel: ObservableObject {
     }
     
     func checkConflict() -> Bool {
+        let startTime = startTime
+        var endTime = endTime
         var isNotConflict = true
+        
+        if startTime >= endTime {
+            endTime = Calendar.current.date(byAdding: DateComponents(day: 1), to: endTime) ?? endTime
+        }
         
         for workday in alreadyExistWorkdays {
             if workday.startTime <= startTime && endTime <= workday.endTime {
@@ -83,6 +89,10 @@ final class ScheduleUpdateViewModel: ObservableObject {
 
 private extension ScheduleUpdateViewModel {
     func updateWorkday() async {
+        if startTime >= endTime {
+            endTime = Calendar.current.date(byAdding: DateComponents(day: 1), to: endTime) ?? endTime
+        }
+        
         CoreDataManager.shared.editWorkday(
             of: workday,
             startTime: startTime,

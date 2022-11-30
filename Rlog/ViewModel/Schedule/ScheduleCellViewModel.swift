@@ -17,6 +17,9 @@ final class ScheduleCellViewModel: ObservableObject{
     @Published var startTimeString = ""
     @Published var endTimeString = ""
     @Published var hasDone = false
+    var isShowPlus1: Bool {
+        return data.startTime.dayInt != data.endTime.dayInt
+    }
     
     init(of data: WorkdayEntity, didTapConfirm: @escaping () -> Void) {
         self.data = data
