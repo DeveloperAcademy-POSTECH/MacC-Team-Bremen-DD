@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ScheduleHasNotDoneListView: View {
     @Environment(\.dismiss) var dismiss
-    @ObservedObject private var viewModel = SchedulePendingListViewModel()
+    @ObservedObject private var viewModel = ScheduleHasNotDoneListViewModel()
     
     var body: some View {
         VStack(spacing: 0) {
