@@ -95,8 +95,9 @@ private extension ScheduleCreationView {
             viewModel.didTapCreationButton()
         } label: {
             Text("완료")
-                .foregroundColor(Color.primary)
+                .foregroundColor(viewModel.isSelectedWorkspace ? Color.primary : Color.grayLight)
         }
+        .disabled(!viewModel.isSelectedWorkspace)
         .alert("근무 추가", isPresented: $viewModel.isAlertActive) {
             Button("취소", role: .cancel) { viewModel.isAlertActive = false }
             Button("추가", role: .none) {
