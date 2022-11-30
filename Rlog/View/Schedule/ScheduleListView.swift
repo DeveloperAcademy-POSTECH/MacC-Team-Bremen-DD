@@ -81,6 +81,7 @@ private extension ScheduleListView {
             Button{ isScheduleCreationViewActive.toggle() } label: {
                 Image("plus.curved")
             }
+            .disabled(!viewModel.hasWorkspace)
             .foregroundColor(.grayMedium)
             
             NavigationLink(

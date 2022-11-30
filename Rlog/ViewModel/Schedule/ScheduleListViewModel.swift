@@ -26,6 +26,9 @@ final class ScheduleListViewModel: ObservableObject {
             previousDate = previousWeek
         }
     }
+    var hasWorkspace: Bool {
+        return workspaces != []
+    }
     
     func onAppear() {
         // 생성된 근무지 여부를 확인합니다. 생성된 근무지가 없다면 예외처리 화면을 표시합니다.
