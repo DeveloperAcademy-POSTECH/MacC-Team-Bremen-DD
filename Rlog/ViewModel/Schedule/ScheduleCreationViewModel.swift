@@ -5,7 +5,7 @@
 //  Created by Hyeon-sang Lee on 2022/11/14.
 //
 
-import Foundation
+import SwiftUI
 
 final class ScheduleCreationViewModel: ObservableObject {
     let alreadyExistWorkdays: [WorkdayEntity]
@@ -15,7 +15,7 @@ final class ScheduleCreationViewModel: ObservableObject {
     @Published var selectedWorkspaceString: String = "" {
         didSet {
             let result = workspaces.filter { $0.name == selectedWorkspaceString}
-            self.selectedWorkspaceEntity = result.first
+            self.selectedWorkspace = result.first
         }
     }
     @Published var selectedWorkspace: WorkspaceEntity? = nil
@@ -25,9 +25,37 @@ final class ScheduleCreationViewModel: ObservableObject {
     @Published var memo: String = ""
     @Published var isAlertActive = false
     @Published var isConflictAlertActive = false
-    
-    var selectedWorkspaceEntity: WorkspaceEntity? = nil
-    
+    @Published var isWorkdayPickerActive = false {
+        willSet {
+            if newValue == true {
+                withAnimation {
+                    self.isStartTimePickerActive = false
+                    self.isEndTimePickerActive = false
+                }
+            }
+        }
+    }
+    @Published var isStartTimePickerActive = false {
+        willSet {
+            if newValue == true {
+                withAnimation {
+                    self.isWorkdayPickerActive = false
+                    self.isEndTimePickerActive = false
+                }
+            }
+        }
+    }
+    @Published var isEndTimePickerActive = false {
+        willSet {
+            if newValue == true {
+                withAnimation {
+                    self.isWorkdayPickerActive = false
+                    self.isStartTimePickerActive = false
+                }
+            }
+        }
+    }
+
     init(of selectedDate: Date) {
         workday = selectedDate
         self.startTime = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: selectedDate) ?? Date()
@@ -72,7 +100,7 @@ private extension ScheduleCreationViewModel {
     }
     
     func createWorkday() {
-        guard let workspaceEntity = selectedWorkspaceEntity else { return }
+        guard let workspaceEntity = selectedWorkspace else { return }
         guard let date = workday.onlyDate else { return }
         CoreDataManager.shared.createWorkday(
             of: workspaceEntity,

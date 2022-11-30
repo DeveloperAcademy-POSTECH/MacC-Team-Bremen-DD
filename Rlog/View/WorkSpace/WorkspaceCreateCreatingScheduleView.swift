@@ -68,10 +68,12 @@ private extension WorkspaceCreateCreatingScheduleView {
             VStack(spacing: 24) {
                 BorderedPicker(
                     date: $viewModel.startTime,
+                    isActive: $viewModel.isStartTimePickerActive,
                     type: .startTime
                 )
                 BorderedPicker(
                     date: $viewModel.endTime,
+                    isActive: $viewModel.isEndTimePickerActive,
                     type: .endTime
                 )
             }
@@ -93,6 +95,9 @@ private extension WorkspaceCreateCreatingScheduleView {
         } label: {
             Text("완료")
                 .foregroundColor(viewModel.isActivatedConfirmButton ? .primary : .grayLight)
+        }
+        .alert("선택된 요일에 근무가 있습니다.", isPresented: $viewModel.isAlertActive) {
+            Button("확인", role: .cancel) { viewModel.isAlertActive = false }
         }
     }
     

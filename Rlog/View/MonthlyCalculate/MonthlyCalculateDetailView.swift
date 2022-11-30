@@ -16,6 +16,15 @@ struct MonthlyCalculateDetailView: View {
     }
     
     var body: some View {
+        calculateDetail
+            .sheet(isPresented: $viewModel.isShareSheetActive) {
+                ShareSheet(items: viewModel.items)
+            }
+    }
+}
+
+private extension MonthlyCalculateDetailView {
+    var calculateDetail: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 header
@@ -28,23 +37,27 @@ struct MonthlyCalculateDetailView: View {
                     .padding(.top, 40)
                 resonList
                     .padding(EdgeInsets(top: 32, leading: 16, bottom: 16, trailing: 16))
-
             }
+            .background(
+                GeometryReader { proxy in
+                    Color.clear.onAppear {
+                        viewModel.proxy = proxy
+                    }
+                }
+            )
         }
-        .navigationBarTitle (Text("근무 정산"), displayMode: .inline)
+        .navigationBarTitle ("근무 정산", displayMode: .inline)
         .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 BackButton { dismiss() }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                shareButton
+                shareButton()
             }
         }
     }
-}
-
-private extension MonthlyCalculateDetailView {
+    
     var header: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(viewModel.calculateResult.workspace.name)
@@ -197,9 +210,9 @@ private extension MonthlyCalculateDetailView {
         }
     }
     
-    var shareButton: some View {
+    func shareButton() -> some View {
         Button(action: {
-            // TODO: - ViewModel에서 구현
+            viewModel.didTapShareButton(view: calculateDetail)
         }, label: {
             Text("공유")
                 .foregroundColor(Color.primary)
@@ -223,8 +236,8 @@ private extension MonthlyCalculateDetailView {
                 Text(worktype.name)
                     .font(.caption2)
                     .foregroundColor(Color.backgroundWhite)
-                    .padding(EdgeInsets(top: 2, leading: 6, bottom: 2, trailing: 6))
-                    .background(worktype.color)
+                    .padding(EdgeInsets(top: 2, leading: 6, bottom: 2, trailing: 6))\
+                    .background(worktype.mainColor)
                     .cornerRadius(5)
                 Spacer()
                 Text(viewModel.getSpentHour(workday.endTime, workday.startTime))
