@@ -5,14 +5,16 @@
 //  Created by 정지혁 on 2022/11/14.
 //
 
-import Foundation
+import SwiftUI
 
 @MainActor
 final class MonthlyCalculateDetailViewModel: ObservableObject {
     let calculateResult: MonthlyCalculateResult
+    @Published var isShareSheetActive = false
+    @Published var items: [Any] = []
+    @Published var proxy: GeometryProxy? = nil
     @Published var calendarDays: [Date] = []
     @Published var emptyCalendarDays: [Int] = []
-
     @Published var startDate = Date()
     @Published var target = Date()
 
@@ -48,6 +50,13 @@ final class MonthlyCalculateDetailViewModel: ObservableObject {
         let result = timeManager.secondsToHoursMinutesSeconds(timeGap)
         
         return result.1 < 30 ? "\(result.0)시간" : "\(result.0)시간 \(result.1)분"
+    }
+    
+    func didTapShareButton(view: some View) {
+        makeViewToImage(view) { [weak self] in
+            guard let self = self else { return }
+            self.shareViewImage()
+        }
     }
 }
 
@@ -89,4 +98,19 @@ private extension MonthlyCalculateDetailViewModel {
             emptyCalendarDays.append(count)
         }
     }
+    
+    func makeViewToImage(_ view: some View, completion: @escaping () -> Void) {
+        guard let proxy = proxy else { return }
+        let image = view.takeScreenshot(origin: proxy.frame(in: .global).origin, size: proxy.size)
+
+        items.removeAll()
+        items.append(image)
+
+        completion()
+    }
+    
+    func shareViewImage() {
+        self.isShareSheetActive = true
+    }
+    
 }
