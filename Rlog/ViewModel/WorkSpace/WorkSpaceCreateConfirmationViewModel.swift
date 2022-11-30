@@ -94,8 +94,12 @@ private extension WorkspaceCreateConfirmationViewModel {
         while range < after5Month {
             if schedule.repeatDays.contains(range.fetchDayOfWeek(date: range)) {
                 guard let startTime = Calendar.current.date(bySettingHour: Int(schedule.startHour), minute: Int(schedule.startMinute), second: 0, of: range),
-                      let endTime = Calendar.current.date(bySettingHour: Int(schedule.endHour), minute: Int(schedule.endMinute), second: 0, of: range),
+                      var endTime = Calendar.current.date(bySettingHour: Int(schedule.endHour), minute: Int(schedule.endMinute), second: 0, of: range),
                       let date = range.onlyDate else { return }
+                
+                if startTime >= endTime {
+                    endTime = Calendar.current.date(byAdding: DateComponents(day: 1), to: endTime) ?? endTime
+                }
                 
                 CoreDataManager.shared.createWorkday(
                     of: workspace,

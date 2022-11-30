@@ -40,7 +40,7 @@ private extension ScheduleCell {
                     .foregroundColor(viewModel.data.hasDone ? Color.grayLight : Color.fontBlack)
             }
             
-            HStack {
+            HStack(alignment: .top, spacing: 2) {
                 Text("\(viewModel.data.workspace.name)")
                     .font(.body)
                     .fontWeight(.bold)
@@ -51,6 +51,11 @@ private extension ScheduleCell {
                 Text("\(viewModel.startTimeString) ~ \(viewModel.endTimeString)")
                     .font(.body)
                     .foregroundColor(viewModel.data.hasDone ? Color.grayLight : Color.fontBlack)
+                if viewModel.isShowPlus1 {
+                    Text("+1")
+                        .font(.caption)
+                        .foregroundColor(viewModel.data.hasDone ? Color.grayLight : Color.grayMedium)
+                }
             }
             .padding(.vertical, 8)
             

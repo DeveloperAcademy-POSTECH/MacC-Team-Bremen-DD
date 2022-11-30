@@ -106,6 +106,11 @@ private extension ScheduleCreationViewModel {
     func createWorkday() {
         guard let workspaceEntity = selectedWorkspace else { return }
         guard let date = workday.onlyDate else { return }
+        
+        if startTime >= endTime {
+            endTime = Calendar.current.date(byAdding: DateComponents(day: 1), to: endTime) ?? endTime
+        }
+        
         CoreDataManager.shared.createWorkday(
             of: workspaceEntity,
             hourlyWage: workspaceEntity.hourlyWage,

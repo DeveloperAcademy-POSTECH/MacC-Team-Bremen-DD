@@ -83,6 +83,10 @@ final class ScheduleUpdateViewModel: ObservableObject {
 
 private extension ScheduleUpdateViewModel {
     func updateWorkday() async {
+        if startTime >= endTime {
+            endTime = Calendar.current.date(byAdding: DateComponents(day: 1), to: endTime) ?? endTime
+        }
+        
         CoreDataManager.shared.editWorkday(
             of: workday,
             startTime: startTime,
