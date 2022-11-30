@@ -38,6 +38,7 @@ final class WorkspaceCreateCreatingScheduleViewModel: ObservableObject {
             endMinute = Int16(timeManager.getMinute(endTime))
         }
     }
+    @Published var isAlertActive = false
     
     let timeManager = TimeManager()
     var isActivatedConfirmButton = false
@@ -60,8 +61,12 @@ final class WorkspaceCreateCreatingScheduleViewModel: ObservableObject {
     
     func didTapConfirmButton() {
         if isActivatedConfirmButton {
-            appendScheduleToList()
-            dismissModal()
+            if !checkScheduleConflict(creatSchedules: scheduleList) {
+                appendScheduleToList()
+                dismissModal()
+            } else {
+                isAlertActive.toggle()
+            }
         }
     }
 }
@@ -102,6 +107,20 @@ private extension WorkspaceCreateCreatingScheduleViewModel {
         } else {
             isActivatedConfirmButton = true
         }
+    }
+    
+    func checkScheduleConflict(creatSchedules: [ScheduleModel]) -> Bool {
+        for i in 0..<creatSchedules.count {
+            for j in i..<creatSchedules.count {
+                for day in creatSchedules[i].repeatedSchedule {
+                    if creatSchedules[j].repeatedSchedule.contains(day) {
+                        print(day)
+                        return true
+                    }
+                }
+            }
+        }
+        return false
     }
 }
 
