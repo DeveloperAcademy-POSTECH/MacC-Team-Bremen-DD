@@ -94,7 +94,7 @@ private extension MonthlyCalculateDetailView {
             }
             
             if viewModel.calculateResult.workspace.hasTax {
-                makeCalculationResult(title: "세금 3.3% 적용", result: "\(viewModel.calculateResult.tax)원")
+                makeCalculationResult(title: "세금 3.3% 적용", result: "- \(viewModel.calculateResult.tax)원")
             }
             
             HStack {
