@@ -135,10 +135,10 @@ private extension ScheduleListViewModel {
             let today = Date().onlyDate ?? Date()
             return date <= today
         }
-        if !hasNotdoneWorkdaysBeforeToday.uniqued().isEmpty {
-            self.hasHasNotDoneWorkdays = true
-        } else {
+        if hasNotdoneWorkdaysBeforeToday.uniqued().isEmpty {
             self.hasHasNotDoneWorkdays = false
+        } else {
+            self.hasHasNotDoneWorkdays = true
         }
     }
 }
