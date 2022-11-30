@@ -13,19 +13,28 @@ extension View {
     }
     
     // 화면을 이미지로 변환
-    func snapshot(width: CGFloat, height: CGFloat) -> UIImage {
-        let controller = UIHostingController(rootView: self)
-        let view = controller.view
+    func takeScreenshot(origin: CGPoint, size: CGSize) -> UIImage {
+        let window = UIWindow(frame: CGRect(origin: origin, size: size))
+        let hosting = UIHostingController(rootView: self)
+        
+        hosting.view.frame = window.frame
+        
+        window.addSubview(hosting.view)
+        window.makeKeyAndVisible()
+        
+        return hosting.view.screenShot
+    }
+}
 
-        let targetSize = CGSize(width: width, height: height)
-        view?.bounds = CGRect(origin: .zero, size: targetSize)
-        view?.backgroundColor = .clear
-
-        let renderer = UIGraphicsImageRenderer(size: targetSize)
-
-        return renderer.image { _ in
-            view?.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
-        }
+extension UIView {
+    var screenShot: UIImage {
+        let rect = self.bounds
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
+        let context: CGContext = UIGraphicsGetCurrentContext()!
+        self.layer.render(in: context)
+        let capturedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return capturedImage
     }
 }
 

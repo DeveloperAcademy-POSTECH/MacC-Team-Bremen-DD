@@ -12,7 +12,7 @@ final class MonthlyCalculateDetailViewModel: ObservableObject {
     let calculateResult: MonthlyCalculateResult
     @Published var isShareSheetActive = false
     @Published var items: [Any] = []
-    @Published var viewHeight: CGFloat = 0
+    @Published var proxy: GeometryProxy? = nil
     @Published var calendarDays: [Date] = []
     @Published var emptyCalendarDays: [Int] = []
     @Published var startDate = Date()
@@ -52,8 +52,8 @@ final class MonthlyCalculateDetailViewModel: ObservableObject {
         return result.1 < 30 ? "\(result.0)시간" : "\(result.0)시간 \(result.1)분"
     }
     
-    func didTapShareButton(view: some View, height: CGFloat) {
-        makeViewToImage(view: view, height: height) { [weak self] in
+    func didTapShareButton(view: some View) {
+        makeViewToImage(view) { [weak self] in
             guard let self = self else { return }
             self.shareViewImage()
         }
@@ -99,12 +99,13 @@ private extension MonthlyCalculateDetailViewModel {
         }
     }
     
-    func makeViewToImage(view: some View, height: CGFloat, completion: @escaping () -> Void) {
-        let width = UIScreen.main.bounds.width
-        let image = view.snapshot(width: width, height: height)
+    func makeViewToImage(_ view: some View, completion: @escaping () -> Void) {
+        guard let proxy = proxy else { return }
+        let image = view.takeScreenshot(origin: proxy.frame(in: .global).origin, size: proxy.size)
 
         items.removeAll()
         items.append(image)
+
         completion()
     }
     
