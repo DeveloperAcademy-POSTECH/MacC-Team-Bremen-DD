@@ -25,11 +25,9 @@ final class ScheduleCreationViewModel: ObservableObject {
     @Published var isWorkdayPickerActive = false {
         willSet {
             if newValue == true {
-                print(newValue)
                 withAnimation {
                     self.isStartTimePickerActive = false
                     self.isEndTimePickerActive = false
-
                 }
             }
         }

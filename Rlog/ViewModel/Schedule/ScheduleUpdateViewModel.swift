@@ -22,7 +22,6 @@ final class ScheduleUpdateViewModel: ObservableObject {
                 withAnimation {
                     self.isStartTimePickerActive = false
                     self.isEndTimePickerActive = false
-
                 }
             }
         }
