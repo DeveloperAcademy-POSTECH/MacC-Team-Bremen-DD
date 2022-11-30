@@ -68,10 +68,12 @@ private extension WorkspaceCreateCreatingScheduleView {
             VStack(spacing: 24) {
                 BorderedPicker(
                     date: $viewModel.startTime,
+                    isActive: $viewModel.isStartTimePickerActive,
                     type: .startTime
                 )
                 BorderedPicker(
                     date: $viewModel.endTime,
+                    isActive: $viewModel.isEndTimePickerActive,
                     type: .endTime
                 )
             }
