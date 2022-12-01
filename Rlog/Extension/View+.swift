@@ -33,7 +33,7 @@ extension UIView {
         let context: CGContext = UIGraphicsGetCurrentContext()!
         self.layer.render(in: context)
         let capturedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
+
         return capturedImage
     }
 }
