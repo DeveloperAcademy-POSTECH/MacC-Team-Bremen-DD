@@ -68,9 +68,14 @@
 
 ## 🖼️ Preview
 
-// 작성예정입니다...
-
-<br/>
+<p align="left">
+<img width="276" alt="image" src="https://user-images.githubusercontent.com/77766769/204975957-626ba0f2-4551-4df9-91a8-86616c290fb7.png">
+<img width="276" alt="image" src="https://user-images.githubusercontent.com/77766769/204975984-dc5263e0-7db1-4d91-a49a-8cbc470f2ab4.png">
+<img width="276" alt="image" src="https://user-images.githubusercontent.com/77766769/204975996-79bec89d-ff04-4d27-b62c-a49cc1745fc7.png">
+<img width="276" alt="image" src="https://user-images.githubusercontent.com/77766769/204976008-8f6d02c4-d50b-4ea6-8172-e1395482223f.png">
+<img width="276" alt="image" src="https://user-images.githubusercontent.com/77766769/204976017-4777bd59-9481-46a4-aa5f-c837b4ba3d13.png">
+<img width="276" alt="image" src="https://user-images.githubusercontent.com/77766769/204976021-53f89aa7-1828-47ed-b2f5-5da97e7b6a55.png">
+</p>
 
 자세한 구현 사항과 진행사항을 확인하기 위해 [팀 페이지](https://heliotrope-touch-13f.notion.site/96f86f9f7b644e6b8862fda663b4eb68) 및 [데일리 스텐드업](https://github.com/SPACE-DEV-CLUB/ReadmeMAker/wiki)을 참고해주세요.
 
