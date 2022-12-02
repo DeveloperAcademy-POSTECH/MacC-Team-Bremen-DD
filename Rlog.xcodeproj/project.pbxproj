@@ -7,74 +7,155 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D16518F2907D5CE00636D61 /* TitleSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D16518E2907D5CE00636D61 /* TitleSubView.swift */; };
+		2D1651912907D5F300636D61 /* WorkSpaceInfoSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1651902907D5F300636D61 /* WorkSpaceInfoSubView.swift */; };
+		2D1651932907D61800636D61 /* WorkspaceCreateConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1651922907D61800636D61 /* WorkspaceCreateConfirmationView.swift */; };
+		2D1651952907D63300636D61 /* WorkspaceCreateConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1651942907D63300636D61 /* WorkspaceCreateConfirmationViewModel.swift */; };
+		2D4377AA29277A2800AB7F94 /* ScheduleUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4377A929277A2800AB7F94 /* ScheduleUpdateView.swift */; };
+		2D5BA7C82900EE34003A6BC7 /* WorkspaceCreateScheduleListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5BA7C72900EE34003A6BC7 /* WorkspaceCreateScheduleListViewModel.swift */; };
 		2D66DCA228FD4DF000C90400 /* RlogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCA128FD4DF000C90400 /* RlogApp.swift */; };
-		2D66DCA628FD4DF200C90400 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D66DCA528FD4DF200C90400 /* Assets.xcassets */; };
-		2D66DCA928FD4DF200C90400 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D66DCA828FD4DF200C90400 /* Preview Assets.xcassets */; };
 		2D66DCAB28FD4DF200C90400 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCAA28FD4DF200C90400 /* CoreDataManager.swift */; };
-		2D66DCAE28FD4DF200C90400 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCAC28FD4DF200C90400 /* DataModel.xcdatamodeld */; };
-		2D66DCBB28FD8D0E00C90400 /* ScheduleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCBA28FD8D0E00C90400 /* ScheduleListView.swift */; };
-		2D66DCBD28FD8D2500C90400 /* ScheduleCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCBC28FD8D2500C90400 /* ScheduleCreateView.swift */; };
-		2D66DCBF28FD8D3700C90400 /* ScheduleUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCBE28FD8D3700C90400 /* ScheduleUpdateView.swift */; };
-		2D66DCC128FD8D5100C90400 /* WorkSpaceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCC028FD8D5100C90400 /* WorkSpaceListView.swift */; };
-		2D66DCC328FD8D6100C90400 /* WorkSpaceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCC228FD8D6100C90400 /* WorkSpaceDetailView.swift */; };
-		2D66DCC528FD8D6D00C90400 /* WorkSpaceCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCC428FD8D6D00C90400 /* WorkSpaceCreateView.swift */; };
-		2D66DCC728FD8D8900C90400 /* MonthlyCalculateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCC628FD8D8900C90400 /* MonthlyCalculateListView.swift */; };
-		2D66DCCA28FD8DA200C90400 /* MonthlyCalculateDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCC928FD8DA200C90400 /* MonthlyCalculateDetailView.swift */; };
+		2D66DCC128FD8D5100C90400 /* WorkspaceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCC028FD8D5100C90400 /* WorkspaceListView.swift */; };
 		2D66DCCC28FD8DC500C90400 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCCB28FD8DC500C90400 /* MainTabView.swift */; };
-		2D66DCCE28FD8DE600C90400 /* ScheduleListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCCD28FD8DE600C90400 /* ScheduleListViewModel.swift */; };
-		2D66DCD028FD8E1000C90400 /* ScheduleCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCCF28FD8E1000C90400 /* ScheduleCreateViewModel.swift */; };
-		2D66DCD428FD8E4700C90400 /* MonthlyCalculateListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCD328FD8E4700C90400 /* MonthlyCalculateListViewModel.swift */; };
-		2D66DCD628FD8E5500C90400 /* MonthlyCalculateDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCD528FD8E5500C90400 /* MonthlyCalculateDetailViewModel.swift */; };
-		2D66DCD828FD8E7100C90400 /* WorkSpaceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCD728FD8E7100C90400 /* WorkSpaceListViewModel.swift */; };
-		2D66DCDA28FD8E8F00C90400 /* WorkSpaceDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCD928FD8E8F00C90400 /* WorkSpaceDetailViewModel.swift */; };
-		2D66DCDC28FD8E9D00C90400 /* WorkSpaceCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCDB28FD8E9D00C90400 /* WorkSpaceCreateViewModel.swift */; };
-		2D66DCDE28FD8EB300C90400 /* ScheduleUpdateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCDD28FD8EB300C90400 /* ScheduleUpdateViewModel.swift */; };
+		2D66DCD828FD8E7100C90400 /* WorkspaceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCD728FD8E7100C90400 /* WorkspaceListViewModel.swift */; };
+		2D66DCDA28FD8E8F00C90400 /* WorkspaceDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCD928FD8E8F00C90400 /* WorkspaceDetailViewModel.swift */; };
+		2D66DCDC28FD8E9D00C90400 /* WorkspaceCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCDB28FD8E9D00C90400 /* WorkspaceCreateViewModel.swift */; };
 		2D66DCE028FD8ECA00C90400 /* MainTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCDF28FD8ECA00C90400 /* MainTabViewModel.swift */; };
 		2D66DCE428FD8F1D00C90400 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D66DCE328FD8F1D00C90400 /* Color+.swift */; };
+		2D9CE86629003AA600C60F4C /* WorkspaceCreateScheduleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9CE86529003AA600C60F4C /* WorkspaceCreateScheduleListView.swift */; };
+		2DF4EC712906344B009B48B4 /* WorkspaceCreateCreatingScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF4EC702906344B009B48B4 /* WorkspaceCreateCreatingScheduleView.swift */; };
+		2DF4EC7329063469009B48B4 /* WorkspaceCreateCreatingScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF4EC7229063469009B48B4 /* WorkspaceCreateCreatingScheduleViewModel.swift */; };
+		75DE0162290271E600A77369 /* WorkSpaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DE0161290271E600A77369 /* WorkSpaceCell.swift */; };
+		7A29B292291D490D0028003A /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A29B291291D490D0028003A /* View+.swift */; };
+		7A29B296291D60410028003A /* ScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A29B295291D60410028003A /* ScheduleCell.swift */; };
+		7A2F04B7291EA91E0091BA28 /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2F04B6291EA91E0091BA28 /* Weekday.swift */; };
+		7A90905A2927E83A00AB6019 /* ScheduleUpdateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9090592927E83A00AB6019 /* ScheduleUpdateViewModel.swift */; };
+		7A937596290035BD00D6D5BE /* FilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A937595290035BD00D6D5BE /* FilledButton.swift */; };
+		89441F572935E579005F4D03 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89441F562935E579005F4D03 /* ShareSheet.swift */; };
+		894CB4DD29221D19008E4197 /* ScheduleHasNotDoneListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4DC29221D19008E4197 /* ScheduleHasNotDoneListView.swift */; };
+		894CB4DF29221D41008E4197 /* ScheduleHasNotDoneListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4DE29221D41008E4197 /* ScheduleHasNotDoneListViewModel.swift */; };
+		894CB4E329235B00008E4197 /* BorderedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4E229235B00008E4197 /* BorderedPicker.swift */; };
+		894CB4E529235B2A008E4197 /* ScheduleCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4E429235B2A008E4197 /* ScheduleCreationView.swift */; };
+		894CB4E729235B4F008E4197 /* ScheduleCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4E629235B4F008E4197 /* ScheduleCreationViewModel.swift */; };
+		894CB4F729277164008E4197 /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4F629277164008E4197 /* TimeManager.swift */; };
+		894CB4F92927727C008E4197 /* WorkspaceListPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4F82927727C008E4197 /* WorkspaceListPicker.swift */; };
+		894CB4FB292772F8008E4197 /* YearMonthStepperCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4FA292772F8008E4197 /* YearMonthStepperCalendar.swift */; };
+		894CB4FD292CB448008E4197 /* ScheduleCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4FC292CB448008E4197 /* ScheduleCellViewModel.swift */; };
+		894CB4FF292F3DBA008E4197 /* Sequence+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB4FE292F3DBA008E4197 /* Sequence+.swift */; };
+		894CB504293098C6008E4197 /* WorkspaceCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB503293098C6008E4197 /* WorkspaceCreateView.swift */; };
+		894CB50629309E20008E4197 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB50529309E20008E4197 /* BackButton.swift */; };
+		894CB5082930A1CC008E4197 /* WorkspaceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894CB5072930A1CC008E4197 /* WorkspaceDetailView.swift */; };
+		898A5EBA2907C79100A6BEF7 /* HDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A5EB92907C79100A6BEF7 /* HDivider.swift */; };
+		898A5EC22908050D00A6BEF7 /* ScheduleContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A5EC12908050D00A6BEF7 /* ScheduleContainer.swift */; };
+		89CAA072290276E800504BDE /* BorderedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA071290276E800504BDE /* BorderedTextField.swift */; };
+		89CAA0742902771D00504BDE /* InputFormElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA0732902771D00504BDE /* InputFormElement.swift */; };
+		B936495A2921CA4500196E76 /* MonthlyCalculateDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93649592921CA4500196E76 /* MonthlyCalculateDetailView.swift */; };
+		B936495C2921CA6600196E76 /* MonthlyCalculateDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B936495B2921CA6600196E76 /* MonthlyCalculateDetailViewModel.swift */; };
+		B9901C0E29308D420089C8BC /* MonthlyCalculateResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9901C0D29308D420089C8BC /* MonthlyCalculateResult.swift */; };
+		C6145A692933627400BC29EE /* UINavigationController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6145A682933627400BC29EE /* UINavigationController+.swift */; };
+		C61880A32926056C00265644 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61880A22926056C00265644 /* ViewRouter.swift */; };
+		C62C338C28FFCEBD00469273 /* CustomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C338B28FFCEBD00469273 /* CustomButtonView.swift */; };
+		C63D4452291CDE86005D5AE6 /* ScheduleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63D4451291CDE86005D5AE6 /* ScheduleListView.swift */; };
+		C63D4457291CE37D005D5AE6 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C63D4455291CE37D005D5AE6 /* DataModel.xcdatamodeld */; };
+		C63D4459291CE3B0005D5AE6 /* MonthlyCalculateListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63D4458291CE3B0005D5AE6 /* MonthlyCalculateListViewModel.swift */; };
+		C63D445B291CE408005D5AE6 /* ScheduleListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63D445A291CE408005D5AE6 /* ScheduleListViewModel.swift */; };
 		C64D97BA28FE918F004F80E7 /* Text+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97B928FE918F004F80E7 /* Text+.swift */; };
 		C64D97BC28FE9197004F80E7 /* TextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97BB28FE9197004F80E7 /* TextField+.swift */; };
 		C64D97BE28FE919F004F80E7 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97BD28FE919F004F80E7 /* Date+.swift */; };
 		C64D97C028FE91AB004F80E7 /* DateFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97BF28FE91AB004F80E7 /* DateFormatter+.swift */; };
-		C64D97C328FE92B0004F80E7 /* WorkspaceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97C228FE92B0004F80E7 /* WorkspaceEntity.swift */; };
-		C64D97C528FE92C1004F80E7 /* ScheduleEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97C428FE92C1004F80E7 /* ScheduleEntity.swift */; };
-		C64D97C728FE92C7004F80E7 /* DayEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97C628FE92C7004F80E7 /* DayEntity.swift */; };
 		C64D97C928FE92D8004F80E7 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64D97C828FE92D8004F80E7 /* Tab.swift */; };
+		C67FC841290815C000DE3898 /* StrokeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CAA06F290265F300504BDE /* StrokeButton.swift */; };
+		C67FC8452908FA8300DE3898 /* WorkspaceCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67FC8442908FA8300DE3898 /* WorkspaceCellViewModel.swift */; };
+		C6959F85291CE78E008FEF4E /* MonthlyCalculateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6959F84291CE78E008FEF4E /* MonthlyCalculateListView.swift */; };
+		C6959FFE291E160C008FEF4E /* WorkspaceEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6959FF8291E160C008FEF4E /* WorkspaceEntity+CoreDataClass.swift */; };
+		C6959FFF291E160C008FEF4E /* WorkspaceEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6959FF9291E160C008FEF4E /* WorkspaceEntity+CoreDataProperties.swift */; };
+		C695A006291E1748008FEF4E /* WorkdayEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C695A004291E1748008FEF4E /* WorkdayEntity+CoreDataClass.swift */; };
+		C695A007291E1748008FEF4E /* WorkdayEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C695A005291E1748008FEF4E /* WorkdayEntity+CoreDataProperties.swift */; };
+		C695A00A291E17BD008FEF4E /* ScheduleEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C695A008291E17BD008FEF4E /* ScheduleEntity+CoreDataClass.swift */; };
+		C695A00B291E17BD008FEF4E /* ScheduleEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C695A009291E17BD008FEF4E /* ScheduleEntity+CoreDataProperties.swift */; };
+		C69C13B029139AB100D9B47F /* WorkDayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69C13AF29139AB100D9B47F /* WorkDayType.swift */; };
+		C6B601E02930B33800A05BCC /* MonthlyCalculateCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B601DF2930B33800A05BCC /* MonthlyCalculateCellView.swift */; };
+		C6B601E22930B36F00A05BCC /* WorkTypeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B601E12930B36F00A05BCC /* WorkTypeManager.swift */; };
+		C6B601E42930B3A100A05BCC /* MonthlyCalculateCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B601E32930B3A100A05BCC /* MonthlyCalculateCellViewModel.swift */; };
+		C6E8A457291CE5880018A2D1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D66DCA828FD4DF200C90400 /* Preview Assets.xcassets */; };
+		C6E8A458291CE58B0018A2D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D66DCA528FD4DF200C90400 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D16518E2907D5CE00636D61 /* TitleSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSubView.swift; sourceTree = "<group>"; };
+		2D1651902907D5F300636D61 /* WorkSpaceInfoSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceInfoSubView.swift; sourceTree = "<group>"; };
+		2D1651922907D61800636D61 /* WorkspaceCreateConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceCreateConfirmationView.swift; sourceTree = "<group>"; };
+		2D1651942907D63300636D61 /* WorkspaceCreateConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceCreateConfirmationViewModel.swift; sourceTree = "<group>"; };
+		2D4377A929277A2800AB7F94 /* ScheduleUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleUpdateView.swift; sourceTree = "<group>"; };
+		2D5BA7C72900EE34003A6BC7 /* WorkspaceCreateScheduleListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceCreateScheduleListViewModel.swift; sourceTree = "<group>"; };
+		2D5BA7C92901242E003A6BC7 /* Rlog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rlog.entitlements; sourceTree = "<group>"; };
 		2D66DC9E28FD4DF000C90400 /* Rlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D66DCA128FD4DF000C90400 /* RlogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RlogApp.swift; sourceTree = "<group>"; };
 		2D66DCA528FD4DF200C90400 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D66DCA828FD4DF200C90400 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2D66DCAA28FD4DF200C90400 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		2D66DCAD28FD4DF200C90400 /* Rlog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Rlog.xcdatamodel; sourceTree = "<group>"; };
-		2D66DCBA28FD8D0E00C90400 /* ScheduleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleListView.swift; sourceTree = "<group>"; };
-		2D66DCBC28FD8D2500C90400 /* ScheduleCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCreateView.swift; sourceTree = "<group>"; };
-		2D66DCBE28FD8D3700C90400 /* ScheduleUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleUpdateView.swift; sourceTree = "<group>"; };
-		2D66DCC028FD8D5100C90400 /* WorkSpaceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceListView.swift; sourceTree = "<group>"; };
-		2D66DCC228FD8D6100C90400 /* WorkSpaceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceDetailView.swift; sourceTree = "<group>"; };
-		2D66DCC428FD8D6D00C90400 /* WorkSpaceCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCreateView.swift; sourceTree = "<group>"; };
-		2D66DCC628FD8D8900C90400 /* MonthlyCalculateListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalculateListView.swift; sourceTree = "<group>"; };
-		2D66DCC928FD8DA200C90400 /* MonthlyCalculateDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalculateDetailView.swift; sourceTree = "<group>"; };
+		2D66DCC028FD8D5100C90400 /* WorkspaceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceListView.swift; sourceTree = "<group>"; };
 		2D66DCCB28FD8DC500C90400 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
-		2D66DCCD28FD8DE600C90400 /* ScheduleListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleListViewModel.swift; sourceTree = "<group>"; };
-		2D66DCCF28FD8E1000C90400 /* ScheduleCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCreateViewModel.swift; sourceTree = "<group>"; };
-		2D66DCD328FD8E4700C90400 /* MonthlyCalculateListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalculateListViewModel.swift; sourceTree = "<group>"; };
-		2D66DCD528FD8E5500C90400 /* MonthlyCalculateDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalculateDetailViewModel.swift; sourceTree = "<group>"; };
-		2D66DCD728FD8E7100C90400 /* WorkSpaceListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceListViewModel.swift; sourceTree = "<group>"; };
-		2D66DCD928FD8E8F00C90400 /* WorkSpaceDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceDetailViewModel.swift; sourceTree = "<group>"; };
-		2D66DCDB28FD8E9D00C90400 /* WorkSpaceCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCreateViewModel.swift; sourceTree = "<group>"; };
-		2D66DCDD28FD8EB300C90400 /* ScheduleUpdateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleUpdateViewModel.swift; sourceTree = "<group>"; };
+		2D66DCD728FD8E7100C90400 /* WorkspaceListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceListViewModel.swift; sourceTree = "<group>"; };
+		2D66DCD928FD8E8F00C90400 /* WorkspaceDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceDetailViewModel.swift; sourceTree = "<group>"; };
+		2D66DCDB28FD8E9D00C90400 /* WorkspaceCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceCreateViewModel.swift; sourceTree = "<group>"; };
 		2D66DCDF28FD8ECA00C90400 /* MainTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewModel.swift; sourceTree = "<group>"; };
 		2D66DCE328FD8F1D00C90400 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		2D9CE86529003AA600C60F4C /* WorkspaceCreateScheduleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceCreateScheduleListView.swift; sourceTree = "<group>"; };
+		2DF4EC702906344B009B48B4 /* WorkspaceCreateCreatingScheduleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceCreateCreatingScheduleView.swift; sourceTree = "<group>"; };
+		2DF4EC7229063469009B48B4 /* WorkspaceCreateCreatingScheduleViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceCreateCreatingScheduleViewModel.swift; sourceTree = "<group>"; };
+		75DE0161290271E600A77369 /* WorkSpaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSpaceCell.swift; sourceTree = "<group>"; };
+		7A29B291291D490D0028003A /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
+		7A29B295291D60410028003A /* ScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCell.swift; sourceTree = "<group>"; };
+		7A2F04B6291EA91E0091BA28 /* Weekday.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
+		7A9090592927E83A00AB6019 /* ScheduleUpdateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleUpdateViewModel.swift; sourceTree = "<group>"; };
+		7A937595290035BD00D6D5BE /* FilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
+		89441F562935E579005F4D03 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		894CB4DC29221D19008E4197 /* ScheduleHasNotDoneListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleHasNotDoneListView.swift; sourceTree = "<group>"; };
+		894CB4DE29221D41008E4197 /* ScheduleHasNotDoneListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleHasNotDoneListViewModel.swift; sourceTree = "<group>"; };
+		894CB4E229235B00008E4197 /* BorderedPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedPicker.swift; sourceTree = "<group>"; };
+		894CB4E429235B2A008E4197 /* ScheduleCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCreationView.swift; sourceTree = "<group>"; };
+		894CB4E629235B4F008E4197 /* ScheduleCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCreationViewModel.swift; sourceTree = "<group>"; };
+		894CB4F629277164008E4197 /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
+		894CB4F82927727C008E4197 /* WorkspaceListPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceListPicker.swift; sourceTree = "<group>"; };
+		894CB4FA292772F8008E4197 /* YearMonthStepperCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearMonthStepperCalendar.swift; sourceTree = "<group>"; };
+		894CB4FC292CB448008E4197 /* ScheduleCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCellViewModel.swift; sourceTree = "<group>"; };
+		894CB4FE292F3DBA008E4197 /* Sequence+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+.swift"; sourceTree = "<group>"; };
+		894CB503293098C6008E4197 /* WorkspaceCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceCreateView.swift; sourceTree = "<group>"; };
+		894CB50529309E20008E4197 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		894CB5072930A1CC008E4197 /* WorkspaceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceDetailView.swift; sourceTree = "<group>"; };
+		898A5EB92907C79100A6BEF7 /* HDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDivider.swift; sourceTree = "<group>"; };
+		898A5EC12908050D00A6BEF7 /* ScheduleContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleContainer.swift; sourceTree = "<group>"; };
+		89CAA06F290265F300504BDE /* StrokeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeButton.swift; sourceTree = "<group>"; };
+		89CAA071290276E800504BDE /* BorderedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedTextField.swift; sourceTree = "<group>"; };
+		89CAA0732902771D00504BDE /* InputFormElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFormElement.swift; sourceTree = "<group>"; };
+		B93649592921CA4500196E76 /* MonthlyCalculateDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalculateDetailView.swift; sourceTree = "<group>"; };
+		B936495B2921CA6600196E76 /* MonthlyCalculateDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalculateDetailViewModel.swift; sourceTree = "<group>"; };
+		B9901C0D29308D420089C8BC /* MonthlyCalculateResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalculateResult.swift; sourceTree = "<group>"; };
+		C6145A682933627400BC29EE /* UINavigationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+.swift"; sourceTree = "<group>"; };
+		C61880A22926056C00265644 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
+		C62C338B28FFCEBD00469273 /* CustomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomButtonView.swift; path = Rlog/View/Components/CustomButtonView.swift; sourceTree = SOURCE_ROOT; };
+		C63D4451291CDE86005D5AE6 /* ScheduleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleListView.swift; sourceTree = "<group>"; };
+		C63D4456291CE37D005D5AE6 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		C63D4458291CE3B0005D5AE6 /* MonthlyCalculateListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalculateListViewModel.swift; sourceTree = "<group>"; };
+		C63D445A291CE408005D5AE6 /* ScheduleListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleListViewModel.swift; sourceTree = "<group>"; };
 		C64D97B928FE918F004F80E7 /* Text+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+.swift"; sourceTree = "<group>"; };
 		C64D97BB28FE9197004F80E7 /* TextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+.swift"; sourceTree = "<group>"; };
 		C64D97BD28FE919F004F80E7 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		C64D97BF28FE91AB004F80E7 /* DateFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+.swift"; sourceTree = "<group>"; };
-		C64D97C228FE92B0004F80E7 /* WorkspaceEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceEntity.swift; sourceTree = "<group>"; };
-		C64D97C428FE92C1004F80E7 /* ScheduleEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEntity.swift; sourceTree = "<group>"; };
-		C64D97C628FE92C7004F80E7 /* DayEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayEntity.swift; sourceTree = "<group>"; };
 		C64D97C828FE92D8004F80E7 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		C67FC8442908FA8300DE3898 /* WorkspaceCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceCellViewModel.swift; sourceTree = "<group>"; };
+		C6959F84291CE78E008FEF4E /* MonthlyCalculateListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalculateListView.swift; sourceTree = "<group>"; };
+		C6959FF8291E160C008FEF4E /* WorkspaceEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkspaceEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C6959FF9291E160C008FEF4E /* WorkspaceEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkspaceEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C695A004291E1748008FEF4E /* WorkdayEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkdayEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C695A005291E1748008FEF4E /* WorkdayEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WorkdayEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C695A008291E17BD008FEF4E /* ScheduleEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C695A009291E17BD008FEF4E /* ScheduleEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C69C13AF29139AB100D9B47F /* WorkDayType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkDayType.swift; sourceTree = "<group>"; };
+		C6B601DF2930B33800A05BCC /* MonthlyCalculateCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalculateCellView.swift; sourceTree = "<group>"; };
+		C6B601E12930B36F00A05BCC /* WorkTypeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkTypeManager.swift; sourceTree = "<group>"; };
+		C6B601E32930B3A100A05BCC /* MonthlyCalculateCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalculateCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +188,7 @@
 		2D66DCA028FD4DF000C90400 /* Rlog */ = {
 			isa = PBXGroup;
 			children = (
+				2D5BA7C92901242E003A6BC7 /* Rlog.entitlements */,
 				2D66DCA128FD4DF000C90400 /* RlogApp.swift */,
 				2D66DCA528FD4DF200C90400 /* Assets.xcassets */,
 				C64D97C128FE92A2004F80E7 /* Model */,
@@ -114,6 +196,7 @@
 				2D66DCB828FD8C8E00C90400 /* ViewModel */,
 				2D66DCE228FD8F0500C90400 /* CoreData */,
 				2D66DCE128FD8EF900C90400 /* Extension */,
+				894CB500292F4392008E4197 /* Manager */,
 				2D66DCA728FD4DF200C90400 /* Preview Content */,
 			);
 			path = Rlog;
@@ -142,9 +225,11 @@
 		2D66DCB528FD51EC00C90400 /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
-				2D66DCBA28FD8D0E00C90400 /* ScheduleListView.swift */,
-				2D66DCBC28FD8D2500C90400 /* ScheduleCreateView.swift */,
-				2D66DCBE28FD8D3700C90400 /* ScheduleUpdateView.swift */,
+				C63D4451291CDE86005D5AE6 /* ScheduleListView.swift */,
+				7A29B295291D60410028003A /* ScheduleCell.swift */,
+				894CB4DC29221D19008E4197 /* ScheduleHasNotDoneListView.swift */,
+				894CB4E429235B2A008E4197 /* ScheduleCreationView.swift */,
+				2D4377A929277A2800AB7F94 /* ScheduleUpdateView.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -152,9 +237,13 @@
 		2D66DCB628FD51F900C90400 /* WorkSpace */ = {
 			isa = PBXGroup;
 			children = (
-				2D66DCC028FD8D5100C90400 /* WorkSpaceListView.swift */,
-				2D66DCC228FD8D6100C90400 /* WorkSpaceDetailView.swift */,
-				2D66DCC428FD8D6D00C90400 /* WorkSpaceCreateView.swift */,
+				75DE0160290271BC00A77369 /* SubViews */,
+				2D66DCC028FD8D5100C90400 /* WorkspaceListView.swift */,
+				894CB503293098C6008E4197 /* WorkspaceCreateView.swift */,
+				2D9CE86529003AA600C60F4C /* WorkspaceCreateScheduleListView.swift */,
+				2DF4EC702906344B009B48B4 /* WorkspaceCreateCreatingScheduleView.swift */,
+				2D1651922907D61800636D61 /* WorkspaceCreateConfirmationView.swift */,
+				894CB5072930A1CC008E4197 /* WorkspaceDetailView.swift */,
 			);
 			path = WorkSpace;
 			sourceTree = "<group>";
@@ -162,8 +251,9 @@
 		2D66DCB728FD520600C90400 /* MonthlyCalculate */ = {
 			isa = PBXGroup;
 			children = (
-				2D66DCC628FD8D8900C90400 /* MonthlyCalculateListView.swift */,
-				2D66DCC928FD8DA200C90400 /* MonthlyCalculateDetailView.swift */,
+				C6959F84291CE78E008FEF4E /* MonthlyCalculateListView.swift */,
+				B93649592921CA4500196E76 /* MonthlyCalculateDetailView.swift */,
+				C6B601DF2930B33800A05BCC /* MonthlyCalculateCellView.swift */,
 			);
 			path = MonthlyCalculate;
 			sourceTree = "<group>";
@@ -172,8 +262,9 @@
 			isa = PBXGroup;
 			children = (
 				2D66DCDF28FD8ECA00C90400 /* MainTabViewModel.swift */,
+				C61880A22926056C00265644 /* ViewRouter.swift */,
 				2D66DCD228FD8E3400C90400 /* MonthlyCalculate */,
-				2D66DCD128FD8E2A00C90400 /* WorkSpace */,
+				2D66DCD128FD8E2A00C90400 /* Workspace */,
 				2D66DCB928FD8CA000C90400 /* Schedule */,
 			);
 			path = ViewModel;
@@ -182,28 +273,35 @@
 		2D66DCB928FD8CA000C90400 /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
-				2D66DCCD28FD8DE600C90400 /* ScheduleListViewModel.swift */,
-				2D66DCCF28FD8E1000C90400 /* ScheduleCreateViewModel.swift */,
-				2D66DCDD28FD8EB300C90400 /* ScheduleUpdateViewModel.swift */,
+				C63D445A291CE408005D5AE6 /* ScheduleListViewModel.swift */,
+				894CB4DE29221D41008E4197 /* ScheduleHasNotDoneListViewModel.swift */,
+				894CB4E629235B4F008E4197 /* ScheduleCreationViewModel.swift */,
+				7A9090592927E83A00AB6019 /* ScheduleUpdateViewModel.swift */,
+				894CB4FC292CB448008E4197 /* ScheduleCellViewModel.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
 		};
-		2D66DCD128FD8E2A00C90400 /* WorkSpace */ = {
+		2D66DCD128FD8E2A00C90400 /* Workspace */ = {
 			isa = PBXGroup;
 			children = (
-				2D66DCD728FD8E7100C90400 /* WorkSpaceListViewModel.swift */,
-				2D66DCD928FD8E8F00C90400 /* WorkSpaceDetailViewModel.swift */,
-				2D66DCDB28FD8E9D00C90400 /* WorkSpaceCreateViewModel.swift */,
+				2D66DCD728FD8E7100C90400 /* WorkspaceListViewModel.swift */,
+				C67FC8442908FA8300DE3898 /* WorkspaceCellViewModel.swift */,
+				2D66DCD928FD8E8F00C90400 /* WorkspaceDetailViewModel.swift */,
+				2D66DCDB28FD8E9D00C90400 /* WorkspaceCreateViewModel.swift */,
+				2D5BA7C72900EE34003A6BC7 /* WorkspaceCreateScheduleListViewModel.swift */,
+				2DF4EC7229063469009B48B4 /* WorkspaceCreateCreatingScheduleViewModel.swift */,
+				2D1651942907D63300636D61 /* WorkspaceCreateConfirmationViewModel.swift */,
 			);
-			path = WorkSpace;
+			path = Workspace;
 			sourceTree = "<group>";
 		};
 		2D66DCD228FD8E3400C90400 /* MonthlyCalculate */ = {
 			isa = PBXGroup;
 			children = (
-				2D66DCD328FD8E4700C90400 /* MonthlyCalculateListViewModel.swift */,
-				2D66DCD528FD8E5500C90400 /* MonthlyCalculateDetailViewModel.swift */,
+				C63D4458291CE3B0005D5AE6 /* MonthlyCalculateListViewModel.swift */,
+				B936495B2921CA6600196E76 /* MonthlyCalculateDetailViewModel.swift */,
+				C6B601E32930B3A100A05BCC /* MonthlyCalculateCellViewModel.swift */,
 			);
 			path = MonthlyCalculate;
 			sourceTree = "<group>";
@@ -216,6 +314,9 @@
 				C64D97BB28FE9197004F80E7 /* TextField+.swift */,
 				C64D97BD28FE919F004F80E7 /* Date+.swift */,
 				C64D97BF28FE91AB004F80E7 /* DateFormatter+.swift */,
+				7A29B291291D490D0028003A /* View+.swift */,
+				894CB4FE292F3DBA008E4197 /* Sequence+.swift */,
+				C6145A682933627400BC29EE /* UINavigationController+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -224,14 +325,46 @@
 			isa = PBXGroup;
 			children = (
 				2D66DCAA28FD4DF200C90400 /* CoreDataManager.swift */,
-				2D66DCAC28FD4DF200C90400 /* DataModel.xcdatamodeld */,
+				C63D4455291CE37D005D5AE6 /* DataModel.xcdatamodeld */,
+				C6959F86291CE7EA008FEF4E /* Model */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		75DE0160290271BC00A77369 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				75DE0161290271E600A77369 /* WorkSpaceCell.swift */,
+				2D16518E2907D5CE00636D61 /* TitleSubView.swift */,
+				2D1651902907D5F300636D61 /* WorkSpaceInfoSubView.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		894CB500292F4392008E4197 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				894CB4F629277164008E4197 /* TimeManager.swift */,
+				C6B601E12930B36F00A05BCC /* WorkTypeManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		C64D97B828FE9146004F80E7 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				C62C338B28FFCEBD00469273 /* CustomButtonView.swift */,
+				89CAA071290276E800504BDE /* BorderedTextField.swift */,
+				89CAA0732902771D00504BDE /* InputFormElement.swift */,
+				7A937595290035BD00D6D5BE /* FilledButton.swift */,
+				89CAA06F290265F300504BDE /* StrokeButton.swift */,
+				898A5EB92907C79100A6BEF7 /* HDivider.swift */,
+				898A5EC12908050D00A6BEF7 /* ScheduleContainer.swift */,
+				894CB4E229235B00008E4197 /* BorderedPicker.swift */,
+				894CB4F82927727C008E4197 /* WorkspaceListPicker.swift */,
+				894CB4FA292772F8008E4197 /* YearMonthStepperCalendar.swift */,
+				894CB50529309E20008E4197 /* BackButton.swift */,
+				89441F562935E579005F4D03 /* ShareSheet.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -239,10 +372,23 @@
 		C64D97C128FE92A2004F80E7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C64D97C228FE92B0004F80E7 /* WorkspaceEntity.swift */,
-				C64D97C428FE92C1004F80E7 /* ScheduleEntity.swift */,
-				C64D97C628FE92C7004F80E7 /* DayEntity.swift */,
 				C64D97C828FE92D8004F80E7 /* Tab.swift */,
+				C69C13AF29139AB100D9B47F /* WorkDayType.swift */,
+				7A2F04B6291EA91E0091BA28 /* Weekday.swift */,
+				B9901C0D29308D420089C8BC /* MonthlyCalculateResult.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C6959F86291CE7EA008FEF4E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C6959FF8291E160C008FEF4E /* WorkspaceEntity+CoreDataClass.swift */,
+				C6959FF9291E160C008FEF4E /* WorkspaceEntity+CoreDataProperties.swift */,
+				C695A008291E17BD008FEF4E /* ScheduleEntity+CoreDataClass.swift */,
+				C695A009291E17BD008FEF4E /* ScheduleEntity+CoreDataProperties.swift */,
+				C695A004291E1748008FEF4E /* WorkdayEntity+CoreDataClass.swift */,
+				C695A005291E1748008FEF4E /* WorkdayEntity+CoreDataProperties.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -256,7 +402,7 @@
 			buildPhases = (
 				2D66DC9A28FD4DF000C90400 /* Sources */,
 				2D66DC9B28FD4DF000C90400 /* Frameworks */,
-				2D66DC9C28FD4DF000C90400 /* Resources */,
+				C6E8A456291CE5810018A2D1 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -301,12 +447,12 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		2D66DC9C28FD4DF000C90400 /* Resources */ = {
+		C6E8A456291CE5810018A2D1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D66DCA928FD4DF200C90400 /* Preview Assets.xcassets in Resources */,
-				2D66DCA628FD4DF200C90400 /* Assets.xcassets in Resources */,
+				C6E8A458291CE58B0018A2D1 /* Assets.xcassets in Resources */,
+				C6E8A457291CE5880018A2D1 /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,36 +463,82 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D66DCC528FD8D6D00C90400 /* WorkSpaceCreateView.swift in Sources */,
-				C64D97C528FE92C1004F80E7 /* ScheduleEntity.swift in Sources */,
-				2D66DCCE28FD8DE600C90400 /* ScheduleListViewModel.swift in Sources */,
+				894CB4DD29221D19008E4197 /* ScheduleHasNotDoneListView.swift in Sources */,
+				7A937596290035BD00D6D5BE /* FilledButton.swift in Sources */,
+				C67FC8452908FA8300DE3898 /* WorkspaceCellViewModel.swift in Sources */,
+				C6959FFF291E160C008FEF4E /* WorkspaceEntity+CoreDataProperties.swift in Sources */,
+				898A5EBA2907C79100A6BEF7 /* HDivider.swift in Sources */,
 				2D66DCE428FD8F1D00C90400 /* Color+.swift in Sources */,
-				2D66DCC128FD8D5100C90400 /* WorkSpaceListView.swift in Sources */,
-				C64D97C728FE92C7004F80E7 /* DayEntity.swift in Sources */,
-				2D66DCD028FD8E1000C90400 /* ScheduleCreateViewModel.swift in Sources */,
-				2D66DCBB28FD8D0E00C90400 /* ScheduleListView.swift in Sources */,
-				2D66DCBF28FD8D3700C90400 /* ScheduleUpdateView.swift in Sources */,
+				2D66DCC128FD8D5100C90400 /* WorkspaceListView.swift in Sources */,
+				2D1651912907D5F300636D61 /* WorkSpaceInfoSubView.swift in Sources */,
+				2D9CE86629003AA600C60F4C /* WorkspaceCreateScheduleListView.swift in Sources */,
+				2D9CE86629003AA600C60F4C /* WorkspaceCreateScheduleListView.swift in Sources */,
+				C695A006291E1748008FEF4E /* WorkdayEntity+CoreDataClass.swift in Sources */,
+				C695A007291E1748008FEF4E /* WorkdayEntity+CoreDataProperties.swift in Sources */,
+				C6959F85291CE78E008FEF4E /* MonthlyCalculateListView.swift in Sources */,
+				C6145A692933627400BC29EE /* UINavigationController+.swift in Sources */,
+				894CB4DF29221D41008E4197 /* ScheduleHasNotDoneListViewModel.swift in Sources */,
+				7A29B296291D60410028003A /* ScheduleCell.swift in Sources */,
+				894CB4F92927727C008E4197 /* WorkspaceListPicker.swift in Sources */,
+				C61880A32926056C00265644 /* ViewRouter.swift in Sources */,
+				C63D4459291CE3B0005D5AE6 /* MonthlyCalculateListViewModel.swift in Sources */,
+				C62C338C28FFCEBD00469273 /* CustomButtonView.swift in Sources */,
+				C63D4452291CDE86005D5AE6 /* ScheduleListView.swift in Sources */,
+				C67FC841290815C000DE3898 /* StrokeButton.swift in Sources */,
 				C64D97C928FE92D8004F80E7 /* Tab.swift in Sources */,
+				894CB4FF292F3DBA008E4197 /* Sequence+.swift in Sources */,
+				894CB4E729235B4F008E4197 /* ScheduleCreationViewModel.swift in Sources */,
 				2D66DCAB28FD4DF200C90400 /* CoreDataManager.swift in Sources */,
-				2D66DCD428FD8E4700C90400 /* MonthlyCalculateListViewModel.swift in Sources */,
-				2D66DCDA28FD8E8F00C90400 /* WorkSpaceDetailViewModel.swift in Sources */,
-				2D66DCC328FD8D6100C90400 /* WorkSpaceDetailView.swift in Sources */,
-				2D66DCAE28FD4DF200C90400 /* DataModel.xcdatamodeld in Sources */,
-				2D66DCDE28FD8EB300C90400 /* ScheduleUpdateViewModel.swift in Sources */,
+				2DF4EC7329063469009B48B4 /* WorkspaceCreateCreatingScheduleViewModel.swift in Sources */,
+				C695A00A291E17BD008FEF4E /* ScheduleEntity+CoreDataClass.swift in Sources */,
+				7A2F04B7291EA91E0091BA28 /* Weekday.swift in Sources */,
+				2D5BA7C82900EE34003A6BC7 /* WorkspaceCreateScheduleListViewModel.swift in Sources */,
+				2D66DCDA28FD8E8F00C90400 /* WorkspaceDetailViewModel.swift in Sources */,
+				2D5BA7C82900EE34003A6BC7 /* WorkspaceCreateScheduleListViewModel.swift in Sources */,
+				2D66DCDA28FD8E8F00C90400 /* WorkspaceDetailViewModel.swift in Sources */,
+				2D5BA7C82900EE34003A6BC7 /* WorkspaceCreateScheduleListViewModel.swift in Sources */,
+				2D66DCDA28FD8E8F00C90400 /* WorkspaceDetailViewModel.swift in Sources */,
+				C6B601E42930B3A100A05BCC /* MonthlyCalculateCellViewModel.swift in Sources */,
+				C6B601E22930B36F00A05BCC /* WorkTypeManager.swift in Sources */,
+				894CB4FD292CB448008E4197 /* ScheduleCellViewModel.swift in Sources */,
+				B936495A2921CA4500196E76 /* MonthlyCalculateDetailView.swift in Sources */,
+				2D16518F2907D5CE00636D61 /* TitleSubView.swift in Sources */,
+				C695A00B291E17BD008FEF4E /* ScheduleEntity+CoreDataProperties.swift in Sources */,
+				894CB4FB292772F8008E4197 /* YearMonthStepperCalendar.swift in Sources */,
+				C63D445B291CE408005D5AE6 /* ScheduleListViewModel.swift in Sources */,
+				2D4377AA29277A2800AB7F94 /* ScheduleUpdateView.swift in Sources */,
 				C64D97BE28FE919F004F80E7 /* Date+.swift in Sources */,
 				2D66DCCC28FD8DC500C90400 /* MainTabView.swift in Sources */,
 				C64D97BA28FE918F004F80E7 /* Text+.swift in Sources */,
-				C64D97C328FE92B0004F80E7 /* WorkspaceEntity.swift in Sources */,
-				2D66DCD628FD8E5500C90400 /* MonthlyCalculateDetailViewModel.swift in Sources */,
-				2D66DCD828FD8E7100C90400 /* WorkSpaceListViewModel.swift in Sources */,
-				2D66DCC728FD8D8900C90400 /* MonthlyCalculateListView.swift in Sources */,
-				2D66DCCA28FD8DA200C90400 /* MonthlyCalculateDetailView.swift in Sources */,
-				2D66DCDC28FD8E9D00C90400 /* WorkSpaceCreateViewModel.swift in Sources */,
+				7A90905A2927E83A00AB6019 /* ScheduleUpdateViewModel.swift in Sources */,
+				89CAA072290276E800504BDE /* BorderedTextField.swift in Sources */,
+				2D66DCD828FD8E7100C90400 /* WorkspaceListViewModel.swift in Sources */,
+				898A5EC22908050D00A6BEF7 /* ScheduleContainer.swift in Sources */,
+				2D1651932907D61800636D61 /* WorkspaceCreateConfirmationView.swift in Sources */,
+				89CAA0742902771D00504BDE /* InputFormElement.swift in Sources */,
+				B9901C0E29308D420089C8BC /* MonthlyCalculateResult.swift in Sources */,
+				75DE0162290271E600A77369 /* WorkSpaceCell.swift in Sources */,
+				B936495C2921CA6600196E76 /* MonthlyCalculateDetailViewModel.swift in Sources */,
+				2D66DCDC28FD8E9D00C90400 /* WorkspaceCreateViewModel.swift in Sources */,
+				C69C13B029139AB100D9B47F /* WorkDayType.swift in Sources */,
+				C6959FFE291E160C008FEF4E /* WorkspaceEntity+CoreDataClass.swift in Sources */,
 				C64D97C028FE91AB004F80E7 /* DateFormatter+.swift in Sources */,
+				7A29B292291D490D0028003A /* View+.swift in Sources */,
 				2D66DCA228FD4DF000C90400 /* RlogApp.swift in Sources */,
+				C63D4457291CE37D005D5AE6 /* DataModel.xcdatamodeld in Sources */,
+				894CB4E529235B2A008E4197 /* ScheduleCreationView.swift in Sources */,
+				894CB5082930A1CC008E4197 /* WorkspaceDetailView.swift in Sources */,
+				894CB4E329235B00008E4197 /* BorderedPicker.swift in Sources */,
+				89441F572935E579005F4D03 /* ShareSheet.swift in Sources */,
+				2DF4EC712906344B009B48B4 /* WorkspaceCreateCreatingScheduleView.swift in Sources */,
 				C64D97BC28FE9197004F80E7 /* TextField+.swift in Sources */,
-				2D66DCBD28FD8D2500C90400 /* ScheduleCreateView.swift in Sources */,
+				894CB504293098C6008E4197 /* WorkspaceCreateView.swift in Sources */,
+				2D1651952907D63300636D61 /* WorkspaceCreateConfirmationViewModel.swift in Sources */,
+				2D1651952907D63300636D61 /* WorkspaceCreateConfirmationViewModel.swift in Sources */,
+				C6B601E02930B33800A05BCC /* MonthlyCalculateCellView.swift in Sources */,
 				2D66DCE028FD8ECA00C90400 /* MainTabViewModel.swift in Sources */,
+				894CB50629309E20008E4197 /* BackButton.swift in Sources */,
+				894CB4F729277164008E4197 /* TimeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,7 +595,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -457,7 +649,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -472,32 +664,41 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Rlog/Rlog.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Rlog/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = LR5A5F6L75;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5MNSFLP2V9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "group.com.Bremen-DD.Rlog";
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BremenDD.Rlog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = RlogApp;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = rlogDev;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -506,32 +707,41 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Rlog/Rlog.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Rlog/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = LR5A5F6L75;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5MNSFLP2V9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "group.com.Bremen-DD.Rlog";
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BremenDD.Rlog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = RlogApp;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = rlogDev;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -559,12 +769,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		2D66DCAC28FD4DF200C90400 /* DataModel.xcdatamodeld */ = {
+		C63D4455291CE37D005D5AE6 /* DataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				2D66DCAD28FD4DF200C90400 /* Rlog.xcdatamodel */,
+				C63D4456291CE37D005D5AE6 /* DataModel.xcdatamodel */,
 			);
-			currentVersion = 2D66DCAD28FD4DF200C90400 /* Rlog.xcdatamodel */;
+			currentVersion = C63D4456291CE37D005D5AE6 /* DataModel.xcdatamodel */;
 			path = DataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

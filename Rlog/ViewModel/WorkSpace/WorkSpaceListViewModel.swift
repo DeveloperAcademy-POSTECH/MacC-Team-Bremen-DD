@@ -5,10 +5,22 @@
 //  Created by 송시원 on 2022/10/17.
 //
 
-import SwiftUI
+import Combine
+import Foundation
 
-struct WorkSpaceListViewModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+@MainActor
+final class WorkspaceListViewModel: ObservableObject {
+    @Published var isShowingSheet = false
+    @Published var workspaces: [WorkspaceEntity] = []
+    
+    func onAppear() {
+        getAllWorkspaces()
+    }
+}
+
+private extension WorkspaceListViewModel {
+    func getAllWorkspaces() {
+        let result = CoreDataManager.shared.getAllWorkspaces()
+        workspaces = result
     }
 }

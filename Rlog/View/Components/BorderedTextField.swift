@@ -1,0 +1,144 @@
+//
+//  BorderedTextField.swift
+//  Rlog
+//
+//  Created by Noah's Ark on 2022/10/19.
+//
+
+import SwiftUI
+
+struct BorderedTextField: View {
+    let textFieldType: BorderedTextFieldType
+    @FocusState var isFocused: Bool
+    @State var maximumText = ""
+    @Binding var text: String
+    
+    var body: some View {
+        borderedTextFieldView
+    }
+}
+
+private extension BorderedTextField {
+    var borderedTextFieldView: some View {
+        VStack(spacing: 0) {
+            HStack(spacing: 0) {
+                prefixView
+                contents
+                Spacer()
+                suffixView
+            }
+            .padding(.vertical, 12)
+            .background(Color.backgroundCard)
+            .cornerRadius(10)
+            .overlay {
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(
+                        isFocused == false ? .backgroundStroke : isErrorOnTextField(),
+                        lineWidth: 2
+                    )
+            }
+        }
+        .frame(maxWidth: .infinity, minHeight: 30, maxHeight: 30)
+    }
+    
+    var prefixView: some View {
+        HStack {
+            if textFieldType == .payday {
+                Text("매월")
+                    .font(.body)
+                    .foregroundColor(.grayMedium)
+                    .padding(.leading, 16)
+            }
+        }
+    }
+    
+    var contents: some View {
+        TextField(
+            textFieldType.placeholder,
+            text: $text
+        )
+        .padding(.horizontal)
+        .keyboardType(textFieldType.keyboardType)
+        .focused($isFocused)
+    }
+    
+    @ViewBuilder
+    var suffixView: some View {
+        switch textFieldType {
+        case .workplace:
+            Text("\(String(describing: text).count)/20")
+                .font(.caption)
+                .foregroundColor(.gray)
+                .padding(.trailing)
+        case .payday:
+            Text("일")
+                .font(.body)
+                .foregroundColor(.grayMedium)
+                .padding(.trailing)
+        case .wage:
+            Text("원")
+                .font(.body)
+                .foregroundColor(.grayMedium)
+                .padding(.trailing)
+        case .reason, .time, .none(title: _):
+            EmptyView()
+        }
+    }
+    
+    func isErrorOnTextField() -> Color {
+        switch textFieldType {
+        case .workplace:
+            if text.count > 20 { return .red }
+        case .wage:
+            if text == "" { return .primary }
+            guard let textToInt = Int(text) else { return .red }
+            if textToInt >= 1000000 { return .red }
+        case .payday:
+            if text == "" { return .primary }
+            guard let textToInt = Int(text) else { return .red }
+            if textToInt > 28 || textToInt < 1 { return .red }
+        case .reason, .time, .none:
+            return .primary
+        }
+        
+        return .primary
+    }
+}
+
+enum BorderedTextFieldType: Equatable {
+    case workplace
+    case wage
+    case payday
+    case reason
+    case time
+    case none(title: String)
+    
+    var title: String {
+        switch self {
+        case .workplace: return "근무지"
+        case .wage: return "시급"
+        case .payday: return "급여일"
+        case .reason: return "사유"
+        case .time: return "시간"
+        case .none(let title): return title
+        }
+    }
+    
+    var placeholder: String {
+        switch self {
+        case .workplace: return "예시) 편의점"
+        case .wage: return "최저시급 9,160원"
+        case .payday: return "10"
+        case .reason: return "사유를 입력해주세요."
+        case .time: return "00"
+        case .none: return "내용을 입력해주세요."
+        }
+    }
+    
+    var keyboardType: UIKeyboardType {
+        switch self {
+        case .wage, .payday, .time: return .decimalPad
+        case .workplace, .reason, .none: return .default
+        }
+    }
+}

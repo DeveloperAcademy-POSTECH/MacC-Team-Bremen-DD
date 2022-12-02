@@ -10,47 +10,212 @@ import CoreData
 struct CoreDataManager {
     static let shared = CoreDataManager()
 
-    static var preview: CoreDataManager = {
-        let result = CoreDataManager(inMemory: true)
-        let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-        }
-        do {
-            try viewContext.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
-        return result
-    }()
+    private let container = NSPersistentContainer(name: "DataModel")
 
-    let container: NSPersistentContainer
-
-    init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "Rlog")
-        if inMemory {
-            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
-        }
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-
-                /*
-                 Typical reasons for an error here include:
-                 * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                 * The device is out of space.
-                 * The store could not be migrated to the current model version.
-                 Check the error message to determine what the actual problem was.
-                 */
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        container.viewContext.automaticallyMergesChangesFromParent = true
+    private var context: NSManagedObjectContext {
+        container.viewContext
     }
+
+    private init() {
+        loadStores()
+    }
+
+    private func loadStores() {
+        container.loadPersistentStores { desc, error in
+              if let error = error {
+                  print(error.localizedDescription)
+              }
+        }
+    }
+
+    private func save() {
+        do {
+            try context.save()
+        } catch {
+            print("FAILED TO SAVE CONTEXT")
+        }
+    }
+}
+
+// MARK: - WorkspaceEntity Logic
+extension CoreDataManager {
+    func createWorkspace(
+        name: String,
+        payDay: Int16,
+        hourlyWage: Int32,
+        hasTax: Bool,
+        hasJuhyu: Bool
+    ) -> WorkspaceEntity {
+        let workspace = WorkspaceEntity(context: context)
+        workspace.name = name
+        workspace.payDay = payDay
+        workspace.hourlyWage = hourlyWage
+        workspace.hasTax = hasTax
+        workspace.hasJuhyu = hasJuhyu
+        save()
+        return workspace
+    }
+
+    func getAllWorkspaces() -> [WorkspaceEntity] {
+        let fetchRequest: NSFetchRequest<WorkspaceEntity> = WorkspaceEntity.fetchRequest()
+        let result = try? context.fetch(fetchRequest)
+        return result ?? []
+    }
+
+    func editWorkspace(
+        workspace: WorkspaceEntity,
+        name: String,
+        payDay: Int16,
+        hourlyWage: Int32,
+        hasTax: Bool,
+        hasJuhyu: Bool
+    ) {
+        workspace.name = name
+        workspace.payDay = payDay
+        workspace.hourlyWage = hourlyWage
+        workspace.hasTax = hasTax
+        workspace.hasJuhyu = hasJuhyu
+        save()
+    }
+
+    func deleteWorkspace(workspace: WorkspaceEntity) {
+        context.delete(workspace)
+        save()
+    }
+}
+
+// MARK: - ScheduleEntity Logic
+extension CoreDataManager {
+    func createSchedule(
+        of workspace: WorkspaceEntity,
+        repeatDays: [String],
+        startHour: Int16,
+        startMinute: Int16,
+        endHour: Int16,
+        endMinute: Int16
+    ) -> ScheduleEntity {
+        let schedule = ScheduleEntity(context: context)
+        schedule.workspace = workspace
+        schedule.repeatDays = repeatDays
+        schedule.startHour = startHour
+        schedule.startMinute = startMinute
+        schedule.endHour = endHour
+        schedule.endMinute = endMinute
+        save()
+        return schedule
+    }
+
+    func getSchedules(of workspace: WorkspaceEntity) -> [ScheduleEntity] {
+        let fetchRequest: NSFetchRequest<ScheduleEntity> = ScheduleEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "workspace.name = %@", workspace.name)
+        let result = try? context.fetch(fetchRequest)
+        return result ?? []
+    }
+
+    func editSchedule(
+        of schedule: ScheduleEntity,
+        repeatDays: [String],
+        startHour: Int16,
+        startMinute: Int16,
+        endHour: Int16,
+        endMinute: Int16
+    ) {
+        schedule.repeatDays = repeatDays
+        schedule.startHour = startHour
+        schedule.startMinute = startMinute
+        schedule.endHour = endHour
+        schedule.endMinute = endMinute
+        save()
+    }
+
+    func deleteSchedule(of schedule: ScheduleEntity) {
+        let workdays = getHasNotDoneWorkdays()
+        let filtered = workdays.filter { $0.schedule?.objectID == schedule.objectID}
+        for workday in filtered {
+          deleteWorkday(of: workday)
+        }
+        context.delete(schedule)
+        save()
+       }
+}
+
+// MARK: - WorkdayEntity Logic
+extension CoreDataManager {
+    func createWorkday(
+        of workspace: WorkspaceEntity,
+        hourlyWage: Int32,
+        hasDone: Bool,
+        date: Date,
+        startTime: Date,
+        endTime: Date,
+        memo: String?,
+        schedule: ScheduleEntity?
+    ) {
+        let workday = WorkdayEntity(context: context)
+        workday.workspace = workspace
+        workday.hourlyWage = hourlyWage
+        workday.hasDone = hasDone
+        workday.date = date
+        workday.startTime = startTime
+        workday.endTime = endTime
+        workday.memo = memo
+        workday.schedule = schedule
+        save()
+    }
+    
+    func getAllWorkdays(of workspace: WorkspaceEntity) -> [WorkdayEntity] {
+        let fetchRequest: NSFetchRequest<WorkdayEntity> = WorkdayEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "workspace.name == %@", workspace.name)
+        let result = try? context.fetch(fetchRequest)
+        return result ?? []
+    }
+
+    func editWorkday(
+        of workday: WorkdayEntity,
+        startTime: Date,
+        endTime: Date,
+        memo: String?
+    ) {
+            workday.startTime = startTime
+            workday.endTime = endTime
+            workday.memo = memo
+            save()
+    }
+
+    func getWorkdaysBetween(start: Date, target: Date) -> [WorkdayEntity] {
+        let fetchRequest: NSFetchRequest<WorkdayEntity> = WorkdayEntity.fetchRequest()
+        let startPredicate = NSPredicate(format: "date >= %@", start as CVarArg)
+        let targetPredicate = NSPredicate(format: "date < %@", target as CVarArg)
+        fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: [startPredicate, targetPredicate])
+        let result = try? context.fetch(fetchRequest)
+        return result ?? []
+    }
+
+    func getHasNotDoneWorkdays() -> [WorkdayEntity] {
+        let fetchRequest: NSFetchRequest<WorkdayEntity> = WorkdayEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "hasDone == %@", NSNumber(booleanLiteral: false))
+        let result = try? context.fetch(fetchRequest)
+        return result ?? []
+    }
+
+    func getHasDoneWorkdays(of workspace: WorkspaceEntity, start: Date, target: Date) -> [WorkdayEntity] {
+        let fetchRequest: NSFetchRequest<WorkdayEntity> = WorkdayEntity.fetchRequest()
+        let workspacePredicate = NSPredicate(format: "workspace.name = %@", workspace.name)
+        let hasDonePredicate = NSPredicate(format: "hasDone == %@", NSNumber(booleanLiteral: true))
+        let startPredicate = NSPredicate(format: "date >= %@", start as CVarArg)
+        let targetPredicate = NSPredicate(format: "date < %@", target as CVarArg)
+        fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: [workspacePredicate, startPredicate, targetPredicate, hasDonePredicate])
+        let result = try? context.fetch(fetchRequest)
+        return result ?? []
+    }
+
+    func toggleHasDone(of workday: WorkdayEntity) {
+        workday.hasDone.toggle()
+        save()
+    }
+
+    func deleteWorkday(of workday: WorkdayEntity) {
+         context.delete(workday)
+         save()
+     }
 }
