@@ -125,5 +125,14 @@ final class TimeManager {
         return minute
     }
     
+    func compareDate(date1: Date, date2: Date, unit: Calendar.Component) -> Bool {
+        let order = NSCalendar.current.compare(date1, to: date2, toGranularity: unit)
+        switch order {
+        case .orderedAscending:
+            return true
+        default:
+            return false
+        }
+    }
     // ✅ BD-203
 }

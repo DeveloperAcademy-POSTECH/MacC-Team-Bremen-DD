@@ -39,6 +39,7 @@ private extension ScheduleHasNotDoneListView {
         ForEach(0..<viewModel.sortedHasNotDoneWorkdays.count, id: \.self) { index in
             VStack(alignment: .leading, spacing: 0) {
                 if !viewModel.sortedHasNotDoneWorkdays[index].1.isEmpty {
+                    // 월, 일 날짜 표시
                     HStack(spacing: 0) {
                         Text("\(viewModel.sortedHasNotDoneWorkdays[index].0.monthInt)월 \(viewModel.sortedHasNotDoneWorkdays[index].0.dayInt)일")
                             .font(.caption)
@@ -47,6 +48,7 @@ private extension ScheduleHasNotDoneListView {
                     }
                     HDivider()
                         .padding(.bottom, 8)
+                    // 미확정 리스트
                     VStack(alignment: .leading, spacing: 16) {
                         ForEach(viewModel.sortedHasNotDoneWorkdays[index].1, id: \.self) { data in
                             ScheduleCell(of: data) {

@@ -10,6 +10,7 @@ import SwiftUI
 final class ScheduleListViewModel: ObservableObject {
     let calendar = Calendar.current
     let timeManager = TimeManager()
+    var hasHasNotDoneWorkdays = false
     @Published var workspaces: [WorkspaceEntity] = []
     @Published var workdays: (hasNotDone: [WorkdayEntity], hasDone: [WorkdayEntity]) = ([], [])
     @Published var workdaysOfFocusedDate: (hasNotDone: [WorkdayEntity], hasDone: [WorkdayEntity]) = ([], [])
@@ -28,10 +29,10 @@ final class ScheduleListViewModel: ObservableObject {
     }
     
     func onAppear() {
-        // 생성된 근무지 여부를 확인합니다. 생성된 근무지가 없다면 예외처리 화면을 표시합니다.
         getAllWorkspaces()
         getWorkdaysOfFiveMonths()
         getWorkdaysOfFocusDate()
+        detectHasNotDoneWorkdays()
     }
     
     func didScrollToNextWeek() {
@@ -125,6 +126,20 @@ private extension ScheduleListViewModel {
         let extractedDate = DateComponents(year: year, month: month, day: day)
         
         return calendar.date(from: extractedDate) ?? Date()
+    }
+    
+    func detectHasNotDoneWorkdays() {
+        let result = CoreDataManager.shared.getHasNotDoneWorkdays()
+        let hasNotdoneWorkdaysBeforeToday = result.filter {
+            let date = $0.date.onlyDate ?? Date()
+            let today = Date().onlyDate ?? Date()
+            return date <= today
+        }
+        if !hasNotdoneWorkdaysBeforeToday.uniqued().isEmpty {
+            self.hasHasNotDoneWorkdays = true
+        } else {
+            self.hasHasNotDoneWorkdays = false
+        }
     }
 }
 
