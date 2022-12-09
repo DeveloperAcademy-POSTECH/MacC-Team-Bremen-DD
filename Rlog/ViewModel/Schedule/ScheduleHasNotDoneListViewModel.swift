@@ -17,7 +17,6 @@ final class ScheduleHasNotDoneListViewModel: ObservableObject {
     
     func onAppear() {
         getSortedHasNotDoneWorkdays()
-        print("🔥", sortedHasNotDoneWorkdays)
     }
 }
 

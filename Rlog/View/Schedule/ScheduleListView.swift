@@ -107,7 +107,7 @@ private extension ScheduleListView {
                 isActive: $isScheduleHasNotDoneListViewActive
             ) { EmptyView() }
             NavigationLink(
-                destination: ScheduleCreationView(of: viewModel.currentDate)
+                destination: ScheduleCreationView(of: viewModel.currentDate, hasDoneWorkdays: workdaysOfFocusedDate.hasDone, hasNotDoneWorkdays: workdaysOfFocusedDate.hasNotDone)
                     .navigationBarBackButtonHidden(true)
                     .navigationBarTitle(Text("근무 추가"), displayMode: .inline),
                  isActive: $isScheduleCreationViewActive

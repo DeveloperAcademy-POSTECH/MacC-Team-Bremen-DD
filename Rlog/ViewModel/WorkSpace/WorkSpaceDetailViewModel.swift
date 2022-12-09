@@ -39,7 +39,6 @@ final class WorkspaceDetailViewModel: ObservableObject {
     
     func didTapConfirmButton(completion: @escaping (() -> Void)) {
         if !checkScheduleConflict(creatSchedules: shouldCreateSchedules, existSchedules: schedules.filter { !deleteSchedules.contains($0) }) {
-            //            print("Hello")
             Task {
                 await updateWorkspace()
                 await deleteSchedules()
