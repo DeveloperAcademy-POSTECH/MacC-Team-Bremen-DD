@@ -20,7 +20,6 @@ final class MonthlyCalculateDetailViewModel: ObservableObject {
 
     let current: Date
     let workTypeManager = WorkTypeManager()
-    let timeManager = TimeManager()
     
     var notRegularWorkdays: [WorkdayEntity] {
         return calculateResult.hasDoneWorkdays.filter { workTypeManager.defineWorkType(workday: $0) != .regular }
@@ -47,7 +46,7 @@ final class MonthlyCalculateDetailViewModel: ObservableObject {
     
     func getSpentHour(_ endTime: Date, _ startTime: Date) -> String {
         let timeGap = endTime - startTime
-        let result = timeManager.secondsToHoursMinutesSeconds(timeGap)
+        let result = Date.secondsToHoursMinutesSeconds(timeGap)
         
         return result.1 < 30 ? "\(result.0)시간" : "\(result.0)시간 \(result.1)분"
     }
@@ -74,15 +73,15 @@ private extension MonthlyCalculateDetailViewModel {
             let previousMonth = monthInt - 1
             let rangeString = "\(yearInt)/\(previousMonth)/\(payDay)"
             let targetString = "\(yearInt)/\(monthInt)/\(payDay)"
-            range = yearMonthDayFormatter.date(from: rangeString)!
-            target = yearMonthDayFormatter.date(from: targetString)!
+            range = yearMonthDayFormatter.date(from: rangeString) ?? Date()
+            target = yearMonthDayFormatter.date(from: targetString) ?? Date()
             startDate = range
         } else {
             let nextMonth = monthInt + 1
             let rangeString = "\(yearInt)/\(monthInt)/\(payDay)"
             let targetString = "\(yearInt)/\(nextMonth)/\(payDay)"
-            range = yearMonthDayFormatter.date(from: rangeString)!
-            target = yearMonthDayFormatter.date(from: targetString)!
+            range = yearMonthDayFormatter.date(from: rangeString) ?? Date()
+            target = yearMonthDayFormatter.date(from: targetString) ?? Date()
             startDate = range
         }
 

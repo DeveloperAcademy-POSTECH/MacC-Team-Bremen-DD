@@ -225,10 +225,10 @@ private extension MonthlyCalculateDetailView {
             return viewModel.workTypeManager.defineWorkType(workday: workday)
         }
         var startTime: String {
-            return "\(viewModel.timeManager.getHour(workday.startTime)):\(viewModel.timeManager.getMinute(workday.startTime) >= 10 ? viewModel.timeManager.getMinute(workday.startTime).description : "0\(viewModel.timeManager.getMinute(workday.startTime))")"
+            return "\(workday.startTime.hourInt)):\(workday.startTime.minuteInt >= 10 ? workday.startTime.minuteInt.description : "0\(workday.startTime.minuteInt)")"
         }
         var endTime: String {
-            return "\(viewModel.timeManager.getHour(workday.endTime)):\(viewModel.timeManager.getMinute(workday.endTime) >= 10 ? viewModel.timeManager.getMinute(workday.endTime).description : "0\(viewModel.timeManager.getMinute(workday.endTime))")"
+            return "\(workday.endTime.hourInt)):\(workday.endTime.minuteInt >= 10 ? workday.endTime.minuteInt.description : "0\(workday.endTime.minuteInt)")"
         }
         var isShowPlus1: Bool {
             return workday.startTime.dayInt != workday.endTime.dayInt

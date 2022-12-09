@@ -9,7 +9,6 @@ import SwiftUI
 
 final class ScheduleListViewModel: ObservableObject {
     let calendar = Calendar.current
-    let timeManager = TimeManager()
     var hasHasNotDoneWorkdays = false
     @Published var workspaces: [WorkspaceEntity] = []
     @Published var workdays: (hasNotDone: [WorkdayEntity], hasDone: [WorkdayEntity]) = ([], [])
@@ -73,26 +72,26 @@ private extension ScheduleListViewModel {
     
     // 일주일 뒤의 날짜를 반환합니다.
     func getNextWeek() {
-        currentDate = timeManager.increaseOneWeek(currentDate)
+        currentDate = Date.increaseOneWeek(currentDate)
     }
     
     // 일주일 전의 날짜를 반환합니다.
     func getPreviousWeek() {
-        currentDate = timeManager.decreaseOneWeek(currentDate)
+        currentDate = Date.decreaseOneWeek(currentDate)
     }
     
     // 한 달 뒤의 날짜를 반환합니다.
     // 갱신 이후 한 달 전의 오늘 날짜로 포커싱 됩니다. (ex. 11월 9일 -> 12월 9일)
     func getNextMonth() {
         let resetWeeks = resetWeekChanges()
-        currentDate = timeManager.increaseOneMonth(resetWeeks)
+        currentDate = Date.increaseOneMonth(resetWeeks)
     }
     
     // 한 달 전의 날짜를 반환합니다.
     // 갱신 이후 한 달 전의 오늘 날짜로 포커싱 됩니다. (ex. 11월 9일 -> 10월 9일)
     func getPreviousMonth() {
         let resetWeeks = resetWeekChanges()
-        currentDate = timeManager.decreaseOneMonth(resetWeeks)
+        currentDate = Date.decreaseOneMonth(resetWeeks)
     }
     
     // 사용자가 다른 날짜를 터치했을 때 Focus를 변경합니다.
@@ -148,7 +147,7 @@ private extension ScheduleListViewModel {
 
 extension ScheduleListViewModel {
     func getWeekdayOfDate(_ date: Date) -> String {
-        let weekday = timeManager.getWeekdayOfDate(date)
+        let weekday = DateFormatter(dateFormatType: .weekday).string(from: date)
         
         return weekday
     }

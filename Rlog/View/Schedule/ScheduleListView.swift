@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+struct CalendarModel {
+    let year: Int
+    let month: Int
+    let day: Int
+}
+
 struct ScheduleListView: View {
     @StateObject var viewModel = ScheduleListViewModel()
     @State var selection = 1
@@ -16,7 +22,7 @@ struct ScheduleListView: View {
     
     // Sample to recognize when workspace is not found
     var weekday: String {
-        return viewModel.getWeekdayOfDate(viewModel.currentDate)
+        return viewModel.currentDate.weekDay
     }
     
     var workdaysOfFocusedDate: (hasNotDone: [WorkdayEntity], hasDone: [WorkdayEntity]) {

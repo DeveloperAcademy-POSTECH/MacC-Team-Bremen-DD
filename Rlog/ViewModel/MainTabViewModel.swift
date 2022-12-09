@@ -39,7 +39,7 @@ private extension MainTabViewModel {
                           let after1MonthOfLatestDate = Calendar.current.date(byAdding: DateComponents(month: 1), to: latestWorkday.date) else { return }
                     
                     while range < after1MonthOfLatestDate {
-                        if schedule.repeatDays.contains(range.fetchDayOfWeek(date: range)) {
+                        if schedule.repeatDays.contains(range.weekDay) {
                             guard let startTime = Calendar.current.date(bySettingHour: Int(schedule.startHour), minute: Int(schedule.startMinute), second: 0, of: range),
                                   var endTime = Calendar.current.date(bySettingHour: Int(schedule.endHour), minute: Int(schedule.endMinute), second: 0, of: range),
                                   let date = range.onlyDate else { return }
