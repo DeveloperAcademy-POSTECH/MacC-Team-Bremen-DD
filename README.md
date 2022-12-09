@@ -1,3 +1,5 @@
+![rlog _final 1](https://user-images.githubusercontent.com/46256034/205825681-d36671d0-36ca-4520-80b9-e3bff5a4162a.png)
+
 # 🥳 알록
 
 ### 나의 소중한 알록, 우리의 정확한 정산
