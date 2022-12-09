@@ -8,7 +8,6 @@
 import Foundation
 
 final class ScheduleHasNotDoneListViewModel: ObservableObject {
-    let timeManager = TimeManager()
     @Published var sortedHasNotDoneWorkdays: [(Date, [WorkdayEntity])] = []
     @Published var hasNotDoneWorkdays: [WorkdayEntity] = [] {
         didSet {
@@ -18,7 +17,6 @@ final class ScheduleHasNotDoneListViewModel: ObservableObject {
     
     func onAppear() {
         getSortedHasNotDoneWorkdays()
-        print("🔥", sortedHasNotDoneWorkdays)
     }
 }
 
@@ -33,7 +31,7 @@ private extension ScheduleHasNotDoneListViewModel {
             let date = $0.date
             let endTime = $0.endTime
             let today = Date()
-            let compareResult = timeManager.compareDate(date1: endTime, date2: today, unit: .minute)
+            let compareResult = Date.compareDate(date1: endTime, date2: today, unit: .minute)
             
             return date <= today && compareResult
         }

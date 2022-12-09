@@ -8,7 +8,6 @@
 import SwiftUI
 
 final class ScheduleCellViewModel: ObservableObject{
-    private let timeManager = TimeManager()
     private let workTypeManager = WorkTypeManager()
     let data: WorkdayEntity
     let didTapConfirm: () -> Void
@@ -43,14 +42,14 @@ extension ScheduleCellViewModel {
     
     func getSpentHour(_ endTime: Date, _ startTime: Date) {
         let timeGap = endTime - startTime
-        let result = timeManager.secondsToHoursMinutesSeconds(timeGap)
+        let result = Date.secondsToHoursMinutesSeconds(timeGap)
         
         self.spentHour = result.1 < 30 ? "\(result.0)시간" : "\(result.0)시간 \(result.1)분"
     }
 
     func getStartAndEndTimeAndMinute(_ startTime: Date, _ endTime: Date) {
-        let startTime = timeManager.getHourAndMinute(startTime)
-        let endTime = timeManager.getHourAndMinute(endTime)
+        let startTime = Date.getHourAndMinute(startTime)
+        let endTime = Date.getHourAndMinute(endTime)
         
         startTimeString = "\(startTime.hour):\(startTime.minute >= 10 ? startTime.minute.description : "0\(startTime.minute)")"
         endTimeString = "\(endTime.hour):\(endTime.minute >= 10 ? endTime.minute.description : "0\(endTime.minute)")"

@@ -28,19 +28,18 @@ final class WorkspaceCreateCreatingScheduleViewModel: ObservableObject {
     }
     @Published var startTime: Date {
         didSet {
-            startHour = Int16(timeManager.getHour(startTime))
-            startMinute = Int16(timeManager.getMinute(startTime))
+            startHour = Int16(startTime.hourInt)
+            startMinute = Int16(startTime.minuteInt)
         }
     }
     @Published var endTime: Date {
         didSet {
-            endHour = Int16(timeManager.getHour(endTime))
-            endMinute = Int16(timeManager.getMinute(endTime))
+            endHour = Int16(endTime.hourInt)
+            endMinute = Int16(endTime.minuteInt)
         }
     }
     @Published var isAlertActive = false
     
-    let timeManager = TimeManager()
     var isActivatedConfirmButton = false
     var errorMessage = ""
     var startHour: Int16 = 9
@@ -51,8 +50,8 @@ final class WorkspaceCreateCreatingScheduleViewModel: ObservableObject {
     init(isShowingModal: Binding<Bool>, scheduleList: Binding<[ScheduleModel]>) {
         self._isShowingModal = isShowingModal
         self._scheduleList = scheduleList
-        self.startTime = timeManager.getDefaultStartTime()
-        self.endTime = timeManager.getDefaultEndTime()
+        self.startTime = Date.getDefaultStartTime()
+        self.endTime = Date.getDefaultEndTime()
     }
     
     func didTapDayPicker(index: Int) {

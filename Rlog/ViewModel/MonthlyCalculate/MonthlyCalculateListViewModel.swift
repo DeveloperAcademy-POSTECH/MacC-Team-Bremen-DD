@@ -9,7 +9,6 @@ import SwiftUI
 
 @MainActor
 final class MonthlyCalculateListViewModel: ObservableObject {
-    let timeManager = TimeManager()
     let currentDate = Date()
     let workspaces: [WorkspaceEntity]
     
@@ -33,12 +32,12 @@ final class MonthlyCalculateListViewModel: ObservableObject {
     }
     
     func didTapPreviousMonth() {
-        switchedDate = timeManager.decreaseOneMonth(switchedDate)
+        switchedDate = Date.decreaseOneMonth(switchedDate)
         updateDate()
     }
     
     func didTapNextMonth() {
-        switchedDate = timeManager.increaseOneMonth(switchedDate)
+        switchedDate = Date.increaseOneMonth(switchedDate)
         updateDate()
     }
     

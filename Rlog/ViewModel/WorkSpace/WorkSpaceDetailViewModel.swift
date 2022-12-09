@@ -39,7 +39,6 @@ final class WorkspaceDetailViewModel: ObservableObject {
     
     func didTapConfirmButton(completion: @escaping (() -> Void)) {
         if !checkScheduleConflict(creatSchedules: shouldCreateSchedules, existSchedules: schedules.filter { !deleteSchedules.contains($0) }) {
-            //            print("Hello")
             Task {
                 await updateWorkspace()
                 await deleteSchedules()
@@ -119,7 +118,7 @@ private extension WorkspaceDetailViewModel {
         guard let after5Month = Calendar.current.date(byAdding: DateComponents(month: 5), to: range) else { return }
         
         while range < after5Month {
-            if schedule.repeatDays.contains(range.fetchDayOfWeek(date: range)) {
+            if schedule.repeatDays.contains(range.weekDay) {
                 guard let startTime = Calendar.current.date(bySettingHour: Int(schedule.startHour), minute: Int(schedule.startMinute), second: 0, of: range),
                       var endTime = Calendar.current.date(bySettingHour: Int(schedule.endHour), minute: Int(schedule.endMinute), second: 0, of: range),
                       let date = range.onlyDate else { return }
@@ -155,7 +154,6 @@ private extension WorkspaceDetailViewModel {
             for existSchedule in existSchedules {
                 for day in existSchedule.repeatDays {
                     if creatSchedule.repeatedSchedule.contains(day) {
-                        print(day)
                         return true
                     }
                 }

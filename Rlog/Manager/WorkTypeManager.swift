@@ -8,8 +8,6 @@
 import SwiftUI
 
 final class WorkTypeManager {
-    private let timeManager = TimeManager()
-
     func defineWorkType(workday: WorkdayEntity) -> WorkDayType {
         guard let relatedSchedule = workday.schedule else { return .extraDay }
 
@@ -18,7 +16,7 @@ final class WorkTypeManager {
 
         let workdayStartTime = workday.startTime
         let workdayEndTime = workday.endTime
-        let workdaySpentHour = timeManager.calculateTimeGapBetweenTwoDate(start: workdayStartTime, end: workdayEndTime)
+        let workdaySpentHour = Date.calculateTimeGapBetweenTwoDate(start: workdayStartTime, end: workdayEndTime)
 
         for schedule in schedules {
             let startHour = schedule.startHour
@@ -27,7 +25,7 @@ final class WorkTypeManager {
             let endMinute = schedule.endMinute
 
             guard schedule.objectID == relatedSchedule.objectID,
-                  let spentHour = timeManager.calculateTimeGap(
+                  let spentHour = Date.calculateTimeGap(
                       startHour: startHour,
                       startMinute: startMinute,
                       endHour: endHour,

@@ -12,8 +12,8 @@ struct ScheduleCreationView: View {
     @ObservedObject var viewModel: ScheduleCreationViewModel
     @State private var isCreationButtonTapped = false
     
-    init(of selectedDate: Date) {
-        self.viewModel = ScheduleCreationViewModel(of: selectedDate)
+    init(of selectedDate: Date, hasDoneWorkdays: [WorkdayEntity], hasNotDoneWorkdays: [WorkdayEntity]) {
+        self.viewModel = ScheduleCreationViewModel(of: selectedDate, hasDoneWorkdays: hasDoneWorkdays, hasNotDoneWorkdays: hasNotDoneWorkdays)
     }
     
     var body: some View {

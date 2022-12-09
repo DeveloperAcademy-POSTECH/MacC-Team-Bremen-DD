@@ -8,7 +8,7 @@
 import SwiftUI
 
 final class ScheduleCreationViewModel: ObservableObject {
-    let alreadyExistWorkdays: [WorkdayEntity]
+    var alreadyExistWorkdays: [WorkdayEntity]
     
     @Published var isFocused = false
     @Published var workspaces: [WorkspaceEntity] = []
@@ -60,12 +60,13 @@ final class ScheduleCreationViewModel: ObservableObject {
         return selectedWorkspaceString != ""
     }
 
-    init(of selectedDate: Date) {
+    init(of selectedDate: Date, hasDoneWorkdays: [WorkdayEntity], hasNotDoneWorkdays: [WorkdayEntity]) {
         workday = selectedDate
-        self.startTime = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: selectedDate) ?? Date()
-        self.endTime = Calendar.current.date(bySettingHour: 18, minute: 0, second: 0, of: selectedDate) ?? Date()
-        self.alreadyExistWorkdays = CoreDataManager.shared.getWorkdaysBetween(start: selectedDate, target: Calendar.current.date(byAdding: DateComponents(day: 1), to: selectedDate) ?? selectedDate)
-        print(alreadyExistWorkdays)
+        startTime = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: selectedDate) ?? Date()
+        endTime = Calendar.current.date(bySettingHour: 18, minute: 0, second: 0, of: selectedDate) ?? Date()
+        
+        alreadyExistWorkdays = hasDoneWorkdays
+        alreadyExistWorkdays.append(contentsOf: hasNotDoneWorkdays)
     }
     
     func onAppear() {
