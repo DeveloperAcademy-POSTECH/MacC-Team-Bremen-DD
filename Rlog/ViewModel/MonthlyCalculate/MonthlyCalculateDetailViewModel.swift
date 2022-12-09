@@ -66,25 +66,14 @@ private extension MonthlyCalculateDetailViewModel {
         let dayInt = current.dayInt
         let monthInt = current.monthInt
         let yearInt = current.yearInt
-
+        
         var range = Date()
-
-        if dayInt < payDay {
-            let previousMonth = monthInt - 1
-            let rangeString = "\(yearInt)/\(previousMonth)/\(payDay)"
-            let targetString = "\(yearInt)/\(monthInt)/\(payDay)"
-            range = yearMonthDayFormatter.date(from: rangeString) ?? Date()
-            target = yearMonthDayFormatter.date(from: targetString) ?? Date()
-            startDate = range
-        } else {
-            let nextMonth = monthInt + 1
-            let rangeString = "\(yearInt)/\(monthInt)/\(payDay)"
-            let targetString = "\(yearInt)/\(nextMonth)/\(payDay)"
-            range = yearMonthDayFormatter.date(from: rangeString) ?? Date()
-            target = yearMonthDayFormatter.date(from: targetString) ?? Date()
-            startDate = range
-        }
-
+        
+        let previous = Date.decreaseOneMonth(current)
+        startDate = Calendar.current.date(bySetting: .day, value: Int(payDay), of: previous) ?? Date()
+        range = startDate
+        target = Calendar.current.date(byAdding: DateComponents(month: 1), to: range) ?? Date()
+        
         while range < target {
             calendarDays.append(range)
             guard let next = Calendar.current.date(byAdding: DateComponents(day: 1), to: range) else { return }
