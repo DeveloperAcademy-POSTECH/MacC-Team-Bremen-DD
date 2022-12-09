@@ -17,14 +17,14 @@ final class MonthlyCalculateDetailViewModel: ObservableObject {
     @Published var emptyCalendarDays: [Int] = []
     @Published var startDate = Date()
     @Published var target = Date()
-
+    
     let current: Date
     let workTypeManager = WorkTypeManager()
     
     var notRegularWorkdays: [WorkdayEntity] {
         return calculateResult.hasDoneWorkdays.filter { workTypeManager.defineWorkType(workday: $0) != .regular }
     }
-
+    
     init(calculateResult: MonthlyCalculateResult) {
         self.calculateResult = calculateResult
         self.current = calculateResult.currentMonth
@@ -33,13 +33,7 @@ final class MonthlyCalculateDetailViewModel: ObservableObject {
             makeEmptyCalendarDates()
         }
     }
-
-    func calculateLeftDays() -> Int {
-        let components = Calendar.current.dateComponents([.day], from: current, to: target)
-        guard let leftDay = components.day else { return 0 }
-        return leftDay
-    }
-
+    
     func filterWorkday(for day: Date) -> [WorkdayEntity] {
         return calculateResult.hasDoneWorkdays.filter{ $0.date == day }
     }
@@ -62,12 +56,10 @@ final class MonthlyCalculateDetailViewModel: ObservableObject {
 private extension MonthlyCalculateDetailViewModel {
     func makeCalendarDates() async {
         let payDay = calculateResult.workspace.payDay
-        let yearMonthDayFormatter = DateFormatter(dateFormatType: .yearMonthDay)
-        let dayInt = current.dayInt
-        let monthInt = current.monthInt
-        let yearInt = current.yearInt
-        
         var range = Date()
+        
+        print(calculateResult.startDate)
+        print(calculateResult.endDate)
         
         let previous = Date.decreaseOneMonth(current)
         startDate = Calendar.current.date(bySetting: .day, value: Int(payDay), of: previous) ?? Date()
@@ -80,7 +72,7 @@ private extension MonthlyCalculateDetailViewModel {
             range = next
         }
     }
-
+    
     func makeEmptyCalendarDates() {
         for count in 0..<startDate.weekDayInt - 1 {
             emptyCalendarDays.append(count)
@@ -90,15 +82,14 @@ private extension MonthlyCalculateDetailViewModel {
     func makeViewToImage(_ view: some View, completion: @escaping () -> Void) {
         guard let proxy = proxy else { return }
         let image = view.takeScreenshot(origin: proxy.frame(in: .global).origin, size: proxy.size)
-
+        
         items.removeAll()
         items.append(image)
-
+        
         completion()
     }
     
     func shareViewImage() {
         self.isShareSheetActive = true
     }
-    
 }

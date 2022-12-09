@@ -62,46 +62,14 @@ struct MonthlyCalculateResult {
     }
     
     private func getStartDate(workspace: WorkspaceEntity, date: Date) -> Date {
-        if workspace.payDay >= Calendar.current.component(.day, from: date) {
-            guard let lastMonth = Calendar.current.date(byAdding: DateComponents(month: -1), to: date) else { return Date() }
-            
-            guard let lastPayDate = Calendar.current.date(from: DateComponents(
-                year: Calendar.current.component(.year, from: lastMonth),
-                month: Calendar.current.component(.month, from: lastMonth),
-                day: Int(workspace.payDay))) else { return Date() }
-            
-            return lastPayDate
-        } else {
-            guard let payDate = Calendar.current.date(from: DateComponents(
-                year: Calendar.current.component(.year, from: date),
-                month: Calendar.current.component(.month, from: date),
-                day: Int(workspace.payDay)
-            )) else { return Date() }
-            
-            return payDate
-        }
+        let previous = Date.decreaseOneMonth(currentMonth)
+        return Calendar.current.date(bySetting: .day, value: Int(workspace.payDay), of: previous) ?? Date()
     }
     
     private func getEndDate(workspace: WorkspaceEntity, date: Date) -> Date {
-        if workspace.payDay >= Calendar.current.component(.day, from: date) {
-            guard let payDate = Calendar.current.date(from: DateComponents(
-                year: Calendar.current.component(.year, from: date),
-                month: Calendar.current.component(.month, from: date),
-                day: Int(workspace.payDay) - 1
-            )) else { return Date() }
-            
-            return payDate
-        } else {
-            guard let nextMonth = Calendar.current.date(byAdding: DateComponents(month: 1), to: date) else { return Date() }
-            
-            guard let nextPayDate = Calendar.current.date(from: DateComponents(
-                year: Calendar.current.component(.year, from: nextMonth),
-                month: Calendar.current.component(.month, from: nextMonth),
-                day: Int(workspace.payDay) - 1
-            )) else { return Date() }
-            
-            return nextPayDate
-        }
+        let previous = Date.decreaseOneMonth(currentMonth)
+        let startDate = Calendar.current.date(bySetting: .day, value: Int(workspace.payDay), of: previous) ?? Date()
+        return Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: startDate) ?? Date()
     }
     
     private func getWorkdays(workspace: WorkspaceEntity, startDate: Date, endDate: Date) -> [WorkdayEntity] {
