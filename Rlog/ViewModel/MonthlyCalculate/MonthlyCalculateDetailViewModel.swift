@@ -58,9 +58,6 @@ private extension MonthlyCalculateDetailViewModel {
         let payDay = calculateResult.workspace.payDay
         var range = Date()
         
-        print(calculateResult.startDate)
-        print(calculateResult.endDate)
-        
         let previous = Date.decreaseOneMonth(current)
         startDate = Calendar.current.date(bySetting: .day, value: Int(payDay), of: previous) ?? Date()
         range = startDate

@@ -154,7 +154,6 @@ private extension WorkspaceDetailViewModel {
             for existSchedule in existSchedules {
                 for day in existSchedule.repeatDays {
                     if creatSchedule.repeatedSchedule.contains(day) {
-                        print(day)
                         return true
                     }
                 }

@@ -140,7 +140,6 @@ private extension WorkspaceCreateView {
                     checkoutInFocus = nil
                     break
                 case .some(.toggleOptions):
-                    print("잘못된 입력")
                     break
                 }
             } label: {

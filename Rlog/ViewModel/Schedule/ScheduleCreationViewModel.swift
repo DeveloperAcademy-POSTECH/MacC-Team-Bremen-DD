@@ -67,7 +67,6 @@ final class ScheduleCreationViewModel: ObservableObject {
         
         alreadyExistWorkdays = hasDoneWorkdays
         alreadyExistWorkdays.append(contentsOf: hasNotDoneWorkdays)
-        print(alreadyExistWorkdays)
     }
     
     func onAppear() {
