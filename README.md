@@ -81,7 +81,7 @@
 <img width="276" alt="image" src="https://user-images.githubusercontent.com/77766769/204976021-53f89aa7-1828-47ed-b2f5-5da97e7b6a55.png">
 </p>
 
-자세한 구현 사항과 진행사항을 확인하기 위해 [팀 페이지](https://heliotrope-touch-13f.notion.site/96f86f9f7b644e6b8862fda663b4eb68) 및 [데일리 스텐드업](https://github.com/SPACE-DEV-CLUB/ReadmeMAker/wiki)을 참고해주세요.
+자세한 구현 사항과 진행사항을 확인하기 위해 [팀 페이지](https://heliotrope-touch-13f.notion.site/96f86f9f7b644e6b8862fda663b4eb68) 및 [데일리 스텐드업](https://heliotrope-touch-13f.notion.site/2343d36a19954aafa8c23c65edb9a8a4)을 참고해주세요.
 
 ## 👏 Contributing
 
